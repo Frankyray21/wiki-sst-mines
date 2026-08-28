@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 import * as yaml from 'js-yaml';
+import { optimiserPng } from './png_palette.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -288,10 +289,23 @@ function assetUrl(relPath) {
   while ([...assetOut.values()].includes(url)) url = url.replace(ext.toLowerCase(), '') + '-' + (n++) + ext.toLowerCase();
   assetOut.set(relPath, url);
   const dest = path.join(OUT, url);
+  const src = assetAbs.get(relPath) || path.join(VAULT, relPath);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.copyFileSync(assetAbs.get(relPath) || path.join(VAULT, relPath), dest);
+  // Les captures d'articles de loi sont stockées en RVB 24 bits alors qu'elles tiennent
+  // sous 256 couleurs : la palettisation divise leur poids par deux, sans perte.
+  if (path.extname(dest).toLowerCase() === '.png') {
+    const brut = fs.readFileSync(src);
+    let out = null;
+    try { out = optimiserPng(brut); } catch { out = null; }
+    if (out) { pngGain += brut.length - out.length; pngOptim++; fs.writeFileSync(dest, out); return url; }
+    pngIntacts++;
+    fs.writeFileSync(dest, brut);
+    return url;
+  }
+  fs.copyFileSync(src, dest);
   return url;
 }
+let pngGain = 0, pngOptim = 0, pngIntacts = 0;
 
 // ---------- rendu markdown ----------
 let CUR;          // page en cours
@@ -858,5 +872,8 @@ if (badFm.length) {
   const reparés = badFm.filter(l => l.endsWith('(réparé)')).length;
   console.warn(`\n⚠ Frontmatter YAML : ${badFm.length} note(s) en erreur — ${reparés} réparée(s), ${badFm.length - reparés} illisible(s)`);
   badFm.filter(l => !l.endsWith('(réparé)')).slice(0, 20).forEach(l => console.warn('   ' + l));
+}
+if (pngOptim) {
+  console.log(`Images PNG : ${pngOptim} recompressées sans perte (${(pngGain / 1048576).toFixed(1)} Mo économisés), ${pngIntacts} laissées telles quelles`);
 }
 console.log(`Terminé : ${pages.length} pages · ${assetOut.size} fichiers copiés · sortie : ${OUT}`);
