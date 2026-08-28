@@ -87,31 +87,48 @@ function stripMd(s) {
 const pages = [];              // {relPath, absPath, wikiKey, base, fm, body, mtime, ...}
 const assetsByBase = new Map();// basename lower -> [relPath]
 const assetsByPath = new Map();// relPath lower -> relPath
+const assetAbs = new Map();    // relPath -> chemin absolu sur le disque
 
-function walk(dir, rel) {
+// Dossiers hors vault contenant des images référencées par les notes.
+// Le préfixe correspond au chemin tel qu'il apparaît dans les [[embeds]].
+const EXTRA_ASSET_ROOTS = [
+  { prefix: 'Notes de cours SST', dir: 'C:/Users/Frank/OneDrive/Documents/SST/Notes de cours SST' },
+  { prefix: 'SST-Images',         dir: 'C:/Users/Frank/OneDrive/Documents/SST/Images' },
+  { prefix: 'Obsidian-Images',    dir: 'C:/Users/Frank/OneDrive/Documents/Obsidian Vault/Images' },
+];
+
+function indexAsset(relPath, absPath) {
+  const b = path.basename(relPath).toLowerCase();
+  if (!assetsByBase.has(b)) assetsByBase.set(b, []);
+  assetsByBase.get(b).push(relPath);
+  if (!assetsByPath.has(relPath.toLowerCase())) assetsByPath.set(relPath.toLowerCase(), relPath);
+  if (!assetAbs.has(relPath)) assetAbs.set(relPath, absPath);
+}
+
+function walk(dir, rel, assetsOnly = false) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (e.name.startsWith('.')) continue;
     if (e.isDirectory()) {
       if (EXCLUDE_DIRS.has(e.name)) continue;
-      walk(path.join(dir, e.name), rel ? rel + '/' + e.name : e.name);
+      walk(path.join(dir, e.name), rel ? rel + '/' + e.name : e.name, assetsOnly);
     } else {
       const ext = path.extname(e.name).toLowerCase();
       const relPath = rel ? rel + '/' + e.name : e.name;
       if (ext === '.md') {
-        if (!rel) continue; // page racine remplacée par le portail
+        if (assetsOnly || !rel) continue; // page racine remplacée par le portail
         const wikiKey = relPath.split('/')[0];
         if (!WIKIS[wikiKey]) continue;
         pages.push({ relPath, absPath: path.join(dir, e.name), wikiKey, base: e.name.slice(0, -3) });
       } else if (ASSET_EXT.has(ext)) {
-        const b = e.name.toLowerCase();
-        if (!assetsByBase.has(b)) assetsByBase.set(b, []);
-        assetsByBase.get(b).push(relPath);
-        assetsByPath.set(relPath.toLowerCase(), relPath);
+        indexAsset(relPath, path.join(dir, e.name));
       }
     }
   }
 }
 walk(VAULT, '');
+for (const root of EXTRA_ASSET_ROOTS) {
+  if (fs.existsSync(root.dir)) walk(root.dir, root.prefix, true);
+}
 console.log(`Pages trouvées : ${pages.length} · assets indexés : ${assetsByPath.size}`);
 
 // ---------- lecture + frontmatter + chemins de sortie ----------
@@ -202,7 +219,7 @@ function assetUrl(relPath) {
   assetOut.set(relPath, url);
   const dest = path.join(OUT, url);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.copyFileSync(path.join(VAULT, relPath), dest);
+  fs.copyFileSync(assetAbs.get(relPath) || path.join(VAULT, relPath), dest);
   return url;
 }
 
