@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIMDUT et FDS — WIKI SST Mines</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<script>window.ROOT='../../../../';</script>
+</head>
+<body>
+<header class="site-header">
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <a class="brand" href="../../../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+  <div class="nav-group"><div class="nav-title">Navigation</div>
+    <ul>
+      <li><a href="../../../../index.html">🏠 Portail</a></li>
+      <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">🌫️ Hygiène industrielle</div>
+  <ul>
+    <li><a href="../../../../w/hygiene/index.html">Accueil du wiki</a></li>
+    <li><a href="../../../../w/hygiene/05-demarrage-rapide/index.html">Démarrage rapide</a></li><li><a href="../../../../w/hygiene/10-themes/index.html">Thèmes</a></li><li><a href="../../../../w/hygiene/20-articles-internes/index.html">Articles internes</a></li><li><a href="../../../../w/hygiene/25-articles-travailleurs/index.html">Articles travailleurs</a></li><li><a href="../../../../w/hygiene/27-articles-gestionnaires/index.html">Articles gestionnaires</a></li><li><a href="../../../../w/hygiene/30-glossaire/index.html">Glossaire</a></li><li><a href="../../../../w/hygiene/40-articles-de-loi/index.html">Articles de loi</a></li>
+    <li><a href="../../../../w/hygiene/index-alphabetique.html">Index alphabétique</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Les wikis</div><ul><li><a href="../../../../w/ergonomie/index.html">🦺 Ergonomie</a></li><li class="active"><a href="../../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></li><li><a href="../../../../w/toxicologie/index.html">☣️ Toxicologie</a></li><li><a href="../../../../w/securite/index.html">⛑️ Sécurité industrielle</a></li><li><a href="../../../../w/droit-travail/index.html">📋 Droit du travail</a></li><li><a href="../../../../w/psychosocial/index.html">🧠 SST psychosociale</a></li><li><a href="../../../../w/legislation/index.html">⚖️ Recueil législatif</a></li></ul></div>
+</nav>
+<main class="content">
+
+<div class="breadcrumbs"><a href="../../../../index.html">Portail</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/index.html">Hygiène industrielle</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/27-articles-gestionnaires/index.html">Articles gestionnaires</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/27-articles-gestionnaires/programmes-de-prevention/index.html">Programmes de prévention</a></div>
+<h1 class="page-title">Gestion du SIMDUT et FDS en mine</h1>
+<div class="page-sub">Un article du wiki <a href="../../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></div>
+<aside class="infobox"><div class="infobox-title">🌫️ SIMDUT et FDS</div><table><tr><th>Thème</th><td><a href="../../../../w/hygiene/27-articles-gestionnaires/programmes-de-prevention/hygiene-industrielle.html">Hygiène industrielle</a></td></tr><tr><th>Statut</th><td>ébauche</td></tr><tr><th>Qualité</th><td>ébauche</td></tr><tr><th>Révision</th><td>2026-05-22</td></tr><tr><th>Public cible</th><td>direction, superviseur</td></tr><tr><th>Sensibilité</th><td>vulgarisé</td></tr></table><div class="infobox-tags"><span class="tag">wiki</span><span class="tag">hygiène</span><span class="tag">gestionnaire</span></div></aside>
+<div class="toc"><div class="toc-title">Sommaire <button class="toc-toggle" data-toggle>[masquer]</button></div><ul><li class="toc-l3"><a href="#pourquoi-en-parler">Pourquoi en parler</a></li><li class="toc-l3"><a href="#options-et-leviers">Options et leviers</a></li><li class="toc-l3"><a href="#indicateurs-a-suivre">Indicateurs à suivre</a></li><li class="toc-l3"><a href="#arbitrages-typiques">Arbitrages typiques</a></li><li class="toc-l3"><a href="#cadre-legal">Cadre légal</a></li><li class="toc-l3"><a href="#limites-du-role-sst">Limites du rôle SST</a></li><li class="toc-l3"><a href="#pour-aller-plus-loin">Pour aller plus loin</a></li></ul></div>
+<div class="page-body">
+<p>Un site minier manipule typiquement des centaines de produits <a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/simdut-et-classes-de-danger.html" title="SIMDUT et classes de danger">SIMDUT</a>, du diesel aux réactifs de procédé. La conformité documentaire (FDS à jour, étiquetage, formation) est une obligation continue. Plusieurs configurations sont possibles selon la taille du site et le degré d&#39;automatisation des achats.</p>
+<h3 id="pourquoi-en-parler">Pourquoi en parler</h3>
+<ul>
+<li>Obligation : Loi sur les produits dangereux (fédérale), RPD, <a href="../../../../w/droit-travail/20-articles-internes/lsst-droits-et-obligations.html" title="LSST, droits et obligations">LSST</a> chapitre IV, RSST.</li>
+<li>Risque opérationnel : une FDS manquante ou désuète peut bloquer un travail (refus du travailleur, <a href="../../../../w/legislation/10-lois-principales/lsst/art-12-lsst-droit-refus.html" title="art-12-LSST, droit refus">art. 12 LSST</a>) ou prolonger une urgence.</li>
+<li>Risque légal : la non-conformité SIMDUT est l&#39;un des sujets les plus fréquents d&#39;inspection <a href="../../../../w/psychosocial/20-articles/legislation-et-normes/cnesst-roles-et-pouvoirs.html" title="CNESST, rôles et pouvoirs">CNESST</a>.</li>
+<li>Risque sanitaire : un mauvais étiquetage en mine (cyanure, acides, frothers) peut générer un accident grave.</li>
+</ul>
+<h3 id="options-et-leviers">Options et leviers</h3>
+<h4 id="systeme-de-gestion-des-fds">Système de gestion des FDS</h4>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Considérations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logiciel commercial dédié (3E, MSDSonline, Veevart, etc.)</td>
+<td>Mise à jour automatique, recherche, traçabilité, coût récurrent</td>
+</tr>
+<tr>
+<td>Base SharePoint ou portail intranet maison</td>
+<td>Coût initial moindre, maintenance interne</td>
+</tr>
+<tr>
+<td>Classeurs papier + sauvegarde numérique</td>
+<td>Simple, demande discipline</td>
+</tr>
+<tr>
+<td>FDS du fournisseur seul (chaque achat)</td>
+<td>Pas centralisé, risque de désuétude</td>
+</tr>
+</tbody></table>
+<h4 id="inventaire-des-produits">Inventaire des produits</h4>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Considérations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Inventaire centralisé par le magasin</td>
+<td>Source unique de vérité</td>
+</tr>
+<tr>
+<td>Inventaire par département (atelier, usine, laboratoire)</td>
+<td>Plus précis localement, plus complexe à consolider</td>
+</tr>
+<tr>
+<td>Codification interne unique par produit</td>
+<td>Facilite la traçabilité</td>
+</tr>
+<tr>
+<td>Procédure d&#39;introduction d&#39;un nouveau produit</td>
+<td>Évite les achats parallèles non documentés</td>
+</tr>
+</tbody></table>
+<h4 id="formation">Formation</h4>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Considérations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Formation générique aux 3 ans pour tous</td>
+<td>Conformité de base</td>
+</tr>
+<tr>
+<td>Formation spécifique par poste (produits réellement utilisés)</td>
+<td>Plus pertinent, plus de logistique</td>
+</tr>
+<tr>
+<td>E-learning + validation en présentiel</td>
+<td>Flexibilité, traçabilité</td>
+</tr>
+<tr>
+<td>Module d&#39;accueil pour sous-traitants</td>
+<td>Cohérence sur le site</td>
+</tr>
+</tbody></table>
+<h4 id="etiquetage">Étiquetage</h4>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Considérations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Étiquettes lieu de travail préimprimées</td>
+<td>Standardisation, rapidité</td>
+</tr>
+<tr>
+<td>Imprimante d&#39;étiquettes au magasin et en atelier</td>
+<td>Réactivité au transvasement</td>
+</tr>
+<tr>
+<td>Vérification étiquetage lors des inspections hebdomadaires</td>
+<td>Maintien dans le temps</td>
+</tr>
+</tbody></table>
+<p>Une option possible consiste à centraliser les FDS dans un logiciel commercial intégré au système d&#39;achats, à former par poste réel d&#39;exposition et à imposer une procédure formelle d&#39;introduction de nouveau produit.</p>
+<h3 id="indicateurs-a-suivre">Indicateurs à suivre</h3>
+<table>
+<thead>
+<tr>
+<th>Indicateur</th>
+<th>Utilité</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>% FDS à jour (&lt; 3 ans) sur l&#39;inventaire actif</td>
+<td>Conformité documentaire</td>
+</tr>
+<tr>
+<td>Délai moyen entre introduction d&#39;un nouveau produit et FDS au système</td>
+<td>Performance du processus</td>
+</tr>
+<tr>
+<td>% travailleurs formation SIMDUT à jour</td>
+<td>Conformité formation</td>
+</tr>
+<tr>
+<td>Nombre d&#39;écarts SIMDUT relevés en inspection</td>
+<td>Performance terrain</td>
+</tr>
+<tr>
+<td>Nombre de sous-traitants validés à l&#39;entrée</td>
+<td>Couverture</td>
+</tr>
+<tr>
+<td>Nombre d&#39;incidents avec produit dangereux par an</td>
+<td>Indicateur résultat</td>
+</tr>
+</tbody></table>
+<h3 id="arbitrages-typiques">Arbitrages typiques</h3>
+<table>
+<thead>
+<tr>
+<th>Arbitrage</th>
+<th>Considérations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logiciel commercial vs solution maison</td>
+<td>Coût récurrent vs maintenance à long terme</td>
+</tr>
+<tr>
+<td>Formation générique vs ciblée par poste</td>
+<td>Rentabilité pédagogique vs effort logistique</td>
+</tr>
+<tr>
+<td>Achat centralisé vs décentralisé</td>
+<td>Contrôle des entrées vs réactivité opérationnelle</td>
+</tr>
+<tr>
+<td>Inclusion sous-traitants au système maison vs leur propre conformité</td>
+<td>Cohérence vs charge administrative</td>
+</tr>
+</tbody></table>
+<h3 id="cadre-legal">Cadre légal</h3>
+<ul>
+<li><strong>Loi sur les produits dangereux</strong> (LPD, fédérale).</li>
+<li><strong>Règlement sur les produits dangereux</strong> (RPD, fédéral).</li>
+<li><strong>LSST chapitre IV</strong> : application au Québec.</li>
+<li><strong><a href="../../../../w/legislation/20-reglements/rsst/art-41-rsst-controle-de-la-qualite-de-lair.html" title="art-41-RSST, contrôle de la qualité de l'air">RSST art. 41</a> et annexe I</strong> : <a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/vea-et-normes.html" title="VEA et normes">VEA</a> cohérentes avec FDS.</li>
+<li><strong><a href="../../../../w/psychosocial/20-articles/legislation-et-normes/lmrsst-vue-densemble-pour-les-rps.html" title="LMRSST, vue d'ensemble pour les RPS">LMRSST</a></strong> : participation des travailleurs à l&#39;identification des risques chimiques.</li>
+<li><strong>Loi sur le transport des marchandises dangereuses (TMD)</strong> : transport interne complémentaire.</li>
+</ul>
+<h3 id="limites-du-role-sst">Limites du rôle SST</h3>
+<p>Le département SST recommande l&#39;architecture du système, valide les nouvelles FDS, anime la formation et alerte sur les écarts. Les décisions sur le choix du logiciel, le budget formation, la politique d&#39;achats centralisés et les exigences pour les sous-traitants reviennent à la direction. Les chefs de département conservent la responsabilité opérationnelle de l&#39;étiquetage et de l&#39;accessibilité des FDS dans leurs aires.</p>
+<h3 id="pour-aller-plus-loin">Pour aller plus loin</h3>
+<ul>
+<li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/simdut-et-classes-de-danger.html" title="SIMDUT et classes de danger">SIMDUT et classes de danger</a></li>
+<li><a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/vea-et-normes.html" title="VEA et normes">_archive Wiki SST unifié/20 - Articles internes/40 - Évaluation et mesure/VEA et normes</a></li>
+<li><a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/maladies-professionnelles.html" title="Maladies professionnelles">Loi/LATMP/Maladies professionnelles</a></li>
+<li>[[Ind</li>
+</ul>
+
+</div>
+<details class="backlinks"><summary>Pages qui pointent ici (1)</summary><ul><li><a href="../../../../w/hygiene/27-articles-gestionnaires/programmes-de-prevention/programmes-de-prevention.html">Programmes de prévention</a> <small class="bl-wiki">Hygiène industrielle</small></li></ul></details>
+<div class="page-meta">Dernière révision : 2026-05-22</div>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours · 2026-08-27</footer>
+<script src="../../../../assets/app.js"></script>
+</body>
+</html>

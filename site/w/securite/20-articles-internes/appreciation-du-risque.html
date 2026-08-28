@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appréciation du risque — WIKI SST Mines</title>
+<link rel="stylesheet" href="../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<script>window.ROOT='../../../';</script>
+</head>
+<body>
+<header class="site-header">
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <a class="brand" href="../../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+  <div class="nav-group"><div class="nav-title">Navigation</div>
+    <ul>
+      <li><a href="../../../index.html">🏠 Portail</a></li>
+      <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">⛑️ Sécurité industrielle</div>
+  <ul>
+    <li><a href="../../../w/securite/index.html">Accueil du wiki</a></li>
+    <li><a href="../../../w/securite/05-demarrage-rapide/index.html">Démarrage rapide</a></li><li><a href="../../../w/securite/10-themes/index.html">Thèmes</a></li><li><a href="../../../w/securite/20-articles-internes/index.html">Articles internes</a></li><li><a href="../../../w/securite/25-articles-travailleurs/index.html">Articles travailleurs</a></li><li><a href="../../../w/securite/27-articles-gestionnaires/index.html">Articles gestionnaires</a></li><li><a href="../../../w/securite/30-glossaire/index.html">Glossaire</a></li><li><a href="../../../w/securite/40-articles-de-loi/index.html">Articles de loi</a></li>
+    <li><a href="../../../w/securite/index-alphabetique.html">Index alphabétique</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Les wikis</div><ul><li><a href="../../../w/ergonomie/index.html">🦺 Ergonomie</a></li><li><a href="../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></li><li><a href="../../../w/toxicologie/index.html">☣️ Toxicologie</a></li><li class="active"><a href="../../../w/securite/index.html">⛑️ Sécurité industrielle</a></li><li><a href="../../../w/droit-travail/index.html">📋 Droit du travail</a></li><li><a href="../../../w/psychosocial/index.html">🧠 SST psychosociale</a></li><li><a href="../../../w/legislation/index.html">⚖️ Recueil législatif</a></li></ul></div>
+</nav>
+<main class="content">
+
+<div class="breadcrumbs"><a href="../../../index.html">Portail</a> <span class="crumb-sep">›</span> <a href="../../../w/securite/index.html">Sécurité industrielle</a> <span class="crumb-sep">›</span> <a href="../../../w/securite/20-articles-internes/index.html">Articles internes</a></div>
+<h1 class="page-title">Appréciation du risque, méthodes</h1>
+<div class="page-sub">Un article du wiki <a href="../../../w/securite/index.html">⛑️ Sécurité industrielle</a></div>
+<aside class="infobox"><div class="infobox-title">⛑️ Appréciation du risque</div><table><tr><th>Thème</th><td><a href="../../../w/securite/20-articles-internes/securite-industrielle.html">Sécurité industrielle</a></td></tr><tr><th>Statut</th><td>complet</td></tr><tr><th>Qualité</th><td>bonne</td></tr><tr><th>Révision</th><td>2026-05-22</td></tr><tr><th>Public cible</th><td>conseiller</td></tr><tr><th>Sensibilité</th><td>interne</td></tr></table><div class="infobox-tags"><span class="tag">wiki</span><span class="tag">sécurité</span><span class="tag">appréciation</span><span class="tag">risque</span><span class="tag">ISO12100</span></div></aside>
+<div class="toc"><div class="toc-title">Sommaire <button class="toc-toggle" data-toggle>[masquer]</button></div><ul><li class="toc-l3"><a href="#cadre-normatif-et-terminologie">Cadre normatif et terminologie</a></li><li class="toc-l3"><a href="#demarche-iso-12100">Démarche ISO 12100</a></li><li class="toc-l3"><a href="#chaine-accidentelle">Chaîne accidentelle</a></li><li class="toc-l3"><a href="#estimation-du-risque-outil-irsstcnesst">Estimation du risque (outil IRSST/CNESST)</a></li><li class="toc-l3"><a href="#catalogue-d39outils-iec-31010">Catalogue d&amp;#39;outils IEC 31010</a></li><li class="toc-l3"><a href="#evaluation-du-risque-alarp-et-sfairp">Évaluation du risque, ALARP et SFAIRP</a></li><li class="toc-l3"><a href="#les-9-tolerances-zero-de-la-cnesst">Les 9 tolérances zéro de la CNESST</a></li><li class="toc-l3"><a href="#application-terrain">Application terrain</a></li><li class="toc-l3"><a href="#ressources">Ressources</a></li></ul></div>
+<div class="page-body">
+<p>L&#39;appréciation du risque suit la démarche <a href="../../../w/legislation/40-concepts-juridiques-transverses/iso.html" title="ISO">ISO</a> 12100 en trois temps : identifier les phénomènes dangereux, estimer le risque (gravité, exposition, probabilité, évitement), puis évaluer si ce risque est tolérable. La méthode est itérative et s&#39;appuie sur des outils variés (<a href="../../../w/legislation/30-organismes-et-tribunaux/irsst.html" title="IRSST">IRSST</a>/<a href="../../../w/psychosocial/20-articles/legislation-et-normes/cnesst-roles-et-pouvoirs.html" title="CNESST, rôles et pouvoirs">CNESST</a>, IEC 31010, ALARP). En mine, elle structure le traitement des risques machines, des chutes de roches et des espaces confinés.</p>
+<p><strong>Table des matières</strong></p>
+<ol>
+<li><a href="#cadre-normatif-et-terminologie">Cadre normatif et terminologie</a></li>
+<li><a href="#d%C3%A9marche-iso-12100">Démarche ISO 12100</a></li>
+<li><a href="#cha%C3%AEne-accidentelle">Chaîne accidentelle</a></li>
+<li><a href="#estimation-du-risque-outil-irsstcnesst">Estimation du risque (outil IRSST/CNESST)</a></li>
+<li><a href="#catalogue-doutils-iec-31010">Catalogue d&#39;outils IEC 31010</a></li>
+<li><a href="#%C3%A9valuation-du-risque-alarp-et-sfairp">Évaluation du risque, ALARP et SFAIRP</a></li>
+<li><a href="#les-9-tol%C3%A9rances-z%C3%A9ro-de-la-cnesst">Les 9 tolérances zéro de la CNESST</a></li>
+<li><a href="#application-terrain">Application terrain</a></li>
+<li><a href="#ressources">Ressources</a></li>
+</ol>
+<h3 id="cadre-normatif-et-terminologie">Cadre normatif et terminologie</h3>
+<p>Référence : <strong>ISO 12100:2010</strong> (type A), <strong>ISO Guide 73</strong>, <strong>IEC/ISO 31010</strong>.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250119002441.png]</span></p>
+<table>
+<thead>
+<tr>
+<th>Terme</th>
+<th>Définition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Analyse du risque</td>
+<td>Identification + estimation (ISO 12100, 3.15)</td>
+</tr>
+<tr>
+<td>Appréciation du risque</td>
+<td>Identification + analyse + évaluation (ISO Guide 73)</td>
+</tr>
+<tr>
+<td>Estimation du risque</td>
+<td>Gradation du risque selon des facteurs</td>
+</tr>
+<tr>
+<td>Évaluation du risque</td>
+<td>Comparer le risque estimé aux critères pour juger tolérable / intolérable</td>
+</tr>
+<tr>
+<td>Traitement du risque</td>
+<td>Modifier (réduire) un risque</td>
+</tr>
+</tbody></table>
+<p>L&#39;analyse est descriptive, l&#39;appréciation est plus large, l&#39;évaluation est décisionnelle. Voir <a href="../../../w/securite/20-articles-internes/gestion-des-risques.html" title="Gestion des risques">Gestion des risques</a> pour le traitement.</p>
+<p>La culture de sécurité conditionne la qualité de l&#39;appréciation : sans dialogue ouvert sur les risques perçus, l&#39;exercice reste théorique.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250119232749.png]</span></p>
+<h3 id="demarche-iso-12100">Démarche ISO 12100</h3>
+<p>Méthode itérative en quatre étapes</p>
+<ol>
+<li>Déterminer les <strong>limites</strong> de la machine ou du système (espace, temps, usage prévu, mauvais usage raisonnablement prévisible).</li>
+<li><strong>Identifier</strong> les phénomènes dangereux.</li>
+<li><strong>Estimer</strong> le risque (par scénario).</li>
+<li><strong>Évaluer</strong> le risque : tolérable ?</li>
+<li>Si non : appliquer la <a href="../../../w/securite/20-articles-internes/hierarchie-des-moyens-de-prevention.html" title="Hiérarchie des moyens de prévention">hiérarchie de réduction</a> puis recommencer.</li>
+</ol>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250127212816.png]</span></p>
+<p>Cadres complémentaires : ILO (documentation), ISO 45001 (SMS), <a href="../../../w/legislation/40-concepts-juridiques-transverses/csa.html" title="CSA">CSA</a> Z1000. Au Québec, encadré par <a href="../../../w/droit-travail/20-articles-internes/lsst-droits-et-obligations.html" title="LSST, droits et obligations">LSST</a> <a href="../../../w/legislation/10-lois-principales/lsst/art-49-lsst-obligations-travailleur.html" title="art-49-LSST, obligations travailleur">art. 49</a>, 51, 59 (voir <a href="../../../w/securite/20-articles-internes/lsst-partie-1.html" title="LSST partie 1">LSST partie 1</a> et <a href="../../../w/securite/20-articles-internes/lsst-partie-2.html" title="LSST partie 2">LSST partie 2</a>).</p>
+<h3 id="chaine-accidentelle">Chaîne accidentelle</h3>
+<p>Le tableau classique à utiliser pour chaque scénario</p>
+<table>
+<thead>
+<tr>
+<th>Phénomène dangereux</th>
+<th>Situation dangereuse</th>
+<th>Événement dangereux</th>
+<th>Dommage possible</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Outils du mélangeur en rotation</td>
+<td>Mains dans la zone alors que le mélangeur tourne</td>
+<td>Le travailleur introduit ses mains</td>
+<td>Membres brisés</td>
+</tr>
+<tr>
+<td>Outils du mélangeur à l&#39;arrêt</td>
+<td>Mains dans la zone, mélangeur arrêté</td>
+<td>Démarrage intempestif (défaillance commande)</td>
+<td>Membres brisés</td>
+</tr>
+</tbody></table>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250127212925.png]</span></p>
+<p><strong>Phénomène dangereux</strong> (ISO 12100) : source potentielle de dommage. Huit catégories</p>
+<ul>
+<li><strong>Mécanique</strong> (écrasement, cisaillement, happement, entraînement, perforation, projection, choc)</li>
+<li><strong>Électrique</strong> (contact direct, arc, foudre, électrostatique)</li>
+<li><strong>Thermique</strong> (vapeur, flammes, chaud/froid)</li>
+<li><strong>Physique</strong> (<a href="../../../w/hygiene/20-articles-internes/environnement-de-travail/bruit.html" title="Bruit">bruit</a>, vibrations, <a href="../../../w/hygiene/20-articles-internes/environnement-de-travail/rayonnements.html" title="Rayonnements">rayonnements</a> UV/X/RF, lumière)</li>
+<li><strong>Chimique</strong> (contaminants, silice, <a href="../../../w/toxicologie/20-articles-internes/amiante.html" title="Amiante">amiante</a>, inflammables)</li>
+<li><strong>Biologique</strong> (virus, bactéries, animaux, insectes)</li>
+<li><strong>Ergonomique</strong> (postures, cadence, <a href="../../../w/ergonomie/25-articles-travailleurs/manutention.html" title="Manutention">manutention</a>, fatigue visuelle)</li>
+<li><strong>Psychosocial</strong> (stress, harcèlement, violence, organisation), voir <a href="../../../w/psychosocial/20-articles/risques-psychosociaux-rps/dimensions-psychosociales-du-travail.html" title="Dimensions psychosociales du travail">Dimensions psychosociales du travail</a></li>
+</ul>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250127213020.png]</span></p>
+<p><strong>Situation dangereuse</strong> : personne exposée à au moins un phénomène. Demander « pour quelle raison le travailleur se trouve-t-il là ? ».</p>
+<p><strong>Événement dangereux</strong> : événement susceptible de causer un dommage (défaillance, erreur humaine, défaut organisationnel).</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250127221121.png]</span></p>
+<p><strong>Dommage</strong> : blessure physique ou atteinte à la santé, plus ou moins grave, réversible, visible.</p>
+<p><strong>Possibilité d&#39;évitement</strong> : qui est exposé (formation), temps de réaction humain vs temps d&#39;action du phénomène, conscience du risque. Certains phénomènes ne laissent aucune chance (électricité, explosion, scie 3800 tr/min).</p>
+<h3 id="estimation-du-risque-outil-irsstcnesst">Estimation du risque (outil IRSST/<a href="../../../w/legislation/30-organismes-et-tribunaux/cnesst.html" title="CNESST">CNESST</a>)</h3>
+<p>Quatre facteurs combinés en indice</p>
+<ul>
+<li><strong>G - Gravité du dommage</strong><ul>
+<li>G1 : lésion légère réversible (premiers soins)</li>
+<li>G2 : lésion grave irréversible (membre brisé, décès)</li>
+</ul>
+</li>
+<li><strong>F - Fréquence/durée d&#39;exposition</strong><ul>
+<li>F1 : rare ou courte (&lt; 1 fois/quart)</li>
+<li>F2 : fréquente à continue (plusieurs fois/jour)</li>
+</ul>
+</li>
+<li><strong>O - Probabilité d&#39;occurrence de l&#39;événement</strong> (pas du dommage)<ul>
+<li>O1 : très faible (technologie éprouvée)</li>
+<li>O2 : faible (défaillance ≥ 10⁻⁵ /h ou personne qualifiée)</li>
+<li>O3 : élevée (défaillance ≥ 10⁻³ /h ou personne non formée)</li>
+</ul>
+</li>
+<li><strong>P - Possibilité d&#39;éviter le dommage</strong><ul>
+<li>P1 : possible dans certaines conditions</li>
+<li>P2 : impossible ou rarement possible</li>
+</ul>
+</li>
+</ul>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250127205551.png]</span></p>
+<p><strong>Exemple</strong> : G2 + F2 + O2 + P2 = indice de risque 5.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250127205634.png]</span></p>
+<p>Autres approches : par <strong>calcul</strong> (Kinney-Wiruth : R = G × E × P), par <strong>matrice</strong> (probabilité × gravité), par <strong>graphe de risque</strong> (CEI 61508, MIL-STD 882-E).</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250127211150.png]</span></p>
+<p>Six outils ont été testés par l&#39;IRSST (R-459 et R-697) : certains sont neutres, d&#39;autres sous- ou surévaluent. Choisir un outil adapté, sans trou ni recouvrement dans les échelles.</p>
+<h3 id="catalogue-d39outils-iec-31010">Catalogue d&#39;outils IEC 31010</h3>
+<p>La norme <strong>IEC/ISO 31010</strong> détaille plus de 40 techniques d&#39;appréciation. Vue d&#39;ensemble<br><span class="missing-file">[fichier introuvable : Pasted image 20250125150400.png]</span></p>
+<p>Trois grandes catégories selon l&#39;étape ciblée.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250125150328.png]</span></p>
+<p>Identification.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250125150458.png]</span></p>
+<p>Analyse.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250125150542.png]</span></p>
+<p>Évaluation.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250125150621.png]</span></p>
+<p>Principales techniques pour la machine</p>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Usage</th>
+<th>Phase</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Analyse préliminaire du danger (APD)</td>
+<td>Conception, rapide, non exhaustive</td>
+<td>Identification</td>
+</tr>
+<tr>
+<td>AMDEC</td>
+<td>Modes de défaillance et criticité</td>
+<td>Analyse</td>
+</tr>
+<tr>
+<td>HAZOP (1965, ICI)</td>
+<td>Mots-guides (no, more, less, reverse, other than...)</td>
+<td>Procédés</td>
+</tr>
+<tr>
+<td>Analyse prédictive des erreurs humaines</td>
+<td>Tâches, conséquences</td>
+<td>Humain</td>
+</tr>
+<tr>
+<td>Arbre de défaillance / arbre des causes</td>
+<td>Logique a priori / a posteriori</td>
+<td>Voir <a href="../../../w/securite/20-articles-internes/risques-mecaniques-et-operations/theorie-causale-des-accidents.html" title="Théorie causale des accidents">Théorie causale des accidents</a></td>
+</tr>
+<tr>
+<td>Ishikawa</td>
+<td>Causes/effet 5M</td>
+<td>Voir <a href="../../../w/securite/20-articles-internes/risques-mecaniques-et-operations/theorie-causale-des-accidents.html" title="Théorie causale des accidents">Théorie causale des accidents</a></td>
+</tr>
+<tr>
+<td>O&amp;SA (Operating and Support Analysis)</td>
+<td>Opération et maintenance</td>
+<td>Exploitation</td>
+</tr>
+</tbody></table>
+<p>Choisir une technique demande une équipe pluridisciplinaire, formation à la méthode, consignation écrite et souvent un ingénieur pour la phase de réduction.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250125150717.png]</span></p>
+<h3 id="evaluation-du-risque-alarp-et-sfairp">Évaluation du risque, ALARP et SFAIRP</h3>
+<p>Évaluer = porter un jugement : le risque est-il <strong>tolérable</strong> ?</p>
+<p><strong>ALARP</strong> (As Low As Reasonably Practicable) : trois zones.</p>
+<ul>
+<li>Intolérable : à corriger sauf circonstances exceptionnelles.</li>
+<li>Zone ALARP : réduire si raisonnablement possible.</li>
+<li>Largement acceptable : pas d&#39;action requise.</li>
+</ul>
+<p><strong>SFAIRP</strong> (So Far As Is Reasonably Practicable) : critère britannique, ne référence pas un niveau de risque mais juge si des moyens de maîtrise supplémentaires sont possibles et réalisables.</p>
+<p><strong>Diagramme de Pareto</strong> : 80/20, prioriser les 20 % de causes qui produisent 80 % des dommages graves.</p>
+<p><strong>Analyse coût/bénéfice</strong> : utile pour comparer les options, mais mal adaptée à l&#39;incertitude.</p>
+<p>Au Québec, les critères s&#39;appuient sur les normes, lois (RSST), tolérances zéro <a href="../../../w/psychosocial/20-articles/legislation-et-normes/cnesst-roles-et-pouvoirs.html" title="CNESST, rôles et pouvoirs">CNESST</a>, valeurs morales et culture SST.</p>
+<h3 id="les-9-tolerances-zero-de-la-cnesst">Les 9 tolérances zéro de la CNESST</h3>
+<p>Situations où la <a href="../../../w/psychosocial/20-articles/legislation-et-normes/cnesst-roles-et-pouvoirs.html" title="CNESST, rôles et pouvoirs">CNESST</a> n&#39;accepte aucun travailleur exposé</p>
+<ol>
+<li>Chutes de hauteur de plus de 3 m</li>
+<li>Chutes de hauteur à partir d&#39;une échelle</li>
+<li>Contact avec une pièce en mouvement d&#39;une machine</li>
+<li>Électrisation avec une ligne aérienne sous tension</li>
+<li>Effondrement d&#39;un échafaudage</li>
+<li>Effondrement des parois d&#39;un creusement non étançonné</li>
+<li>Exposition aux poussières d&#39;amiante</li>
+<li>Exposition aux poussières de silice</li>
+<li>Roches instables (mines)</li>
+</ol>
+<p>Pour chaque tolérance, des moyens hiérarchisés sont prescrits (voir <a href="../../../w/securite/20-articles-internes/hierarchie-des-moyens-de-prevention.html" title="Hiérarchie des moyens de prévention">Hiérarchie des moyens de prévention</a>).</p>
+<h3 id="application-terrain">Application terrain</h3>
+<p><strong>Configurations minières exigeantes pour l&#39;appréciation</strong></p>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Spécificité d&#39;appréciation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Chantier souterrain (foraison, sautage, écaillage)</td>
+<td>Géométrie changeante, atmosphère, vibrations sismiques, exposition courte mais répétée</td>
+</tr>
+<tr>
+<td>Concentrateur (broyage, flottation, lixiviation)</td>
+<td>Procédés combinés, chimie, <a href="../../../w/securite/20-articles-internes/risques-mecaniques-et-operations/espaces-clos.html" title="Espaces clos">Espaces clos</a>, automatisation partielle</td>
+</tr>
+<tr>
+<td>Aire à ciel ouvert</td>
+<td>Visibilité, météo, équipements lourds, terrain mouvant</td>
+</tr>
+<tr>
+<td>Maintenance lourde</td>
+<td>Phase d&#39;usage non « nominal », plusieurs corps de métier, fenêtres temporelles serrées</td>
+</tr>
+<tr>
+<td>Cage et chevalement</td>
+<td>Énergie potentielle massive, défaillance rare mais catastrophique</td>
+</tr>
+</tbody></table>
+<p><strong>Leviers spécifiques au secteur minier</strong></p>
+<ul>
+<li>Coupler l&#39;appréciation avec le <strong>plan d&#39;écaillage</strong> et les bulletins géotechniques quotidiens.</li>
+<li>Intégrer la rotation FIFO et la fatigue cumulée comme facteur de probabilité (voir <a href="../../../w/psychosocial/20-articles/milieu-minier-et-fifo/quarts-longs-et-fatigue-en-souterrain.html" title="Quarts longs et fatigue en souterrain">Quarts longs et fatigue en souterrain</a>).</li>
+<li>Prévoir une appréciation <strong>dédiée aux modes spéciaux</strong> (apprentissage, maintenance, nettoyage), souvent oubliés.</li>
+<li>Documenter le mauvais usage raisonnablement prévisible (raccourci pour gagner du temps en fin de quart).</li>
+</ul>
+<p><strong>Souterrain vs surface</strong> : en souterrain, la « limite spatiale » bouge à chaque tir. Une appréciation figée perd vite sa pertinence. Prévoir une révision déclenchée par les jalons miniers (nouveau niveau, nouvel équipement, modification de plan de minage).</p>
+<h3 id="ressources">Ressources</h3>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Type</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ISO 12100:2010</td>
+<td>Norme</td>
+<td>ISO</td>
+</tr>
+<tr>
+<td>IEC/ISO 31010</td>
+<td>Norme</td>
+<td>IEC/ISO</td>
+</tr>
+<tr>
+<td>Rapport IRSST R-459 (outils d&#39;estimation)</td>
+<td>Étude</td>
+<td>IRSST</td>
+</tr>
+<tr>
+<td>Rapport IRSST R-697 (comparaison d&#39;outils)</td>
+<td>Étude</td>
+<td>IRSST</td>
+</tr>
+<tr>
+<td>Grille d&#39;estimation IRSST/<a href="../../../w/psychosocial/20-articles/legislation-et-normes/cnesst-roles-et-pouvoirs.html" title="CNESST, rôles et pouvoirs">CNESST, rôles et pouvoirs</a> (G, F, O, P)</td>
+<td>Gabarit</td>
+<td>IRSST</td>
+</tr>
+<tr>
+<td>Tolérances zéro CNESST</td>
+<td>Document de référence</td>
+<td>CNESST</td>
+</tr>
+</tbody></table>
+<p><strong>Articles wiki connexes</strong></p>
+<ul>
+<li>[[Wiki</li>
+</ul>
+
+</div>
+<details class="backlinks"><summary>Pages qui pointent ici (15)</summary><ul><li><a href="../../../w/securite/05-demarrage-rapide/demarrage-rapide-conseiller-sst.html">🎯 Démarrage rapide - Conseiller SST</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/05-demarrage-rapide/demarrage-rapide-superviseur.html">🎯 Démarrage rapide - Superviseur</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/00-accueil/00-accueil.html">00 - 🏠 Accueil</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/20-articles-internes/20-articles-internes.html">20 - Articles internes</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/27-articles-gestionnaires/gestion-des-risques-operationnels/appreciation-des-risques.html">Appréciation des risques</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/40-articles-de-loi/rsst/art-174-rsst-epi-obligatoires.html">art-174-RSST, EPI obligatoires</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/40-articles-de-loi/rsst/art-188-4-rsst-protection-respiratoire.html">art-188.4-RSST, protection respiratoire</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/27-articles-gestionnaires/cadenassage.html">Cadenassage</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/20-articles-internes/gestion-des-risques.html">Gestion des risques</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/10-themes/hierarchie-de-la-prevention.html">Hiérarchie de la prévention</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/hygiene/20-articles-internes/prevention-et-programmes/hierarchie-des-moyens-de-prevention.html">Hiérarchie des moyens de prévention</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../w/securite/20-articles-internes/hierarchie-des-moyens-de-prevention.html">Hiérarchie des moyens de prévention</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/27-articles-gestionnaires/gestion-des-risques-operationnels/risques-machines.html">Risques machines</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/10-themes/securite-machines.html">Sécurité machines</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../w/securite/20-articles-internes/risques-mecaniques-et-operations/theorie-causale-des-accidents.html">Théorie causale des accidents</a> <small class="bl-wiki">Sécurité industrielle</small></li></ul></details>
+<div class="page-meta">Dernière révision : 2026-05-22</div>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours · 2026-08-27</footer>
+<script src="../../../assets/app.js"></script>
+</body>
+</html>

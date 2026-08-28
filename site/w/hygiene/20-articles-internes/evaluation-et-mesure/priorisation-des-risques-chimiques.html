@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priorisation des risques chimiques — WIKI SST Mines</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<script>window.ROOT='../../../../';</script>
+</head>
+<body>
+<header class="site-header">
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <a class="brand" href="../../../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+  <div class="nav-group"><div class="nav-title">Navigation</div>
+    <ul>
+      <li><a href="../../../../index.html">🏠 Portail</a></li>
+      <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">🌫️ Hygiène industrielle</div>
+  <ul>
+    <li><a href="../../../../w/hygiene/index.html">Accueil du wiki</a></li>
+    <li><a href="../../../../w/hygiene/05-demarrage-rapide/index.html">Démarrage rapide</a></li><li><a href="../../../../w/hygiene/10-themes/index.html">Thèmes</a></li><li><a href="../../../../w/hygiene/20-articles-internes/index.html">Articles internes</a></li><li><a href="../../../../w/hygiene/25-articles-travailleurs/index.html">Articles travailleurs</a></li><li><a href="../../../../w/hygiene/27-articles-gestionnaires/index.html">Articles gestionnaires</a></li><li><a href="../../../../w/hygiene/30-glossaire/index.html">Glossaire</a></li><li><a href="../../../../w/hygiene/40-articles-de-loi/index.html">Articles de loi</a></li>
+    <li><a href="../../../../w/hygiene/index-alphabetique.html">Index alphabétique</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Les wikis</div><ul><li><a href="../../../../w/ergonomie/index.html">🦺 Ergonomie</a></li><li class="active"><a href="../../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></li><li><a href="../../../../w/toxicologie/index.html">☣️ Toxicologie</a></li><li><a href="../../../../w/securite/index.html">⛑️ Sécurité industrielle</a></li><li><a href="../../../../w/droit-travail/index.html">📋 Droit du travail</a></li><li><a href="../../../../w/psychosocial/index.html">🧠 SST psychosociale</a></li><li><a href="../../../../w/legislation/index.html">⚖️ Recueil législatif</a></li></ul></div>
+</nav>
+<main class="content">
+
+<div class="breadcrumbs"><a href="../../../../index.html">Portail</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/index.html">Hygiène industrielle</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/20-articles-internes/index.html">Articles internes</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/index.html">Évaluation et mesure</a></div>
+<h1 class="page-title">Outils de priorisation des risques chimiques</h1>
+<div class="page-sub">Un article du wiki <a href="../../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></div>
+<aside class="infobox"><div class="infobox-title">🌫️ Priorisation des risques chimiques</div><table><tr><th>Thème</th><td><a href="../../../../w/toxicologie/20-articles-internes/toxicologie-industrielle.html">Toxicologie industrielle</a></td></tr><tr><th>Statut</th><td>complet</td></tr><tr><th>Qualité</th><td>satisfaisante</td></tr><tr><th>Révision</th><td>2026-05-22</td></tr><tr><th>Public cible</th><td>conseiller</td></tr><tr><th>Sensibilité</th><td>interne</td></tr></table><div class="infobox-tags"><span class="tag">wiki</span><span class="tag">toxicologie</span><span class="tag">priorisation</span><span class="tag">control-banding</span><span class="tag">niosh</span><span class="tag">irsst</span></div></aside>
+<div class="toc"><div class="toc-title">Sommaire <button class="toc-toggle" data-toggle>[masquer]</button></div><ul><li class="toc-l3"><a href="#demarche-d39analyse-de-risque">Démarche d&amp;#39;analyse de risque</a></li><li class="toc-l3"><a href="#evaluation-quantitative-vs-qualitative">Évaluation quantitative vs qualitative</a></li><li class="toc-l3"><a href="#control-banding-principes">Control banding : principes</a></li><li class="toc-l3"><a href="#outils-par-contexte">Outils par contexte</a></li><li class="toc-l3"><a href="#communication-des-risques">Communication des risques</a></li><li class="toc-l3"><a href="#application-terrain">Application terrain</a></li><li class="toc-l3"><a href="#ressources">Ressources</a></li></ul></div>
+<div class="page-body">
+<p>Quand les normes d&#39;exposition manquent ou que les données métrologiques sont absentes, on priorise les risques par des approches qualitatives ou semi-quantitatives : bandes de danger (control banding), score combiné danger × exposition, démarche <a href="../../../../w/legislation/30-organismes-et-tribunaux/niosh.html" title="NIOSH">NIOSH</a> OEB, outils sectoriels (IRPeQ pour les pesticides). L&#39;objectif : décider de l&#39;urgence d&#39;agir sans attendre des mesures parfaites. En mine, c&#39;est l&#39;outil pour traiter le portefeuille de produits chimiques (souvent 200 à 800 références) au-delà du cadre normatif RSST.</p>
+<p><strong>Table des matières</strong></p>
+<ol>
+<li><a href="#d%C3%A9marche-danalyse-de-risque">Démarche d&#39;analyse de risque</a></li>
+<li><a href="#%C3%A9valuation-quantitative-vs-qualitative">Évaluation quantitative vs qualitative</a></li>
+<li><a href="#control-banding--principes">Control banding : principes</a></li>
+<li><a href="#outils-par-contexte">Outils par contexte</a></li>
+<li><a href="#communication-des-risques">Communication des risques</a></li>
+<li><a href="#application-terrain">Application terrain</a></li>
+<li><a href="#ressources">Ressources</a></li>
+</ol>
+<h3 id="demarche-d39analyse-de-risque">Démarche d&#39;analyse de risque</h3>
+<p>L&#39;analyse des risques comporte 3 composantes</p>
+<ol>
+<li><strong>Évaluation</strong> des risques.</li>
+<li><strong>Gestion</strong> des risques.</li>
+<li><strong><a href="../../../../w/psychosocial/10-themes/communication.html" title="Communication">Communication</a></strong> des risques.</li>
+</ol>
+<h4 id="principe-general-en-4-etapes">Principe général en 4 étapes</h4>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213141033.png]</span></p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213141201.png]</span></p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213141357.png]</span></p>
+<table>
+<thead>
+<tr>
+<th>Étape</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Inventaire des produits et procédés</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Classification du danger (<a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/simdut-et-classes-de-danger.html" title="SIMDUT et classes de danger">SIMDUT et classes de danger</a>/<a href="../../../../w/legislation/40-concepts-juridiques-transverses/sgh.html" title="SGH">SGH</a>, fiches toxicologiques, <a href="../../../../w/toxicologie/20-articles-internes/cancerogenicite.html" title="Cancérogénicité">Cancérogénicité</a>)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Estimation de l&#39;exposition (quantité, fréquence, durée, voie, <a href="../../../../w/legislation/40-concepts-juridiques-transverses/epi.html" title="EPI">EPI</a>, contrôles)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Évaluation du risque (combinaison danger × exposition) + sélection des mesures</td>
+</tr>
+</tbody></table>
+<p>R = D × E. Voir <a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/toxicologie-introduction.html" title="Toxicologie (introduction)">Toxicologie (introduction)</a>.</p>
+<h3 id="evaluation-quantitative-vs-qualitative">Évaluation quantitative vs qualitative</h3>
+<h4 id="quantitative">Quantitative</h4>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213135543.png]</span></p>
+<ul>
+<li>Mesurer l&#39;exposition (échantillonnage de l&#39;air, <a href="../../../../w/legislation/40-concepts-juridiques-transverses/ibe.html" title="IBE">IBE</a>) et comparer à une norme (<a href="../../../../w/legislation/40-concepts-juridiques-transverses/vemp.html" title="VEMP">VEMP</a>, <a href="../../../../w/legislation/40-concepts-juridiques-transverses/vecd.html" title="VECD">VECD</a>).</li>
+<li>Méthode de référence quand normes et données fiables existent.</li>
+<li>Voir <a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/vea-et-normes.html" title="VEA et normes">VEA et normes</a>.</li>
+</ul>
+<h4 id="qualitative">Qualitative</h4>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213135736.png]</span></p>
+<ul>
+<li>Détermine la <strong>classe de danger</strong> et l&#39;<strong>exposition potentielle</strong> sans mesure exhaustive.</li>
+<li>Utilisée quand<ul>
+<li>Pas de norme disponible.</li>
+<li>Pas de données métrologiques.</li>
+<li>Nombreuses substances (priorisation initiale).</li>
+<li>Décision rapide nécessaire.</li>
+</ul>
+</li>
+</ul>
+<h4 id="cas-typiques-de-decision">Cas typiques de décision</h4>
+<table>
+<thead>
+<tr>
+<th>Cas</th>
+<th>Normes ?</th>
+<th>Données échantillonnage ?</th>
+<th>Approche</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Oui</td>
+<td>Oui</td>
+<td>Comparaison directe avec VEMP/VECD</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Non</td>
+<td>Variable</td>
+<td>NIOSH OEB ; control banding</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Oui (<a href="../../../../w/legislation/30-organismes-et-tribunaux/circ.html" title="CIRC">CIRC</a>, R, S)</td>
+<td>Non</td>
+<td>Substitution prioritaire, mesures collectives, surveillance</td>
+</tr>
+</tbody></table>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213135945.png]</span></p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213140155.png]</span></p>
+<h3 id="control-banding-principes">Control banding : principes</h3>
+<p><strong>Control banding</strong> = stratégie qui regroupe les substances en quelques bandes selon leur danger, puis associe à chaque bande un niveau de contrôle (de la ventilation générale jusqu&#39;au confinement total).</p>
+<h4 id="logique">Logique</h4>
+<table>
+<thead>
+<tr>
+<th>Bande danger</th>
+<th>Niveau de contrôle</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Faible (irritant léger, cat. 5)</td>
+<td>Bonne ventilation générale, EPI standard</td>
+</tr>
+<tr>
+<td>Modéré</td>
+<td>Ventilation locale aspirante (LEV)</td>
+</tr>
+<tr>
+<td>Élevé</td>
+<td><a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/confinement-profondeur-et-charge-mentale.html" title="Confinement, profondeur et charge mentale">Confinement, profondeur et charge mentale</a>, ventilation locale forte, EPI spécifique</td>
+</tr>
+<tr>
+<td>Très élevé (cancérogène, <a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/sensibilisants.html" title="Sensibilisants">Sensibilisants</a> respiratoire fort)</td>
+<td>Système clos, EPI ultime, surveillance médicale</td>
+</tr>
+</tbody></table>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213141551.png]</span></p>
+<p>Croisé avec la bande <strong>d&#39;exposition</strong> (quantité, forme, volatilité, fréquence) pour déterminer la stratégie finale.</p>
+<h4 id="referentiels">Référentiels</h4>
+<ul>
+<li><strong>COSHH Essentials</strong> (HSE, UK) : pionnier ; bandes basées sur les phrases R (anciennes), maintenant H.</li>
+<li><strong>NIOSH Occupational Exposure Banding</strong> (2019, doc 2019-132) : démarche à 3 niveaux (tier 1 = phrases H ; tier 2 = analyse des données toxico ; tier 3 = expert toxicologue) pour générer une OEB (5 bandes A-E correspondant à des plages numériques).</li>
+<li><strong><a href="../../../../w/legislation/30-organismes-et-tribunaux/inrs.html" title="INRS">INRS</a></strong> : Méthode d&#39;évaluation simplifiée des risques chimiques (ND 2233).</li>
+<li><strong>Stoffenmanager</strong> (Pays-Bas) : web, basé sur control banding.</li>
+</ul>
+<h3 id="outils-par-contexte">Outils par contexte</h3>
+<h4 id="outils-terrain-generaux">Outils terrain (généraux)</h4>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213140241.png]</span></p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213140308.png]</span></p>
+<ul>
+<li><strong>Outil A</strong> (référentiel sectoriel).</li>
+<li><strong>Outil B (maison)</strong> : feuille de saisie terrain + feuille d&#39;analyse. Recense les produits, opérations, durée, fréquence, EPI.</li>
+<li><strong>Outil C</strong> : collaboration travailleurs-comité-SST pour validation.</li>
+</ul>
+<h4 id="outils-sectoriels">Outils sectoriels</h4>
+<table>
+<thead>
+<tr>
+<th>Outil</th>
+<th>Domaine</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>MiXie Qc</strong></td>
+<td><a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/multiexposition.html" title="Multiexposition">Multiexposition</a> par additivité (voir <a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/multiexposition.html" title="Multiexposition">Multiexposition</a>)</td>
+</tr>
+<tr>
+<td><strong>IRPeQ</strong></td>
+<td><a href="../../../../w/toxicologie/20-articles-internes/substances-dangereuses/pesticides.html" title="Pesticides">Pesticides</a> au Québec (voir <a href="../../../../w/toxicologie/20-articles-internes/substances-dangereuses/pesticides.html" title="Pesticides">Pesticides</a>)</td>
+</tr>
+<tr>
+<td><strong>NIOSH OEB</strong></td>
+<td>Substances sans VLE</td>
+</tr>
+<tr>
+<td><strong>COSHH Essentials</strong></td>
+<td>PME, large gamme</td>
+</tr>
+<tr>
+<td><strong>Stoffenmanager Nano</strong></td>
+<td>Spécifique aux nanomatériaux (voir <a href="../../../../w/toxicologie/20-articles-internes/substances-dangereuses/nanoparticules.html" title="Nanoparticules">Nanoparticules</a>)</td>
+</tr>
+<tr>
+<td><strong>REACH (UE)</strong></td>
+<td>Évaluation et autorisation européenne</td>
+</tr>
+</tbody></table>
+<h4 id="etapes-d39application">Étapes d&#39;application</h4>
+<p>Pour un atelier</p>
+<ol>
+<li><strong>Inventaire</strong> : tous les produits chimiques utilisés, <a href="../../../../w/legislation/40-concepts-juridiques-transverses/fds.html" title="FDS">FDS</a> à jour.</li>
+<li><strong>Bandes de danger</strong> : attribuer selon les mentions H (<a href="../../../../w/legislation/40-concepts-juridiques-transverses/simdut.html" title="SIMDUT">SIMDUT</a>/SGH) et la classification CIRC/RSST.</li>
+<li><strong>Bandes d&#39;émission/exposition</strong> : selon volatilité, quantité, fréquence, forme.</li>
+<li><strong>Score de risque</strong> : combinaison des deux dimensions, parfois pondérée.</li>
+<li><strong>Mesures</strong> : substitution, ingénierie, organisation, EPI, suivi.</li>
+</ol>
+<h3 id="communication-des-risques">Communication des risques</h3>
+<p>La 3e composante de l&#39;analyse, souvent sous-estimée.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213142337.png]</span></p>
+<h4 id="perception-et-dilemme">Perception et dilemme</h4>
+<ul>
+<li><strong>Experts</strong> : raisonnent en probabilité, dose, exposition cumulée.</li>
+<li><strong>Travailleurs / grand public</strong> : raisonnent en représentations (gravité, contrôle, équité, familiarité).</li>
+<li>Décalage = méfiance. Le risque perçu n&#39;est pas le risque mesuré.</li>
+</ul>
+<h4 id="nouvelle-equation">Nouvelle équation</h4>
+<p>R_perçu = D × E × <strong>facteurs de perception</strong> (familiarité, choix, équité, gravité, confiance).</p>
+<h4 id="a-cibler-pour-ameliorer-la-communication">À cibler pour améliorer la communication</h4>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251213142526.png]</span></p>
+<ul>
+<li>Écoute active et reconnaissance des préoccupations.</li>
+<li>Vocabulaire accessible.</li>
+<li>Transparence sur l&#39;incertitude.</li>
+<li>Implication des travailleurs dans la décision.</li>
+<li>Messages cohérents au fil du temps et entre les sources.</li>
+</ul>
+<h3 id="application-terrain">Application terrain</h3>
+<p>Un site minier typique gère 200 à 800 références de produits chimiques (réactifs d&#39;usine, carburants, lubrifiants, <a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/solvants.html" title="Solvants">solvants</a> d&#39;atelier, peintures, biocides, désinfectants, gaz comprimés). Mesurer chacun à la VEMP est impossible. La priorisation est l&#39;outil structurant.</p>
+<h4 id="demarche-type-en-mine">Démarche-type en mine</h4>
+<table>
+<thead>
+<tr>
+<th>Étape</th>
+<th>Outil</th>
+<th>Livrable</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. Inventaire</td>
+<td>Registre central FDS, audit ateliers</td>
+<td>Liste exhaustive + procédé d&#39;usage</td>
+</tr>
+<tr>
+<td>2. Tri rapide (bandes)</td>
+<td>NIOSH OEB / Stoffenmanager / COSHH Essentials</td>
+<td>Top 20-50 produits prioritaires</td>
+</tr>
+<tr>
+<td>3. Évaluation quantitative</td>
+<td>Échantillonnage <a href="../../../../w/legislation/30-organismes-et-tribunaux/irsst.html" title="IRSST">IRSST</a> T-06, IBE</td>
+<td>Cartographie d&#39;exposition par <a href="../../../../w/legislation/40-concepts-juridiques-transverses/ghe.html" title="GHE">GHE</a></td>
+</tr>
+<tr>
+<td>4. <a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/multiexposition.html" title="Multiexposition">Multiexposition</a></td>
+<td>MiXie sur les postes les plus exposés</td>
+<td>Rapport multiexposition</td>
+</tr>
+<tr>
+<td>5. Hiérarchie des moyens</td>
+<td>Substitution, ingénierie, organisationnel, EPI</td>
+<td>Plan d&#39;action priorisé</td>
+</tr>
+<tr>
+<td>6. Suivi</td>
+<td>Indicateurs KPI hygiène</td>
+<td>Tableau de bord SST</td>
+</tr>
+</tbody></table>
+<h4 id="indicateurs-typiques-suivi-multi-annuel">Indicateurs typiques (suivi multi-annuel)</h4>
+<ul>
+<li>% de produits prioritaires (bandes D-E) avec stratégie de contrôle documentée.</li>
+<li>% de GHE évalués dans les 5 dernières années.</li>
+<li>Nombre de substitutions réalisées par an.</li>
+<li>Nombre de dépassements VEMP (chronique).</li>
+</ul>
+<h4 id="cas-pratique-atelier-mecanique">Cas pratique : atelier mécanique</h4>
+<p>Atelier de 30 mécaniciens, 80 produits chimiques. Application du control banding : 5 produits classés bande D-E (anciens dégraissants chlorés, certaines peintures à isocyanates, brasures au cadmium). Action prioritaire : substitution des chlorés par dégraissants à base aqueuse, fermeture des bains de dégraissage, P100 imposé pour les opérations cadmium. Le reste du portefeuille reste sous contrôle par ventilation générale + EPI standard.</p>
+<h3 id="ressources">Ressources</h3>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Type</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NIOSH Occupational Exposure Banding (2019-132)</td>
+<td>Guide</td>
+<td>NIOSH</td>
+</tr>
+<tr>
+<td>COSHH Essentials</td>
+<td>Outil web</td>
+<td>HSE UK</td>
+</tr>
+<tr>
+<td>Stoffenmanager / Stoffenmanager Nano</td>
+<td>Outil web</td>
+<td>TNO</td>
+</tr>
+<tr>
+<td>MiXie Qc</td>
+<td>Outil web</td>
+<td>IRSST + UdeM</td>
+</tr>
+<tr>
+<td>IRPeQ</td>
+<td>Outil web</td>
+<td>MELCCFP</td>
+</tr>
+<tr>
+<td>Méthode INRS ND 2233</td>
+<td>Guide</td>
+<td>INRS</td>
+</tr>
+</tbody></table>
+<p><strong>Articles wiki connexes</strong></p>
+<ul>
+<li><a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/toxicologie-introduction.html" title="Toxicologie (introduction)">Toxicologie (introduction)</a></li>
+<li><a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/dose-reponse-et-dl50.html" title="Dose-réponse et DL50">Dose-réponse et DL50</a></li>
+<li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/simdut-et-classes-de-danger.html" title="SIMDUT et classes de danger">SIMDUT et classes de danger</a></li>
+<li><a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/multiexposition.html" title="Multiexposition">Multiexposition</a></li>
+<li><a href="../../../../w/toxicologie/20-articles-internes/substances-dangereuses/pesticides.html" title="Pesticides">Pesticides</a></li>
+<li><a href="../../../../w/toxicologie/20-articles-internes/substances-dangereuses/nanoparticules.html" title="Nanoparticules">Nanoparticules</a></li>
+<li><a href="../../../../w/hygiene/20-articles-internes/prevention-et-programmes/demarche-arec.html" title="Démarche AREC">_archive Wiki SST unifié/20 - Articles internes/60 - Prévention et programmes/Démarche AREC</a></li>
+<li>[[Wiki SST/20 - Articles internes/60 - Prévention et programmes/Hiérarchie des moyens d</li>
+</ul>
+
+</div>
+<details class="backlinks"><summary>Pages qui pointent ici (6)</summary><ul><li><a href="../../../../w/hygiene/05-demarrage-rapide/demarrage-rapide-conseiller-sst.html">🎯 Démarrage rapide - Conseiller SST</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/05-demarrage-rapide/demarrage-rapide-direction-et-rh.html">🎯 Démarrage rapide - Direction et RH</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/00-accueil/00-accueil.html">00 - 🏠 Accueil</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/10-themes/demarche-en-hygiene-industrielle.html">Démarche en hygiène industrielle</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/evaluation-et-mesure.html">Évaluation et mesure</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/multiexposition.html">Multiexposition</a> <small class="bl-wiki">Hygiène industrielle</small></li></ul></details>
+<div class="page-meta">Dernière révision : 2026-05-22</div>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours · 2026-08-27</footer>
+<script src="../../../../assets/app.js"></script>
+</body>
+</html>

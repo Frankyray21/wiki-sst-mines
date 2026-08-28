@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIMDUT et classes de danger — WIKI SST Mines</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<script>window.ROOT='../../../../';</script>
+</head>
+<body>
+<header class="site-header">
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <a class="brand" href="../../../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+  <div class="nav-group"><div class="nav-title">Navigation</div>
+    <ul>
+      <li><a href="../../../../index.html">🏠 Portail</a></li>
+      <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">🌫️ Hygiène industrielle</div>
+  <ul>
+    <li><a href="../../../../w/hygiene/index.html">Accueil du wiki</a></li>
+    <li><a href="../../../../w/hygiene/05-demarrage-rapide/index.html">Démarrage rapide</a></li><li><a href="../../../../w/hygiene/10-themes/index.html">Thèmes</a></li><li><a href="../../../../w/hygiene/20-articles-internes/index.html">Articles internes</a></li><li><a href="../../../../w/hygiene/25-articles-travailleurs/index.html">Articles travailleurs</a></li><li><a href="../../../../w/hygiene/27-articles-gestionnaires/index.html">Articles gestionnaires</a></li><li><a href="../../../../w/hygiene/30-glossaire/index.html">Glossaire</a></li><li><a href="../../../../w/hygiene/40-articles-de-loi/index.html">Articles de loi</a></li>
+    <li><a href="../../../../w/hygiene/index-alphabetique.html">Index alphabétique</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Les wikis</div><ul><li><a href="../../../../w/ergonomie/index.html">🦺 Ergonomie</a></li><li class="active"><a href="../../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></li><li><a href="../../../../w/toxicologie/index.html">☣️ Toxicologie</a></li><li><a href="../../../../w/securite/index.html">⛑️ Sécurité industrielle</a></li><li><a href="../../../../w/droit-travail/index.html">📋 Droit du travail</a></li><li><a href="../../../../w/psychosocial/index.html">🧠 SST psychosociale</a></li><li><a href="../../../../w/legislation/index.html">⚖️ Recueil législatif</a></li></ul></div>
+</nav>
+<main class="content">
+
+<div class="breadcrumbs"><a href="../../../../index.html">Portail</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/index.html">Hygiène industrielle</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/20-articles-internes/index.html">Articles internes</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/index.html">Substances dangereuses</a></div>
+<h1 class="page-title">SIMDUT et classes de danger</h1>
+<div class="page-sub">Un article du wiki <a href="../../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></div>
+<aside class="infobox"><div class="infobox-title">🌫️ SIMDUT et classes de danger</div><table><tr><th>Thème</th><td><a href="../../../../w/hygiene/27-articles-gestionnaires/programmes-de-prevention/hygiene-industrielle.html">Hygiène industrielle</a></td></tr><tr><th>Statut</th><td>complet</td></tr><tr><th>Qualité</th><td>bonne</td></tr><tr><th>Révision</th><td>2026-05-22</td></tr><tr><th>Public cible</th><td>conseiller, direction, superviseur</td></tr><tr><th>Sensibilité</th><td>interne</td></tr></table><div class="infobox-tags"><span class="tag">wiki</span><span class="tag">hygiène</span><span class="tag">toxicologie</span><span class="tag">simdut</span><span class="tag">sgh</span><span class="tag">communication-risques</span><span class="tag">classes-danger</span></div></aside>
+<div class="toc"><div class="toc-title">Sommaire <button class="toc-toggle" data-toggle>[masquer]</button></div><ul><li class="toc-l3"><a href="#sgh-et-simdut">SGH et SIMDUT</a></li><li class="toc-l3"><a href="#etapes-de-classification">Étapes de classification</a></li><li class="toc-l3"><a href="#classes-de-danger">Classes de danger</a></li><li class="toc-l3"><a href="#toxicite-aigue-et-corrosion">Toxicité aiguë et corrosion</a></li><li class="toc-l3"><a href="#pictogrammes">Pictogrammes</a></li><li class="toc-l3"><a href="#communication-des-risques">Communication des risques</a></li><li class="toc-l3"><a href="#responsabilites">Responsabilités</a></li><li class="toc-l3"><a href="#cadre-legal">Cadre légal</a></li><li class="toc-l3"><a href="#application-terrain">Application terrain</a></li><li class="toc-l3"><a href="#ressources">Ressources</a></li></ul></div>
+<div class="page-body">
+<p>Le <a href="../../../../w/legislation/40-concepts-juridiques-transverses/simdut.html" title="SIMDUT">SIMDUT</a> 2015 est l&#39;application canadienne du Système général harmonisé (<a href="../../../../w/legislation/40-concepts-juridiques-transverses/sgh.html" title="SGH">SGH</a>). Il classe les produits dangereux en classes physiques, santé et biologiques et impose un système de communication des risques articulé autour de trois piliers : étiquettes, <a href="../../../../w/legislation/40-concepts-juridiques-transverses/fds.html" title="FDS">FDS</a> à 16 sections et formation. Le RPD (DORS/2015-17) fixe les critères de classification au Canada, et la <a href="../../../../w/droit-travail/20-articles-internes/lsst-droits-et-obligations.html" title="LSST, droits et obligations">LSST</a> (chapitre IV) en assure l&#39;application au Québec via le RSST. En mine, le SIMDUT couvre les réactifs d&#39;usine (cyanure, xanthates, acides, bases, frothers), les huiles et carburants, les <a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/solvants.html" title="Solvants">solvants</a> d&#39;atelier ; les explosifs et les <a href="../../../../w/toxicologie/20-articles-internes/substances-dangereuses/pesticides.html" title="Pesticides">pesticides</a> sont encadrés par des régimes propres.</p>
+<p><strong>Table des matières</strong></p>
+<ol>
+<li><a href="#sgh-et-simdut">SGH et SIMDUT</a></li>
+<li><a href="#%C3%A9tapes-de-classification">Étapes de classification</a></li>
+<li><a href="#classes-de-danger">Classes de danger</a></li>
+<li><a href="#toxicit%C3%A9-aigu%C3%AB-et-corrosion">Toxicité aiguë et corrosion</a></li>
+<li><a href="#pictogrammes">Pictogrammes</a></li>
+<li><a href="#communication-des-risques">Communication des risques</a></li>
+<li><a href="#responsabilit%C3%A9s">Responsabilités</a></li>
+<li><a href="#cadre-l%C3%A9gal">Cadre légal</a></li>
+<li><a href="#application-terrain">Application terrain</a></li>
+<li><a href="#ressources">Ressources</a></li>
+</ol>
+<h3 id="sgh-et-simdut">SGH et SIMDUT</h3>
+<p>Le SGH est un système international développé par l&#39;ONU pour harmoniser la classification et l&#39;étiquetage des produits dangereux. Ses objectifs : harmonisation internationale, facilitation du commerce, amélioration de la communication des dangers, réduction des tests animaux.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206143400.png]</span></p>
+<ul>
+<li>SGH (Système Général Harmonisé) : système international.</li>
+<li>SIMDUT 2015 : intégration canadienne du SGH (remplace SIMDUT 1988).</li>
+<li>LPD : Loi sur les produits dangereux (fédérale).</li>
+<li>RPD : Règlement sur les produits dangereux (DORS/2015-17).</li>
+</ul>
+<p>Le passage de SIMDUT 1988 à SIMDUT 2015 a modifié l&#39;esthétique des pictogrammes, ajouté des classes et restructuré la FDS.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206144506.png]</span></p>
+<p><strong>Produits non assujettis</strong> : explosifs, cosmétiques, drogues, aliments, produits antiparasitaires, produits de consommation, bois, substances radioactives, déchets, tabac, articles manufacturés. Ces produits demeurent encadrés par d&#39;autres lois (LCSPC, Loi sur les aliments et drogues, Loi sur les produits antiparasitaires).</p>
+<p>Deux éléments majeurs du SGH</p>
+<ol>
+<li><strong>Classification</strong> selon les critères SGH.</li>
+<li><strong><a href="../../../../w/psychosocial/10-themes/communication.html" title="Communication">Communication</a></strong> par étiquettes normalisées et FDS à 16 sections.</li>
+</ol>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251004141104.png]</span></p>
+<h3 id="etapes-de-classification">Étapes de classification</h3>
+<ol>
+<li>Identifier les données pertinentes (test sur la substance, sur le mélange, principes d&#39;extrapolation).</li>
+<li>Évaluer les dangers (force probante, jugement d&#39;experts).</li>
+<li>Classer selon les critères du RPD.</li>
+</ol>
+<p>Pour les <strong>mélanges</strong> : les données sur le mélange ont priorité ; sinon, application des seuils sur les ingrédients (synergie et antagonisme à considérer).</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206145510.png]</span></p>
+<p>Certaines exclusions s&#39;appliquent à la LPD.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206150516.png]</span></p>
+<h3 id="classes-de-danger">Classes de danger</h3>
+<p>Vue d&#39;ensemble des classes SGH.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206150128.png]</span></p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206150204.png]</span></p>
+<h4 id="dangers-physiques-18-classes">Dangers physiques (18 classes)</h4>
+<p>Gaz inflammables, <a href="../../../../w/hygiene/20-articles-internes/environnement-de-travail/aerosols.html" title="Aérosols">aérosols</a> inflammables, gaz comburants, gaz sous pression, liquides inflammables, matières solides inflammables, matières autoréactives, liquides ou solides pyrophoriques, matières autoéchauffantes, matières au contact de l&#39;eau dégageant des gaz inflammables, liquides ou solides comburants, peroxydes organiques, matières corrosives pour les <a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/metaux.html" title="Métaux">métaux</a>, <strong>poussières combustibles</strong> (classe propre au Canada), <strong><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/asphyxiants.html" title="Asphyxiants">Asphyxiants</a> simples</strong> (classe propre au Canada), gaz pyrophoriques, dangers physiques non classifiés.</p>
+<h4 id="dangers-pour-la-sante-12-classes">Dangers pour la santé (12 classes)</h4>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Classe</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/dose-reponse-et-dl50.html" title="Dose-réponse et DL50">Dose-réponse et DL50</a> aiguë</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Corrosion / irritation cutanée</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Lésions oculaires graves / irritation oculaire</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/sensibilisants.html" title="Sensibilisants">Sensibilisants</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="../../../../w/toxicologie/20-articles-internes/cancerogenicite.html" title="Cancérogénicité">Cancérogénicité</a> sur cellules germinales</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="../../../../w/toxicologie/20-articles-internes/cancerogenicite.html" title="Cancérogénicité">Cancérogénicité</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Toxicité pour la reproduction</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Toxicité pour certains organes cibles, exposition unique (STOT-SE)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Toxicité pour certains organes cibles, expositions répétées (STOT-RE)</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/dangers-biologiques-et-aspiration.html" title="Dangers biologiques et aspiration">Dangers biologiques et aspiration</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/dangers-biologiques-et-aspiration.html" title="Dangers biologiques et aspiration">Dangers biologiques et aspiration</a> (classe canadienne)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Dangers pour la santé non classifiés</td>
+</tr>
+</tbody></table>
+<h4 id="dangers-pour-l39environnement">Dangers pour l&#39;environnement</h4>
+<p>Danger pour le milieu aquatique, danger pour la couche d&#39;ozone. Le SGH inclut cette catégorie mais elle <strong>n&#39;est pas adoptée dans le SIMDUT 2015</strong>. Toutefois, les FDS peuvent fournir ces informations.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206145451.png]</span></p>
+<h3 id="toxicite-aigue-et-corrosion">Toxicité aiguë et corrosion</h3>
+<h4 id="toxicite-aigue">Toxicité aiguë</h4>
+<p>Quatre catégories (cat. 1 = la plus toxique). Critères en DL50 oral, DL50 cutané, CL50 inhalation (gaz, vapeurs, poussières / brouillards).</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251006204545.png]</span></p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251006204756.png]</span></p>
+<h4 id="corrosion-et-irritation-cutanee">Corrosion et irritation cutanée</h4>
+<p><strong>Corrosion cutanée</strong> (cat. 1) : destruction du tissu cutané. Sous-catégories 1A / 1B / 1C selon durée d&#39;exposition et de récupération. <strong>Acides</strong> (pH ≤ 2) ou <strong>bases</strong> (pH ≥ 11,5) à pH extrêmes sont automatiquement cat. 1.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251006205148.png]</span></p>
+<p>Les acides causent une nécrose de coagulation (lésion limitée en profondeur) ; les bases causent une nécrose de liquéfaction (lésion qui progresse en profondeur, souvent plus grave).</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251006211156.png]</span></p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251006211720.png]</span></p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251006211855.png]</span></p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251006212056.png]</span></p>
+<p><strong>Irritation cutanée</strong> (cat. 2) : effets réversibles.</p>
+<h4 id="lesions-oculaires">Lésions oculaires</h4>
+<p>Cat. 1 = grave (≥ 21 jours) ; cat. 2A / 2B = irritation (réversible).</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251006214354.png]</span></p>
+<p><strong>Mesures associées</strong> : douches d&#39;urgence et douches oculaires obligatoires en présence de corrosifs. Gants et vêtements selon FDS (section 8).</p>
+<h3 id="pictogrammes">Pictogrammes</h3>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251004141426.png]</span></p>
+<table>
+<thead>
+<tr>
+<th>Pictogramme</th>
+<th>Classes / catégories typiques</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tête de mort</td>
+<td><a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/dose-reponse-et-dl50.html" title="Dose-réponse et DL50">Dose-réponse et DL50</a> aiguë cat. 1-3 (orale, cutanée, inhalation)</td>
+</tr>
+<tr>
+<td>Corrosion</td>
+<td>Corrosifs (peau cat. 1A-1C), lésion oculaire grave cat. 1, corrosifs pour les <a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/metaux.html" title="Métaux">Métaux</a></td>
+</tr>
+<tr>
+<td>Point d&#39;exclamation</td>
+<td>Toxicité aiguë cat. 4, irritation cutanée cat. 2, irritation oculaire cat. 2 / 2A, sensibilisation cutanée, STOT-SE cat. 3</td>
+</tr>
+<tr>
+<td>Danger pour la santé</td>
+<td>Sensibilisation respiratoire, mutagénicité, cancérogénicité, toxicité reproduction, STOT cat. 1-2, danger par aspiration cat. 1</td>
+</tr>
+<tr>
+<td>Matières infectieuses</td>
+<td>Biorisque cat. 1</td>
+</tr>
+<tr>
+<td>Flamme</td>
+<td>Inflammables, pyrophoriques, autoréactifs</td>
+</tr>
+<tr>
+<td>Bouteille de gaz</td>
+<td>Gaz sous pression</td>
+</tr>
+<tr>
+<td>Flamme sur cercle</td>
+<td>Comburants</td>
+</tr>
+<tr>
+<td>Bombe explosant</td>
+<td><a href="../../../../w/securite/20-articles-internes/explosifs.html" title="Explosifs">Explosifs</a>, autoréactifs A / B, peroxydes A / B</td>
+</tr>
+</tbody></table>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251004141504.png]</span></p>
+<p><strong>Sans pictogramme</strong> : gaz inflammables cat. 2, liquides inflammables cat. 4, asphyxiants simples cat. 1, poussières combustibles cat. 1, irritation oculaire cat. 2B.</p>
+<p><strong>Mentions d&#39;avertissement</strong> : « Danger » (gravité élevée) ou « Attention » (gravité moindre). Sur l&#39;étiquette seulement.</p>
+<h3 id="communication-des-risques">Communication des risques</h3>
+<p>Les composantes de l&#39;étiquette du fournisseur sont normalisées.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206150006.png]</span></p>
+<h4 id="a-etiquette-du-fournisseur">A. Étiquette du fournisseur</h4>
+<p>Identificateur du produit, identificateur du fournisseur, mention d&#39;avertissement (Danger ou Attention), mentions de danger (H), conseils de prudence (P), pictogrammes SGH, renseignements supplémentaires.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206151144.png]</span></p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20251004141247.png]</span></p>
+<h4 id="b-etiquette-de-lieu-de-travail">B. Étiquette de lieu de travail</h4>
+<p>Pour produits transvasés, produits fabriqués sur place, contenants secondaires : identificateur du produit, mesures de précaution (manipulation sécuritaire), référence à la FDS disponible.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206151305.png]</span></p>
+<h4 id="c-fds-fiche-de-donnees-de-securite">C. FDS (Fiche de données de sécurité)</h4>
+<p>16 sections normalisées.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206151430.png]</span></p>
+<ol>
+<li>Identification du produit.</li>
+<li>Identification des dangers.</li>
+<li>Composition / ingrédients.</li>
+<li>Premiers soins.</li>
+<li>Mesures de lutte contre l&#39;incendie.</li>
+<li>Mesures en cas de déversement.</li>
+<li>Manipulation et stockage.</li>
+<li>Contrôle de l&#39;exposition / protection individuelle.</li>
+<li>Propriétés physiques et chimiques.</li>
+<li>Stabilité et réactivité.</li>
+<li>Données toxicologiques.</li>
+<li>Données écologiques.</li>
+<li>Données sur l&#39;élimination.</li>
+<li>Informations relatives au transport.</li>
+<li>Informations sur la réglementation.</li>
+<li>Autres informations.</li>
+</ol>
+<p><strong>Seuil de déclaration</strong> : varie par classe. Exemple : toxicité reproduction cat. 1 = seuil 0,1 % d&#39;ingrédient cat. 1A / 1B.</p>
+<h4 id="d-formation-et-information">D. Formation et information</h4>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20241206151532.png]</span></p>
+<ul>
+<li>Connaître les dangers du produit.</li>
+<li>Lire et interpréter les étiquettes et FDS.</li>
+<li>Procédures sécuritaires.</li>
+<li>Mesures d&#39;urgence.</li>
+<li>À renouveler aux 3 ans ou lors de changements.</li>
+</ul>
+<h3 id="responsabilites">Responsabilités</h3>
+<h4 id="fabricant-fournisseur">Fabricant / fournisseur</h4>
+<ul>
+<li>Classer le produit.</li>
+<li>Préparer l&#39;étiquette du fournisseur conforme.</li>
+<li>Préparer la <strong>FDS</strong> en 16 sections normalisées.</li>
+<li>Mettre à jour la FDS au besoin (au moins tous les 3 ans).</li>
+</ul>
+<h4 id="employeur">Employeur</h4>
+<ul>
+<li>S&#39;assurer que tout produit dangereux dans le lieu de travail est étiqueté.</li>
+<li>Mettre à disposition les FDS (à jour, accessibles).</li>
+<li>Former les travailleurs (généralement aux 3 ans ou si changement).</li>
+<li>Préparer les <strong>étiquettes de lieu de travail</strong> au besoin (transvasement, produits sans étiquette, produits fabriqués sur place).</li>
+</ul>
+<h4 id="travailleur">Travailleur</h4>
+<ul>
+<li>Suivre la formation.</li>
+<li>Utiliser les produits selon les instructions.</li>
+<li>Signaler les étiquettes manquantes ou endommagées.</li>
+</ul>
+<h3 id="cadre-legal">Cadre légal</h3>
+<ul>
+<li><strong>Loi sur les produits dangereux</strong> (fédérale, LPD).</li>
+<li><strong>Règlement sur les produits dangereux</strong> (RPD, DORS/2015-17).</li>
+<li><strong>LSST</strong> chapitre IV : application au Québec via le RSST.</li>
+<li><strong>Reptox</strong> (<a href="../../../../w/psychosocial/20-articles/legislation-et-normes/cnesst-roles-et-pouvoirs.html" title="CNESST, rôles et pouvoirs">CNESST</a>) : base de données toxicologiques.</li>
+</ul>
+<p>Voir aussi <a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/vea-et-normes.html" title="VEA et normes">_archive Wiki SST unifié/20 - Articles internes/40 - Évaluation et mesure/VEA et normes</a> pour les valeurs limites et <a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/maladies-professionnelles.html" title="Maladies professionnelles">Loi/LATMP/Maladies professionnelles</a> pour les indicateurs toxicologiques.</p>
+<h3 id="application-terrain">Application terrain</h3>
+<p><strong>Produits SIMDUT typiques en mine</strong></p>
+<table>
+<thead>
+<tr>
+<th>Produit</th>
+<th>Type</th>
+<th>Dangers principaux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cyanure de sodium (lixiviation Au)</td>
+<td>Solide toxique aigu</td>
+<td><a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/dose-reponse-et-dl50.html" title="Dose-réponse et DL50">Dose-réponse et DL50</a> aiguë sévère, formation de HCN au contact d&#39;acide</td>
+</tr>
+<tr>
+<td>Xanthates (flottation)</td>
+<td>Sensibilisant cutané</td>
+<td>Allergie, dégagement de CS2</td>
+</tr>
+<tr>
+<td>Acide sulfurique (procédé)</td>
+<td>Corrosif</td>
+<td>Brûlures, vapeurs irritantes</td>
+</tr>
+<tr>
+<td>Soude caustique (NaOH)</td>
+<td>Corrosif</td>
+<td>Brûlures alcalines</td>
+</tr>
+<tr>
+<td>Frothers (MIBC, polyglycols)</td>
+<td>Inflammable, irritant</td>
+<td>Vapeurs, contact cutané</td>
+</tr>
+<tr>
+<td>Émulsions et explosifs (ANFO, dynamite)</td>
+<td>Explosif, gaz toxiques</td>
+<td>Gaz de tir (CO, NOx)</td>
+</tr>
+<tr>
+<td>Carburant diesel, huiles hydrauliques</td>
+<td>Inflammable, danger santé</td>
+<td><a href="../../../../w/legislation/40-concepts-juridiques-transverses/cov.html" title="COV">COV</a>, contact cutané</td>
+</tr>
+<tr>
+<td><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/solvants.html" title="Solvants">Solvants</a> d&#39;atelier (dégraissants)</td>
+<td>Inflammable, neurotoxique</td>
+<td>Vapeurs, ototoxicité</td>
+</tr>
+<tr>
+<td>Béton, ciment</td>
+<td>Corrosion (alcalin, pH 12-13), sensibilisation cutanée Cr (VI)</td>
+<td>Voir <a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/sensibilisants.html" title="Sensibilisants">Sensibilisants</a></td>
+</tr>
+</tbody></table>
+<p><strong>Encadrement parallèle</strong></p>
+<table>
+<thead>
+<tr>
+<th>Famille</th>
+<th>Encadrement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Explosifs</strong></td>
+<td>Non assujettis SIMDUT. Loi sur les explosifs (fédérale).</td>
+</tr>
+<tr>
+<td><strong><a href="../../../../w/toxicologie/20-articles-internes/substances-dangereuses/pesticides.html" title="Pesticides">Pesticides</a></strong> (rongicides, biocides forage)</td>
+<td>Non assujettis SIMDUT. Loi sur les produits antiparasitaires (ARLA).</td>
+</tr>
+</tbody></table>
+<p><strong>Particularités minières</strong></p>
+<ul>
+<li>Cyanure : risques croisés avec acidité (formation de HCN), procédures de mélange et stockage encadrées.</li>
+<li>Plan d&#39;urgence chimique du site (PIU) doit articuler les FDS, les <a href="../../../../w/legislation/40-concepts-juridiques-transverses/epi.html" title="EPI">EPI</a> et les équipes d&#39;intervention.</li>
+<li>Sous-traitants (entreprises de services miniers) : leur conformité SIMDUT doit être vérifiée à l&#39;arrivée.</li>
+<li>Un site minier maintient typiquement un registre central des FDS (papier ou électronique) et une formation SIMDUT initiale + recyclage triennal.</li>
+</ul>
+<h3 id="ressources">Ressources</h3>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Type</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Loi sur les produits dangereux</td>
+<td>Loi</td>
+<td>Gouvernement du Canada</td>
+</tr>
+<tr>
+<td>Règlement sur les produits dangereux</td>
+<td>Règlement</td>
+<td>Gouvernement du Canada</td>
+</tr>
+<tr>
+<td>Reptox</td>
+<td>Base de données</td>
+<td><a href="../../../../w/psychosocial/20-articles/legislation-et-normes/cnesst-roles-et-pouvoirs.html" title="CNESST, rôles et pouvoirs">CNESST, rôles et pouvoirs</a></td>
+</tr>
+<tr>
+<td>Guide SIMDUT 2015</td>
+<td>Guide</td>
+<td>Santé Canada</td>
+</tr>
+<tr>
+<td>Modèle d&#39;étiquette lieu de travail</td>
+<td>Gabarit</td>
+<td>À développer en interne</td>
+</tr>
+<tr>
+<td>FDS site (registre)</td>
+<td>Registre interne</td>
+<td>À maintenir</td>
+</tr>
+<tr>
+<td>Affichage SIMDUT par zone</td>
+<td>Outil terrain</td>
+<td>Site minier</td>
+</tr>
+</tbody></table>
+<p><strong>Articles wiki connexes</strong></p>
+<ul>
+<li><a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/vea-et-normes.html" title="VEA et normes">_archive Wiki SST unifié/20 - Articles internes/40 - Évaluation et mesure/VEA et normes</a></li>
+<li><a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/maladies-professionnelles.html" title="Maladies professionnelles">Loi/LATMP/Maladies professionnelles</a></li>
+<li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/gaz-et-vapeurs.html" title="Gaz et vapeurs">Gaz et vapeurs</a></li>
+<li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/amiante.html" title="Amiante">Amiante</a></li>
+<li><a href="../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/sensibilisants.html" title="Sensibilisants">Sensibilisants</a></li>
+<li><a href="../../../../w/toxicologie/20-articles-internes/cancerogenicite.html" title="Cancérogénicité">Cancérogénicité</a></li>
+<li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/dangers-biologiques-et-aspiration.html" title="Dangers biologiques et aspiration">Dangers biologiques et aspiration</a></li>
+<li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/asphyxiants.html" title="Asphyxiants">Asphyxiants</a></li>
+<li>[[Priorisation d</li>
+</ul>
+
+</div>
+<details class="backlinks"><summary>Pages qui pointent ici (15)</summary><ul><li><a href="../../../../w/hygiene/05-demarrage-rapide/demarrage-rapide-conseiller-sst.html">🎯 Démarrage rapide - Conseiller SST</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/00-accueil/00-accueil.html">00 - 🏠 Accueil</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/10-themes/agresseurs-chimiques.html">Agresseurs chimiques</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/amiante.html">Amiante</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/40-articles-de-loi/rsst/art-41-rsst-etiquetage-simdut.html">art-41-RSST, étiquetage SIMDUT</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/asphyxiants.html">Asphyxiants</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/dangers-biologiques-et-aspiration.html">Dangers biologiques et aspiration</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/prevention-et-programmes/hierarchie-des-moyens-de-prevention.html">Hiérarchie des moyens de prévention</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/27-articles-gestionnaires/programmes-de-prevention/hygiene-industrielle.html">Hygiène industrielle</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/priorisation-des-risques-chimiques.html">Priorisation des risques chimiques</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/25-articles-travailleurs/simdut-et-fds.html">SIMDUT et FDS</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/27-articles-gestionnaires/programmes-de-prevention/simdut-et-fds.html">SIMDUT et FDS</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/solvants.html">Solvants</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/substances-dangereuses.html">Substances dangereuses</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/vea-et-normes.html">VEA et normes</a> <small class="bl-wiki">Hygiène industrielle</small></li></ul></details>
+<div class="page-meta">Dernière révision : 2026-05-22</div>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours · 2026-08-27</footer>
+<script src="../../../../assets/app.js"></script>
+</body>
+</html>

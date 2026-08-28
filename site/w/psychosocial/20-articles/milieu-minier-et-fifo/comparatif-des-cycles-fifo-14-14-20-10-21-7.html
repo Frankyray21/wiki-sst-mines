@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparatif des cycles FIFO (14-14, 20-10, 21-7) — WIKI SST Mines</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<script>window.ROOT='../../../../';</script>
+</head>
+<body>
+<header class="site-header">
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <a class="brand" href="../../../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+  <div class="nav-group"><div class="nav-title">Navigation</div>
+    <ul>
+      <li><a href="../../../../index.html">🏠 Portail</a></li>
+      <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">🧠 SST psychosociale</div>
+  <ul>
+    <li><a href="../../../../w/psychosocial/index.html">Accueil du wiki</a></li>
+    <li><a href="../../../../w/psychosocial/05-demarrage-rapide/index.html">Démarrage rapide</a></li><li><a href="../../../../w/psychosocial/10-themes/index.html">Thèmes</a></li><li><a href="../../../../w/psychosocial/15-navigation/index.html">Navigation</a></li><li><a href="../../../../w/psychosocial/20-articles/index.html">Articles</a></li><li><a href="../../../../w/psychosocial/24-references-internes-pages-travailleurs/index.html">Références internes pages travailleurs</a></li><li><a href="../../../../w/psychosocial/25-articles-travailleurs/index.html">Articles travailleurs</a></li><li><a href="../../../../w/psychosocial/30-glossaire/index.html">Glossaire</a></li><li><a href="../../../../w/psychosocial/40-index-legal/index.html">Index légal</a></li><li><a href="../../../../w/psychosocial/50-ressources-daide/index.html">Ressources d'aide</a></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/index.html">Documents et outils</a></li><li><a href="../../../../w/psychosocial/98-archives/index.html">Archives</a></li>
+    <li><a href="../../../../w/psychosocial/index-alphabetique.html">Index alphabétique</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Les wikis</div><ul><li><a href="../../../../w/ergonomie/index.html">🦺 Ergonomie</a></li><li><a href="../../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></li><li><a href="../../../../w/toxicologie/index.html">☣️ Toxicologie</a></li><li><a href="../../../../w/securite/index.html">⛑️ Sécurité industrielle</a></li><li><a href="../../../../w/droit-travail/index.html">📋 Droit du travail</a></li><li class="active"><a href="../../../../w/psychosocial/index.html">🧠 SST psychosociale</a></li><li><a href="../../../../w/legislation/index.html">⚖️ Recueil législatif</a></li></ul></div>
+</nav>
+<main class="content">
+
+<div class="breadcrumbs"><a href="../../../../index.html">Portail</a> <span class="crumb-sep">›</span> <a href="../../../../w/psychosocial/index.html">SST psychosociale</a> <span class="crumb-sep">›</span> <a href="../../../../w/psychosocial/20-articles/index.html">Articles</a> <span class="crumb-sep">›</span> <a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/index.html">Milieu Minier et FIFO</a></div>
+<h1 class="page-title">Comparatif des cycles FIFO (14/14, 20/10, 21/7)</h1>
+<div class="page-sub">Un article du wiki <a href="../../../../w/psychosocial/index.html">🧠 SST psychosociale</a></div>
+<aside class="infobox"><div class="infobox-title">🧠 Comparatif des cycles FIFO (14-14, 20-10, 21-7)</div><table><tr><th>Thème</th><td><a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/milieu-minier-et-fifo.html">Milieu Minier et FIFO</a></td></tr><tr><th>Statut</th><td>complet</td></tr><tr><th>Qualité</th><td>satisfaisante</td></tr><tr><th>Révision</th><td>2026-05-22</td></tr><tr><th>Public cible</th><td>superviseur, conseiller, direction</td></tr><tr><th>Sensibilité</th><td>2</td></tr></table><div class="infobox-tags"><span class="tag">wiki</span><span class="tag">mines</span><span class="tag">FIFO</span><span class="tag">rotation</span><span class="tag">sommeil</span><span class="tag">vie-familiale</span></div></aside>
+<div class="toc"><div class="toc-title">Sommaire <button class="toc-toggle" data-toggle>[masquer]</button></div><ul><li class="toc-l2"><a href="#definition">Définition</a></li><li class="toc-l2"><a href="#comparatif-des-trois-cycles">Comparatif des trois cycles</a></li><li class="toc-l2"><a href="#effets-documentes">Effets documentés</a></li><li class="toc-l3"><a href="#sommeil-et-fatigue">Sommeil et fatigue</a></li><li class="toc-l3"><a href="#sante-mentale">Santé mentale</a></li><li class="toc-l3"><a href="#vie-familiale-et-sociale">Vie familiale et sociale</a></li><li class="toc-l3"><a href="#securite-au-travail">Sécurité au travail</a></li><li class="toc-l2"><a href="#application-en-mines">Application en mines</a></li><li class="toc-l2"><a href="#recommandations">Recommandations</a></li><li class="toc-l2"><a href="#cadre-legal">Cadre légal</a></li><li class="toc-l2"><a href="#documents-et-outils">Documents et outils</a></li><li class="toc-l2"><a href="#pour-aller-plus-loin">Pour aller plus loin</a></li></ul></div>
+<div class="page-body">
+<p><strong>Table des matières</strong></p>
+<ol>
+<li><a href="#d%C3%A9finition">Définition</a></li>
+<li><a href="#comparatif-des-trois-cycles">Comparatif des trois cycles</a></li>
+<li><a href="#effets-document%C3%A9s">Effets documentés</a></li>
+<li><a href="#application-en-mines">Application en mines</a></li>
+<li><a href="#recommandations">Recommandations</a></li>
+<li><a href="#cadre-l%C3%A9gal">Cadre légal</a></li>
+</ol>
+<p><strong>L&#39;essentiel</strong> : Tous les cycles <a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/comparatif-des-cycles-fifo-14-14-20-10-21-7.html" title="Comparatif des cycles FIFO (14-14, 20-10, 21-7)">FIFO</a> ne se valent pas. La recherche est claire : plus la rotation est longue (20/10, 21/7), plus les conséquences sur le sommeil, la santé mentale et la vie familiale sont marquées. Le 14/14 est le cycle le mieux toléré dans la majorité des études. Le choix du cycle est l&#39;une des décisions psychosociales les plus importantes qu&#39;un employeur minier puisse prendre.</p>
+<h2 id="definition">Définition</h2>
+<p><strong>FIFO (fly-in fly-out)</strong> : régime de travail où les travailleurs sont transportés par avion (ou par autobus pour les régimes DIDO, drive-in drive-out) sur un site éloigné pour des <strong>rotations consécutives de plusieurs jours</strong>, suivies d&#39;une période de congé à domicile.<br>Les notations expriment le nombre de jours travaillés sur le site, suivi du nombre de jours de congé : un cycle <strong>20/10</strong> signifie 20 jours de travail consécutifs (souvent 10 à 12 heures par jour) suivis de 10 jours de congé à la maison.<br>En mine québécoise, les cycles les plus courants sont <strong>14/14, 20/10 et 21/7</strong>, avec des variantes (15/13, 4 semaines/2 semaines, etc.).</p>
+<h2 id="comparatif-des-trois-cycles">Comparatif des trois cycles</h2>
+<table>
+<thead>
+<tr>
+<th>Cycle</th>
+<th>Jours travaillés</th>
+<th>Jours de congé</th>
+<th>Heures cumulées sur site (à 12h/jour)</th>
+<th>Ratio travail/congé</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>14/14</strong></td>
+<td>14</td>
+<td>14</td>
+<td>168 h</td>
+<td>1 : 1</td>
+</tr>
+<tr>
+<td><strong>20/10</strong></td>
+<td>20</td>
+<td>10</td>
+<td>240 h</td>
+<td>2 : 1</td>
+</tr>
+<tr>
+<td><strong>21/7</strong></td>
+<td>21</td>
+<td>7</td>
+<td>252 h</td>
+<td>3 : 1</td>
+</tr>
+<tr>
+<td><strong>Lecture</strong> : un cycle 21/7 expose un travailleur à <strong>50 % plus d&#39;heures sur site avec 50 % moins de congé</strong> qu&#39;un cycle 14/14 sur la même période.</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="effets-documentes">Effets documentés</h2>
+<h3 id="sommeil-et-fatigue">Sommeil et fatigue</h3>
+<table>
+<thead>
+<tr>
+<th>Cycle</th>
+<th>Dette de sommeil cumulative</th>
+<th>Récupération en congé</th>
+<th>Risque de fatigue chronique</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>14/14</td>
+<td>Modérée</td>
+<td>Suffisante pour la majorité</td>
+<td>Faible à modéré</td>
+</tr>
+<tr>
+<td>20/10</td>
+<td>Importante</td>
+<td>Souvent incomplète</td>
+<td>Modéré à élevé</td>
+</tr>
+<tr>
+<td>21/7</td>
+<td>Très importante</td>
+<td>Rarement suffisante</td>
+<td>Élevé</td>
+</tr>
+<tr>
+<td>Les études australiennes (Vojnovic et al., 2014; Parker et al., 2018) montrent que la dette de sommeil ne disparaît pas linéairement avec le congé : un congé court ne permet pas de « rattraper » une rotation longue.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="sante-mentale">Santé mentale</h3>
+<p>Méta-analyses (<a class="external" href="../../../../files/wiki-sst-psychosociale/70-documents-et-outils/document-references/bowers-2018-psychological-distress-in-remote-mining-and.pdf#page=4" target="_blank">Bowers et al. 2018 p. 4</a>; Asare et al., 2021)</p>
+<ul>
+<li>Symptômes dépressifs et anxieux <strong>deux fois plus fréquents</strong> en FIFO long (&gt;14 jours) qu&#39;en travail régulier</li>
+<li>Consommation problématique d&#39;alcool plus fréquente en cycles 20+</li>
+<li>Taux de divorce et de séparation plus élevé chez les travailleurs FIFO long</li>
+<li>Idées suicidaires significativement plus rapportées chez les travailleurs en cycles ≥21/7 (<a class="external" href="../../../../files/wiki-sst-psychosociale/70-documents-et-outils/document-references/bowers-2018-psychological-distress-in-remote-mining-and.pdf#page=4" target="_blank">Bowers et al. 2018 p. 4</a>)</li>
+</ul>
+<h3 id="vie-familiale-et-sociale">Vie familiale et sociale</h3>
+<table>
+<thead>
+<tr>
+<th>Indicateur</th>
+<th>14/14</th>
+<th>20/10</th>
+<th>21/7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Présence aux événements familiaux par an</td>
+<td>~26/52 semaines</td>
+<td>~17/52</td>
+<td>~13/52</td>
+</tr>
+<tr>
+<td>Difficulté de réintégration au foyer</td>
+<td>Modérée</td>
+<td>Élevée</td>
+<td>Très élevée</td>
+</tr>
+<tr>
+<td>Risque de séparation conjugale</td>
+<td>Modéré</td>
+<td>Élevé</td>
+<td>Très élevé</td>
+</tr>
+<tr>
+<td>Présence parentale (enfants)</td>
+<td>Acceptable</td>
+<td>Difficile</td>
+<td>Très difficile</td>
+</tr>
+</tbody></table>
+<h3 id="securite-au-travail">Sécurité au travail</h3>
+<p>La fatigue cumulative dégrade la vigilance. Les jours <strong>17 à 21</strong> d&#39;une rotation longue présentent un risque accru d&#39;accidents (Parker et al., 2018; Lim &amp; Dinges, 2010 sur la dette de sommeil et la performance cognitive).</p>
+<div class="callout callout-warning"><div class="callout-title"><span class="callout-icon">⚠️</span>Sujet sensible</div><div class="callout-body"><p>Les données sur la santé mentale en FIFO long incluent des taux d&#39;idéation suicidaire et de détresse élevés. Si toi ou un collègue avez besoin de soutien, voir <a href="../../../../w/psychosocial/50-ressources-daide/lignes-daide-et-pae.html" title="🆘 Lignes d'aide et PAE">🆘 Lignes d&#39;aide et PAE</a>.</p>
+</div></div>
+<h2 id="application-en-mines">Application en mines</h2>
+<p><strong>Mines québécoises typiques par cycle</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cycle</th>
+<th>Type d&#39;opération typique</th>
+<th>Profil travailleur</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>14/14</td>
+<td>Mines régulières avec accès route</td>
+<td>Familles établies dans la région</td>
+</tr>
+<tr>
+<td>20/10</td>
+<td>Mines nordiques accessibles l&#39;été</td>
+<td>Travailleurs souvent éloignés, conjoints variables</td>
+</tr>
+<tr>
+<td>21/7</td>
+<td>Mines très éloignées (Nunavik, Côte-Nord)</td>
+<td>Sous-traitance, célibataires ou couples sans enfants</td>
+</tr>
+<tr>
+<td><strong>Facteurs aggravants en contexte minier</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Travail souterrain</strong> : ajout de la <a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/confinement-profondeur-et-charge-mentale.html" title="Confinement, profondeur et charge mentale">charge mentale</a> du confinement et de l&#39;absence de lumière naturelle.</li>
+<li><strong>Quart de 12 heures</strong> : standard en mine FIFO, double l&#39;effet rotation.</li>
+<li><strong>Quarts de nuit en alternance</strong> : perturbation circadienne supplémentaire (voir <a href="../../../../w/psychosocial/20-articles/conditions-de-travail/horaires-atypiques-et-travail-de-nuit.html" title="Horaires atypiques et travail de nuit">Horaires atypiques et travail de nuit</a>).</li>
+<li><strong>Accès limité au <a href="../../../../w/legislation/40-concepts-juridiques-transverses/pae.html" title="PAE">PAE</a> en camp</strong> : ressources distantes, parfois indisponibles le soir.<br><strong>Signaux observables par phase de rotation</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Jours de rotation</th>
+<th>Signaux à surveiller</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Jours 1 à 5</td>
+<td>Adaptation, légère fatigue</td>
+<td>Aucune action particulière</td>
+</tr>
+<tr>
+<td>Jours 6 à 14</td>
+<td>Performance optimale puis légère baisse</td>
+<td>Surveillance normale</td>
+</tr>
+<tr>
+<td>Jours 15 à 20</td>
+<td>Irritabilité, oublis, baisse de communication</td>
+<td>Conversations, ajustement de tâches</td>
+</tr>
+<tr>
+<td>Jours 21+</td>
+<td>Erreurs, isolement, fatigue marquée, signalements en baisse</td>
+<td>Évaluation rapprochée, repos imposé si nécessaire</td>
+</tr>
+</tbody></table>
+<h2 id="recommandations">Recommandations</h2>
+<table>
+<thead>
+<tr>
+<th>Niveau</th>
+<th>Action</th>
+<th>Responsable</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Primaire</td>
+<td>Privilégier le 14/14 quand possible. Si cycle plus long est nécessaire pour des raisons logistiques, documenter la justification</td>
+<td>Direction, planification</td>
+</tr>
+<tr>
+<td>Primaire</td>
+<td>Aménagements en camp : qualité du sommeil (chambres individuelles, isolation phonique, occultation), alimentation, accès activités physiques</td>
+<td>Direction, exploitation du camp</td>
+</tr>
+<tr>
+<td>Primaire</td>
+<td>Ratio cadres/travailleurs suffisant en camp pour assurer un <a href="../../../../w/psychosocial/20-articles/facteurs-organisationnels/soutien-social-au-travail.html" title="Soutien social au travail">Soutien social au travail</a> effectif</td>
+<td>Direction</td>
+</tr>
+<tr>
+<td>Secondaire</td>
+<td>Formation des contremaîtres aux signaux d&#39;épuisement par phase de rotation</td>
+<td>Conseiller SST</td>
+</tr>
+<tr>
+<td>Secondaire</td>
+<td>Sensibilisation à l&#39;hygiène du sommeil en camp</td>
+<td>Conseiller SST</td>
+</tr>
+<tr>
+<td>Tertiaire</td>
+<td>Accès rapide au PAE en camp (téléphone, vidéoconférence, présence ponctuelle d&#39;un intervenant)</td>
+<td>Direction, RH</td>
+</tr>
+<tr>
+<td>Tertiaire</td>
+<td>Procédure de retour anticipé à domicile en cas de détresse, sans pénalité</td>
+<td>Direction, RH</td>
+</tr>
+</tbody></table>
+<div class="callout callout-tip"><div class="callout-title"><span class="callout-icon">💡</span>Bonne pratique documentée</div><div class="callout-body"><p>Les retours d&#39;expérience australiens et canadiens convergent : les sites qui investissent dans la <strong>qualité de la vie en camp</strong> (sommeil, nourriture, activités, soutien) compensent partiellement les effets négatifs des cycles longs. C&#39;est l&#39;investissement préventif le plus rentable documenté.</p>
+</div></div>
+<h2 id="cadre-legal">Cadre légal</h2>
+<ul>
+<li><strong><a href="../../../../w/psychosocial/20-articles/legislation-et-normes/lmrsst-vue-densemble-pour-les-rps.html" title="LMRSST, vue d'ensemble pour les RPS">LMRSST</a></strong> : l&#39;identification des facteurs de risque liés à l&#39;organisation du travail (incluant les horaires) fait partie du programme de prévention obligatoire.</li>
+<li><strong>Norme du travail</strong> : aucune limite légale spécifique sur la durée des rotations FIFO au Québec, mais l&#39;employeur reste responsable de la santé et sécurité (LSST art. 51).</li>
+<li><strong><a href="../../../../w/psychosocial/20-articles/legislation-et-normes/cnesst-roles-et-pouvoirs.html" title="CNESST, rôles et pouvoirs">CNESST</a></strong> : peut intervenir si le régime d&#39;horaires est associé à un nombre anormal de lésions professionnelles, y compris psychologiques.</li>
+<li>Lien : <a href="../../../../w/psychosocial/40-index-legal/index-lmrsst-cnesst.html" title="⚖️ Index LMRSST-CNESST">⚖️ Index LMRSST-CNESST</a></li>
+</ul>
+<h2 id="documents-et-outils">Documents et outils</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Type</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Rapport Parker et al. (2018), <em>Mental health in FIFO work</em></td>
+<td>Méta-analyse PDF</td>
+<td>Curtin University</td>
+</tr>
+<tr>
+<td><a class="external" href="../../../../files/wiki-sst-psychosociale/70-documents-et-outils/document-references/bowers-2018-psychological-distress-in-remote-mining-and.pdf#page=1" target="_blank">Bowers 2018. Psychological distress in remote mining and.pdf</a></td>
+<td>Article PDF</td>
+<td>International Journal of Mental Health</td>
+</tr>
+<tr>
+<td>Asare et al. (2021), revue systématique FIFO et bien-être</td>
+<td>Article PDF</td>
+<td>Australian and NZ Journal of Public Health</td>
+</tr>
+<tr>
+<td>Guide gouvernemental Western Australia, <em>Mentally healthy workplaces in FIFO</em></td>
+<td>Guide PDF gratuit</td>
+<td>mhc.wa.gov.au</td>
+</tr>
+<tr>
+<td>Outils australiens d&#39;évaluation de la fatigue en rotation</td>
+<td>PDF</td>
+<td>NSW Resources Regulator</td>
+</tr>
+<tr>
+<td><a href="../../../../w/psychosocial/20-articles/legislation-et-normes/norme-csa-z1003-13.html" title="✅Norme CSA Z1003-13">✅Norme CSA Z1003-13</a>, applicable au camp et site éloigné</td>
+<td>Norme PDF</td>
+<td>CSA</td>
+</tr>
+<tr>
+<td>Voir le centre de ressources : <a href="../../../../w/psychosocial/70-documents-et-outils/documents-et-outils.html" title="📁 Documents et outils">📁 Documents et outils</a>.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<p><strong>Références académiques</strong></p>
+<ul>
+<li><a class="external" href="../../../../files/wiki-sst-psychosociale/70-documents-et-outils/document-references/bowers-2018-psychological-distress-in-remote-mining-and.pdf#page=1" target="_blank">Bowers et al. 2018 p. 1</a></li>
+<li>Parker, S. K. et al. (2018). Mental health in fly-in fly-out work: A systematic review. <em>Centre for Transformative Work Design</em>, Curtin University.</li>
+<li>Vojnovic, P. et al. (2014). Australian FIFO mining employees: A grounded theory study. <em>International Journal of Mental Health and Addiction</em>, 12, 605-620.</li>
+<li>Asare, B. Y.-A. et al. (2021). The impact of fly-in fly-out work on the health and wellbeing of workers and their families. <em>Australian and New Zealand Journal of Public Health</em>, 45(6), 599-605.</li>
+<li>Lim, J. &amp; Dinges, D. F. (2010). A meta-analysis of the impact of short-term sleep deprivation on cognitive</li>
+</ul>
+
+</div>
+<details class="backlinks"><summary>Pages qui pointent ici (102)</summary><ul><li><a href="../../../../w/psychosocial/15-navigation/faq-demarrage.html">❓ FAQ démarrage</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/15-navigation/top-20-articles-essentiels.html">⭐ Top 20 articles essentiels</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/05-demarrage-rapide/demarrage-rapide-direction-et-rh.html">🎯 Démarrage rapide - Direction et RH</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/30-glossaire/glossaire.html">📖 Glossaire</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/15-navigation/index-alphabetique.html">🔤 Index alphabétique</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/00-accueil/00-accueil.html">00 - 🏠 Accueil</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/aide-foreur-profil-rps.html">Aide-foreur, profil RPS</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/conditions-de-travail/amenagement-des-horaires-et-rotations.html">Aménagement des horaires et rotations</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-bourbonnais-et-al-2006.html">Analyse Bourbonnais et al. (2006)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-briand-et-al-2008.html">Analyse Briand et al. (2008)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-charbonneau-2012.html">Analyse Charbonneau (2012)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-cnesst-2023.html">Analyse CNESST (2023)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-gouvernement-du-canada-2023.html">Analyse Gouvernement du Canada (2023)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-inrs-2024.html">Analyse INRS (2024)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-inspq-2018.html">Analyse INSPQ (2018)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-inspq-2021a.html">Analyse INSPQ (2021a)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-inspq-2024.html">Analyse INSPQ (2024)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-karasek-1979.html">Analyse Karasek (1979)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-karasek-et-theorell-1990.html">Analyse Karasek et Theorell (1990)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-matamala-pizarro-et-aguayo-fuenzalida-2021.html">Analyse Matamala Pizarro et Aguayo Fuenzalida (2021)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-paulin-et-griffin-2016.html">Analyse Paulin et Griffin (2016)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-siegrist-1996.html">Analyse Siegrist (1996)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-tissot-et-al-inspq-2022.html">Analyse Tissot et al. - INSPQ (2022)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/analyse-torquati-et-al-2019.html">Analyse Torquati et al. (2019)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/evaluation-et-outils/audit-psychosocial-complet-methodologie.html">Audit psychosocial complet, méthodologie</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/invalidite-et-lesions/causes-psychologiques-dinvalidite.html">Causes psychologiques d'invalidité</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/legislation-et-normes/comite-sst-et-representant-en-sst.html">Comité SST et représentant en SST</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/legislation-et-normes/comites-sst-en-milieu-minier.html">Comités SST en milieu minier</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/retour-au-travail/communication-avec-lequipe-lors-du-retour.html">Communication avec l'équipe lors du retour</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/communication/communication-descendante.html">Communication descendante</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/communication/communication-en-situation-difficile.html">Communication en situation difficile</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/comparatif-des-cycles-fifo.html">Comparatif des cycles FIFO</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/10-themes/conditions-de-travail.html">Conditions de Travail</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/10-themes/conflits-et-harcelement.html">Conflits et Harcèlement</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/sante-mentale/consequences-du-stress-sur-la-sante.html">Conséquences du stress sur la santé</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/consommation-dalcool-et-substances-en-milieu-fifo.html">Consommation d'alcool et substances en milieu FIFO</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/risques-psychosociaux-rps/cout-economique-des-rps-pour-lemployeur.html">Coût économique des RPS pour l'employeur</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/culture-miniere-et-stigmatisation-de-la-sante-mentale.html">Culture minière et stigmatisation de la santé mentale</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/modeles-et-theories/definition-du-stress-professionnel.html">Définition du stress professionnel</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/gestion-et-prevention/demarche-de-prevention-en-rps-etapes.html">Démarche de prévention en RPS, étapes</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/effets-sur-la-sante/detresse-psychologique.html">Détresse psychologique</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/retour-au-travail/etapes-dun-retour-au-travail-reussi.html">Étapes d'un retour au travail réussi</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/supervision-et-roles/formation-des-superviseurs-a-la-detection.html">Formation des superviseurs à la détection</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/gestion-et-prevention/gestion-participative-et-consultation-des-equipes.html">Gestion participative et consultation des équipes</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/evaluation-et-outils/grille-inspq-didentification-des-rps.html">Grille INSPQ d'identification des RPS</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/stress-et-facteurs-de-risque/horaires-atypiques-et-sante.html">Horaires atypiques et santé</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/conditions-de-travail/horaires-atypiques-et-travail-de-nuit.html">Horaires atypiques et travail de nuit</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/70-documents-et-outils/analyses-sources/index-notes-wiki.html">INDEX_NOTES_WIKI</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/evaluation-et-outils/indicateurs-rh-pour-suivre-les-rps.html">Indicateurs RH pour suivre les RPS</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/legislation-et-normes/inspecteur-cnesst-et-rps.html">Inspecteur CNESST et RPS</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/gestion-et-prevention/intervention-organisationnelle-vs-individuelle.html">Intervention organisationnelle vs individuelle</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/invalidite-et-lesions/invalidite-de-courte-vs-longue-duree.html">Invalidité de courte vs longue durée</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/modeles-et-theories/iso-strain-ce-que-ca-signifie.html">Iso-strain - Ce que ça signifie</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/evaluation-et-outils/k10.html">K10</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/le-tough-guy-et-levitement-du-signalement.html">Le « tough guy » et l'évitement du signalement</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/gestion-et-prevention/les-trois-niveaux-de-prevention.html">Les trois niveaux de prévention</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/gestion-et-prevention/limites-des-programmes-de-mieux-etre-individuels.html">Limites des programmes de mieux-être individuels</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/conflits-et-harcelement/mediation-et-resolution-de-conflits.html">Médiation et résolution de conflits</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/10-themes/milieu-minier-et-fifo.html">Milieu Minier et FIFO</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/milieu-minier-et-fifo.html">Milieu Minier et FIFO</a> <small class="bl-wiki">SST psychosociale</small></li><li>…</li></ul></details>
+<div class="page-meta">Dernière révision : 2026-05-22</div>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours · 2026-08-27</footer>
+<script src="../../../../assets/app.js"></script>
+</body>
+</html>

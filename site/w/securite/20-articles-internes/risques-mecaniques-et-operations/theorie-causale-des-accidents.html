@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Théorie causale des accidents — WIKI SST Mines</title>
+<link rel="stylesheet" href="../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<script>window.ROOT='../../../../';</script>
+</head>
+<body>
+<header class="site-header">
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <a class="brand" href="../../../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+  <div class="nav-group"><div class="nav-title">Navigation</div>
+    <ul>
+      <li><a href="../../../../index.html">🏠 Portail</a></li>
+      <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">⛑️ Sécurité industrielle</div>
+  <ul>
+    <li><a href="../../../../w/securite/index.html">Accueil du wiki</a></li>
+    <li><a href="../../../../w/securite/05-demarrage-rapide/index.html">Démarrage rapide</a></li><li><a href="../../../../w/securite/10-themes/index.html">Thèmes</a></li><li><a href="../../../../w/securite/20-articles-internes/index.html">Articles internes</a></li><li><a href="../../../../w/securite/25-articles-travailleurs/index.html">Articles travailleurs</a></li><li><a href="../../../../w/securite/27-articles-gestionnaires/index.html">Articles gestionnaires</a></li><li><a href="../../../../w/securite/30-glossaire/index.html">Glossaire</a></li><li><a href="../../../../w/securite/40-articles-de-loi/index.html">Articles de loi</a></li>
+    <li><a href="../../../../w/securite/index-alphabetique.html">Index alphabétique</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Les wikis</div><ul><li><a href="../../../../w/ergonomie/index.html">🦺 Ergonomie</a></li><li><a href="../../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></li><li><a href="../../../../w/toxicologie/index.html">☣️ Toxicologie</a></li><li class="active"><a href="../../../../w/securite/index.html">⛑️ Sécurité industrielle</a></li><li><a href="../../../../w/droit-travail/index.html">📋 Droit du travail</a></li><li><a href="../../../../w/psychosocial/index.html">🧠 SST psychosociale</a></li><li><a href="../../../../w/legislation/index.html">⚖️ Recueil législatif</a></li></ul></div>
+</nav>
+<main class="content">
+
+<div class="breadcrumbs"><a href="../../../../index.html">Portail</a> <span class="crumb-sep">›</span> <a href="../../../../w/securite/index.html">Sécurité industrielle</a> <span class="crumb-sep">›</span> <a href="../../../../w/securite/20-articles-internes/index.html">Articles internes</a> <span class="crumb-sep">›</span> <a href="../../../../w/securite/20-articles-internes/risques-mecaniques-et-operations/index.html">Risques mécaniques et opérations</a></div>
+<h1 class="page-title">Accidents et incidents, théorie causale</h1>
+<div class="page-sub">Un article du wiki <a href="../../../../w/securite/index.html">⛑️ Sécurité industrielle</a></div>
+<aside class="infobox"><div class="infobox-title">⛑️ Théorie causale des accidents</div><table><tr><th>Thème</th><td><a href="../../../../w/securite/20-articles-internes/securite-industrielle.html">Sécurité industrielle</a></td></tr><tr><th>Statut</th><td>complet</td></tr><tr><th>Qualité</th><td>satisfaisante</td></tr><tr><th>Révision</th><td>2026-05-22</td></tr><tr><th>Public cible</th><td>conseiller</td></tr><tr><th>Sensibilité</th><td>interne</td></tr></table><div class="infobox-tags"><span class="tag">wiki</span><span class="tag">sécurité</span><span class="tag">accidents</span><span class="tag">causalité</span><span class="tag">enquête</span></div></aside>
+<div class="toc"><div class="toc-title">Sommaire <button class="toc-toggle" data-toggle>[masquer]</button></div><ul><li class="toc-l3"><a href="#definitions-et-cadre">Définitions et cadre</a></li><li class="toc-l3"><a href="#pourquoi-faire-de-la-prevention">Pourquoi faire de la prévention</a></li><li class="toc-l3"><a href="#modeles-causaux">Modèles causaux</a></li><li class="toc-l3"><a href="#arbre-des-causes-inrs">Arbre des causes (INRS)</a></li><li class="toc-l3"><a href="#diagramme-d39ishikawa">Diagramme d&amp;#39;Ishikawa</a></li><li class="toc-l3"><a href="#arbre-de-defaillance-et-nud-papillon">Arbre de défaillance et nœud papillon</a></li><li class="toc-l3"><a href="#enquete-d39accident-methode">Enquête d&amp;#39;accident, méthode</a></li><li class="toc-l3"><a href="#application-terrain">Application terrain</a></li><li class="toc-l3"><a href="#ressources">Ressources</a></li></ul></div>
+<div class="page-body">
+<p>Un accident a toujours plusieurs causes, jamais une seule. Les théories causales (Reason, Dekker, <a href="../../../../w/legislation/30-organismes-et-tribunaux/inrs.html" title="INRS">INRS</a>) et les outils d&#39;enquête (arbre des causes, Ishikawa, arbre de défaillance, nœud papillon) permettent de remonter aux causes profondes plutôt que de s&#39;arrêter à l&#39;erreur humaine apparente. En contexte minier, cette posture est essentielle pour transformer les presqu&#39;accidents en levier de prévention.</p>
+<p><strong>Table des matières</strong></p>
+<ol>
+<li><a href="#d%C3%A9finitions-et-cadre">Définitions et cadre</a></li>
+<li><a href="#pourquoi-faire-de-la-pr%C3%A9vention">Pourquoi faire de la prévention</a></li>
+<li><a href="#mod%C3%A8les-causaux">Modèles causaux</a></li>
+<li><a href="#arbre-des-causes-inrs">Arbre des causes (INRS)</a></li>
+<li><a href="#diagramme-dishikawa">Diagramme d&#39;Ishikawa</a></li>
+<li><a href="#arbre-de-d%C3%A9faillance-et-n%C5%93ud-papillon">Arbre de défaillance et nœud papillon</a></li>
+<li><a href="#enqu%C3%AAte-daccident-m%C3%A9thode">Enquête d&#39;accident, méthode</a></li>
+<li><a href="#application-terrain">Application terrain</a></li>
+<li><a href="#ressources">Ressources</a></li>
+</ol>
+<h3 id="definitions-et-cadre">Définitions et cadre</h3>
+<table>
+<thead>
+<tr>
+<th>Terme</th>
+<th>Définition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Accident</td>
+<td>Événement non désiré qui cause un dommage à la personne, au matériel ou à l&#39;environnement</td>
+</tr>
+<tr>
+<td>Incident</td>
+<td>Événement non désiré sans dommage corporel mais avec potentiel de dommage</td>
+</tr>
+<tr>
+<td><a href="../../../../w/securite/25-articles-travailleurs/presquaccident.html" title="Presqu'accident">Presqu&#39;accident</a> (near miss)</td>
+<td>Événement où le dommage a été évité de justesse</td>
+</tr>
+<tr>
+<td>Danger</td>
+<td>Source potentielle de dommage (<a href="../../../../w/legislation/40-concepts-juridiques-transverses/iso.html" title="ISO">ISO</a> 12100)</td>
+</tr>
+<tr>
+<td>Risque</td>
+<td>Combinaison de la probabilité d&#39;occurrence et de la gravité (Risque = Probabilité × Conséquence)</td>
+</tr>
+</tbody></table>
+<p>Le risque zéro n&#39;existe pas, il se gère. Les presqu&#39;accidents sont des occasions de prévention gratuites.</p>
+<h3 id="pourquoi-faire-de-la-prevention">Pourquoi faire de la prévention</h3>
+<p>Quatre familles de motivations</p>
+<ul>
+<li><strong>Légales</strong> : <a href="../../../../w/droit-travail/20-articles-internes/lsst-droits-et-obligations.html" title="LSST, droits et obligations">LSST</a>, <a href="../../../../w/droit-travail/20-articles-internes/notions-latmp.html" title="Notions LATMP">LATMP</a>, Loi sur les ingénieurs, Code criminel canadien C-21/C-45.</li>
+<li><strong>Corporatives</strong> : objectif zéro accident, développement durable, image.</li>
+<li><strong>Économiques</strong> : un accident coûte cher. En Ontario (2007), coût moyen total environ 85 000 $ par accident avec perte de temps (20 % directs, 80 % indirects). Pour une entreprise à 6 % de marge, il faut près de 1 M$ de ventes nettes pour compenser.</li>
+<li><strong>Sociales</strong> : au Québec en 2022, 180 décès et 104 732 lésions pour une population active de 8,5 M. Au Canada, environ 5 morts par jour liés au travail.</li>
+</ul>
+<p>L&#39;INRS résume la démarche en neuf principes généraux de prévention : éviter le risque, évaluer, combattre à la source, adapter le travail à l&#39;humain, suivre l&#39;évolution de la technique, substituer ce qui est dangereux, planifier la prévention, privilégier la protection collective sur l&#39;individuelle, et instruire les travailleurs.</p>
+<p>Le coût d&#39;un accident reste largement sous-estimé tant qu&#39;on ne décompose pas les frais indirects.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250112190153.png]</span></p>
+<h3 id="modeles-causaux">Modèles causaux</h3>
+<p>Trois grandes approches structurent la lecture d&#39;un accident.</p>
+<table>
+<thead>
+<tr>
+<th>Modèle</th>
+<th>Idée centrale</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Domino (Heinrich, 1931)</td>
+<td>Cinq dominos qui tombent en chaîne, dont l&#39;erreur humaine est le maillon central</td>
+</tr>
+<tr>
+<td>Lignes de défense (Reason, fromage suisse)</td>
+<td>Plusieurs barrières percées s&#39;alignent pour laisser passer le danger</td>
+</tr>
+<tr>
+<td>Dekker</td>
+<td>« L&#39;erreur humaine n&#39;est jamais une cause profonde » ; c&#39;est un symptôme du système</td>
+</tr>
+</tbody></table>
+<p>Le modèle de Reason est aujourd&#39;hui la référence : un accident résulte de défaillances combinées au niveau technique, individuel et organisationnel.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250112231542.png]</span></p>
+<p>Les causes se regroupent au minimum en trois classes (technique, humain, organisationnel) ou cinq (machine, tâche, milieu, individu, interface).</p>
+<h3 id="arbre-des-causes-inrs">Arbre des causes (INRS)</h3>
+<p>Méthode <strong>a posteriori</strong> pour reconstituer un accident survenu. Référence : INRS ED 6163.</p>
+<p><strong>Principe central</strong> : un accident a toujours plusieurs causes. On reconstitue les faits en remontant du dommage vers les antécédents, en s&#39;arrêtant aux faits (jamais aux opinions).</p>
+<p><strong>Code graphique</strong></p>
+<ul>
+<li>Rectangle : fait permanent (état).</li>
+<li>Cercle : fait inhabituel (variation).</li>
+<li>Bord pointillé : incertitude.</li>
+<li>Lecture de haut en bas, départ au dommage. Liens verticaux ou horizontaux, jamais obliques ni croisés.</li>
+</ul>
+<p>Code couleur facultatif : rouge (fait final), orange (faits directs), jaune (immédiates), vert (secondaires), bleu (organisationnelles), violet (fondamentales).</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250112231817.png]</span></p>
+<p>Exemple d&#39;arbre construit pour un accident de tapis-ski.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250112231851.png]</span></p>
+<h3 id="diagramme-d39ishikawa">Diagramme d&#39;Ishikawa</h3>
+<p>Outil <strong>collectif</strong> en arête de poisson, d&#39;origine japonaise (cercles qualité). Sert à classer les causes possibles d&#39;un effet par rubriques (5M ou 6M)</p>
+<ul>
+<li><strong>Matériel</strong> (machines, équipements)</li>
+<li><strong>Méthode</strong> (tâches, procédures)</li>
+<li><strong>Main-d&#39;œuvre</strong> (comportements, formation)</li>
+<li><strong>Milieu</strong> (environnement)</li>
+<li><strong>Matière</strong> (intrants)</li>
+<li><strong>Management</strong> (organisation)</li>
+</ul>
+<p>Construction : équipe pluridisciplinaire, remue-méninges, classement consensuel par rubrique, puis priorisation. Complémentaire de l&#39;arbre des causes.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250112233919.png]</span></p>
+<h3 id="arbre-de-defaillance-et-nud-papillon">Arbre de défaillance et nœud papillon</h3>
+<p><strong>Arbre de défaillance (Fault Tree)</strong> : analyse <strong>a priori</strong>, déductive, développée par Watson (Bell Labs, 1961) pour les missiles Minuteman. On part d&#39;un événement redouté et on cherche les facteurs nécessaires et suffisants jusqu&#39;aux événements de base, avec portes logiques ET / OU.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250113234629.png]</span></p>
+<p>Utile pour visualiser la logique et la diffuser. Limites : ne garantit pas l&#39;exhaustivité, demande temps et rigueur.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250113234712.png]</span></p>
+<p><strong>Nœud papillon</strong> : combine arbre de défaillance (en amont, causes) et arbre d&#39;événements (en aval, conséquences) autour d&#39;un événement redouté central. Exemple historique : incendie d&#39;usine de peinture en Allemagne (2008), fuite de CO2, 107 intoxications.</p>
+<p>Exemple appliqué à la chute d&#39;une cage : chaîne de défaillances combinées.</p>
+<p><span class="missing-file">[fichier introuvable : Pasted image 20250113234809.png]</span></p>
+<h3 id="enquete-d39accident-methode">Enquête d&#39;accident, méthode</h3>
+<p>Référence principale : <strong>norme <a href="../../../../w/legislation/40-concepts-juridiques-transverses/csa.html" title="CSA">CSA</a> Z1005-2021</strong> (planifier, exécuter, vérifier, agir).</p>
+<p><strong>Quand enquêter</strong> : tout accident, mais aussi les passés proches et incidents mineurs. Les presqu&#39;accidents sont les meilleurs candidats.</p>
+<p><strong>Qui</strong> : équipe pluridisciplinaire incluant les travailleurs (présence du CSS et du représentant à la prévention).</p>
+<p><strong>Classement des facteurs</strong></p>
+<ul>
+<li>3 classes : technique, humain, organisationnel.</li>
+<li>4 classes (Z1005) : personnel, matériel, environnement, processus.</li>
+<li>6 classes : individu, tâche, matériel, milieu, organisation, gestion.</li>
+</ul>
+<p><strong>Six étapes sur le lieu</strong> : sécuriser, observer, photographier, recueillir, interviewer, faire les croquis. Puis au bureau : reconstitution, arbre des causes, rapport, recommandations.</p>
+<p><strong>Faits vs opinions vs jugements</strong> : seuls les faits doivent figurer dans la chronologie. Les jugements appartiennent à la phase d&#39;interprétation.</p>
+<h3 id="application-terrain">Application terrain</h3>
+<p><strong>Configurations minières typiques où la causalité est complexe</strong></p>
+<table>
+<thead>
+<tr>
+<th>Contexte</th>
+<th>Pourquoi la lecture causale est exigeante</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Chute de roches en chantier souterrain</td>
+<td>Cumul géotechnique, séquence de minage, contrôle des terrains, qualité de l&#39;écaillage, formation du foreur</td>
+</tr>
+<tr>
+<td>Heurt entre équipement lourd et piéton</td>
+<td>Visibilité, ergonomie de la cabine, plan de circulation, communication radio, fatigue de fin de quart</td>
+</tr>
+<tr>
+<td>Renversement d&#39;équipement</td>
+<td>Stabilité du terrain, géométrie de la rampe, vitesse, expérience opérateur, état mécanique</td>
+</tr>
+<tr>
+<td>Coup d&#39;arc électrique sous-station</td>
+<td>Procédure cadenassage, <a href="../../../../w/legislation/40-concepts-juridiques-transverses/epi.html" title="EPI">EPI</a> Cal/cm², état de l&#39;appareillage, supervision</td>
+</tr>
+<tr>
+<td>Inondation ou venue d&#39;eau</td>
+<td>Plan de drainage, instrumentation, signalement précoce, plan d&#39;évacuation</td>
+</tr>
+</tbody></table>
+<p><strong>Leviers d&#39;enquête spécifiques au secteur minier</strong></p>
+<ul>
+<li>Intégrer un représentant du sauvetage minier dès l&#39;arrivée sur les lieux.</li>
+<li>Documenter les conditions atmosphériques (gaz, ventilation, température) au moment de l&#39;événement.</li>
+<li>Reconstituer le <strong>dernier tour de garde</strong> : qui a vu quoi, quand, à quel niveau.</li>
+<li>Croiser avec les indicateurs de fatigue (heures travaillées, position dans la rotation FIFO). Voir <a href="../../../../w/psychosocial/20-articles/milieu-minier-et-fifo/quarts-longs-et-fatigue-en-souterrain.html" title="Quarts longs et fatigue en souterrain">Quarts longs et fatigue en souterrain</a>.</li>
+<li>Vérifier la disponibilité et l&#39;état des équipements de sauvetage à proximité.</li>
+</ul>
+<p><strong>Souterrain vs surface</strong> : en souterrain, la temporalité de l&#39;enquête est contrainte par la stabilité du terrain et la ventilation. Les preuves se dégradent vite. Documenter rapidement avec photos et croquis, sans compromettre la sécurité de l&#39;équipe d&#39;enquête.</p>
+<h3 id="ressources">Ressources</h3>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Type</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>INRS ED 6163 (arbre des causes)</td>
+<td>Guide</td>
+<td>INRS</td>
+</tr>
+<tr>
+<td>Norme CSA Z1005-2021 (enquête d&#39;incident)</td>
+<td>Norme</td>
+<td>CSA</td>
+</tr>
+<tr>
+<td>Modèle de Reason, lignes de défense</td>
+<td>Cadre conceptuel</td>
+<td>Reason, 1990</td>
+</tr>
+<tr>
+<td>Grille de classement 5M / 6M</td>
+<td>Gabarit</td>
+<td>À développer en interne</td>
+</tr>
+<tr>
+<td>Trousse d&#39;enquête sur le lieu (appareil photo, gallon, fiches)</td>
+<td>Matériel</td>
+<td>Préparer par site</td>
+</tr>
+</tbody></table>
+<p><strong>Articles wiki connexes</strong></p>
+<ul>
+<li><a href="../../../../w/securite/20-articles-internes/appreciation-du-risque.html" title="Appréciation du risque">Appréciation du risque</a></li>
+<li><a href="../../../../w/securite/20-articles-internes/gestion-des-risques.html" title="Gestion des risques">Gestion des risques</a></li>
+<li><a href="../../../../w/securite/20-articles-internes/hierarchie-des-moyens-de-prevention.html" title="Hiérarchie des moyens de prévention">Hiérarchie des moyens de prévention</a></li>
+<li>[[Wiki Sécurité indu</li>
+</ul>
+
+</div>
+<details class="backlinks"><summary>Pages qui pointent ici (11)</summary><ul><li><a href="../../../../w/securite/05-demarrage-rapide/demarrage-rapide-conseiller-sst.html">🎯 Démarrage rapide - Conseiller SST</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../../w/securite/05-demarrage-rapide/demarrage-rapide-direction-et-rh.html">🎯 Démarrage rapide - Direction et RH</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../../w/securite/05-demarrage-rapide/demarrage-rapide-superviseur.html">🎯 Démarrage rapide - Superviseur</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../../w/securite/00-accueil/00-accueil.html">00 - 🏠 Accueil</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../../w/securite/10-themes/analyse-des-accidents.html">Analyse des accidents</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../../w/securite/20-articles-internes/appreciation-du-risque.html">Appréciation du risque</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../../w/securite/27-articles-gestionnaires/gestion-des-risques-operationnels/enquete-daccidents.html">Enquête d'accidents</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../../w/securite/20-articles-internes/gestion-des-risques.html">Gestion des risques</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/prevention-et-programmes/hierarchie-des-moyens-de-prevention.html">Hiérarchie des moyens de prévention</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/securite/20-articles-internes/hierarchie-des-moyens-de-prevention.html">Hiérarchie des moyens de prévention</a> <small class="bl-wiki">Sécurité industrielle</small></li><li><a href="../../../../w/securite/20-articles-internes/risques-mecaniques-et-operations/risques-mecaniques-et-operations.html">Risques mécaniques et opérations</a> <small class="bl-wiki">Sécurité industrielle</small></li></ul></details>
+<div class="page-meta">Dernière révision : 2026-05-22</div>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours · 2026-08-27</footer>
+<script src="../../../../assets/app.js"></script>
+</body>
+</html>
