@@ -16,7 +16,7 @@ Encyclopédie interne de santé et sécurité du travail en milieu minier, gén�
 
 ## Structure
 
-- `site/` — le site statique généré (HTML pur, aucune dépendance serveur)
+- `docs/` — le site statique généré (HTML pur, aucune dépendance serveur)
 - `tools/build_site.mjs` — générateur : markdown Obsidian → HTML type Wikipédia
 - `tools/serve.mjs` — serveur local de prévisualisation (port 8090)
 

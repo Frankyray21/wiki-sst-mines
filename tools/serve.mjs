@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'site');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'docs');
 const PORT = 8090;
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',

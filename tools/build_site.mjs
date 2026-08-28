@@ -8,7 +8,7 @@ import * as yaml from 'js-yaml';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
-const OUT = path.resolve(__dirname, '..', 'site');
+const OUT = path.resolve(__dirname, '..', 'docs');
 
 const WIKIS = {
   'Wiki Ergonomie':            { slug: 'ergonomie',      icon: '🦺', name: 'Ergonomie',            desc: 'TMS, manutention, postures, vibrations, confort thermique' },
