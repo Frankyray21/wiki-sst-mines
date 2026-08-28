@@ -58,9 +58,21 @@ function slugify(s) {
     .toLowerCase() || 'page';
 }
 
+// Décode les entités produites par marked, sinon « d&#39;ensemble » finit dans les id ET dans le texte du sommaire
+function decodeEntities(s) {
+  return String(s)
+    .replace(/&#(\d+);/g, (m, d) => String.fromCharCode(+d))
+    .replace(/&#x([0-9a-f]+);/gi, (m, h) => String.fromCharCode(parseInt(h, 16)))
+    .replace(/&(rsquo|lsquo|apos);/g, "'")
+    .replace(/&(rdquo|ldquo|quot);/g, '"')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
+}
+
 function headingSlug(text) {
-  return String(text)
-    .replace(/<[^>]+>/g, '')
+  return decodeEntities(String(text).replace(/<[^>]+>/g, ''))
+    .replace(/['’]/g, '')
     .normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
@@ -78,9 +90,19 @@ function stripMd(s) {
   return s
     .replace(/!?\[\[([^\]]+)\]\]/g, (m, t) => { const p = t.replace(/\\\|/g, '|').split('|'); return p[p.length - 1].split('#')[0]; })
     .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    // boilerplate qui rendait 1838 extraits indiscernables les uns des autres
+    .replace(/\[!\w+\][+-]?/g, ' ')
+    .replace(/🌐 LegisQuébec[^\n]*/g, ' ')
+    .replace(/^\s*(En bref|Table des matières|Voir aussi)\b/gim, ' ')
     .replace(/[*_`#>~=|]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+// Extrait de 150 caractères coupé en fin de mot
+function extrait(s, n = 150) {
+  const t = stripMd(s);
+  return t.length <= n ? t : t.slice(0, n).replace(/\s\S*$/, '');
 }
 
 // ---------- scan du vault ----------
@@ -132,6 +154,25 @@ for (const root of EXTRA_ASSET_ROOTS) {
 console.log(`Pages trouvées : ${pages.length} · assets indexés : ${assetsByPath.size}`);
 
 // ---------- lecture + frontmatter + chemins de sortie ----------
+
+// Répare un bloc YAML invalide : guillemete les valeurs contenant « : » non protégé.
+// N'est appelé que si yaml.load a déjà échoué — on ne touche jamais un frontmatter sain.
+function sanitizeFm(block) {
+  return block.split(/\r?\n/).map((line) => {
+    const m = line.match(/^(\s*[^:\s#][^:]*):[ \t]+(.+?)\s*$/);
+    if (!m) return line;
+    const [, cle, valeur] = m;
+    if (/^['"|>&*!]/.test(valeur)) return line;             // déjà cité ou bloc YAML
+    if (/^\[.*\]$/.test(valeur)) {                          // liste : ne citer que si illisible
+      try { yaml.load('x: ' + valeur); return line; } catch { /* on cite plus bas */ }
+    } else if (!valeur.includes(':')) return line;
+    const propre = valeur.replace(/^[:\s]+|[:\s]+$/g, '');  // « visé:  : » → valeur vide
+    if (!propre) return `${cle}: ''`;
+    return `${cle}: '${propre.replace(/'/g, "''")}'`;
+  }).join('\n');
+}
+
+const badFm = [];
 const usedOut = new Set();
 for (const p of pages) {
   let raw = fs.readFileSync(p.absPath, 'utf8').replace(/^\uFEFF/, '');
@@ -139,14 +180,19 @@ for (const p of pages) {
   p.fm = {};
   const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
   if (m) {
-    try { p.fm = yaml.load(m[1]) || {}; } catch { p.fm = {}; }
+    try {
+      p.fm = yaml.load(m[1]) || {};
+    } catch {
+      try { p.fm = yaml.load(sanitizeFm(m[1])) || {}; badFm.push(`${p.relPath} (réparé)`); }
+      catch (e) { p.fm = {}; badFm.push(`${p.relPath} : ${String(e.message).split('\n')[0]}`); }
+    }
     raw = raw.slice(m[0].length);
   }
   p.body = raw;
-  // titre affiché : premier H1 s'il existe, sinon nom de fichier
+  // titre unique : le H1 s'il existe, sinon le nom de fichier.
+  // p.base reste la clé de résolution des wikilinks et du chemin de sortie.
   const h1 = p.body.match(/^\s*#\s+(.+?)\s*$/m);
-  p.title = p.base;
-  p.displayTitle = h1 ? h1[1].trim() : p.base;
+  p.title = h1 ? h1[1].trim() : p.base;
   if (h1) p.body = p.body.replace(h1[0], ''); // évite le doublon de titre
   // chemin de sortie : miroir du vault, slugifié
   const parts = p.relPath.slice(0, -3).split('/');
@@ -162,11 +208,35 @@ for (const p of pages) {
 // index de résolution des liens
 const byBase = new Map();  // basename lower -> [page]
 const byPath = new Map();  // relPath sans .md, lower -> page
+const byLoose = new Map(); // clé assouplie -> [page] (dernier recours)
+
+const ROMAINS = { i: 1, ii: 2, iii: 3, iv: 4, v: 5, vi: 6, vii: 7, viii: 8, ix: 9, x: 10, xi: 11, xii: 12, xiii: 13, xiv: 14, xv: 15, xvi: 16, xvii: 17, xviii: 18, xix: 19, xx: 20, xxi: 21, xxii: 22, xxiii: 23, xxiv: 24, xxv: 25, xxvi: 26, xxvii: 27, xxviii: 28, xxix: 29, xxx: 30, xxxi: 31, xxxii: 32, xxxiii: 33, xxxiv: 34, xxxv: 35, xxxvi: 36, xxxvii: 37, xxxviii: 38, xxxix: 39, xl: 40 };
+
+// « CSTC - Section 3 » et « CSTC - Section 03 », « RSST Section XXVI » et « RSST Section 26 »
+// doivent tomber sur la même clé. Les romains ne sont convertis QUE derrière un mot structurant,
+// sinon un « l' » réduit à « l » se transformerait en 50.
+function looseKey(s) {
+  let k = String(s).toLowerCase()
+    .normalize('NFKD').replace(/[̀-ͯ]/g, '')
+    .replace(/['’]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+  k = k.replace(/\b(section|chapitre|partie|annexe|titre|livre|sous-section)\s+([ivxl]+)\b/g,
+    (m, mot, rom) => ROMAINS[rom] ? `${mot} ${ROMAINS[rom]}` : m);
+  k = k.replace(/\b0+(\d)/g, '$1'); // zéros de tête : « Section 03 » → « Section 3 »
+  return k.replace(/\s+/g, ' ').trim();
+}
+
 for (const p of pages) {
   const b = p.base.toLowerCase();
   if (!byBase.has(b)) byBase.set(b, []);
   byBase.get(b).push(p);
   byPath.set(p.relPath.slice(0, -3).toLowerCase(), p);
+  const lk = looseKey(p.base);
+  if (lk) {
+    if (!byLoose.has(lk)) byLoose.set(lk, []);
+    byLoose.get(lk).push(p);
+  }
 }
 
 function resolvePage(target, from) {
@@ -177,7 +247,7 @@ function resolvePage(target, from) {
     if (hit) return hit;
     t = t.split('/').pop();
   }
-  const cands = byBase.get(t.toLowerCase());
+  const cands = byBase.get(t.toLowerCase()) || byLoose.get(looseKey(t));
   if (!cands || !cands.length) return null;
   if (cands.length === 1) return cands[0];
   const sameDir = cands.filter(c => c.dir === from.dir);
@@ -250,7 +320,11 @@ function renderWikilinks(md) {
         const ext = extMatch[1].toLowerCase();
         if (IMG_EXT.has('.' + ext)) {
           const w = alias && /^\d+/.test(alias) ? ` style="max-width:${parseInt(alias)}px"` : '';
-          return protect(`<span class="page-img"><img src="{{ROOT}}${url}" alt="${esc(target.split('/').pop())}" loading="lazy"${w}></span>`);
+          // alt utile : sur les captures d'articles de loi, le nom de fichier ne dit rien au lecteur d'écran
+          const legende = alias && !/^\d+$/.test(alias) ? alias
+            : /^art[-.]/i.test(target.split('/').pop()) ? `Texte officiel de l'article — ${CUR.title}`
+            : `Illustration — ${CUR.title}`;
+          return protect(`<span class="page-img"><a href="{{ROOT}}${url}" target="_blank" rel="noopener"><img src="{{ROOT}}${url}" alt="${esc(legende)}" loading="lazy"${w}></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>`);
         }
         if (ext === 'mp4') return protect(`<video controls preload="metadata" src="{{ROOT}}${url}" style="max-width:100%"></video>`);
         if (ext === 'm4a' || ext === 'mp3') return protect(`<audio controls src="{{ROOT}}${url}"></audio>`);
@@ -275,7 +349,9 @@ function renderWikilinks(md) {
       return `<a href="#${headingSlug(anchor)}">${esc(alias || anchor)}</a>`;
     }
     const pg = resolvePage(target, CUR);
-    const label = alias || (anchor ? `${target} › ${anchor}` : target);
+    // libellé : jamais le chemin Obsidian complet — on affiche le titre de la page cible
+    const nom = pg ? pg.title : target.split('/').pop();
+    const label = alias || (anchor ? `${nom} › ${anchor}` : nom);
     if (!pg) return `<span class="new" title="page non créée">${esc(label)}</span>`;
     CUR_LINKS.add(pg);
     const a = anchor ? '#' + headingSlug(anchor) : '';
@@ -317,10 +393,21 @@ function renderBody(md, nested = false) {
       let n = 2;
       while (CUR.headIds.has(id)) id = headingSlug(inner) + '-' + (n++);
       CUR.headIds.add(id);
-      if (lv === '2' || lv === '3') CUR.toc.push({ lv: +lv, id, text: inner.replace(/<[^>]+>/g, '') });
+      if (lv === '2' || lv === '3') CUR.toc.push({ lv: +lv, id, text: decodeEntities(inner.replace(/<[^>]+>/g, '')) });
       return `<h${lv} id="${id}">${inner}</h${lv}>`;
     });
   }
+  // liens markdown relatifs vers un fichier du vault : [Voir art. 51 (page 20)](RSST.pdf#page=20)
+  html = html.replace(/<a href="(?!https?:|#|\{\{ROOT\}\}|mailto:|files\/)([^"]+)"/g, (m, href) => {
+    let cible = href, frag = '';
+    const h = cible.indexOf('#');
+    if (h >= 0) { frag = cible.slice(h); cible = cible.slice(0, h); }
+    try { cible = decodeURIComponent(cible); } catch { /* laisse tel quel */ }
+    if (!/\.(pdf|png|jpe?g|gif|svg|webp|mp4|m4a|mp3|epub)$/i.test(cible)) return m;
+    const rel = resolveAsset(cible, CUR);
+    if (!rel) return '<a class="lien-mort" title="fichier introuvable" href="#"';
+    return `<a class="external" target="_blank" rel="noopener" href="{{ROOT}}${assetUrl(rel)}${frag}"`;
+  });
   // liens externes http(s)
   html = html.replace(/<a href="(https?:\/\/[^"]+)"/g, '<a class="external" target="_blank" rel="noopener" href="$1"');
   return html;
@@ -394,6 +481,7 @@ function wikiSidebar(wikiKey, sections) {
     <li><a href="${ROOT}w/${wiki.slug}/index.html">Accueil du wiki</a></li>
     ${items}
     <li><a href="${ROOT}w/${wiki.slug}/index-alphabetique.html">Index alphabétique</a></li>
+    ${wikiKey === 'Recueil législatif SST' ? `<li><a href="${ROOT}w/${wiki.slug}/index-par-loi.html">Index par loi</a></li>` : ''}
   </ul></div>`;
 }
 
@@ -427,16 +515,21 @@ function wikiHome(wikiKey) {
 
 // ---------- infobox ----------
 const FM_LABELS = [
-  ['loi', 'Loi'], ['article', 'Article'], ['référence', 'Référence'], ['reference', 'Référence'],
+  ['loi', 'Loi'], ['article', 'Article'], ['référence', 'Référence'],
+  ['en-vigueur-depuis', 'En vigueur depuis'], ['chapitre', 'Chapitre'], ['section', 'Section'], ['bloc', 'Bloc'],
   ['nature', 'Nature'], ['sujet', 'Sujet'], ['visé', 'Visé'], ['type', 'Type'], ['theme', 'Thème'], ['thème', 'Thème'],
-  ['statut', 'Statut'], ['qualité', 'Qualité'], ['révision', 'Révision'], ['public-cible', 'Public cible'],
-  ['niveau-sensibilité', 'Sensibilité'],
+  ['auteur', 'Auteur'], ['année', 'Année'],
+  ['statut', 'Statut'], ['qualité', 'Qualité'], ['qualite', 'Qualité'],
+  ['révision', 'Révision'], ['revision', 'Révision'],
+  ['public-cible', 'Public cible'], ['niveau-sensibilité', 'Sensibilité'],
 ];
 function infobox(p) {
   const rows = [];
+  const vus = new Set(); // évite « Révision » deux fois quand le vault écrit la clé avec et sans accent
   for (const [key, label] of FM_LABELS) {
     let v = p.fm[key];
-    if (v === undefined || v === null || v === '') continue;
+    if (v === undefined || v === null || v === '' || vus.has(label)) continue;
+    vus.add(label);
     if (Array.isArray(v)) v = v.join(', ');
     v = String(v);
     if (/^\[\[.*\]\]$/.test(v.trim())) {
@@ -459,7 +552,13 @@ function infobox(p) {
 
 // ---------- rendu de toutes les pages ----------
 console.log('Rendu des pages…');
-fs.rmSync(OUT, { recursive: true, force: true });
+// On vide le contenu sans supprimer OUT lui-même : sous Windows le dossier racine reste
+// verrouillé dès qu'un terminal ou un serveur l'a comme répertoire courant.
+if (fs.existsSync(OUT)) {
+  for (const e of fs.readdirSync(OUT)) {
+    fs.rmSync(path.join(OUT, e), { recursive: true, force: true, maxRetries: 20, retryDelay: 400 });
+  }
+}
 fs.mkdirSync(OUT, { recursive: true });
 
 const backlinks = new Map(); // page -> Set(pages qui pointent vers elle)
@@ -492,10 +591,10 @@ for (const p of pages) {
   const blHtml = bl && bl.size
     ? `<details class="backlinks"><summary>Pages qui pointent ici (${bl.size})</summary><ul>${[...bl].sort((a, b) => a.title.localeCompare(b.title, 'fr')).slice(0, 60).map(b => `<li><a href="{{ROOT}}${b.out}">${esc(b.title)}</a> <small class="bl-wiki">${WIKIS[b.wikiKey].name}</small></li>`).join('')}${bl.size > 60 ? '<li>…</li>' : ''}</ul></details>`
     : '';
-  const rev = p.fm['révision'] || p.mtime.toISOString().slice(0, 10);
+  const rev = p.fm['révision'] || p.fm['revision'] || p.mtime.toISOString().slice(0, 10);
   const content = `
 <div class="breadcrumbs">${crumbs.join(' <span class="crumb-sep">›</span> ')}</div>
-<h1 class="page-title">${esc(p.displayTitle)}</h1>
+<h1 class="page-title">${esc(p.title)}</h1>
 <div class="page-sub">Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a></div>
 ${infobox(p)}
 ${tocHtml}
@@ -515,6 +614,28 @@ ${blHtml}
 
 // ---------- pages de catégorie (une par dossier) ----------
 console.log('Pages de catégories…');
+
+// Tri naturel : art-1, art-2, art-10 — et non art-1, art-10, art-100, art-11.
+// Le numéro est lu dans le NOM DE FICHIER : le frontmatter `article: 312.100` est parsé
+// en nombre par YAML et 312.1 / 312.10 / 312.100 s'effondreraient sur la même clé.
+function numArticle(p) {
+  const m = String(p.base).match(/^art[-.\s]*(\d+(?:\.\d+)*)/i);
+  if (!m) return null;
+  return m[1].split('.').map(Number);
+}
+function triNaturel(a, b) {
+  const na = numArticle(a), nb = numArticle(b);
+  if (na && nb) {
+    for (let i = 0; i < Math.max(na.length, nb.length); i++) {
+      const d = (na[i] ?? -1) - (nb[i] ?? -1);
+      if (d) return d;
+    }
+    return a.base.localeCompare(b.base, 'fr');
+  }
+  if (na) return 1;   // les articles numérotés après les pages de structure
+  if (nb) return -1;
+  return a.title.localeCompare(b.title, 'fr', { numeric: true });
+}
 const dirsAll = new Set();
 for (const p of pages) {
   const parts = p.relPath.split('/');
@@ -529,7 +650,7 @@ for (const dir of dirsAll) {
   const outDir = 'w/' + wiki.slug + (isWikiRoot ? '' : '/' + parts.slice(1).map(slugify).join('/'));
   const childDirs = [...dirsAll].filter(d => d.startsWith(dir + '/') && d.split('/').length === parts.length + 1)
     .sort((a, b) => a.localeCompare(b, 'fr'));
-  const childPages = (pagesByDir.get(dir) || []).slice().sort((a, b) => a.title.localeCompare(b.title, 'fr'));
+  const childPages = (pagesByDir.get(dir) || []).slice().sort(triNaturel);
   const countIn = (d) => pages.filter(p => p.relPath.startsWith(d + '/')).length;
 
   // page d'accueil de wiki : rediriger la catégorie racine vers la vraie page Accueil
@@ -547,13 +668,44 @@ for (const dir of dirsAll) {
     const url = 'w/' + wiki.slug + '/' + d.split('/').slice(1).map(slugify).join('/') + '/index.html';
     return `<a class="cat-card" href="{{ROOT}}${url}"><span class="cat-icon">📁</span><span><strong>${esc(name)}</strong><small>${countIn(d)} page${countIn(d) > 1 ? 's' : ''}</small></span></a>`;
   }).join('');
-  const pageList = childPages.map(p => `<li><a href="{{ROOT}}${p.out}">${esc(p.title)}</a></li>`).join('');
+  // Sommaire : pages de structure (index, sections, chapitres) mises en avant.
+  // Sans ça, les 32 pages « RSST - Section NN » se retrouvent en position 549 à 580.
+  const estStructure = (p) => !numArticle(p) && /section|chapitre|index|sommaire|annexe|partie|^00 |^0\d /i.test(p.base);
+  const structure = childPages.filter(estStructure);
+  const articles = childPages.filter(p => !estStructure(p));
+  const lien = (p) => `<li><a href="{{ROOT}}${p.out}">${esc(p.title)}</a></li>`;
+
+  // regroupement par centaine d'articles au-delà de 60, pour casser le mur
+  let blocsArticles = '';
+  if (articles.length > 60 && articles.filter(numArticle).length > articles.length / 2) {
+    const groupes = new Map();
+    for (const p of articles) {
+      const n = numArticle(p);
+      const cle = n ? `${Math.floor(n[0] / 50) * 50 + 1}–${Math.floor(n[0] / 50) * 50 + 50}` : 'Autres';
+      if (!groupes.has(cle)) groupes.set(cle, []);
+      groupes.get(cle).push(p);
+    }
+    const cles = [...groupes.keys()].sort((a, b) => (parseInt(a) || 1e9) - (parseInt(b) || 1e9));
+    blocsArticles = `<div class="saut-nav">${cles.map(c => `<a href="#g-${slugify(c)}">art. ${esc(c)}</a>`).join(' · ')}</div>` +
+      cles.map(c => `<h3 id="g-${slugify(c)}">Articles ${esc(c)}</h3><ul class="cat-pages">${groupes.get(c).map(lien).join('')}</ul>`).join('');
+  } else if (articles.length) {
+    blocsArticles = `<ul class="cat-pages">${articles.map(lien).join('')}</ul>`;
+  }
+
+  const crumbsCat = ['<a href="{{ROOT}}index.html">Portail</a>', `<a href="{{ROOT}}w/${wiki.slug}/index.html">${esc(wiki.name)}</a>`];
+  let accCat = 'w/' + wiki.slug;
+  for (let i = 1; i < parts.length - 1; i++) {
+    accCat += '/' + slugify(parts[i]);
+    crumbsCat.push(`<a href="{{ROOT}}${accCat}/index.html">${esc(cleanLabel(parts[i]))}</a>`);
+  }
+
   const content = `
-<div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a> <span class="crumb-sep">›</span> <a href="{{ROOT}}w/${wiki.slug}/index.html">${esc(wiki.name)}</a></div>
+<div class="breadcrumbs">${crumbsCat.join(' <span class="crumb-sep">›</span> ')}</div>
 <h1 class="page-title">Catégorie : ${esc(label)}</h1>
 <div class="page-sub">${childPages.length} page${childPages.length > 1 ? 's' : ''}${childDirs.length ? ` · ${childDirs.length} sous-catégorie${childDirs.length > 1 ? 's' : ''}` : ''} — wiki ${esc(wiki.name)}</div>
 ${dirCards ? `<h2>Sous-catégories</h2><div class="cat-grid">${dirCards}</div>` : ''}
-${pageList ? `<h2>Pages</h2><ul class="cat-pages">${pageList}</ul>` : ''}`;
+${structure.length ? `<h2>Sommaire</h2><ul class="cat-pages cat-structure">${structure.map(lien).join('')}</ul>` : ''}
+${blocsArticles ? `<h2>${structure.length ? 'Articles' : 'Pages'}</h2>${blocsArticles}` : ''}`;
   const outPath = outDir + '/index.html';
   const html = pageShell({ out: outPath, title: 'Catégorie : ' + label, wikiKey, content, sidebarExtra: wikiSidebar(wikiKey, wikiSections[wikiKey]) })
     .replace(/\{\{ROOT\}\}/g, rootOf(outPath));
@@ -563,7 +715,11 @@ ${pageList ? `<h2>Pages</h2><ul class="cat-pages">${pageList}</ul>` : ''}`;
 
 // ---------- index alphabétique par wiki ----------
 for (const [wikiKey, wiki] of Object.entries(WIKIS)) {
-  const list = pages.filter(p => p.wikiKey === wikiKey).sort((a, b) => a.title.localeCompare(b.title, 'fr'));
+  const toutes = pages.filter(p => p.wikiKey === wikiKey);
+  // Les articles de loi (3362 entrées toutes sous « A ») partent dans leur propre index par loi,
+  // sinon les vraies entrées en A (ACGIH, amiante, assignation temporaire) sont noyées.
+  const articlesLoi = toutes.filter(p => p.fm.loi && numArticle(p));
+  const list = toutes.filter(p => !(p.fm.loi && numArticle(p))).sort((a, b) => a.title.localeCompare(b.title, 'fr'));
   const groups = new Map();
   for (const p of list) {
     const c = p.title.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').charAt(0).toUpperCase();
@@ -574,12 +730,38 @@ for (const [wikiKey, wiki] of Object.entries(WIKIS)) {
   const letters = [...groups.keys()].sort();
   const nav = letters.map(l => `<a href="#lettre-${l}">${l}</a>`).join(' · ');
   const sections = letters.map(l =>
-    `<h2 id="lettre-${l}">${l}</h2><ul class="cat-pages">${groups.get(l).map(p => `<li><a href="{{ROOT}}${p.out}">${esc(p.title)}</a></li>`).join('')}</ul>`).join('');
+    `<h2 id="lettre-${l}">${l} <a class="retour-haut" href="#haut">↑ haut</a></h2><ul class="cat-pages">${groups.get(l).map(p => `<li><a href="{{ROOT}}${p.out}">${esc(p.title)}</a></li>`).join('')}</ul>`).join('');
   const outPath = `w/${wiki.slug}/index-alphabetique.html`;
+
+  // index par loi : classe les articles par loi puis par numéro, au lieu de 3362 lignes sous « A »
+  let lienIndexLoi = '';
+  if (articlesLoi.length) {
+    const parLoi = new Map();
+    for (const p of articlesLoi) {
+      const l = String(p.fm.loi).trim();
+      if (!parLoi.has(l)) parLoi.set(l, []);
+      parLoi.get(l).push(p);
+    }
+    const lois = [...parLoi.keys()].sort((a, b) => parLoi.get(b).length - parLoi.get(a).length);
+    const outLoi = `w/${wiki.slug}/index-par-loi.html`;
+    const contenuLoi = `
+<div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a> <span class="crumb-sep">›</span> <a href="{{ROOT}}w/${wiki.slug}/index.html">${esc(wiki.name)}</a></div>
+<h1 class="page-title" id="haut">Index par loi et par article</h1>
+<div class="page-sub">${articlesLoi.length} articles répartis dans ${lois.length} lois et règlements</div>
+<div class="letters-nav">${lois.map(l => `<a href="#loi-${slugify(l)}">${esc(l)}</a>`).join(' · ')}</div>
+${lois.map(l => `<h2 id="loi-${slugify(l)}">${esc(l)} <small>(${parLoi.get(l).length} articles)</small> <a class="retour-haut" href="#haut">↑ haut</a></h2>
+<ul class="cat-pages">${parLoi.get(l).sort(triNaturel).map(p => `<li><a href="{{ROOT}}${p.out}">${esc(p.title)}</a></li>`).join('')}</ul>`).join('')}`;
+    fs.writeFileSync(path.join(OUT, outLoi),
+      pageShell({ out: outLoi, title: 'Index par loi — ' + wiki.name, wikiKey, content: contenuLoi, sidebarExtra: wikiSidebar(wikiKey, wikiSections[wikiKey]) })
+        .replace(/\{\{ROOT\}\}/g, rootOf(outLoi)));
+    lienIndexLoi = `<p class="encart-nav">📜 Les ${articlesLoi.length} articles de loi sont classés à part : <a href="{{ROOT}}w/${wiki.slug}/index-par-loi.html"><strong>Index par loi et par article</strong></a></p>`;
+  }
+
   const content = `
 <div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a> <span class="crumb-sep">›</span> <a href="{{ROOT}}w/${wiki.slug}/index.html">${esc(wiki.name)}</a></div>
-<h1 class="page-title">Index alphabétique — ${esc(wiki.name)}</h1>
-<div class="page-sub">${list.length} pages</div>
+<h1 class="page-title" id="haut">Index alphabétique — ${esc(wiki.name)}</h1>
+<div class="page-sub">${list.length} page${list.length > 1 ? 's' : ''}</div>
+${lienIndexLoi}
 <div class="letters-nav">${nav}</div>
 ${sections}`;
   const html = pageShell({ out: outPath, title: 'Index — ' + wiki.name, wikiKey, content, sidebarExtra: wikiSidebar(wikiKey, wikiSections[wikiKey]) })
@@ -589,14 +771,28 @@ ${sections}`;
 
 // ---------- index de recherche ----------
 console.log('Index de recherche…');
-const searchIndex = pages.map(p => ({
-  t: p.title,
-  u: p.out,
-  w: WIKIS[p.wikiKey].name,
-  i: WIKIS[p.wikiKey].icon,
-  g: (Array.isArray(p.fm.tags) ? p.fm.tags.join(' ') : ''),
-  x: stripMd(p.body).slice(0, 150),
-}));
+const searchIndex = pages.map(p => {
+  const e = {
+    t: p.title,
+    u: p.out,
+    w: WIKIS[p.wikiKey].name,
+    i: WIKIS[p.wikiKey].icon,
+    // tags + alias + nom de fichier : le nom porte souvent un mot absent du H1 (« art-11-LATMP, exclusions »)
+    g: [
+      ...(Array.isArray(p.fm.tags) ? p.fm.tags : []),
+      ...(Array.isArray(p.fm.aliases) ? p.fm.aliases : []),
+      p.base !== p.title ? p.base : '',
+    ].filter(Boolean).join(' '),
+    x: extrait(p.body),
+  };
+  // chemin de catégorie : distingue les 31 groupes de pages homonymes
+  const cat = p.relPath.split('/').slice(1, -1).map(cleanLabel).filter(Boolean).join(' › ');
+  if (cat) e.c = cat;
+  // 2 = ébauche, 1 = article abrogé/remplacé → dépriorisés dans les résultats
+  if (/Stub créé automatiquement|page vide à documenter/i.test(p.body)) e.q = 2;
+  else if (/Article abrogé|Article remplacé|disposition remplacée/i.test(stripMd(p.body).slice(0, 400))) e.q = 1;
+  return e;
+});
 fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
 fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(searchIndex));
 
@@ -658,4 +854,9 @@ fs.writeFileSync(path.join(OUT, 'assets', 'style.css'), style);
 fs.writeFileSync(path.join(OUT, 'assets', 'app.js'), appjs);
 fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas passer par Jekyll
 
+if (badFm.length) {
+  const reparés = badFm.filter(l => l.endsWith('(réparé)')).length;
+  console.warn(`\n⚠ Frontmatter YAML : ${badFm.length} note(s) en erreur — ${reparés} réparée(s), ${badFm.length - reparés} illisible(s)`);
+  badFm.filter(l => !l.endsWith('(réparé)')).slice(0, 20).forEach(l => console.warn('   ' + l));
+}
 console.log(`Terminé : ${pages.length} pages · ${assetOut.size} fichiers copiés · sortie : ${OUT}`);
