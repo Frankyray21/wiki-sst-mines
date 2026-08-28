@@ -377,7 +377,7 @@
   ancreRepli();
 
   // ---------- bouton « haut de page » ----------
-  if (document.querySelector('.page-body') || document.querySelector('.cat-pages')) {
+  if (document.querySelector('.page-body, .cat-pages, .search-results')) {
     var haut = document.createElement('button');
     haut.className = 'btn-haut';
     haut.setAttribute('aria-label', 'Remonter en haut de la page');
