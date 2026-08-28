@@ -639,5 +639,6 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
 // ---------- assets statiques ----------
 fs.writeFileSync(path.join(OUT, 'assets', 'style.css'), style);
 fs.writeFileSync(path.join(OUT, 'assets', 'app.js'), appjs);
+fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas passer par Jekyll
 
 console.log(`Terminé : ${pages.length} pages · ${assetOut.size} fichiers copiés · sortie : ${OUT}`);
