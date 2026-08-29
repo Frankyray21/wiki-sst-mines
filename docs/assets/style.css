@@ -453,8 +453,9 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .carte-public { border-width: 2px; border-color: var(--hover-bd); background: linear-gradient(180deg, var(--carte-public-grad) 0%, var(--content-bg) 100%); }
 .carte-public:hover { border-color: var(--carte-public-hover); }
 .carte-public .portal-icon { font-size: 42px; }
-/* le bouton de thème du portail, qui n'a pas d'en-tête */
-.theme-portail { position: absolute; top: 14px; right: 16px; }
+/* boutons flottants du portail, qui n'a pas d'en-tête */
+.theme-portail { position: absolute; top: 14px; right: 16px; background: var(--content-bg); }
+#btnAide.theme-portail { right: 62px; } /* sinon il se superposerait au bouton de thème */
 
 /* rubriques des portails par public */
 .rubrique { margin: 26px 0; }

@@ -449,6 +449,212 @@
     }).catch(function () { /* la date écrite à la construction reste affichée */ });
   })();
 
+  // ---------- visite guidée ----------
+  // Se déclenche une seule fois, à la première venue sur chaque type de page, et reste
+  // relançable par le bouton « ? ». Les étapes s'adaptent à la page affichée ; celles dont
+  // l'élément est absent sont ignorées, donc le tour ne montre jamais le vide.
+  var TOUR = (function () {
+    var CSS = '.tour-masque{position:fixed;inset:0;z-index:900;pointer-events:auto}' +
+      '.tour-trou{position:absolute;border-radius:10px;box-shadow:0 0 0 9999px rgba(10,14,20,.72);transition:all .25s ease;pointer-events:none}' +
+      '.tour-bulle{position:absolute;z-index:901;max-width:360px;background:var(--content-bg,#fff);color:var(--text,#202122);' +
+      'border:1px solid var(--border-light,#c8ccd1);border-radius:12px;padding:18px 20px;box-shadow:0 10px 34px rgba(0,0,0,.35);' +
+      'font-size:14.5px;line-height:1.55;font-family:inherit}' +
+      '.tour-bulle h3{font-size:16.5px;font-weight:700;margin:0 0 7px}' +
+      '.tour-bulle p{margin:0 0 14px}' +
+      '.tour-pied{display:flex;align-items:center;gap:10px}' +
+      '.tour-compte{font-size:12.5px;color:var(--text-soft,#54595d);margin-right:auto}' +
+      '.tour-btn{border:1px solid var(--border-light,#c8ccd1);background:none;color:inherit;border-radius:8px;' +
+      'padding:8px 15px;font-size:13.5px;cursor:pointer;font-family:inherit;min-height:38px}' +
+      '.tour-btn:hover{background:var(--hover,#eaf3ff)}' +
+      '.tour-btn.principal{background:#2563eb;border-color:#2563eb;color:#fff;font-weight:600}' +
+      '.tour-btn.principal:hover{background:#1d4ed8}' +
+      '.tour-passer{background:none;border:0;color:var(--text-soft,#54595d);font-size:13px;cursor:pointer;text-decoration:underline;font-family:inherit}' +
+      '@media(max-width:700px){.tour-bulle{left:12px!important;right:12px!important;max-width:none;width:auto}}' +
+      '@media(prefers-reduced-motion:reduce){.tour-trou{transition:none}}';
+
+    var etapes = [], i = 0, masque, trou, bulle, cleMemoire;
+
+    function injecterCss() {
+      if (document.getElementById('tourCss')) return;
+      var s = document.createElement('style');
+      s.id = 'tourCss';
+      s.textContent = CSS;
+      document.head.appendChild(s);
+    }
+
+    function fermer(termine) {
+      if (masque) masque.remove();
+      if (bulle) bulle.remove();
+      masque = bulle = trou = null;
+      document.removeEventListener('keydown', auClavier);
+      window.removeEventListener('resize', placer);
+      if (termine && cleMemoire) { try { localStorage.setItem(cleMemoire, '1'); } catch (e) {} }
+    }
+
+    function auClavier(ev) {
+      if (ev.key === 'Escape') { fermer(true); ev.preventDefault(); }
+      else if (ev.key === 'ArrowRight' || ev.key === 'Enter') { aller(1); ev.preventDefault(); }
+      else if (ev.key === 'ArrowLeft') { aller(-1); ev.preventDefault(); }
+    }
+
+    function placer() {
+      if (!bulle) return;
+      var e = etapes[i], cible = e.el;
+      var marge = 8;
+      if (cible) {
+        var r = cible.getBoundingClientRect();
+        trou.style.display = 'block';
+        trou.style.left = (r.left - marge) + 'px';
+        trou.style.top = (r.top - marge) + 'px';
+        trou.style.width = (r.width + marge * 2) + 'px';
+        trou.style.height = (r.height + marge * 2) + 'px';
+        // la bulle se place sous la cible, ou au-dessus si le bas manque de place
+        var hb = bulle.offsetHeight || 190, lb = Math.min(360, innerWidth - 24);
+        var dessous = r.bottom + 14 + hb < innerHeight;
+        bulle.style.top = (dessous ? r.bottom + 14 : Math.max(12, r.top - hb - 14)) + 'px';
+        bulle.style.left = Math.max(12, Math.min(r.left, innerWidth - lb - 12)) + 'px';
+        bulle.style.position = 'fixed';
+      } else {
+        // étape sans ancre : bulle centrée, aucun projecteur
+        trou.style.display = 'none';
+        bulle.style.position = 'fixed';
+        bulle.style.top = Math.max(16, innerHeight / 2 - (bulle.offsetHeight || 190) / 2) + 'px';
+        bulle.style.left = Math.max(12, innerWidth / 2 - Math.min(360, innerWidth - 24) / 2) + 'px';
+      }
+    }
+
+    function peindre() {
+      var e = etapes[i];
+      var dernier = i === etapes.length - 1;
+      bulle.innerHTML =
+        '<h3>' + escHtml(e.titre) + '</h3><p>' + escHtml(e.texte) + '</p>' +
+        '<div class="tour-pied">' +
+        '<span class="tour-compte">Étape ' + (i + 1) + ' sur ' + etapes.length + '</span>' +
+        (i > 0 ? '<button class="tour-btn" data-prec>Précédent</button>' : '<button class="tour-passer" data-fin>Passer</button>') +
+        '<button class="tour-btn principal" data-suiv>' + (dernier ? 'Terminer' : 'Suivant') + '</button>' +
+        '</div>';
+      bulle.querySelector('[data-suiv]').addEventListener('click', function () { aller(1); });
+      var p = bulle.querySelector('[data-prec]'); if (p) p.addEventListener('click', function () { aller(-1); });
+      var f = bulle.querySelector('[data-fin]'); if (f) f.addEventListener('click', function () { fermer(true); });
+      if (e.el) {
+        var r = e.el.getBoundingClientRect();
+        if (r.top < 60 || r.bottom > innerHeight - 60) e.el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        setTimeout(placer, 320);
+      }
+      placer();
+      bulle.querySelector('.principal').focus();
+    }
+
+    function aller(pas) {
+      var n = i + pas;
+      if (n < 0) return;
+      if (n >= etapes.length) { fermer(true); return; }
+      i = n;
+      peindre();
+    }
+
+    function demarrer(liste, cle) {
+      etapes = liste.map(function (e) {
+        return { titre: e.titre, texte: e.texte, el: e.cible ? document.querySelector(e.cible) : null };
+      }).filter(function (e) { return e.el || !e.ancre; });
+      etapes = etapes.filter(function (e, n) { return e.el || n === 0 || n === liste.length - 1; });
+      if (!etapes.length) return;
+      cleMemoire = cle;
+      injecterCss();
+      i = 0;
+      masque = document.createElement('div');
+      masque.className = 'tour-masque';
+      masque.addEventListener('click', function () { fermer(true); });
+      trou = document.createElement('div');
+      trou.className = 'tour-trou';
+      masque.appendChild(trou);
+      bulle = document.createElement('div');
+      bulle.className = 'tour-bulle';
+      bulle.setAttribute('role', 'dialog');
+      bulle.setAttribute('aria-label', 'Visite guidée du wiki');
+      bulle.addEventListener('click', function (ev) { ev.stopPropagation(); });
+      document.body.appendChild(masque);
+      document.body.appendChild(bulle);
+      document.addEventListener('keydown', auClavier);
+      window.addEventListener('resize', placer);
+      peindre();
+    }
+
+    return { demarrer: demarrer };
+  })();
+
+  // Étapes selon la page affichée
+  function etapesDeLaPage() {
+    if (document.body.classList.contains('tb')) {
+      return ['tour-encadrement', [
+        { titre: 'Bienvenue dans le wiki de l’encadrement', texte: 'Cet espace réunit ce qu’un superviseur, un gestionnaire ou un dirigeant doit savoir. Voici comment vous y retrouver en quelques secondes.' },
+        { titre: 'Chercher, même sans connaître le mot exact', texte: 'Tapez une obligation, une situation, ou un numéro d’article comme « art 51 RSST ». Les puces en dessous reprennent les recherches les plus fréquentes.', cible: '.tb-recherche' },
+        { titre: 'Entrer par votre rôle', texte: 'Chaque rôle a son point de départ : responsabilités du superviseur, obligations du gestionnaire, gouvernance pour la direction.', cible: '.tb-grille' },
+        { titre: 'Ou par ce qui vous arrive aujourd’hui', texte: 'Un accident, une visite d’inspecteur, un constat d’infraction, un travailleur blessé : chaque situation mène directement à la marche à suivre.', cible: '.tb-grille + .tb-section + .tb-grille' },
+        { titre: 'Le cadre légal, article par article', texte: 'Les 3 818 articles de loi sont classés par loi et par numéro : LSST, LATMP, RSST, RSSM, CSTC.', cible: '.tb-legal' },
+        { titre: 'Vos pages reviennent toutes seules', texte: 'Les articles que vous ouvrez s’inscrivent dans « Récemment consulté ». Pour garder une page sous la main, cliquez l’étoile dans son en-tête : elle rejoint vos favoris.', cible: '#tbRecents' },
+        { titre: 'Tout est aussi rangé à gauche', texte: 'La barre latérale donne accès aux obligations, aux programmes, aux outils et aux domaines. Vous pouvez relancer cette visite à tout moment par le bouton « ? ».', cible: '.tb-side' },
+      ]];
+    }
+    if (document.getElementById('tbRecents') === null && document.querySelector('.encart-urgence')) {
+      return ['tour-travailleurs', [
+        { titre: 'Bienvenue', texte: 'Ce wiki est écrit pour vous qui travaillez à la mine. On y entre par ce qui vous arrive, pas par des termes techniques.' },
+        { titre: 'Si ça ne va pas, c’est ici', texte: 'Ce bandeau reste en haut de la page. Les numéros sont cliquables : un toucher et le téléphone compose.', cible: '.encart-urgence' },
+        { titre: 'Trouvez par votre problème', texte: '« J’ai mal quelque part », « Je ne dors plus », « Est-ce que j’ai le droit ? » : choisissez la phrase qui vous ressemble.', cible: '.rubrique' },
+        { titre: 'Vos droits, en toutes lettres', texte: 'Le refus de travail, le retrait préventif, la réclamation : ce que la loi vous garantit, dans son texte officiel.', cible: '.portal-grid' },
+      ]];
+    }
+    if (document.querySelector('.portal-publics')) {
+      return ['tour-portail', [
+        { titre: 'Bienvenue dans le wiki SST', texte: 'Ce site réunit vos notes de cours en une encyclopédie consultable. Trois entrées, selon qui consulte.' },
+        { titre: 'Deux wikis selon qui vous êtes', texte: 'Le wiki des travailleurs parle simplement des risques et des droits. Celui de l’encadrement traite des obligations et des programmes.', cible: '.portal-publics' },
+        { titre: 'Le fond documentaire complet', texte: 'Les 4 500 pages classées par discipline, pour le conseiller SST et la recherche documentaire.', cible: '.portal-section + .portal-note + .portal-grid' },
+        { titre: 'Chercher partout à la fois', texte: 'La recherche couvre tout le site, y compris les numéros d’articles de loi. Essayez « art 4 RSST » ou « silice ».', cible: '.portal-search' },
+      ]];
+    }
+    if (document.querySelector('.page-body')) {
+      return ['tour-article', [
+        { titre: 'Lire un article', texte: 'Voici les repères d’une page du wiki. Trois choses à connaître, et vous êtes autonome.' },
+        { titre: 'L’essentiel, tout de suite', texte: 'Le résumé en tête donne la substance de l’article avant d’entrer dans le détail.', cible: '.chapo' },
+        { titre: 'La fiche signalétique', texte: 'Loi, article, statut, date de révision : les repères de la page. Les mots-clés en bas sont cliquables et mènent à toutes les pages du même sujet.', cible: '.infobox' },
+        { titre: 'Garder cette page', texte: 'L’étoile ajoute la page à vos favoris, retrouvables depuis le portail. Le bouton à côté change le thème clair ou sombre.', cible: '#btnFav' },
+      ]];
+    }
+    return null;
+  }
+
+  (function visiteGuidee() {
+    var conf = etapesDeLaPage();
+    if (!conf) return;
+    var cle = conf[0], liste = conf[1];
+
+    function lancer() { TOUR.demarrer(liste, cle); }
+
+    // bouton « ? » permanent, pour relancer la visite quand on veut.
+    // Les portails n'ont pas d'en-tête classique : on se cale alors sur le bouton de thème.
+    var aide = document.createElement('button');
+    aide.id = 'btnAide';
+    aide.textContent = '?';
+    aide.setAttribute('aria-label', 'Visite guidée de cette page');
+    aide.setAttribute('title', 'Visite guidée de cette page');
+    aide.addEventListener('click', lancer);
+
+    var ancre = document.getElementById('btnTheme');
+    var barre = document.querySelector('.site-header') || document.querySelector('.tb-head');
+    if (ancre && ancre.parentNode) {
+      aide.className = ancre.className;   // même habillage que son voisin
+      ancre.parentNode.insertBefore(aide, ancre);
+    } else if (barre) {
+      aide.className = document.body.classList.contains('tb') ? 'tb-icone-btn' : 'btn-theme';
+      barre.appendChild(aide);
+    }
+
+    // première visite : on lance de nous-mêmes, une seule fois
+    var vu = null;
+    try { vu = localStorage.getItem(cle); } catch (e) { vu = '1'; } // sans mémoire, on n'impose rien
+    if (!vu && !location.search) setTimeout(lancer, 700);
+  })();
+
   // ---------- date de dernière mise à jour ----------
   // Lue depuis un fichier unique : l'écrire dans chaque page ferait changer tout le site
   // à chaque reconstruction, même sans modification de contenu.
