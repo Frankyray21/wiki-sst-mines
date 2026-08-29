@@ -385,7 +385,30 @@ a.tag-lien:hover { background: var(--tag-hover-bg); border-color: var(--tag-hove
 .encart-nav { background: var(--info-bg); border: 1px solid var(--info-bd); border-radius: 3px; padding: 10px 14px; margin: 12px 0 16px; font-size: 14.5px; }
 .lien-mort { color: var(--text-soft); text-decoration: line-through; cursor: not-allowed; }
 
-/* tableau de bord qualité */
+/* aperçu des liens au survol */
+.apercu-lien {
+  position: fixed; z-index: 200; display: none;
+  width: 380px; max-width: calc(100vw - 24px);
+  background: var(--content-bg); border: 1px solid var(--border-light); border-radius: 10px;
+  box-shadow: 0 8px 28px var(--ombre); padding: 13px 16px;
+  font-size: 13.5px; line-height: 1.5; pointer-events: none;
+}
+.apercu-lien .ap-titre { font-weight: 700; font-size: 14.5px; margin-bottom: 2px; }
+.apercu-lien .ap-meta { color: var(--text-soft); font-size: 12px; margin-bottom: 6px; }
+.apercu-lien .ap-texte { color: var(--text); }
+
+/* graphe des liens */
+.graphe-titre { font-size: 18px; color: var(--text-soft); margin-left: 12px; font-family: inherit; }
+.graphe-barre { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin: 8px 0 10px; }
+.graphe-barre input {
+  padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
+  font-size: 14px; width: 280px; max-width: 100%; background: var(--content-bg); color: var(--text);
+}
+.graphe-filtres { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; }
+.gf { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; padding: 4px 0; }
+.gf-point { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.graphe-cadre { border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; background: var(--bg); }
+.graphe-cadre canvas { display: block; width: 100%; touch-action: none; cursor: grab; }
 .q-table, .q-resume { border-collapse: collapse; width: 100%; font-size: 14px; margin: 12px 0 24px; }
 .q-table th, .q-table td, .q-resume th, .q-resume td { border: 1px solid var(--border-light); padding: 7px 10px; text-align: left; vertical-align: top; }
 .q-table th, .q-resume th { background: var(--th-bg); }

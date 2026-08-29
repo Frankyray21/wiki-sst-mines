@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphe des liens — WIKI SST Mines</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<script>window.ROOT='';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <a class="brand" href="index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+  <button class="btn-theme" id="btnFav" aria-label="Ajouter aux favoris" title="Ajouter aux favoris">☆</button>
+  <button class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+  <div class="nav-group"><div class="nav-title">Navigation</div>
+    <ul>
+      <li><a href="index.html">🏠 Portail</a></li>
+      <li><a href="categories.html">🏷️ Catégories</a></li>
+      <li><a href="qualite.html">🔧 Qualité rédactionnelle</a></li>
+      <li><a href="graphe.html">🕸️ Graphe des liens</a></li>
+      <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">Selon qui vous êtes</div>
+    <ul>
+      <li><a href="t/index.html">👷 Wiki des travailleurs</a></li>
+      <li><a href="g/index.html">🎓 Wiki de l'encadrement</a></li>
+    </ul>
+  </div>
+  
+  <div class="nav-group"><div class="nav-title">Les wikis</div><ul><li><a href="w/ergonomie/index.html">🦺 Ergonomie</a></li><li><a href="w/hygiene/index.html">🌫️ Hygiène industrielle</a></li><li><a href="w/toxicologie/index.html">☣️ Toxicologie</a></li><li><a href="w/securite/index.html">⛑️ Sécurité industrielle</a></li><li><a href="w/droit-travail/index.html">📋 Droit du travail</a></li><li><a href="w/psychosocial/index.html">🧠 SST psychosociale</a></li><li><a href="w/legislation/index.html">⚖️ Recueil législatif</a></li></ul></div>
+</nav>
+<main class="content">
+
+<div class="breadcrumbs"><a href="index.html">Portail</a></div>
+<h1 class="page-title">Graphe des liens<span id="graphe-titre" class="graphe-titre"></span></h1>
+<div class="page-sub" id="graphe-etat">4 514 pages · 21 261 liens. Molette pour zoomer, glisser pour déplacer, cliquer pour ouvrir la page. Le Recueil législatif est masqué par défaut : cochez-le pour l'afficher.</div>
+<div class="graphe-barre">
+  <input type="search" id="graphe-q" placeholder="Trouver une page dans le graphe…" autocomplete="off">
+  <div id="graphe-filtres" class="graphe-filtres"></div>
+</div>
+<div class="graphe-cadre"><canvas id="graphe"></canvas></div>
+<script>// Graphe des liens du wiki — canvas pur, aucune dépendance.
+// Reproduit l'esprit de la vue Graphe d'Obsidian : chaque nœud est une page, chaque
+// trait un lien ; couleur par domaine ; survol = voisins en évidence ; clic = ouvrir.
+(function () {
+  var ROOT = window.ROOT || '';
+  var canvas = document.getElementById('graphe');
+  var ctx = canvas.getContext('2d');
+  var etat = document.getElementById('graphe-etat');
+
+  var COULEURS = ['#e5484d', '#f5a623', '#30a46c', '#0091ff', '#8e4ec6', '#12a594', '#f76b15'];
+  var noeuds = [], aretes = [], voisins = new Map();
+  var actifs = new Set();       // indices de wikis affichés
+  var vue = { x: 0, y: 0, z: 1 };
+  var survol = -1, traine = -1, focusId = -1;
+  var chaud = 0;                // itérations de simulation restantes
+
+  function css(nom, repli) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(nom).trim();
+    return v || repli;
+  }
+
+  function redimensionner() {
+    var r = canvas.parentElement.getBoundingClientRect();
+    canvas.width = r.width * devicePixelRatio;
+    canvas.height = (innerHeight - r.top - 12) * devicePixelRatio;
+    canvas.style.height = (innerHeight - r.top - 12) + 'px';
+    dessiner();
+  }
+  window.addEventListener('resize', redimensionner);
+
+  // ---------- chargement ----------
+  fetch(ROOT + 'assets/graphe.json')
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (g) {
+      noeuds = g.n.map(function (n, i) {
+        return { t: n.t, u: n.u, w: n.w, deg: 0, i: i,
+          x: Math.cos(i * 2.4) * Math.sqrt(i) * 14, y: Math.sin(i * 2.4) * Math.sqrt(i) * 14, vx: 0, vy: 0 };
+      });
+      aretes = g.e;
+      for (var k = 0; k < aretes.length; k++) {
+        var a = aretes[k][0], b = aretes[k][1];
+        noeuds[a].deg++; noeuds[b].deg++;
+        if (!voisins.has(a)) voisins.set(a, []);
+        if (!voisins.has(b)) voisins.set(b, []);
+        voisins.get(a).push(b); voisins.get(b).push(a);
+      }
+      construireFiltres(g.wikis);
+      lireFocus(g);
+      redimensionner();
+      chauffer(400);
+      boucle();
+    })
+    .catch(function () { etat.textContent = 'Impossible de charger le graphe.'; });
+
+  function lireFocus(g) {
+    var f = new URLSearchParams(location.search).get('focus');
+    if (!f) { // vue globale : le Recueil (3800 nœuds) est masqué par défaut pour rester lisible
+      g.wikis.forEach(function (w, i) { if (!/législatif/i.test(w)) actifs.add(i); });
+      majFiltres();
+      return;
+    }
+    g.wikis.forEach(function (w, i) { actifs.add(i); });
+    focusId = noeuds.findIndex(function (n) { return n.u === f; });
+    if (focusId < 0) { majFiltres(); return; }
+    // voisinage à deux pas : c'est le « graphe local » d'Obsidian
+    var garde = new Set([focusId]);
+    (voisins.get(focusId) || []).forEach(function (v) {
+      garde.add(v);
+      (voisins.get(v) || []).forEach(function (v2) { garde.add(v2); });
+    });
+    if (garde.size > 400) { // trop dense : un seul pas
+      garde = new Set([focusId]);
+      (voisins.get(focusId) || []).forEach(function (v) { garde.add(v); });
+    }
+    noeuds.forEach(function (n) { n.cache = !garde.has(n.i); });
+    var fN = noeuds[focusId];
+    document.getElementById('graphe-titre').textContent = fN.t;
+    etat.textContent = (garde.size - 1) + ' pages liées, à deux pas ou moins.';
+    majFiltres();
+  }
+
+  function visible(n) { return !n.cache && actifs.has(n.w); }
+
+  // ---------- simulation (répulsion par grille spatiale) ----------
+  function chauffer(n) { chaud = Math.max(chaud, n); }
+
+  function simuler() {
+    var vis = noeuds.filter(visible);
+    if (!vis.length) return;
+    var cellule = 120, grille = new Map();
+    for (var i = 0; i < vis.length; i++) {
+      var n = vis[i], cle = (n.x / cellule | 0) + ':' + (n.y / cellule | 0);
+      if (!grille.has(cle)) grille.set(cle, []);
+      grille.get(cle).push(n);
+    }
+    for (var i2 = 0; i2 < vis.length; i2++) {
+      var a = vis[i2], cx = a.x / cellule | 0, cy = a.y / cellule | 0;
+      for (var gx = cx - 1; gx <= cx + 1; gx++) for (var gy = cy - 1; gy <= cy + 1; gy++) {
+        var lot = grille.get(gx + ':' + gy);
+        if (!lot) continue;
+        for (var j = 0; j < lot.length; j++) {
+          var b = lot[j];
+          if (b === a) continue;
+          var dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
+          if (d2 < 1) { d2 = 1; dx = Math.random() - 0.5; dy = Math.random() - 0.5; }
+          if (d2 > cellule * cellule * 2) continue;
+          var f = 900 / d2;
+          a.vx += dx * f * 0.01; a.vy += dy * f * 0.01;
+        }
+      }
+      // gravité douce vers le centre
+      a.vx -= a.x * 0.0008; a.vy -= a.y * 0.0008;
+    }
+    for (var k = 0; k < aretes.length; k++) {
+      var na = noeuds[aretes[k][0]], nb = noeuds[aretes[k][1]];
+      if (!visible(na) || !visible(nb)) continue;
+      var ddx = nb.x - na.x, ddy = nb.y - na.y;
+      var dist = Math.sqrt(ddx * ddx + ddy * ddy) || 1;
+      var tir = (dist - 60) * 0.004;
+      na.vx += ddx / dist * tir; na.vy += ddy / dist * tir;
+      nb.vx -= ddx / dist * tir; nb.vy -= ddy / dist * tir;
+    }
+    for (var m = 0; m < vis.length; m++) {
+      var nd = vis[m];
+      if (nd.i === traine) { nd.vx = 0; nd.vy = 0; continue; }
+      nd.x += nd.vx; nd.y += nd.vy;
+      nd.vx *= 0.85; nd.vy *= 0.85;
+    }
+  }
+
+  // ---------- rendu ----------
+  function dessiner() {
+    var L = canvas.width, H = canvas.height;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, L, H);
+    ctx.setTransform(devicePixelRatio * vue.z, 0, 0, devicePixelRatio * vue.z,
+      L / 2 + vue.x * devicePixelRatio, H / 2 + vue.y * devicePixelRatio);
+
+    var enEvidence = new Set();
+    var actif = survol >= 0 ? survol : focusId;
+    if (actif >= 0) {
+      enEvidence.add(actif);
+      (voisins.get(actif) || []).forEach(function (v) { enEvidence.add(v); });
+    }
+
+    var couleurTrait = css('--border-light', '#c8ccd1');
+    ctx.lineWidth = 1 / vue.z;
+    for (var k = 0; k < aretes.length; k++) {
+      var a = noeuds[aretes[k][0]], b = noeuds[aretes[k][1]];
+      if (!visible(a) || !visible(b)) continue;
+      var fort = actif >= 0 && (aretes[k][0] === actif || aretes[k][1] === actif);
+      ctx.strokeStyle = fort ? css('--link', '#36c') : couleurTrait;
+      ctx.globalAlpha = actif >= 0 && !fort ? 0.12 : (fort ? 0.9 : 0.35);
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+
+    for (var i = 0; i < noeuds.length; i++) {
+      var n = noeuds[i];
+      if (!visible(n)) continue;
+      var r = Math.min(3 + Math.sqrt(n.deg) * 1.1, 14);
+      if (i === focusId) r += 4;
+      ctx.globalAlpha = actif >= 0 && !enEvidence.has(i) ? 0.18 : 1;
+      ctx.fillStyle = COULEURS[n.w % COULEURS.length];
+      ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, 7); ctx.fill();
+      if (i === focusId || i === survol) {
+        ctx.strokeStyle = css('--text', '#202122');
+        ctx.lineWidth = 2 / vue.z;
+        ctx.stroke();
+      }
+    }
+
+    // libellés : le nœud survolé, le focus, et les gros nœuds quand on est assez proche
+    ctx.fillStyle = css('--text', '#202122');
+    ctx.globalAlpha = 1;
+    var taille = 12 / vue.z;
+    ctx.font = taille + 'px sans-serif';
+    for (var i3 = 0; i3 < noeuds.length; i3++) {
+      var n3 = noeuds[i3];
+      if (!visible(n3)) continue;
+      var montre = i3 === survol || i3 === focusId || (vue.z > 1.4 && n3.deg > 8) || (enEvidence.has(i3) && enEvidence.size <= 40);
+      if (!montre) continue;
+      ctx.fillText(n3.t.length > 44 ? n3.t.slice(0, 42) + '…' : n3.t, n3.x + 10 / vue.z, n3.y + 4 / vue.z);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function boucle() {
+    if (chaud > 0) { simuler(); chaud--; dessiner(); }
+    requestAnimationFrame(boucle);
+  }
+
+  // ---------- interactions ----------
+  function versMonde(ev) {
+    var r = canvas.getBoundingClientRect();
+    return {
+      x: (ev.clientX - r.left - r.width / 2 - vue.x) / vue.z,
+      y: (ev.clientY - r.top - r.height / 2 - vue.y) / vue.z,
+    };
+  }
+  function sous(ev) {
+    var p = versMonde(ev), meilleur = -1, dMin = 14 / vue.z + 6;
+    for (var i = 0; i < noeuds.length; i++) {
+      var n = noeuds[i];
+      if (!visible(n)) continue;
+      var d = Math.hypot(n.x - p.x, n.y - p.y);
+      if (d < dMin) { dMin = d; meilleur = i; }
+    }
+    return meilleur;
+  }
+
+  var pan = null;
+  canvas.addEventListener('pointerdown', function (ev) {
+    var n = sous(ev);
+    if (n >= 0) { traine = n; canvas.setPointerCapture(ev.pointerId); }
+    else pan = { x: ev.clientX - vue.x, y: ev.clientY - vue.y };
+  });
+  canvas.addEventListener('pointermove', function (ev) {
+    if (traine >= 0) {
+      var p = versMonde(ev);
+      noeuds[traine].x = p.x; noeuds[traine].y = p.y;
+      chauffer(30); dessiner();
+      return;
+    }
+    if (pan) { vue.x = ev.clientX - pan.x; vue.y = ev.clientY - pan.y; dessiner(); return; }
+    var s = sous(ev);
+    if (s !== survol) { survol = s; canvas.style.cursor = s >= 0 ? 'pointer' : 'grab'; dessiner(); }
+  });
+  canvas.addEventListener('pointerup', function (ev) {
+    if (traine >= 0 && sous(ev) === traine && !ev.movementX && !ev.movementY) { /* clic géré ci-dessous */ }
+    traine = -1; pan = null;
+  });
+  canvas.addEventListener('click', function (ev) {
+    var n = sous(ev);
+    if (n >= 0) location.href = ROOT + noeuds[n].u;
+  });
+  canvas.addEventListener('wheel', function (ev) {
+    ev.preventDefault();
+    var f = ev.deltaY < 0 ? 1.15 : 1 / 1.15;
+    vue.z = Math.max(0.15, Math.min(6, vue.z * f));
+    dessiner();
+  }, { passive: false });
+
+  // ---------- filtres ----------
+  function construireFiltres(wikis) {
+    var boite = document.getElementById('graphe-filtres');
+    boite.innerHTML = wikis.map(function (w, i) {
+      return '<label class="gf"><input type="checkbox" data-w="' + i + '">' +
+        '<span class="gf-point" style="background:' + COULEURS[i % COULEURS.length] + '"></span>' +
+        w + '</label>';
+    }).join('');
+    boite.addEventListener('change', function (ev) {
+      var i = +ev.target.getAttribute('data-w');
+      if (ev.target.checked) actifs.add(i); else actifs.delete(i);
+      chauffer(250); dessiner();
+    });
+  }
+  function majFiltres() {
+    document.querySelectorAll('#graphe-filtres input').forEach(function (c) {
+      c.checked = actifs.has(+c.getAttribute('data-w'));
+    });
+  }
+
+  // recherche d'un nœud
+  var champ = document.getElementById('graphe-q');
+  champ.addEventListener('input', function () {
+    var q = champ.value.trim().toLowerCase();
+    if (q.length < 3) return;
+    var n = noeuds.find(function (x) { return visible(x) && x.t.toLowerCase().indexOf(q) >= 0; });
+    if (n) {
+      vue.x = -n.x * vue.z; vue.y = -n.y * vue.z;
+      survol = n.i;
+      dessiner();
+    }
+  });
+})();
+</script>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours<span id="version"></span></footer>
+<script src="assets/app.js"></script>
+</body>
+</html>

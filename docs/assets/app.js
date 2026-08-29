@@ -449,6 +449,72 @@
     }).catch(function () { /* la date écrite à la construction reste affichée */ });
   })();
 
+  // ---------- aperçu des liens au survol, façon Obsidian ----------
+  // Survoler un lien interne montre le titre, le domaine et le début de la page cible,
+  // sans quitter la lecture. Désactivé au toucher (pas de survol sur téléphone).
+  (function apercuLiens() {
+    if (matchMedia('(hover: none)').matches) return;
+    var zone = document.querySelector('.page-body');
+    if (!zone) return;
+
+    var bulle = null, minuterie = null, parUrl = null;
+
+    function normaliser(href) {
+      // ramène un href relatif à la clé du site : sans ../, sans préfixe t/ ou g/
+      var u = href.split('#')[0].replace(/^(\.\.\/)+/, '');
+      return u.replace(/^[tg]\//, '');
+    }
+
+    function construireCarte() {
+      return loadIndex().then(function (idx) {
+        if (!parUrl) {
+          parUrl = new Map();
+          for (var i = 0; i < idx.length; i++) parUrl.set(idx[i].u, idx[i]);
+        }
+      });
+    }
+
+    function montrer(a) {
+      var href = a.getAttribute('href') || '';
+      if (/^(https?:|mailto:|tel:|#)/.test(href)) return;
+      construireCarte().then(function () {
+        var e = parUrl.get(normaliser(href));
+        if (!e || !bulleDemandee) return;
+        if (!bulle) {
+          bulle = document.createElement('div');
+          bulle.className = 'apercu-lien';
+          document.body.appendChild(bulle);
+        }
+        bulle.innerHTML = '<div class="ap-titre">' + e.i + ' ' + escHtml(e.t) + '</div>' +
+          '<div class="ap-meta">' + escHtml(e.w) + (e.c ? ' › ' + escHtml(e.c) : '') + '</div>' +
+          (e.x ? '<div class="ap-texte">' + escHtml(e.x) + '…</div>' : '');
+        var r = a.getBoundingClientRect();
+        bulle.style.display = 'block';
+        var lb = Math.min(380, innerWidth - 24);
+        var gauche = Math.max(12, Math.min(r.left, innerWidth - lb - 12));
+        var dessous = r.bottom + 10 + 150 < innerHeight;
+        bulle.style.left = gauche + 'px';
+        bulle.style.top = (dessous ? r.bottom + 8 : r.top - bulle.offsetHeight - 8) + 'px';
+      }).catch(function () { /* index indisponible : pas d'aperçu, la navigation reste intacte */ });
+    }
+
+    var bulleDemandee = false;
+    zone.addEventListener('mouseover', function (ev) {
+      var a = ev.target.closest ? ev.target.closest('a[href]') : null;
+      if (!a || !zone.contains(a)) return;
+      bulleDemandee = true;
+      clearTimeout(minuterie);
+      minuterie = setTimeout(function () { montrer(a); }, 350);
+    });
+    zone.addEventListener('mouseout', function (ev) {
+      var a = ev.target.closest ? ev.target.closest('a[href]') : null;
+      if (!a) return;
+      bulleDemandee = false;
+      clearTimeout(minuterie);
+      if (bulle) bulle.style.display = 'none';
+    });
+  })();
+
   // ---------- visite guidée ----------
   // Se déclenche une seule fois, à la première venue sur chaque type de page, et reste
   // relançable par le bouton « ? ». Les étapes s'adaptent à la page affichée ; celles dont

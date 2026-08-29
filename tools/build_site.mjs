@@ -109,6 +109,9 @@ function stripMd(s) {
     // boilerplate qui rendait 1838 extraits indiscernables les uns des autres
     .replace(/\[!\w+\][+-]?/g, ' ')
     .replace(/🌐 LegisQuébec[^\n]*/g, ' ')
+    .replace(/Texte officiel : capture du PDF[^\n]*/gi, ' ')
+    .replace(/🔗 Ouvrir a cette page[^\n]*/gi, ' ')
+    .replace(/texte a jour au [^\n]*/gi, ' ')
     .replace(/^\s*(En bref|Table des matières|Voir aussi)\b/gim, ' ')
     .replace(/[*_`#>~=|]/g, ' ')
     .replace(/\s+/g, ' ')
@@ -595,6 +598,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
       <li><a href="${ROOT}index.html">🏠 Portail</a></li>
       <li><a href="${ROOT}categories.html">🏷️ Catégories</a></li>
       <li><a href="${ROOT}qualite.html">🔧 Qualité rédactionnelle</a></li>
+      <li><a href="${ROOT}graphe.html">🕸️ Graphe des liens</a></li>
       <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
     </ul>
   </div>
@@ -796,6 +800,7 @@ for (const p of pages) {
   }
 
   p.html = finalize(renderBody(corpsMd));
+  p.liens = [...CUR_LINKS].filter(x => x !== p); // liens sortants, pour le graphe
   blocks.length = 0;
   for (const target of CUR_LINKS) {
     if (target === p) continue;
@@ -835,7 +840,7 @@ ${tocHtml}
 ${p.html}
 </div>
 ${blHtml}
-<div class="page-meta">Dernière révision : ${esc(String(rev))}</div>`;
+<div class="page-meta">Dernière révision : ${esc(String(rev))} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
   const html = pageShell({
     out: p.out, title: p.title, wikiKey: p.wikiKey, content,
     sidebarExtra: wikiSidebar(p.wikiKey, wikiSections[p.wikiKey]),
@@ -1117,6 +1122,44 @@ ${lignes}
   for (const [c, n] of codes) console.log(`    ${String(n).padStart(4)} × ${LIBELLES[c] || c}`);
 }
 
+// ---------- graphe des liens, façon Obsidian ----------
+console.log('Graphe des liens…');
+{
+  const wikisListe = Object.keys(WIKIS);
+  const indexDe = new Map(pages.map((p, i) => [p, i]));
+  const aretes = new Set();
+  for (const p of pages) {
+    for (const cible of (p.liens || [])) {
+      const a = indexDe.get(p), b = indexDe.get(cible);
+      if (b === undefined || a === b) continue;
+      aretes.add(a < b ? a + ',' + b : b + ',' + a);
+    }
+  }
+  const graphe = {
+    wikis: wikisListe.map(k => WIKIS[k].name),
+    n: pages.map(p => ({ t: p.title, u: p.out, w: wikisListe.indexOf(p.wikiKey) })),
+    e: [...aretes].map(s => s.split(',').map(Number)),
+  };
+  fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'assets', 'graphe.json'), JSON.stringify(graphe));
+
+  const clientGraphe = fs.readFileSync(path.join(__dirname, 'graphe_client.js'), 'utf8');
+  const content = `
+<div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a></div>
+<h1 class="page-title">Graphe des liens<span id="graphe-titre" class="graphe-titre"></span></h1>
+<div class="page-sub" id="graphe-etat">${pages.length.toLocaleString('fr-CA')} pages · ${aretes.size.toLocaleString('fr-CA')} liens. Molette pour zoomer, glisser pour déplacer, cliquer pour ouvrir la page. Le Recueil législatif est masqué par défaut : cochez-le pour l'afficher.</div>
+<div class="graphe-barre">
+  <input type="search" id="graphe-q" placeholder="Trouver une page dans le graphe…" autocomplete="off">
+  <div id="graphe-filtres" class="graphe-filtres"></div>
+</div>
+<div class="graphe-cadre"><canvas id="graphe"></canvas></div>
+<script>${clientGraphe}</script>`;
+  fs.writeFileSync(path.join(OUT, 'graphe.html'),
+    pageShell({ out: 'graphe.html', title: 'Graphe des liens', wikiKey: null, content })
+      .replace(/\{\{ROOT\}\}/g, ''));
+  console.log(`  ${aretes.size} liens entre ${pages.length} pages`);
+}
+
 // ---------- index de recherche ----------
 console.log('Index de recherche…');
 const searchIndex = pages.map(p => {
@@ -1141,6 +1184,7 @@ const searchIndex = pages.map(p => {
   else if (/Article abrogé|Article remplacé|disposition remplacée/i.test(stripMd(p.body).slice(0, 400))) e.q = 1;
   return e;
 });
+searchIndex.push({ t: 'Graphe des liens', u: 'graphe.html', w: 'Outil', i: '🕸️', g: 'graphe liens réseau obsidian', x: 'Toutes les pages et leurs liens, en réseau interactif.' });
 searchIndex.push({ t: 'Qualité rédactionnelle', u: 'qualite.html', w: 'Outil', i: '🔧', g: 'qualité relecture ébauche atelier', x: `${rapportQualite.length} pages présentent au moins un défaut de forme.` });
 // Les catégories sont cherchables au même titre que les articles.
 for (const [tag, membres] of categories) {

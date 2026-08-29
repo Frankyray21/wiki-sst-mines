@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Démarche AREC — WIKI SST Mines</title>
+<link rel="stylesheet" href="../../../../../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<script>window.ROOT='../../../../../';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <a class="brand" href="../../../../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+  <button class="btn-theme" id="btnFav" aria-label="Ajouter aux favoris" title="Ajouter aux favoris">☆</button>
+  <button class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+  <div class="nav-group"><div class="nav-title">Navigation</div>
+    <ul>
+      <li><a href="../../../../../index.html">🏠 Portail</a></li>
+      <li><a href="../../../../../categories.html">🏷️ Catégories</a></li>
+      <li><a href="../../../../../qualite.html">🔧 Qualité rédactionnelle</a></li>
+      <li><a href="../../../../../graphe.html">🕸️ Graphe des liens</a></li>
+      <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">Selon qui vous êtes</div>
+    <ul>
+      <li><a href="../../../../../t/index.html">👷 Wiki des travailleurs</a></li>
+      <li><a href="../../../../../g/index.html">🎓 Wiki de l'encadrement</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">🎓 Wiki de l'encadrement</div>
+  <ul>
+    <li><a href="../../../../../g/index.html">Accueil</a></li>
+    <li><a href="../../../../../w/legislation/index-par-loi.html">Les articles de loi</a></li>
+    <li><a href="../../../../../t/index.html">👷 Wiki des travailleurs</a></li>
+    <li><a href="../../../../../index.html">🏠 Tous les wikis</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Les wikis</div><ul><li><a href="../../../../../w/ergonomie/index.html">🦺 Ergonomie</a></li><li><a href="../../../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></li><li><a href="../../../../../w/toxicologie/index.html">☣️ Toxicologie</a></li><li><a href="../../../../../w/securite/index.html">⛑️ Sécurité industrielle</a></li><li><a href="../../../../../w/droit-travail/index.html">📋 Droit du travail</a></li><li><a href="../../../../../w/psychosocial/index.html">🧠 SST psychosociale</a></li><li><a href="../../../../../w/legislation/index.html">⚖️ Recueil législatif</a></li></ul></div>
+</nav>
+<main class="content">
+
+<div class="breadcrumbs"><a href="../../../../../g/index.html">🎓 Wiki de l'encadrement</a> <span class="crumb-sep">›</span> Hygiène industrielle</div>
+<h1 class="page-title">Démarche AREC</h1>
+<div class="page-sub">🌫️ Hygiène industrielle</div>
+<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">12 sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul><li class="toc-l3"><a href="#definition-de-lhygiene-du-travail">Définition de l'hygiène du travail</a></li><li class="toc-l3"><a href="#les-4-phases-arec">Les 4 phases AREC</a></li><li class="toc-l3"><a href="#pourquoi-une-demarche-structuree">Pourquoi une démarche structurée</a></li><li class="toc-l3"><a href="#enquete-preliminaire">Enquête préliminaire</a></li><li class="toc-l3"><a href="#evaluation-et-priorisation-du-risque">Évaluation et priorisation du risque</a></li><li class="toc-l3"><a href="#enquete-approfondie-et-strategie-dechantillonnage">Enquête approfondie et stratégie d'échantillonnage</a></li><li class="toc-l3"><a href="#rapport-dhygiene">Rapport d'hygiène</a></li><li class="toc-l3"><a href="#conservation-des-dossiers">Conservation des dossiers</a></li><li class="toc-l3"><a href="#role-de-lhygieniste">Rôle de l'hygiéniste</a></li><li class="toc-l3"><a href="#cadre-legal-quebecois">Cadre légal québécois</a></li><li class="toc-l3"><a href="#application-terrain">Application terrain</a></li><li class="toc-l3"><a href="#ressources">Ressources</a></li></ul></nav>
+<div class="page-body">
+<p>L&#39;hygiène du travail est la discipline d&#39;anticipation, de reconnaissance, d&#39;évaluation et de maîtrise (AREC) des risques pour la santé en milieu de travail. La démarche structure l&#39;intervention en deux grandes phases opérationnelles : l&#39;enquête préliminaire (reconnaissance qualitative) et, au besoin, l&#39;enquête approfondie (quantification de l&#39;exposition par échantillonnage). Le tout se conclut par un rapport d&#39;hygiène avec recommandations priorisées. En mine, elle balise la gestion des poussières, des gaz, du <a href="../../../../../g/w/hygiene/20-articles-internes/environnement-de-travail/bruit.html" title="Bruit en milieu de travail">Bruit en milieu de travail</a>, de la chaleur et des contaminants chimiques d&#39;opération, en s&#39;appuyant sur la <a href="../../../../../w/droit-travail/20-articles-internes/lsst-droits-et-obligations.html" title="LSST, droits et obligations">LSST</a>, le RSST et le RSSM.</p>
+<p><strong>Table des matières</strong></p>
+<ol>
+<li><a href="#d%C3%A9finition-de-lhygi%C3%A8ne-du-travail">Définition de l&#39;hygiène du travail</a></li>
+<li><a href="#les-4-phases-arec">Les 4 phases AREC</a></li>
+<li><a href="#pourquoi-une-d%C3%A9marche-structur%C3%A9e">Pourquoi une démarche structurée</a></li>
+<li><a href="#enqu%C3%AAte-pr%C3%A9liminaire">Enquête préliminaire</a></li>
+<li><a href="#%C3%A9valuation-et-priorisation-du-risque">Évaluation et priorisation du risque</a></li>
+<li><a href="#enqu%C3%AAte-approfondie-et-strat%C3%A9gie-d%C3%A9chantillonnage">Enquête approfondie et stratégie d&#39;échantillonnage</a></li>
+<li><a href="#rapport-dhygi%C3%A8ne">Rapport d&#39;hygiène</a></li>
+<li><a href="#conservation-des-dossiers">Conservation des dossiers</a></li>
+<li><a href="#r%C3%B4le-de-lhygi%C3%A9niste">Rôle de l&#39;hygiéniste</a></li>
+<li><a href="#cadre-l%C3%A9gal-qu%C3%A9b%C3%A9cois">Cadre légal québécois</a></li>
+<li><a href="#application-terrain">Application terrain</a></li>
+<li><a href="#ressources">Ressources</a></li>
+</ol>
+<h3 id="definition-de-lhygiene-du-travail">Définition de l&#39;hygiène du travail</h3>
+<p>Selon l&#39;Association internationale pour l&#39;hygiène du travail (AIHT), l&#39;hygiène du travail est</p>
+<blockquote>
+<p>« Discipline vouée à l&#39;anticipation, la reconnaissance, l&#39;évaluation et la maîtrise des risques en milieu de travail ayant pour objectif de protéger la santé et le bien-être du travailleur comme de la communauté en général. »</p>
+</blockquote>
+<p>C&#39;est une discipline de prévention primaire : elle agit sur les conditions d&#39;exposition, pas sur les conséquences cliniques.</p>
+<h3 id="les-4-phases-arec">Les 4 phases AREC</h3>
+<table>
+<thead>
+<tr>
+<th>Étape</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Anticipation</td>
+<td>Prévoir les risques avant qu&#39;ils ne se manifestent (nouveau procédé, nouveau produit, nouvelle zone de travail)</td>
+</tr>
+<tr>
+<td>Reconnaissance</td>
+<td>Identifier qualitativement les dangers présents (enquête préliminaire)</td>
+</tr>
+<tr>
+<td>Évaluation</td>
+<td>Évaluer qualitativement ou quantitativement le niveau d&#39;exposition (enquête approfondie)</td>
+</tr>
+<tr>
+<td>Maîtrise</td>
+<td>Mettre en place les moyens de contrôle, voir <a href="../../../../../g/w/hygiene/20-articles-internes/prevention-et-programmes/hierarchie-des-moyens-de-prevention.html" title="Hiérarchie des moyens de prévention">Hiérarchie des moyens de prévention</a></td>
+</tr>
+</tbody></table>
+<p>Les deux certifications professionnelles principales sont le ROH (Registered Occupational Hygienist) au Canada et le CIH (Certified Industrial Hygienist) aux États-Unis. Le schéma ci-dessous présente leurs voies d&#39;accès et compétences requises.</p>
+<span class="page-img"><a href="../../../../../files/images-wiki/pasted-image-20240908135014.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../../files/images-wiki/pasted-image-20240908135014.png" alt="Illustration — Démarche AREC" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<p>L&#39;examen et les compétences exigés par l&#39;AQHSST (2021) sont synthétisés ci-dessous.</p>
+<span class="page-img"><a href="../../../../../files/images-wiki/pasted-image-20240908134933.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../../files/images-wiki/pasted-image-20240908134933.png" alt="Illustration — Démarche AREC" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<h3 id="pourquoi-une-demarche-structuree">Pourquoi une démarche structurée</h3>
+<p>Trois finalités principales</p>
+<ul>
+<li>Produire un diagnostic des facteurs de risque.</li>
+<li>Vérifier la conformité réglementaire.</li>
+<li>Assurer la surveillance de l&#39;exposition à moyen et long terme.</li>
+</ul>
+<h3 id="enquete-preliminaire">Enquête préliminaire</h3>
+<p>Objectifs</p>
+<ul>
+<li>Identifier et qualifier les risques chimiques, physiques, biologiques, <a href="../../../../../w/ergonomie/20-articles-internes/tms/tms-troubles-musculosquelettiques.html" title="TMS (troubles musculosquelettiques)">TMS</a>, mécaniques et psychosociaux.</li>
+<li>Évaluer les moyens de maîtrise déjà en place (<a href="../../../../../w/legislation/40-concepts-juridiques-transverses/epi.html" title="EPI">EPI</a>, ventilation, gardes).</li>
+<li>Recueillir les préoccupations des travailleurs et de l&#39;employeur.</li>
+<li>Prioriser les facteurs de risque.</li>
+<li>Décider de la nécessité d&#39;une enquête approfondie.</li>
+</ul>
+<p>Sources d&#39;information</p>
+<ul>
+<li>Visite du milieu de travail (observation, odeurs, sources d&#39;émission, EPI).</li>
+<li>Entrevues (travailleurs, superviseurs, RPSAT, comité SST).</li>
+<li>Documentaire : programmes en place (<a href="../../../../../g/w/hygiene/20-articles-internes/environnement-de-travail/bruit.html" title="Bruit en milieu de travail">bruit</a>, <a href="../../../../../w/hygiene/25-articles-travailleurs/espaces-clos.html" title="Entrer dans un espace clos en sécurité">espaces clos</a>, <a href="../../../../../w/hygiene/20-articles-internes/prevention-et-programmes/apr.html" title="Protection respiratoire (APR)">Protection respiratoire (APR)</a>).</li>
+<li>Service de santé de l&#39;entreprise.</li>
+</ul>
+<div class="callout callout-warning"><div class="callout-title"><span class="callout-icon">⚠️</span>Limite de l'odorat</div><div class="callout-body"><p>La limite olfactive peut être très supérieure à la <a href="../../../../../w/legislation/40-concepts-juridiques-transverses/vemp.html" title="VEMP">VEMP</a>. Exemple : chloroforme limite olfactive 214 ppm vs VEMP 50 ppm. Le CO est inodore. Ne jamais se fier au nez pour valider la salubrité d&#39;une atmosphère.</p>
+</div></div>
+<h3 id="evaluation-et-priorisation-du-risque">Évaluation et priorisation du risque</h3>
+<p>Critères de priorisation (<a href="../../../../../w/legislation/30-organismes-et-tribunaux/cchst.html" title="CCHST">CCHST</a>, <a href="../../../../../w/legislation/40-concepts-juridiques-transverses/csa.html" title="CSA">CSA</a>, <a href="../../../../../w/legislation/30-organismes-et-tribunaux/inrs.html" title="INRS">INRS</a>)</p>
+<ol>
+<li>Gravité des effets et voie d&#39;exposition.</li>
+<li>Intensité de l&#39;exposition.</li>
+<li>Nombre de personnes exposées.</li>
+<li>Capacité de quantifier et d&#39;évaluer.</li>
+<li>Capacité à résoudre le problème.</li>
+<li>Perception et préoccupations des parties.</li>
+</ol>
+<p>Méthodes spécialisées INRS</p>
+<ul>
+<li>Évaluation du risque potentiel.</li>
+<li>Évaluation du risque d&#39;inhalation.</li>
+<li>Évaluation du risque cutané.</li>
+</ul>
+<h3 id="enquete-approfondie-et-strategie-dechantillonnage">Enquête approfondie et stratégie d&#39;échantillonnage</h3>
+<p>Référence principale : Guide <a href="../../../../../w/legislation/30-organismes-et-tribunaux/irsst.html" title="IRSST">IRSST</a> T-06, <em>Guide d&#39;échantillonnage des contaminants de l&#39;air en milieu de travail</em> (8e éd.).</p>
+<p>Éléments d&#39;une stratégie</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Décision</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Que échantillonner ?</td>
+<td>Contaminants priorisés à l&#39;enquête préliminaire</td>
+</tr>
+<tr>
+<td>Où ?</td>
+<td>Zone respiratoire ou ambiance, selon objectif</td>
+</tr>
+<tr>
+<td>Qui ?</td>
+<td>Travailleur le plus exposé ou groupes homogènes d&#39;exposition (<a href="../../../../../w/legislation/40-concepts-juridiques-transverses/ghe.html" title="GHE">GHE</a>)</td>
+</tr>
+<tr>
+<td>Quelle méthode ?</td>
+<td>Pompe + tube / filtre, dosimètre, lecture directe</td>
+</tr>
+<tr>
+<td>Comment ?</td>
+<td>Selon les fiches méthodes IRSST ou <a href="../../../../../w/legislation/30-organismes-et-tribunaux/niosh.html" title="NIOSH">NIOSH</a></td>
+</tr>
+<tr>
+<td>Combien de temps ?</td>
+<td>Suffisant pour atteindre la limite analytique et représenter le quart</td>
+</tr>
+</tbody></table>
+<p>La représentativité de l&#39;échantillon doit refléter les conditions normales d&#39;exposition. Voir <a href="../../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/calculs-dexposition.html" title="Calculs d'exposition et ajustements TPN">Calculs d&#39;exposition et ajustements TPN</a> pour le traitement des données et les limites de confiance (LCI / LCS).</p>
+<h3 id="rapport-dhygiene">Rapport d&#39;hygiène</h3>
+<p>Le rapport doit contenir</p>
+<ul>
+<li>Objet et contexte.</li>
+<li>Méthodologie d&#39;évaluation.</li>
+<li>Résultats (concentrations, comparaison aux <a href="../../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/vea-et-normes.html" title="VEA et normes RSST">VEA</a>).</li>
+<li>Interprétation (respect du RSST, ratio de mélange).</li>
+<li>Recommandations hiérarchisées, voir <a href="../../../../../g/w/hygiene/20-articles-internes/prevention-et-programmes/hierarchie-des-moyens-de-prevention.html" title="Hiérarchie des moyens de prévention">Hiérarchie des moyens de prévention</a>.</li>
+<li>Suivi proposé.</li>
+</ul>
+<h3 id="conservation-des-dossiers">Conservation des dossiers</h3>
+<p>L&#39;article 44 du RSST encadre la conservation des dossiers d&#39;hygiène. Les schémas suivants synthétisent les durées, supports et accès comparés au cadre <a href="../../../../../w/legislation/30-organismes-et-tribunaux/osha.html" title="OSHA">OSHA</a> et aux pratiques de Santé publique.</p>
+<span class="page-img"><a href="../../../../../files/images-wiki/pasted-image-20240922210548.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../../files/images-wiki/pasted-image-20240922210548.png" alt="Illustration — Démarche AREC" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<span class="page-img"><a href="../../../../../files/images-wiki/pasted-image-20240922210605.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../../files/images-wiki/pasted-image-20240922210605.png" alt="Illustration — Démarche AREC" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<span class="page-img"><a href="../../../../../files/images-wiki/pasted-image-20240922210615.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../../files/images-wiki/pasted-image-20240922210615.png" alt="Illustration — Démarche AREC" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<span class="page-img"><a href="../../../../../files/images-wiki/pasted-image-20240922210627.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../../files/images-wiki/pasted-image-20240922210627.png" alt="Illustration — Démarche AREC" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<h3 id="role-de-lhygieniste">Rôle de l&#39;hygiéniste</h3>
+<ul>
+<li>Anticiper les risques pour la santé liés aux procédés et aux contaminants.</li>
+<li>Comprendre les voies d&#39;exposition et les effets des contaminants, voir <a href="../../../../../w/toxicologie/20-articles-internes/toxicologie-clinique/maladies-professionnelles.html" title="Maladies professionnelles en mine">Maladies professionnelles en mine</a>.</li>
+<li>Évaluer l&#39;exposition qualitativement ou quantitativement.</li>
+<li>Recommander des moyens de contrôle pour éliminer ou réduire l&#39;exposition à des niveaux acceptables.</li>
+<li>Concevoir, recommander et tester des stratégies de prévention.</li>
+<li>Participer à la gestion globale des risques.</li>
+<li>Former et informer les travailleurs et conseiller la direction.</li>
+<li>Travailler en équipe multidisciplinaire.</li>
+</ul>
+<p>Exemples de tâches en mine : évaluations d&#39;exposition aux poussières de silice ou aux <a href="../../../../../w/legislation/40-concepts-juridiques-transverses/dpm.html" title="DPM">DPM</a> (diesel particulate matter), audits de ventilation souterraine, enquêtes après IADO (intoxication à déclaration obligatoire), conception de programmes en <a href="../../../../../g/w/hygiene/20-articles-internes/environnement-de-travail/bruit.html" title="Bruit en milieu de travail">bruit</a>, <a href="../../../../../w/hygiene/25-articles-travailleurs/espaces-clos.html" title="Entrer dans un espace clos en sécurité">espaces clos</a> ou <a href="../../../../../w/hygiene/20-articles-internes/prevention-et-programmes/apr.html" title="Protection respiratoire (APR)">protection respiratoire</a>.</p>
+<h3 id="cadre-legal-quebecois">Cadre légal québécois</h3>
+<p>La LSST (Loi sur la santé et la sécurité du travail, chapitre S-2.1) est la loi cadre. Près de 46 règlements en découlent. Les principaux pour l&#39;hygiène</p>
+<ul>
+<li>RSST (S-2.1, r. 13) : principal règlement en hygiène industrielle. Annexe I = <a href="../../../../../w/legislation/40-concepts-juridiques-transverses/vea.html" title="VEA">VEA</a> pour ~700 substances, voir <a href="../../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/vea-et-normes.html" title="VEA et normes RSST">VEA et normes RSST</a>.</li>
+<li>CSTC (Code de sécurité pour les travaux de construction, S-2.1, r. 4).</li>
+<li>RSSM (<a href="../../../../../w/droit-travail/20-articles-internes/reglement-sur-la-sante-et-la-securite-du-travail-dans-les-mines.html" title="Règlement sur la santé et la sécurité du travail dans les mines">Règlement sur la santé et la sécurité du travail dans les mines</a>, r. 14) : agresseurs souterrains, qualité de l&#39;air, ventilation, services sanitaires.</li>
+<li>Règlement sur l&#39;hygiène dans les travaux de fonderie (r. 15).</li>
+</ul>
+<p>Référence technique obligatoire : Guide IRSST T-06.</p>
+<p>L&#39;hygiène du travail mobilise plusieurs disciplines : chimie, biologie, toxicologie, épidémiologie, statistique, ingénierie, droit, physique. Une enquête sérieuse exige souvent la collaboration de plusieurs experts (ventilation, métallurgie, médecine du travail, <a href="../../../../../w/ergonomie/20-articles-internes/ergonomie-du-travail.html" title="Ergonomie du travail">ergonomie</a>).</p>
+<h3 id="application-terrain">Application terrain</h3>
+<p><strong>Configurations typiques en mine où l&#39;hygiène s&#39;applique</strong></p>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Risques d&#39;hygiène typiques</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Forage et minage souterrain</td>
+<td><a href="../../../../../g/w/hygiene/27-articles-gestionnaires/programmes-de-prevention/silice-cristalline.html" title="Programme de prévention silice cristalline">Programme de prévention silice cristalline</a> respirable, DPM, <a href="../../../../../w/legislation/40-concepts-juridiques-transverses/bruit-hub.html" title="Bruit (hub)">Bruit (hub)</a>, vibrations</td>
+</tr>
+<tr>
+<td>Concasseur et convoyeurs</td>
+<td>Poussières, bruit, chaleur (en été)</td>
+</tr>
+<tr>
+<td>Usine de traitement (broyeur, flottation, lixiviation)</td>
+<td>Réactifs chimiques, brouillards d&#39;acide, cyanures, contaminants spécifiques au minerai</td>
+</tr>
+<tr>
+<td>Atelier mécanique et soudage</td>
+<td>Fumées de soudage, vapeurs de <a href="../../../../../w/hygiene/20-articles-internes/substances-dangereuses/solvants.html" title="Solvants organiques">Solvants organiques</a>, bruit</td>
+</tr>
+<tr>
+<td>Conduite d&#39;équipement minier diesel</td>
+<td>DPM, vibrations corps entier, monoxyde de carbone</td>
+</tr>
+<tr>
+<td><a href="../../../../../w/hygiene/25-articles-travailleurs/espaces-clos.html" title="Entrer dans un espace clos en sécurité">Entrer dans un espace clos en sécurité</a> (silos, réservoirs, conduits de ventilation)</td>
+<td>Atmosphères appauvries en O2, gaz toxiques</td>
+</tr>
+</tbody></table>
+<p><strong>Particularités d&#39;une enquête d&#39;hygiène en site minier</strong></p>
+<table>
+<thead>
+<tr>
+<th>Élément</th>
+<th>Spécificité minière</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GHE</td>
+<td>Souvent par activité minière (foreur, jumbo, conduite de camion, opérateur usine) plutôt que par poste fixe</td>
+</tr>
+<tr>
+<td>Stratégie</td>
+<td>Échantillonnage saisonnier en surface, en continu pour les agresseurs souterrains (CO, NO2, DPM)</td>
+</tr>
+<tr>
+<td>Sources mobiles</td>
+<td>Engins diesel : prélèvements représentatifs sur travailleur, pas en poste fixe</td>
+</tr>
+<tr>
+<td>Quarts</td>
+<td>10 h ou 12 h : ajustement VEMA systématique</td>
+</tr>
+<tr>
+<td>Sautage</td>
+<td>Surveillance post-tir avant reprise d&#39;activité (CO, NO2)</td>
+</tr>
+<tr>
+<td>RSSM</td>
+<td>Articles spécifiques sur ventilation, qualité de l&#39;air, puits de mine</td>
+</tr>
+</tbody></table>
+<p><strong>Leviers spécifiques au secteur minier</strong></p>
+<ul>
+<li>Conception de la ventilation souterraine principale et auxiliaire (RSSM art. 100 et suivants).</li>
+<li>Surveillance continue (O2, CO, NO2, H2S) via réseaux fixes ou détecteurs personnels.</li>
+<li>Programmes d&#39;hygiène intégrés à la gestion du chantier (planification des tirs, dilution post-sautage, contrôle d&#39;empoussiérage).</li>
+<li>Coordination avec la santé au travail (SIVET, registres d&#39;exposition).</li>
+<li>Interface avec les programmes RPS quand un agresseur physique (bruit, chaleur) interagit avec la fatigue ou la charge mentale, voir wiki Wiki SST psychosociale - Mines.</li>
+</ul>
+<p><strong>Documentation type d&#39;une enquête en mine</strong> : programme d&#39;hygiène annuel, registre d&#39;exposition par GHE, suivi des actions correctives, lien avec le programme RSSM, échange avec le médecin désigné.</p>
+<h3 id="ressources">Ressources</h3>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Type</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Guide d&#39;échantillonnage des contaminants de l&#39;air (T-06)</td>
+<td>Guide technique</td>
+<td>IRSST</td>
+</tr>
+<tr>
+<td>Méthodes analytiques</td>
+<td>Fiches</td>
+<td>IRSST, NIOSH</td>
+</tr>
+<tr>
+<td>Stratégie d&#39;évaluation <a href="../../../../../w/legislation/30-organismes-et-tribunaux/aiha.html" title="AIHA">AIHA</a></td>
+<td>Guide</td>
+<td>AIHA</td>
+</tr>
+<tr>
+<td>RSST annexe I (VEA)</td>
+<td>Règlement</td>
+<td>LégisQuébec</td>
+</tr>
+<tr>
+<td>RSSM (Règlement SST mines)</td>
+<td>Règlement</td>
+<td>LégisQuébec</td>
+</tr>
+<tr>
+<td>Reptox (base toxicologique)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+</div>
+<div class="page-meta">Dernière révision : 2026-05-22 · <a href="../../../../../w/hygiene/20-articles-internes/prevention-et-programmes/demarche-arec.html">Voir cette page dans le fond documentaire</a></div>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours<span id="version"></span></footer>
+<script src="../../../../../assets/app.js"></script>
+</body>
+</html>
