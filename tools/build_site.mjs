@@ -607,7 +607,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
 ${content}
 </main>
 </div>
-<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours · ${new Date().toLocaleDateString('fr-CA')}</footer>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours<span id="version"></span></footer>
 <script src="${ROOT}assets/app.js"></script>
 </body>
 </html>`;
@@ -1270,7 +1270,7 @@ function pageAutonome({ out, titre, contenu }) {
 </head>
 <body class="portal"><button class="btn-theme theme-portail" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 <main class="portal-main">${contenu.replace(/\{\{ROOT\}\}/g, R)}</main>
-<footer class="site-footer">WIKI SST — Mines · ${new Date().toLocaleDateString('fr-CA')}</footer>
+<footer class="site-footer">WIKI SST — Mines<span id="version"></span></footer>
 <script src="${R}assets/app.js"></script>
 </body>
 </html>`;
@@ -1337,7 +1337,7 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
 </head>
 <body class="portal"><button class="btn-theme theme-portail" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 <main class="portal-main">${content}</main>
-<footer class="site-footer">WIKI SST — Mines · encyclopédie interne · générée le ${new Date().toLocaleDateString('fr-CA')}</footer>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne<span id="version"></span></footer>
 <script src="assets/app.js"></script>
 </body>
 </html>`;
@@ -1348,6 +1348,15 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
 fs.writeFileSync(path.join(OUT, 'assets', 'style.css'), style);
 fs.writeFileSync(path.join(OUT, 'assets', 'app.js'), appjs);
 fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas passer par Jekyll
+
+// La date de génération vit dans un seul fichier, lu par le pied de page. Écrite dans les
+// 4970 pages, elle changeait tout le site à chaque reconstruction — ~60 Mo de dépôt pour une date.
+fs.writeFileSync(path.join(OUT, 'assets', 'version.json'), JSON.stringify({
+  date: new Date().toISOString().slice(0, 10),
+  pages: pages.length,
+  categories: categories.length,
+  medias: assetOut.size,
+}));
 
 if (badFm.length) {
   const reparés = badFm.filter(l => l.endsWith('(réparé)')).length;

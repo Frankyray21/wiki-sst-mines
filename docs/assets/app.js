@@ -334,6 +334,23 @@
   if (r1) r1.addEventListener('click', randomPage);
   if (r2) r2.addEventListener('click', randomPage);
 
+  // ---------- date de dernière mise à jour ----------
+  // Lue depuis un fichier unique : l'écrire dans chaque page ferait changer tout le site
+  // à chaque reconstruction, même sans modification de contenu.
+  (function version() {
+    var el = document.getElementById('version');
+    if (!el) return;
+    fetch(ROOT + 'assets/version.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (v) {
+        if (!v || !v.date) return;
+        var d = v.date.split('-');
+        el.textContent = ' · mis à jour le ' + d[2] + '/' + d[1] + '/' + d[0] +
+          (v.pages ? ' · ' + v.pages.toLocaleString('fr-CA') + ' pages' : '');
+      })
+      .catch(function () { /* le pied de page reste simplement sans date */ });
+  })();
+
   // ---------- thème clair / sombre ----------
   // Trois états : « auto » suit le réglage du téléphone ou de l'ordinateur, les deux autres
   // forcent un thème. Le choix est retenu d'une page à l'autre.
