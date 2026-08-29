@@ -16,6 +16,19 @@ Encyclopédie interne de santé et sécurité du travail en milieu minier, gén�
 
 **En ligne : https://frankyray21.github.io/wiki-sst-mines/**
 
+## Trois entrées
+
+| Entrée | Pour qui | Contenu |
+| --- | --- | --- |
+| 👷 [`/t/`](https://frankyray21.github.io/wiki-sst-mines/t/) | Travailleurs | 51 pages vulgarisées, rangées par problème vécu, plus les articles de loi qui fondent leurs droits |
+| 🎓 [`/g/`](https://frankyray21.github.io/wiki-sst-mines/g/) | Superviseurs, gestionnaires, direction | 122 pages rangées par obligation et par situation |
+| 📚 [`/w/`](https://frankyray21.github.io/wiki-sst-mines/) | Conseiller SST, recherche documentaire | Les 4 577 pages classées par discipline |
+
+La répartition est automatique, à partir du frontmatter du vault : `publication-travailleur`,
+`publication-gestionnaire` et `public-cible`, avec veto sur `niveau-sensibilité` (interne ou ≥ 2).
+**Une page n'entre jamais dans le wiki des travailleurs sans autorisation explicite.**
+Le Recueil législatif n'est pas dupliqué : le texte de loi est public et identique pour tous.
+
 ## Structure
 
 - `docs/` — le site statique généré (HTML pur, aucune dépendance serveur) — c'est ce dossier que GitHub Pages publie
@@ -28,6 +41,9 @@ Encyclopédie interne de santé et sécurité du travail en milieu minier, gén�
 ```bash
 # Regénérer le site depuis le vault Obsidian
 node tools/build_site.mjs
+
+# Vérifier qu'aucun lien interne ne pointe dans le vide
+node tools/verif_liens.mjs        # t, g et w — ou passer t / g / w en argument
 
 # Prévisualiser en local
 node tools/serve.mjs
