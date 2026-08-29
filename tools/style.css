@@ -385,6 +385,18 @@ a.tag-lien:hover { background: var(--tag-hover-bg); border-color: var(--tag-hove
 .encart-nav { background: var(--info-bg); border: 1px solid var(--info-bd); border-radius: 3px; padding: 10px 14px; margin: 12px 0 16px; font-size: 14.5px; }
 .lien-mort { color: var(--text-soft); text-decoration: line-through; cursor: not-allowed; }
 
+/* tableau de bord qualité */
+.q-table, .q-resume { border-collapse: collapse; width: 100%; font-size: 14px; margin: 12px 0 24px; }
+.q-table th, .q-table td, .q-resume th, .q-resume td { border: 1px solid var(--border-light); padding: 7px 10px; text-align: left; vertical-align: top; }
+.q-table th, .q-resume th { background: var(--th-bg); }
+.q-table tr:nth-child(even) td, .q-resume tr:nth-child(even) td { background: var(--tr-alt); }
+.q-mots { text-align: right; white-space: nowrap; color: var(--text-soft); }
+.q-chemin { color: var(--text-soft); font-size: 11.5px; }
+.q-etiq { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 9px; margin: 1px 2px 1px 0; white-space: nowrap; border: 1px solid; }
+.q-g3 { background: var(--danger-bg); color: var(--danger-fg); border-color: var(--danger-bd); }
+.q-g2 { background: var(--warn-bg); color: var(--warn-fg); border-color: var(--warn-bd); }
+.q-g1 { background: var(--stub-bg); color: var(--stub-fg); border-color: var(--stub-bd); }
+
 /* ---------- recherche (page) ---------- */
 .search-results { max-width: 780px; }
 .sr-item { padding: 10px 0; border-bottom: 1px solid var(--border-soft); }

@@ -7,6 +7,7 @@ import { marked } from 'marked';
 import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
+import { analyserQualite, LIBELLES } from './qualite.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -1055,6 +1056,63 @@ ${lettres.map(l => `<h2 id="lettre-${l}">${l} <a class="retour-haut" href="#haut
       .replace(/\{\{ROOT\}\}/g, ''));
 }
 console.log(`  ${categories.length} catégories générées (seuil : ${SEUIL_CATEGORIE} pages)`);
+
+// ---------- tableau de bord qualité ----------
+// Il ne juge pas le fond : il signale ce qu'un lecteur verrait qui cloche, et rien d'autre.
+console.log('Contrôle qualité…');
+const rapportQualite = [];
+for (const p of pages) {
+  const r = analyserQualite(p);
+  if (r.defauts.length) rapportQualite.push({ p, ...r });
+}
+rapportQualite.sort((a, b) => b.score - a.score || a.p.title.localeCompare(b.p.title, 'fr'));
+
+{
+  const parCode = new Map();
+  for (const r of rapportQualite) for (const d of r.defauts) parCode.set(d.code, (parCode.get(d.code) || 0) + 1);
+  const codes = [...parCode.entries()].sort((a, b) => b[1] - a[1]);
+
+  const lignes = rapportQualite.slice(0, 250).map(r => `<tr>
+    <td><a href="{{ROOT}}${r.p.out}">${esc(r.p.title)}</a><br><small class="q-chemin">${esc(WIKIS[r.p.wikiKey].name)}</small></td>
+    <td class="q-mots">${r.mots}</td>
+    <td>${r.defauts.map(d => `<span class="q-etiq q-g${d.gravite}" title="${esc(d.texte)}">${esc(LIBELLES[d.code] || d.code)}</span>`).join(' ')}</td>
+  </tr>`).join('');
+
+  const total = pages.length;
+  const saines = total - rapportQualite.length;
+  const content = `
+<div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a></div>
+<h1 class="page-title">Qualité rédactionnelle</h1>
+<div class="page-sub">${saines.toLocaleString('fr-CA')} pages sur ${total.toLocaleString('fr-CA')} ne présentent aucun défaut détecté (${Math.round(saines / total * 100)} %). Cette page liste les autres, les plus atteintes d'abord.</div>
+
+<div class="callout callout-info"><div class="callout-title"><span class="callout-icon">ℹ️</span>Ce que cette page mesure — et ce qu'elle ne mesure pas</div><div class="callout-body">
+<p>Elle repère des défauts <strong>mécaniques</strong> : un texte coupé, une section annoncée mais vide, une mention « à compléter » restée visible, une référence sans auteur ni année. Elle ne juge <strong>ni la justesse ni l'intérêt</strong> du contenu : une page peut être irréprochable ici et rester à étoffer, ou apparaître ci-dessous alors qu'elle est excellente sur le fond.</p>
+</div></div>
+
+<h2>Défauts par type</h2>
+<table class="q-resume">
+<tr><th>Défaut</th><th>Pages touchées</th><th>Ce que voit le lecteur</th></tr>
+${codes.map(([c, n]) => {
+  const ex = rapportQualite.find(r => r.defauts.some(d => d.code === c));
+  const d = ex.defauts.find(x => x.code === c);
+  return `<tr><td><strong>${esc(LIBELLES[c] || c)}</strong></td><td class="q-mots">${n}</td><td>${esc(d.texte)}</td></tr>`;
+}).join('')}
+</table>
+
+<h2>Pages à reprendre</h2>
+<p class="portal-note">${rapportQualite.length} pages présentent au moins un défaut${rapportQualite.length > 250 ? ' — les 250 plus atteintes sont listées' : ''}.</p>
+<table class="q-table">
+<tr><th>Page</th><th>Mots</th><th>Défauts</th></tr>
+${lignes}
+</table>`;
+  fs.writeFileSync(path.join(OUT, 'qualite.html'),
+    pageShell({ out: 'qualite.html', title: 'Qualité rédactionnelle', wikiKey: null, content })
+      .replace(/\{\{ROOT\}\}/g, ''));
+
+  // récapitulatif dans la console : c'est là que Frank verra le travail à faire
+  console.log(`  ${rapportQualite.length} page(s) avec au moins un défaut · ${saines} page(s) sans défaut détecté`);
+  for (const [c, n] of codes) console.log(`    ${String(n).padStart(4)} × ${LIBELLES[c] || c}`);
+}
 
 // ---------- index de recherche ----------
 console.log('Index de recherche…');
