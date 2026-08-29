@@ -334,6 +334,121 @@
   if (r1) r1.addEventListener('click', randomPage);
   if (r2) r2.addEventListener('click', randomPage);
 
+  // ---------- historique et favoris (mémorisés sur l'appareil du lecteur) ----------
+  var MEM = {
+    lire: function (cle) {
+      try { return JSON.parse(localStorage.getItem(cle) || '[]'); } catch (e) { return []; }
+    },
+    ecrire: function (cle, v) {
+      try { localStorage.setItem(cle, JSON.stringify(v.slice(0, 40))); } catch (e) { /* espace saturé ou navigation privée */ }
+    },
+  };
+
+  function urlCourante() {
+    var u = location.pathname.split('/').pop() || 'index.html';
+    var chemin = location.pathname;
+    var i = chemin.indexOf('/wiki-sst-mines/');
+    return i >= 0 ? chemin.slice(i + 16) : chemin.replace(/^\//, '');
+  }
+
+  // Toute page d'article s'inscrit dans l'historique en s'ouvrant.
+  (function noterVisite() {
+    var titre = document.querySelector('.page-title');
+    if (!titre) return;
+    var e = { u: urlCourante(), t: titre.textContent.trim(), d: Date.now() };
+    var h = MEM.lire('historique').filter(function (x) { return x.u !== e.u; });
+    h.unshift(e);
+    MEM.ecrire('historique', h);
+  })();
+
+  function ilYA(ts) {
+    var m = Math.floor((Date.now() - ts) / 60000);
+    if (m < 2) return 'à l’instant';
+    if (m < 60) return 'il y a ' + m + ' min';
+    var h = Math.floor(m / 60);
+    if (h < 24) return 'il y a ' + h + ' h';
+    var j = Math.floor(h / 24);
+    if (j === 1) return 'hier';
+    return 'il y a ' + j + ' jours';
+  }
+
+  // Bouton favori dans l'en-tête des articles
+  (function boutonFavori() {
+    var btn = document.getElementById('btnFav');
+    var titre = document.querySelector('.page-title');
+    if (!btn || !titre) return;
+    var u = urlCourante(), t = titre.textContent.trim();
+    function estFav() { return MEM.lire('favoris').some(function (x) { return x.u === u; }); }
+    function peindre() {
+      var f = estFav();
+      btn.textContent = f ? '★' : '☆';
+      btn.classList.toggle('actif', f);
+      btn.setAttribute('title', f ? 'Retirer des favoris' : 'Ajouter aux favoris');
+      btn.setAttribute('aria-pressed', f ? 'true' : 'false');
+    }
+    peindre();
+    btn.addEventListener('click', function () {
+      var f = MEM.lire('favoris');
+      if (estFav()) f = f.filter(function (x) { return x.u !== u; });
+      else f.unshift({ u: u, t: t, d: Date.now() });
+      MEM.ecrire('favoris', f);
+      peindre();
+    });
+  })();
+
+  // ---------- portail en tableau de bord ----------
+  (function tableauDeBord() {
+    if (!document.body.classList.contains('tb')) return;
+
+    // menu latéral sur petit écran
+    var burger = document.getElementById('tbBurger'), side = document.getElementById('tbSide');
+    if (burger && side) burger.addEventListener('click', function () { side.classList.toggle('ouvert'); });
+
+    // bouton « Rechercher » et puces de recherches populaires
+    function chercher(q) {
+      if (q && q.trim()) location.href = ROOT + 'recherche.html?q=' + encodeURIComponent(q.trim());
+    }
+    var go = document.getElementById('tbGo'), champ = document.getElementById('q2');
+    if (go && champ) go.addEventListener('click', function () { chercher(champ.value); });
+    document.querySelectorAll('.tb-puce').forEach(function (p) {
+      p.addEventListener('click', function () { chercher(p.getAttribute('data-q')); });
+    });
+
+    // listes « Récemment consulté » et « Favoris »
+    function remplir(idListe, cle, avecEtoile) {
+      var ul = document.getElementById(idListe);
+      if (!ul) return 0;
+      var items = MEM.lire(cle).slice(0, 5);
+      if (!items.length) return 0;
+      ul.innerHTML = items.map(function (e) {
+        var lien = '<a href="' + ROOT + e.u + '">' + escHtml(e.t) + (avecEtoile ? '' : '<span class="tb-quand">' + ilYA(e.d) + '</span>') + '</a>';
+        return avecEtoile ? '<li><span class="tb-etoile">★</span>' + lien + '</li>' : '<li>' + lien + '</li>';
+      }).join('');
+      return items.length;
+    }
+    if (remplir('tbRecents', 'historique', false)) {
+      var vh = document.getElementById('tbVoirHist');
+      if (vh) { vh.hidden = false; vh.setAttribute('href', ROOT + 'recherche.html'); }
+    }
+    remplir('tbFavoris', 'favoris', true);
+
+    // en-tête : les deux boutons pointent vers les blocs correspondants
+    var bf = document.getElementById('tbFav'), bh = document.getElementById('tbHist');
+    if (bf) bf.addEventListener('click', function () { var e = document.getElementById('tbFavoris'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+    if (bh) bh.addEventListener('click', function () { var e = document.getElementById('tbRecents'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+
+    // version et date réelles
+    fetch(ROOT + 'assets/version.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
+      if (!v) return;
+      var maj = document.getElementById('tbMaj');
+      if (maj && v.date) {
+        var d = v.date.split('-');
+        var mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+        maj.textContent = (+d[2]) + ' ' + mois[+d[1] - 1] + ' ' + d[0];
+      }
+    }).catch(function () { /* la date écrite à la construction reste affichée */ });
+  })();
+
   // ---------- date de dernière mise à jour ----------
   // Lue depuis un fichier unique : l'écrire dans chaque page ferait changer tout le site
   // à chaque reconstruction, même sans modification de contenu.

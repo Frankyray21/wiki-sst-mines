@@ -213,6 +213,7 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
   font-size: 17px; cursor: pointer; color: var(--text); line-height: 1;
 }
 .btn-theme:hover { background: var(--hover); border-color: var(--hover-bd); }
+#btnFav.actif { color: #f5a623; border-color: #f5a623; }
 
 .suggest {
   position: absolute; top: calc(100% + 2px); left: 0; right: 0;

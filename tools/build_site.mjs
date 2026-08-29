@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
+import { rendrePortailEncadrement } from './portail_encadrement.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -583,6 +584,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
     <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
     <div id="suggest" class="suggest" hidden></div>
   </div>
+  <button class="btn-theme" id="btnFav" aria-label="Ajouter aux favoris" title="Ajouter aux favoris">☆</button>
   <button class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 </header>
 <div class="layout">
@@ -1235,9 +1237,23 @@ ${autres.length ? `<section class="rubrique"><h2><span class="rub-icone">📄</s
 <div class="portal-foot"><a href="{{ROOT}}index.html">← Retour à l'accueil du wiki</a></div>`;
 
   fs.mkdirSync(path.join(OUT, pub), { recursive: true });
-  fs.writeFileSync(path.join(OUT, pub, 'index.html'), pageAutonome({
-    out: pub + '/index.html', titre: conf.nom, contenu,
-  }));
+  if (pub === 'g') {
+    // L'encadrement a son propre portail, en tableau de bord.
+    const { html: corps, morts } = rendrePortailEncadrement({
+      R: '../',
+      nbLois: pagesPub.length - horsLoi.length,
+      majDate: new Date().toLocaleDateString('fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }),
+      verifier: (c) => existeDansLeSite(c),
+    });
+    if (morts.length) console.warn(`  ⚠ portail encadrement : ${morts.length} cible(s) introuvable(s) — ${morts.slice(0, 4).join(', ')}`);
+    fs.writeFileSync(path.join(OUT, pub, 'index.html'), pageTableauDeBord({
+      out: pub + '/index.html', titre: conf.nom, corps,
+    }));
+  } else {
+    fs.writeFileSync(path.join(OUT, pub, 'index.html'), pageAutonome({
+      out: pub + '/index.html', titre: conf.nom, contenu,
+    }));
+  }
 
   PUB = null;
   return { total: pagesPub.length, horsLoi: horsLoi.length, rubriques };
@@ -1253,6 +1269,32 @@ function sidebarPublic(pub) {
     <li><a href="{{ROOT}}${autre.slug}/index.html">${autre.icon} ${esc(autre.nom)}</a></li>
     <li><a href="{{ROOT}}index.html">🏠 Tous les wikis</a></li>
   </ul></div>`;
+}
+
+// Une cible du portail existe-t-elle réellement dans le site généré ?
+// Un renommage dans Obsidian ne doit pas laisser un lien mort en page d'accueil.
+function existeDansLeSite(cible) {
+  return fs.existsSync(path.join(OUT, cible.split('#')[0]));
+}
+
+// Gabarit du portail en tableau de bord : sa propre feuille de style, pas de barre latérale commune.
+function pageTableauDeBord({ out, titre, corps }) {
+  const R = rootOf(out);
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${esc(titre)} — WIKI SST Mines</title>
+<link rel="stylesheet" href="${R}assets/portail.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<script>window.ROOT='${R}';${SCRIPT_THEME}</script>
+</head>
+<body class="tb">
+${corps}
+<script src="${R}assets/app.js"></script>
+</body>
+</html>`;
 }
 
 // Page autonome (portail) : même habillage que le portail racine, sans barre latérale.
@@ -1347,6 +1389,7 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
 // ---------- assets statiques ----------
 fs.writeFileSync(path.join(OUT, 'assets', 'style.css'), style);
 fs.writeFileSync(path.join(OUT, 'assets', 'app.js'), appjs);
+fs.writeFileSync(path.join(OUT, 'assets', 'portail.css'), fs.readFileSync(path.join(__dirname, 'portail.css'), 'utf8'));
 fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas passer par Jekyll
 
 // La date de génération vit dans un seul fichier, lu par le pied de page. Écrite dans les
