@@ -62,6 +62,9 @@ node tools/serve.mjs
 - Captures officielles des articles de loi + PDF sources, images cliquables pour agrandir
 - **Mobile** : aucun débordement horizontal, cibles tactiles de 44 px, bouton de retour en haut
 - **Catégories** : une page par mot-clé du frontmatter porté par au moins 5 pages, tous domaines confondus
+- **Visite guidée** : se lance à la première venue sur chaque type de page (portail, wiki travailleurs,
+  tableau de bord, article), puis se relance à la demande par le bouton « ? » de l'en-tête. Les étapes
+  dont l'élément est absent sont ignorées.
 - **Thème clair / sombre / automatique** : bouton dans l'en-tête, choix mémorisé. Les captures d'articles
   de loi (texte noir sur blanc) sont détectées à la construction et **inversées** en thème sombre, pour
   ne pas laisser un rectangle éblouissant au milieu de la page. L'impression reste toujours en clair.
