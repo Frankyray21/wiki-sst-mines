@@ -404,6 +404,13 @@ a.tag-lien:hover { background: var(--tag-hover-bg); border-color: var(--tag-hove
   padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
   font-size: 14px; width: 280px; max-width: 100%; background: var(--content-bg); color: var(--text);
 }
+.graphe-bascule {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
+  font-size: 13.5px; font-weight: 600; color: var(--link) !important;
+  background: var(--content-bg); cursor: pointer; font-family: inherit;
+}
+.graphe-bascule:hover { background: var(--hover); border-color: var(--hover-bd); text-decoration: none; }
 .graphe-filtres { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; }
 .gf { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; padding: 4px 0; }
 .gf-point { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }

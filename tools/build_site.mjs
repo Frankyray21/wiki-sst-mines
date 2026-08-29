@@ -1143,21 +1143,39 @@ console.log('Graphe des liens…');
   fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
   fs.writeFileSync(path.join(OUT, 'assets', 'graphe.json'), JSON.stringify(graphe));
 
-  const clientGraphe = fs.readFileSync(path.join(__dirname, 'graphe_client.js'), 'utf8');
-  const content = `
+  // les deux vues partagent les mêmes données et la même barre d'outils
+  const pageGraphe = (mode) => {
+    const est3d = mode === '3d';
+    const client = fs.readFileSync(path.join(__dirname, est3d ? 'graphe3d_client.js' : 'graphe_client.js'), 'utf8');
+    const autre = est3d
+      ? `<a class="graphe-bascule" href="{{ROOT}}graphe.html" id="lien-vue">◱ Vue 2D</a>`
+      : `<a class="graphe-bascule" href="{{ROOT}}graphe3d.html" id="lien-vue">◲ Vue 3D</a>`;
+    const aide = est3d
+      ? 'Glisser pour tourner, molette pour zoomer, cliquer pour ouvrir la page. Le graphe tourne tout seul tant que vous n’y touchez pas.'
+      : 'Molette pour zoomer, glisser pour déplacer, cliquer pour ouvrir la page.';
+    return `
 <div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a></div>
-<h1 class="page-title">Graphe des liens<span id="graphe-titre" class="graphe-titre"></span></h1>
-<div class="page-sub" id="graphe-etat">${pages.length.toLocaleString('fr-CA')} pages · ${aretes.size.toLocaleString('fr-CA')} liens. Molette pour zoomer, glisser pour déplacer, cliquer pour ouvrir la page. Le Recueil législatif est masqué par défaut : cochez-le pour l'afficher.</div>
+<h1 class="page-title">Graphe des liens${est3d ? ' — 3D' : ''}<span id="graphe-titre" class="graphe-titre"></span></h1>
+<div class="page-sub" id="graphe-etat">${pages.length.toLocaleString('fr-CA')} pages · ${aretes.size.toLocaleString('fr-CA')} liens. ${aide} Le Recueil législatif est masqué par défaut : cochez-le pour l'afficher.</div>
 <div class="graphe-barre">
+  ${autre}
+  ${est3d ? '<button class="graphe-bascule" id="graphe-rotation">⏸ Arrêter la rotation</button>' : ''}
   <input type="search" id="graphe-q" placeholder="Trouver une page dans le graphe…" autocomplete="off">
   <div id="graphe-filtres" class="graphe-filtres"></div>
 </div>
 <div class="graphe-cadre"><canvas id="graphe"></canvas></div>
-<script>${clientGraphe}</script>`;
+<script>
+// la bascule 2D/3D conserve la page en focus
+(function(){var f=new URLSearchParams(location.search).get('focus');if(f){var l=document.getElementById('lien-vue');l.href+='?focus='+encodeURIComponent(f);}})();
+${client}</script>`;
+  };
   fs.writeFileSync(path.join(OUT, 'graphe.html'),
-    pageShell({ out: 'graphe.html', title: 'Graphe des liens', wikiKey: null, content })
+    pageShell({ out: 'graphe.html', title: 'Graphe des liens', wikiKey: null, content: pageGraphe('2d') })
       .replace(/\{\{ROOT\}\}/g, ''));
-  console.log(`  ${aretes.size} liens entre ${pages.length} pages`);
+  fs.writeFileSync(path.join(OUT, 'graphe3d.html'),
+    pageShell({ out: 'graphe3d.html', title: 'Graphe des liens 3D', wikiKey: null, content: pageGraphe('3d') })
+      .replace(/\{\{ROOT\}\}/g, ''));
+  console.log(`  ${aretes.size} liens entre ${pages.length} pages · vues 2D et 3D`);
 }
 
 // ---------- index de recherche ----------
@@ -1184,6 +1202,7 @@ const searchIndex = pages.map(p => {
   else if (/Article abrogé|Article remplacé|disposition remplacée/i.test(stripMd(p.body).slice(0, 400))) e.q = 1;
   return e;
 });
+searchIndex.push({ t: 'Graphe des liens 3D', u: 'graphe3d.html', w: 'Outil', i: '🕸️', g: 'graphe 3d liens réseau obsidian', x: 'Le réseau des pages en trois dimensions, en rotation libre.' });
 searchIndex.push({ t: 'Graphe des liens', u: 'graphe.html', w: 'Outil', i: '🕸️', g: 'graphe liens réseau obsidian', x: 'Toutes les pages et leurs liens, en réseau interactif.' });
 searchIndex.push({ t: 'Qualité rédactionnelle', u: 'qualite.html', w: 'Outil', i: '🔧', g: 'qualité relecture ébauche atelier', x: `${rapportQualite.length} pages présentent au moins un défaut de forme.` });
 // Les catégories sont cherchables au même titre que les articles.

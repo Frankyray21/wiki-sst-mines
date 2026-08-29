@@ -1,0 +1,304 @@
+// Graphe des liens en 3D — canvas pur, aucune dépendance.
+// Simulation de forces dans l'espace, projection perspective, orbite à la souris.
+// Glisser = tourner · molette = zoomer · clic = ouvrir la page · le graphe tourne
+// doucement tout seul tant qu'on n'y touche pas.
+(function () {
+  var ROOT = window.ROOT || '';
+  var canvas = document.getElementById('graphe');
+  var ctx = canvas.getContext('2d');
+  var etat = document.getElementById('graphe-etat');
+
+  var COULEURS = ['#e5484d', '#f5a623', '#30a46c', '#0091ff', '#8e4ec6', '#12a594', '#f76b15'];
+  var noeuds = [], aretes = [], voisins = new Map();
+  var actifs = new Set();
+  var yaw = 0.6, pitch = 0.25, zoom = 1, FOCALE = 900;
+  var survol = -1, focusId = -1;
+  var chaud = 0, autoTour = true, projete = null;
+
+  function css(nom, repli) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue(nom).trim();
+    return v || repli;
+  }
+
+  function redimensionner() {
+    var r = canvas.parentElement.getBoundingClientRect();
+    canvas.width = r.width * devicePixelRatio;
+    canvas.height = (innerHeight - r.top - 12) * devicePixelRatio;
+    canvas.style.height = (innerHeight - r.top - 12) + 'px';
+  }
+  window.addEventListener('resize', redimensionner);
+
+  // ---------- chargement ----------
+  fetch(ROOT + 'assets/graphe.json')
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (g) {
+      // départ sur une sphère : répartition uniforme par spirale de Fibonacci
+      var N = g.n.length;
+      noeuds = g.n.map(function (n, i) {
+        var t = i / Math.max(1, N - 1), incl = Math.acos(1 - 2 * t), az = i * 2.39996;
+        var r0 = 260;
+        return { t: n.t, u: n.u, w: n.w, deg: 0, i: i,
+          x: r0 * Math.sin(incl) * Math.cos(az), y: r0 * Math.sin(incl) * Math.sin(az), z: r0 * Math.cos(incl),
+          vx: 0, vy: 0, vz: 0 };
+      });
+      aretes = g.e;
+      for (var k = 0; k < aretes.length; k++) {
+        var a = aretes[k][0], b = aretes[k][1];
+        noeuds[a].deg++; noeuds[b].deg++;
+        if (!voisins.has(a)) voisins.set(a, []);
+        if (!voisins.has(b)) voisins.set(b, []);
+        voisins.get(a).push(b); voisins.get(b).push(a);
+      }
+      construireFiltres(g.wikis);
+      lireFocus(g);
+      redimensionner();
+      chaud = 320;
+      boucle();
+    })
+    .catch(function () { etat.textContent = 'Impossible de charger le graphe.'; });
+
+  function lireFocus(g) {
+    var f = new URLSearchParams(location.search).get('focus');
+    if (!f) {
+      g.wikis.forEach(function (w, i) { if (!/législatif/i.test(w)) actifs.add(i); });
+      majFiltres();
+      return;
+    }
+    g.wikis.forEach(function (w, i) { actifs.add(i); });
+    focusId = noeuds.findIndex(function (n) { return n.u === f; });
+    if (focusId < 0) { majFiltres(); return; }
+    var garde = new Set([focusId]);
+    (voisins.get(focusId) || []).forEach(function (v) {
+      garde.add(v);
+      (voisins.get(v) || []).forEach(function (v2) { garde.add(v2); });
+    });
+    if (garde.size > 400) {
+      garde = new Set([focusId]);
+      (voisins.get(focusId) || []).forEach(function (v) { garde.add(v); });
+    }
+    noeuds.forEach(function (n) { n.cache = !garde.has(n.i); });
+    document.getElementById('graphe-titre').textContent = noeuds[focusId].t;
+    etat.textContent = (garde.size - 1) + ' pages liées, à deux pas ou moins.';
+    majFiltres();
+  }
+
+  function visible(n) { return !n.cache && actifs.has(n.w); }
+
+  // ---------- simulation dans l'espace ----------
+  function simuler() {
+    var vis = noeuds.filter(visible);
+    if (!vis.length) return;
+    var cellule = 130, grille = new Map();
+    for (var i = 0; i < vis.length; i++) {
+      var n = vis[i];
+      var cle = (n.x / cellule | 0) + ':' + (n.y / cellule | 0) + ':' + (n.z / cellule | 0);
+      if (!grille.has(cle)) grille.set(cle, []);
+      grille.get(cle).push(n);
+    }
+    for (var i2 = 0; i2 < vis.length; i2++) {
+      var a = vis[i2];
+      var cx = a.x / cellule | 0, cy = a.y / cellule | 0, cz = a.z / cellule | 0;
+      for (var gx = cx - 1; gx <= cx + 1; gx++)
+        for (var gy = cy - 1; gy <= cy + 1; gy++)
+          for (var gz = cz - 1; gz <= cz + 1; gz++) {
+            var lot = grille.get(gx + ':' + gy + ':' + gz);
+            if (!lot) continue;
+            for (var j = 0; j < lot.length; j++) {
+              var b = lot[j];
+              if (b === a) continue;
+              var dx = a.x - b.x, dy = a.y - b.y, dz = a.z - b.z;
+              var d2 = dx * dx + dy * dy + dz * dz;
+              if (d2 < 1) { d2 = 1; dx = Math.random() - .5; dy = Math.random() - .5; dz = Math.random() - .5; }
+              if (d2 > cellule * cellule * 2) continue;
+              var f = 1400 / d2;
+              a.vx += dx * f * 0.01; a.vy += dy * f * 0.01; a.vz += dz * f * 0.01;
+            }
+          }
+      a.vx -= a.x * 0.0008; a.vy -= a.y * 0.0008; a.vz -= a.z * 0.0008;
+    }
+    for (var k = 0; k < aretes.length; k++) {
+      var na = noeuds[aretes[k][0]], nb = noeuds[aretes[k][1]];
+      if (!visible(na) || !visible(nb)) continue;
+      var ddx = nb.x - na.x, ddy = nb.y - na.y, ddz = nb.z - na.z;
+      var dist = Math.sqrt(ddx * ddx + ddy * ddy + ddz * ddz) || 1;
+      var tir = (dist - 70) * 0.004;
+      na.vx += ddx / dist * tir; na.vy += ddy / dist * tir; na.vz += ddz / dist * tir;
+      nb.vx -= ddx / dist * tir; nb.vy -= ddy / dist * tir; nb.vz -= ddz / dist * tir;
+    }
+    for (var m = 0; m < vis.length; m++) {
+      var nd = vis[m];
+      nd.x += nd.vx; nd.y += nd.vy; nd.z += nd.vz;
+      nd.vx *= 0.85; nd.vy *= 0.85; nd.vz *= 0.85;
+    }
+  }
+
+  // ---------- projection et rendu ----------
+  function projeter() {
+    var cy = Math.cos(yaw), sy = Math.sin(yaw);
+    var cp = Math.cos(pitch), sp = Math.sin(pitch);
+    projete = new Array(noeuds.length);
+    for (var i = 0; i < noeuds.length; i++) {
+      var n = noeuds[i];
+      if (!visible(n)) { projete[i] = null; continue; }
+      // rotation autour de Y puis de X
+      var x1 = n.x * cy + n.z * sy;
+      var z1 = -n.x * sy + n.z * cy;
+      var y2 = n.y * cp - z1 * sp;
+      var z2 = n.y * sp + z1 * cp;
+      var e = FOCALE / (FOCALE + z2 + 420);          // perspective
+      projete[i] = { sx: x1 * e * zoom, sy: y2 * e * zoom, e: e, prof: z2, i: i };
+    }
+  }
+
+  function dessiner() {
+    projeter();
+    var L = canvas.width, H = canvas.height;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, L, H);
+    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, L / 2, H / 2);
+
+    var enEvidence = new Set();
+    var actif = survol >= 0 ? survol : focusId;
+    if (actif >= 0) {
+      enEvidence.add(actif);
+      (voisins.get(actif) || []).forEach(function (v) { enEvidence.add(v); });
+    }
+
+    // arêtes, atténuées avec la profondeur
+    var couleurTrait = css('--border-light', '#c8ccd1');
+    var couleurFort = css('--link', '#36c');
+    ctx.lineWidth = 1;
+    for (var k = 0; k < aretes.length; k++) {
+      var pa = projete[aretes[k][0]], pb = projete[aretes[k][1]];
+      if (!pa || !pb) continue;
+      var fort = actif >= 0 && (aretes[k][0] === actif || aretes[k][1] === actif);
+      var prof = (pa.e + pb.e) / 2;                   // proche de 1 = devant
+      ctx.strokeStyle = fort ? couleurFort : couleurTrait;
+      ctx.globalAlpha = actif >= 0 && !fort ? 0.05 : (fort ? 0.9 : Math.max(0.04, prof * prof * 0.4));
+      ctx.beginPath(); ctx.moveTo(pa.sx, pa.sy); ctx.lineTo(pb.sx, pb.sy); ctx.stroke();
+    }
+
+    // nœuds, du fond vers l'avant
+    var ordre = projete.filter(Boolean).sort(function (a, b) { return b.prof - a.prof; });
+    var couleurTexte = css('--text', '#202122');
+    for (var o = 0; o < ordre.length; o++) {
+      var p = ordre[o], n = noeuds[p.i];
+      var r = Math.min(2.5 + Math.sqrt(n.deg), 12) * p.e * zoom;
+      if (p.i === focusId) r += 4;
+      ctx.globalAlpha = actif >= 0 && !enEvidence.has(p.i) ? 0.12 : Math.max(0.25, p.e);
+      ctx.fillStyle = COULEURS[n.w % COULEURS.length];
+      ctx.beginPath(); ctx.arc(p.sx, p.sy, Math.max(r, 1.2), 0, 7); ctx.fill();
+      if (p.i === focusId || p.i === survol) {
+        ctx.strokeStyle = couleurTexte; ctx.lineWidth = 2; ctx.stroke();
+      }
+    }
+
+    // libellés au premier plan
+    ctx.fillStyle = couleurTexte;
+    for (var o2 = ordre.length - 1; o2 >= Math.max(0, ordre.length - 400); o2--) {
+      var p2 = ordre[o2], n2 = noeuds[p2.i];
+      var montre = p2.i === survol || p2.i === focusId
+        || (zoom > 1.6 && n2.deg > 8 && p2.e > 0.9)
+        || (enEvidence.has(p2.i) && enEvidence.size <= 40);
+      if (!montre) continue;
+      ctx.globalAlpha = 1;
+      ctx.font = Math.max(11, 12 * p2.e * Math.min(zoom, 1.6)) + 'px sans-serif';
+      ctx.fillText(n2.t.length > 44 ? n2.t.slice(0, 42) + '…' : n2.t, p2.sx + 9, p2.sy + 4);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function boucle() {
+    var bouge = false;
+    if (chaud > 0) { simuler(); chaud--; bouge = true; }
+    if (autoTour && survol < 0) { yaw += 0.0022; bouge = true; }
+    if (bouge) dessiner();
+    requestAnimationFrame(boucle);
+  }
+
+  // ---------- interactions ----------
+  function sous(ev) {
+    if (!projete) return -1;
+    var r = canvas.getBoundingClientRect();
+    var mx = ev.clientX - r.left - r.width / 2;
+    var my = ev.clientY - r.top - r.height / 2;
+    var meilleur = -1, dMin = 16, profMin = Infinity;
+    for (var i = 0; i < projete.length; i++) {
+      var p = projete[i];
+      if (!p) continue;
+      var d = Math.hypot(p.sx - mx, p.sy - my);
+      if (d < dMin && p.prof < profMin + 40) { dMin = Math.max(d, 6); profMin = p.prof; meilleur = i; }
+    }
+    return meilleur;
+  }
+
+  var orbite = null, aBouge = false;
+  canvas.addEventListener('pointerdown', function (ev) {
+    orbite = { x: ev.clientX, y: ev.clientY };
+    aBouge = false;
+    autoTour = false;
+    canvas.setPointerCapture(ev.pointerId);
+  });
+  canvas.addEventListener('pointermove', function (ev) {
+    if (orbite) {
+      var dx = ev.clientX - orbite.x, dy = ev.clientY - orbite.y;
+      if (Math.abs(dx) + Math.abs(dy) > 3) aBouge = true;
+      yaw += dx * 0.005;
+      pitch = Math.max(-1.4, Math.min(1.4, pitch + dy * 0.005));
+      orbite = { x: ev.clientX, y: ev.clientY };
+      dessiner();
+      return;
+    }
+    var s = sous(ev);
+    if (s !== survol) {
+      survol = s;
+      canvas.style.cursor = s >= 0 ? 'pointer' : 'grab';
+      dessiner();
+    }
+  });
+  canvas.addEventListener('pointerup', function () { orbite = null; });
+  canvas.addEventListener('click', function (ev) {
+    if (aBouge) return; // c'était une rotation, pas un clic
+    var n = sous(ev);
+    if (n >= 0) location.href = ROOT + noeuds[n].u;
+  });
+  canvas.addEventListener('wheel', function (ev) {
+    ev.preventDefault();
+    autoTour = false;
+    zoom = Math.max(0.2, Math.min(6, zoom * (ev.deltaY < 0 ? 1.15 : 1 / 1.15)));
+    dessiner();
+  }, { passive: false });
+
+  var btnTour = document.getElementById('graphe-rotation');
+  if (btnTour) btnTour.addEventListener('click', function () {
+    autoTour = !autoTour;
+    btnTour.textContent = autoTour ? '⏸ Arrêter la rotation' : '▶ Reprendre la rotation';
+  });
+
+  // ---------- filtres et recherche ----------
+  function construireFiltres(wikis) {
+    var boite = document.getElementById('graphe-filtres');
+    boite.innerHTML = wikis.map(function (w, i) {
+      return '<label class="gf"><input type="checkbox" data-w="' + i + '">' +
+        '<span class="gf-point" style="background:' + COULEURS[i % COULEURS.length] + '"></span>' + w + '</label>';
+    }).join('');
+    boite.addEventListener('change', function (ev) {
+      var i = +ev.target.getAttribute('data-w');
+      if (ev.target.checked) actifs.add(i); else actifs.delete(i);
+      chaud = Math.max(chaud, 220);
+    });
+  }
+  function majFiltres() {
+    document.querySelectorAll('#graphe-filtres input').forEach(function (c) {
+      c.checked = actifs.has(+c.getAttribute('data-w'));
+    });
+  }
+
+  var champ = document.getElementById('graphe-q');
+  champ.addEventListener('input', function () {
+    var q = champ.value.trim().toLowerCase();
+    if (q.length < 3) return;
+    var n = noeuds.find(function (x) { return visible(x) && x.t.toLowerCase().indexOf(q) >= 0; });
+    if (n) { survol = n.i; autoTour = false; dessiner(); }
+  });
+})();
