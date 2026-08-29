@@ -4,7 +4,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'docs');
-const cibles = process.argv[2] ? [process.argv[2]] : ['t', 'g', 'w'];
+// Par défaut on parcourt tout docs/ : limiter à t/g/w laissait hors du filet les 165 pages
+// de catégorie, categories.html, index.html et recherche.html.
+const cibles = process.argv[2] ? [process.argv[2]] : ['.'];
 
 let total = 0, morts = 0;
 const exemples = [];

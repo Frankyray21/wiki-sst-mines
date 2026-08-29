@@ -267,6 +267,19 @@ for (const p of pages) {
   p.publics = publicsDeLaPage(p);
 }
 
+// Les notes explicitement marquées « ne pas publier » sortent du site, y compris du fond
+// documentaire : les publier irait contre une consigne écrite dans le vault lui-même.
+// Les liens qui les visaient deviennent des liens rouges, sans révéler leur titre.
+const refusees = pages.filter(p => {
+  const fm = p.fm || {};
+  return fm.publish === false
+    || REFUS_ABSOLU.has(String(fm['traitement-publication'] ?? '').trim().toLowerCase());
+});
+if (refusees.length) {
+  for (const p of refusees) pages.splice(pages.indexOf(p), 1);
+  console.log(`Non publiées (publish: false / traitement interne) : ${refusees.length} notes écartées du site`);
+}
+
 // Chemin de sortie dans le fond documentaire : miroir du vault, slugifié.
 // Les wikis par public préfixent ce chemin (t/… ou g/…) sans le recalculer.
 const usedOut = new Set();
@@ -567,7 +580,14 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
   <div class="nav-group"><div class="nav-title">Navigation</div>
     <ul>
       <li><a href="${ROOT}index.html">🏠 Portail</a></li>
+      <li><a href="${ROOT}categories.html">🏷️ Catégories</a></li>
       <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">Selon qui vous êtes</div>
+    <ul>
+      <li><a href="${ROOT}t/index.html">👷 Wiki des travailleurs</a></li>
+      <li><a href="${ROOT}g/index.html">🎓 Wiki de l'encadrement</a></li>
     </ul>
   </div>
   ${sidebarExtra}
@@ -705,6 +725,11 @@ const TAGS_STRUCTURELS = new Set([
   'wiki', 'loi', 'recueil', 'index', 'stub', 'à-documenter', 'a-documenter', 'template', 'moc',
   'article', 'articles', 'note', 'notes', 'brouillon', 'archive', 'accueil', 'hub', 'carrefour',
   'concept', 'section', 'sous-section', 'definition', 'définition', 'reference', 'référence',
+  'chapitre', 'partie', 'titre', 'livre', 'navigation', 'transverse', 'acronyme',
+  'en-cours', 'ebauche', 'ébauche', 'theme', 'thème', 'meta', 'méta', 'conventions',
+  // Étiquettes de confidentialité : en faire un index public reviendrait à publier
+  // un répertoire de ce qui n'est justement pas destiné à être diffusé.
+  'interne', 'sensible', 'confidentiel', 'reference-interne', 'référence-interne', 'prive', 'privé',
   'lsst', 'latmp', 'lmrsst', 'lnt', 'rsst', 'rssm', 'cstc', 'csst',
 ]);
 
@@ -715,7 +740,12 @@ for (const p of pages) {
   for (const brut of tags) {
     const t = String(brut).trim().toLowerCase().replace(/^#/, '');
     if (!t || t.length < 3 || vus.has(t)) continue;
-    if (TAGS_STRUCTURELS.has(t) || /^(section|chapitre|partie|annexe|article|art)-?\d/.test(t) || /^\d+$/.test(t)) continue;
+    // « chapitre-i » à « chapitre-v » regroupaient les chapitres I de six lois sans rapport :
+    // le filtre n'acceptait que les chiffres arabes. Les tags « wiki-… » sont aussi structurels.
+    if (TAGS_STRUCTURELS.has(t)
+      || /^(section|chapitre|partie|annexe|titre|livre|article|art)[-.\s]?(\d|[ivxl]+$)/i.test(t)
+      || /^wiki-/.test(t)
+      || /^\d+$/.test(t)) continue;
     vus.add(t);
     if (!parTag.has(t)) parTag.set(t, []);
     parTag.get(t).push(p);
@@ -740,11 +770,11 @@ for (const p of pages) {
     corpsMd = [...lignes.slice(0, ch.debut), ...lignes.slice(ch.fin)].join('\n');
     // Le chapô est rendu dans la même fenêtre que le corps : CUR et CUR_LINKS sont posés,
     // donc ses liens comptent dans les backlinks et les jetons de bloc restent alignés.
-    const estCapture = /!\[\[[^\]]*\.png/i.test(p.body) && /^art[-.]/i.test(p.base);
+    // Le libellé reste « En bref » partout : les conventions du vault imposent de SYNTHÉTISER
+    // le texte de loi, jamais de le transcrire. L'annoncer comme une transcription
+    // ferait passer un résumé pour le texte officiel — inacceptable sur du droit.
     p.chapoHtml = finalize(renderBody(ch.md));
-    p.chapoLabel = estCapture
-      ? (/…\s*$/.test(ch.md) ? 'Texte de l’article (transcription incomplète — voir le PDF officiel)' : 'Texte de l’article (transcription)')
-      : 'En bref';
+    p.chapoLabel = 'En bref';
   } else {
     p.chapoHtml = '';
   }
@@ -1038,6 +1068,16 @@ const searchIndex = pages.map(p => {
   else if (/Article abrogé|Article remplacé|disposition remplacée/i.test(stripMd(p.body).slice(0, 400))) e.q = 1;
   return e;
 });
+// Les catégories sont cherchables au même titre que les articles.
+for (const [tag, membres] of categories) {
+  searchIndex.push({
+    t: 'Catégorie : ' + tag,
+    u: 'categorie/' + slugTag.get(tag) + '.html',
+    w: 'Catégorie', i: '🏷️',
+    g: tag,
+    x: `${membres.length} pages portent ce mot-clé.`,
+  });
+}
 fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
 fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(searchIndex));
 
@@ -1265,6 +1305,13 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
 <h2 class="portal-section">Le fond documentaire complet</h2>
 <p class="portal-note">Les ${total.toLocaleString('fr-CA')} pages, classées par discipline. Destiné au conseiller SST et à la recherche documentaire.</p>
 <div class="portal-grid">${cards}</div>
+<h2 class="portal-section">Parcourir par sujet</h2>
+<div class="portal-grid">
+  <a class="portal-card" href="categories.html">
+    <span class="portal-icon">🏷️</span>
+    <span class="portal-info"><strong>Catégories</strong><span class="portal-desc">Les mots-clés qui traversent les disciplines : bruit, explosifs, espaces clos, silice… Chaque catégorie réunit les articles du même sujet, quel que soit le domaine.</span><span class="portal-count">${categories.length} catégories</span></span>
+  </a>
+</div>
 <div class="portal-foot">
   <a href="#" id="randomLink2">🎲 Une page au hasard</a>
 </div>`;

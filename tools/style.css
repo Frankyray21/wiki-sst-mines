@@ -173,6 +173,7 @@ a.tag-lien:hover { background: #dfe6f0; border-color: #7a9cc6; text-decoration: 
 .chapo {
   border-left: 4px solid #a3c9f0; background: #f7fbff;
   padding: 12px 18px; margin: 0 0 16px; font-size: 15.5px; line-height: 1.6;
+  display: flow-root; /* sinon la boîte court sous l'infobox flottante */
 }
 .chapo-label {
   font-size: 11px; text-transform: uppercase; letter-spacing: .6px;
@@ -326,7 +327,10 @@ body.portal { background: linear-gradient(180deg, #eef1f5 0%, #f8f9fa 340px); }
   }
   .sidebar.open { transform: translateX(0); }
   .content { padding: 16px 16px 36px; border: 0; }
+  /* L'infobox liste des métadonnées techniques : sur téléphone elle atteignait 511 px et
+     repoussait le résumé introductif hors de l'écran. On la borne, elle défile à l'intérieur. */
   .infobox { float: none; width: 100%; max-width: 100%; margin: 0 0 16px; }
+  .infobox table { display: block; max-height: 40vh; overflow-y: auto; }
   .cat-pages, .backlinks ul { columns: 1; }
   .brand-text small { display: none; }
   .page-title { font-size: 24px; }
