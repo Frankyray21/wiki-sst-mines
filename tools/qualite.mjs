@@ -70,10 +70,26 @@ export function analyserQualite(p) {
   }
   if (vides) defauts.push({ code: 'section-vide', gravite: 2, texte: `${vides} section${vides > 1 ? 's' : ''} annoncée${vides > 1 ? 's' : ''} par un titre mais sans contenu.` });
 
-  // Phrases très longues : au-delà de 45 mots, la relecture décroche.
-  const longues = corps.replace(/\|[^\n]*\|/g, '').split(/[.!?]\s+/)
+  // Phrases très longues, mesurées sur la PROSE seule.
+  // Une première version comptait aussi les tableaux, les listes et les titres :
+  // 92 % des signalements ne contenaient aucune phrase réellement longue.
+  const prose = corps
+    .replace(/```[\s\S]*?```/g, ' ')          // blocs de code
+    .replace(/^---[\s\S]*?^---/gm, ' ')       // frontmatter résiduel
+    .split('\n')
+    .filter(l => {
+      const s = l.trim();
+      if (!s) return false;
+      if (/^[#>|\-*+\d]/.test(s)) return false;  // titres, citations, tableaux, listes
+      if (/^!?\[\[/.test(s)) return false;        // images et transclusions
+      return true;
+    })
+    .join(' ');
+  const longues = prose
+    .replace(/\b(art|p|pp|vol|no|nº|ex|cf|etc|M|Mme|Dr|inc|ltée)\.\s/gi, '$1 ') // abréviations
+    .split(/[.!?]+\s+/)
     .filter(ph => ph.split(/\s+/).filter(Boolean).length > 45).length;
-  if (longues >= 3) defauts.push({ code: 'phrases-longues', gravite: 1, texte: `${longues} phrases de plus de 45 mots.` });
+  if (longues >= 3) defauts.push({ code: 'phrases-longues', gravite: 1, texte: `${longues} phrases de plus de 45 mots dans le texte suivi.` });
 
   return { mots, defauts, score: defauts.reduce((s, d) => s + d.gravite, 0) };
 }

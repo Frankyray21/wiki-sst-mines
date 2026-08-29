@@ -594,6 +594,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
     <ul>
       <li><a href="${ROOT}index.html">🏠 Portail</a></li>
       <li><a href="${ROOT}categories.html">🏷️ Catégories</a></li>
+      <li><a href="${ROOT}qualite.html">🔧 Qualité rédactionnelle</a></li>
       <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
     </ul>
   </div>
@@ -663,10 +664,12 @@ const FM_LABELS = [
   ['en-vigueur-depuis', 'En vigueur depuis'], ['chapitre', 'Chapitre'], ['section', 'Section'], ['bloc', 'Bloc'],
   ['nature', 'Nature'], ['sujet', 'Sujet'], ['visé', 'Visé'], ['type', 'Type'], ['theme', 'Thème'], ['thème', 'Thème'],
   ['auteur', 'Auteur'], ['année', 'Année'],
-  ['statut', 'Statut'], ['qualité', 'Qualité'], ['qualite', 'Qualité'],
   ['révision', 'Révision'], ['revision', 'Révision'],
-  ['public-cible', 'Public cible'], ['niveau-sensibilité', 'Sensibilité'],
 ];
+// « statut », « qualité », « public-cible » et « niveau-sensibilité » sont volontairement absents :
+// ce sont des étiquettes de travail. Afficher « Sensibilité : 3 » signale au lecteur qu'il existe
+// une version qu'on lui cache, et « Statut : ébauche » décrédibilise une page souvent aboutie.
+// Elles restent visibles dans le tableau de bord qualité, qui s'adresse à l'auteur.
 function infobox(p) {
   const rows = [];
   const vus = new Set(); // évite « Révision » deux fois quand le vault écrit la clé avec et sans accent
@@ -1138,6 +1141,7 @@ const searchIndex = pages.map(p => {
   else if (/Article abrogé|Article remplacé|disposition remplacée/i.test(stripMd(p.body).slice(0, 400))) e.q = 1;
   return e;
 });
+searchIndex.push({ t: 'Qualité rédactionnelle', u: 'qualite.html', w: 'Outil', i: '🔧', g: 'qualité relecture ébauche atelier', x: `${rapportQualite.length} pages présentent au moins un défaut de forme.` });
 // Les catégories sont cherchables au même titre que les articles.
 for (const [tag, membres] of categories) {
   searchIndex.push({
@@ -1420,6 +1424,10 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
   <a class="portal-card" href="categories.html">
     <span class="portal-icon">🏷️</span>
     <span class="portal-info"><strong>Catégories</strong><span class="portal-desc">Les mots-clés qui traversent les disciplines : bruit, explosifs, espaces clos, silice… Chaque catégorie réunit les articles du même sujet, quel que soit le domaine.</span><span class="portal-count">${categories.length} catégories</span></span>
+  </a>
+  <a class="portal-card" href="qualite.html">
+    <span class="portal-icon">🔧</span>
+    <span class="portal-info"><strong>Qualité rédactionnelle</strong><span class="portal-desc">Atelier de l'auteur : les pages dont le texte est coupé, les sections restées vides, les mentions « à compléter » encore visibles. Les plus atteintes d'abord.</span><span class="portal-count">${rapportQualite.length} pages à reprendre</span></span>
   </a>
 </div>
 <div class="portal-foot">
