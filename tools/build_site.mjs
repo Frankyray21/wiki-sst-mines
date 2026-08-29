@@ -186,8 +186,60 @@ function sanitizeFm(block) {
   }).join('\n');
 }
 
+// ---------- répartition des pages entre les deux publics ----------
+// Le vault marque déjà chaque note : publication-travailleur / publication-gestionnaire.
+// Principe de prudence : ce qui n'est pas explicitement autorisé n'est pas publié.
+// Seule exception, assumée : le Recueil législatif (texte de loi du Québec, public par nature,
+// et vérifié sans aucune note « interne » ni refus explicite).
+const LEGISLATION_PUBLIQUE = true;
+
+const estOui = (v) => String(v ?? '').trim().toLowerCase() === 'oui';
+
+// Le vault mélange trois barèmes : « public »/« interne », 0-3, et « publique »/« vulgarisé ».
+function sensibiliteRestreinte(v) {
+  if (v === undefined || v === null || v === '') return false;
+  const s = String(v).trim().toLowerCase();
+  if (s === 'interne' || s === 'sensible' || s === 'confidentiel') return true;
+  const n = Number(s);
+  return Number.isFinite(n) && n >= 2;
+}
+
+const REFUS_ABSOLU = new Set(['interne-non-publie', 'interne-strict', 'a-archiver', 'archive-confirmee']);
+
+const estNon = (v) => String(v ?? '').trim().toLowerCase() === 'non';
+
+// « public-cible » désigne le LECTEUR visé. À ne pas confondre avec « visé », qui désigne
+// le destinataire d'une obligation légale : router dessus retirerait aux travailleurs
+// les articles qui fondent leurs propres droits.
+const ENCADREMENT = ['direction', 'superviseur', 'gestionnaire', 'rh', 'employeur', 'contremaitre', 'contremaître'];
+
+function publicsDeLaPage(p) {
+  const fm = p.fm || {};
+  const S = new Set();
+  if (fm.publish === false) return S;
+  if (REFUS_ABSOLU.has(String(fm['traitement-publication'] ?? '').trim().toLowerCase())) return S;
+
+  const cible = (Array.isArray(fm['public-cible']) ? fm['public-cible'] : String(fm['public-cible'] ?? '').split(/[,;]/))
+    .map(x => String(x).trim().toLowerCase()).filter(Boolean);
+
+  // Le texte de loi est public : il fonde les droits du travailleur comme les obligations de l'employeur.
+  if (LEGISLATION_PUBLIQUE && p.wikiKey === 'Recueil législatif SST' && !sensibiliteRestreinte(fm['niveau-sensibilité'])) {
+    S.add('t'); S.add('g');
+    return S;
+  }
+  // Travailleurs : autorisation explicite ou public-cible, plus veto de sensibilité.
+  const okTravailleur = estOui(fm['publication-travailleur'])
+    || (cible.includes('travailleur') && !estNon(fm['publication-travailleur']));
+  if (okTravailleur && !sensibiliteRestreinte(fm['niveau-sensibilité'])) S.add('t');
+
+  // Encadrement : même logique. Ici « interne » signifie « pas pour les travailleurs »,
+  // pas « pas pour l'encadrement » — ce n'est donc pas un veto.
+  if (estOui(fm['publication-gestionnaire'])
+    || (cible.some(c => ENCADREMENT.includes(c)) && !estNon(fm['publication-gestionnaire']))) S.add('g');
+  return S;
+}
+
 const badFm = [];
-const usedOut = new Set();
 for (const p of pages) {
   let raw = fs.readFileSync(p.absPath, 'utf8').replace(/^\uFEFF/, '');
   p.mtime = fs.statSync(p.absPath).mtime;
@@ -206,17 +258,25 @@ for (const p of pages) {
   // titre unique : le H1 s'il existe, sinon le nom de fichier.
   // p.base reste la clé de résolution des wikilinks et du chemin de sortie.
   const h1 = p.body.match(/^\s*#\s+(.+?)\s*$/m);
-  p.title = h1 ? h1[1].trim() : p.base;
+  // Un titre peut contenir un wikilink brut : « Wiki [[Sécurité industrielle]] mines » → on garde le libellé.
+  p.title = (h1 ? h1[1].trim() : p.base)
+    .replace(/\[\[([^\]]+)\]\]/g, (m, t) => { const s = t.replace(/\\\|/g, '|').split('|'); return s[s.length - 1].split('#')[0]; })
+    .trim();
   if (h1) p.body = p.body.replace(h1[0], ''); // évite le doublon de titre
-  // chemin de sortie : miroir du vault, slugifié
+  p.dir = p.relPath.split('/').slice(0, -1).join('/');
+  p.publics = publicsDeLaPage(p);
+}
+
+// Chemin de sortie dans le fond documentaire : miroir du vault, slugifié.
+// Les wikis par public préfixent ce chemin (t/… ou g/…) sans le recalculer.
+const usedOut = new Set();
+for (const p of pages) {
   const parts = p.relPath.slice(0, -3).split('/');
-  const wiki = WIKIS[p.wikiKey];
-  let out = 'w/' + wiki.slug + '/' + parts.slice(1).map(slugify).join('/') + '.html';
+  let out = 'w/' + WIKIS[p.wikiKey].slug + '/' + parts.slice(1).map(slugify).join('/') + '.html';
   let n = 2;
   while (usedOut.has(out.toLowerCase())) out = out.replace(/\.html$/, '') + '-' + (n++) + '.html';
   usedOut.add(out.toLowerCase());
   p.out = out;
-  p.dir = p.relPath.split('/').slice(0, -1).join('/');
 }
 
 // index de résolution des liens
@@ -320,6 +380,16 @@ function assetUrl(relPath) {
 }
 let pngGain = 0, pngOptim = 0, pngIntacts = 0;
 
+// Public en cours de génération : null pour le fond documentaire, 't' ou 'g' pour les wikis par public.
+// Un lien vers une page du même public reste dans le wiki ; sinon il renvoie au fond documentaire.
+let PUB = null;
+function urlDe(pg) {
+  // Le Recueil législatif n'est pas dupliqué dans les arbres par public : les deux wikis
+  // renvoient vers l'exemplaire unique du fond documentaire.
+  const dansLArbre = PUB && pg.publics && pg.publics.has(PUB) && pg.wikiKey !== 'Recueil législatif SST';
+  return dansLArbre ? PUB + '/' + pg.out : pg.out;
+}
+
 // ---------- rendu markdown ----------
 let CUR;          // page en cours
 let CUR_LINKS;    // cibles collectées pour les backlinks
@@ -359,7 +429,7 @@ function renderWikilinks(md) {
       }
       // transclusion de note : simple lien encadré
       const pg = resolvePage(target, CUR);
-      if (pg) { CUR_LINKS.add(pg); return `<a href="{{ROOT}}${pg.out}">${esc(alias || pg.title)}</a>`; }
+      if (pg) { CUR_LINKS.add(pg); return `<a href="{{ROOT}}${urlDe(pg)}">${esc(alias || pg.title)}</a>`; }
       return `<span class="new">${esc(alias || target)}</span>`;
     }
 
@@ -382,7 +452,7 @@ function renderWikilinks(md) {
     if (!pg) return `<span class="new" title="page non créée">${esc(label)}</span>`;
     CUR_LINKS.add(pg);
     const a = anchor ? '#' + headingSlug(anchor) : '';
-    return `<a href="{{ROOT}}${pg.out}${a}" title="${esc(pg.title)}">${esc(label)}</a>`;
+    return `<a href="{{ROOT}}${urlDe(pg)}${a}" title="${esc(pg.title)}">${esc(label)}</a>`;
   });
 }
 
@@ -836,6 +906,186 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
   fs.writeFileSync(path.join(OUT, 'recherche.html'), html);
 }
 
+// ---------- wikis par public (travailleurs / encadrement) ----------
+// Chaque public a son portail, sa navigation et ses pages. Le Recueil législatif n'est pas
+// dupliqué : le texte de loi est public et identique pour tous, les deux wikis y renvoient.
+const PUBLICS = {
+  t: {
+    slug: 't', icon: '👷', nom: 'Wiki des travailleurs',
+    tagline: 'Tes droits, ta santé, ta sécurité — expliqué simplement',
+    intro: 'Ce wiki est écrit pour toi qui travailles à la mine. Tu y trouves ce qu\'il faut savoir sur les risques du métier, ce que la loi te garantit, et où trouver de l\'aide.',
+  },
+  g: {
+    slug: 'g', icon: '🎓', nom: 'Wiki de l\'encadrement',
+    tagline: 'Superviseurs, gestionnaires et direction — obligations, programmes et outils',
+    intro: 'Ce wiki réunit ce qu\'un superviseur, un gestionnaire ou un dirigeant doit connaître : obligations légales, programmes de prévention, gestion des situations et outils de suivi.',
+  },
+};
+
+// Rubriques du portail travailleurs : on entre par le problème vécu, pas par la discipline.
+const RUBRIQUES_T = [
+  { titre: 'J\'ai mal quelque part', icone: '🤕', mots: ['postures', 'manutention', 'travail répétitif', 'vibrations', 'tms'] },
+  { titre: 'Je respire quelque chose', icone: '😷', mots: ['poussières', 'diesel', 'silice', 'solvants', 'gaz', 'simdut', 'amiante'] },
+  { titre: 'Il fait trop chaud, j\'entends moins bien', icone: '🌡️', mots: ['chaleur', 'bruit', 'froid', 'thermique'] },
+  { titre: 'Ça ne va pas dans ma tête', icone: '🧠', mots: ['détresse', 'santé mentale', 'stress', 'aide', 'pae', 'appeler', 'rps'] },
+  { titre: 'Je ne dors plus', icone: '😴', mots: ['sommeil', 'fatigue', 'quart de nuit', 'récupération'] },
+  { titre: 'Ça chauffe avec l\'équipe ou le boss', icone: '💬', mots: ['équipe', 'reconnaissance', 'conflit', 'harcèlement', 'soutien'] },
+  { titre: 'Est-ce que j\'ai le droit ?', icone: '⚖️', mots: ['droit de refus', 'réclamation', 'retour au travail', 'droits', 'lésion'] },
+  { titre: 'C\'est dangereux ici', icone: '⚠️', mots: ['danger', 'presqu', 'cadenassage', 'espaces clos', 'machines', 'protection'] },
+  { titre: 'La vie au camp', icone: '🏕️', mots: ['camp', 'fifo', 'famille', 'séjour'] },
+];
+
+const RUBRIQUES_G = [
+  { titre: 'Mes obligations légales', icone: '📋', mots: ['obligation', 'diligence', 'conformité', 'inspecteur', 'infraction', 'tarification', 'lmrsst'] },
+  { titre: 'Programmes et prévention', icone: '🛠️', mots: ['programme', 'prévention', 'aménagement', 'conception', 'politique', 'surveillance'] },
+  { titre: 'Gérer une situation', icone: '🚨', mots: ['accident', 'lésion', 'retour au travail', 'assignation', 'réclamation', 'refus', 'enquête'] },
+  { titre: 'Évaluer et mesurer', icone: '📊', mots: ['évaluation', 'mesure', 'questionnaire', 'indicateur', 'score', 'grille', 'analyse'] },
+];
+
+function genererWikiPublic(pub) {
+  const conf = PUBLICS[pub];
+  const pagesPub = pages.filter(p => p.publics.has(pub));
+  const horsLoi = pagesPub.filter(p => p.wikiKey !== 'Recueil législatif SST');
+  PUB = pub;
+
+  // --- pages de l'arbre (le Recueil reste dans le fond documentaire, non dupliqué) ---
+  for (const p of horsLoi) {
+    CUR = p; p.toc = []; p.headIds = new Set(); CUR_LINKS = new Set();
+    const corps = finalize(renderBody(p.body));
+    blocks.length = 0;
+    const out = pub + '/' + p.out;
+    const R = rootOf(out);
+    const wiki = WIKIS[p.wikiKey];
+    const tocHtml = p.toc.length >= 3
+      ? `<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">${p.toc.filter(t => t.lv === 2).length || p.toc.length} sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul>${p.toc.map(t => `<li class="toc-l${t.lv}"><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ul></nav>`
+      : '';
+    const contenu = `
+<div class="breadcrumbs"><a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a> <span class="crumb-sep">›</span> ${esc(wiki.name)}</div>
+<h1 class="page-title">${esc(p.title)}</h1>
+<div class="page-sub">${wiki.icon} ${esc(wiki.name)}</div>
+${tocHtml}
+<div class="page-body">
+${corps}
+</div>
+<div class="page-meta">Dernière révision : ${esc(String(p.fm['révision'] || p.fm['revision'] || p.mtime.toISOString().slice(0, 10)))} · <a href="{{ROOT}}${p.out}">Voir cette page dans le fond documentaire</a></div>`;
+    const html = pageShell({ out, title: p.title, wikiKey: null, content: contenu, sidebarExtra: sidebarPublic(pub) })
+      .replace(/\{\{ROOT\}\}/g, R);
+    const dest = path.join(OUT, out);
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, html);
+  }
+
+  // --- rubriques du portail, remplies avec les pages réellement disponibles ---
+  // Comparaison sur des mots entiers normalisés : « équipe » ne doit pas attraper « équipements ».
+  const motsDe = (s) => ' ' + String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ').trim() + ' ';
+  const contientExpression = (texte, expr) => texte.includes(' ' + motsDe(expr).trim() + ' ');
+
+  const accueils = horsLoi.filter(p => /accueil|démarrage|bienvenue/i.test(p.title) || /^\d+ - Articles/.test(p.base));
+  const articles = horsLoi.filter(p => !accueils.includes(p));
+
+  // Le vault contient souvent deux versions du même sujet : « Manutention (travailleurs) » et
+  // « Manutention (pour toi) ». On n'en montre qu'une, en préférant la formulation vulgarisée.
+  const sujetDe = (p) => motsDe(p.title.replace(/\s*\([^)]*\)\s*$/, '')).trim();
+  const vulgarisee = (p) => /\(pour toi\)/i.test(p.title);
+  const meilleure = new Map();
+  for (const p of articles) {
+    const s = sujetDe(p);
+    const dejaLa = meilleure.get(s);
+    if (!dejaLa || (vulgarisee(p) && !vulgarisee(dejaLa))) meilleure.set(s, p);
+  }
+  const articlesUniques = [...meilleure.values()];
+
+  const rubriques = (pub === 't' ? RUBRIQUES_T : RUBRIQUES_G).map(r => {
+    const membres = articlesUniques.filter(p => {
+      const t = motsDe(p.title + ' ' + p.relPath);
+      return r.mots.some(m => contientExpression(t, m));
+    });
+    return { ...r, membres };
+  });
+  const casees = new Set(rubriques.flatMap(r => r.membres));
+  const autres = articlesUniques.filter(p => !casees.has(p));
+
+  const carte = (r) => `<section class="rubrique">
+  <h2><span class="rub-icone">${r.icone}</span> ${esc(r.titre)}</h2>
+  ${r.membres.length
+    ? `<ul class="rub-liste">${r.membres.slice(0, 14).map(p => `<li><a href="{{ROOT}}${pub}/${p.out}">${esc(p.title)}</a></li>`).join('')}</ul>`
+    : `<p class="rub-vide">Aucune page publiée pour l'instant sur ce sujet.</p>`}
+</section>`;
+
+  const lienLoi = pub === 't'
+    ? `<a class="portal-card" href="{{ROOT}}w/legislation/index-par-loi.html"><span class="portal-icon">⚖️</span><span class="portal-info"><strong>Ce que dit la loi</strong><span class="portal-desc">Les articles de loi qui fondent tes droits : refus de travail, retrait préventif, réclamation, retour au travail.</span><span class="portal-count">${pagesPub.length - horsLoi.length} articles de loi</span></span></a>`
+    : `<a class="portal-card" href="{{ROOT}}w/legislation/index-par-loi.html"><span class="portal-icon">⚖️</span><span class="portal-info"><strong>Le cadre légal</strong><span class="portal-desc">Lois et règlements applicables, article par article : obligations de l'employeur, mécanismes de prévention, sanctions.</span><span class="portal-count">${pagesPub.length - horsLoi.length} articles de loi</span></span></a>`;
+
+  const urgence = pub === 't' ? `
+<div class="encart-urgence">
+  <strong>☎ Ça ne va pas ?</strong>
+  <span>Urgence <a href="tel:911">911</a> · Info-Santé <a href="tel:811">811</a> (option 2 pour Info-Social) · Prévention du suicide <a href="tel:988">988</a></span>
+</div>` : '';
+
+  const contenu = `
+<div class="portal-hero">
+  <div class="portal-globe">${conf.icon}</div>
+  <h1>${esc(conf.nom)}</h1>
+  <p class="portal-tagline">${esc(conf.tagline)}</p>
+  <div class="portal-search"><input type="search" id="q2" placeholder="Rechercher…" autocomplete="off"><div id="suggest2" class="suggest" hidden></div></div>
+</div>
+${urgence}
+<p class="portal-intro">${esc(conf.intro)}</p>
+${accueils.length ? `<section class="rubrique"><h2><span class="rub-icone">🚩</span> Pour commencer</h2><ul class="rub-liste">${accueils.map(p => `<li><a href="{{ROOT}}${pub}/${p.out}">${esc(p.title)}</a> <small class="rub-domaine">${WIKIS[p.wikiKey].icon} ${esc(WIKIS[p.wikiKey].name)}</small></li>`).join('')}</ul></section>` : ''}
+<div class="portal-grid">${lienLoi}</div>
+${rubriques.map(carte).join('')}
+${autres.length ? `<section class="rubrique"><h2><span class="rub-icone">📄</span> Autres pages</h2><ul class="rub-liste">${autres.map(p => `<li><a href="{{ROOT}}${pub}/${p.out}">${esc(p.title)}</a></li>`).join('')}</ul></section>` : ''}
+<div class="portal-foot"><a href="{{ROOT}}index.html">← Retour à l'accueil du wiki</a></div>`;
+
+  fs.mkdirSync(path.join(OUT, pub), { recursive: true });
+  fs.writeFileSync(path.join(OUT, pub, 'index.html'), pageAutonome({
+    out: pub + '/index.html', titre: conf.nom, contenu,
+  }));
+
+  PUB = null;
+  return { total: pagesPub.length, horsLoi: horsLoi.length, rubriques };
+}
+
+function sidebarPublic(pub) {
+  const conf = PUBLICS[pub];
+  const autre = pub === 't' ? PUBLICS.g : PUBLICS.t;
+  return `<div class="nav-group"><div class="nav-title">${conf.icon} ${esc(conf.nom)}</div>
+  <ul>
+    <li><a href="{{ROOT}}${pub}/index.html">Accueil</a></li>
+    <li><a href="{{ROOT}}w/legislation/index-par-loi.html">Les articles de loi</a></li>
+    <li><a href="{{ROOT}}${autre.slug}/index.html">${autre.icon} ${esc(autre.nom)}</a></li>
+    <li><a href="{{ROOT}}index.html">🏠 Tous les wikis</a></li>
+  </ul></div>`;
+}
+
+// Page autonome (portail) : même habillage que le portail racine, sans barre latérale.
+function pageAutonome({ out, titre, contenu }) {
+  const R = rootOf(out);
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${esc(titre)} — WIKI SST Mines</title>
+<link rel="stylesheet" href="${R}assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<script>window.ROOT='${R}';</script>
+</head>
+<body class="portal">
+<main class="portal-main">${contenu.replace(/\{\{ROOT\}\}/g, R)}</main>
+<footer class="site-footer">WIKI SST — Mines · ${new Date().toLocaleDateString('fr-CA')}</footer>
+<script src="${R}assets/app.js"></script>
+</body>
+</html>`;
+}
+
+console.log('Wikis par public…');
+const statT = genererWikiPublic('t');
+const statG = genererWikiPublic('g');
+console.log(`  👷 travailleurs : ${statT.horsLoi} pages + ${statT.total - statT.horsLoi} articles de loi`);
+console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - statG.horsLoi} articles de loi`);
+
 // ---------- portail ----------
 {
   const counts = {};
@@ -855,6 +1105,19 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
   <p class="portal-tagline">L'encyclopédie santé et sécurité du travail en milieu minier<br>${total.toLocaleString('fr-CA')} articles en français · construite à partir des notes de cours</p>
   <div class="portal-search"><input type="search" id="q2" placeholder="Rechercher parmi ${total.toLocaleString('fr-CA')} articles…" autocomplete="off"><div id="suggest2" class="suggest" hidden></div></div>
 </div>
+<h2 class="portal-section">Deux wikis selon qui tu es</h2>
+<div class="portal-grid portal-publics">
+  <a class="portal-card carte-public" href="t/index.html">
+    <span class="portal-icon">👷</span>
+    <span class="portal-info"><strong>Je suis travailleur</strong><span class="portal-desc">${esc(PUBLICS.t.tagline)}</span><span class="portal-count">${statT.horsLoi} pages + les articles de loi</span></span>
+  </a>
+  <a class="portal-card carte-public" href="g/index.html">
+    <span class="portal-icon">🎓</span>
+    <span class="portal-info"><strong>Je supervise ou je dirige</strong><span class="portal-desc">${esc(PUBLICS.g.tagline)}</span><span class="portal-count">${statG.horsLoi} pages + les articles de loi</span></span>
+  </a>
+</div>
+<h2 class="portal-section">Le fond documentaire complet</h2>
+<p class="portal-note">Les ${total.toLocaleString('fr-CA')} pages, classées par discipline. Destiné au conseiller SST et à la recherche documentaire.</p>
 <div class="portal-grid">${cards}</div>
 <div class="portal-foot">
   <a href="#" id="randomLink2">🎲 Une page au hasard</a>
