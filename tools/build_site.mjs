@@ -82,9 +82,22 @@ function headingSlug(text) {
     .replace(/\s+/g, '-') || 'section';
 }
 
+// Libellé du sommaire : on retire uniquement le préfixe de classement du vault
+// (« 15 - Navigation »). Règle volontairement étroite : elle exige des espaces
+// autour du tiret et une lettre derrière, pour ne pas toucher aux titres
+// légitimement numérotés dans les notes (« 1. Diligence raisonnable », « 2.1 Comment mesurer »).
+// Consomme une grappe d'emoji entière, y compris les emojis composés reliés par un
+// ZWJ (U+200D) comme 🧑‍💼 : sinon on mange la première moitié et on laisse un liant orphelin.
+const EMOJIS_DE_TETE = /^(?:\p{Extended_Pictographic}(?:️|\p{Emoji_Modifier})?(?:‍\p{Extended_Pictographic}️?)*|\s)+/u;
+
+function libelleTdm(texte) {
+  const t = texte.replace(/^\d{1,3} +[-–—] +(?=\p{L})/u, '').trim();
+  return t || texte.trim();
+}
+
 function cleanLabel(name) {
   // "20 - Articles" -> "Articles" ; retire aussi les emojis de tête
-  return name.replace(/^\d+\s*-\s*/, '').replace(/^[\p{Extended_Pictographic}\uFE0F\s]+/gu, '').trim() || name;
+  return name.replace(/^\d+\s*-\s*/, '').replace(EMOJIS_DE_TETE, '').trim() || name;
 }
 
 function stripMd(s) {
@@ -407,7 +420,7 @@ function renderBody(md, nested = false) {
       let n = 2;
       while (CUR.headIds.has(id)) id = headingSlug(inner) + '-' + (n++);
       CUR.headIds.add(id);
-      if (lv === '2' || lv === '3') CUR.toc.push({ lv: +lv, id, text: decodeEntities(inner.replace(/<[^>]+>/g, '')) });
+      if (lv === '2' || lv === '3') CUR.toc.push({ lv: +lv, id, text: libelleTdm(decodeEntities(inner.replace(/<[^>]+>/g, ''))) });
       return `<h${lv} id="${id}">${inner}</h${lv}>`;
     });
   }
@@ -598,8 +611,10 @@ for (const p of pages) {
     acc += '/' + slugify(parts[i]);
     crumbs.push(`<a href="{{ROOT}}${acc}/index.html">${esc(cleanLabel(parts[i]))}</a>`);
   }
+  // Le compteur reste lisible quand le sommaire est replié : le lecteur sait ce qu'il y a derrière le bouton.
+  const nbSections = p.toc.filter(t => t.lv === 2).length || p.toc.length;
   const tocHtml = p.toc.length >= 3
-    ? `<div class="toc"><div class="toc-title">Sommaire <button class="toc-toggle" data-toggle>[masquer]</button></div><ul>${p.toc.map(t => `<li class="toc-l${t.lv}"><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ul></div>`
+    ? `<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">${nbSections} section${nbSections > 1 ? 's' : ''}</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul>${p.toc.map(t => `<li class="toc-l${t.lv}"><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ul></nav>`
     : '';
   const bl = backlinks.get(p);
   const blHtml = bl && bl.size

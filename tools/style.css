@@ -141,11 +141,14 @@ mark { background: #ffe49c; padding: 0 2px; }
   font-size: 13.5px; margin: 4px 0 16px;
 }
 .toc-title { text-align: center; font-weight: 700; margin-bottom: 5px; }
-.toc-toggle { background: none; border: 0; color: var(--link); font-size: 11.5px; cursor: pointer; font-weight: 400; }
+.toc-compte { font-weight: 400; font-size: 12px; color: var(--text-soft); }
+.toc-toggle { background: none; border: 0; color: var(--link); font-size: 11.5px; cursor: pointer; font-weight: 400; font-family: inherit; }
 .toc ul { list-style: none; }
 .toc li.toc-l2 { margin: 2px 0; }
 .toc li.toc-l3 { margin-left: 20px; font-size: 13px; }
 .toc.collapsed ul { display: none; }
+/* garde-fou : une page a 55 entrées de sommaire — au-delà, on borne et on fait défiler à l'intérieur */
+.toc > ul { max-height: 60vh; overflow-y: auto; }
 
 /* ---------- infobox ---------- */
 .infobox {
@@ -280,7 +283,13 @@ body.portal { background: linear-gradient(180deg, #eef1f5 0%, #f8f9fa 340px); }
   .page-title { font-size: 24px; }
   /* cibles tactiles : 44 px minimum */
   .letters-nav a { display: inline-block; min-width: 44px; min-height: 44px; line-height: 44px; text-align: center; margin: 2px; }
-  .cat-pages li a, .sidebar a, .toc a { display: block; padding: 11px 4px; }
+  .cat-pages li a, .sidebar a { display: block; padding: 11px 4px; }
+  /* Sommaire : 6px de marge (cible de 34px, au-dessus du minimum WCAG 2.5.8 AA de 24px).
+     À 11px comme les autres listes, un sommaire de 11 entrées poussait tout le contenu
+     hors de l'écran ; le repli automatique fait le reste du travail. */
+  .toc a { display: block; padding: 6px 4px; }
+  .toc { display: block; width: 100%; }
+  .toc-title { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
   .toc-toggle { min-height: 44px; padding: 0 12px; font-size: 14px; }
   .search-filters .filtre { min-height: 40px; }
 }

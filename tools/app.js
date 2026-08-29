@@ -345,12 +345,37 @@
   }
 
   // ---------- sommaire repliable ----------
-  document.querySelectorAll('.toc-toggle').forEach(function (btn) {
+  // Sur téléphone, un sommaire de 11 entrées occupe 561 px et repousse tout le contenu
+  // sous la ligne de flottaison. Au-delà de 8 entrées on le replie d'entrée de jeu ;
+  // le choix du lecteur est ensuite mémorisé pour toutes les pages.
+  var SEUIL_REPLI = 8;
+
+  function prefTdm(valeur) {
+    try {
+      if (valeur === undefined) return localStorage.getItem('tdm-repliee');
+      localStorage.setItem('tdm-repliee', valeur);
+    } catch (e) { /* navigation privée : on continue sans mémoire */ }
+    return null;
+  }
+
+  function appliquerEtat(toc, btn, replie) {
+    toc.classList.toggle('collapsed', replie);
+    btn.textContent = replie ? '[afficher]' : '[masquer]';
+    btn.setAttribute('aria-expanded', replie ? 'false' : 'true');
+  }
+
+  document.querySelectorAll('.toc').forEach(function (toc) {
+    var btn = toc.querySelector('.toc-toggle');
+    if (!btn) return;
+    var nb = toc.querySelectorAll('li').length;
+    var pref = prefTdm();
+    // priorité au choix explicite du lecteur ; sinon repli auto sur petit écran si le sommaire est long
+    var replie = pref !== null ? pref === '1' : (window.innerWidth <= 900 && nb > SEUIL_REPLI);
+    if (replie) appliquerEtat(toc, btn, true);
     btn.addEventListener('click', function () {
-      var toc = btn.closest('.toc');
-      var replie = toc.classList.toggle('collapsed');
-      btn.textContent = replie ? '[afficher]' : '[masquer]';
-      btn.setAttribute('aria-expanded', replie ? 'false' : 'true');
+      var nouvelEtat = !toc.classList.contains('collapsed');
+      appliquerEtat(toc, btn, nouvelEtat);
+      prefTdm(nouvelEtat ? '1' : '0');
     });
   });
 
