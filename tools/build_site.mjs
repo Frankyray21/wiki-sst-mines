@@ -301,15 +301,25 @@ function looseKey(s) {
   return k.replace(/\s+/g, ' ').trim();
 }
 
+function ajouterCle(map, cle, p) {
+  if (!cle) return;
+  if (!map.has(cle)) map.set(cle, []);
+  if (!map.get(cle).includes(p)) map.get(cle).push(p);
+}
+
 for (const p of pages) {
-  const b = p.base.toLowerCase();
-  if (!byBase.has(b)) byBase.set(b, []);
-  byBase.get(b).push(p);
+  ajouterCle(byBase, p.base.toLowerCase(), p);
   byPath.set(p.relPath.slice(0, -3).toLowerCase(), p);
-  const lk = looseKey(p.base);
-  if (lk) {
-    if (!byLoose.has(lk)) byLoose.set(lk, []);
-    byLoose.get(lk).push(p);
+  ajouterCle(byLoose, looseKey(p.base), p);
+  // Les alias déclarés dans le frontmatter deviennent des cibles de lien à part entière.
+  // String() est indispensable : js-yaml rend un alias « 2631 » sous forme de nombre.
+  const alias = Array.isArray(p.fm.aliases) ? p.fm.aliases
+    : (p.fm.aliases ? [p.fm.aliases] : []);
+  for (const a of alias) {
+    const s = String(a).trim();
+    if (!s) continue;
+    ajouterCle(byBase, s.toLowerCase(), p);
+    ajouterCle(byLoose, looseKey(s), p);
   }
 }
 
@@ -446,8 +456,12 @@ function renderWikilinks(md) {
       return `<a href="#${headingSlug(anchor)}">${esc(alias || anchor)}</a>`;
     }
     const pg = resolvePage(target, CUR);
-    // libellé : jamais le chemin Obsidian complet — on affiche le titre de la page cible
-    const nom = pg ? pg.title : target.split('/').pop();
+    // Libellé : jamais le chemin Obsidian complet. On affiche le titre de la page cible,
+    // sauf quand le lien passe par un alias — « [[ISO 2631]] » doit rester « ISO 2631 »
+    // et non devenir « ISO 2631 - Vibrations globales du corps » en pleine phrase.
+    const saisi = target.split('/').pop();
+    const parAlias = pg && looseKey(saisi) !== looseKey(pg.base) && looseKey(saisi) !== looseKey(pg.title);
+    const nom = pg ? (parAlias ? saisi : pg.title) : saisi;
     const label = alias || (anchor ? `${nom} › ${anchor}` : nom);
     if (!pg) return `<span class="new" title="page non créée">${esc(label)}</span>`;
     CUR_LINKS.add(pg);
@@ -640,8 +654,15 @@ function infobox(p) {
   }
   let tags = p.fm.tags;
   if (tags && !Array.isArray(tags)) tags = String(tags).split(/[,\s]+/);
+  // Une étiquette qui a sa page de catégorie devient un lien ; les autres restent inertes.
   const tagHtml = (tags && tags.length)
-    ? `<div class="infobox-tags">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : '';
+    ? `<div class="infobox-tags">${tags.map(t => {
+        const cle = String(t).trim().toLowerCase().replace(/^#/, '');
+        const slug = slugTag.get(cle);
+        return slug
+          ? `<a class="tag tag-lien" href="{{ROOT}}categorie/${slug}.html">${esc(t)}</a>`
+          : `<span class="tag">${esc(t)}</span>`;
+      }).join('')}</div>` : '';
   if (!rows.length && !tagHtml) return '';
   const wiki = WIKIS[p.wikiKey];
   return `<aside class="infobox"><div class="infobox-title">${wiki.icon} ${esc(p.title)}</div><table>${rows.join('')}</table>${tagHtml}</aside>`;
@@ -658,11 +679,77 @@ if (fs.existsSync(OUT)) {
 }
 fs.mkdirSync(OUT, { recursive: true });
 
+// Résumé introductif, façon Wikipédia. On ne fabrique jamais de texte : on promeut le callout
+// « En bref » que 3408 pages portent déjà, et on le retire du corps pour éviter le doublon.
+// Sur un article de loi dont le texte officiel n'est qu'une capture d'image, ce résumé EST
+// le texte de l'article : il est alors étiqueté comme tel.
+function extraireChapo(p) {
+  const lignes = p.body.split('\n');
+  for (let i = 0; i < lignes.length; i++) {
+    const m = lignes[i].match(/^>\s*\[!(abstract|summary)\][+-]?\s*(.*)$/i);
+    if (!m) continue;
+    const corps = [];
+    let j = i + 1;
+    while (j < lignes.length && /^>/.test(lignes[j])) { corps.push(lignes[j].replace(/^>\s?/, '')); j++; }
+    const texte = corps.join('\n').trim();
+    if (!texte) return null;
+    return { md: texte, debut: i, fin: j, titre: m[2].trim() };
+  }
+  return null;
+}
+
+// ---------- mots-clés → catégories ----------
+// Calculé avant l'écriture des pages : l'infobox rend cliquables les étiquettes qui ont une page.
+// Étiquettes de structure : elles décrivent le classement interne du vault, pas un sujet.
+const TAGS_STRUCTURELS = new Set([
+  'wiki', 'loi', 'recueil', 'index', 'stub', 'à-documenter', 'a-documenter', 'template', 'moc',
+  'article', 'articles', 'note', 'notes', 'brouillon', 'archive', 'accueil', 'hub', 'carrefour',
+  'concept', 'section', 'sous-section', 'definition', 'définition', 'reference', 'référence',
+  'lsst', 'latmp', 'lmrsst', 'lnt', 'rsst', 'rssm', 'cstc', 'csst',
+]);
+
+const parTag = new Map();
+for (const p of pages) {
+  const tags = Array.isArray(p.fm.tags) ? p.fm.tags : (p.fm.tags ? String(p.fm.tags).split(/[,\s]+/) : []);
+  const vus = new Set();
+  for (const brut of tags) {
+    const t = String(brut).trim().toLowerCase().replace(/^#/, '');
+    if (!t || t.length < 3 || vus.has(t)) continue;
+    if (TAGS_STRUCTURELS.has(t) || /^(section|chapitre|partie|annexe|article|art)-?\d/.test(t) || /^\d+$/.test(t)) continue;
+    vus.add(t);
+    if (!parTag.has(t)) parTag.set(t, []);
+    parTag.get(t).push(p);
+  }
+}
+
+const SEUIL_CATEGORIE = 5;
+const categories = [...parTag.entries()]
+  .filter(([, pgs]) => pgs.length >= SEUIL_CATEGORIE)
+  .sort((a, b) => b[1].length - a[1].length);
+const slugTag = new Map(categories.map(([t]) => [t, slugify(t)]));
+
 const backlinks = new Map(); // page -> Set(pages qui pointent vers elle)
 for (const p of pages) {
   CUR = p; p.toc = []; p.headIds = new Set();
   CUR_LINKS = new Set();
-  p.html = finalize(renderBody(p.body));
+
+  const ch = extraireChapo(p);
+  let corpsMd = p.body;
+  if (ch) {
+    const lignes = p.body.split('\n');
+    corpsMd = [...lignes.slice(0, ch.debut), ...lignes.slice(ch.fin)].join('\n');
+    // Le chapô est rendu dans la même fenêtre que le corps : CUR et CUR_LINKS sont posés,
+    // donc ses liens comptent dans les backlinks et les jetons de bloc restent alignés.
+    const estCapture = /!\[\[[^\]]*\.png/i.test(p.body) && /^art[-.]/i.test(p.base);
+    p.chapoHtml = finalize(renderBody(ch.md));
+    p.chapoLabel = estCapture
+      ? (/…\s*$/.test(ch.md) ? 'Texte de l’article (transcription incomplète — voir le PDF officiel)' : 'Texte de l’article (transcription)')
+      : 'En bref';
+  } else {
+    p.chapoHtml = '';
+  }
+
+  p.html = finalize(renderBody(corpsMd));
   blocks.length = 0;
   for (const target of CUR_LINKS) {
     if (target === p) continue;
@@ -696,6 +783,7 @@ for (const p of pages) {
 <h1 class="page-title">${esc(p.title)}</h1>
 <div class="page-sub">Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a></div>
 ${infobox(p)}
+${p.chapoHtml ? `<div class="chapo"><div class="chapo-label">${esc(p.chapoLabel)}</div>${p.chapoHtml}</div>` : ''}
 ${tocHtml}
 <div class="page-body">
 ${p.html}
@@ -867,6 +955,64 @@ ${sections}`;
     .replace(/\{\{ROOT\}\}/g, rootOf(outPath));
   fs.writeFileSync(path.join(OUT, outPath), html);
 }
+
+// ---------- espace de noms « Catégorie: » ----------
+// Le mécanisme central de Wikipédia : chaque mot-clé du frontmatter devient une page
+// qui liste les articles qui le portent. Les étiquettes de l'infobox deviennent cliquables.
+console.log('Catégories…');
+
+fs.mkdirSync(path.join(OUT, 'categorie'), { recursive: true });
+for (const [tag, membres] of categories) {
+  const outPath = `categorie/${slugTag.get(tag)}.html`;
+  // Regroupement par domaine : un tag comme « bruit » traverse plusieurs wikis.
+  const parWiki = new Map();
+  for (const p of membres) {
+    if (!parWiki.has(p.wikiKey)) parWiki.set(p.wikiKey, []);
+    parWiki.get(p.wikiKey).push(p);
+  }
+  const sections = [...parWiki.entries()]
+    .sort((a, b) => b[1].length - a[1].length)
+    .map(([wk, pgs]) => `<h2>${WIKIS[wk].icon} ${esc(WIKIS[wk].name)} <small>(${pgs.length})</small></h2>
+<ul class="cat-pages">${pgs.sort(triNaturel).map(p => `<li><a href="{{ROOT}}${p.out}">${esc(p.title)}</a></li>`).join('')}</ul>`)
+    .join('');
+  const voisins = categories
+    .filter(([t]) => t !== tag && parTag.get(t).some(p => membres.includes(p)))
+    .slice(0, 12)
+    .map(([t]) => `<a class="tag tag-lien" href="{{ROOT}}categorie/${slugTag.get(t)}.html">${esc(t)}</a>`)
+    .join('');
+  const content = `
+<div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a> <span class="crumb-sep">›</span> <a href="{{ROOT}}categories.html">Catégories</a></div>
+<h1 class="page-title">Catégorie : ${esc(tag)}</h1>
+<div class="page-sub">${membres.length} page${membres.length > 1 ? 's' : ''} portent ce mot-clé, réparties dans ${parWiki.size} domaine${parWiki.size > 1 ? 's' : ''}.</div>
+${sections}
+${voisins ? `<h2>Mots-clés souvent associés</h2><div class="infobox-tags">${voisins}</div>` : ''}`;
+  fs.writeFileSync(path.join(OUT, outPath),
+    pageShell({ out: outPath, title: 'Catégorie : ' + tag, wikiKey: null, content })
+      .replace(/\{\{ROOT\}\}/g, rootOf(outPath)));
+}
+
+// index de toutes les catégories
+{
+  const groupes = new Map();
+  for (const [tag, membres] of categories) {
+    const c = tag.normalize('NFKD').replace(/[̀-ͯ]/g, '').charAt(0).toUpperCase();
+    const g = /[A-Z]/.test(c) ? c : '#';
+    if (!groupes.has(g)) groupes.set(g, []);
+    groupes.get(g).push([tag, membres.length]);
+  }
+  const lettres = [...groupes.keys()].sort();
+  const content = `
+<div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a></div>
+<h1 class="page-title" id="haut">Catégories</h1>
+<div class="page-sub">${categories.length} mots-clés portés par au moins ${SEUIL_CATEGORIE} pages. Chaque catégorie regroupe les articles qui traitent du même sujet, tous domaines confondus.</div>
+<div class="letters-nav">${lettres.map(l => `<a href="#lettre-${l}">${l}</a>`).join(' · ')}</div>
+${lettres.map(l => `<h2 id="lettre-${l}">${l} <a class="retour-haut" href="#haut">↑ haut</a></h2>
+<ul class="cat-pages">${groupes.get(l).sort((a, b) => a[0].localeCompare(b[0], 'fr')).map(([t, n]) => `<li><a href="{{ROOT}}categorie/${slugTag.get(t)}.html">${esc(t)}</a> <small class="cat-compte">${n}</small></li>`).join('')}</ul>`).join('')}`;
+  fs.writeFileSync(path.join(OUT, 'categories.html'),
+    pageShell({ out: 'categories.html', title: 'Catégories', wikiKey: null, content })
+      .replace(/\{\{ROOT\}\}/g, ''));
+}
+console.log(`  ${categories.length} catégories générées (seuil : ${SEUIL_CATEGORIE} pages)`);
 
 // ---------- index de recherche ----------
 console.log('Index de recherche…');
