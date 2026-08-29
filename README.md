@@ -21,7 +21,7 @@ Encyclopédie interne de santé et sécurité du travail en milieu minier, gén�
 | Entrée | Pour qui | Contenu |
 | --- | --- | --- |
 | 👷 [`/t/`](https://frankyray21.github.io/wiki-sst-mines/t/) | Travailleurs | 51 pages vulgarisées, rangées par problème vécu, plus les articles de loi qui fondent leurs droits |
-| 🎓 [`/g/`](https://frankyray21.github.io/wiki-sst-mines/g/) | Superviseurs, gestionnaires, direction | 122 pages rangées par obligation et par situation |
+| 🎓 [`/g/`](https://frankyray21.github.io/wiki-sst-mines/g/) | Superviseurs, gestionnaires, direction | Portail en tableau de bord : entrée par rôle, par situation à gérer, ou par thème |
 | 📚 [`/w/`](https://frankyray21.github.io/wiki-sst-mines/) | Conseiller SST, recherche documentaire | Les 4 577 pages classées par discipline |
 
 La répartition est automatique, à partir du frontmatter du vault : `publication-travailleur`,
@@ -34,6 +34,9 @@ Le Recueil législatif n'est pas dupliqué : le texte de loi est public et ident
 - `docs/` — le site statique généré (HTML pur, aucune dépendance serveur) — c'est ce dossier que GitHub Pages publie
 - `tools/build_site.mjs` — générateur : markdown Obsidian → HTML type Wikipédia
 - `tools/png_palette.mjs` — recompression PNG sans perte (palette 8 bits, zlib natif)
+- `tools/portail_encadrement.mjs` — portail `/g/` en tableau de bord : contenu des cartes, icônes SVG.
+  Les cibles sont vérifiées à la construction ; le build avertit si l'une disparaît du site.
+- `tools/portail.css` — feuille de style de ce portail (chargée par lui seul)
 - `tools/serve.mjs` — serveur local de prévisualisation (port 8090)
 
 ## Utilisation
