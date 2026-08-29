@@ -334,6 +334,45 @@
   if (r1) r1.addEventListener('click', randomPage);
   if (r2) r2.addEventListener('click', randomPage);
 
+  // ---------- thème clair / sombre ----------
+  // Trois états : « auto » suit le réglage du téléphone ou de l'ordinateur, les deux autres
+  // forcent un thème. Le choix est retenu d'une page à l'autre.
+  (function theme() {
+    var btn = document.getElementById('btnTheme');
+    if (!btn) return;
+    var ETATS = [
+      { cle: 'auto', icone: '🌗', libelle: 'Thème : automatique (suit votre appareil)' },
+      { cle: 'light', icone: '☀️', libelle: 'Thème : clair' },
+      { cle: 'dark', icone: '🌙', libelle: 'Thème : sombre' },
+    ];
+
+    function lire() {
+      try { var v = localStorage.getItem('theme'); return (v === 'dark' || v === 'light') ? v : 'auto'; }
+      catch (e) { return 'auto'; }
+    }
+    function ecrire(v) {
+      try { if (v === 'auto') localStorage.removeItem('theme'); else localStorage.setItem('theme', v); }
+      catch (e) { /* navigation privée : le thème vaut pour la page courante seulement */ }
+    }
+    function appliquer(v) {
+      if (v === 'auto') document.documentElement.removeAttribute('data-theme');
+      else document.documentElement.setAttribute('data-theme', v);
+      var e = ETATS.filter(function (x) { return x.cle === v; })[0] || ETATS[0];
+      btn.textContent = e.icone;
+      btn.setAttribute('title', e.libelle + ' — cliquer pour changer');
+      btn.setAttribute('aria-label', e.libelle + ' — cliquer pour changer');
+    }
+
+    appliquer(lire());
+    btn.addEventListener('click', function () {
+      var i = 0;
+      for (var k = 0; k < ETATS.length; k++) if (ETATS[k].cle === lire()) i = k;
+      var suivant = ETATS[(i + 1) % ETATS.length].cle;
+      ecrire(suivant);
+      appliquer(suivant);
+    });
+  })();
+
   // ---------- menu mobile ----------
   var burger = document.getElementById('burger');
   var sidebar = document.getElementById('sidebar');

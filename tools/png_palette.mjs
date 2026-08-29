@@ -130,6 +130,25 @@ function encoderPalette(img) {
   return Buffer.concat(morceaux);
 }
 
+// Une capture de document (texte noir sur fond blanc) est presque entièrement grise
+// — chaque pixel a R≈G≈B — et majoritairement claire. On s'en sert pour décider quelles
+// images inverser en thème sombre : inverser une photo ou un schéma en couleur serait affreux.
+export function estDocumentTexte(buf) {
+  const img = lirePng(buf);
+  if (!img) return false;
+  const { canaux, px } = img;
+  const pas = Math.max(canaux, Math.floor(px.length / canaux / 20000) * canaux); // ~20 000 pixels échantillonnés
+  let total = 0, gris = 0, clairs = 0;
+  for (let i = 0; i + canaux - 1 < px.length; i += pas) {
+    const r = px[i], v = px[i + 1], b = px[i + 2];
+    total++;
+    if (Math.abs(r - v) <= 12 && Math.abs(v - b) <= 12 && Math.abs(r - b) <= 12) gris++;
+    if (r > 200 && v > 200 && b > 200) clairs++;
+  }
+  if (!total) return false;
+  return gris / total > 0.97 && clairs / total > 0.5;
+}
+
 // Recompresse si possible ; retourne le buffer optimisé ou null si aucun gain / non applicable.
 export function optimiserPng(buf) {
   const img = lirePng(buf);

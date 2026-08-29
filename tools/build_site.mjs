@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 import * as yaml from 'js-yaml';
-import { optimiserPng } from './png_palette.mjs';
+import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -391,6 +391,7 @@ function assetUrl(relPath) {
   // sous 256 couleurs : la palettisation divise leur poids par deux, sans perte.
   if (path.extname(dest).toLowerCase() === '.png') {
     const brut = fs.readFileSync(src);
+    try { if (estDocumentTexte(brut)) docsTexte.add(url); } catch { /* image illisible : on n'inverse pas */ }
     let out = null;
     try { out = optimiserPng(brut); } catch { out = null; }
     if (out) { pngGain += brut.length - out.length; pngOptim++; fs.writeFileSync(dest, out); return url; }
@@ -402,6 +403,9 @@ function assetUrl(relPath) {
   return url;
 }
 let pngGain = 0, pngOptim = 0, pngIntacts = 0;
+// URLs des images qui sont des captures de documents (texte noir sur blanc) : elles sont
+// inversées en thème sombre au lieu d'éblouir le lecteur.
+const docsTexte = new Set();
 
 // Public en cours de génération : null pour le fond documentaire, 't' ou 'g' pour les wikis par public.
 // Un lien vers une page du même public reste dans le wiki ; sinon il renvoie au fond documentaire.
@@ -444,7 +448,8 @@ function renderWikilinks(md) {
           const legende = alias && !/^\d+$/.test(alias) ? alias
             : /^art[-.]/i.test(target.split('/').pop()) ? `Texte officiel de l'article — ${CUR.title}`
             : `Illustration — ${CUR.title}`;
-          return protect(`<span class="page-img"><a href="{{ROOT}}${url}" target="_blank" rel="noopener"><img src="{{ROOT}}${url}" alt="${esc(legende)}" loading="lazy"${w}></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>`);
+          const classeDoc = docsTexte.has(url) ? ' class="img-doc"' : '';
+          return protect(`<span class="page-img"><a href="{{ROOT}}${url}" target="_blank" rel="noopener"><img${classeDoc} src="{{ROOT}}${url}" alt="${esc(legende)}" loading="lazy"${w}></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>`);
         }
         if (ext === 'mp4') return protect(`<video controls preload="metadata" src="{{ROOT}}${url}" style="max-width:100%"></video>`);
         if (ext === 'm4a' || ext === 'mp3') return protect(`<audio controls src="{{ROOT}}${url}"></audio>`);
@@ -551,6 +556,10 @@ const appjs = fs.readFileSync(path.join(__dirname, 'app.js'), 'utf8');
 
 function rootOf(out) { return '../'.repeat(out.split('/').length - 1); }
 
+// Posé dans le <head>, avant tout rendu : sans lui, une page s'afficherait en clair
+// une fraction de seconde avant de basculer en sombre.
+const SCRIPT_THEME = `try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}`;
+
 function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
   const ROOT = rootOf(out);
   const wiki = wikiKey ? WIKIS[wikiKey] : null;
@@ -564,7 +573,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
 <title>${esc(title)} — WIKI SST Mines</title>
 <link rel="stylesheet" href="${ROOT}assets/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
-<script>window.ROOT='${ROOT}';</script>
+<script>window.ROOT='${ROOT}';${SCRIPT_THEME}</script>
 </head>
 <body>
 <header class="site-header">
@@ -574,6 +583,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
     <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
     <div id="suggest" class="suggest" hidden></div>
   </div>
+  <button class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 </header>
 <div class="layout">
 <nav class="sidebar" id="sidebar">
@@ -1256,9 +1266,9 @@ function pageAutonome({ out, titre, contenu }) {
 <title>${esc(titre)} — WIKI SST Mines</title>
 <link rel="stylesheet" href="${R}assets/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
-<script>window.ROOT='${R}';</script>
+<script>window.ROOT='${R}';${SCRIPT_THEME}</script>
 </head>
-<body class="portal">
+<body class="portal"><button class="btn-theme theme-portail" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 <main class="portal-main">${contenu.replace(/\{\{ROOT\}\}/g, R)}</main>
 <footer class="site-footer">WIKI SST — Mines · ${new Date().toLocaleDateString('fr-CA')}</footer>
 <script src="${R}assets/app.js"></script>
@@ -1323,9 +1333,9 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
 <title>WIKI SST — Mines · Portail</title>
 <link rel="stylesheet" href="assets/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
-<script>window.ROOT='';</script>
+<script>window.ROOT='';${SCRIPT_THEME}</script>
 </head>
-<body class="portal">
+<body class="portal"><button class="btn-theme theme-portail" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 <main class="portal-main">${content}</main>
 <footer class="site-footer">WIKI SST — Mines · encyclopédie interne · générée le ${new Date().toLocaleDateString('fr-CA')}</footer>
 <script src="assets/app.js"></script>

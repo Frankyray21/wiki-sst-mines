@@ -6,7 +6,7 @@
 <title>Toxicité, dose-réponse et DL50 — WIKI SST Mines</title>
 <link rel="stylesheet" href="../../../../assets/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
-<script>window.ROOT='../../../../';</script>
+<script>window.ROOT='../../../../';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
 <body>
 <header class="site-header">
@@ -16,6 +16,7 @@
     <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
     <div id="suggest" class="suggest" hidden></div>
   </div>
+  <button class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 </header>
 <div class="layout">
 <nav class="sidebar" id="sidebar">
@@ -100,9 +101,9 @@
 </ul>
 <span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001213353.png" target="_blank" rel="noopener"><img src="../../../../files/images-wiki/pasted-image-20251001213353.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
 <p>Représentation : axe x logarithmique (large plage de doses).</p>
-<span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001214347.png" target="_blank" rel="noopener"><img src="../../../../files/images-wiki/pasted-image-20251001214347.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001214347.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../files/images-wiki/pasted-image-20251001214347.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
 <p>La courbe cumulative est utilisée pour situer la DL50 et autres percentiles d&#39;effet.</p>
-<span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001214426.png" target="_blank" rel="noopener"><img src="../../../../files/images-wiki/pasted-image-20251001214426.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001214426.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../files/images-wiki/pasted-image-20251001214426.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
 <p>Pour certains éléments essentiels (Zn, Se, Cu), la courbe a un aspect en U : carence à faible dose, toxicité à forte dose.</p>
 <span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001214458.png" target="_blank" rel="noopener"><img src="../../../../files/images-wiki/pasted-image-20251001214458.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
 <h4 id="courbes-avec-seuil-vs-sans-seuil">Courbes avec seuil vs sans seuil</h4>
@@ -125,8 +126,8 @@
 <td>Cancérogènes génotoxiques, mutagènes</td>
 </tr>
 </tbody></table>
-<span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001214556.png" target="_blank" rel="noopener"><img src="../../../../files/images-wiki/pasted-image-20251001214556.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
-<span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001220401.png" target="_blank" rel="noopener"><img src="../../../../files/images-wiki/pasted-image-20251001220401.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001214556.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../files/images-wiki/pasted-image-20251001214556.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001220401.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../files/images-wiki/pasted-image-20251001220401.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
 <h3 id="seuils-et-indicateurs">Seuils et indicateurs</h3>
 <table>
 <thead>
@@ -170,7 +171,7 @@
 <span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001220515.png" target="_blank" rel="noopener"><img src="../../../../files/images-wiki/pasted-image-20251001220515.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
 <p>NOAEL et LOAEL sont la base de l&#39;évaluation des risques.</p>
 <p><strong>DL50 indicatives</strong> : toxine botulique 0,001 µg/kg (extrêmement toxique) ; nicotine ~1 mg/kg ; sel de table ~3000 mg/kg.</p>
-<span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001214530.png" target="_blank" rel="noopener"><img src="../../../../files/images-wiki/pasted-image-20251001214530.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001214530.png" target="_blank" rel="noopener"><img class="img-doc" src="../../../../files/images-wiki/pasted-image-20251001214530.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
 <span class="page-img"><a href="../../../../files/images-wiki/pasted-image-20251001221401.png" target="_blank" rel="noopener"><img src="../../../../files/images-wiki/pasted-image-20251001221401.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
 <h3 id="valeurs-toxicologiques-de-reference-vtr">Valeurs toxicologiques de référence (VTR)</h3>
 <h4 id="avec-seuil-dja">Avec seuil : DJA</h4>
