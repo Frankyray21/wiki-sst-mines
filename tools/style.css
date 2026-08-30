@@ -414,8 +414,26 @@ a.tag-lien:hover { background: var(--tag-hover-bg); border-color: var(--tag-hove
 .graphe-filtres { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; }
 .gf { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; padding: 4px 0; }
 .gf-point { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
-.graphe-cadre { border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; background: var(--bg); }
+.graphe-cadre { position: relative; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; background: var(--bg); }
 .graphe-cadre canvas { display: block; width: 100%; touch-action: none; cursor: grab; }
+.graphe-plein {
+  position: absolute; top: 10px; right: 10px; z-index: 5;
+  width: 44px; height: 44px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--content-bg); color: var(--text);
+  font-size: 19px; cursor: pointer; opacity: .85;
+}
+.graphe-plein:hover { opacity: 1; background: var(--hover); }
+/* plein écran « maison » : fonctionne aussi sur iPhone, où l'API Fullscreen n'existe pas */
+.graphe-cadre.gc-plein { position: fixed; inset: 0; z-index: 300; border: 0; border-radius: 0; }
+body.graphe-fige { overflow: hidden; }
+
+@media (max-width: 900px) {
+  /* les 7 filtres empilés mangeaient l'écran : une seule ligne qui défile */
+  .graphe-filtres { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; max-width: 100%; }
+  .gf { white-space: nowrap; flex-shrink: 0; }
+  .graphe-barre input { width: 100%; }
+  .graphe-titre { display: block; margin-left: 0; font-size: 15px; }
+}
 .q-table, .q-resume { border-collapse: collapse; width: 100%; font-size: 14px; margin: 12px 0 24px; }
 .q-table th, .q-table td, .q-resume th, .q-resume td { border: 1px solid var(--border-light); padding: 7px 10px; text-align: left; vertical-align: top; }
 .q-table th, .q-resume th { background: var(--th-bg); }

@@ -20,13 +20,30 @@
     return v || repli;
   }
 
+  var cadre = canvas.parentElement;
   function redimensionner() {
-    var r = canvas.parentElement.getBoundingClientRect();
-    canvas.width = r.width * devicePixelRatio;
-    canvas.height = (innerHeight - r.top - 12) * devicePixelRatio;
-    canvas.style.height = (innerHeight - r.top - 12) + 'px';
+    var plein = cadre.classList.contains('gc-plein');
+    var r = cadre.getBoundingClientRect();
+    // hauteur garantie : sur téléphone, la barre d'outils repoussait le canvas
+    // et il ne restait qu'une bande minuscule
+    var h = plein ? innerHeight : Math.max(innerHeight - r.top - 12, Math.round(innerHeight * 0.62));
+    canvas.width = (plein ? innerWidth : r.width) * devicePixelRatio;
+    canvas.height = h * devicePixelRatio;
+    canvas.style.height = h + 'px';
+    dessiner();
   }
   window.addEventListener('resize', redimensionner);
+
+  // plein écran « maison » (l'API Fullscreen n'existe pas sur iPhone) : le cadre
+  // passe en position fixe sur tout l'écran, le même bouton en ressort
+  var btnPlein = document.getElementById('graphe-plein');
+  if (btnPlein) btnPlein.addEventListener('click', function () {
+    var actif = cadre.classList.toggle('gc-plein');
+    document.body.classList.toggle('graphe-fige', actif);
+    btnPlein.textContent = actif ? '✕' : '⛶';
+    btnPlein.setAttribute('aria-label', actif ? 'Quitter le plein écran' : 'Plein écran');
+    redimensionner();
+  });
 
   // ---------- chargement ----------
   fetch(ROOT + 'assets/graphe.json')
@@ -233,13 +250,33 @@
   }
 
   var orbite = null, aBouge = false;
+  var doigts = new Map(), pincement = null; // zoom à deux doigts sur écran tactile
+
+  function ecartDoigts() {
+    var pts = [...doigts.values()];
+    return Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+  }
+
   canvas.addEventListener('pointerdown', function (ev) {
+    doigts.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+    autoTour = false;
+    try { canvas.setPointerCapture(ev.pointerId); } catch (e) { /* événement synthétique */ }
+    if (doigts.size === 2) {
+      pincement = { ecart: ecartDoigts(), zoom0: zoom };
+      orbite = null;
+      return;
+    }
     orbite = { x: ev.clientX, y: ev.clientY };
     aBouge = false;
-    autoTour = false;
-    canvas.setPointerCapture(ev.pointerId);
   });
   canvas.addEventListener('pointermove', function (ev) {
+    if (doigts.has(ev.pointerId)) doigts.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+    if (pincement && doigts.size === 2) {
+      zoom = Math.max(0.2, Math.min(6, pincement.zoom0 * ecartDoigts() / pincement.ecart));
+      aBouge = true;
+      dessiner();
+      return;
+    }
     if (orbite) {
       var dx = ev.clientX - orbite.x, dy = ev.clientY - orbite.y;
       if (Math.abs(dx) + Math.abs(dy) > 3) aBouge = true;
@@ -256,7 +293,13 @@
       dessiner();
     }
   });
-  canvas.addEventListener('pointerup', function () { orbite = null; });
+  function finDoigt(ev) {
+    doigts.delete(ev.pointerId);
+    if (doigts.size < 2) pincement = null;
+    if (!doigts.size) orbite = null;
+  }
+  canvas.addEventListener('pointerup', finDoigt);
+  canvas.addEventListener('pointercancel', finDoigt);
   canvas.addEventListener('click', function (ev) {
     if (aBouge) return; // c'était une rotation, pas un clic
     var n = sous(ev);

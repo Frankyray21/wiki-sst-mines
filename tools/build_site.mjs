@@ -1163,7 +1163,7 @@ console.log('Graphe des liens…');
   <input type="search" id="graphe-q" placeholder="Trouver une page dans le graphe…" autocomplete="off">
   <div id="graphe-filtres" class="graphe-filtres"></div>
 </div>
-<div class="graphe-cadre"><canvas id="graphe"></canvas></div>
+<div class="graphe-cadre"><button id="graphe-plein" class="graphe-plein" aria-label="Plein écran" title="Plein écran">⛶</button><canvas id="graphe"></canvas></div>
 <script>
 // la bascule 2D/3D conserve la page en focus
 (function(){var f=new URLSearchParams(location.search).get('focus');if(f){var l=document.getElementById('lien-vue');l.href+='?focus='+encodeURIComponent(f);}})();
