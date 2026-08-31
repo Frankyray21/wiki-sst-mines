@@ -4,57 +4,322 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wiki des travailleurs — WIKI SST Mines</title>
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/portail.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 <script>window.ROOT='../';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
-<body class="portal"><button class="btn-theme theme-portail" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
-<main class="portal-main">
-<div class="portal-hero">
-  <div class="portal-globe">👷</div>
-  <h1>Wiki des travailleurs</h1>
-  <p class="portal-tagline">Tes droits, ta santé, ta sécurité — expliqué simplement</p>
-  <div class="portal-search"><input type="search" id="q2" placeholder="Rechercher…" autocomplete="off"><div id="suggest2" class="suggest" hidden></div></div>
-</div>
+<body class="tb" data-pub="t">
+<div class="tb-layout">
+<aside class="tb-side" id="tbSide">
+  <div class="tb-logo">
+    <span class="tb-logo-carre" style="background:#ea580c"><svg style="fill:none;stroke:#fff;stroke-width:1.7" viewBox="0 0 24 24"><path d="M3 17h18M4 17v-2a8 8 0 0 1 16 0v2M9 8V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg></span>
+    <span class="tb-logo-txt"><strong>Wiki SST</strong><span>Espace travailleurs</span></span>
+  </div>
+  <nav class="tb-nav"><a href="#" class="actif"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Accueil</span></a><a href="../w/legislation/index-par-loi.html"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M12 6 4 8l3 6a3 3 0 0 0 6 0zM12 6l8 2-3 6a3 3 0 0 1-6 0z"/></svg><span>Ce que dit la loi</span></a><a href="../t/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-9-9c-1.2-2.7.6-6 3.8-6 2 0 3.4 1.2 4.2 2.6C11.8 6.2 13.2 5 15.2 5c3.2 0 5 3.3 3.8 6-2 4.4-7 9-7 9z"/></svg><span>Où trouver de l'aide</span></a><a href="../w/psychosocial/30-glossaire/glossaire.html"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h5v18H6a2 2 0 0 1-2-2zM20 5a2 2 0 0 0-2-2h-5v18h5a2 2 0 0 0 2-2z"/></svg><span>Glossaire</span></a><a href="#tbFavoris"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span>Favoris</span></a></nav>
+  <div class="tb-sep"></div>
+  <div class="tb-titre-groupe">Par sujet</div>
+  <nav class="tb-nav"><a href="#rub-0"><span class="tb-nav-emoji">🤕</span><span>J'ai mal quelque part</span></a><a href="#rub-1"><span class="tb-nav-emoji">😷</span><span>Je respire quelque chose</span></a><a href="#rub-2"><span class="tb-nav-emoji">🌡️</span><span>Il fait trop chaud, j'entends moins bien</span></a><a href="#rub-3"><span class="tb-nav-emoji">🧠</span><span>Ça ne va pas dans ma tête</span></a><a href="#rub-4"><span class="tb-nav-emoji">😴</span><span>Je ne dors plus</span></a><a href="#rub-5"><span class="tb-nav-emoji">💬</span><span>Ça chauffe avec l'équipe ou le boss</span></a><a href="#rub-6"><span class="tb-nav-emoji">⚖️</span><span>Est-ce que j'ai le droit ?</span></a><a href="#rub-7"><span class="tb-nav-emoji">⚠️</span><span>C'est dangereux ici</span></a><a href="#rub-8"><span class="tb-nav-emoji">🏕️</span><span>La vie au camp</span></a></nav>
+  <div class="tb-sep"></div>
+  <div class="tb-titre-groupe">Par domaine</div>
+  <nav class="tb-nav"><a href="../w/securite/index.html"><span class="tb-pastille" style="background:#3b82f6"></span><span>Santé et sécurité</span></a><a href="../w/ergonomie/index.html"><span class="tb-pastille" style="background:#8b5cf6"></span><span>Ergonomie</span></a><a href="../w/hygiene/index.html"><span class="tb-pastille" style="background:#10b981"></span><span>Hygiène industrielle</span></a><a href="../w/securite/index.html"><span class="tb-pastille" style="background:#f59e0b"></span><span>Sécurité industrielle</span></a><a href="../w/psychosocial/index.html"><span class="tb-pastille" style="background:#ef4444"></span><span>RPS et organisation</span></a><a href="../w/toxicologie/index.html"><span class="tb-pastille" style="background:#22c55e"></span><span>Environnement</span></a></nav>
+  <a class="tb-btn-tags" href="../categories.html">Afficher tous les tags</a>
+</aside>
 
-<div class="encart-urgence">
-  <strong>☎ Ça ne va pas ?</strong>
-  <span>Urgence <a href="tel:911">911</a> · Info-Santé <a href="tel:811">811</a> (option 2 pour Info-Social) · Prévention du suicide <a href="tel:988">988</a></span>
+<div class="tb-main">
+  <header class="tb-head">
+    <button class="tb-icone-btn tb-burger" id="tbBurger" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="tb-retour" href="../index.html"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Accueil</span></a>
+    <div class="tb-head-recherche">
+      <span class="tb-loupe"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+      <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+      <div id="suggest" class="tb-sugg" hidden></div>
+    </div>
+    <button class="tb-icone-btn" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
+    <button class="tb-icone-btn" id="tbFav" aria-label="Mes favoris" title="Mes favoris"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></button>
+    <button class="tb-icone-btn" id="tbHist" aria-label="Historique" title="Historique"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
+    <div class="tb-profil">
+      <span class="tb-avatar tb-avatar-emoji">👷</span>
+      <span class="tb-profil-txt"><strong>Espace travailleurs</strong><span>Wiki SST — Mines</span></span>
+    </div>
+  </header>
+
+  <div class="tb-corps">
+    <main class="tb-centre">
+      <h1 class="tb-bonjour">Salut&nbsp;! 👋</h1>
+      <p class="tb-sous-titre">Tes droits, ta santé, ta sécurité — expliqué simplement, pour toi qui travailles à la mine.</p>
+
+      <div class="tb-urgence">
+        <strong>☎ Ça ne va pas&nbsp;?</strong>
+        <span>Urgence <a href="tel:911">911</a> · Info-Santé <a href="tel:811">811</a> (option 2 pour Info-Social) · Prévention du suicide <a href="tel:988">988</a></span>
+        <a class="tb-urgence-lien" href="../t/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html">Où appeler quand ça ne va pas →</a>
+      </div>
+
+      <div class="tb-recherche">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="q2" placeholder="Cherche un mot, un risque, un droit…" autocomplete="off">
+        <button id="tbGo">Rechercher</button>
+        <div id="suggest2" class="tb-sugg" hidden></div>
+      </div>
+      <div class="tb-populaires"><span>Recherches populaires :</span><button class="tb-puce" data-q="droit de refus">droit de refus</button><button class="tb-puce" data-q="chaleur">chaleur</button><button class="tb-puce" data-q="bruit">bruit</button><button class="tb-puce" data-q="sommeil">sommeil</button><button class="tb-puce" data-q="cadenassage">cadenassage</button><button class="tb-puce" data-q="espace clos">espace clos</button><button class="tb-puce" data-q="CNESST">CNESST</button></div>
+
+      <h2 class="tb-section">Pour commencer</h2>
+      <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/droit-travail/05-demarrage-rapide/demarrage-rapide-travailleur.html">
+      <span class="tb-situ-ic tb-situ-emoji">🚩</span>
+      <span class="tb-situ-txt"><h3>🎯 Démarrage rapide, travailleur</h3><p>📋 Droit du travail</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/droit-travail/25-articles-travailleurs/25-articles-travailleurs.html">
+      <span class="tb-situ-ic tb-situ-emoji">🚩</span>
+      <span class="tb-situ-txt"><h3>👷 Wiki Droit du travail mines - Travailleurs</h3><p>📋 Droit du travail</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/ergonomie/05-demarrage-rapide/demarrage-rapide-travailleur.html">
+      <span class="tb-situ-ic tb-situ-emoji">🚩</span>
+      <span class="tb-situ-txt"><h3>🚀 Démarrage rapide - Travailleur</h3><p>🦺 Ergonomie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/ergonomie/25-articles-travailleurs/25-articles-travailleurs.html">
+      <span class="tb-situ-ic tb-situ-emoji">🚩</span>
+      <span class="tb-situ-txt"><h3>👷 Bienvenue, travailleur</h3><p>🦺 Ergonomie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/hygiene/05-demarrage-rapide/demarrage-rapide-travailleur.html">
+      <span class="tb-situ-ic tb-situ-emoji">🚩</span>
+      <span class="tb-situ-txt"><h3>🎯 Démarrage rapide, travailleur</h3><p>🌫️ Hygiène industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/00-accueil/accueil-travailleurs.html">
+      <span class="tb-situ-ic tb-situ-emoji">🚩</span>
+      <span class="tb-situ-txt"><h3>Accueil travailleurs</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/securite/05-demarrage-rapide/demarrage-rapide-travailleur.html">
+      <span class="tb-situ-ic tb-situ-emoji">🚩</span>
+      <span class="tb-situ-txt"><h3>🎯 Démarrage rapide, travailleur</h3><p>⛑️ Sécurité industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/toxicologie/05-demarrage-rapide/demarrage-rapide-travailleur.html">
+      <span class="tb-situ-ic tb-situ-emoji">🚩</span>
+      <span class="tb-situ-txt"><h3>🎯 Démarrage rapide, travailleur</h3><p>☣️ Toxicologie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div>
+
+      <section class="tb-rub" id="rub-0">
+    <h2 class="tb-section"><span class="tb-rub-emoji">🤕</span> J'ai mal quelque part</h2>
+    <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/ergonomie/25-articles-travailleurs/manutention.html">
+      <span class="tb-situ-ic tb-situ-emoji">🤕</span>
+      <span class="tb-situ-txt"><h3>Manutention (pour toi)</h3><p>🦺 Ergonomie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/ergonomie/25-articles-travailleurs/postures.html">
+      <span class="tb-situ-ic tb-situ-emoji">🤕</span>
+      <span class="tb-situ-txt"><h3>Postures (pour toi)</h3><p>🦺 Ergonomie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/ergonomie/25-articles-travailleurs/travail-repetitif.html">
+      <span class="tb-situ-ic tb-situ-emoji">🤕</span>
+      <span class="tb-situ-txt"><h3>Travail répétitif (pour toi)</h3><p>🦺 Ergonomie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/ergonomie/25-articles-travailleurs/vibrations.html">
+      <span class="tb-situ-ic tb-situ-emoji">🤕</span>
+      <span class="tb-situ-txt"><h3>Vibrations (pour toi)</h3><p>🦺 Ergonomie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div>
+  </section><section class="tb-rub" id="rub-1">
+    <h2 class="tb-section"><span class="tb-rub-emoji">😷</span> Je respire quelque chose</h2>
+    <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/hygiene/25-articles-travailleurs/environnement-de-travail/poussieres-et-aerosols.html">
+      <span class="tb-situ-ic tb-situ-emoji">😷</span>
+      <span class="tb-situ-txt"><h3>Reconnaître les poussières dangereuses en mine</h3><p>🌫️ Hygiène industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/hygiene/25-articles-travailleurs/simdut-et-fds.html">
+      <span class="tb-situ-ic tb-situ-emoji">😷</span>
+      <span class="tb-situ-txt"><h3>Lire une FDS rapidement</h3><p>🌫️ Hygiène industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/toxicologie/25-articles-travailleurs/diesel-et-fumees-de-tirs.html">
+      <span class="tb-situ-ic tb-situ-emoji">😷</span>
+      <span class="tb-situ-txt"><h3>Travailler près des moteurs diesel en mine</h3><p>☣️ Toxicologie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/toxicologie/25-articles-travailleurs/solvants.html">
+      <span class="tb-situ-ic tb-situ-emoji">😷</span>
+      <span class="tb-situ-txt"><h3>Travailler avec des solvants en mine</h3><p>☣️ Toxicologie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div>
+  </section><section class="tb-rub" id="rub-2">
+    <h2 class="tb-section"><span class="tb-rub-emoji">🌡️</span> Il fait trop chaud, j'entends moins bien</h2>
+    <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/ergonomie/25-articles-travailleurs/chaleur.html">
+      <span class="tb-situ-ic tb-situ-emoji">🌡️</span>
+      <span class="tb-situ-txt"><h3>Chaleur (pour toi)</h3><p>🦺 Ergonomie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/hygiene/25-articles-travailleurs/environnement-de-travail/bruit.html">
+      <span class="tb-situ-ic tb-situ-emoji">🌡️</span>
+      <span class="tb-situ-txt"><h3>Le bruit en mine et ma protection auditive</h3><p>🌫️ Hygiène industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/hygiene/25-articles-travailleurs/environnement-de-travail/chaleur.html">
+      <span class="tb-situ-ic tb-situ-emoji">🌡️</span>
+      <span class="tb-situ-txt"><h3>Travailler à la chaleur en mine</h3><p>🌫️ Hygiène industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div>
+  </section><section class="tb-rub" id="rub-3">
+    <h2 class="tb-section"><span class="tb-rub-emoji">🧠</span> Ça ne va pas dans ma tête</h2>
+    <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/10-comprendre-les-rps/quand-ca-va-moins-bien-au-travail.html">
+      <span class="tb-situ-ic tb-situ-emoji">🧠</span>
+      <span class="tb-situ-txt"><h3>Quand ça va moins bien au travail</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/bien-utiliser-les-ressources-de-soutien.html">
+      <span class="tb-situ-ic tb-situ-emoji">🧠</span>
+      <span class="tb-situ-txt"><h3>Bien utiliser les ressources de soutien</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/le-pae-comment-ca-marche.html">
+      <span class="tb-situ-ic tb-situ-emoji">🧠</span>
+      <span class="tb-situ-txt"><h3>Le PAE, comment ça marche</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html">
+      <span class="tb-situ-ic tb-situ-emoji">🧠</span>
+      <span class="tb-situ-txt"><h3>Où appeler quand ça ne va pas</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div>
+  </section><section class="tb-rub" id="rub-4">
+    <h2 class="tb-section"><span class="tb-rub-emoji">😴</span> Je ne dors plus</h2>
+    <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/ergonomie/25-articles-travailleurs/sommeil-et-quart-de-nuit.html">
+      <span class="tb-situ-ic tb-situ-emoji">😴</span>
+      <span class="tb-situ-txt"><h3>Sommeil et quart de nuit (pour toi)</h3><p>🦺 Ergonomie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/30-fatigue-et-recuperation/gerer-la-fatigue-de-fin-de-quart.html">
+      <span class="tb-situ-ic tb-situ-emoji">😴</span>
+      <span class="tb-situ-txt"><h3>Gérer la fatigue de fin de quart</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/30-fatigue-et-recuperation/revenir-a-la-maison-apres-une-periode-de-travail.html">
+      <span class="tb-situ-ic tb-situ-emoji">😴</span>
+      <span class="tb-situ-txt"><h3>Revenir à la maison après une période de travail</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div>
+  </section><section class="tb-rub" id="rub-5">
+    <h2 class="tb-section"><span class="tb-rub-emoji">💬</span> Ça chauffe avec l'équipe ou le boss</h2>
+    <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/bien-utiliser-les-ressources-de-soutien.html">
+      <span class="tb-situ-ic tb-situ-emoji">💬</span>
+      <span class="tb-situ-txt"><h3>Bien utiliser les ressources de soutien</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/60-reconnaissance-et-soutien/se-sentir-reconnu-reconnaitre-ses-collegues.html">
+      <span class="tb-situ-ic tb-situ-emoji">💬</span>
+      <span class="tb-situ-txt"><h3>Se sentir reconnu, reconnaître ses collègues</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/60-reconnaissance-et-soutien/se-sentir-epaule-par-lequipe.html">
+      <span class="tb-situ-ic tb-situ-emoji">💬</span>
+      <span class="tb-situ-txt"><h3>Se sentir épaulé par l'équipe</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div>
+  </section><section class="tb-rub" id="rub-6">
+    <h2 class="tb-section"><span class="tb-rub-emoji">⚖️</span> Est-ce que j'ai le droit ?</h2>
+    <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/droit-travail/25-articles-travailleurs/accidents-et-lesions/droit-de-refus.html">
+      <span class="tb-situ-ic tb-situ-emoji">⚖️</span>
+      <span class="tb-situ-txt"><h3>Mon droit de refus en mine</h3><p>📋 Droit du travail</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/droit-travail/25-articles-travailleurs/accidents-et-lesions/droits-et-ressources-apres-lesion.html">
+      <span class="tb-situ-ic tb-situ-emoji">⚖️</span>
+      <span class="tb-situ-txt"><h3>Droits et ressources après lésion</h3><p>📋 Droit du travail</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/droit-travail/25-articles-travailleurs/accidents-et-lesions/retour-au-travail.html">
+      <span class="tb-situ-ic tb-situ-emoji">⚖️</span>
+      <span class="tb-situ-txt"><h3>Retour au travail après une lésion</h3><p>📋 Droit du travail</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/droit-travail/25-articles-travailleurs/accidents-et-lesions/reclamation-cnesst.html">
+      <span class="tb-situ-ic tb-situ-emoji">⚖️</span>
+      <span class="tb-situ-txt"><h3>Faire une réclamation à la CNESST</h3><p>📋 Droit du travail</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div>
+  </section><section class="tb-rub" id="rub-7">
+    <h2 class="tb-section"><span class="tb-rub-emoji">⚠️</span> C'est dangereux ici</h2>
+    <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/hygiene/25-articles-travailleurs/environnement-de-travail/bruit.html">
+      <span class="tb-situ-ic tb-situ-emoji">⚠️</span>
+      <span class="tb-situ-txt"><h3>Le bruit en mine et ma protection auditive</h3><p>🌫️ Hygiène industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/hygiene/25-articles-travailleurs/espaces-clos.html">
+      <span class="tb-situ-ic tb-situ-emoji">⚠️</span>
+      <span class="tb-situ-txt"><h3>Entrer dans un espace clos en sécurité</h3><p>🌫️ Hygiène industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/hygiene/25-articles-travailleurs/equipements-de-protection.html">
+      <span class="tb-situ-ic tb-situ-emoji">⚠️</span>
+      <span class="tb-situ-txt"><h3>Équipements de protection</h3><p>🌫️ Hygiène industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/securite/25-articles-travailleurs/presquaccident.html">
+      <span class="tb-situ-ic tb-situ-emoji">⚠️</span>
+      <span class="tb-situ-txt"><h3>Signaler un presqu'accident en mine</h3><p>⛑️ Sécurité industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/securite/25-articles-travailleurs/risques-mecaniques/cadenassage.html">
+      <span class="tb-situ-ic tb-situ-emoji">⚠️</span>
+      <span class="tb-situ-txt"><h3>Procédure cadenassage en mine</h3><p>⛑️ Sécurité industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/securite/25-articles-travailleurs/risques-mecaniques/machines-et-protecteurs.html">
+      <span class="tb-situ-ic tb-situ-emoji">⚠️</span>
+      <span class="tb-situ-txt"><h3>Travailler en sécurité près des machines</h3><p>⛑️ Sécurité industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div>
+  </section><section class="tb-rub" id="rub-8">
+    <h2 class="tb-section"><span class="tb-rub-emoji">🏕️</span> La vie au camp</h2>
+    <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/psychosocial/25-articles-travailleurs/40-vie-hors-travail-et-camp/bien-vivre-son-sejour-au-camp.html">
+      <span class="tb-situ-ic tb-situ-emoji">🏕️</span>
+      <span class="tb-situ-txt"><h3>Bien vivre son séjour au camp</h3><p>🧠 SST psychosociale</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div>
+  </section>
+
+      <section class="tb-rub"><h2 class="tb-section"><span class="tb-rub-emoji">📄</span> Autres pages</h2>
+      <div class="tb-grille tb-g4"><a class="tb-carte tb-situ" href="../t/w/hygiene/25-articles-travailleurs/00-accueil-travailleurs.html">
+      <span class="tb-situ-ic tb-situ-emoji">📄</span>
+      <span class="tb-situ-txt"><h3>👷 Wiki Hygiène industrielle mines - Travailleurs</h3><p>🌫️ Hygiène industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/hygiene/25-articles-travailleurs/reconnaitre-une-exposition.html">
+      <span class="tb-situ-ic tb-situ-emoji">📄</span>
+      <span class="tb-situ-txt"><h3>Reconnaître une exposition</h3><p>🌫️ Hygiène industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/securite/25-articles-travailleurs/00-accueil-travailleurs.html">
+      <span class="tb-situ-ic tb-situ-emoji">📄</span>
+      <span class="tb-situ-txt"><h3>👷 Wiki Sécurité industrielle mines - Travailleurs</h3><p>⛑️ Sécurité industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/securite/25-articles-travailleurs/dangers-et-risques.html">
+      <span class="tb-situ-ic tb-situ-emoji">📄</span>
+      <span class="tb-situ-txt"><h3>Reconnaître les dangers sur un chantier en mine</h3><p>⛑️ Sécurité industrielle</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a><a class="tb-carte tb-situ" href="../t/w/toxicologie/25-articles-travailleurs/00-accueil-travailleurs.html">
+      <span class="tb-situ-ic tb-situ-emoji">📄</span>
+      <span class="tb-situ-txt"><h3>👷 Wiki Toxicologie mines - Travailleurs</h3><p>☣️ Toxicologie</p></span>
+      <svg class="tb-fleche" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a></div></section>
+
+      <div class="tb-barre"><a href="../categories.html"><span class="tb-barre-ic"><svg viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7zM14 3v4h4M9 12h6M9 16h6"/></svg></span><span><strong>Tous les articles</strong><span>Parcourir par sujet</span></span></a><a href="../w/psychosocial/30-glossaire/glossaire.html"><span class="tb-barre-ic"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h5v18H6a2 2 0 0 1-2-2zM20 5a2 2 0 0 0-2-2h-5v18h5a2 2 0 0 0 2-2z"/></svg></span><span><strong>Glossaire</strong><span>Termes et définitions</span></span></a><a href="../graphe.html"><span class="tb-barre-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8a4 4 0 0 0 0 8M12 8a4 4 0 0 1 0 8"/></svg></span><span><strong>Graphe des liens</strong><span>Le wiki en réseau</span></span></a><a href="../w/psychosocial/50-ressources-daide/index.html"><span class="tb-barre-ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-9-9c-1.2-2.7.6-6 3.8-6 2 0 3.4 1.2 4.2 2.6C11.8 6.2 13.2 5 15.2 5c3.2 0 5 3.3 3.8 6-2 4.4-7 9-7 9z"/></svg></span><span><strong>Ressources d’aide</strong><span>Lignes d’aide et PAE</span></span></a></div>
+    </main>
+
+    <aside class="tb-droite">
+      <section class="tb-bloc tb-legal">
+        <span class="tb-legal-ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M12 6 4 8l3 6a3 3 0 0 0 6 0zM12 6l8 2-3 6a3 3 0 0 1-6 0z"/></svg></span>
+        <div>
+          <h2>Ce que dit la loi</h2>
+          <p>Les articles qui fondent tes droits : refus de travail, retrait préventif, réclamation, retour au travail.</p>
+          <a class="tb-btn-plein" href="../w/legislation/index-par-loi.html">Explorer les lois et règlements</a>
+          <a class="tb-legal-compte" href="../w/legislation/index-par-loi.html">3 818 articles de loi</a>
+        </div>
+      </section>
+
+      <section class="tb-bloc">
+        <div class="tb-bloc-tete"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h2>Récemment consulté</h2></div>
+        <ul class="tb-liste" id="tbRecents"><li class="tb-vide">Les pages que tu ouvres apparaîtront ici.</li></ul>
+        <a class="tb-voir" href="#" id="tbVoirHist" hidden>Voir tout l'historique →</a>
+      </section>
+
+      <section class="tb-bloc">
+        <div class="tb-bloc-tete"><svg style="stroke:#f5a623" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><h2>Favoris</h2><a class="tb-voir" href="#" id="tbVoirFav" hidden>Voir tous</a></div>
+        <ul class="tb-liste tb-liste-fav" id="tbFavoris"><li class="tb-vide">Garde une page sous la main avec l'étoile de son en-tête.</li></ul>
+      </section>
+
+      <section class="tb-bloc">
+        <div class="tb-bloc-tete"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.5"/></svg><h2>À propos du contenu</h2></div>
+        <ul class="tb-apropos">
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-5"/></svg><span>Écrit à partir de notes de cours SST, en mots simples</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M12 6 4 8l3 6a3 3 0 0 0 6 0zM12 6l8 2-3 6a3 3 0 0 1-6 0z"/></svg><span>Appuyé sur les lois et règlements du Québec en vigueur</span></li>
+          <li><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Date de mise à jour : <span id="tbMaj">31 août 2026</span></span></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="tb-pied">
+    <a href="../w/psychosocial/50-ressources-daide/index.html">Ressources d'aide</a>
+    <a href="../index.html">Accueil du wiki</a>
+    <span class="tb-droite-pied"><span>© 2026 Machines Roger inc.</span><span id="tbVersion">Version 1.0.0</span></span>
+  </footer>
 </div>
-<p class="portal-intro">Ce wiki est écrit pour toi qui travailles à la mine. Tu y trouves ce qu'il faut savoir sur les risques du métier, ce que la loi te garantit, et où trouver de l'aide.</p>
-<section class="rubrique"><h2><span class="rub-icone">🚩</span> Pour commencer</h2><ul class="rub-liste"><li><a href="../t/w/droit-travail/05-demarrage-rapide/demarrage-rapide-travailleur.html">🎯 Démarrage rapide, travailleur</a> <small class="rub-domaine">📋 Droit du travail</small></li><li><a href="../t/w/droit-travail/25-articles-travailleurs/25-articles-travailleurs.html">👷 Wiki Droit du travail mines - Travailleurs</a> <small class="rub-domaine">📋 Droit du travail</small></li><li><a href="../t/w/ergonomie/05-demarrage-rapide/demarrage-rapide-travailleur.html">🚀 Démarrage rapide - Travailleur</a> <small class="rub-domaine">🦺 Ergonomie</small></li><li><a href="../t/w/ergonomie/25-articles-travailleurs/25-articles-travailleurs.html">👷 Bienvenue, travailleur</a> <small class="rub-domaine">🦺 Ergonomie</small></li><li><a href="../t/w/hygiene/05-demarrage-rapide/demarrage-rapide-travailleur.html">🎯 Démarrage rapide, travailleur</a> <small class="rub-domaine">🌫️ Hygiène industrielle</small></li><li><a href="../t/w/psychosocial/25-articles-travailleurs/00-accueil/accueil-travailleurs.html">Accueil travailleurs</a> <small class="rub-domaine">🧠 SST psychosociale</small></li><li><a href="../t/w/securite/05-demarrage-rapide/demarrage-rapide-travailleur.html">🎯 Démarrage rapide, travailleur</a> <small class="rub-domaine">⛑️ Sécurité industrielle</small></li><li><a href="../t/w/toxicologie/05-demarrage-rapide/demarrage-rapide-travailleur.html">🎯 Démarrage rapide, travailleur</a> <small class="rub-domaine">☣️ Toxicologie</small></li></ul></section>
-<div class="portal-grid"><a class="portal-card" href="../w/legislation/index-par-loi.html"><span class="portal-icon">⚖️</span><span class="portal-info"><strong>Ce que dit la loi</strong><span class="portal-desc">Les articles de loi qui fondent tes droits : refus de travail, retrait préventif, réclamation, retour au travail.</span><span class="portal-count">3818 articles de loi</span></span></a></div>
-<section class="rubrique">
-  <h2><span class="rub-icone">🤕</span> J'ai mal quelque part</h2>
-  <ul class="rub-liste"><li><a href="../t/w/ergonomie/25-articles-travailleurs/manutention.html">Manutention (pour toi)</a></li><li><a href="../t/w/ergonomie/25-articles-travailleurs/postures.html">Postures (pour toi)</a></li><li><a href="../t/w/ergonomie/25-articles-travailleurs/travail-repetitif.html">Travail répétitif (pour toi)</a></li><li><a href="../t/w/ergonomie/25-articles-travailleurs/vibrations.html">Vibrations (pour toi)</a></li></ul>
-</section><section class="rubrique">
-  <h2><span class="rub-icone">😷</span> Je respire quelque chose</h2>
-  <ul class="rub-liste"><li><a href="../t/w/hygiene/25-articles-travailleurs/environnement-de-travail/poussieres-et-aerosols.html">Reconnaître les poussières dangereuses en mine</a></li><li><a href="../t/w/hygiene/25-articles-travailleurs/simdut-et-fds.html">Lire une FDS rapidement</a></li><li><a href="../t/w/toxicologie/25-articles-travailleurs/diesel-et-fumees-de-tirs.html">Travailler près des moteurs diesel en mine</a></li><li><a href="../t/w/toxicologie/25-articles-travailleurs/solvants.html">Travailler avec des solvants en mine</a></li></ul>
-</section><section class="rubrique">
-  <h2><span class="rub-icone">🌡️</span> Il fait trop chaud, j'entends moins bien</h2>
-  <ul class="rub-liste"><li><a href="../t/w/ergonomie/25-articles-travailleurs/chaleur.html">Chaleur (pour toi)</a></li><li><a href="../t/w/hygiene/25-articles-travailleurs/environnement-de-travail/bruit.html">Le bruit en mine et ma protection auditive</a></li><li><a href="../t/w/hygiene/25-articles-travailleurs/environnement-de-travail/chaleur.html">Travailler à la chaleur en mine</a></li></ul>
-</section><section class="rubrique">
-  <h2><span class="rub-icone">🧠</span> Ça ne va pas dans ma tête</h2>
-  <ul class="rub-liste"><li><a href="../t/w/psychosocial/25-articles-travailleurs/10-comprendre-les-rps/quand-ca-va-moins-bien-au-travail.html">Quand ça va moins bien au travail</a></li><li><a href="../t/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/bien-utiliser-les-ressources-de-soutien.html">Bien utiliser les ressources de soutien</a></li><li><a href="../t/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/le-pae-comment-ca-marche.html">Le PAE, comment ça marche</a></li><li><a href="../t/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html">Où appeler quand ça ne va pas</a></li></ul>
-</section><section class="rubrique">
-  <h2><span class="rub-icone">😴</span> Je ne dors plus</h2>
-  <ul class="rub-liste"><li><a href="../t/w/ergonomie/25-articles-travailleurs/sommeil-et-quart-de-nuit.html">Sommeil et quart de nuit (pour toi)</a></li><li><a href="../t/w/psychosocial/25-articles-travailleurs/30-fatigue-et-recuperation/gerer-la-fatigue-de-fin-de-quart.html">Gérer la fatigue de fin de quart</a></li><li><a href="../t/w/psychosocial/25-articles-travailleurs/30-fatigue-et-recuperation/revenir-a-la-maison-apres-une-periode-de-travail.html">Revenir à la maison après une période de travail</a></li></ul>
-</section><section class="rubrique">
-  <h2><span class="rub-icone">💬</span> Ça chauffe avec l'équipe ou le boss</h2>
-  <ul class="rub-liste"><li><a href="../t/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/bien-utiliser-les-ressources-de-soutien.html">Bien utiliser les ressources de soutien</a></li><li><a href="../t/w/psychosocial/25-articles-travailleurs/60-reconnaissance-et-soutien/se-sentir-reconnu-reconnaitre-ses-collegues.html">Se sentir reconnu, reconnaître ses collègues</a></li><li><a href="../t/w/psychosocial/25-articles-travailleurs/60-reconnaissance-et-soutien/se-sentir-epaule-par-lequipe.html">Se sentir épaulé par l'équipe</a></li></ul>
-</section><section class="rubrique">
-  <h2><span class="rub-icone">⚖️</span> Est-ce que j'ai le droit ?</h2>
-  <ul class="rub-liste"><li><a href="../t/w/droit-travail/25-articles-travailleurs/accidents-et-lesions/droit-de-refus.html">Mon droit de refus en mine</a></li><li><a href="../t/w/droit-travail/25-articles-travailleurs/accidents-et-lesions/droits-et-ressources-apres-lesion.html">Droits et ressources après lésion</a></li><li><a href="../t/w/droit-travail/25-articles-travailleurs/accidents-et-lesions/retour-au-travail.html">Retour au travail après une lésion</a></li><li><a href="../t/w/droit-travail/25-articles-travailleurs/accidents-et-lesions/reclamation-cnesst.html">Faire une réclamation à la CNESST</a></li></ul>
-</section><section class="rubrique">
-  <h2><span class="rub-icone">⚠️</span> C'est dangereux ici</h2>
-  <ul class="rub-liste"><li><a href="../t/w/hygiene/25-articles-travailleurs/environnement-de-travail/bruit.html">Le bruit en mine et ma protection auditive</a></li><li><a href="../t/w/hygiene/25-articles-travailleurs/espaces-clos.html">Entrer dans un espace clos en sécurité</a></li><li><a href="../t/w/hygiene/25-articles-travailleurs/equipements-de-protection.html">Équipements de protection</a></li><li><a href="../t/w/securite/25-articles-travailleurs/presquaccident.html">Signaler un presqu'accident en mine</a></li><li><a href="../t/w/securite/25-articles-travailleurs/risques-mecaniques/cadenassage.html">Procédure cadenassage en mine</a></li><li><a href="../t/w/securite/25-articles-travailleurs/risques-mecaniques/machines-et-protecteurs.html">Travailler en sécurité près des machines</a></li></ul>
-</section><section class="rubrique">
-  <h2><span class="rub-icone">🏕️</span> La vie au camp</h2>
-  <ul class="rub-liste"><li><a href="../t/w/psychosocial/25-articles-travailleurs/40-vie-hors-travail-et-camp/bien-vivre-son-sejour-au-camp.html">Bien vivre son séjour au camp</a></li></ul>
-</section>
-<section class="rubrique"><h2><span class="rub-icone">📄</span> Autres pages</h2><ul class="rub-liste"><li><a href="../t/w/hygiene/25-articles-travailleurs/00-accueil-travailleurs.html">👷 Wiki Hygiène industrielle mines - Travailleurs</a></li><li><a href="../t/w/hygiene/25-articles-travailleurs/reconnaitre-une-exposition.html">Reconnaître une exposition</a></li><li><a href="../t/w/securite/25-articles-travailleurs/00-accueil-travailleurs.html">👷 Wiki Sécurité industrielle mines - Travailleurs</a></li><li><a href="../t/w/securite/25-articles-travailleurs/dangers-et-risques.html">Reconnaître les dangers sur un chantier en mine</a></li><li><a href="../t/w/toxicologie/25-articles-travailleurs/00-accueil-travailleurs.html">👷 Wiki Toxicologie mines - Travailleurs</a></li></ul></section>
-<div class="portal-foot"><a href="../index.html">← Retour à l'accueil du wiki</a></div></main>
-<footer class="site-footer">WIKI SST — Mines<span id="version"></span></footer>
+</div>
 <script src="../assets/app.js"></script>
 </body>
 </html>

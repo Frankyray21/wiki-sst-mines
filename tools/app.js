@@ -651,9 +651,20 @@
 
   // Étapes selon la page affichée
   function etapesDeLaPage() {
+    if (document.body.classList.contains('tb') && document.body.getAttribute('data-pub') === 't') {
+      return ['tour-travailleurs', [
+        { titre: 'Bienvenue', texte: 'Cet espace est écrit pour toi qui travailles à la mine. On y entre par ce qui t’arrive, pas par des termes techniques.' },
+        { titre: 'Si ça ne va pas, c’est ici', texte: 'Ce bandeau reste en haut de l’accueil. Les numéros sont cliquables : un toucher et le téléphone compose.', cible: '.tb-urgence' },
+        { titre: 'Cherche avec tes mots', texte: 'Un risque, un droit, un malaise — tape-le comme tu le dirais. Les puces reprennent les recherches les plus fréquentes.', cible: '.tb-recherche' },
+        { titre: 'Trouve par ta situation', texte: '« J’ai mal quelque part », « Je ne dors plus », « Est-ce que j’ai le droit ? » : choisis la phrase qui te ressemble.', cible: '.tb-rub' },
+        { titre: 'Tes droits, en toutes lettres', texte: 'Le refus de travail, le retrait préventif, la réclamation : ce que la loi te garantit, dans son texte officiel.', cible: '.tb-legal' },
+        { titre: 'Tes pages te suivent', texte: 'Ce que tu ouvres s’inscrit dans « Récemment consulté », et l’étoile d’un article le garde dans tes favoris.', cible: '#tbRecents' },
+        { titre: 'Tout est aussi rangé à gauche', texte: 'La barre latérale reprend les sujets et les domaines. Le bouton « ? » relance cette visite quand tu veux.', cible: '.tb-side' },
+      ]];
+    }
     if (document.body.classList.contains('tb')) {
       return ['tour-encadrement', [
-        { titre: 'Bienvenue dans le wiki de l’encadrement', texte: 'Cet espace réunit ce qu’un superviseur, un gestionnaire ou un dirigeant doit savoir. Voici comment vous y retrouver en quelques secondes.' },
+        { titre: 'Bienvenue dans Gestion & prévention', texte: 'Cet espace réunit ce qu’un superviseur, un gestionnaire ou un dirigeant doit savoir. Voici comment vous y retrouver en quelques secondes.' },
         { titre: 'Chercher, même sans connaître le mot exact', texte: 'Tapez une obligation, une situation, ou un numéro d’article comme « art 51 RSST ». Les puces en dessous reprennent les recherches les plus fréquentes.', cible: '.tb-recherche' },
         { titre: 'Entrer par votre rôle', texte: 'Chaque rôle a son point de départ : responsabilités du superviseur, obligations du gestionnaire, gouvernance pour la direction.', cible: '.tb-grille' },
         { titre: 'Ou par ce qui vous arrive aujourd’hui', texte: 'Un accident, une visite d’inspecteur, un constat d’infraction, un travailleur blessé : chaque situation mène directement à la marche à suivre.', cible: '.tb-grille + .tb-section + .tb-grille' },

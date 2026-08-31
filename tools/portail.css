@@ -204,6 +204,27 @@ body.tb a { color: inherit; text-decoration: none; }
 }
 .tb-pied .tb-droite-pied { margin-left: auto; display: flex; gap: 22px; }
 
+/* espace travailleurs : bandeau d'urgence et cartes à emoji */
+:root { --p-rouge-bg: #fdecec; --p-rouge-bd: #f0b1b1; --p-rouge-fg: #a92222; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --p-rouge-bg: #2f1a1a; --p-rouge-bd: #8a3c3c; --p-rouge-fg: #ffabab; }
+}
+:root[data-theme="dark"] { --p-rouge-bg: #2f1a1a; --p-rouge-bd: #8a3c3c; --p-rouge-fg: #ffabab; }
+.tb-urgence {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px;
+  background: var(--p-rouge-bg); border: 1px solid var(--p-rouge-bd);
+  border-left: 5px solid var(--p-rouge-fg); border-radius: var(--p-rayon);
+  padding: 13px 17px; margin: 0 0 18px; font-size: 14.5px;
+}
+.tb-urgence strong { color: var(--p-rouge-fg); }
+.tb-urgence a { color: var(--p-rouge-fg); font-weight: 700; white-space: nowrap; }
+.tb-urgence .tb-urgence-lien { margin-left: auto; font-weight: 600; white-space: normal; }
+.tb-situ-emoji { font-size: 26px; line-height: 1; }
+.tb-rub { scroll-margin-top: 84px; }
+.tb-rub-emoji { font-size: 22px; margin-right: 4px; }
+.tb-nav-emoji { width: 19px; text-align: center; flex-shrink: 0; }
+.tb-avatar-emoji { background: var(--p-bleu-pale); font-size: 20px; }
+
 /* suggestions de recherche réutilisées */
 .tb-sugg {
   position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 40;

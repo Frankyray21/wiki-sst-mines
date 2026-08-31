@@ -32,6 +32,7 @@ const I = {
   coche: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-5"/></svg>',
   calendrier: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
   menu: '<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+  coeur: '<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-9-9c-1.2-2.7.6-6 3.8-6 2 0 3.4 1.2 4.2 2.6C11.8 6.2 13.2 5 15.2 5c3.2 0 5 3.3 3.8 6-2 4.4-7 9-7 9z"/></svg>',
 };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -119,6 +120,163 @@ export const DOMAINES = [
 ];
 
 export const POPULAIRES = ['accident', 'inspecteur CNESST', 'chaleur', 'cadenassage', 'espace clos', 'amiante', 'RPS'];
+
+// ---------- portail des travailleurs, même habillage tableau de bord ----------
+// Le contenu vient du build (rubriques remplies avec les pages réellement publiées) ;
+// seul l'habillage est défini ici. Ton reste au « tu », bandeau d'urgence en tête.
+export function rendrePortailTravailleurs({ R, nbLois, majDate, verifier, rubriques, accueils, autres }) {
+  const morts = [];
+  const url = (cible) => {
+    if (!cible) return '#';
+    if (verifier && !verifier(cible)) { morts.push(cible); return '#'; }
+    return R + cible;
+  };
+  const ico = (nom, style = '') => (I[nom] || I.doc).replace('<svg', `<svg${style ? ` style="${style}"` : ''}`);
+
+  const aideUrl = 't/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html';
+
+  const navHaut = [
+    `<a href="#" class="actif">${ico('accueil')}<span>Accueil</span></a>`,
+    `<a href="${url('w/legislation/index-par-loi.html')}">${ico('balance')}<span>Ce que dit la loi</span></a>`,
+    `<a href="${url(aideUrl)}">${ico('coeur')}<span>Où trouver de l'aide</span></a>`,
+    `<a href="${url('w/psychosocial/30-glossaire/glossaire.html')}">${ico('livre')}<span>Glossaire</span></a>`,
+    `<a href="#tbFavoris">${ico('etoile')}<span>Favoris</span></a>`,
+  ].join('');
+
+  const navSujets = rubriques.map((r, i) =>
+    `<a href="#rub-${i}"><span class="tb-nav-emoji">${r.icone}</span><span>${esc(r.titre)}</span></a>`).join('');
+
+  const domaines = DOMAINES.map(d =>
+    `<a href="${url(d.cible)}"><span class="tb-pastille" style="background:${d.couleur}"></span><span>${esc(d.nom)}</span></a>`).join('');
+
+  const populaires = ['droit de refus', 'chaleur', 'bruit', 'sommeil', 'cadenassage', 'espace clos', 'CNESST']
+    .map(p => `<button class="tb-puce" data-q="${esc(p)}">${esc(p)}</button>`).join('');
+
+  const cartePage = (p) => `<a class="tb-carte tb-situ" href="${url(p.u)}">
+      <span class="tb-situ-ic tb-situ-emoji">${p.icone || '📄'}</span>
+      <span class="tb-situ-txt"><h3>${esc(p.t)}</h3>${p.dom ? `<p>${esc(p.dom)}</p>` : ''}</span>
+      ${I.fleche.replace('<svg', '<svg class="tb-fleche"')}
+    </a>`;
+
+  const sections = rubriques.map((r, i) => r.membres.length ? `<section class="tb-rub" id="rub-${i}">
+    <h2 class="tb-section"><span class="tb-rub-emoji">${r.icone}</span> ${esc(r.titre)}</h2>
+    <div class="tb-grille tb-g4">${r.membres.map(m => cartePage({ ...m, icone: r.icone })).join('')}</div>
+  </section>` : '').join('');
+
+  const barre = [
+    { t: 'Tous les articles', s: 'Parcourir par sujet', i: 'doc', c: 'categories.html' },
+    { t: 'Glossaire', s: 'Termes et définitions', i: 'livre', c: 'w/psychosocial/30-glossaire/glossaire.html' },
+    { t: 'Graphe des liens', s: 'Le wiki en réseau', i: 'cercle', c: 'graphe.html' },
+    { t: 'Ressources d’aide', s: 'Lignes d’aide et PAE', i: 'coeur', c: 'w/psychosocial/50-ressources-daide/index.html' },
+  ].map(b => `<a href="${url(b.c)}"><span class="tb-barre-ic">${ico(b.i)}</span><span><strong>${esc(b.t)}</strong><span>${esc(b.s)}</span></span></a>`).join('');
+
+  const html = `<div class="tb-layout">
+<aside class="tb-side" id="tbSide">
+  <div class="tb-logo">
+    <span class="tb-logo-carre" style="background:#ea580c">${I.casque.replace('<svg', '<svg style="fill:none;stroke:#fff;stroke-width:1.7"')}</span>
+    <span class="tb-logo-txt"><strong>Wiki SST</strong><span>Espace travailleurs</span></span>
+  </div>
+  <nav class="tb-nav">${navHaut}</nav>
+  <div class="tb-sep"></div>
+  <div class="tb-titre-groupe">Par sujet</div>
+  <nav class="tb-nav">${navSujets}</nav>
+  <div class="tb-sep"></div>
+  <div class="tb-titre-groupe">Par domaine</div>
+  <nav class="tb-nav">${domaines}</nav>
+  <a class="tb-btn-tags" href="${url('categories.html')}">Afficher tous les tags</a>
+</aside>
+
+<div class="tb-main">
+  <header class="tb-head">
+    <button class="tb-icone-btn tb-burger" id="tbBurger" aria-label="Menu">${I.menu}</button>
+    <a class="tb-retour" href="${R}index.html">${I.retour}<span>Accueil</span></a>
+    <div class="tb-head-recherche">
+      <span class="tb-loupe">${I.loupe}</span>
+      <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+      <div id="suggest" class="tb-sugg" hidden></div>
+    </div>
+    <button class="tb-icone-btn" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
+    <button class="tb-icone-btn" id="tbFav" aria-label="Mes favoris" title="Mes favoris">${I.etoile}</button>
+    <button class="tb-icone-btn" id="tbHist" aria-label="Historique" title="Historique">${I.horloge}</button>
+    <div class="tb-profil">
+      <span class="tb-avatar tb-avatar-emoji">👷</span>
+      <span class="tb-profil-txt"><strong>Espace travailleurs</strong><span>Wiki SST — Mines</span></span>
+    </div>
+  </header>
+
+  <div class="tb-corps">
+    <main class="tb-centre">
+      <h1 class="tb-bonjour">Salut&nbsp;! 👋</h1>
+      <p class="tb-sous-titre">Tes droits, ta santé, ta sécurité — expliqué simplement, pour toi qui travailles à la mine.</p>
+
+      <div class="tb-urgence">
+        <strong>☎ Ça ne va pas&nbsp;?</strong>
+        <span>Urgence <a href="tel:911">911</a> · Info-Santé <a href="tel:811">811</a> (option 2 pour Info-Social) · Prévention du suicide <a href="tel:988">988</a></span>
+        <a class="tb-urgence-lien" href="${url(aideUrl)}">Où appeler quand ça ne va pas →</a>
+      </div>
+
+      <div class="tb-recherche">
+        ${I.loupe}
+        <input type="search" id="q2" placeholder="Cherche un mot, un risque, un droit…" autocomplete="off">
+        <button id="tbGo">Rechercher</button>
+        <div id="suggest2" class="tb-sugg" hidden></div>
+      </div>
+      <div class="tb-populaires"><span>Recherches populaires :</span>${populaires}</div>
+
+      ${accueils.length ? `<h2 class="tb-section">Pour commencer</h2>
+      <div class="tb-grille tb-g4">${accueils.map(a => cartePage({ ...a, icone: '🚩' })).join('')}</div>` : ''}
+
+      ${sections}
+
+      ${autres.length ? `<section class="tb-rub"><h2 class="tb-section"><span class="tb-rub-emoji">📄</span> Autres pages</h2>
+      <div class="tb-grille tb-g4">${autres.map(a => cartePage({ ...a, icone: '📄' })).join('')}</div></section>` : ''}
+
+      <div class="tb-barre">${barre}</div>
+    </main>
+
+    <aside class="tb-droite">
+      <section class="tb-bloc tb-legal">
+        <span class="tb-legal-ic">${I.balance}</span>
+        <div>
+          <h2>Ce que dit la loi</h2>
+          <p>Les articles qui fondent tes droits : refus de travail, retrait préventif, réclamation, retour au travail.</p>
+          <a class="tb-btn-plein" href="${url('w/legislation/index-par-loi.html')}">Explorer les lois et règlements</a>
+          <a class="tb-legal-compte" href="${url('w/legislation/index-par-loi.html')}">${nbLois.toLocaleString('fr-CA')} articles de loi</a>
+        </div>
+      </section>
+
+      <section class="tb-bloc">
+        <div class="tb-bloc-tete">${I.horloge}<h2>Récemment consulté</h2></div>
+        <ul class="tb-liste" id="tbRecents"><li class="tb-vide">Les pages que tu ouvres apparaîtront ici.</li></ul>
+        <a class="tb-voir" href="#" id="tbVoirHist" hidden>Voir tout l'historique →</a>
+      </section>
+
+      <section class="tb-bloc">
+        <div class="tb-bloc-tete">${I.etoile.replace('<svg', '<svg style="stroke:#f5a623"')}<h2>Favoris</h2><a class="tb-voir" href="#" id="tbVoirFav" hidden>Voir tous</a></div>
+        <ul class="tb-liste tb-liste-fav" id="tbFavoris"><li class="tb-vide">Garde une page sous la main avec l'étoile de son en-tête.</li></ul>
+      </section>
+
+      <section class="tb-bloc">
+        <div class="tb-bloc-tete">${I.info}<h2>À propos du contenu</h2></div>
+        <ul class="tb-apropos">
+          <li>${I.coche}<span>Écrit à partir de notes de cours SST, en mots simples</span></li>
+          <li>${I.balance}<span>Appuyé sur les lois et règlements du Québec en vigueur</span></li>
+          <li>${I.calendrier}<span>Date de mise à jour : <span id="tbMaj">${esc(majDate)}</span></span></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  <footer class="tb-pied">
+    <a href="${url('w/psychosocial/50-ressources-daide/index.html')}">Ressources d'aide</a>
+    <a href="${R}index.html">Accueil du wiki</a>
+    <span class="tb-droite-pied"><span>© ${new Date().getFullYear()} Machines Roger inc.</span><span id="tbVersion">Version 1.0.0</span></span>
+  </footer>
+</div>
+</div>`;
+
+  return { html, morts: [...new Set(morts)] };
+}
 
 // Rend le portail. `R` est le chemin racine relatif, `nbLois` le nombre d'articles de loi,
 // `verifier` une fonction qui dit si une cible existe (pour n'afficher que des liens valides).

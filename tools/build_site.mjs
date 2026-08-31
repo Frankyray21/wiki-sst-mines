@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
-import { rendrePortailEncadrement } from './portail_encadrement.mjs';
+import { rendrePortailEncadrement, rendrePortailTravailleurs } from './portail_encadrement.mjs';
 import { analyserQualite, LIBELLES } from './qualite.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -1239,9 +1239,9 @@ const PUBLICS = {
     intro: 'Ce wiki est écrit pour toi qui travailles à la mine. Tu y trouves ce qu\'il faut savoir sur les risques du métier, ce que la loi te garantit, et où trouver de l\'aide.',
   },
   g: {
-    slug: 'g', icon: '🎓', nom: 'Wiki de l\'encadrement',
+    slug: 'g', icon: '🎓', nom: 'Gestion & prévention',
     tagline: 'Superviseurs, gestionnaires et direction — obligations, programmes et outils',
-    intro: 'Ce wiki réunit ce qu\'un superviseur, un gestionnaire ou un dirigeant doit connaître : obligations légales, programmes de prévention, gestion des situations et outils de suivi.',
+    intro: 'Cet espace réunit ce qu\'un superviseur, un gestionnaire ou un dirigeant doit connaître : obligations légales, programmes de prévention, gestion des situations et outils de suivi.',
   },
 };
 
@@ -1329,56 +1329,27 @@ ${corps}
   const casees = new Set(rubriques.flatMap(r => r.membres));
   const autres = articlesUniques.filter(p => !casees.has(p));
 
-  const carte = (r) => `<section class="rubrique">
-  <h2><span class="rub-icone">${r.icone}</span> ${esc(r.titre)}</h2>
-  ${r.membres.length
-    ? `<ul class="rub-liste">${r.membres.slice(0, 14).map(p => `<li><a href="{{ROOT}}${pub}/${p.out}">${esc(p.title)}</a></li>`).join('')}</ul>`
-    : `<p class="rub-vide">Aucune page publiée pour l'instant sur ce sujet.</p>`}
-</section>`;
-
-  const lienLoi = pub === 't'
-    ? `<a class="portal-card" href="{{ROOT}}w/legislation/index-par-loi.html"><span class="portal-icon">⚖️</span><span class="portal-info"><strong>Ce que dit la loi</strong><span class="portal-desc">Les articles de loi qui fondent tes droits : refus de travail, retrait préventif, réclamation, retour au travail.</span><span class="portal-count">${pagesPub.length - horsLoi.length} articles de loi</span></span></a>`
-    : `<a class="portal-card" href="{{ROOT}}w/legislation/index-par-loi.html"><span class="portal-icon">⚖️</span><span class="portal-info"><strong>Le cadre légal</strong><span class="portal-desc">Lois et règlements applicables, article par article : obligations de l'employeur, mécanismes de prévention, sanctions.</span><span class="portal-count">${pagesPub.length - horsLoi.length} articles de loi</span></span></a>`;
-
-  const urgence = pub === 't' ? `
-<div class="encart-urgence">
-  <strong>☎ Ça ne va pas ?</strong>
-  <span>Urgence <a href="tel:911">911</a> · Info-Santé <a href="tel:811">811</a> (option 2 pour Info-Social) · Prévention du suicide <a href="tel:988">988</a></span>
-</div>` : '';
-
-  const contenu = `
-<div class="portal-hero">
-  <div class="portal-globe">${conf.icon}</div>
-  <h1>${esc(conf.nom)}</h1>
-  <p class="portal-tagline">${esc(conf.tagline)}</p>
-  <div class="portal-search"><input type="search" id="q2" placeholder="Rechercher…" autocomplete="off"><div id="suggest2" class="suggest" hidden></div></div>
-</div>
-${urgence}
-<p class="portal-intro">${esc(conf.intro)}</p>
-${accueils.length ? `<section class="rubrique"><h2><span class="rub-icone">🚩</span> Pour commencer</h2><ul class="rub-liste">${accueils.map(p => `<li><a href="{{ROOT}}${pub}/${p.out}">${esc(p.title)}</a> <small class="rub-domaine">${WIKIS[p.wikiKey].icon} ${esc(WIKIS[p.wikiKey].name)}</small></li>`).join('')}</ul></section>` : ''}
-<div class="portal-grid">${lienLoi}</div>
-${rubriques.map(carte).join('')}
-${autres.length ? `<section class="rubrique"><h2><span class="rub-icone">📄</span> Autres pages</h2><ul class="rub-liste">${autres.map(p => `<li><a href="{{ROOT}}${pub}/${p.out}">${esc(p.title)}</a></li>`).join('')}</ul></section>` : ''}
-<div class="portal-foot"><a href="{{ROOT}}index.html">← Retour à l'accueil du wiki</a></div>`;
-
+  // Les deux publics partagent l'habillage tableau de bord ; seul le contenu diffère.
   fs.mkdirSync(path.join(OUT, pub), { recursive: true });
-  if (pub === 'g') {
-    // L'encadrement a son propre portail, en tableau de bord.
-    const { html: corps, morts } = rendrePortailEncadrement({
-      R: '../',
-      nbLois: pagesPub.length - horsLoi.length,
-      majDate: new Date().toLocaleDateString('fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }),
-      verifier: (c) => existeDansLeSite(c),
-    });
-    if (morts.length) console.warn(`  ⚠ portail encadrement : ${morts.length} cible(s) introuvable(s) — ${morts.slice(0, 4).join(', ')}`);
-    fs.writeFileSync(path.join(OUT, pub, 'index.html'), pageTableauDeBord({
-      out: pub + '/index.html', titre: conf.nom, corps,
-    }));
-  } else {
-    fs.writeFileSync(path.join(OUT, pub, 'index.html'), pageAutonome({
-      out: pub + '/index.html', titre: conf.nom, contenu,
-    }));
-  }
+  const donnees = {
+    R: '../',
+    nbLois: pagesPub.length - horsLoi.length,
+    majDate: new Date().toLocaleDateString('fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }),
+    verifier: (c) => existeDansLeSite(c),
+  };
+  const versCarte = (p) => ({ t: p.title, u: pub + '/' + p.out, dom: `${WIKIS[p.wikiKey].icon} ${WIKIS[p.wikiKey].name}` });
+  const rendu = pub === 'g'
+    ? rendrePortailEncadrement(donnees)
+    : rendrePortailTravailleurs({
+        ...donnees,
+        rubriques: rubriques.map(r => ({ titre: r.titre, icone: r.icone, membres: r.membres.map(versCarte) })),
+        accueils: accueils.map(versCarte),
+        autres: autres.map(versCarte),
+      });
+  if (rendu.morts.length) console.warn(`  ⚠ portail ${pub} : ${rendu.morts.length} cible(s) introuvable(s) — ${rendu.morts.slice(0, 4).join(', ')}`);
+  fs.writeFileSync(path.join(OUT, pub, 'index.html'), pageTableauDeBord({
+    out: pub + '/index.html', titre: conf.nom, corps: rendu.html, dataPub: pub,
+  }));
 
   PUB = null;
   return { total: pagesPub.length, horsLoi: horsLoi.length, rubriques };
@@ -1403,7 +1374,7 @@ function existeDansLeSite(cible) {
 }
 
 // Gabarit du portail en tableau de bord : sa propre feuille de style, pas de barre latérale commune.
-function pageTableauDeBord({ out, titre, corps }) {
+function pageTableauDeBord({ out, titre, corps, dataPub }) {
   const R = rootOf(out);
   return `<!DOCTYPE html>
 <html lang="fr">
@@ -1415,7 +1386,7 @@ function pageTableauDeBord({ out, titre, corps }) {
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 <script>window.ROOT='${R}';${SCRIPT_THEME}</script>
 </head>
-<body class="tb">
+<body class="tb"${dataPub ? ` data-pub="${dataPub}"` : ''}>
 ${corps}
 <script src="${R}assets/app.js"></script>
 </body>
