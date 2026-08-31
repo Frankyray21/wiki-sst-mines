@@ -26,7 +26,7 @@
     var r = cadre.getBoundingClientRect();
     // hauteur garantie : sur téléphone, la barre d'outils repoussait le canvas
     // et il ne restait qu'une bande minuscule
-    var h = plein ? innerHeight : Math.max(innerHeight - r.top - 12, Math.round(innerHeight * 0.62));
+    var h = plein ? innerHeight : Math.max(innerHeight - r.top - 12, Math.round(innerHeight * 0.62), 320);
     canvas.width = (plein ? innerWidth : r.width) * devicePixelRatio;
     canvas.height = h * devicePixelRatio;
     canvas.style.height = h + 'px';
@@ -210,17 +210,62 @@
       }
     }
 
-    // libellés au premier plan
-    ctx.fillStyle = couleurTexte;
-    for (var o2 = ordre.length - 1; o2 >= Math.max(0, ordre.length - 400); o2--) {
+    // Libellés : candidats triés par priorité puis posés SANS chevauchement.
+    // Un libellé qui recouvrirait un libellé déjà posé est simplement omis :
+    // mieux vaut en lire dix que d'en deviner quarante superposés.
+    var candidats = [];
+    for (var o2 = ordre.length - 1; o2 >= 0; o2--) {
       var p2 = ordre[o2], n2 = noeuds[p2.i];
-      var montre = p2.i === survol || p2.i === focusId
-        || (zoom > 1.6 && n2.deg > 8 && p2.e > 0.9)
-        || (enEvidence.has(p2.i) && enEvidence.size <= 40);
-      if (!montre) continue;
+      var prio = p2.i === survol ? 4
+        : p2.i === focusId ? 3
+        : (enEvidence.has(p2.i) && enEvidence.size <= 60) ? 1 + p2.e
+        : (zoom > 1.6 && n2.deg > 8 && p2.e > 0.9) ? p2.e
+        : -1;
+      if (prio < 0) continue;
+      candidats.push({ p: p2, n: n2, prio: prio });
+    }
+    candidats.sort(function (a, b) { return b.prio - a.prio || b.n.deg - a.n.deg; });
+
+    var fondPastille = css('--content-bg', '#fff');
+    var poses = [];
+    function libre(r) {
+      for (var q = 0; q < poses.length; q++) {
+        var s = poses[q];
+        if (r.x < s.x + s.l && r.x + r.l > s.x && r.y < s.y + s.h && r.y + r.h > s.y) return false;
+      }
+      poses.push(r);
+      return true;
+    }
+
+    var maxLibelles = 28;
+    for (var c2 = 0; c2 < candidats.length && poses.length < maxLibelles; c2++) {
+      var cd = candidats[c2];
+      var texte = cd.n.t.length > 40 ? cd.n.t.slice(0, 38) + '…' : cd.n.t;
+      var taille = Math.max(11.5, 12.5 * Math.min(cd.p.e, 1) * Math.min(zoom, 1.5));
+      ctx.font = (cd.p.i === survol || cd.p.i === focusId ? '600 ' : '') + taille + 'px sans-serif';
+      var larg = ctx.measureText(texte).width;
+      // sous le nœud à droite ; si occupé, on tente au-dessus, puis à gauche
+      var essais = [
+        { x: cd.p.sx + 9, y: cd.p.sy - taille / 2 - 3 },
+        { x: cd.p.sx + 9, y: cd.p.sy - taille * 1.9 },
+        { x: cd.p.sx - larg - 15, y: cd.p.sy - taille / 2 - 3 },
+      ];
+      var place = null;
+      for (var t2 = 0; t2 < essais.length; t2++) {
+        var r2 = { x: essais[t2].x - 4, y: essais[t2].y - 2, l: larg + 12, h: taille + 8 };
+        if (libre(r2)) { place = essais[t2]; break; }
+      }
+      if (!place && (cd.p.i === survol || cd.p.i === focusId)) place = essais[0]; // jamais muet sur le nœud actif
+      if (!place) continue;
+      // pastille de fond : le texte reste lisible par-dessus les traits
+      ctx.globalAlpha = 0.82;
+      ctx.fillStyle = fondPastille;
+      var rx = place.x - 4, ry = place.y - 2, rl = larg + 8, rh = taille + 6;
+      if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(rx, ry, rl, rh, 4); ctx.fill(); }
+      else ctx.fillRect(rx, ry, rl, rh);
       ctx.globalAlpha = 1;
-      ctx.font = Math.max(11, 12 * p2.e * Math.min(zoom, 1.6)) + 'px sans-serif';
-      ctx.fillText(n2.t.length > 44 ? n2.t.slice(0, 42) + '…' : n2.t, p2.sx + 9, p2.sy + 4);
+      ctx.fillStyle = couleurTexte;
+      ctx.fillText(texte, place.x, place.y + taille - 1);
     }
     ctx.globalAlpha = 1;
   }

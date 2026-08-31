@@ -80,7 +80,7 @@
     var plein = cadre.classList.contains('gc-plein');
     var r = cadre.getBoundingClientRect();
     // hauteur garantie : sur téléphone, la barre d'outils repoussait le canvas
-    var h = plein ? innerHeight : Math.max(innerHeight - r.top - 12, Math.round(innerHeight * 0.62));
+    var h = plein ? innerHeight : Math.max(innerHeight - r.top - 12, Math.round(innerHeight * 0.62), 320);
     canvas.width = (plein ? innerWidth : r.width) * devicePixelRatio;
     canvas.height = h * devicePixelRatio;
     canvas.style.height = h + 'px';
@@ -238,17 +238,57 @@
       }
     }
 
-    // libellés : le nœud survolé, le focus, et les gros nœuds quand on est assez proche
-    ctx.fillStyle = css('--text', '#202122');
-    ctx.globalAlpha = 1;
+    // Libellés : posés sans chevauchement, les plus importants d'abord.
+    var couleurTexte = css('--text', '#202122');
+    var fondPastille = css('--content-bg', '#fff');
     var taille = 12 / vue.z;
-    ctx.font = taille + 'px sans-serif';
+    var candidats = [];
     for (var i3 = 0; i3 < noeuds.length; i3++) {
       var n3 = noeuds[i3];
       if (!visible(n3)) continue;
-      var montre = i3 === survol || i3 === focusId || (vue.z > 1.4 && n3.deg > 8) || (enEvidence.has(i3) && enEvidence.size <= 40);
-      if (!montre) continue;
-      ctx.fillText(n3.t.length > 44 ? n3.t.slice(0, 42) + '…' : n3.t, n3.x + 10 / vue.z, n3.y + 4 / vue.z);
+      var prio = i3 === survol ? 4
+        : i3 === focusId ? 3
+        : (enEvidence.has(i3) && enEvidence.size <= 60) ? 1
+        : (vue.z > 1.4 && n3.deg > 8) ? 0.5
+        : -1;
+      if (prio < 0) continue;
+      candidats.push({ n: n3, prio: prio });
+    }
+    candidats.sort(function (a, b) { return b.prio - a.prio || b.n.deg - a.n.deg; });
+
+    var poses = [];
+    function libre(r) {
+      for (var q = 0; q < poses.length; q++) {
+        var s = poses[q];
+        if (r.x < s.x + s.l && r.x + r.l > s.x && r.y < s.y + s.h && r.y + r.h > s.y) return false;
+      }
+      poses.push(r);
+      return true;
+    }
+
+    for (var c3 = 0; c3 < candidats.length && poses.length < 28; c3++) {
+      var cd = candidats[c3], n4 = cd.n;
+      var texte = n4.t.length > 40 ? n4.t.slice(0, 38) + '…' : n4.t;
+      ctx.font = (n4.i === survol || n4.i === focusId ? '600 ' : '') + taille + 'px sans-serif';
+      var larg = ctx.measureText(texte).width;
+      var essais = [
+        { x: n4.x + 10 / vue.z, y: n4.y - taille / 2 },
+        { x: n4.x + 10 / vue.z, y: n4.y - taille * 1.8 },
+        { x: n4.x - larg - 14 / vue.z, y: n4.y - taille / 2 },
+      ];
+      var place = null;
+      for (var t3 = 0; t3 < essais.length; t3++) {
+        var r3 = { x: essais[t3].x - 3 / vue.z, y: essais[t3].y - 2 / vue.z, l: larg + 10 / vue.z, h: taille + 7 / vue.z };
+        if (libre(r3)) { place = essais[t3]; break; }
+      }
+      if (!place && (n4.i === survol || n4.i === focusId)) place = essais[0];
+      if (!place) continue;
+      ctx.globalAlpha = 0.82;
+      ctx.fillStyle = fondPastille;
+      ctx.fillRect(place.x - 3 / vue.z, place.y - 2 / vue.z, larg + 6 / vue.z, taille + 5 / vue.z);
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = couleurTexte;
+      ctx.fillText(texte, place.x, place.y + taille - 2 / vue.z);
     }
     ctx.globalAlpha = 1;
   }
