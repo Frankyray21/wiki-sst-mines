@@ -684,7 +684,7 @@
     if (document.querySelector('.portal-publics')) {
       return ['tour-portail', [
         { titre: 'Bienvenue dans le wiki SST', texte: 'Ce site réunit vos notes de cours en une encyclopédie consultable. Trois entrées, selon qui consulte.' },
-        { titre: 'Deux wikis selon qui vous êtes', texte: 'Le wiki des travailleurs parle simplement des risques et des droits. Celui de l’encadrement traite des obligations et des programmes.', cible: '.portal-publics' },
+        { titre: 'Deux espaces selon qui vous êtes', texte: 'L’espace travailleurs parle simplement des risques et des droits. Gestion & prévention traite des obligations et des programmes.', cible: '.portal-publics' },
         { titre: 'Le fond documentaire complet', texte: 'Les 4 500 pages classées par discipline, pour le conseiller SST et la recherche documentaire.', cible: '.portal-section + .portal-note + .portal-grid' },
         { titre: 'Chercher partout à la fois', texte: 'La recherche couvre tout le site, y compris les numéros d’articles de loi. Essayez « art 4 RSST » ou « silice ».', cible: '.portal-search' },
       ]];

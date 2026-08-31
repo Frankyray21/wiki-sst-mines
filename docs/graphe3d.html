@@ -33,7 +33,7 @@
   <div class="nav-group"><div class="nav-title">Selon qui vous êtes</div>
     <ul>
       <li><a href="t/index.html">👷 Wiki des travailleurs</a></li>
-      <li><a href="g/index.html">🎓 Wiki de l'encadrement</a></li>
+      <li><a href="g/index.html">🎓 Gestion &amp; prévention</a></li>
     </ul>
   </div>
   
@@ -43,14 +43,14 @@
 
 <div class="breadcrumbs"><a href="index.html">Portail</a></div>
 <h1 class="page-title">Graphe des liens — 3D<span id="graphe-titre" class="graphe-titre"></span></h1>
-<div class="page-sub" id="graphe-etat">4 514 pages · 21 261 liens. Glisser pour tourner, molette pour zoomer, cliquer pour ouvrir la page. Le graphe tourne tout seul tant que vous n’y touchez pas. Le Recueil législatif est masqué par défaut : cochez-le pour l'afficher.</div>
+<div class="page-sub" id="graphe-etat">4 514 pages · 23 352 liens. Glisser pour tourner, molette pour zoomer, cliquer pour ouvrir la page. Le graphe tourne tout seul tant que vous n’y touchez pas. Le Recueil législatif est masqué par défaut : cochez-le pour l'afficher.</div>
 <div class="graphe-barre">
   <a class="graphe-bascule" href="graphe.html" id="lien-vue">◱ Vue 2D</a>
   <button class="graphe-bascule" id="graphe-rotation">⏸ Arrêter la rotation</button>
   <input type="search" id="graphe-q" placeholder="Trouver une page dans le graphe…" autocomplete="off">
   <div id="graphe-filtres" class="graphe-filtres"></div>
 </div>
-<div class="graphe-cadre"><button id="graphe-plein" class="graphe-plein" aria-label="Plein écran" title="Plein écran">⛶</button><canvas id="graphe"></canvas></div>
+<div class="graphe-cadre"><div id="graphe-legende" class="graphe-legende" aria-label="Légende"></div><button id="graphe-plein" class="graphe-plein" aria-label="Plein écran" title="Plein écran">⛶</button><canvas id="graphe"></canvas></div>
 <script>
 // la bascule 2D/3D conserve la page en focus
 (function(){var f=new URLSearchParams(location.search).get('focus');if(f){var l=document.getElementById('lien-vue');l.href+='?focus='+encodeURIComponent(f);}})();
@@ -82,8 +82,8 @@
     var r = cadre.getBoundingClientRect();
     // hauteur garantie : sur téléphone, la barre d'outils repoussait le canvas
     // et il ne restait qu'une bande minuscule
-    var h = plein ? innerHeight : Math.max(innerHeight - r.top - 12, Math.round(innerHeight * 0.62), 320);
-    canvas.width = (plein ? innerWidth : r.width) * devicePixelRatio;
+    var h = Math.max(plein ? innerHeight : innerHeight - r.top - 12, Math.round(innerHeight * 0.62), 320);
+    canvas.width = Math.max(plein ? innerWidth : r.width, 320) * devicePixelRatio;
     canvas.height = h * devicePixelRatio;
     canvas.style.height = h + 'px';
     dessiner();
@@ -123,6 +123,7 @@
         voisins.get(a).push(b); voisins.get(b).push(a);
       }
       construireFiltres(g.wikis);
+      construireLegende(g.wikis);
       lireFocus(g);
       redimensionner();
       chaud = 320;
@@ -419,6 +420,26 @@
     btnTour.textContent = autoTour ? '⏸ Arrêter la rotation' : '▶ Reprendre la rotation';
   });
 
+  // légende cliquable, posée sur le graphe : visible aussi en plein écran
+  function construireLegende(wikis) {
+    var bo = document.getElementById('graphe-legende');
+    if (!bo) return;
+    bo.innerHTML = wikis.map(function (w, i) {
+      return '<button class="gl-item" data-w="' + i + '"><span class="gf-point" style="background:' + COULEURS[i % COULEURS.length] + '"></span>' + w + '</button>';
+    }).join('');
+    bo.addEventListener('click', function (ev) {
+      var it = ev.target.closest ? ev.target.closest('.gl-item') : null;
+      if (!it) return;
+      var i = +it.getAttribute('data-w');
+      if (actifs.has(i)) actifs.delete(i); else actifs.add(i);
+      majFiltres(); majLegende(); chaud = Math.max(chaud, 220); dessiner();
+    });
+  }
+  function majLegende() {
+    document.querySelectorAll('#graphe-legende .gl-item').forEach(function (it) {
+      it.classList.toggle('gl-off', !actifs.has(+it.getAttribute('data-w')));
+    });
+  }
   // ---------- filtres et recherche ----------
   function construireFiltres(wikis) {
     var boite = document.getElementById('graphe-filtres');
@@ -429,6 +450,7 @@
     boite.addEventListener('change', function (ev) {
       var i = +ev.target.getAttribute('data-w');
       if (ev.target.checked) actifs.add(i); else actifs.delete(i);
+      majLegende();
       chaud = Math.max(chaud, 220);
     });
   }
@@ -436,6 +458,7 @@
     document.querySelectorAll('#graphe-filtres input').forEach(function (c) {
       c.checked = actifs.has(+c.getAttribute('data-w'));
     });
+    majLegende();
   }
 
   var champ = document.getElementById('graphe-q');

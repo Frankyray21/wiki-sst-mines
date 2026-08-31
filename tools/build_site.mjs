@@ -23,6 +23,20 @@ const WIKIS = {
   'Recueil législatif SST':    { slug: 'legislation',    icon: '⚖️', name: 'Recueil législatif',   desc: 'Lois, règlements, article par article, jurisprudence' },
 };
 
+const PUBLICS = {
+  t: {
+    slug: 't', icon: '👷', nom: 'Wiki des travailleurs',
+    tagline: 'Tes droits, ta santé, ta sécurité — expliqué simplement',
+    intro: 'Ce wiki est écrit pour toi qui travailles à la mine. Tu y trouves ce qu\'il faut savoir sur les risques du métier, ce que la loi te garantit, et où trouver de l\'aide.',
+  },
+  g: {
+    slug: 'g', icon: '🎓', nom: 'Gestion & prévention',
+    tagline: 'Superviseurs, gestionnaires et direction — obligations, programmes et outils',
+    intro: 'Cet espace réunit ce qu\'un superviseur, un gestionnaire ou un dirigeant doit connaître : obligations légales, programmes de prévention, gestion des situations et outils de suivi.',
+  },
+};
+
+
 const EXCLUDE_DIRS = new Set(['.obsidian', '.trash', '99 - Templates', '_À supprimer (vérifier puis effacer)', '📥 PDF à téléverser']);
 const ASSET_EXT = new Set(['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.pdf', '.mp4', '.m4a', '.mp3', '.epub']);
 const IMG_EXT = new Set(['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp']);
@@ -341,6 +355,78 @@ for (const p of pages) {
   }
 }
 
+// ---------- auto-liaison des références légales ----------
+// « LSST », « art. 51 », « articles 234-242 » écrits en texte simple deviennent des liens
+// vers la page du recueil correspondante. On ne crée jamais de lien vers une page absente.
+const artIndex = new Map();   // "51|lsst" -> page de l'article
+const sigleHubs = new Map();  // "lsst" -> page-chapeau de la loi
+{
+  for (const p of pages) {
+    const m = p.base.match(/^art-([\d.]+)-([A-Za-z0-9-]+)/);
+    if (m) {
+      const cle = m[1] + '|' + m[2].toLowerCase();
+      if (!artIndex.has(cle)) artIndex.set(cle, p);
+    }
+  }
+  for (const s of ['LSST', 'LATMP', 'LMRSST', 'LNT', 'RSST', 'RSSM', 'CSTC']) {
+    const hub = (byBase.get(s.toLowerCase()) || []).find(p => p.wikiKey === 'Recueil législatif SST')
+      || (byBase.get(s.toLowerCase()) || [])[0];
+    if (hub) sigleHubs.set(s.toLowerCase(), hub);
+  }
+  const cpp = (byBase.get('code de procédure pénale') || [])[0];
+  if (cpp) sigleHubs.set('code de procédure pénale', cpp);
+  const c21 = (byBase.get('loi c-21') || [])[0];
+  if (c21) sigleHubs.set('loi c-21', c21);
+}
+
+const RE_SIGLES = /(?<![-\w])(Code de procédure pénale|Loi C-21|LSST|LATMP|LMRSST|LNT|RSST|RSSM|CSTC)(?![-\w])/g;
+const RE_ARTICLE = /\b(art(?:icles?)?\.?\s+)(\d+(?:\.\d+)*)((?:\s*(?:à|–|-|,|et)\s*\d+(?:\.\d+)*)*)(\s+(?:de\s+la\s+|de\s+l['’]|du\s+)?(LSST|LATMP|LMRSST|LNT|RSST|RSSM|CSTC))?/g;
+
+function lierTexteLegal(texte) {
+  const protege = [];
+  const jeton = (html) => { protege.push(html); return `${protege.length - 1}`; };
+
+  // 1) les références d'article, avec le sigle explicite ou la loi de la page courante
+  let s = texte.replace(RE_ARTICLE, (tout, prefixe, num, suite, blocSigle, sigle) => {
+    const loi = (sigle || String(CUR.fm?.loi || '')).toLowerCase();
+    if (!loi) return tout;
+    const cible = artIndex.get(num + '|' + loi);
+    if (!cible || cible === CUR) return tout;
+    CUR_LINKS.add(cible);
+    // on ne lie que « art. N » : une plage « 234-242 » ne doit pas prétendre couvrir la plage entière
+    return jeton(`<a href="{{ROOT}}${urlDe(cible)}" title="${esc(cible.title)}">${prefixe}${num}</a>`) + suite + (blocSigle || '');
+  });
+
+  // 2) les sigles de lois, vers leur page-chapeau
+  s = s.replace(RE_SIGLES, (tout, sigle) => {
+    const hub = sigleHubs.get(sigle.toLowerCase());
+    if (!hub || hub === CUR) return tout;
+    CUR_LINKS.add(hub);
+    return jeton(`<a href="{{ROOT}}${urlDe(hub)}" title="${esc(hub.title)}">${sigle}</a>`);
+  });
+
+  return s.replace(/(\d+)/g, (m, i) => protege[+i]);
+}
+
+// Passe sur le HTML rendu : uniquement les segments de texte, jamais l'intérieur
+// des liens existants, des titres, du code ou des boutons.
+function lierReferencesLegales(html) {
+  const morceaux = html.split(/(<[^>]+>)/);
+  let saut = 0;
+  const SAUT = /^<\s*(a|code|pre|h1|h2|h3|h4|script|style|button)\b/i;
+  const FIN = /^<\s*\/\s*(a|code|pre|h1|h2|h3|h4|script|style|button)\b/i;
+  for (let i = 0; i < morceaux.length; i++) {
+    const m = morceaux[i];
+    if (m.startsWith('<')) {
+      if (SAUT.test(m) && !/\/>$/.test(m)) saut++;
+      else if (FIN.test(m)) saut = Math.max(0, saut - 1);
+      continue;
+    }
+    if (saut === 0 && m && /[A-Z]/.test(m)) morceaux[i] = lierTexteLegal(m);
+  }
+  return morceaux.join('');
+}
+
 function resolvePage(target, from) {
   let t = target.trim().replace(/^🏠 WIKI SST - Mines\//u, '');
   if (!t) return null;
@@ -544,6 +630,8 @@ function renderBody(md, nested = false) {
   });
   // liens externes http(s)
   html = html.replace(/<a href="(https?:\/\/[^"]+)"/g, '<a class="external" target="_blank" rel="noopener" href="$1"');
+  // « LSST », « art. 51 » écrits en texte simple deviennent des liens vers le recueil
+  if (!nested) html = lierReferencesLegales(html);
   return html;
 }
 
@@ -604,8 +692,8 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
   </div>
   <div class="nav-group"><div class="nav-title">Selon qui vous êtes</div>
     <ul>
-      <li><a href="${ROOT}t/index.html">👷 Wiki des travailleurs</a></li>
-      <li><a href="${ROOT}g/index.html">🎓 Wiki de l'encadrement</a></li>
+      <li><a href="${ROOT}t/index.html">${PUBLICS.t.icon} ${esc(PUBLICS.t.nom)}</a></li>
+      <li><a href="${ROOT}g/index.html">${PUBLICS.g.icon} ${esc(PUBLICS.g.nom)}</a></li>
     </ul>
   </div>
   ${sidebarExtra}
@@ -1163,7 +1251,7 @@ console.log('Graphe des liens…');
   <input type="search" id="graphe-q" placeholder="Trouver une page dans le graphe…" autocomplete="off">
   <div id="graphe-filtres" class="graphe-filtres"></div>
 </div>
-<div class="graphe-cadre"><button id="graphe-plein" class="graphe-plein" aria-label="Plein écran" title="Plein écran">⛶</button><canvas id="graphe"></canvas></div>
+<div class="graphe-cadre"><div id="graphe-legende" class="graphe-legende" aria-label="Légende"></div><button id="graphe-plein" class="graphe-plein" aria-label="Plein écran" title="Plein écran">⛶</button><canvas id="graphe"></canvas></div>
 <script>
 // la bascule 2D/3D conserve la page en focus
 (function(){var f=new URLSearchParams(location.search).get('focus');if(f){var l=document.getElementById('lien-vue');l.href+='?focus='+encodeURIComponent(f);}})();
@@ -1232,18 +1320,7 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
 // ---------- wikis par public (travailleurs / encadrement) ----------
 // Chaque public a son portail, sa navigation et ses pages. Le Recueil législatif n'est pas
 // dupliqué : le texte de loi est public et identique pour tous, les deux wikis y renvoient.
-const PUBLICS = {
-  t: {
-    slug: 't', icon: '👷', nom: 'Wiki des travailleurs',
-    tagline: 'Tes droits, ta santé, ta sécurité — expliqué simplement',
-    intro: 'Ce wiki est écrit pour toi qui travailles à la mine. Tu y trouves ce qu\'il faut savoir sur les risques du métier, ce que la loi te garantit, et où trouver de l\'aide.',
-  },
-  g: {
-    slug: 'g', icon: '🎓', nom: 'Gestion & prévention',
-    tagline: 'Superviseurs, gestionnaires et direction — obligations, programmes et outils',
-    intro: 'Cet espace réunit ce qu\'un superviseur, un gestionnaire ou un dirigeant doit connaître : obligations légales, programmes de prévention, gestion des situations et outils de suivi.',
-  },
-};
+// (déplacé en tête de fichier : la barre latérale en a besoin)
 
 // Rubriques du portail travailleurs : on entre par le problème vécu, pas par la discipline.
 const RUBRIQUES_T = [

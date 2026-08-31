@@ -24,8 +24,8 @@
     var plein = cadre.classList.contains('gc-plein');
     var r = cadre.getBoundingClientRect();
     // hauteur garantie : sur téléphone, la barre d'outils repoussait le canvas
-    var h = plein ? innerHeight : Math.max(innerHeight - r.top - 12, Math.round(innerHeight * 0.62), 320);
-    canvas.width = (plein ? innerWidth : r.width) * devicePixelRatio;
+    var h = Math.max(plein ? innerHeight : innerHeight - r.top - 12, Math.round(innerHeight * 0.62), 320);
+    canvas.width = Math.max(plein ? innerWidth : r.width, 320) * devicePixelRatio;
     canvas.height = h * devicePixelRatio;
     canvas.style.height = h + 'px';
     dessiner();
@@ -58,6 +58,7 @@
         voisins.get(a).push(b); voisins.get(b).push(a);
       }
       construireFiltres(g.wikis);
+      construireLegende(g.wikis);
       lireFocus(g);
       redimensionner();
       chauffer(400);
@@ -316,6 +317,26 @@
     dessiner();
   }, { passive: false });
 
+  // légende cliquable, posée sur le graphe : visible aussi en plein écran
+  function construireLegende(wikis) {
+    var bo = document.getElementById('graphe-legende');
+    if (!bo) return;
+    bo.innerHTML = wikis.map(function (w, i) {
+      return '<button class="gl-item" data-w="' + i + '"><span class="gf-point" style="background:' + COULEURS[i % COULEURS.length] + '"></span>' + w + '</button>';
+    }).join('');
+    bo.addEventListener('click', function (ev) {
+      var it = ev.target.closest ? ev.target.closest('.gl-item') : null;
+      if (!it) return;
+      var i = +it.getAttribute('data-w');
+      if (actifs.has(i)) actifs.delete(i); else actifs.add(i);
+      majFiltres(); majLegende(); chauffer(220); dessiner();
+    });
+  }
+  function majLegende() {
+    document.querySelectorAll('#graphe-legende .gl-item').forEach(function (it) {
+      it.classList.toggle('gl-off', !actifs.has(+it.getAttribute('data-w')));
+    });
+  }
   // ---------- filtres ----------
   function construireFiltres(wikis) {
     var boite = document.getElementById('graphe-filtres');
@@ -327,6 +348,7 @@
     boite.addEventListener('change', function (ev) {
       var i = +ev.target.getAttribute('data-w');
       if (ev.target.checked) actifs.add(i); else actifs.delete(i);
+      majLegende();
       chauffer(250); dessiner();
     });
   }
@@ -334,6 +356,7 @@
     document.querySelectorAll('#graphe-filtres input').forEach(function (c) {
       c.checked = actifs.has(+c.getAttribute('data-w'));
     });
+    majLegende();
   }
 
   // recherche d'un nœud

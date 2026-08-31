@@ -423,6 +423,23 @@ a.tag-lien:hover { background: var(--tag-hover-bg); border-color: var(--tag-hove
   font-size: 19px; cursor: pointer; opacity: .85;
 }
 .graphe-plein:hover { opacity: 1; background: var(--hover); }
+/* légende posée sur le graphe : visible aussi en plein écran, cliquable pour filtrer */
+.graphe-legende {
+  position: absolute; left: 10px; bottom: 10px; z-index: 5;
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--content-bg); opacity: .93;
+  border: 1px solid var(--border-light); border-radius: 8px;
+  padding: 7px 10px; max-height: 46%; overflow-y: auto; max-width: 62%;
+}
+.gl-item {
+  display: flex; align-items: center; gap: 7px; text-align: left;
+  background: none; border: 0; color: var(--text);
+  font-size: 12.5px; cursor: pointer; font-family: inherit; padding: 3px 2px;
+  white-space: nowrap;
+}
+.gl-item:hover { color: var(--link); }
+.gl-item.gl-off { opacity: .35; text-decoration: line-through; }
+
 /* plein écran « maison » : fonctionne aussi sur iPhone, où l'API Fullscreen n'existe pas */
 .graphe-cadre.gc-plein { position: fixed; inset: 0; z-index: 300; border: 0; border-radius: 0; }
 body.graphe-fige { overflow: hidden; }
