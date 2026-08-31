@@ -423,6 +423,25 @@ a.tag-lien:hover { background: var(--tag-hover-bg); border-color: var(--tag-hove
   font-size: 19px; cursor: pointer; opacity: .85;
 }
 .graphe-plein:hover { opacity: 1; background: var(--hover); }
+/* aide à l'installation de l'application */
+.pwa-aide {
+  position: fixed; inset: 0; z-index: 900;
+  background: rgba(10, 14, 20, .72);
+  display: flex; align-items: center; justify-content: center; padding: 18px;
+}
+.pwa-aide-boite {
+  max-width: 400px; background: var(--content-bg); color: var(--text);
+  border: 1px solid var(--border-light); border-radius: 12px;
+  padding: 20px 22px; box-shadow: 0 10px 34px rgba(0,0,0,.35);
+  font-size: 14.5px; line-height: 1.6;
+}
+.pwa-aide-boite h3 { font-size: 17px; margin-bottom: 9px; }
+.pwa-aide-boite p { margin-bottom: 12px; }
+.pwa-aide-boite .tour-btn {
+  border: 1px solid var(--border-light); background: #2563eb; border-color: #2563eb; color: #fff;
+  border-radius: 8px; padding: 9px 16px; font-size: 13.5px; cursor: pointer; font-family: inherit; font-weight: 600;
+}
+
 /* légende posée sur le graphe : visible aussi en plein écran, cliquable pour filtrer */
 .graphe-legende {
   position: absolute; left: 10px; bottom: 10px; z-index: 5;

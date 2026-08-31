@@ -149,6 +149,11 @@ export function estDocumentTexte(buf) {
   return gris / total > 0.97 && clairs / total > 0.5;
 }
 
+// Encode un tampon RGBA brut en PNG palettisé (≤ 256 couleurs) — sert aux icônes générées.
+export function encoderPixels(largeur, hauteur, px) {
+  return encoderPalette({ width: largeur, height: hauteur, canaux: 4, px });
+}
+
 // Recompresse si possible ; retourne le buffer optimisé ou null si aucun gain / non applicable.
 export function optimiserPng(buf) {
   const img = lirePng(buf);

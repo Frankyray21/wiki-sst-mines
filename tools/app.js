@@ -749,6 +749,69 @@
       .catch(function () { /* le pied de page reste simplement sans date */ });
   })();
 
+  // ---------- application installable (PWA) ----------
+  (function pwa() {
+    // service worker : les pages visitées restent lisibles sans réseau — utile sous terre
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+      navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* le site marche sans lui */ });
+    }
+
+    var enApp = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+    if (enApp) return; // déjà installée : pas de bouton
+
+    var promptInstall = null;
+
+    function creerBouton() {
+      if (document.getElementById('btnInstall')) return;
+      var ancre = document.getElementById('btnTheme');
+      if (!ancre || !ancre.parentNode) return;
+      var b = document.createElement('button');
+      b.id = 'btnInstall';
+      b.className = ancre.className;
+      b.textContent = '📲';
+      b.setAttribute('title', 'Installer l’application');
+      b.setAttribute('aria-label', 'Installer l’application');
+      b.addEventListener('click', function () {
+        if (promptInstall) {
+          promptInstall.prompt();
+          promptInstall.userChoice.then(function (c) {
+            if (c && c.outcome === 'accepted') b.remove();
+            promptInstall = null;
+          });
+          return;
+        }
+        aideInstallation();
+      });
+      ancre.parentNode.insertBefore(b, ancre);
+    }
+
+    // iPhone/iPad : pas d'invite native — on explique le geste
+    function aideInstallation() {
+      var v = document.createElement('div');
+      v.className = 'pwa-aide';
+      v.innerHTML = '<div class="pwa-aide-boite" role="dialog" aria-label="Installer l’application">' +
+        '<h3>📲 Installer le Wiki SST</h3>' +
+        '<p>Ouvre le menu <strong>Partager</strong> de ton navigateur (l’icône <strong>⎋</strong> ou <strong>⋮</strong>), ' +
+        'puis choisis <strong>« Sur l’écran d’accueil »</strong> ou <strong>« Installer l’application »</strong>.</p>' +
+        '<p>Le wiki s’ouvrira ensuite comme une app, et les pages déjà visitées resteront lisibles sans réseau.</p>' +
+        '<button class="tour-btn principal" data-fermer>Compris</button></div>';
+      v.addEventListener('click', function (ev) {
+        if (ev.target === v || ev.target.hasAttribute('data-fermer')) v.remove();
+      });
+      document.body.appendChild(v);
+    }
+
+    window.addEventListener('beforeinstallprompt', function (ev) {
+      ev.preventDefault();
+      promptInstall = ev;
+      creerBouton();
+    });
+
+    // Safari iOS ne déclenche jamais beforeinstallprompt : bouton d'aide direct
+    var estIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (estIos) creerBouton();
+  })();
+
   // ---------- thème clair / sombre ----------
   // Trois états : « auto » suit le réglage du téléphone ou de l'ordinateur, les deux autres
   // forcent un thème. Le choix est retenu d'une page à l'autre.

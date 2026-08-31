@@ -8,6 +8,7 @@ import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { rendrePortailEncadrement, rendrePortailTravailleurs } from './portail_encadrement.mjs';
 import { analyserQualite, LIBELLES } from './qualite.mjs';
+import { genererPwa, metaPwa } from './pwa.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -666,6 +667,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
 <title>${esc(title)} — WIKI SST Mines</title>
 <link rel="stylesheet" href="${ROOT}assets/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+${metaPwa(ROOT)}
 <script>window.ROOT='${ROOT}';${SCRIPT_THEME}</script>
 </head>
 <body>
@@ -1461,6 +1463,7 @@ function pageTableauDeBord({ out, titre, corps, dataPub }) {
 <title>${esc(titre)} — WIKI SST Mines</title>
 <link rel="stylesheet" href="${R}assets/portail.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+${metaPwa(R)}
 <script>window.ROOT='${R}';${SCRIPT_THEME}</script>
 </head>
 <body class="tb"${dataPub ? ` data-pub="${dataPub}"` : ''}>
@@ -1552,6 +1555,7 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
 <title>WIKI SST — Mines · Portail</title>
 <link rel="stylesheet" href="assets/style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+${metaPwa('')}
 <script>window.ROOT='';${SCRIPT_THEME}</script>
 </head>
 <body class="portal"><button class="btn-theme theme-portail" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
@@ -1568,6 +1572,7 @@ fs.writeFileSync(path.join(OUT, 'assets', 'style.css'), style);
 fs.writeFileSync(path.join(OUT, 'assets', 'app.js'), appjs);
 fs.writeFileSync(path.join(OUT, 'assets', 'portail.css'), fs.readFileSync(path.join(__dirname, 'portail.css'), 'utf8'));
 fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas passer par Jekyll
+genererPwa(OUT, new Date().toISOString().slice(0, 13));
 
 // La date de génération vit dans un seul fichier, lu par le pied de page. Écrite dans les
 // 4970 pages, elle changeait tout le site à chaque reconstruction — ~60 Mo de dépôt pour une date.
