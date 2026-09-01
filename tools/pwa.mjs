@@ -80,8 +80,9 @@ export function genererPwa(OUT, version) {
     ],
   }, null, 1));
 
-  // Service worker : réseau d'abord (le contenu reste frais), cache en secours
-  // (les pages déjà visitées se rouvrent sans réseau — précieux sous terre).
+  // Service worker : réseau d'abord (le contenu reste frais), cache en secours.
+  // En plus du cache des pages visitées : mise en cache MASSIVE sur demande —
+  // tout le texte du wiki en tâche de fond, les médias sur bouton (progression diffusée).
   fs.writeFileSync(path.join(OUT, 'sw.js'), `// Service worker du WIKI SST — généré à la construction
 const CACHE = 'wiki-sst-${version}';
 const NOYAU = ['./', './index.html', './t/index.html', './g/index.html',
@@ -98,6 +99,15 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  const estMedia = new URL(req.url).pathname.includes('/files/');
+  if (estMedia) {
+    // les captures et PDF ne changent pas : cache d'abord, réseau sinon
+    e.respondWith(caches.match(req).then((m) => m || fetch(req).then((rep) => {
+      if (rep.ok && rep.type === 'basic') { const c2 = rep.clone(); caches.open(CACHE).then((c) => c.put(req, c2)); }
+      return rep;
+    })));
+    return;
+  }
   e.respondWith(
     fetch(req).then((rep) => {
       if (rep.ok && rep.type === 'basic') {
@@ -107,6 +117,63 @@ self.addEventListener('fetch', (e) => {
       return rep;
     }).catch(() => caches.match(req).then((m) => m || (req.mode === 'navigate' ? caches.match('./offline.html') : Response.error())))
   );
+});
+
+// ---- mise en cache massive, pilotée par les pages ----
+async function diffuser(msg) {
+  (await self.clients.matchAll({ includeUncontrolled: true })).forEach((cl) => cl.postMessage(msg));
+}
+async function liste() {
+  const r = await fetch('./assets/hors-ligne.json');
+  return r.json();
+}
+let enCours = null;
+async function precacher(quoi) {
+  if (enCours === quoi) return;
+  enCours = quoi;
+  try {
+    const l = await liste();
+    const items = l[quoi] || [];
+    const c = await caches.open(CACHE);
+    let fait = 0;
+    const LOT = 6;
+    for (let i = 0; i < items.length; i += LOT) {
+      await Promise.all(items.slice(i, i + LOT).map(async (u) => {
+        const url = './' + u;
+        if (!(await c.match(url))) {
+          try { const r = await fetch(url); if (r.ok) await c.put(url, r); } catch (e) { /* réseau coupé : on continue */ }
+        }
+        fait++;
+      }));
+      if (fait % 60 < LOT || fait === items.length) diffuser({ type: 'progression', quoi, fait, total: items.length });
+    }
+    diffuser({ type: 'termine', quoi });
+  } finally { enCours = null; }
+}
+async function compter(arr, c) {
+  let n = 0;
+  const LOT = 50;
+  for (let i = 0; i < arr.length; i += LOT) {
+    const r = await Promise.all(arr.slice(i, i + LOT).map((u) => c.match('./' + u)));
+    n += r.filter(Boolean).length;
+  }
+  return n;
+}
+self.addEventListener('message', (e) => {
+  const d = e.data || {};
+  if (d.type === 'precache-pages') e.waitUntil(precacher('pages'));
+  else if (d.type === 'precache-medias') e.waitUntil(precacher('medias'));
+  else if (d.type === 'etat') {
+    e.waitUntil((async () => {
+      const l = await liste();
+      const c = await caches.open(CACHE);
+      e.source.postMessage({
+        type: 'etat',
+        pages: { en: await compter(l.pages, c), total: l.pages.length, octets: l.octetsPages },
+        medias: { en: await compter(l.medias, c), total: l.medias.length, octets: l.octetsMedias },
+      });
+    })());
+  }
 });
 `);
 
@@ -118,6 +185,27 @@ self.addEventListener('fetch', (e) => {
 <body><div class="b"><h1>📡</h1><h2>Pas de réseau</h2>
 <p>Cette page n'est pas encore dans le cache de l'application. Les pages que tu as déjà visitées restent consultables hors ligne — <a href="./">retourner à l'accueil</a> ou réessayer quand le signal revient.</p></div></body></html>
 `);
+}
+
+// Inventaire du site pour la mise en cache massive : tout le texte d'un côté,
+// les médias (captures, PDF) de l'autre. À appeler en toute fin de construction.
+export function genererListeHorsLigne(OUT) {
+  const pages = [], medias = [];
+  let octetsPages = 0, octetsMedias = 0;
+  (function walk(d, rel) {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      if (e.name === 'sw.js') continue;
+      const abs = path.join(d, e.name);
+      const chemin = rel + e.name;
+      if (e.isDirectory()) { walk(abs, chemin + '/'); continue; }
+      const taille = fs.statSync(abs).size;
+      if (chemin.startsWith('files/')) { medias.push(chemin); octetsMedias += taille; }
+      else if (/\.(html|css|js|json|webmanifest|png)$/.test(e.name)) { pages.push(chemin); octetsPages += taille; }
+    }
+  })(OUT, '');
+  fs.writeFileSync(path.join(OUT, 'assets', 'hors-ligne.json'),
+    JSON.stringify({ pages, medias, octetsPages, octetsMedias }));
+  return { pages: pages.length, medias: medias.length, octetsPages, octetsMedias };
 }
 
 // Balises à poser dans chaque <head> — `root` est le préfixe relatif de la page.

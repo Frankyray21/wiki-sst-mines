@@ -782,6 +782,100 @@
     // service worker : les pages visitées restent lisibles sans réseau — utile sous terre
     if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
       navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* le site marche sans lui */ });
+
+      // tout le texte du wiki se met en cache tout seul, en tâche de fond,
+      // une fois par session : le wiki entier devient lisible sans réseau
+      navigator.serviceWorker.ready.then(function (reg) {
+        var deja = false;
+        try { deja = sessionStorage.getItem('hl-auto') === '1'; } catch (e) {}
+        if (!deja && navigator.onLine && reg.active) {
+          setTimeout(function () {
+            reg.active.postMessage({ type: 'precache-pages' });
+            try { sessionStorage.setItem('hl-auto', '1'); } catch (e) {}
+          }, 5000);
+        }
+      });
+
+      // panneau « Hors-ligne » : état du cache + téléchargement des médias avec progression
+      var dlg = null;
+      function formatMo(o) { return Math.round(o / 1048576).toLocaleString('fr-CA') + ' Mo'; }
+
+      function ouvrirPanneau() {
+        if (dlg) dlg.remove();
+        dlg = document.createElement('div');
+        dlg.className = 'pwa-aide';
+        dlg.innerHTML = '<div class="pwa-aide-boite" role="dialog" aria-label="Hors-ligne">' +
+          '<h3>📶 Consultation hors ligne</h3>' +
+          '<p id="hl-etat">Interrogation du cache…</p>' +
+          '<div class="hl-barre" id="hl-barre" hidden><div class="hl-barre-plein" id="hl-plein"></div></div>' +
+          '<p id="hl-note" class="hl-note"></p>' +
+          '<div class="hl-boutons">' +
+          '<button class="tour-btn" data-fermer>Fermer</button>' +
+          '<button class="tour-btn principal" id="hl-medias" hidden>Télécharger aussi les images et PDF</button>' +
+          '</div></div>';
+        dlg.addEventListener('click', function (ev) {
+          if (ev.target === dlg || ev.target.hasAttribute('data-fermer')) { dlg.remove(); dlg = null; }
+        });
+        document.body.appendChild(dlg);
+        navigator.serviceWorker.ready.then(function (reg) {
+          if (reg.active) reg.active.postMessage({ type: 'etat' });
+        });
+      }
+
+      navigator.serviceWorker.addEventListener('message', function (ev) {
+        var d = ev.data || {};
+        if (!dlg) {
+          return;
+        }
+        var etat = dlg.querySelector('#hl-etat');
+        var note = dlg.querySelector('#hl-note');
+        var barre = dlg.querySelector('#hl-barre');
+        var plein = dlg.querySelector('#hl-plein');
+        var btnM = dlg.querySelector('#hl-medias');
+        if (d.type === 'etat') {
+          var pOk = d.pages.en >= d.pages.total;
+          var mOk = d.medias.en >= d.medias.total;
+          etat.innerHTML = 'Texte du wiki : <strong>' + d.pages.en.toLocaleString('fr-CA') + ' / ' + d.pages.total.toLocaleString('fr-CA') + '</strong> fichiers en cache (' + formatMo(d.pages.octets) + ')' +
+            (pOk ? ' ✓' : ' — téléchargement en tâche de fond…') +
+            '<br>Images et PDF : <strong>' + d.medias.en.toLocaleString('fr-CA') + ' / ' + d.medias.total.toLocaleString('fr-CA') + '</strong> (' + formatMo(d.medias.octets) + ')' + (mOk ? ' ✓' : '');
+          if (!mOk) {
+            btnM.hidden = false;
+            btnM.textContent = 'Télécharger les images et PDF (' + formatMo(d.medias.octets) + ')';
+            btnM.onclick = function () {
+              btnM.disabled = true;
+              note.textContent = 'Téléchargement en cours — laisse la page ouverte, idéalement en wifi.';
+              navigator.serviceWorker.ready.then(function (reg) {
+                if (reg.active) reg.active.postMessage({ type: 'precache-medias' });
+              });
+            };
+          } else {
+            btnM.hidden = true;
+            note.textContent = 'Tout le wiki est disponible sans réseau sur cet appareil.';
+          }
+        } else if (d.type === 'progression') {
+          barre.hidden = false;
+          plein.style.width = Math.round(d.fait / d.total * 100) + '%';
+          note.textContent = (d.quoi === 'medias' ? 'Images et PDF : ' : 'Texte : ') + d.fait.toLocaleString('fr-CA') + ' / ' + d.total.toLocaleString('fr-CA');
+        } else if (d.type === 'termine') {
+          navigator.serviceWorker.ready.then(function (reg) {
+            if (reg.active) reg.active.postMessage({ type: 'etat' });
+          });
+        }
+      });
+
+      // bouton 📶 dans l'en-tête, à côté du thème
+      (function boutonHl() {
+        var ancre = document.getElementById('btnTheme');
+        if (!ancre || !ancre.parentNode) return;
+        var b = document.createElement('button');
+        b.id = 'btnHorsLigne';
+        b.className = ancre.className;
+        b.textContent = '📶';
+        b.setAttribute('title', 'Consultation hors ligne');
+        b.setAttribute('aria-label', 'Consultation hors ligne');
+        b.addEventListener('click', ouvrirPanneau);
+        ancre.parentNode.insertBefore(b, ancre);
+      })();
     }
 
     var enApp = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;

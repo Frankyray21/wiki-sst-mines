@@ -8,7 +8,7 @@ import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { rendrePortailEncadrement, rendrePortailTravailleurs } from './portail_encadrement.mjs';
 import { analyserQualite, LIBELLES } from './qualite.mjs';
-import { genererPwa, metaPwa } from './pwa.mjs';
+import { genererPwa, metaPwa, genererListeHorsLigne } from './pwa.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -1625,4 +1625,6 @@ if (badFm.length) {
 if (pngOptim) {
   console.log(`Images PNG : ${pngOptim} recompressées sans perte (${(pngGain / 1048576).toFixed(1)} Mo économisés), ${pngIntacts} laissées telles quelles`);
 }
+const hl = genererListeHorsLigne(OUT);
+console.log(`Hors-ligne : ${hl.pages} fichiers texte (${Math.round(hl.octetsPages/1048576)} Mo) · ${hl.medias} médias (${Math.round(hl.octetsMedias/1048576)} Mo)`);
 console.log(`Terminé : ${pages.length} pages · ${assetOut.size} fichiers copiés · sortie : ${OUT}`);

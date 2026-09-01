@@ -423,6 +423,14 @@ a.tag-lien:hover { background: var(--tag-hover-bg); border-color: var(--tag-hove
   font-size: 19px; cursor: pointer; opacity: .85;
 }
 .graphe-plein:hover { opacity: 1; background: var(--hover); }
+/* panneau hors-ligne */
+.hl-barre { height: 10px; border-radius: 5px; background: var(--border-soft); overflow: hidden; margin: 10px 0 6px; }
+.hl-barre-plein { height: 100%; width: 0; background: #2563eb; transition: width .3s ease; }
+.hl-note { font-size: 12.5px; color: var(--text-soft); min-height: 18px; }
+.hl-boutons { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 10px; }
+.hl-boutons .tour-btn { border: 1px solid var(--border-light); background: none; color: var(--text); border-radius: 8px; padding: 9px 15px; font-size: 13.5px; cursor: pointer; font-family: inherit; }
+.hl-boutons .tour-btn.principal { background: #2563eb; border-color: #2563eb; color: #fff; font-weight: 600; }
+
 /* visionneuse d'image : l'agrandissement se fait sur place, pas dans un autre onglet */
 .visionneuse {
   position: fixed; inset: 0; z-index: 950;
