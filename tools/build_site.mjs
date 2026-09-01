@@ -687,7 +687,7 @@ function rootOf(out) { return '../'.repeat(out.split('/').length - 1); }
 // Posé dans le <head>, avant tout rendu : sans lui, une page s'afficherait en clair
 // une fraction de seconde avant de basculer en sombre.
 // version de build : casse le cache HTTP de 10 minutes de GitHub Pages à chaque déploiement
-const V = new Date().toISOString().slice(0, 16).replace(/[-T:]/g, '');
+const V = new Date().toISOString().slice(0, 19).replace(/[-T:]/g, '');
 const SCRIPT_THEME = `window.V='${V}';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}`;
 
 function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
@@ -1608,7 +1608,7 @@ fs.writeFileSync(path.join(OUT, 'assets', 'style.css'), style);
 fs.writeFileSync(path.join(OUT, 'assets', 'app.js'), appjs);
 fs.writeFileSync(path.join(OUT, 'assets', 'portail.css'), fs.readFileSync(path.join(__dirname, 'portail.css'), 'utf8'));
 fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas passer par Jekyll
-genererPwa(OUT, new Date().toISOString().slice(0, 13));
+genererPwa(OUT, V);
 
 // La date de génération vit dans un seul fichier, lu par le pied de page. Écrite dans les
 // 4970 pages, elle changeait tout le site à chaque reconstruction — ~60 Mo de dépôt pour une date.
@@ -1627,6 +1627,6 @@ if (badFm.length) {
 if (pngOptim) {
   console.log(`Images PNG : ${pngOptim} recompressées sans perte (${(pngGain / 1048576).toFixed(1)} Mo économisés), ${pngIntacts} laissées telles quelles`);
 }
-const hl = genererListeHorsLigne(OUT);
+const hl = genererListeHorsLigne(OUT, V);
 console.log(`Hors-ligne : ${hl.pages} fichiers texte (${Math.round(hl.octetsPages/1048576)} Mo) · ${hl.medias} médias (${Math.round(hl.octetsMedias/1048576)} Mo)`);
 console.log(`Terminé : ${pages.length} pages · ${assetOut.size} fichiers copiés · sortie : ${OUT}`);

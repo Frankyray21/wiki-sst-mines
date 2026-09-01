@@ -780,26 +780,76 @@
 
   // ---------- application installable (PWA) ----------
   (function pwa() {
-    // service worker : les pages visitées restent lisibles sans réseau — utile sous terre
+    // service worker : tout le wiki (texte, puis images et PDF) se synchronise
+    // tout seul, par tranches courtes pilotées d'ici — un service worker occupé
+    // trop longtemps se fait tuer par le navigateur, jamais une tranche.
+    // Reprend après interruption, retour du réseau ou mise à jour du site.
     if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-      navigator.serviceWorker.register(ROOT + 'sw.js').catch(function () { /* le site marche sans lui */ });
+      var regOk = false;
+      navigator.serviceWorker.register(ROOT + 'sw.js')
+        .then(function () { regOk = true; })
+        .catch(function () { /* le site marche sans lui */ });
 
-      // tout le texte du wiki se met en cache tout seul, en tâche de fond,
-      // une fois par session : le wiki entier devient lisible sans réseau
-      navigator.serviceWorker.ready.then(function (reg) {
-        var deja = false;
-        try { deja = sessionStorage.getItem('hl-auto') === '1'; } catch (e) {}
-        if (!deja && navigator.onLine && reg.active) {
-          setTimeout(function () {
-            reg.active.postMessage({ type: 'precache-pages' });
-            try { sessionStorage.setItem('hl-auto', '1'); } catch (e) {}
-          }, 5000);
-        }
+      var sync = { quoi: null, depuis: 0, total: 0, gen: 0, signal: 0 };
+      var FINI = 'hl-fini'; // version du site entièrement synchronisée
+
+      function dejaFini() {
+        try { return localStorage.getItem(FINI) === String(window.V || ''); } catch (e) { return false; }
+      }
+      function quotaPlein() {
+        try { return sessionStorage.getItem('hl-quota') === '1'; } catch (e) { return false; }
+      }
+      function envoyer(msg) {
+        navigator.serviceWorker.ready.then(function (reg) {
+          if (reg.active) reg.active.postMessage(msg);
+        });
+      }
+      function demarrer(quoi, depuis) {
+        sync.gen++;
+        sync.quoi = quoi; sync.depuis = depuis || 0; sync.total = 0; sync.signal = Date.now();
+        envoyer({ type: 'sync', quoi: quoi, depuis: sync.depuis, gen: sync.gen });
+      }
+      function lancerAuto() {
+        if (sync.quoi || dejaFini() || quotaPlein()) return;
+        demarrer('pages', 0);
+      }
+
+      navigator.serviceWorker.ready.then(function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(lancerAuto, { timeout: 4000 });
+        else setTimeout(lancerAuto, 2500);
       });
+      // le réseau revient (retour en surface) : on reprend là où c'était rendu
+      window.addEventListener('online', lancerAuto);
+      // nouveau service worker = site mis à jour : re-vérifier tout (delta par hash,
+      // seuls les fichiers modifiés se retéléchargent)
+      navigator.serviceWorker.addEventListener('controllerchange', function () {
+        try { localStorage.removeItem(FINI); } catch (e) {}
+        sync.quoi = null;
+        setTimeout(lancerAuto, 1500);
+      });
+      // chien de garde : si le service worker a été tué en pleine tranche, on renvoie la demande
+      setInterval(function () {
+        if (sync.quoi && Date.now() - sync.signal > 45000) {
+          sync.signal = Date.now();
+          envoyer({ type: 'sync', quoi: sync.quoi, depuis: sync.depuis, gen: sync.gen });
+        }
+      }, 15000);
 
-      // panneau « Hors-ligne » : état du cache + téléchargement des médias avec progression
+      // panneau « Hors-ligne » : état du cache + progression
       var dlg = null;
+      var minuterieEtat = null;
       function formatMo(o) { return Math.round(o / 1048576).toLocaleString('fr-CA') + ' Mo'; }
+      var iosSansApp = /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+        !(matchMedia('(display-mode: standalone)').matches || navigator.standalone === true);
+
+      function majBouton() {
+        var b = document.getElementById('btnHorsLigne');
+        if (!b) return;
+        b.setAttribute('title', sync.quoi && sync.total
+          ? 'Synchronisation hors ligne : ' + Math.round(sync.depuis / sync.total * 100) + ' %'
+          : 'Consultation hors ligne');
+      }
+      function demanderEtat() { envoyer({ type: 'etat' }); }
 
       function ouvrirPanneau() {
         if (dlg) dlg.remove();
@@ -812,55 +862,121 @@
           '<p id="hl-note" class="hl-note"></p>' +
           '<div class="hl-boutons">' +
           '<button class="tour-btn" data-fermer>Fermer</button>' +
-          '<button class="tour-btn principal" id="hl-medias" hidden>Télécharger aussi les images et PDF</button>' +
+          '<button class="tour-btn principal" id="hl-verifier" hidden>Vérifier maintenant</button>' +
           '</div></div>';
         dlg.addEventListener('click', function (ev) {
           if (ev.target === dlg || ev.target.hasAttribute('data-fermer')) { dlg.remove(); dlg = null; }
         });
         document.body.appendChild(dlg);
-        navigator.serviceWorker.ready.then(function (reg) {
-          if (reg.active) reg.active.postMessage({ type: 'etat' });
-        });
+        demanderEtat();
+        clearTimeout(minuterieEtat);
+        minuterieEtat = setTimeout(function () {
+          var etat = dlg && dlg.querySelector('#hl-etat');
+          if (etat && etat.textContent.indexOf('Interrogation') === 0) {
+            etat.textContent = regOk
+              ? 'Le service hors ligne ne répond pas — recharge la page et réessaie.'
+              : 'La consultation hors ligne n’est pas prise en charge par ce navigateur.';
+          }
+        }, 4000);
       }
 
       navigator.serviceWorker.addEventListener('message', function (ev) {
         var d = ev.data || {};
-        if (!dlg) {
-          return;
+        // effets globaux d'abord : la synchronisation tourne panneau fermé
+        // toute réponse est corrélée à la synchro courante par le jeton gen :
+        // un message d'une synchro abandonnée (clic, redémarrage) est ignoré
+        var actuel = d.gen === sync.gen && d.quoi === sync.quoi;
+        if (d.type === 'tranche' && actuel) {
+          sync.depuis = d.suivant; sync.total = d.total; sync.signal = Date.now();
+          majBouton();
+          setTimeout(function () {
+            if (sync.quoi === d.quoi && sync.gen === d.gen) {
+              envoyer({ type: 'sync', quoi: sync.quoi, depuis: sync.depuis, gen: sync.gen });
+            }
+          }, 60);
+        } else if (d.type === 'occupe' && actuel) {
+          // une tranche d'une synchro précédente finit encore : réessayer sous peu
+          sync.signal = Date.now();
+          setTimeout(function () {
+            if (sync.quoi === d.quoi && sync.gen === d.gen) {
+              envoyer({ type: 'sync', quoi: sync.quoi, depuis: sync.depuis, gen: sync.gen });
+            }
+          }, 5000);
+        } else if (d.type === 'sync-fin' && actuel) {
+          sync.signal = Date.now();
+          if (d.quoi === 'pages') {
+            // le texte est là : on enchaîne images et PDF, et on demande au
+            // navigateur de protéger le stockage contre l'effacement automatique
+            if (navigator.storage && navigator.storage.persist) {
+              navigator.storage.persist().catch(function () {});
+            }
+            demarrer('medias', 0);
+          } else {
+            sync.quoi = null; sync.total = 0;
+            majBouton();
+            demanderEtat(); // l'état réel du cache décide si la version est complète
+          }
+        } else if (d.type === 'erreur-quota' && actuel) {
+          sync.quoi = null; sync.total = 0;
+          try { sessionStorage.setItem('hl-quota', '1'); } catch (e) {}
+          majBouton();
+          if (dlg) demanderEtat();
+        } else if (d.type === 'sync-erreur' && actuel) {
+          sync.quoi = null; sync.total = 0;
+          majBouton();
+        } else if (d.type === 'etat' && d.pages && d.medias) {
+          // complétude fondée sur l'état réel du cache, pas sur des compteurs
+          if (!sync.quoi && d.pages.en >= d.pages.total && d.medias.en >= d.medias.total) {
+            try { localStorage.setItem(FINI, String(window.V || '')); } catch (e) {}
+          }
         }
+        if (!dlg) return;
         var etat = dlg.querySelector('#hl-etat');
         var note = dlg.querySelector('#hl-note');
         var barre = dlg.querySelector('#hl-barre');
         var plein = dlg.querySelector('#hl-plein');
-        var btnM = dlg.querySelector('#hl-medias');
+        var btnV = dlg.querySelector('#hl-verifier');
         if (d.type === 'etat') {
           var pOk = d.pages.en >= d.pages.total;
           var mOk = d.medias.en >= d.medias.total;
-          etat.innerHTML = 'Texte du wiki : <strong>' + d.pages.en.toLocaleString('fr-CA') + ' / ' + d.pages.total.toLocaleString('fr-CA') + '</strong> fichiers en cache (' + formatMo(d.pages.octets) + ')' +
-            (pOk ? ' ✓' : ' — téléchargement en tâche de fond…') +
-            '<br>Images et PDF : <strong>' + d.medias.en.toLocaleString('fr-CA') + ' / ' + d.medias.total.toLocaleString('fr-CA') + '</strong> (' + formatMo(d.medias.octets) + ')' + (mOk ? ' ✓' : '');
-          if (!mOk) {
-            btnM.hidden = false;
-            btnM.textContent = 'Télécharger les images et PDF (' + formatMo(d.medias.octets) + ')';
-            btnM.onclick = function () {
-              btnM.disabled = true;
-              note.textContent = 'Téléchargement en cours — laisse la page ouverte, idéalement en wifi.';
-              navigator.serviceWorker.ready.then(function (reg) {
-                if (reg.active) reg.active.postMessage({ type: 'precache-medias' });
-              });
-            };
-          } else {
-            btnM.hidden = true;
+          etat.innerHTML = 'Texte du wiki : <strong>' + d.pages.en.toLocaleString('fr-CA') + ' / ' + d.pages.total.toLocaleString('fr-CA') + '</strong> fichiers (' + formatMo(d.pages.octets) + ')' + (pOk ? ' ✓' : '') +
+            '<br>Images et PDF : <strong>' + d.medias.en.toLocaleString('fr-CA') + ' / ' + d.medias.total.toLocaleString('fr-CA') + '</strong> (' + formatMo(d.medias.octets) + ')' +
+            (mOk ? ' ✓' : ' — reste ' + formatMo(d.medias.restant || 0));
+          if (quotaPlein()) {
+            note.textContent = 'Espace de stockage insuffisant sur cet appareil : libère de l’espace puis touche « Vérifier maintenant ».';
+          } else if (pOk && mOk) {
             note.textContent = 'Tout le wiki est disponible sans réseau sur cet appareil.';
+          } else if (sync.quoi || (d.enCours && d.enCours.length)) {
+            note.textContent = 'Téléchargement automatique en cours — tu peux fermer ce panneau, ça continue tout seul.';
+          } else {
+            note.textContent = 'La synchronisation repartira toute seule — ou touche « Vérifier maintenant ».';
           }
-        } else if (d.type === 'progression') {
+          if (iosSansApp) {
+            note.textContent += ' Sur iPhone/iPad : installe d’abord l’app (Partager → Sur l’écran d’accueil) — le contenu téléchargé dans Safari ne suit pas dans l’app installée.';
+          }
+          btnV.hidden = pOk && mOk;
+          btnV.onclick = function () {
+            try { sessionStorage.removeItem('hl-quota'); } catch (e) {}
+            try { localStorage.removeItem(FINI); } catch (e) {}
+            btnV.disabled = true;
+            sync.quoi = null;
+            lancerAuto();
+            setTimeout(function () { btnV.disabled = false; demanderEtat(); }, 1500);
+          };
+          if (navigator.storage && navigator.storage.persisted) {
+            navigator.storage.persisted().then(function (p) {
+              var bloc = dlg && dlg.querySelector('#hl-etat');
+              if (bloc) bloc.innerHTML += '<br><small>' + (p ? 'Stockage protégé contre l’effacement automatique ✓' : 'Stockage non garanti — installer l’app le protège') + '</small>';
+            }).catch(function () {});
+          }
+        } else if (d.type === 'tranche') {
           barre.hidden = false;
-          plein.style.width = Math.round(d.fait / d.total * 100) + '%';
-          note.textContent = (d.quoi === 'medias' ? 'Images et PDF : ' : 'Texte : ') + d.fait.toLocaleString('fr-CA') + ' / ' + d.total.toLocaleString('fr-CA');
-        } else if (d.type === 'termine') {
-          navigator.serviceWorker.ready.then(function (reg) {
-            if (reg.active) reg.active.postMessage({ type: 'etat' });
-          });
+          plein.style.width = (sync.total ? Math.round(sync.depuis / sync.total * 100) : 0) + '%';
+          note.textContent = (d.quoi === 'medias' ? 'Images et PDF : ' : 'Texte : ') +
+            sync.depuis.toLocaleString('fr-CA') + ' / ' + sync.total.toLocaleString('fr-CA') +
+            ' — tu peux fermer ce panneau, ça continue tout seul.';
+        } else if (d.type === 'etat-indisponible') {
+          etat.textContent = 'État indisponible — le premier téléchargement n’a pas encore commencé.';
         }
       });
 
@@ -916,7 +1032,7 @@
         '<h3>📲 Installer le Wiki SST</h3>' +
         '<p>Ouvre le menu <strong>Partager</strong> de ton navigateur (l’icône <strong>⎋</strong> ou <strong>⋮</strong>), ' +
         'puis choisis <strong>« Sur l’écran d’accueil »</strong> ou <strong>« Installer l’application »</strong>.</p>' +
-        '<p>Le wiki s’ouvrira ensuite comme une app, et les pages déjà visitées resteront lisibles sans réseau.</p>' +
+        '<p>Le wiki s’ouvrira ensuite comme une app. Sur iPhone/iPad, ouvre l’app installée au moins une fois avec du réseau : le contenu hors ligne se télécharge dans l’app, pas dans Safari.</p>' +
         '<button class="tour-btn principal" data-fermer>Compris</button></div>';
       v.addEventListener('click', function (ev) {
         if (ev.target === v || ev.target.hasAttribute('data-fermer')) v.remove();
