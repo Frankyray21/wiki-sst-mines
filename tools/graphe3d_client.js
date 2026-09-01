@@ -46,7 +46,7 @@
   });
 
   // ---------- chargement ----------
-  fetch(ROOT + 'assets/graphe.json')
+  fetch(ROOT + 'assets/graphe.json?v=' + (window.V || '0'))
     .then(function (r) { if (!r.ok) throw 0; return r.json(); })
     .then(function (g) {
       // départ sur une sphère : répartition uniforme par spirale de Fibonacci

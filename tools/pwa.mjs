@@ -102,7 +102,7 @@ self.addEventListener('fetch', (e) => {
   const estMedia = new URL(req.url).pathname.includes('/files/');
   if (estMedia) {
     // les captures et PDF ne changent pas : cache d'abord, réseau sinon
-    e.respondWith(caches.match(req).then((m) => m || fetch(req).then((rep) => {
+    e.respondWith(caches.match(req, { ignoreSearch: true }).then((m) => m || fetch(req).then((rep) => {
       if (rep.ok && rep.type === 'basic') { const c2 = rep.clone(); caches.open(CACHE).then((c) => c.put(req, c2)); }
       return rep;
     })));
@@ -115,7 +115,7 @@ self.addEventListener('fetch', (e) => {
         caches.open(CACHE).then((c) => c.put(req, copie));
       }
       return rep;
-    }).catch(() => caches.match(req).then((m) => m || (req.mode === 'navigate' ? caches.match('./offline.html') : Response.error())))
+    }).catch(() => caches.match(req, { ignoreSearch: true }).then((m) => m || (req.mode === 'navigate' ? caches.match('./offline.html') : Response.error())))
   );
 });
 

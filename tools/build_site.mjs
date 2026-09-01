@@ -686,7 +686,9 @@ function rootOf(out) { return '../'.repeat(out.split('/').length - 1); }
 
 // Posé dans le <head>, avant tout rendu : sans lui, une page s'afficherait en clair
 // une fraction de seconde avant de basculer en sombre.
-const SCRIPT_THEME = `try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}`;
+// version de build : casse le cache HTTP de 10 minutes de GitHub Pages à chaque déploiement
+const V = new Date().toISOString().slice(0, 16).replace(/[-T:]/g, '');
+const SCRIPT_THEME = `window.V='${V}';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}`;
 
 function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
   const ROOT = rootOf(out);
@@ -699,7 +701,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(title)} — WIKI SST Mines</title>
-<link rel="stylesheet" href="${ROOT}assets/style.css">
+<link rel="stylesheet" href="${ROOT}assets/style.css?v=${V}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 ${metaPwa(ROOT)}
 <script>window.ROOT='${ROOT}';${SCRIPT_THEME}</script>
@@ -740,7 +742,7 @@ ${content}
 </main>
 </div>
 <footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours<span id="version"></span></footer>
-<script src="${ROOT}assets/app.js"></script>
+<script src="${ROOT}assets/app.js?v=${V}"></script>
 </body>
 </html>`;
 }
@@ -1495,14 +1497,14 @@ function pageTableauDeBord({ out, titre, corps, dataPub }) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(titre)} — WIKI SST Mines</title>
-<link rel="stylesheet" href="${R}assets/portail.css">
+<link rel="stylesheet" href="${R}assets/portail.css?v=${V}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 ${metaPwa(R)}
 <script>window.ROOT='${R}';${SCRIPT_THEME}</script>
 </head>
 <body class="tb"${dataPub ? ` data-pub="${dataPub}"` : ''}>
 ${corps}
-<script src="${R}assets/app.js"></script>
+<script src="${R}assets/app.js?v=${V}"></script>
 </body>
 </html>`;
 }
@@ -1516,14 +1518,14 @@ function pageAutonome({ out, titre, contenu }) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(titre)} — WIKI SST Mines</title>
-<link rel="stylesheet" href="${R}assets/style.css">
+<link rel="stylesheet" href="${R}assets/style.css?v=${V}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 <script>window.ROOT='${R}';${SCRIPT_THEME}</script>
 </head>
 <body class="portal"><button class="btn-theme theme-portail" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 <main class="portal-main">${contenu.replace(/\{\{ROOT\}\}/g, R)}</main>
 <footer class="site-footer">WIKI SST — Mines<span id="version"></span></footer>
-<script src="${R}assets/app.js"></script>
+<script src="${R}assets/app.js?v=${V}"></script>
 </body>
 </html>`;
 }
@@ -1587,7 +1589,7 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WIKI SST — Mines · Portail</title>
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=${V}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 ${metaPwa('')}
 <script>window.ROOT='';${SCRIPT_THEME}</script>
@@ -1595,7 +1597,7 @@ ${metaPwa('')}
 <body class="portal"><button class="btn-theme theme-portail" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 <main class="portal-main">${content}</main>
 <footer class="site-footer">WIKI SST — Mines · encyclopédie interne<span id="version"></span></footer>
-<script src="assets/app.js"></script>
+<script src="assets/app.js?v=${V}"></script>
 </body>
 </html>`;
   fs.writeFileSync(path.join(OUT, 'index.html'), html);

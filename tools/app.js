@@ -1,13 +1,14 @@
 // WIKI SST — Mines · recherche + navigation
 (function () {
   var ROOT = window.ROOT || '';
+  function vUrl(u) { return u + (u.indexOf('?') >= 0 ? '&' : '?') + 'v=' + (window.V || '0'); }
   var index = null;
   var loading = null;
 
   function loadIndex() {
     if (index) return Promise.resolve(index);
     if (loading) return loading;
-    loading = fetch(ROOT + 'assets/search-index.json')
+    loading = fetch(vUrl(ROOT + 'assets/search-index.json'))
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
@@ -438,7 +439,7 @@
     if (bh) bh.addEventListener('click', function () { var e = document.getElementById('tbRecents'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
 
     // version et date réelles
-    fetch(ROOT + 'assets/version.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
+    fetch(vUrl(ROOT + 'assets/version.json')).then(function (r) { return r.ok ? r.json() : null; }).then(function (v) {
       if (!v) return;
       var maj = document.getElementById('tbMaj');
       if (maj && v.date) {
@@ -738,7 +739,7 @@
   (function version() {
     var el = document.getElementById('version');
     if (!el) return;
-    fetch(ROOT + 'assets/version.json')
+    fetch(vUrl(ROOT + 'assets/version.json'))
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (v) {
         if (!v || !v.date) return;
