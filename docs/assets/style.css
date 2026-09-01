@@ -381,6 +381,9 @@ a.tag-lien:hover { background: var(--tag-hover-bg); border-color: var(--tag-hove
 .retour-haut { font-size: 12px; font-weight: 400; font-family: -apple-system, 'Segoe UI', sans-serif; margin-left: 8px; }
 .encart-nav { background: var(--info-bg); border: 1px solid var(--info-bd); border-radius: 3px; padding: 10px 14px; margin: 12px 0 16px; font-size: 14.5px; }
 .lien-mort { color: var(--text-soft); text-decoration: line-through; cursor: not-allowed; }
+/* article de loi remplacé ou abrogé : mention informative, volontairement sans page */
+.abroge-inline { color: var(--text-soft); cursor: help; }
+.abroge-inline small { color: var(--text-faint); font-style: italic; }
 
 /* aperçu des liens au survol */
 .apercu-lien {

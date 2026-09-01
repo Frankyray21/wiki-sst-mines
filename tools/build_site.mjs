@@ -300,6 +300,28 @@ if (refusees.length) {
   console.log(`Non publiées (publish: false / traitement interne) : ${refusees.length} notes écartées du site`);
 }
 
+// Un article de loi remplacé ou abrogé n'a rien à dire : pas de page.
+// Les liens qui le visaient afficheront une mention grisée « (remplacé) » à la place.
+const articlesRetires = new Map(); // basename minuscule -> 'remplacé' | 'abrogé'
+{
+  const coquilles = pages.filter(p => {
+    if (p.wikiKey !== 'Recueil législatif SST') return false;
+    const st = String(p.fm.statut ?? '').toLowerCase();
+    if (st === 'abrogé' || st === 'remplacé') return true;
+    const sujet = String(p.fm.sujet ?? '').toLowerCase();
+    if (/remplac|abrog/.test(sujet)) return true;
+    const debut = stripMd(p.body).slice(0, 200).toLowerCase();
+    return /disposition remplacée|disposition abrogée|article abrogé|article remplacé/.test(debut);
+  });
+  for (const p of coquilles) {
+    const st = String(p.fm.statut ?? '').toLowerCase();
+    const texte = (String(p.fm.sujet ?? '') + ' ' + stripMd(p.body).slice(0, 200)).toLowerCase();
+    articlesRetires.set(p.base.toLowerCase(), st === 'abrogé' || /abrog/.test(texte) ? 'abrogé' : 'remplacé');
+    pages.splice(pages.indexOf(p), 1);
+  }
+  console.log(`Articles remplacés ou abrogés : ${coquilles.length} coquilles vides écartées (mention grisée à la place)`);
+}
+
 // Chemin de sortie dans le fond documentaire : miroir du vault, slugifié.
 // Les wikis par public préfixent ce chemin (t/… ou g/…) sans le recalculer.
 const usedOut = new Set();
@@ -550,6 +572,10 @@ function renderWikilinks(md) {
       // transclusion de note : simple lien encadré
       const pg = resolvePage(target, CUR);
       if (pg) { CUR_LINKS.add(pg); return `<a href="{{ROOT}}${urlDe(pg)}">${esc(alias || pg.title)}</a>`; }
+      {
+        const retire = articlesRetires.get(target.split('/').pop().trim().toLowerCase());
+        if (retire) return `<span class="abroge-inline" title="Non repris dans le wiki">${esc(alias || target)} <small>(${retire})</small></span>`;
+      }
       return `<span class="new">${esc(alias || target)}</span>`;
     }
 
@@ -573,7 +599,15 @@ function renderWikilinks(md) {
     const parAlias = pg && looseKey(saisi) !== looseKey(pg.base) && looseKey(saisi) !== looseKey(pg.title);
     const nom = pg ? (parAlias ? saisi : pg.title) : saisi;
     const label = alias || (anchor ? `${nom} › ${anchor}` : nom);
-    if (!pg) return `<span class="new" title="page non créée">${esc(label)}</span>`;
+    if (!pg) {
+      // article remplacé ou abrogé : mention grisée, pas de lien — la page n'existe pas volontairement
+      const retire = articlesRetires.get(target.split('/').pop().trim().toLowerCase());
+      if (retire) {
+        const suffixe = /remplac|abrog/i.test(label) ? '' : ` <small>(${retire})</small>`;
+        return `<span class="abroge-inline" title="${retire === 'abrogé' ? 'Article abrogé' : 'Disposition remplacée'} — non repris dans le wiki">${esc(label)}${suffixe}</span>`;
+      }
+      return `<span class="new" title="page non créée">${esc(label)}</span>`;
+    }
     CUR_LINKS.add(pg);
     const a = anchor ? '#' + headingSlug(anchor) : '';
     return `<a href="{{ROOT}}${urlDe(pg)}${a}" title="${esc(pg.title)}">${esc(label)}</a>`;
