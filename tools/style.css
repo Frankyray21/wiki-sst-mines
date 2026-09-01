@@ -579,7 +579,11 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .carte-public .portal-icon { font-size: 42px; }
 /* boutons flottants du portail, qui n'a pas d'en-tête */
 .theme-portail { position: absolute; top: 14px; right: 16px; background: var(--content-bg); }
-#btnAide.theme-portail { right: 62px; } /* sinon il se superposerait au bouton de thème */
+/* les boutons injectés héritent de la même position absolue : chacun son décalage,
+   sinon ils s'empilent tous au même endroit et seul le dernier se voit */
+#btnAide.theme-portail { right: 62px; }
+#btnHorsLigne.theme-portail { right: 108px; }
+#btnInstall.theme-portail { right: 154px; }
 
 /* rubriques des portails par public */
 .rubrique { margin: 26px 0; }
