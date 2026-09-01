@@ -749,6 +749,34 @@
       .catch(function () { /* le pied de page reste simplement sans date */ });
   })();
 
+  // ---------- visionneuse d'image sur place ----------
+  // Cliquer une image l'agrandit par-dessus la page ; clic, ✕ ou Échap referme.
+  (function visionneuse() {
+    function ouvrir(src, alt) {
+      var v = document.createElement('div');
+      v.className = 'visionneuse';
+      v.setAttribute('role', 'dialog');
+      v.setAttribute('aria-label', 'Image agrandie');
+      v.innerHTML = '<button class="vis-fermer" aria-label="Fermer">✕</button>';
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = alt || '';
+      v.appendChild(img);
+      function fermer() { v.remove(); document.removeEventListener('keydown', surTouche); }
+      function surTouche(ev) { if (ev.key === 'Escape') fermer(); }
+      v.addEventListener('click', fermer);
+      document.addEventListener('keydown', surTouche);
+      document.body.appendChild(v);
+    }
+    document.addEventListener('click', function (ev) {
+      var a = ev.target.closest ? ev.target.closest('.page-img a') : null;
+      if (!a) return;
+      ev.preventDefault();
+      var img = a.querySelector('img');
+      ouvrir(a.getAttribute('href'), img ? img.alt : '');
+    });
+  })();
+
   // ---------- application installable (PWA) ----------
   (function pwa() {
     // service worker : les pages visitées restent lisibles sans réseau — utile sous terre

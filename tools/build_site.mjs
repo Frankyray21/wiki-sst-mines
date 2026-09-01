@@ -541,7 +541,7 @@ function renderWikilinks(md) {
             : /^art[-.]/i.test(target.split('/').pop()) ? `Texte officiel de l'article — ${CUR.title}`
             : `Illustration — ${CUR.title}`;
           const classeDoc = docsTexte.has(url) ? ' class="img-doc"' : '';
-          return protect(`<span class="page-img"><a href="{{ROOT}}${url}" target="_blank" rel="noopener"><img${classeDoc} src="{{ROOT}}${url}" alt="${esc(legende)}" loading="lazy"${w}></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>`);
+          return protect(`<span class="page-img"><a class="img-lien" href="{{ROOT}}${url}"><img${classeDoc} src="{{ROOT}}${url}" alt="${esc(legende)}" loading="lazy"${w}></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>`);
         }
         if (ext === 'mp4') return protect(`<video controls preload="metadata" src="{{ROOT}}${url}" style="max-width:100%"></video>`);
         if (ext === 'm4a' || ext === 'mp3') return protect(`<audio controls src="{{ROOT}}${url}"></audio>`);

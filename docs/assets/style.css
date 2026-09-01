@@ -293,9 +293,6 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .page-img { display: block; text-align: center; margin: 14px 0; }
 /* !important : neutralise le max-width en pixels hérité de l'alias Obsidian (|650), qui débordait sur mobile */
 .page-img img { max-width: 100% !important; height: auto; border: 1px solid var(--border-light); background: var(--img-bg); padding: 4px; }
-/* Capture de document : texte noir sur fond blanc. En thème sombre, l'inverser la rend
-   lisible plutôt qu'éblouissante. Les photos et schémas en couleur ne portent pas cette classe. */
-.page-img img.img-doc { filter: var(--img-filtre); background: var(--content-bg); }
 .page-img a { display: inline-block; max-width: 100%; }
 .img-zoom { display: block; font-size: 12px; color: var(--text-soft); margin-top: 2px; }
 .missing-file { color: var(--link-new); font-style: italic; font-size: 13px; }
@@ -423,6 +420,26 @@ a.tag-lien:hover { background: var(--tag-hover-bg); border-color: var(--tag-hove
   font-size: 19px; cursor: pointer; opacity: .85;
 }
 .graphe-plein:hover { opacity: 1; background: var(--hover); }
+/* visionneuse d'image : l'agrandissement se fait sur place, pas dans un autre onglet */
+.visionneuse {
+  position: fixed; inset: 0; z-index: 950;
+  background: rgba(8, 10, 14, .88);
+  display: flex; align-items: center; justify-content: center;
+  padding: 18px; cursor: zoom-out;
+}
+.visionneuse img {
+  max-width: 96vw; max-height: 92vh;
+  background: #fff; padding: 6px; border-radius: 6px;
+  box-shadow: 0 12px 44px rgba(0,0,0,.6);
+}
+.visionneuse .vis-fermer {
+  position: absolute; top: 14px; right: 14px;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 0; background: rgba(255,255,255,.14); color: #fff;
+  font-size: 20px; cursor: pointer;
+}
+.visionneuse .vis-fermer:hover { background: rgba(255,255,255,.28); }
+
 /* aide à l'installation de l'application */
 .pwa-aide {
   position: fixed; inset: 0; z-index: 900;
