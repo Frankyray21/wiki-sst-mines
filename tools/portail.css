@@ -108,8 +108,9 @@ body.tb a { color: inherit; text-decoration: none; }
 .tb-profil-txt span { display: block; font-size: 12.5px; color: var(--p-texte-doux); }
 
 /* ---------- corps ---------- */
-.tb-corps { display: flex; gap: 24px; padding: 22px 28px; align-items: flex-start; max-width: 1680px; margin: 0 auto; }
-.tb-centre { flex: 1; min-width: 0; }
+.tb-corps { display: flex; gap: 24px; padding: 22px 28px; align-items: flex-start; max-width: 1680px; margin: 0 auto; width: 100%; }
+.tb-centre { flex: 1; min-width: 0; width: 100%; }
+.tb-conteneur { width: 100%; container-type: inline-size; container-name: centre; }
 .tb-droite { width: 372px; flex-shrink: 0; display: flex; flex-direction: column; gap: 18px; }
 
 .tb-bonjour { font-size: 34px; font-weight: 700; letter-spacing: -.6px; margin-bottom: 6px; }
@@ -133,7 +134,7 @@ body.tb a { color: inherit; text-decoration: none; }
 
 .tb-section { font-size: 21.5px; font-weight: 700; letter-spacing: -.3px; margin: 24px 0 12px; }
 .tb-grille { display: grid; gap: 13px; }
-.tb-g4 { grid-template-columns: repeat(4, 1fr); }
+.tb-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .tb-carte {
   background: var(--p-carte); border: 1px solid var(--p-bordure); border-radius: var(--p-rayon);
   padding: 17px 18px; box-shadow: var(--p-ombre); transition: box-shadow .13s, transform .13s, border-color .13s;
@@ -147,7 +148,7 @@ body.tb a { color: inherit; text-decoration: none; }
 }
 .tb-carte-icone svg { width: 25px; height: 25px; fill: none; stroke-width: 1.7; }
 .tb-carte h3 { font-size: 16.5px; font-weight: 700; margin-bottom: 5px; }
-.tb-carte p { font-size: 14px; color: var(--p-texte-doux); line-height: 1.5; }
+.tb-carte p { font-size: 14.5px; color: var(--p-texte-doux); line-height: 1.5; }
 .tb-carte-lien { color: var(--p-bleu); font-size: 14px; font-weight: 600; margin-top: 10px; display: inline-block; }
 
 /* cartes « situation » : icône à gauche, flèche à droite */
@@ -158,9 +159,9 @@ body.tb a { color: inherit; text-decoration: none; }
   display: flex; align-items: center; justify-content: center;
 }
 .tb-situ .tb-situ-ic svg { width: 23px; height: 23px; fill: none; stroke-width: 1.7; }
-.tb-situ-txt { flex: 1; min-width: 0; }
+.tb-situ-txt { flex: 1; min-width: 0; overflow-wrap: normal; }
 .tb-situ-txt h3 { font-size: 15.5px; margin-bottom: 3px; }
-.tb-situ-txt p { font-size: 13.5px; }
+.tb-situ-txt p { font-size: 14px; }
 .tb-fleche { stroke: var(--p-texte-doux); width: 19px; height: 19px; fill: none; stroke-width: 1.8; flex-shrink: 0; }
 .tb-carte:hover .tb-fleche { stroke: var(--p-bleu); }
 
@@ -274,3 +275,15 @@ body.tb a { color: inherit; text-decoration: none; }
   .tb-pied .tb-droite-pied { margin-left: 0; flex-wrap: wrap; gap: 12px; }
 }
 .tb-burger { display: none; }
+
+/* colonnes adaptées à la largeur réelle de la zone centrale (fenêtre à mi-largeur,
+   colonne de droite présente ou non) — remplace les 4 colonnes forcées */
+@container centre (max-width: 1119px) {
+  .tb-g4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@container centre (max-width: 829px) {
+  .tb-g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@container centre (max-width: 539px) {
+  .tb-g4 { grid-template-columns: minmax(0, 1fr); }
+}

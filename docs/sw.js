@@ -1,5 +1,5 @@
 // Service worker du WIKI SST — généré à la construction
-const CACHE = 'wiki-sst-2026-08-31T20';
+const CACHE = 'wiki-sst-2026-09-01T14';
 const NOYAU = ['./', './index.html', './t/index.html', './g/index.html',
   './assets/style.css', './assets/portail.css', './assets/app.js', './offline.html'];
 

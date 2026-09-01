@@ -205,7 +205,7 @@ export function rendrePortailTravailleurs({ R, nbLois, majDate, verifier, rubriq
   </header>
 
   <div class="tb-corps">
-    <main class="tb-centre">
+    <main class="tb-centre"><div class="tb-conteneur">
       <h1 class="tb-bonjour">Salut&nbsp;! 👋</h1>
       <p class="tb-sous-titre">Tes droits, ta santé, ta sécurité — expliqué simplement, pour toi qui travailles à la mine.</p>
 
@@ -232,7 +232,7 @@ export function rendrePortailTravailleurs({ R, nbLois, majDate, verifier, rubriq
       <div class="tb-grille tb-g4">${autres.map(a => cartePage({ ...a, icone: '📄' })).join('')}</div></section>` : ''}
 
       <div class="tb-barre">${barre}</div>
-    </main>
+    </div></main>
 
     <aside class="tb-droite">
       <section class="tb-bloc tb-legal">
@@ -357,7 +357,7 @@ export function rendrePortailEncadrement({ R, nbLois, majDate, verifier }) {
   </header>
 
   <div class="tb-corps">
-    <main class="tb-centre">
+    <main class="tb-centre"><div class="tb-conteneur">
       <h1 class="tb-bonjour">Bonjour François 👋</h1>
       <p class="tb-sous-titre">Tout ce qu’un gestionnaire, superviseur ou dirigeant doit savoir pour prévenir, intervenir et respecter ses obligations SST.</p>
 
@@ -379,7 +379,7 @@ export function rendrePortailEncadrement({ R, nbLois, majDate, verifier }) {
       <div class="tb-grille tb-g4">${explorer}</div>
 
       <div class="tb-barre">${barre}</div>
-    </main>
+    </div></main>
 
     <aside class="tb-droite">
       <section class="tb-bloc tb-legal">
