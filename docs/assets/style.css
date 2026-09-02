@@ -269,15 +269,15 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
   border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 4px;
 }
 .page-sub { font-size: 13px; color: var(--text-soft); margin-bottom: 18px; }
-.page-body { font-size: 15px; max-width: 100%; }
+.page-body { font-size: calc(15px * var(--echelle, 1)); max-width: 100%; }
 .page-body h1, .page-body h2, .page-body h3, .page-body h4 {
   font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif;
   font-weight: 400; margin: 26px 0 10px; line-height: 1.3;
 }
 .page-body h1 { font-size: 26px; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
 .page-body h2 { font-size: 23px; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
-.page-body h3 { font-size: 19px; font-weight: 600; font-family: inherit; }
-.page-body h4 { font-size: 16px; font-weight: 700; font-family: inherit; }
+.page-body h3 { font-size: calc(19px * var(--echelle, 1)); font-weight: 600; font-family: inherit; }
+.page-body h4 { font-size: calc(16px * var(--echelle, 1)); font-weight: 700; font-family: inherit; }
 .page-body p { margin: 9px 0; }
 .page-body ul, .page-body ol { margin: 9px 0 9px 26px; }
 .page-body li { margin: 3px 0; }
@@ -286,7 +286,7 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .page-body code { background: var(--code-bg); border: 1px solid var(--border-soft); border-radius: 2px; padding: 1px 4px; font-size: 13px; }
 .page-body pre { background: var(--pre-bg); border: 1px solid var(--border-soft); padding: 12px; overflow-x: auto; margin: 10px 0; }
 .page-body pre code { border: 0; background: none; }
-.page-body table { border-collapse: collapse; margin: 12px 0; font-size: 14px; display: block; overflow-x: auto; max-width: 100%; }
+.page-body table { border-collapse: collapse; margin: 12px 0; font-size: calc(14px * var(--echelle, 1)); display: block; overflow-x: auto; max-width: 100%; }
 .page-body table th, .page-body table td { border: 1px solid var(--border-light); padding: 5px 10px; text-align: left; }
 .page-body table th { background: var(--th-bg); }
 .page-body table tr:nth-child(even) td { background: var(--tr-alt); }
@@ -542,6 +542,38 @@ body.graphe-fige { overflow: hidden; }
 }
 .btn-haut.visible { opacity: .93; visibility: visible; }
 .btn-haut:hover { background: var(--hover); opacity: 1; }
+
+/* ---------- confort de lecture ---------- */
+/* --echelle est posée sur <html> depuis localStorage, dans le <head>, avant le premier rendu. */
+.lecture-outils { display: inline-flex; gap: 6px; margin: -8px 0 16px; }
+.lecture-outils button {
+  min-width: 40px; height: 34px; padding: 0 10px;
+  background: var(--content-bg); border: 1px solid var(--border-light); border-radius: 3px;
+  font: inherit; font-size: 13.5px; color: var(--text); cursor: pointer;
+}
+.lecture-outils button:hover:not(:disabled) { background: var(--hover); border-color: var(--hover-bd); }
+.lecture-outils button:disabled { opacity: .45; cursor: default; }
+.lecture-outils button.actif { background: var(--tag-bg); border-color: var(--border); font-weight: 600; }
+/* mode lecture : rien que l'article, colonne étroite, interligne aéré */
+html[data-lecture] .sidebar, html[data-lecture] .breadcrumbs, html[data-lecture] .backlinks,
+html[data-lecture] .site-footer, html[data-lecture] .page-sub, html[data-lecture] .page-meta { display: none !important; }
+html[data-lecture] .content { max-width: 780px; margin: 0 auto; }
+html[data-lecture] .page-body { line-height: 1.75; }
+
+/* pages voisines : précédente / suivante dans le même dossier */
+.voisins { display: flex; justify-content: space-between; gap: 12px; margin-top: 26px; padding-top: 12px; border-top: 1px solid var(--border-soft); }
+.voisin { display: flex; flex-direction: column; max-width: 48%; min-width: 0; text-decoration: none; padding: 8px 10px; border: 1px solid var(--border-light); border-radius: 3px; }
+.voisin:hover { background: var(--hover); border-color: var(--hover-bd); }
+.voisin small { color: var(--text-soft); font-size: 11.5px; }
+.voisin span { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.voisin-suiv { text-align: right; align-items: flex-end; margin-left: auto; }
+
+.badge-corps { background: var(--tag-bg); color: var(--text-soft); border: 1px solid var(--border-light); }
+
+@media (max-width: 900px) {
+  .btn-haut { width: 52px; height: 52px; font-size: 22px; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+  .voisin span { white-space: normal; }
+}
 
 /* ---------- portail ---------- */
 /* couleur de repli explicite : un dégradé seul laisserait un fond transparent si l'image de fond ne s'applique pas */

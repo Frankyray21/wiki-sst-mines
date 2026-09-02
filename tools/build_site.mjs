@@ -688,7 +688,7 @@ function rootOf(out) { return '../'.repeat(out.split('/').length - 1); }
 // une fraction de seconde avant de basculer en sombre.
 // version de build : casse le cache HTTP de 10 minutes de GitHub Pages à chaque déploiement
 const V = new Date().toISOString().slice(0, 19).replace(/[-T:]/g, '');
-const SCRIPT_THEME = `window.V='${V}';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}`;
+const SCRIPT_THEME = `window.V='${V}';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}`;
 
 function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
   const ROOT = rootOf(out);
@@ -935,6 +935,30 @@ for (const p of pages) {
   }
 }
 
+// Pages voisines : précédente et suivante dans le même dossier du vault, en ordre naturel
+// (« art-9 » avant « art-10 ») — sur téléphone, on enchaîne les articles sans remonter au sommaire.
+const voisins = new Map();
+{
+  const groupes = new Map();
+  for (const p of pages) {
+    const dossier = p.relPath.slice(0, p.relPath.lastIndexOf('/'));
+    if (!groupes.has(dossier)) groupes.set(dossier, []);
+    groupes.get(dossier).push(p);
+  }
+  for (const liste of groupes.values()) {
+    liste.sort((a, b) => a.relPath.localeCompare(b.relPath, 'fr', { numeric: true, sensitivity: 'base' }));
+    liste.forEach((p, i) => voisins.set(p, { prec: liste[i - 1], suiv: liste[i + 1] }));
+  }
+}
+function voisinsHtml(p) {
+  const v = voisins.get(p) || {};
+  if (!v.prec && !v.suiv) return '';
+  const lien = (q, cls, lab) => q
+    ? `<a class="voisin ${cls}" href="{{ROOT}}${q.out}"><small>${lab}</small><span>${esc(q.title)}</span></a>`
+    : '<span></span>';
+  return `<nav class="voisins" aria-label="Pages voisines">${lien(v.prec, 'voisin-prec', '← Précédent')}${lien(v.suiv, 'voisin-suiv', 'Suivant →')}</nav>`;
+}
+
 console.log('Écriture des fichiers…');
 for (const p of pages) {
   const wiki = WIKIS[p.wikiKey];
@@ -965,6 +989,7 @@ ${tocHtml}
 <div class="page-body">
 ${p.html}
 </div>
+${voisinsHtml(p)}
 ${blHtml}
 <div class="page-meta">Dernière révision : ${esc(String(rev))} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
   const html = pageShell({
@@ -1343,6 +1368,38 @@ for (const [tag, membres] of categories) {
 }
 fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
 fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(searchIndex));
+
+// ---------- index plein texte ----------
+// Les mots de chaque page (normalisés exactement comme dans app.js), en listes
+// d'identifiants delta-encodés base 36 : la recherche trouve une notion partout
+// où elle apparaît, pas seulement dans les titres. Les identifiants sont les
+// positions dans search-index.json (les pages y viennent en premier, même ordre).
+{
+  const STOP = new Set(('le la les de des du un une et en au aux ou est sont pour par sur dans avec sans que qui dont ce cet cette ces se sa son ses leur leurs ne pas plus moins tout tous toute toutes comme mais donc car ni aussi ainsi entre vers chez sous selon lors puis afin etre avoir fait faire peut peuvent doit doivent elle elles ils lui nous vous votre vos notre nos meme memes autre autres cela ceci celui celle ceux celles ont ete etait sera soit').split(' '));
+  const normIdx = (s) => String(s).toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae').normalize('NFKD').replace(/[̀-ͯ]/g, '');
+  const postings = new Map();
+  pages.forEach((p, id) => {
+    const mots = new Set(normIdx(stripMd(p.body)).split(/[^a-z0-9.]+/)
+      .map(w => w.replace(/^\.+|\.+$/g, ''))
+      .filter(w => (w.length >= 3 || (w.length === 2 && /^\d+$/.test(w))) && w.length <= 40 && !STOP.has(w)));
+    for (const m of mots) {
+      if (!postings.has(m)) postings.set(m, []);
+      postings.get(m).push(id);
+    }
+  });
+  const maxDf = pages.length * 0.4;
+  const m = {};
+  let nbPost = 0;
+  for (const [mot, ids] of [...postings].sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
+    if (ids.length > maxDf) continue; // présent dans 40 % des pages : ne discrimine rien
+    let prev = 0;
+    m[mot] = ids.map(id => { const d = (id - prev).toString(36); prev = id; return d; }).join(',');
+    nbPost += ids.length;
+  }
+  const json = JSON.stringify({ n: pages.length, m });
+  fs.writeFileSync(path.join(OUT, 'assets', 'search-mots.json'), json);
+  console.log(`  plein texte : ${Object.keys(m).length} mots · ${nbPost} occurrences · ${(json.length / 1048576).toFixed(1)} Mo`);
+}
 
 // ---------- page de recherche ----------
 {

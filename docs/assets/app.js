@@ -4,18 +4,53 @@
   function vUrl(u) { return u + (u.indexOf('?') >= 0 ? '&' : '?') + 'v=' + (window.V || '0'); }
   var index = null;
   var loading = null;
+  var mots = null, motsCles = null, motsCache = {}; // index plein texte (mot → pages)
 
   function loadIndex() {
     if (index) return Promise.resolve(index);
     if (loading) return loading;
-    loading = fetch(vUrl(ROOT + 'assets/search-index.json'))
-      .then(function (r) {
+    loading = Promise.all([
+      fetch(vUrl(ROOT + 'assets/search-index.json')).then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         return r.json();
-      })
-      .then(function (d) { index = d; return d; })
-      .catch(function (e) { loading = null; throw e; });
+      }),
+      // l'index plein texte est un plus : sans lui, la recherche marche sur les titres
+      fetch(vUrl(ROOT + 'assets/search-mots.json'))
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; })
+    ]).then(function (d) {
+      index = d[0];
+      if (d[1] && d[1].m) { mots = d[1].m; motsCles = Object.keys(mots).sort(); }
+      return index;
+    }).catch(function (e) { loading = null; throw e; });
     return loading;
+  }
+
+  // ---------- plein texte ----------
+  // Les listes sont delta-encodées en base 36 ; décodées à la demande et mises en cache.
+  function idsDuMot(mot) {
+    if (motsCache[mot]) return motsCache[mot];
+    var s = mots[mot], set = new Set(), prev = 0;
+    if (s) {
+      var parts = s.split(',');
+      for (var k = 0; k < parts.length; k++) { prev += parseInt(parts[k], 36); set.add(prev); }
+    }
+    return (motsCache[mot] = set);
+  }
+  // pages dont le texte contient le mot, ou un mot qui commence par lui (« silic » → silice, silicose)
+  function idsPour(mot) {
+    if (!mots) return null;
+    var cle = 'p:' + mot;
+    if (motsCache[cle]) return motsCache[cle];
+    var res = new Set(idsDuMot(mot));
+    if (mot.length >= 4) {
+      var lo = 0, hi = motsCles.length;
+      while (lo < hi) { var mid = (lo + hi) >> 1; if (motsCles[mid] < mot) lo = mid + 1; else hi = mid; }
+      for (var j = lo, n = 0; j < motsCles.length && n < 40 && motsCles[j].indexOf(mot) === 0; j++, n++) {
+        if (motsCles[j] !== mot) idsDuMot(motsCles[j]).forEach(function (id) { res.add(id); });
+      }
+    }
+    return (motsCache[cle] = res);
   }
 
   // ---------- normalisation ----------
@@ -62,7 +97,7 @@
       var nx = norm(e.x || '');
       var ktitre = ' ' + tokenize(nt).join(' ') + ' ';
       var kmots = ' ' + tokenize(ng).join(' ') + ' ';
-      var score = 0, ok = true, premierePos = 9999;
+      var score = 0, ok = true, premierePos = 9999, corps = false;
 
       for (var w = 0; w < words.length; w++) {
         var mot = words[w];
@@ -83,6 +118,11 @@
           else if (kmots.indexOf(' ' + m + ' ') >= 0) { score += 20 + bonus; trouve = true; }
           else if (ng.indexOf(m) >= 0) { score += 6 + bonus; trouve = true; }
           else if (nx.indexOf(m) >= 0) { score += 2 + bonus; trouve = true; }
+          else {
+            // dernier recours : le mot est quelque part dans le texte de la page
+            var ids = idsPour(m);
+            if (ids && ids.has(i)) { score += 3 + bonus; trouve = true; corps = true; }
+          }
         }
         if (!trouve) { ok = false; break; }
       }
@@ -96,12 +136,14 @@
       if (e.q === 2) score = Math.round(score * 0.25);
       else if (e.q === 1) score = Math.round(score * 0.6);
 
-      scored.push([score, e, premierePos]);
+      scored.push([score, e, premierePos, corps]);
     }
     scored.sort(function (a, b) { return b[0] - a[0] || a[2] - b[2] || a[1].t.localeCompare(b[1].t, 'fr'); });
     return {
       total: scored.length,
-      items: scored.slice(0, limit || 8).map(function (s) { return s[1]; }),
+      items: scored.slice(0, limit || 8).map(function (s) {
+        return s[3] ? Object.assign({}, s[1], { corps: true }) : s[1];
+      }),
     };
   }
 
@@ -294,6 +336,7 @@
       resultsBox.innerHTML = tranche.map(function (e) {
         return '<div class="sr-item"><a class="sr-title" href="' + ROOT + e.u + '">' + e.i + ' ' + hl(e.t, q) + '</a>' +
           (pastille[e.q] || '') +
+          (e.corps ? '<span class="badge badge-corps">dans le texte</span>' : '') +
           '<div class="sr-meta">' + ligneMeta(e) + '</div>' +
           (e.x ? '<div class="sr-x">' + hl(e.x, q) + '…</div>' : '') + '</div>';
       }).join('') +
@@ -1157,6 +1200,53 @@
   window.addEventListener('hashchange', ancreRepli);
   ancreRepli();
 
+  // ---------- confort de lecture : taille du texte, mode lecture ----------
+  // Les réglages sont relus dans le <head> (SCRIPT_THEME) pour éviter tout saut de mise en page.
+  (function outilsLecture() {
+    var corps = document.querySelector('.page-body');
+    var titre = document.querySelector('.page-title');
+    if (!corps || !titre) return;
+    var PALIERS = [0.85, 0.92, 1, 1.1, 1.2, 1.32, 1.45];
+    function lireEchelle() {
+      try { var v = parseFloat(localStorage.getItem('echelle')); return PALIERS.indexOf(v) >= 0 ? v : 1; } catch (e) { return 1; }
+    }
+    function poserEchelle(v) {
+      document.documentElement.style.setProperty('--echelle', v);
+      try { if (v === 1) localStorage.removeItem('echelle'); else localStorage.setItem('echelle', String(v)); } catch (e) {}
+      etat();
+    }
+    var barre = document.createElement('div');
+    barre.className = 'lecture-outils';
+    barre.setAttribute('role', 'group');
+    barre.setAttribute('aria-label', 'Confort de lecture');
+    barre.innerHTML = '<button type="button" data-moins title="Texte plus petit" aria-label="Texte plus petit">A−</button>' +
+      '<button type="button" data-plus title="Texte plus grand" aria-label="Texte plus grand">A+</button>' +
+      '<button type="button" data-lecture title="Mode lecture : masque les menus" aria-pressed="false">📖 Lecture</button>';
+    var ancre = document.querySelector('.page-sub') || titre;
+    ancre.parentNode.insertBefore(barre, ancre.nextSibling);
+    var bMoins = barre.querySelector('[data-moins]');
+    var bPlus = barre.querySelector('[data-plus]');
+    var bLect = barre.querySelector('[data-lecture]');
+    function etat() {
+      var i = PALIERS.indexOf(lireEchelle());
+      bMoins.disabled = i <= 0;
+      bPlus.disabled = i >= PALIERS.length - 1;
+      var on = document.documentElement.getAttribute('data-lecture') === '1';
+      bLect.setAttribute('aria-pressed', on ? 'true' : 'false');
+      bLect.classList.toggle('actif', on);
+    }
+    bMoins.addEventListener('click', function () { var i = PALIERS.indexOf(lireEchelle()); if (i > 0) poserEchelle(PALIERS[i - 1]); });
+    bPlus.addEventListener('click', function () { var i = PALIERS.indexOf(lireEchelle()); if (i < PALIERS.length - 1) poserEchelle(PALIERS[i + 1]); });
+    bLect.addEventListener('click', function () {
+      var on = document.documentElement.getAttribute('data-lecture') !== '1';
+      if (on) document.documentElement.setAttribute('data-lecture', '1');
+      else document.documentElement.removeAttribute('data-lecture');
+      try { if (on) localStorage.setItem('lecture', '1'); else localStorage.removeItem('lecture'); } catch (e) {}
+      etat();
+    });
+    etat();
+  })();
+
   // ---------- bouton « haut de page » ----------
   if (document.querySelector('.page-body, .cat-pages, .search-results')) {
     var haut = document.createElement('button');
@@ -1165,7 +1255,7 @@
     haut.innerHTML = '↑';
     haut.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
     document.body.appendChild(haut);
-    var afficheHaut = function () { haut.classList.toggle('visible', window.scrollY > 700); };
+    var afficheHaut = function () { haut.classList.toggle('visible', window.scrollY > 400); };
     window.addEventListener('scroll', afficheHaut, { passive: true });
     afficheHaut();
   }
