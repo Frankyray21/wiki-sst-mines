@@ -730,14 +730,16 @@
         { titre: 'Bienvenue dans le wiki SST', texte: 'Ce site réunit vos notes de cours en une encyclopédie consultable. Trois entrées, selon qui consulte.' },
         { titre: 'Deux espaces selon qui vous êtes', texte: 'L’espace travailleurs parle simplement des risques et des droits. Gestion & prévention traite des obligations et des programmes.', cible: '.portal-publics' },
         { titre: 'Le fond documentaire complet', texte: 'Les 4 500 pages classées par discipline, pour le conseiller SST et la recherche documentaire.', cible: '.portal-section + .portal-note + .portal-grid' },
-        { titre: 'Chercher partout à la fois', texte: 'La recherche couvre tout le site, y compris les numéros d’articles de loi. Essayez « art 4 RSST » ou « silice ».', cible: '.portal-search' },
+        { titre: 'Chercher partout à la fois', texte: 'La recherche lit le texte entier des pages, pas seulement les titres : un mot cité au détour d’un paragraphe se retrouve. Essayez « art 4 RSST », « silice » ou « boulonneur ».', cible: '.portal-search' },
       ]];
     }
     if (document.querySelector('.page-body')) {
       return ['tour-article', [
-        { titre: 'Lire un article', texte: 'Voici les repères d’une page du wiki. Trois choses à connaître, et vous êtes autonome.' },
+        { titre: 'Lire un article', texte: 'Voici les repères d’une page du wiki. Quelques repères, et vous êtes autonome.' },
+        { titre: 'Lire à votre aise', texte: 'A− et A+ règlent la taille du texte, et « Lecture » ne garde que l’article : pratique sur un téléphone, sous terre. Le réglage vous suit d’une page à l’autre.', cible: '.lecture-outils' },
         { titre: 'L’essentiel, tout de suite', texte: 'Le résumé en tête donne la substance de l’article avant d’entrer dans le détail.', cible: '.chapo' },
         { titre: 'La fiche signalétique', texte: 'Loi, article, statut, date de révision : les repères de la page. Les mots-clés en bas sont cliquables et mènent à toutes les pages du même sujet.', cible: '.infobox' },
+        { titre: 'Passer à la page voisine', texte: 'En bas de l’article, « Précédent » et « Suivant » enchaînent les pages du même dossier : les articles de loi se lisent ainsi dans l’ordre.', cible: '.voisins' },
         { titre: 'Garder cette page', texte: 'L’étoile ajoute la page à vos favoris, retrouvables depuis le portail. Le bouton à côté change le thème clair ou sombre.', cible: '#btnFav' },
       ]];
     }

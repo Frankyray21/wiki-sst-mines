@@ -35,6 +35,11 @@ export function analyserQualite(p) {
 
   if (estTronque(t)) defauts.push({ code: 'tronque', gravite: 3, texte: 'Le texte s’arrête en plein mot : du contenu manque à la fin.' });
 
+  // Coquille créée automatiquement pour servir de cible à un lien : aucun contenu propre.
+  if (/Stub créé automatiquement|page vide à documenter/i.test(corps)) {
+    defauts.push({ code: 'stub', gravite: 3, texte: 'Page créée automatiquement comme cible de lien : elle ne contient encore rien.' });
+  }
+
   if (RE_A_FAIRE.test(corps)) {
     const m = corps.match(RE_A_FAIRE);
     defauts.push({ code: 'a-faire', gravite: 2, texte: `Mention « ${m[0]} » visible par le lecteur.` });
@@ -95,6 +100,7 @@ export function analyserQualite(p) {
 }
 
 export const LIBELLES = {
+  'stub': 'Page vide (coquille automatique)',
   'tronque': 'Texte tronqué',
   'a-faire': 'Mention « à compléter » visible',
   'auto-lien': 'Lien vers soi-même',
