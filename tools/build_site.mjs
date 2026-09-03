@@ -600,7 +600,13 @@ function renderWikilinks(md) {
     if (extMatch) {
       const rel = resolveAsset(target, CUR);
       const label = alias || target.split('/').pop();
-      if (!rel) return `<span class="new" title="fichier introuvable">${esc(label)}</span>`;
+      if (!rel) {
+        // Le document n'est pas dans le vault. Ce n'est pas un lien cassé du wiki :
+        // c'est une pièce que Frank n'a pas versée. On le dit, plutôt que de laisser
+        // croire à une page manquante.
+        const estDoc = /.(pdf|docx?|xlsx?|pptx?)$/i.test(target);
+        return `<span class="${estDoc ? 'doc-absent' : 'new'}" title="${estDoc ? 'Document non versé au vault' : 'fichier introuvable'}">${esc(label)}${estDoc ? ' <small>(document non joint)</small>' : ''}</span>`;
+      }
       const url = assetUrl(rel);
       const pageAnchor = anchor && /^page=\d+$/.test(anchor) ? '#' + anchor : '';
       return `<a class="external" href="{{ROOT}}${url}${pageAnchor}" target="_blank">${esc(label)}</a>`;

@@ -137,16 +137,22 @@ export function analyserQualite(p) {
   // Deux corrections successives : une première version comptait les tableaux et les
   // listes (92 % de faux signalements) ; une seconde comptait encore la syntaxe des
   // liens, si bien qu'une phrase courte truffée de renvois passait pour interminable.
-  const prose = texteRendu(corps
+  // Les lignes sont triées AVANT d'être rendues : « texteRendu » retire les marques de
+  // gras, et donc l'astérisque qui ouvre une puce. Trier après, c'est prendre une liste
+  // de dix items pour une phrase de cent mots.
+  const prose = corps
     .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/^---[\s\S]*?^---/gm, ' '))
+    .replace(/^---[\s\S]*?^---/gm, ' ')
     .split('\n')
     .filter(l => {
       const s = l.trim();
       if (!s) return false;
-      if (/^[#>|\-*+\d]/.test(s)) return false;  // titres, citations, tableaux, listes
+      if (/^[#>|\-+]/.test(s)) return false;      // titres, citations, tableaux, listes
+      if (/^\*\s/.test(s)) return false;           // puce en astérisque
+      if (/^\d+[.)]\s/.test(s)) return false;      // liste numérotée
       return true;
     })
+    .map(texteRendu)
     .join(' ');
   const longues = prose
     .replace(/\b(art|p|pp|vol|no|nº|ex|cf|etc|M|Mme|Dr|inc|ltée)\.\s/gi, '$1 ') // abréviations

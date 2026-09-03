@@ -693,3 +693,9 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   cursor: help;
 }
 .interne-inline small { font-size: .85em; opacity: .8; }
+
+/* Pièce jointe absente du vault (PDF d'un jugement, document de référence).
+   Distinguée d'un lien de wiki cassé : le wiki n'a rien perdu, le fichier
+   n'a simplement pas été versé. */
+.doc-absent { color: var(--text-soft); cursor: help; }
+.doc-absent small { font-size: .85em; opacity: .75; }
