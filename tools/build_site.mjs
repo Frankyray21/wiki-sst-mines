@@ -306,6 +306,33 @@ if (refusees.length) {
 // verrait un manque là où il y a une consigne de confidentialité. On garde le nom,
 // qui reste utile pour tracer une source, avec la mention de sa nature.
 const notesInternes = new Map(); // basename ou alias en minuscules -> nature
+// Les dossiers exclus du parcours (gabarits, corbeille) contiennent des notes bien
+// réelles : un renvoi vers un gabarit n'est pas un lien mort, c'est un document de
+// travail que le site ne publie pas.
+{
+  const racine = VAULT;
+  for (const nom of EXCLUDE_DIRS) {
+    if (nom.startsWith('.')) continue;
+    const pile = [];
+    (function chercher(d) {
+      let entrees;
+      try { entrees = fs.readdirSync(d, { withFileTypes: true }); } catch (e) { return; }
+      for (const e of entrees) {
+        const p = path.join(d, e.name);
+        if (e.isDirectory()) { if (e.name === nom) pile.push(p); else if (!e.name.startsWith('.')) chercher(p); }
+      }
+    })(racine);
+    for (const dossier of pile) {
+      (function lister(d) {
+        for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+          const p = path.join(d, e.name);
+          if (e.isDirectory()) lister(p);
+          else if (e.name.endsWith('.md')) notesInternes.set(e.name.slice(0, -3).toLowerCase(), 'document de travail');
+        }
+      })(dossier);
+    }
+  }
+}
 for (const p of refusees) {
   const nature = p.fm && p.fm.publish === false ? 'non publiée' : 'interne';
   notesInternes.set(String(p.base).toLowerCase(), nature);
