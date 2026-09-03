@@ -683,3 +683,13 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   /* toujours imprimer en clair, quel que soit le thème affiché */
   :root { --bg: #fff; --content-bg: #fff; --text: #000; --img-filtre: none; }
 }
+
+/* Renvoi vers une note que le vault marque « interne » ou « ne pas publier ».
+   Ni un lien (elle n'est pas en ligne), ni un manque (elle existe) : le nom reste
+   lisible pour tracer la source, sans promettre une page derrière. */
+.interne-inline {
+  color: var(--text-soft);
+  border-bottom: 1px dotted var(--border);
+  cursor: help;
+}
+.interne-inline small { font-size: .85em; opacity: .8; }

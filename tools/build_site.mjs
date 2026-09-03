@@ -289,7 +289,8 @@ for (const p of pages) {
 
 // Les notes explicitement marquées « ne pas publier » sortent du site, y compris du fond
 // documentaire : les publier irait contre une consigne écrite dans le vault lui-même.
-// Les liens qui les visaient deviennent des liens rouges, sans révéler leur titre.
+// Les liens qui les visaient s'affichent en gris, marqués « source interne » : le
+// lecteur sait que la source existe et qu'elle n'est pas publiée, pas qu'elle manque.
 const refusees = pages.filter(p => {
   const fm = p.fm || {};
   return fm.publish === false
@@ -298,6 +299,18 @@ const refusees = pages.filter(p => {
 if (refusees.length) {
   for (const p of refusees) pages.splice(pages.indexOf(p), 1);
   console.log(`Non publiées (publish: false / traitement interne) : ${refusees.length} notes écartées du site`);
+}
+
+// Ces notes existent bel et bien dans le vault : c'est leur marquage qui les retient.
+// Un lien qui les vise ne doit donc pas s'afficher comme un lien mort — le lecteur
+// verrait un manque là où il y a une consigne de confidentialité. On garde le nom,
+// qui reste utile pour tracer une source, avec la mention de sa nature.
+const notesInternes = new Map(); // basename ou alias en minuscules -> nature
+for (const p of refusees) {
+  const nature = p.fm && p.fm.publish === false ? 'non publiée' : 'interne';
+  notesInternes.set(String(p.base).toLowerCase(), nature);
+  const al = p.fm && p.fm.aliases;
+  if (Array.isArray(al)) for (const a of al) notesInternes.set(String(a).toLowerCase(), nature);
 }
 
 // Un article de loi remplacé ou abrogé n'a rien à dire : pas de page.
@@ -576,6 +589,10 @@ function renderWikilinks(md) {
         const retire = articlesRetires.get(target.split('/').pop().trim().toLowerCase());
         if (retire) return `<span class="abroge-inline" title="Non repris dans le wiki">${esc(alias || target)} <small>(${retire})</small></span>`;
       }
+      {
+        const nature = notesInternes.get(target.split('/').pop().trim().toLowerCase());
+        if (nature) return `<span class="interne-inline" title="Source interne du vault, non publiée sur le site">${esc(alias || target)} <small>(source ${nature})</small></span>`;
+      }
       return `<span class="new">${esc(alias || target)}</span>`;
     }
 
@@ -606,6 +623,8 @@ function renderWikilinks(md) {
         const suffixe = /remplac|abrog/i.test(label) ? '' : ` <small>(${retire})</small>`;
         return `<span class="abroge-inline" title="${retire === 'abrogé' ? 'Article abrogé' : 'Disposition remplacée'} — non repris dans le wiki">${esc(label)}${suffixe}</span>`;
       }
+      const nature = notesInternes.get(target.split('/').pop().trim().toLowerCase());
+      if (nature) return `<span class="interne-inline" title="Source interne du vault, non publiée sur le site">${esc(label)} <small>(source ${nature})</small></span>`;
       return `<span class="new" title="page non créée">${esc(label)}</span>`;
     }
     CUR_LINKS.add(pg);
