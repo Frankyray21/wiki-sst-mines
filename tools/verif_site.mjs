@@ -131,9 +131,40 @@ assert.ok(!isoStrain.includes('Article en construction'), 'ancienne coquille rem
 assert.ok(!fs.existsSync(path.join(out, 't/w/psychosocial/20-articles/modeles-et-theories/iso-strain-ce-que-ca-signifie.html')), 'publication travailleurs inchangée');
 assert.ok(!fs.existsSync(path.join(out, 'g/w/psychosocial/20-articles/modeles-et-theories/iso-strain-ce-que-ca-signifie.html')), 'publication gestionnaires inchangée');
 
+const lotRps = [
+  { page: 'psychosocial/20-articles/modeles-et-theories/demandes-psychologiques.html', prefixe: 'dem', parcours: ['w/'] },
+  { page: 'psychosocial/20-articles/modeles-et-theories/latitude-decisionnelle.html', prefixe: 'lat', parcours: ['w/'] },
+  { page: 'psychosocial/20-articles/facteurs-organisationnels/soutien-social-au-travail.html', prefixe: 'sou', parcours: ['w/', 'g/w/'] },
+];
+let pagesRpsReferencees = 0;
+for (const note of lotRps) {
+  for (const parcours of note.parcours) {
+    const html = lire(parcours + note.page);
+    for (let n = 1; n <= 4; n++) {
+      const ancre = 'ref-' + note.prefixe + '-' + n;
+      assert.equal((html.match(new RegExp('id="' + ancre + '"', 'g')) || []).length, 1, 'RPS : référence unique ' + ancre);
+      assert.ok(html.includes('href="#' + ancre + '"'), 'RPS : référence appelée ' + ancre);
+    }
+    assert.ok(html.includes('Sources consultées le'), 'RPS : traçabilité visible');
+    assert.ok(html.includes('Relecture éditoriale : non attestée'), 'RPS : aucune validation humaine inventée');
+    assert.ok(!html.includes('Article en construction'), 'RPS : ancienne coquille retirée');
+    assert.match(html, /fictif|fictifs/, 'RPS : exemple identifié');
+    if (note.prefixe === 'sou') {
+      for (const ancre of ['definition', 'quatre-formes-de-soutien', 'sources-de-soutien', 'absence-de-soutien-et-iso-strain', 'application-en-mines', 'documents-et-outils', 'pour-aller-plus-loin']) {
+        assert.equal((html.match(new RegExp('id="' + ancre + '"', 'g')) || []).length, 1, 'soutien : ancienne ancre unique ' + ancre);
+      }
+      assert.doesNotMatch(html, /2,2 à 2,8|15 minutes par jour|plus rentable|isolated prisoner/i);
+    }
+    pagesRpsReferencees++;
+  }
+  for (const parcours of ['t/w/', 'g/w/'].filter(p => !note.parcours.includes(p))) {
+    assert.ok(!fs.existsSync(path.join(out, parcours + note.page)), 'RPS : parcours non élargi');
+  }
+}
+
 const qualite = lire('qualite.html');
 assert.ok(qualite.includes('Contrôles automatiques de forme'));
 assert.ok(qualite.includes('ni une note de fiabilité ni une validation SST'));
 assert.ok(qualite.includes('Résultats par type de contenu'));
 assert.ok(qualite.includes('Validation spécialisée datée et validateur déclaré'));
-console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, tableauxCadenassage: 2, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));
+console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, tableauxCadenassage: 2, pagesRpsReferencees, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));
