@@ -213,6 +213,30 @@ for (const [page, prefixe, ancienneAncre] of terrain) {
   }
   assert.ok(!fs.existsSync(path.join(out, 'g/w/' + page)), 'parcours encadrement non élargi');
 }
+const terrainSuite = [
+  { page: 'toxicologie/25-articles-travailleurs/solvants.html', prefixe: 'sol', refs: 5, parcours: ['w/', 't/w/'], ancres: ['trois-signes-que-tu-en-respires-trop', 'le-piege-du-5-minutes-sans-masque', 'si-tu-es-expose-fortement'] },
+  { page: 'ergonomie/25-articles-travailleurs/sommeil-et-quart-de-nuit.html', prefixe: 'nuit', refs: 4, parcours: ['w/', 't/w/'], ancres: ['contenu'] },
+  { page: 'droit-travail/10-themes/obligations-de-lemployeur.html', prefixe: 'emp', refs: 4, parcours: ['w/', 'g/w/'], ancres: ['articles-couverts', 'articles-de-loi-pertinents'] },
+];
+for (const note of terrainSuite) {
+  for (const parcours of note.parcours) {
+    const html = lire(parcours + note.page);
+    for (const ancre of note.ancres) assert.equal((html.match(new RegExp('id="' + ancre + '"', 'g')) || []).length, 1, 'suite terrain : ancienne ancre unique');
+    for (let n = 1; n <= note.refs; n++) {
+      const ancre = 'ref-' + note.prefixe + '-' + n;
+      assert.equal((html.match(new RegExp('id="' + ancre + '"', 'g')) || []).length, 1, 'suite terrain : référence unique');
+      assert.ok(html.includes('href="#' + ancre + '"'), 'suite terrain : référence appelée');
+    }
+    assert.equal((html.match(/<thead>/g) || []).length, 1, 'suite terrain : un tableau');
+    const entete = html.match(/<thead>([\s\S]*?)<\/thead>/)?.[1] || '';
+    assert.equal((entete.match(/<th(?:\s|>)/g) || []).length, 2, 'suite terrain : deux colonnes');
+    assert.ok(html.includes('Sources consultées le'), 'suite terrain : traçabilité visible');
+    assert.ok(html.includes('aucune validation spécialisée'), 'suite terrain : limite explicite');
+    assert.ok(html.includes('Relecture éditoriale : non attestée'), 'suite terrain : aucune validation humaine inventée');
+    assert.doesNotMatch(html, /class="redlink"/, 'suite terrain : aucun lien non résolu');
+  }
+  for (const parcours of ['t/w/', 'g/w/'].filter(p => !note.parcours.includes(p))) assert.ok(!fs.existsSync(path.join(out, parcours + note.page)), 'suite terrain : parcours non élargi');
+}
 assert.ok(qualite.includes('Contrôles automatiques de forme'));
 assert.ok(qualite.includes('ni une note de fiabilité ni une validation SST'));
 assert.ok(qualite.includes('Résultats par type de contenu'));
