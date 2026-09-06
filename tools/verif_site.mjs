@@ -17,9 +17,17 @@ assert.ok(lire('sw.js').includes('X-Wiki-SST-Hash'), 'worker avec reçus de fra�
 
 let octetsPages = 0, octetsMedias = 0;
 let appelsReference = 0;
+let entetesArticles = 0;
 for (const [rel, attendu, taille] of manifeste.pages) {
   const brut = fs.readFileSync(path.join(out, rel));
   if (rel.endsWith('.html')) {
+    const html = brut.toString('utf8');
+    if (html.includes('<header class="site-header">')) {
+      assert.ok(html.includes('<html lang="fr" data-wiki-entete>'), 'décalage des ancres activé : ' + rel);
+      assert.match(html, /id="burger"[^>]*aria-expanded="false"[^>]*aria-controls="sidebar"/, 'commande du menu reliée : ' + rel);
+      assert.ok(html.includes('id="sidebar" aria-label="Navigation du wiki"'), 'navigation nommée : ' + rel);
+      entetesArticles++;
+    }
     for (const appel of brut.toString('utf8').matchAll(/<a\b[^>]*href="#ref-[^"]+"[^>]*>([\s\S]*?)<\/a>/g)) {
       assert.match(appel[1], /^\s*\d+\s*$/, 'exposant réservé aux appels numériques : ' + rel);
       appelsReference++;
@@ -36,6 +44,7 @@ for (const [rel, taille] of manifeste.medias) {
 }
 assert.equal(octetsPages, manifeste.octetsPages);
 assert.ok(appelsReference > 0, 'appels bibliographiques présents');
+assert.ok(entetesArticles > 0, 'en-têtes partagés présents');
 assert.equal(octetsMedias, manifeste.octetsMedias);
 
 const visuels = [
@@ -184,8 +193,28 @@ for (const note of lotRps) {
 }
 
 const qualite = lire('qualite.html');
+const terrain = [
+  ['securite/25-articles-travailleurs/risques-mecaniques/espaces-clos.html', 'ec', 'avant-dentrer-verifie-ces-5-choses'],
+  ['hygiene/25-articles-travailleurs/espaces-clos.html', 'ec', 'avant-dentrer-verifie-ces-5-choses'],
+  ['hygiene/25-articles-travailleurs/simdut-et-fds.html', 'fds', 'les-4-sections-a-connaitre-par-coeur'],
+];
+for (const [page, prefixe, ancienneAncre] of terrain) {
+  for (const parcours of ['w/', 't/w/']) {
+    const html = lire(parcours + page);
+    assert.equal((html.match(new RegExp('id="' + ancienneAncre + '"', 'g')) || []).length, 1, 'ancienne ancre terrain unique');
+    for (let i = 1; i <= 4; i++) {
+      assert.equal((html.match(new RegExp('id="ref-' + prefixe + '-' + i + '"', 'g')) || []).length, 1, 'référence terrain unique');
+      assert.ok(html.includes('href="#ref-' + prefixe + '-' + i + '"'), 'référence terrain appelée');
+    }
+    assert.equal((html.match(/<thead>/g) || []).length, 1, 'un tableau de compréhension');
+    assert.ok(html.includes('aucune validation spécialisée'), 'pas de validation spécialisée inventée');
+    assert.ok(html.includes('Relecture éditoriale : non attestée'), 'pas de relecture humaine inventée');
+    assert.doesNotMatch(html, /4 sections suffisent|20,5 et 23|moitié des morts|<li>Le comi<|<li>L</);
+  }
+  assert.ok(!fs.existsSync(path.join(out, 'g/w/' + page)), 'parcours encadrement non élargi');
+}
 assert.ok(qualite.includes('Contrôles automatiques de forme'));
 assert.ok(qualite.includes('ni une note de fiabilité ni une validation SST'));
 assert.ok(qualite.includes('Résultats par type de contenu'));
 assert.ok(qualite.includes('Validation spécialisée datée et validateur déclaré'));
-console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, tableauxCadenassage: 2, pagesRpsReferencees, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));
+console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, entetesArticles, appelsReference, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, tableauxCadenassage: 2, pagesRpsReferencees, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));

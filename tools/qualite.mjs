@@ -27,7 +27,8 @@ function estTronque(texte) {
     || /\[\[00 - $/.test(fin)
     || /\|←\s*Ac?$/.test(fin)
     || /\[\[[^\]]{0,40}$/.test(fin)
-    || /(?:à un travaille|décrire ce q)\s*$/.test(fin); // coupures constatées et non phrases ordinaires
+    || /(?:à un travaille|décrire ce q)\s*$/.test(fin)
+    || /(?:^|\n)\s*[-*]\s+(?:Le comi|L)\s*$/.test(fin); // fins de puces constatées dans les deux fiches Espaces clos
 }
 
 // Références trop vagues pour être vérifiables : ni auteur+année, ni titre, ni URL.
@@ -113,7 +114,9 @@ export function analyserQualite(p) {
     s = s.replace(/^>\s?/, '').trim();                    // corps d'encadré : c'est de la prose
     if (/^\[!/.test(s)) continue;
     if (/^[|]/.test(s)) continue;
-    if (/^!?\[\[/.test(s)) continue;
+    // Une illustration ou un lien isolé ne constitue pas une introduction ;
+    // une vraie phrase peut en revanche commencer par un terme lié.
+    if (/^!\[\[/.test(s) || /^\[\[[^\]]+\]\]\s*$/.test(s)) continue;
     if (/^[-+*]\s/.test(s) || /^\d+\.\s/.test(s)) continue;
     if (/^\*\*(Table des matières|Sommaire)/i.test(s)) break;
     const r = texteRendu(s).trim();

@@ -750,7 +750,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
   const wikiLinks = Object.entries(WIKIS).map(([k, w]) =>
     `<li${wiki && w.slug === wiki.slug ? ' class="active"' : ''}><a href="${ROOT}w/${w.slug}/index.html">${w.icon} ${w.name}</a></li>`).join('');
   return `<!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-wiki-entete>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -762,7 +762,7 @@ ${metaPwa(ROOT)}
 </head>
 <body>
 <header class="site-header">
-  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">☰</button>
   <a class="brand" href="${ROOT}index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
   <div class="searchbox">
     <input type="search" id="q" aria-label="Rechercher dans le wiki" placeholder="Rechercher dans le wiki…" autocomplete="off">
@@ -772,7 +772,7 @@ ${metaPwa(ROOT)}
   <button class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 </header>
 <div class="layout">
-<nav class="sidebar" id="sidebar">
+<nav class="sidebar" id="sidebar" aria-label="Navigation du wiki">
   <div class="nav-group"><div class="nav-title">Navigation</div>
     <ul>
       <li><a href="${ROOT}index.html">🏠 Portail</a></li>

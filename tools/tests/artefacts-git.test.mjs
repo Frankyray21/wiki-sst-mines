@@ -9,6 +9,8 @@ for (const [chemin, contenu] of [
   ['docs/assets/exemple.css', Buffer.from('a { color: blue; }\r\n/* fin */\r\n')],
   ['docs/w/exemple.html', Buffer.from('<p>Référence</p>\n<p>Suite</p>\r\n')],
   ['docs/files/exemple.png', Buffer.from([137, 80, 78, 71, 13, 10, 26, 10, 255, 0])],
+  ['tools/app.js', Buffer.from('/* source partagée */\r\nvar exemple = true;\n')],
+  ['tools/style.css', Buffer.from('/* source partagée */\r\na { color: blue; }\n')],
 ]) {
   test('Git préserve les octets du site même sous Windows : ' + chemin, () => {
     const attendu = createHash('sha1').update(Buffer.from('blob ' + contenu.length + '\0')).update(contenu).digest('hex');

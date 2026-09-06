@@ -96,7 +96,7 @@ test('les commandes restent sœurs du domaine et permettent de quitter le mode L
     localStorage: { getItem: k => stored.get(k) ?? null, setItem: (k, v) => stored.set(k, v), removeItem: k => stored.delete(k) },
   };
   const start = app.indexOf('  (function outilsLecture()');
-  const end = app.indexOf('  // ---------- bouton « haut de page »', start);
+  const end = app.indexOf("  // ---------- hauteur d'en-tête", start);
   vm.runInNewContext(app.slice(start, end), ctx);
   assert.equal(barre.parentNode, parent);
   events['lecture-click'](); assert.equal(attributs.get('data-lecture'), '1'); assert.equal(boutons['[data-lecture]'].attrs['aria-pressed'], 'true');
