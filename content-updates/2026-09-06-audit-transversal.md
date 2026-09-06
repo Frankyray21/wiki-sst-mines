@@ -1,6 +1,6 @@
 # Wiki SST — amélioration transversale, 6 septembre 2026
 
-**Suite autorisée le 6 septembre :** Frank a demandé « Go et publier ». Les deux fiches Espaces clos et la page FDS ont depuis été reprises et référencées dans `2026-09-06-terrain-references.json`, pour le public travailleurs déjà autorisé. Les constats et chiffres ci-dessous décrivent l'état avant cette reprise ; Solvants, Sommeil et Obligations de l'employeur restent des pistes ultérieures.
+**Suites autorisées le 6 septembre :** Frank a demandé « Go et publier », puis « Continue avec le reste ». Les deux fiches Espaces clos et la page FDS ont été reprises dans `2026-09-06-terrain-references.json`. Solvants, Sommeil et Obligations de l'employeur suivent dans `2026-09-06-terrain-references-lot2.json`, sans modification des publics. Les constats et chiffres ci-dessous sont historiques, antérieurs à ces deux reprises. Plusieurs anciennes fiches du recueil juridique ont des intitulés inexacts : elles restent à auditer séparément ; la page Obligations renvoie désormais à la loi officielle.
 
 ## Périmètre de ce lot
 
