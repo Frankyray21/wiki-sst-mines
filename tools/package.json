@@ -7,7 +7,8 @@
     "test": "node --test tests/*.test.mjs tests/*.test.cjs",
     "build": "node build_site.mjs",
     "check:links": "node verif_liens.mjs",
-    "check:site": "node verif_site.mjs"
+    "check:site": "node verif_site.mjs",
+    "check:publication": "node verif_publication.mjs"
   },
   "keywords": [],
   "author": "",
