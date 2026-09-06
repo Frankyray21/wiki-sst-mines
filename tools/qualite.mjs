@@ -11,6 +11,7 @@ const RE_LIEN = /\[\[([^\]]+)\]\]/g;
 // markdown à leur texte, marques de gras et d'italique retirées.
 function texteRendu(s) {
   return String(s)
+    .replace(/<[^>]+>/g, ' ')
     .replace(/!?\[\[([^\]]+)\]\]/g, (m, t) => {
       const p = t.replace(/\\\|/g, '|').split('|');
       return p[p.length - 1].split('#')[0];
@@ -25,7 +26,8 @@ function estTronque(texte) {
   return /←\s*Accuei$/.test(fin)
     || /\[\[00 - $/.test(fin)
     || /\|←\s*Ac?$/.test(fin)
-    || /\[\[[^\]]{0,40}$/.test(fin); // wikilink jamais refermé en fin de fichier
+    || /\[\[[^\]]{0,40}$/.test(fin)
+    || /(?:à un travaille|décrire ce q)\s*$/.test(fin); // coupures constatées et non phrases ordinaires
 }
 
 // Références trop vagues pour être vérifiables : ni auteur+année, ni titre, ni URL.
@@ -102,25 +104,33 @@ export function analyserQualite(p) {
   // Québec. » est une vraie introduction, même courte. Deux pièges évités : le résumé
   // « En bref » vit dans un encadré (lignes préfixées de « > »), et beaucoup de pages
   // ouvrent sur une phrase en gras : ni l'un ni l'autre n'est un titre ou une liste.
-  const premierePros = corps.split('\n').find(l => {
+  let premierePros = false;
+  let ouverture = 0;
+  for (const l of corps.split('\n')) {
     let s = l.trim();
-    if (!s) return false;
+    if (!s || /^<!--/.test(s) || /^#\s/.test(s)) continue;
+    if (/^#{2,6}\s/.test(s) || ouverture++ >= 12) break;
     s = s.replace(/^>\s?/, '').trim();                    // corps d'encadré : c'est de la prose
-    if (/^\[!/.test(s)) return false;                     // ligne de titre de l'encadré
-    if (/^#{1,6}\s/.test(s)) return false;                // titre
-    if (/^[|]/.test(s)) return false;                     // tableau
-    if (/^!?\[\[/.test(s)) return false;                  // image ou transclusion
-    if (/^[-+*]\s/.test(s) || /^\d+\.\s/.test(s)) return false; // liste
-    if (/^\*\*Table des matières/i.test(s)) return false;
+    if (/^\[!/.test(s)) continue;
+    if (/^[|]/.test(s)) continue;
+    if (/^!?\[\[/.test(s)) continue;
+    if (/^[-+*]\s/.test(s) || /^\d+\.\s/.test(s)) continue;
+    if (/^\*\*(Table des matières|Sommaire)/i.test(s)) break;
     const r = texteRendu(s).trim();
-    return r.length >= 40 && /\s/.test(r);
-  });
-  if (!premierePros && mots > 80) {
+    if (r.length >= 40 && /\s/.test(r)) { premierePros = true; break; }
+  }
+  if (!premierePros && mots > 80 && p.wikiKey !== 'Recueil législatif SST') {
     defauts.push({ code: 'sans-intro', gravite: 2, texte: 'Aucune phrase d’introduction : la page démarre sur un titre, un tableau ou une liste.' });
   }
 
   const vagues = sourcesVagues(corps);
   if (vagues >= 2) defauts.push({ code: 'sources-vagues', gravite: 1, texte: `${vagues} références sans auteur, année ni lien : invérifiables.` });
+  if (p.wikiKey !== 'Recueil législatif SST' && mots > 150 && !/https?:\/\//.test(corps)) {
+    defauts.push({ code: 'source-directe-absente', gravite: 1, texte: 'Aucun lien direct vers une source externe repéré. Des références peuvent exister dans les pages liées : vérifier leur traçabilité.' });
+  }
+  if (/(?:^|\|)\s*[ÀA] (?:créer|adapter)\s*(?:\||$)/m.test(corps)) {
+    defauts.push({ code: 'outil-a-preparer', gravite: 1, texte: 'Un outil est annoncé à créer ou à adapter : vérifier sa disponibilité réelle.' });
+  }
 
   // Un titre suivi d'un titre de MÊME niveau ou plus haut annonce une section jamais
   // écrite. Un H2 suivi d'un H3 est au contraire un plan normal : « Effets sur la
@@ -170,6 +180,8 @@ export const LIBELLES = {
   'auto-lien': 'Lien vers soi-même',
   'sans-intro': 'Pas de phrase d’introduction',
   'sources-vagues': 'Références invérifiables',
+  'source-directe-absente': 'Source directe à vérifier',
+  'outil-a-preparer': 'Outil non finalisé',
   'section-vide': 'Section annoncée mais vide',
   'phrases-longues': 'Phrases très longues',
 };

@@ -78,7 +78,10 @@
   function search(q, limit) {
     var nq = norm(q).trim();
     if (!nq) return { total: 0, items: [] };
-    var words = tokenize(nq);
+    // Accepte « art.51.1 », « article 51 . 1 » et la virgule décimale.
+    var requete = nq.replace(/\b(?:art|article)\.?\s*(?=\d)/g, 'art ')
+      .replace(/\d+(?:\s*[.,]\s*\d+)+/g, function (n) { return n.replace(/\s/g, '').replace(/,/g, '.'); });
+    var words = tokenize(requete);
     if (!words.length) return { total: 0, items: [] };
 
     // Motif législatif : un numéro + un sigle de loi, dans n'importe quel ordre
@@ -87,7 +90,8 @@
       if (/^\d+(\.\d+)*$/.test(words[w0])) { if (!numTok) numTok = words[w0]; }
       else if (SIGLES.test(words[w0]) && words[w0].length >= 3) { if (!loiTok) loiTok = words[w0]; }
     }
-    var prefixeLoi = (numTok && loiTok) ? 'art-' + numTok + '-' + loiTok + ',' : null;
+    // La référence doit être exacte : 51 ne désigne ni 51.1, ni le paragraphe 51-11.
+    var refLoi = numTok && loiTok ? { numero: numTok, loi: loiTok } : null;
 
     var scored = [];
     for (var i = 0; i < index.length; i++) {
@@ -128,8 +132,15 @@
       }
       if (!ok) continue;
 
-      if (nt === nq) score += 500;
-      if (prefixeLoi && nt.indexOf(prefixeLoi) === 0) score += 400;
+      // Un titre abrégé identique à la requête ne doit pas devancer le recueil.
+      if (nt === nq) score += refLoi ? 40 : 500;
+      var reference = nt.match(/^art(?:icle)?[\s.-]*(\d+(?:\s*[.,]\s*\d+)*)(?:\s*[-,:]\s*|\s+)([a-z]+)(?=$|[^a-z0-9])/);
+      var numeroTitre = reference ? reference[1].replace(/\s/g, '').replace(/,/g, '.') : null;
+      if (refLoi && reference && numeroTitre === refLoi.numero && reference[2] === refLoi.loi) {
+        score += 400;
+        // À référence identique, ouvrir d’abord le recueil législatif complet.
+        if (/^w\/legislation\//.test(e.u)) score += 80;
+      }
       // numéro sans sigle : privilégier l'article lui-même sur les articles qui le citent
       else if (numTok && nt.indexOf('art-' + numTok + '-') === 0) score += 150;
       // dépriorise les ébauches et les articles abrogés (champ ajouté par le générateur)
@@ -228,32 +239,73 @@
     var input = document.getElementById(inputId);
     var box = document.getElementById(suggestId);
     if (!input || !box) return;
-    var sel = -1;
+    var sel = -1, demande = 0;
+    input.setAttribute('role', 'combobox');
+    if (!input.hasAttribute('aria-label') && !input.hasAttribute('aria-labelledby')) {
+      input.setAttribute('aria-label', 'Rechercher dans le wiki');
+    }
+    input.setAttribute('aria-autocomplete', 'list');
+    input.setAttribute('aria-controls', suggestId);
+    input.setAttribute('aria-expanded', 'false');
+    box.setAttribute('role', 'listbox');
+    box.setAttribute('aria-label', 'Suggestions de recherche');
+    var annonce = document.createElement('span');
+    annonce.setAttribute('role', 'status');
+    annonce.setAttribute('aria-live', 'polite');
+    annonce.setAttribute('aria-atomic', 'true');
+    annonce.style.cssText = 'position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0';
+    input.parentNode.appendChild(annonce);
 
-    function close() { box.hidden = true; sel = -1; }
-    function message(html) { box.innerHTML = '<div class="s-msg">' + html + '</div>'; box.hidden = false; }
+    function close() {
+      demande++;
+      box.hidden = true;
+      sel = -1;
+      input.setAttribute('aria-expanded', 'false');
+      input.removeAttribute('aria-activedescendant');
+      annonce.textContent = '';
+    }
+    function message(html) {
+      box.innerHTML = '<div class="s-msg" role="presentation">' + html + '</div>';
+      box.hidden = false;
+      sel = -1;
+      input.setAttribute('aria-expanded', 'true');
+      input.removeAttribute('aria-activedescendant');
+      annonce.textContent = box.textContent;
+    }
 
     function open(res, q) {
       if (!res.items.length) { message('Aucun résultat pour « ' + escHtml(q) + ' »'); return; }
       var html = res.items.map(function (e) {
-        return '<a href="' + ROOT + e.u + '"><span class="s-title">' + e.i + ' ' + hl(e.t, q) +
+        return '<a href="' + ROOT + e.u + '"><span class="s-title">' + (window.WIKI_UI ? '' : e.i + ' ') + hl(window.WIKI_UI ? window.WIKI_UI.texte(e.t) : e.t, q) +
           (pastille[e.q] || '') + '</span><span class="s-meta">' + ligneMeta(e) + '</span></a>';
       }).join('');
       html += '<a class="s-all" href="' + ROOT + 'recherche.html?q=' + encodeURIComponent(q) + '">' +
         'Voir les ' + res.total + ' résultat' + (res.total > 1 ? 's' : '') + ' pour « ' + escHtml(q) + ' »</a>';
       box.innerHTML = html;
+      box.querySelectorAll('a').forEach(function (lien, i) {
+        lien.id = suggestId + '-option-' + i;
+        lien.setAttribute('role', 'option');
+        lien.setAttribute('tabindex', '-1');
+        lien.setAttribute('aria-selected', 'false');
+      });
       box.hidden = false;
       sel = -1;
+      input.setAttribute('aria-expanded', 'true');
+      input.removeAttribute('aria-activedescendant');
+      annonce.textContent = res.total + ' résultat' + (res.total > 1 ? 's' : '') +
+        '. Utilisez les flèches pour parcourir les suggestions et Entrée pour ouvrir.';
     }
 
     input.addEventListener('input', function () {
       var q = input.value;
+      var numeroDemande = ++demande;
       if (!q.trim()) { close(); return; }
       if (!index) message('<span class="s-loading"></span>Chargement de l\'index…');
       loadIndex().then(function () {
-        if (input.value !== q) return; // la frappe a continué
+        if (input.value !== q || numeroDemande !== demande) return;
         open(search(q, 8), q);
       }).catch(function () {
+        if (input.value !== q || numeroDemande !== demande) return;
         message('Recherche indisponible (connexion). Réessaie.');
       });
     });
@@ -266,12 +318,19 @@
         if (sel >= 0 && links[sel]) location.href = links[sel].href;
         else if (input.value.trim()) location.href = ROOT + 'recherche.html?q=' + encodeURIComponent(input.value.trim());
         ev.preventDefault();
-      } else if (ev.key === 'Escape') { close(); }
+      } else if (ev.key === 'Escape') { close(); ev.preventDefault(); }
+      else if (ev.key === 'Tab') { close(); }
     });
 
     function mark(links) {
-      for (var i = 0; i < links.length; i++) links[i].classList.toggle('sel', i === sel);
-      if (links[sel]) links[sel].scrollIntoView({ block: 'nearest' });
+      for (var i = 0; i < links.length; i++) {
+        links[i].classList.toggle('sel', i === sel);
+        links[i].setAttribute('aria-selected', i === sel ? 'true' : 'false');
+      }
+      if (links[sel]) {
+        input.setAttribute('aria-activedescendant', links[sel].id);
+        links[sel].scrollIntoView({ block: 'nearest' });
+      } else input.removeAttribute('aria-activedescendant');
     }
 
     document.addEventListener('click', function (ev) {
@@ -381,7 +440,10 @@
   // ---------- historique et favoris (mémorisés sur l'appareil du lecteur) ----------
   var MEM = {
     lire: function (cle) {
-      try { return JSON.parse(localStorage.getItem(cle) || '[]'); } catch (e) { return []; }
+      try {
+        var valeurs = JSON.parse(localStorage.getItem(cle) || '[]');
+        return Array.isArray(valeurs) ? valeurs : [];
+      } catch (e) { return []; }
     },
     ecrire: function (cle, v) {
       try { localStorage.setItem(cle, JSON.stringify(v.slice(0, 40))); } catch (e) { /* espace saturé ou navigation privée */ }
@@ -428,6 +490,7 @@
       btn.textContent = f ? '★' : '☆';
       btn.classList.toggle('actif', f);
       btn.setAttribute('title', f ? 'Retirer des favoris' : 'Ajouter aux favoris');
+      btn.setAttribute('aria-label', f ? 'Retirer des favoris' : 'Ajouter aux favoris');
       btn.setAttribute('aria-pressed', f ? 'true' : 'false');
     }
     peindre();
@@ -458,23 +521,42 @@
       p.addEventListener('click', function () { chercher(p.getAttribute('data-q')); });
     });
 
-    // listes « Récemment consulté » et « Favoris »
-    function remplir(idListe, cle, avecEtoile) {
+    // Les cinq premières entrées restent compactes ; le bouton déplie toute la liste.
+    function remplir(idListe, cle, avecEtoile, idVoir) {
       var ul = document.getElementById(idListe);
-      if (!ul) return 0;
-      var items = MEM.lire(cle).slice(0, 5);
-      if (!items.length) return 0;
-      ul.innerHTML = items.map(function (e) {
-        var lien = '<a href="' + ROOT + e.u + '">' + escHtml(e.t) + (avecEtoile ? '' : '<span class="tb-quand">' + ilYA(e.d) + '</span>') + '</a>';
-        return avecEtoile ? '<li><span class="tb-etoile">★</span>' + lien + '</li>' : '<li>' + lien + '</li>';
-      }).join('');
-      return items.length;
+      if (!ul) return;
+      var items = MEM.lire(cle), deplie = false;
+      var ancien = document.getElementById(idVoir), bouton = null;
+      if (ancien) ancien.hidden = true;
+      if (!items.length) return;
+      if (items.length > 5) {
+        bouton = document.createElement('button');
+        bouton.id = idVoir;
+        bouton.type = 'button';
+        bouton.className = ancien ? ancien.className : 'tb-voir';
+        bouton.style.cssText = 'border:0;background:none;padding:.5rem 0;min-height:44px;cursor:pointer;font:inherit;font-size:.875rem;color:var(--p-bleu,var(--link));text-align:left';
+        bouton.setAttribute('aria-controls', idListe);
+        if (ancien && ancien.parentNode) ancien.parentNode.replaceChild(bouton, ancien);
+        else ul.parentNode.insertBefore(bouton, ul.nextSibling);
+        bouton.addEventListener('click', function () { deplie = !deplie; peindre(); });
+      }
+      function peindre() {
+        var visibles = deplie ? items : items.slice(0, 5);
+        ul.innerHTML = visibles.map(function (e) {
+          var lien = '<a href="' + ROOT + e.u + '">' + escHtml(window.WIKI_UI ? window.WIKI_UI.texte(e.t) : e.t) + (avecEtoile ? '' : '<span class="tb-quand">' + ilYA(e.d) + '</span>') + '</a>';
+          return avecEtoile ? '<li><span class="tb-etoile">' + (window.WIKI_UI ? window.WIKI_UI.icones.favori : '★') + '</span>' + lien + '</li>' : '<li>' + lien + '</li>';
+        }).join('');
+        if (bouton) {
+          bouton.setAttribute('aria-expanded', deplie ? 'true' : 'false');
+          bouton.textContent = deplie
+            ? (avecEtoile ? 'Réduire les favoris' : 'Réduire l’historique')
+            : (avecEtoile ? 'Voir tous les favoris' : 'Voir tout l’historique') + ' (' + items.length + ')';
+        }
+      }
+      peindre();
     }
-    if (remplir('tbRecents', 'historique', false)) {
-      var vh = document.getElementById('tbVoirHist');
-      if (vh) { vh.hidden = false; vh.setAttribute('href', ROOT + 'recherche.html'); }
-    }
-    remplir('tbFavoris', 'favoris', true);
+    remplir('tbRecents', 'historique', false, 'tbVoirHist');
+    remplir('tbFavoris', 'favoris', true, 'tbVoirFav');
 
     // en-tête : les deux boutons pointent vers les blocs correspondants
     var bf = document.getElementById('tbFav'), bh = document.getElementById('tbHist');
@@ -602,6 +684,10 @@
     }
 
     function auClavier(ev) {
+      if (ev.defaultPrevented) return;
+      // Entrée garde l’action native du contrôle qui a le focus (Passer, Précédent…).
+      if (ev.key === 'Enter' && ev.target && ev.target.closest &&
+          ev.target.closest('button, a[href], input, select, textarea, [contenteditable], [role="button"]')) return;
       if (ev.key === 'Escape') { fermer(true); ev.preventDefault(); }
       else if (ev.key === 'ArrowRight' || ev.key === 'Enter') { aller(1); ev.preventDefault(); }
       else if (ev.key === 'ArrowLeft') { aller(-1); ev.preventDefault(); }
@@ -829,17 +915,21 @@
     // tout seul, par tranches courtes pilotées d'ici — un service worker occupé
     // trop longtemps se fait tuer par le navigateur, jamais une tranche.
     // Reprend après interruption, retour du réseau ou mise à jour du site.
-    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || ['localhost', '127.0.0.1', '[::1]'].indexOf(location.hostname) >= 0)) {
       var regOk = false;
       navigator.serviceWorker.register(ROOT + 'sw.js')
         .then(function () { regOk = true; })
         .catch(function () { /* le site marche sans lui */ });
 
-      var sync = { quoi: null, depuis: 0, total: 0, gen: 0, signal: 0 };
-      var FINI = 'hl-fini'; // version du site entièrement synchronisée
+      var sync = { quoi: null, depuis: 0, total: 0, gen: 0, signal: 0, echecs: 0 };
+      var FINI = 'hl-fini-v2'; // ancienne complétude fondée sur la présence : ne pas la réutiliser
+      var versionCible = String(window.V || '');
+      var etatVerifie = false, attenteInitiale = true;
+      var reprises = 0, minuterieReprise = null, dernierProbleme = '';
+      var DELAIS_REPRISE = [5000, 15000, 45000];
 
       function dejaFini() {
-        try { return localStorage.getItem(FINI) === String(window.V || ''); } catch (e) { return false; }
+        try { return etatVerifie && localStorage.getItem(FINI) === versionCible; } catch (e) { return false; }
       }
       function quotaPlein() {
         try { return sessionStorage.getItem('hl-quota') === '1'; } catch (e) { return false; }
@@ -851,26 +941,72 @@
       }
       function demarrer(quoi, depuis) {
         sync.gen++;
-        sync.quoi = quoi; sync.depuis = depuis || 0; sync.total = 0; sync.signal = Date.now();
+        sync.quoi = quoi; sync.depuis = depuis || 0; sync.total = 0; sync.signal = Date.now(); sync.echecs = 0;
         envoyer({ type: 'sync', quoi: quoi, depuis: sync.depuis, gen: sync.gen });
       }
       function lancerAuto() {
-        if (sync.quoi || dejaFini() || quotaPlein()) return;
+        if (navigator.onLine === false || sync.quoi || dejaFini() || quotaPlein()) return;
         demarrer('pages', 0);
       }
 
+      function adopterVersion(d) {
+        var candidate = String(d.version || '');
+        // Les pages inchangées gardent leur ancien window.V dans le cache
+        // différentiel. Le manifeste du SW courant définit la cible, à condition
+        // de ne jamais reculer derrière la page affichée ou une cible déjà vue.
+        // Le générateur utilise une estampille UTC YYYYMMDDhhmmss comparable.
+        if (d.manifesteActuel === true && /^\d{14}$/.test(candidate) && candidate >= versionCible) {
+          versionCible = candidate;
+        }
+      }
+      function versionCourante(d) {
+        return d.manifesteActuel === true && d.version === versionCible;
+      }
+      function pagesCompletes(d) {
+        return versionCourante(d) && d.pages &&
+          typeof d.pages.aJour === 'number' && d.pages.aJour === d.pages.total;
+      }
+      function invaliderFin() {
+        etatVerifie = false;
+        try { localStorage.removeItem(FINI); } catch (e) {}
+      }
+      function programmerReprise(message) {
+        sync.quoi = null; sync.total = 0; sync.gen++;
+        invaliderFin();
+        dernierProbleme = message || 'Certains fichiers restent à actualiser.';
+        clearTimeout(minuterieReprise);
+        minuterieReprise = null;
+        // Une passe a parcouru tout le manifeste, mais ses échecs peuvent être au
+        // début : toujours repartir de zéro. Les hashes évitent les doublons.
+        // Après trois reprises, attendre un geste ou le retour du réseau.
+        if (reprises < DELAIS_REPRISE.length && navigator.onLine !== false && !quotaPlein()) {
+          var delai = DELAIS_REPRISE[reprises++];
+          minuterieReprise = setTimeout(function () {
+            minuterieReprise = null;
+            lancerAuto();
+          }, delai);
+        }
+        majBouton();
+        demanderEtat();
+      }
+      function revalider() {
+        clearTimeout(minuterieReprise); minuterieReprise = null;
+        reprises = 0; dernierProbleme = ''; attenteInitiale = true;
+        invaliderFin();
+        demanderEtat();
+      }
       navigator.serviceWorker.ready.then(function () {
-        if ('requestIdleCallback' in window) requestIdleCallback(lancerAuto, { timeout: 4000 });
-        else setTimeout(lancerAuto, 2500);
+        // Même une version déjà marquée complète est recontrôlée : l'appareil
+        // peut avoir évincé des fichiers depuis la consultation précédente.
+        if ('requestIdleCallback' in window) requestIdleCallback(demanderEtat, { timeout: 4000 });
+        else setTimeout(demanderEtat, 2500);
       });
-      // le réseau revient (retour en surface) : on reprend là où c'était rendu
-      window.addEventListener('online', lancerAuto);
+      window.addEventListener('online', revalider);
       // nouveau service worker = site mis à jour : re-vérifier tout (delta par hash,
       // seuls les fichiers modifiés se retéléchargent)
       navigator.serviceWorker.addEventListener('controllerchange', function () {
-        try { localStorage.removeItem(FINI); } catch (e) {}
-        sync.quoi = null;
-        setTimeout(lancerAuto, 1500);
+        sync.quoi = null; sync.gen++;
+        setTimeout(revalider, 1500);
       });
       // chien de garde : si le service worker a été tué en pleine tranche, on renvoie la demande
       setInterval(function () {
@@ -901,8 +1037,8 @@
         dlg = document.createElement('div');
         dlg.className = 'pwa-aide';
         dlg.innerHTML = '<div class="pwa-aide-boite" role="dialog" aria-label="Hors-ligne">' +
-          '<h3>📶 Consultation hors ligne</h3>' +
-          '<p id="hl-etat">Interrogation du cache…</p>' +
+          '<h3>' + (window.WIKI_UI ? '' : '📶 ') + 'Consultation hors ligne</h3>' +
+          '<p id="hl-etat" role="status" aria-live="polite" aria-atomic="true">Interrogation du cache…</p>' +
           '<div class="hl-barre" id="hl-barre" hidden><div class="hl-barre-plein" id="hl-plein"></div></div>' +
           '<p id="hl-note" class="hl-note"></p>' +
           '<div class="hl-boutons">' +
@@ -933,6 +1069,7 @@
         var actuel = d.gen === sync.gen && d.quoi === sync.quoi;
         if (d.type === 'tranche' && actuel) {
           sync.depuis = d.suivant; sync.total = d.total; sync.signal = Date.now();
+          sync.echecs += d.rate || 0;
           majBouton();
           setTimeout(function () {
             if (sync.quoi === d.quoi && sync.gen === d.gen) {
@@ -949,8 +1086,15 @@
           }, 5000);
         } else if (d.type === 'sync-fin' && actuel) {
           sync.signal = Date.now();
+          sync.echecs += d.rate || 0;
+          if (d.complet !== true || d.version !== versionCible) {
+            programmerReprise(sync.echecs
+              ? 'Téléchargement incomplet : ' + sync.echecs + ' échec(s). Les anciennes copies sont conservées.'
+              : 'La version actuelle n’est pas encore entièrement vérifiée. Les anciennes copies sont conservées.');
+            return;
+          }
           if (d.quoi === 'pages') {
-            // le texte est là : on enchaîne images et PDF, et on demande au
+            // le texte est vérifié : on enchaîne images et PDF, et on demande au
             // navigateur de protéger le stockage contre l'effacement automatique
             if (navigator.storage && navigator.storage.persist) {
               navigator.storage.persist().catch(function () {});
@@ -962,18 +1106,36 @@
             demanderEtat(); // l'état réel du cache décide si la version est complète
           }
         } else if (d.type === 'erreur-quota' && actuel) {
-          sync.quoi = null; sync.total = 0;
+          sync.quoi = null; sync.total = 0; sync.gen++;
+          clearTimeout(minuterieReprise); minuterieReprise = null;
+          invaliderFin();
           try { sessionStorage.setItem('hl-quota', '1'); } catch (e) {}
+          dernierProbleme = 'Espace de stockage insuffisant.';
           majBouton();
-          if (dlg) demanderEtat();
+          demanderEtat();
         } else if (d.type === 'sync-erreur' && actuel) {
-          sync.quoi = null; sync.total = 0;
-          majBouton();
+          programmerReprise('La mise à jour n’a pas abouti. Les copies déjà téléchargées restent disponibles.');
+          return;
         } else if (d.type === 'etat' && d.pages && d.medias) {
-          // complétude fondée sur l'état réel du cache, pas sur des compteurs
-          if (!sync.quoi && d.pages.en >= d.pages.total && d.medias.en >= d.medias.total) {
-            try { localStorage.setItem(FINI, String(window.V || '')); } catch (e) {}
+          // Être disponible n'est pas être à jour : exiger le reçu de hash et
+          // le manifeste correspondant à la page actuellement affichée.
+          adopterVersion(d);
+          var complet = pagesCompletes(d) && d.medias.en === d.medias.total;
+          etatVerifie = true;
+          if (!sync.quoi && complet) {
+            try { localStorage.setItem(FINI, d.version); } catch (e) {}
+            clearTimeout(minuterieReprise); minuterieReprise = null;
+            dernierProbleme = ''; reprises = 0;
+          } else if (!complet) {
+            try { localStorage.removeItem(FINI); } catch (e) {}
           }
+          if (attenteInitiale && !sync.quoi) {
+            attenteInitiale = false;
+            if (!complet) lancerAuto();
+          }
+        } else if (d.type === 'etat-indisponible' && attenteInitiale) {
+          attenteInitiale = false;
+          lancerAuto();
         }
         if (!dlg) return;
         var etat = dlg.querySelector('#hl-etat');
@@ -981,37 +1143,49 @@
         var barre = dlg.querySelector('#hl-barre');
         var plein = dlg.querySelector('#hl-plein');
         var btnV = dlg.querySelector('#hl-verifier');
-        if (d.type === 'etat') {
-          var pOk = d.pages.en >= d.pages.total;
-          var mOk = d.medias.en >= d.medias.total;
-          etat.innerHTML = 'Texte du wiki : <strong>' + d.pages.en.toLocaleString('fr-CA') + ' / ' + d.pages.total.toLocaleString('fr-CA') + '</strong> fichiers (' + formatMo(d.pages.octets) + ')' + (pOk ? ' ✓' : '') +
+        if (d.type === 'etat' && d.pages && d.medias) {
+          var pOk = pagesCompletes(d);
+          var mOk = d.medias.en === d.medias.total;
+          var aJour = typeof d.pages.aJour === 'number' ? d.pages.aJour : 0;
+          var anciens = Math.max(0, d.pages.en - aJour);
+          etat.innerHTML = 'Texte du wiki : <strong>' + d.pages.en.toLocaleString('fr-CA') + ' / ' + d.pages.total.toLocaleString('fr-CA') + '</strong> fichiers disponibles (' + formatMo(d.pages.octets) + ')' +
+            '<br><strong>' + aJour.toLocaleString('fr-CA') + ' / ' + d.pages.total.toLocaleString('fr-CA') + '</strong> ' +
+            (versionCourante(d) ? 'à jour' : 'vérifiés selon un manifeste à revalider') + (pOk ? ' ✓' : '') +
+            (anciens ? ' — ' + anciens.toLocaleString('fr-CA') + ' copie(s) ancienne(s) ou non vérifiée(s)' : '') +
             '<br>Images et PDF : <strong>' + d.medias.en.toLocaleString('fr-CA') + ' / ' + d.medias.total.toLocaleString('fr-CA') + '</strong> (' + formatMo(d.medias.octets) + ')' +
             (mOk ? ' ✓' : ' — reste ' + formatMo(d.medias.restant || 0));
+          barre.hidden = !sync.quoi;
           if (quotaPlein()) {
             note.textContent = 'Espace de stockage insuffisant sur cet appareil : libère de l’espace puis touche « Vérifier maintenant ».';
+          } else if (!versionCourante(d)) {
+            note.textContent = 'La version actuelle ne peut pas encore être confirmée. Les copies présentes restent consultables ; retrouve du réseau puis vérifie à nouveau.';
           } else if (pOk && mOk) {
-            note.textContent = 'Tout le wiki est disponible sans réseau sur cet appareil.';
+            note.textContent = 'Le texte du wiki est à jour. Les images et PDF du wiki sont disponibles sans réseau sur cet appareil. Les liens vers des sites externes nécessitent du réseau.';
           } else if (sync.quoi || (d.enCours && d.enCours.length)) {
             note.textContent = 'Téléchargement automatique en cours — tu peux fermer ce panneau, ça continue tout seul.';
           } else {
-            note.textContent = 'La synchronisation repartira toute seule — ou touche « Vérifier maintenant ».';
+            note.textContent = (dernierProbleme ? dernierProbleme + ' ' : '') +
+              (minuterieReprise !== null ? 'Une nouvelle tentative est prévue.' :
+                'Touche « Vérifier maintenant » ou retrouve du réseau pour reprendre.');
           }
           if (iosSansApp) {
             note.textContent += ' Sur iPhone/iPad : installe d’abord l’app (Partager → Sur l’écran d’accueil) — le contenu téléchargé dans Safari ne suit pas dans l’app installée.';
           }
-          btnV.hidden = pOk && mOk;
+          btnV.hidden = pOk && mOk && !quotaPlein();
           btnV.onclick = function () {
             try { sessionStorage.removeItem('hl-quota'); } catch (e) {}
-            try { localStorage.removeItem(FINI); } catch (e) {}
+            clearTimeout(minuterieReprise); minuterieReprise = null;
+            reprises = 0; dernierProbleme = ''; attenteInitiale = false;
+            invaliderFin();
             btnV.disabled = true;
-            sync.quoi = null;
+            sync.quoi = null; sync.gen++;
             lancerAuto();
             setTimeout(function () { btnV.disabled = false; demanderEtat(); }, 1500);
           };
           if (navigator.storage && navigator.storage.persisted) {
             navigator.storage.persisted().then(function (p) {
               var bloc = dlg && dlg.querySelector('#hl-etat');
-              if (bloc) bloc.innerHTML += '<br><small>' + (p ? 'Stockage protégé contre l’effacement automatique ✓' : 'Stockage non garanti — installer l’app le protège') + '</small>';
+              if (bloc) bloc.innerHTML += '<br><small>' + (p ? 'Stockage protégé contre l’effacement automatique ✓' : 'Stockage non garanti — l’installation ne garantit pas sa conservation') + '</small>';
             }).catch(function () {});
           }
         } else if (d.type === 'tranche') {
@@ -1032,7 +1206,8 @@
         var b = document.createElement('button');
         b.id = 'btnHorsLigne';
         b.className = ancre.className;
-        b.textContent = '📶';
+        if (window.WIKI_UI) b.innerHTML = window.WIKI_UI.icones.horsLigne;
+        else b.textContent = '📶';
         b.setAttribute('title', 'Consultation hors ligne');
         b.setAttribute('aria-label', 'Consultation hors ligne');
         b.addEventListener('click', ouvrirPanneau);
@@ -1052,7 +1227,8 @@
       var b = document.createElement('button');
       b.id = 'btnInstall';
       b.className = ancre.className;
-      b.textContent = '📲';
+      if (window.WIKI_UI) b.innerHTML = window.WIKI_UI.icones.installer;
+      else b.textContent = '📲';
       b.setAttribute('title', 'Installer l’application');
       b.setAttribute('aria-label', 'Installer l’application');
       b.addEventListener('click', function () {
@@ -1074,7 +1250,7 @@
       var v = document.createElement('div');
       v.className = 'pwa-aide';
       v.innerHTML = '<div class="pwa-aide-boite" role="dialog" aria-label="Installer l’application">' +
-        '<h3>📲 Installer le Wiki SST</h3>' +
+        '<h3>' + (window.WIKI_UI ? '' : '📲 ') + 'Installer le Wiki SST</h3>' +
         '<p>Ouvre le menu <strong>Partager</strong> de ton navigateur (l’icône <strong>⎋</strong> ou <strong>⋮</strong>), ' +
         'puis choisis <strong>« Sur l’écran d’accueil »</strong> ou <strong>« Installer l’application »</strong>.</p>' +
         '<p>Le wiki s’ouvrira ensuite comme une app. Sur iPhone/iPad, ouvre l’app installée au moins une fois avec du réseau : le contenu hors ligne se télécharge dans l’app, pas dans Safari.</p>' +
@@ -1120,7 +1296,8 @@
       if (v === 'auto') document.documentElement.removeAttribute('data-theme');
       else document.documentElement.setAttribute('data-theme', v);
       var e = ETATS.filter(function (x) { return x.cle === v; })[0] || ETATS[0];
-      btn.textContent = e.icone;
+      if (window.WIKI_UI) btn.innerHTML = window.WIKI_UI.icones[e.cle];
+      else btn.textContent = e.icone;
       btn.setAttribute('title', e.libelle + ' — cliquer pour changer');
       btn.setAttribute('aria-label', e.libelle + ' — cliquer pour changer');
     }
@@ -1161,7 +1338,7 @@
 
   function appliquerEtat(toc, btn, replie) {
     toc.classList.toggle('collapsed', replie);
-    btn.textContent = replie ? '[afficher]' : '[masquer]';
+    btn.textContent = replie ? (btn.getAttribute('data-label-ferme') || '[afficher]') : (btn.getAttribute('data-label-ouvert') || '[masquer]');
     btn.setAttribute('aria-expanded', replie ? 'false' : 'true');
   }
 
@@ -1171,7 +1348,7 @@
     var nb = toc.querySelectorAll('li').length;
     var pref = prefTdm();
     // priorité au choix explicite du lecteur ; sinon repli auto sur petit écran si le sommaire est long
-    var replie = pref !== null ? pref === '1' : (window.innerWidth <= 900 && nb > SEUIL_REPLI);
+    var replie = pref !== null ? pref === '1' : (window.innerWidth <= 900 && (nb > SEUIL_REPLI || toc.getAttribute('data-mobile-replie') === 'true'));
     if (replie) appliquerEtat(toc, btn, true);
     btn.addEventListener('click', function () {
       var nouvelEtat = !toc.classList.contains('collapsed');

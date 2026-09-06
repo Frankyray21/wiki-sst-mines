@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculs d'exposition et ajustements TPN — WIKI SST Mines</title>
-<link rel="stylesheet" href="../../../../assets/style.css?v=20260903205320">
+<link rel="stylesheet" href="../../../../assets/style.css?v=20260906180055">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 <link rel="manifest" href="../../../../manifest.webmanifest">
 <meta name="theme-color" content="#2563eb">
@@ -12,14 +12,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Wiki SST">
-<script>window.ROOT='../../../../';window.V='20260903205320';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}</script>
+<script>window.ROOT='../../../../';window.V='20260906180055';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}</script>
 </head>
 <body>
 <header class="site-header">
   <button class="burger" id="burger" aria-label="Menu">☰</button>
   <a class="brand" href="../../../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
   <div class="searchbox">
-    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <input type="search" id="q" aria-label="Rechercher dans le wiki" placeholder="Rechercher dans le wiki…" autocomplete="off">
     <div id="suggest" class="suggest" hidden></div>
   </div>
   <button class="btn-theme" id="btnFav" aria-label="Ajouter aux favoris" title="Ajouter aux favoris">☆</button>
@@ -31,7 +31,7 @@
     <ul>
       <li><a href="../../../../index.html">🏠 Portail</a></li>
       <li><a href="../../../../categories.html">🏷️ Catégories</a></li>
-      <li><a href="../../../../qualite.html">🔧 Qualité rédactionnelle</a></li>
+      <li><a href="../../../../qualite.html">🔧 Contrôles de forme</a></li>
       <li><a href="../../../../graphe.html">🕸️ Graphe des liens</a></li>
       <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
     </ul>
@@ -56,21 +56,12 @@
 <div class="breadcrumbs"><a href="../../../../index.html">Portail</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/index.html">Hygiène industrielle</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/20-articles-internes/index.html">Articles internes</a> <span class="crumb-sep">›</span> <a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/index.html">Évaluation et mesure</a></div>
 <h1 class="page-title">Calculs d'exposition et ajustements TPN</h1>
 <div class="page-sub">Un article du wiki <a href="../../../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></div>
-<aside class="infobox"><div class="infobox-title">🌫️ Calculs d'exposition et ajustements TPN</div><table><tr><th>Thème</th><td><a href="../../../../w/hygiene/27-articles-gestionnaires/programmes-de-prevention/hygiene-industrielle.html">Mettre en place un programme d'hygiène industrielle</a></td></tr><tr><th>Révision</th><td>2026-05-22</td></tr></table><div class="infobox-tags"><span class="tag">wiki</span><a class="tag tag-lien" href="../../../../categorie/hygiene.html">hygiène</a><span class="tag">calculs</span><span class="tag">tpn</span><span class="tag">vemp</span></div></aside>
+<aside class="infobox"><div class="infobox-title">🌫️ Calculs d'exposition et ajustements TPN</div><table><tr><th>Thème</th><td><a href="../../../../w/hygiene/27-articles-gestionnaires/programmes-de-prevention/hygiene-industrielle.html">Mettre en place un programme d'hygiène industrielle</a></td></tr><tr><th>Révision déclarée</th><td>2026-05-22</td></tr></table><div class="infobox-tags"><span class="tag">wiki</span><a class="tag tag-lien" href="../../../../categorie/hygiene.html">hygiène</a><span class="tag">calculs</span><span class="tag">tpn</span><span class="tag">vemp</span></div></aside>
 
 <nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">8 sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul><li class="toc-l3"><a href="#volume-dair-echantillonne">Volume d'air échantillonné</a></li><li class="toc-l3"><a href="#exposition-quotidienne-moyenne">Exposition quotidienne moyenne</a></li><li class="toc-l3"><a href="#ajustement-aux-conditions-tpn">Ajustement aux conditions TPN</a></li><li class="toc-l3"><a href="#limites-de-confiance">Limites de confiance</a></li><li class="toc-l3"><a href="#ratio-de-melange">Ratio de mélange</a></li><li class="toc-l3"><a href="#horaires-non-conventionnels">Horaires non conventionnels</a></li><li class="toc-l3"><a href="#application-terrain">Application terrain</a></li><li class="toc-l3"><a href="#ressources">Ressources</a></li></ul></nav>
 <div class="page-body">
 <p>L&#39;évaluation quantitative exige des calculs d&#39;exposition quotidienne moyenne (EQM), des conversions d&#39;unités, des ajustements aux conditions <a href="../../../../w/legislation/40-concepts-juridiques-transverses/tpn.html" title="TPN">TPN</a> et le calcul du ratio de mélange (RM) pour les expositions multiples. Les limites de confiance (LCI/LCS) à 95 % permettent de statuer sur le respect de la <a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/vea-et-normes.html" title="VEA et normes RSST">VEA</a>. En mine, les quarts de 10 h ou 12 h imposent un ajustement VEMA systématique.</p>
-<p><strong>Table des matières</strong></p>
-<ol>
-<li><a href="#volume-dair-%C3%A9chantillonn%C3%A9">Volume d&#39;air échantillonné</a></li>
-<li><a href="#exposition-quotidienne-moyenne">Exposition quotidienne moyenne</a></li>
-<li><a href="#ajustement-aux-conditions-tpn">Ajustement aux conditions TPN</a></li>
-<li><a href="#limites-de-confiance">Limites de confiance</a></li>
-<li><a href="#ratio-de-m%C3%A9lange">Ratio de mélange</a></li>
-<li><a href="#horaires-non-conventionnels">Horaires non conventionnels</a></li>
-<li><a href="#application-terrain">Application terrain</a></li>
-</ol>
+
 <h3 id="volume-dair-echantillonne">Volume d&#39;air échantillonné</h3>
 <p>$$V = Q_m \times T$$</p>
 <ul>
@@ -198,10 +189,10 @@
 </div>
 <nav class="voisins" aria-label="Pages voisines"><span></span><a class="voisin voisin-suiv" href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/evaluation-et-mesure.html"><small>Suivant →</small><span>Évaluation et mesure</span></a></nav>
 <details class="backlinks"><summary>Pages qui pointent ici (11)</summary><ul><li><a href="../../../../w/hygiene/05-demarrage-rapide/demarrage-rapide-conseiller-sst.html">🎯 Démarrage rapide, conseiller SST</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/00-accueil/00-accueil.html">🏠 Wiki Hygiène industrielle, mines</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/10-themes/agresseurs-chimiques.html">Agresseurs chimiques</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/environnement-de-travail/bruit.html">Bruit en milieu de travail</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/prevention-et-programmes/demarche-arec.html">Démarche AREC</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/10-themes/demarche-en-hygiene-industrielle.html">Démarche en hygiène industrielle</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/evaluation-et-mesure.html">Évaluation et mesure</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/gaz-et-vapeurs.html">Gaz et vapeurs</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/hygiene/20-articles-internes/prevention-et-programmes/apr.html">Protection respiratoire (APR)</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../../../w/legislation/40-concepts-juridiques-transverses/tpn.html">TPN</a> <small class="bl-wiki">Recueil législatif</small></li><li><a href="../../../../w/hygiene/20-articles-internes/evaluation-et-mesure/vea-et-normes.html">VEA et normes RSST</a> <small class="bl-wiki">Hygiène industrielle</small></li></ul></details>
-<div class="page-meta">Dernière révision : 2026-05-22 · <a href="../../../../graphe.html?focus=w%2Fhygiene%2F20-articles-internes%2Fevaluation-et-mesure%2Fcalculs-dexposition.html">🕸️ Voir cette page dans le graphe</a></div>
+<div class="page-meta">Révision déclarée dans la note : 2026-05-22 · Relecture éditoriale : non attestée · Vérification des sources : non attestée · Site généré le 2026-09-06 · <a href="../../../../graphe.html?focus=w%2Fhygiene%2F20-articles-internes%2Fevaluation-et-mesure%2Fcalculs-dexposition.html">🕸️ Voir cette page dans le graphe</a></div>
 </main>
 </div>
 <footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours<span id="version"></span></footer>
-<script src="../../../../assets/app.js?v=20260903205320"></script>
+<script src="../../../../assets/app.js?v=20260906180055"></script>
 </body>
 </html>

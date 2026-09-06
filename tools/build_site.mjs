@@ -6,9 +6,11 @@ import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
-import { rendrePortailEncadrement, rendrePortailTravailleurs } from './portail_encadrement.mjs';
+import { rendrePortailEncadrement, rendrePortailTravailleurs, faviconTravailleurs } from './portail_encadrement.mjs';
 import { analyserQualite, LIBELLES } from './qualite.mjs';
+import { normaliserNavigationInterne, metadonneesEditoriales, indicateursDocumentaires } from './editorial.mjs';
 import { genererPwa, metaPwa, genererListeHorsLigne } from './pwa.mjs';
+import { rendreEnteteCompact } from './entete-article.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -727,7 +729,7 @@ function finalize(html) {
   while (/XBLOCKX\d+X/.test(html) && guard++ < 10) {
     html = html.replace(/(?:<p>)?XBLOCKX(\d+)X(?:<\/p>)?/g, (m, i) => blocks[+i]);
   }
-  return html;
+  return normaliserNavigationInterne(html);
 }
 
 // ---------- gabarits ----------
@@ -763,7 +765,7 @@ ${metaPwa(ROOT)}
   <button class="burger" id="burger" aria-label="Menu">☰</button>
   <a class="brand" href="${ROOT}index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
   <div class="searchbox">
-    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <input type="search" id="q" aria-label="Rechercher dans le wiki" placeholder="Rechercher dans le wiki…" autocomplete="off">
     <div id="suggest" class="suggest" hidden></div>
   </div>
   <button class="btn-theme" id="btnFav" aria-label="Ajouter aux favoris" title="Ajouter aux favoris">☆</button>
@@ -775,7 +777,7 @@ ${metaPwa(ROOT)}
     <ul>
       <li><a href="${ROOT}index.html">🏠 Portail</a></li>
       <li><a href="${ROOT}categories.html">🏷️ Catégories</a></li>
-      <li><a href="${ROOT}qualite.html">🔧 Qualité rédactionnelle</a></li>
+      <li><a href="${ROOT}qualite.html">🔧 Contrôles de forme</a></li>
       <li><a href="${ROOT}graphe.html">🕸️ Graphe des liens</a></li>
       <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
     </ul>
@@ -846,7 +848,7 @@ const FM_LABELS = [
   ['en-vigueur-depuis', 'En vigueur depuis'], ['chapitre', 'Chapitre'], ['section', 'Section'], ['bloc', 'Bloc'],
   ['nature', 'Nature'], ['sujet', 'Sujet'], ['visé', 'Visé'], ['type', 'Type'], ['theme', 'Thème'], ['thème', 'Thème'],
   ['auteur', 'Auteur'], ['année', 'Année'],
-  ['révision', 'Révision'], ['revision', 'Révision'],
+  ['révision', 'Révision déclarée'], ['revision', 'Révision déclarée'],
 ];
 // « statut », « qualité », « public-cible » et « niveau-sensibilité » sont volontairement absents :
 // ce sont des étiquettes de travail. Afficher « Sensibilité : 3 » signale au lecteur qu'il existe
@@ -891,6 +893,10 @@ console.log('Rendu des pages…');
 // On vide le contenu sans supprimer OUT lui-même : sous Windows le dossier racine reste
 // verrouillé dès qu'un terminal ou un serveur l'a comme répertoire courant.
 if (fs.existsSync(OUT)) {
+  const attendu = path.resolve(__dirname, '..', 'docs');
+  if (OUT !== attendu || fs.lstatSync(OUT).isSymbolicLink() || fs.realpathSync(OUT).toLowerCase() !== attendu.toLowerCase()) {
+    throw new Error('Sortie de génération non sûre : nettoyage refusé.');
+  }
   for (const e of fs.readdirSync(OUT)) {
     fs.rmSync(path.join(OUT, e), { recursive: true, force: true, maxRetries: 20, retryDelay: 400 });
   }
@@ -1030,20 +1036,21 @@ for (const p of pages) {
   const blHtml = bl && bl.size
     ? `<details class="backlinks"><summary>Pages qui pointent ici (${bl.size})</summary><ul>${[...bl].sort((a, b) => a.title.localeCompare(b.title, 'fr')).slice(0, 60).map(b => `<li><a href="{{ROOT}}${b.out}">${esc(b.title)}</a> <small class="bl-wiki">${WIKIS[b.wikiKey].name}</small></li>`).join('')}${bl.size > 60 ? '<li>…</li>' : ''}</ul></details>`
     : '';
-  const rev = p.fm['révision'] || p.fm['revision'] || p.mtime.toISOString().slice(0, 10);
+  const revisionHtml = metadonneesEditoriales(p, new Date().toISOString().slice(0, 10));
+  const enteteCompact = rendreEnteteCompact({ out: p.out, titre: p.title, domaineHtml: `<a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>`, sections: p.toc });
   const content = `
 <div class="breadcrumbs">${crumbs.join(' <span class="crumb-sep">›</span> ')}</div>
-<h1 class="page-title">${esc(p.title)}</h1>
-<div class="page-sub">Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a></div>
+${enteteCompact || `<h1 class="page-title">${esc(p.title)}</h1>
+<div class="page-sub">Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a></div>`}
 ${infobox(p)}
 ${p.chapoHtml ? `<div class="chapo"><div class="chapo-label">${esc(p.chapoLabel)}</div>${p.chapoHtml}</div>` : ''}
-${tocHtml}
+${enteteCompact ? '' : tocHtml}
 <div class="page-body">
 ${p.html}
 </div>
 ${voisinsHtml(p)}
 ${blHtml}
-<div class="page-meta">Dernière révision : ${esc(String(rev))} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
+<div class="page-meta">${revisionHtml} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
   const html = pageShell({
     out: p.out, title: p.title, wikiKey: p.wikiKey, content,
     sidebarExtra: wikiSidebar(p.wikiKey, wikiSections[p.wikiKey]),
@@ -1291,14 +1298,27 @@ rapportQualite.sort((a, b) => b.score - a.score || a.p.title.localeCompare(b.p.t
 
   const total = pages.length;
   const saines = total - rapportQualite.length;
+  const avecDefaut = new Set(rapportQualite.map(r => r.p));
+  const fiches = pages.filter(p => p.wikiKey !== 'Recueil législatif SST');
+  const groupes = [
+    ['Fiches et autres pages non législatives', fiches],
+    ['Recueil législatif', pages.filter(p => p.wikiKey === 'Recueil législatif SST')],
+  ];
+  const indicateurs = fiches.map(indicateursDocumentaires);
   const content = `
 <div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a></div>
-<h1 class="page-title">Qualité rédactionnelle</h1>
-<div class="page-sub">${saines.toLocaleString('fr-CA')} pages sur ${total.toLocaleString('fr-CA')} ne présentent aucun défaut détecté (${Math.round(saines / total * 100)} %). Cette page liste les autres, les plus atteintes d'abord.</div>
+<h1 class="page-title">Contrôles automatiques de forme</h1>
+<div class="page-sub">${saines.toLocaleString('fr-CA')} pages sur ${total.toLocaleString('fr-CA')} sans signalement automatique. Ce résultat n'est ni une note de fiabilité ni une validation SST.</div>
 
 <div class="callout callout-info"><div class="callout-title"><span class="callout-icon">ℹ️</span>Ce que cette page mesure — et ce qu'elle ne mesure pas</div><div class="callout-body">
 <p>Elle repère des défauts <strong>mécaniques</strong> : un texte coupé, une section annoncée mais vide, une mention « à compléter » restée visible, une référence sans auteur ni année. Elle ne juge <strong>ni la justesse ni l'intérêt</strong> du contenu : une page peut être irréprochable ici et rester à étoffer, ou apparaître ci-dessous alors qu'elle est excellente sur le fond.</p>
 </div></div>
+
+<h2>Résultats par type de contenu</h2>
+<table class="q-resume"><thead><tr><th>Périmètre</th><th>Pages</th><th>Avec signalement</th></tr></thead><tbody>${groupes.map(([nom, liste]) => `<tr><td>${nom}</td><td>${liste.length}</td><td>${liste.filter(p => avecDefaut.has(p)).length}</td></tr>`).join('')}</tbody></table>
+<h2>Traçabilité des ${fiches.length} pages non législatives</h2>
+<p>Ces indicateurs comptent des liens et des métadonnées explicites. Un lien externe ne prouve pas à lui seul la justesse d'une affirmation ; une date n'est affichée comme relecture que si un relecteur est renseigné.</p>
+<table class="q-resume"><thead><tr><th>Indicateur</th><th>Renseigné</th><th>Non renseigné</th></tr></thead><tbody>${[['lienSource', 'Lien externe présent'], ['relecture', 'Relecture datée et relecteur déclaré'], ['sourcesDatees', 'Date de vérification des sources déclarée'], ['validationSpecialisee', 'Validation spécialisée datée et validateur déclaré']].map(([cle, label]) => { const n = indicateurs.filter(i => i[cle]).length; return `<tr><td>${label}</td><td>${n}</td><td>${indicateurs.length - n}</td></tr>`; }).join('')}</tbody></table>
 
 <h2>Défauts par type</h2>
 <table class="q-resume">
@@ -1317,7 +1337,7 @@ ${codes.map(([c, n]) => {
 ${lignes}
 </table>`;
   fs.writeFileSync(path.join(OUT, 'qualite.html'),
-    pageShell({ out: 'qualite.html', title: 'Qualité rédactionnelle', wikiKey: null, content })
+    pageShell({ out: 'qualite.html', title: 'Contrôles automatiques de forme', wikiKey: null, content })
       .replace(/\{\{ROOT\}\}/g, ''));
 
   // récapitulatif dans la console : c'est là que Frank verra le travail à faire
@@ -1407,7 +1427,7 @@ const searchIndex = pages.map(p => {
 });
 searchIndex.push({ t: 'Graphe des liens 3D', u: 'graphe3d.html', w: 'Outil', i: '🕸️', g: 'graphe 3d liens réseau obsidian', x: 'Le réseau des pages en trois dimensions, en rotation libre.' });
 searchIndex.push({ t: 'Graphe des liens', u: 'graphe.html', w: 'Outil', i: '🕸️', g: 'graphe liens réseau obsidian', x: 'Toutes les pages et leurs liens, en réseau interactif.' });
-searchIndex.push({ t: 'Qualité rédactionnelle', u: 'qualite.html', w: 'Outil', i: '🔧', g: 'qualité relecture ébauche atelier', x: `${rapportQualite.length} pages présentent au moins un défaut de forme.` });
+searchIndex.push({ t: 'Contrôles automatiques de forme', u: 'qualite.html', w: 'Outil', i: '🔧', g: 'qualité rédactionnelle relecture ébauche atelier', x: `${rapportQualite.length} pages présentent au moins un signalement de forme. Ce contrôle ne valide pas le fond SST.` });
 // Les catégories sont cherchables au même titre que les articles.
 for (const [tag, membres] of categories) {
   searchIndex.push({
@@ -1471,15 +1491,15 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
 
 // Rubriques du portail travailleurs : on entre par le problème vécu, pas par la discipline.
 const RUBRIQUES_T = [
-  { titre: 'J\'ai mal quelque part', icone: '🤕', mots: ['postures', 'manutention', 'travail répétitif', 'vibrations', 'tms'] },
-  { titre: 'Je respire quelque chose', icone: '😷', mots: ['poussières', 'diesel', 'silice', 'solvants', 'gaz', 'simdut', 'amiante'] },
-  { titre: 'Il fait trop chaud, j\'entends moins bien', icone: '🌡️', mots: ['chaleur', 'bruit', 'froid', 'thermique'] },
-  { titre: 'Ça ne va pas dans ma tête', icone: '🧠', mots: ['détresse', 'santé mentale', 'stress', 'aide', 'pae', 'appeler', 'rps'] },
-  { titre: 'Je ne dors plus', icone: '😴', mots: ['sommeil', 'fatigue', 'quart de nuit', 'récupération'] },
-  { titre: 'Ça chauffe avec l\'équipe ou le boss', icone: '💬', mots: ['équipe', 'reconnaissance', 'conflit', 'harcèlement', 'soutien'] },
-  { titre: 'Est-ce que j\'ai le droit ?', icone: '⚖️', mots: ['droit de refus', 'réclamation', 'retour au travail', 'droits', 'lésion'] },
-  { titre: 'C\'est dangereux ici', icone: '⚠️', mots: ['danger', 'presqu', 'cadenassage', 'espaces clos', 'machines', 'protection'] },
-  { titre: 'La vie au camp', icone: '🏕️', mots: ['camp', 'fifo', 'famille', 'séjour'] },
+  { titre: 'J\'ai mal quelque part', icone: 'personne', mots: ['postures', 'manutention', 'travail répétitif', 'vibrations', 'tms'] },
+  { titre: 'Je respire quelque chose', icone: 'air', mots: ['poussières', 'diesel', 'silice', 'solvants', 'gaz', 'simdut', 'amiante'] },
+  { titre: 'Il fait trop chaud, j\'entends moins bien', icone: 'soleil', mots: ['chaleur', 'bruit', 'froid', 'thermique'] },
+  { titre: 'Ça ne va pas dans ma tête', icone: 'cerveau', mots: ['détresse', 'santé mentale', 'stress', 'aide', 'pae', 'appeler', 'rps'] },
+  { titre: 'Je ne dors plus', icone: 'lune', mots: ['sommeil', 'fatigue', 'quart de nuit', 'récupération'] },
+  { titre: 'Ça chauffe avec l\'équipe ou le boss', icone: 'gens', mots: ['équipe', 'reconnaissance', 'conflit', 'harcèlement', 'soutien'] },
+  { titre: 'Est-ce que j\'ai le droit ?', icone: 'balance', mots: ['droit de refus', 'réclamation', 'retour au travail', 'droits', 'lésion'] },
+  { titre: 'C\'est dangereux ici', icone: 'alerte', mots: ['danger', 'presqu', 'cadenassage', 'espaces clos', 'machines', 'protection'] },
+  { titre: 'La vie au camp', icone: 'accueil', mots: ['camp', 'fifo', 'famille', 'séjour'] },
 ];
 
 const RUBRIQUES_G = [
@@ -1506,15 +1526,16 @@ function genererWikiPublic(pub) {
     const tocHtml = p.toc.length >= 3
       ? `<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">${p.toc.filter(t => t.lv === 2).length || p.toc.length} sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul>${p.toc.map(t => `<li class="toc-l${t.lv}"><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ul></nav>`
       : '';
+    const enteteCompact = rendreEnteteCompact({ out, titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}`, sections: p.toc });
     const contenu = `
 <div class="breadcrumbs"><a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a> <span class="crumb-sep">›</span> ${esc(wiki.name)}</div>
-<h1 class="page-title">${esc(p.title)}</h1>
-<div class="page-sub">${wiki.icon} ${esc(wiki.name)}</div>
-${tocHtml}
+${enteteCompact || `<h1 class="page-title">${esc(p.title)}</h1>
+<div class="page-sub">${wiki.icon} ${esc(wiki.name)}</div>`}
+${enteteCompact ? '' : tocHtml}
 <div class="page-body">
 ${corps}
 </div>
-<div class="page-meta">Dernière révision : ${esc(String(p.fm['révision'] || p.fm['revision'] || p.mtime.toISOString().slice(0, 10)))} · <a href="{{ROOT}}${p.out}">Voir cette page dans le fond documentaire</a></div>`;
+<div class="page-meta">${metadonneesEditoriales(p, new Date().toISOString().slice(0, 10))} · <a href="{{ROOT}}${p.out}">Voir cette page dans le fond documentaire</a></div>`;
     const html = pageShell({ out, title: p.title, wikiKey: null, content: contenu, sidebarExtra: sidebarPublic(pub) })
       .replace(/\{\{ROOT\}\}/g, R);
     const dest = path.join(OUT, out);
@@ -1607,7 +1628,7 @@ function pageTableauDeBord({ out, titre, corps, dataPub }) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(titre)} — WIKI SST Mines</title>
 <link rel="stylesheet" href="${R}assets/portail.css?v=${V}">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<link rel="icon" href="${dataPub === 't' ? faviconTravailleurs : "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>"}">
 ${metaPwa(R)}
 <script>window.ROOT='${R}';${SCRIPT_THEME}</script>
 </head>
@@ -1662,7 +1683,7 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
   <div class="portal-globe">⛏️</div>
   <h1>WIKI SST — Mines</h1>
   <p class="portal-tagline">L'encyclopédie santé et sécurité du travail en milieu minier<br>${total.toLocaleString('fr-CA')} articles en français · construite à partir des notes de cours</p>
-  <div class="portal-search"><input type="search" id="q2" placeholder="Rechercher parmi ${total.toLocaleString('fr-CA')} articles…" autocomplete="off"><div id="suggest2" class="suggest" hidden></div></div>
+  <div class="portal-search"><input type="search" id="q2" aria-label="Rechercher dans le wiki" placeholder="Rechercher parmi ${total.toLocaleString('fr-CA')} articles…" autocomplete="off"><div id="suggest2" class="suggest" hidden></div></div>
 </div>
 <h2 class="portal-section">Deux wikis selon qui tu es</h2>
 <div class="portal-grid portal-publics">
@@ -1686,7 +1707,7 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
   </a>
   <a class="portal-card" href="qualite.html">
     <span class="portal-icon">🔧</span>
-    <span class="portal-info"><strong>Qualité rédactionnelle</strong><span class="portal-desc">Atelier de l'auteur : les pages dont le texte est coupé, les sections restées vides, les mentions « à compléter » encore visibles. Les plus atteintes d'abord.</span><span class="portal-count">${rapportQualite.length} pages à reprendre</span></span>
+    <span class="portal-info"><strong>Contrôles de forme</strong><span class="portal-desc">Repérer les textes coupés, sections vides et références à vérifier. Ces signalements automatiques ne valident ni le contenu SST ni sa conformité.</span><span class="portal-count">${rapportQualite.length} pages à examiner</span></span>
   </a>
 </div>
 <div class="portal-foot">

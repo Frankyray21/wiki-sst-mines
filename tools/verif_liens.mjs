@@ -1,50 +1,55 @@
-// Vérifie que tous les liens internes des pages générées pointent vers un fichier existant.
+// Vérification des fichiers ET des fragments, y compris les ancres dans la même page.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'docs');
-// Par défaut on parcourt tout docs/ : limiter à t/g/w laissait hors du filet les 165 pages
-// de catégorie, categories.html, index.html et recherche.html.
-const cibles = process.argv[2] ? [process.argv[2]] : ['.'];
+const decodeHtml = s => s.replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"');
 
-let total = 0, morts = 0;
-const exemples = [];
-
-function fichiers(dir) {
-  const acc = [];
-  (function rec(d) {
-    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
-      const p = path.join(d, e.name);
-      if (e.isDirectory()) rec(p);
-      else if (e.name.endsWith('.html')) acc.push(p);
+export function verifierLiens(out, cibles = ['.']) {
+  let total = 0, fragments = 0;
+  const erreurs = [], cache = new Map();
+  const htmlDe = file => {
+    if (!cache.has(file)) {
+      const html = fs.readFileSync(file, 'utf8');
+      cache.set(file, { html, ids: new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(m => decodeHtml(m[1]))) });
     }
-  })(dir);
-  return acc;
-}
-
-for (const c of cibles) {
-  const racine = path.join(OUT, c);
-  if (!fs.existsSync(racine)) continue;
-  for (const f of fichiers(racine)) {
-    const html = fs.readFileSync(f, 'utf8');
-    for (const m of html.matchAll(/href="([^"]+)"/g)) {
-      let href = m[1];
-      if (/^(https?:|mailto:|tel:|data:|#)/.test(href)) continue;
-      href = href.split('#')[0].split('?')[0];
-      if (!href) continue;
-      total++;
-      const abs = path.resolve(path.dirname(f), decodeURIComponent(href));
-      if (!fs.existsSync(abs)) {
-        morts++;
-        if (exemples.length < 15) exemples.push(`${path.relative(OUT, f)}\n     → ${href}`);
+    return cache.get(file);
+  };
+  function fichiers(dir) {
+    if (fs.statSync(dir).isFile()) return dir.endsWith('.html') ? [dir] : [];
+    return fs.readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? fichiers(path.join(dir, e.name)) : e.name.endsWith('.html') ? [path.join(dir, e.name)] : []);
+  }
+  for (const cible of cibles) {
+    const root = path.resolve(out, cible);
+    if (!fs.existsSync(root)) { erreurs.push({ page: cible, href: cible, cause: 'Périmètre absent' }); continue; }
+    for (const file of fichiers(root)) {
+      for (const m of htmlDe(file).html.matchAll(/href="([^"]+)"/g)) {
+        const href = decodeHtml(m[1]);
+        if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(href) || href === '#') continue;
+        const hash = href.indexOf('#');
+        let chemin = (hash < 0 ? href : href.slice(0, hash)).split('?')[0];
+        let fragment = hash < 0 ? '' : href.slice(hash + 1);
+        try { chemin = decodeURIComponent(chemin); fragment = decodeURIComponent(fragment); }
+        catch { erreurs.push({ page: path.relative(out, file), href, cause: 'Encodage invalide' }); continue; }
+        let target = chemin ? path.resolve(path.dirname(file), chemin) : file;
+        total++;
+        if (!fs.existsSync(target)) { erreurs.push({ page: path.relative(out, file), href, cause: 'Fichier absent' }); continue; }
+        if (fs.statSync(target).isDirectory()) target = path.join(target, 'index.html');
+        if (!fs.existsSync(target)) { erreurs.push({ page: path.relative(out, file), href, cause: 'Index absent' }); continue; }
+        if (fragment && target.endsWith('.html')) {
+          fragments++;
+          if (!htmlDe(target).ids.has(fragment)) erreurs.push({ page: path.relative(out, file), href, cause: 'Ancre absente' });
+        }
       }
     }
   }
+  return { total, fragments, erreurs };
 }
 
-console.log(`Liens internes vérifiés : ${total} · morts : ${morts}`);
-if (exemples.length) {
-  console.log('\nExemples :');
-  exemples.forEach(e => console.log('  ' + e));
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const result = verifierLiens(OUT, process.argv[2] ? [process.argv[2]] : ['.']);
+  console.log('Liens internes vérifiés : ' + result.total + ' · fragments vérifiés : ' + result.fragments + ' · erreurs : ' + result.erreurs.length);
+  result.erreurs.slice(0, 20).forEach(e => console.log(e.cause + ' : ' + e.page + ' → ' + e.href));
+  if (result.erreurs.length) process.exitCode = 1;
 }
