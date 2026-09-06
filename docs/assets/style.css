@@ -270,6 +270,16 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 }
 .page-sub { font-size: 13px; color: var(--text-soft); margin-bottom: 18px; }
 .page-body { font-size: calc(15px * var(--echelle, 1)); max-width: 100%; }
+/* Appels bibliographiques : discrets dans la phrase, sans modifier la bibliographie. */
+.page-body a[href^="#ref-"] {
+  font-size: max(.75rem, .72em);
+  line-height: 0;
+  vertical-align: super;
+  font-weight: 600;
+  padding-block: .2em;
+  padding-inline: .12em;
+  white-space: nowrap;
+}
 .page-body h1, .page-body h2, .page-body h3, .page-body h4 {
   font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif;
   font-weight: 400; margin: 26px 0 10px; line-height: 1.3;

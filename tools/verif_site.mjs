@@ -16,8 +16,15 @@ assert.equal(lire('assets/style.css'), fs.readFileSync(path.join(outils, 'style.
 assert.ok(lire('sw.js').includes('X-Wiki-SST-Hash'), 'worker avec reçus de fraîcheur');
 
 let octetsPages = 0, octetsMedias = 0;
+let appelsReference = 0;
 for (const [rel, attendu, taille] of manifeste.pages) {
   const brut = fs.readFileSync(path.join(out, rel));
+  if (rel.endsWith('.html')) {
+    for (const appel of brut.toString('utf8').matchAll(/<a\b[^>]*href="#ref-[^"]+"[^>]*>([\s\S]*?)<\/a>/g)) {
+      assert.match(appel[1], /^\s*\d+\s*$/, 'exposant réservé aux appels numériques : ' + rel);
+      appelsReference++;
+    }
+  }
   const normalise = Buffer.from(brut.toString('latin1').split(manifeste.version).join(''), 'latin1');
   assert.equal(createHash('sha1').update(normalise).digest('hex').slice(0, 10), attendu, 'hash : ' + rel);
   assert.equal(brut.length, taille, 'taille : ' + rel);
@@ -28,6 +35,7 @@ for (const [rel, taille] of manifeste.medias) {
   octetsMedias += taille;
 }
 assert.equal(octetsPages, manifeste.octetsPages);
+assert.ok(appelsReference > 0, 'appels bibliographiques présents');
 assert.equal(octetsMedias, manifeste.octetsMedias);
 
 const visuels = [
@@ -135,6 +143,9 @@ const lotRps = [
   { page: 'psychosocial/20-articles/modeles-et-theories/demandes-psychologiques.html', prefixe: 'dem', parcours: ['w/'] },
   { page: 'psychosocial/20-articles/modeles-et-theories/latitude-decisionnelle.html', prefixe: 'lat', parcours: ['w/'] },
   { page: 'psychosocial/20-articles/facteurs-organisationnels/soutien-social-au-travail.html', prefixe: 'sou', parcours: ['w/', 'g/w/'] },
+  { page: 'psychosocial/20-articles/reconnaissance-au-travail.html', prefixe: 'rec', parcours: ['w/'], ancres: ['definition', 'les-quatre-formes-brun-et-dugas', 'pourquoi-cest-un-enjeu-de-sante', 'les-regles-dor-de-la-pratique', 'application-terrain', 'ressources'] },
+  { page: 'psychosocial/20-articles/justice-organisationnelle.html', prefixe: 'jus', parcours: ['w/'], ancres: ['definition', 'ce-que-dit-la-recherche', 'mesure', 'application-terrain', 'ressources'] },
+  { page: 'psychosocial/20-articles/modeles-et-theories/definition-du-stress-professionnel.html', prefixe: 'str', parcours: ['w/', 'g/w/'], ancres: ['definition', 'stress-aigu-vs-chronique', 'mecanismes', 'application-en-mines', 'documents-et-outils', 'pour-aller-plus-loin'] },
 ];
 let pagesRpsReferencees = 0;
 for (const note of lotRps) {
@@ -149,6 +160,16 @@ for (const note of lotRps) {
     assert.ok(html.includes('Relecture éditoriale : non attestée'), 'RPS : aucune validation humaine inventée');
     assert.ok(!html.includes('Article en construction'), 'RPS : ancienne coquille retirée');
     assert.match(html, /fictif|fictifs/, 'RPS : exemple identifié');
+    for (const ancre of note.ancres || []) {
+      assert.equal((html.match(new RegExp('id="' + ancre + '"', 'g')) || []).length, 1, 'RPS : ancienne ancre unique ' + ancre);
+    }
+    if (note.ancres) {
+      // L'infobox est aussi un tableau : limiter ce contrôle au tableau de contenu.
+      assert.equal((html.match(/<thead>/g) || []).length, 1, 'lot 3 : un seul tableau de compréhension');
+      const entete = html.match(/<thead>([\s\S]*?)<\/thead>/)?.[1] || '';
+      assert.equal((entete.match(/<th(?:\s|>)/g) || []).length, 2, 'lot 3 : deux colonnes');
+    }
+    if (note.prefixe === 'str') assert.doesNotMatch(html, /img-000\.png|Usage personnel/i, 'stress : schéma de cours retiré de la page');
     if (note.prefixe === 'sou') {
       for (const ancre of ['definition', 'quatre-formes-de-soutien', 'sources-de-soutien', 'absence-de-soutien-et-iso-strain', 'application-en-mines', 'documents-et-outils', 'pour-aller-plus-loin']) {
         assert.equal((html.match(new RegExp('id="' + ancre + '"', 'g')) || []).length, 1, 'soutien : ancienne ancre unique ' + ancre);
