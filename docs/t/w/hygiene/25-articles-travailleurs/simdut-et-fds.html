@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-wiki-entete>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lire une FDS rapidement — WIKI SST Mines</title>
-<link rel="stylesheet" href="../../../../assets/style.css?v=20260906201055">
+<link rel="stylesheet" href="../../../../assets/style.css?v=20260906224400">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 <link rel="manifest" href="../../../../manifest.webmanifest">
 <meta name="theme-color" content="#2563eb">
@@ -12,11 +12,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Wiki SST">
-<script>window.ROOT='../../../../';window.V='20260906201055';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}</script>
+<script>window.ROOT='../../../../';window.V='20260906224400';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}</script>
 </head>
 <body>
 <header class="site-header">
-  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">☰</button>
   <a class="brand" href="../../../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
   <div class="searchbox">
     <input type="search" id="q" aria-label="Rechercher dans le wiki" placeholder="Rechercher dans le wiki…" autocomplete="off">
@@ -26,7 +26,7 @@
   <button class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 </header>
 <div class="layout">
-<nav class="sidebar" id="sidebar">
+<nav class="sidebar" id="sidebar" aria-label="Navigation du wiki">
   <div class="nav-group"><div class="nav-title">Navigation</div>
     <ul>
       <li><a href="../../../../index.html">🏠 Portail</a></li>
@@ -56,137 +56,74 @@
 <div class="breadcrumbs"><a href="../../../../t/index.html">👷 Wiki des travailleurs</a> <span class="crumb-sep">›</span> Hygiène industrielle</div>
 <h1 class="page-title">Lire une FDS rapidement</h1>
 <div class="page-sub">🌫️ Hygiène industrielle</div>
-<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">7 sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul><li class="toc-l3"><a href="#a-quoi-sert-cette-page">À quoi sert cette page</a></li><li class="toc-l3"><a href="#les-4-sections-a-connaitre-par-coeur">Les 4 sections à connaître par coeur</a></li><li class="toc-l3"><a href="#lire-les-pictogrammes-en-un-coup-doeil">Lire les pictogrammes en un coup d'oeil</a></li><li class="toc-l3"><a href="#reperer-les-gestes-critiques">Repérer les gestes critiques</a></li><li class="toc-l3"><a href="#ou-trouver-les-fds-sur-le-site">Où trouver les FDS sur le site</a></li><li class="toc-l3"><a href="#a-eviter">À éviter</a></li><li class="toc-l3"><a href="#a-qui-tu-peux-en-parler">À qui tu peux en parler</a></li></ul></nav>
+<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">8 sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul><li class="toc-l2"><a href="#a-quoi-sert-cette-page">À quoi sert cette page</a></li><li class="toc-l2"><a href="#trouver-la-bonne-rubrique-selon-ta-question">Trouver la bonne rubrique selon ta question</a></li><li class="toc-l2"><a href="#lire-les-pictogrammes-en-un-coup-doeil">Lire les pictogrammes en un coup d'oeil</a></li><li class="toc-l2"><a href="#reperer-les-gestes-critiques">Repérer les gestes critiques</a></li><li class="toc-l2"><a href="#ou-trouver-les-fds-sur-le-site">Où trouver les FDS sur le site</a></li><li class="toc-l2"><a href="#a-eviter">À éviter</a></li><li class="toc-l2"><a href="#a-qui-tu-peux-en-parler">À qui tu peux en parler</a></li><li class="toc-l2"><a href="#references-et-portee">Références et portée</a></li></ul></nav>
 <div class="page-body">
-<p>Une fiche de données de sécurité (<a href="../../../../w/legislation/40-concepts-juridiques-transverses/fds.html" title="FDS">FDS</a>) peut faire 10 pages. Tu n&#39;as pas besoin de tout lire pour travailler en sécurité : 4 sections suffisent pour les gestes courants. Voici comment t&#39;y retrouver vite.</p>
-<h3 id="a-quoi-sert-cette-page">À quoi sert cette page</h3>
-<p>T&#39;aider à retrouver l&#39;information utile dans une FDS quand tu manipules un produit que tu connais moins, et à savoir où la trouver dans ton site.</p>
-<h3 id="les-4-sections-a-connaitre-par-coeur">Les 4 sections à connaître par coeur</h3>
-<p>Une FDS a toujours 16 sections, dans le même ordre. Tu peux te concentrer sur ces quatre.</p>
+<p>La <strong>fiche de données de sécurité (FDS)</strong> aide à comprendre les dangers d&#39;un produit et les précautions à prévoir. Commence par vérifier que la fiche correspond bien au produit utilisé. <strong>Quelques rubriques repères ne remplacent pas les renseignements applicables à ta tâche, la formation et les procédures du site.</strong> <a href="#ref-fds-1">1</a> <a href="#ref-fds-2">2</a></p>
+<h2 id="a-quoi-sert-cette-page">À quoi sert cette page</h2>
+<p>Retrouver l&#39;information utile avant de manipuler un produit, puis faire préciser ce qui reste flou. La FDS décrit le produit ; elle ne décrit pas nécessairement les conditions exactes de ton poste. <a href="#ref-fds-2">2</a></p>
+<p><span id="les-4-sections-a-connaitre-par-coeur"></span></p>
+<h2 id="trouver-la-bonne-rubrique-selon-ta-question">Trouver la bonne rubrique selon ta question</h2>
+<p>Les FDS du SIMDUT comportent <strong>16 rubriques dans un ordre normalisé</strong>. Ce tableau est un guide de repérage, pas une sélection de rubriques qu&#39;on pourrait toujours ignorer. <a href="#ref-fds-1">1</a></p>
 <table>
 <thead>
 <tr>
-<th>Section</th>
-<th>Ce que tu y trouves</th>
-<th>Quand t&#39;en servir</th>
+<th>Ta question</th>
+<th>Où regarder dans la FDS</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>2. Identification des dangers</td>
-<td>Pictogrammes, mention « Danger » ou « Attention », phrases de danger</td>
-<td>Avant la première utilisation</td>
+<td>Est-ce la bonne fiche ?</td>
+<td><strong>1</strong> : produit, fournisseur et usage ; <strong>16</strong> : date de révision.</td>
 </tr>
 <tr>
-<td>4. Premiers soins</td>
-<td>Quoi faire en cas de contact peau, yeux, ingestion, inhalation</td>
-<td>À mémoriser ou afficher au poste</td>
+<td>Quels dangers dois-je connaître ?</td>
+<td><strong>2</strong> : dangers et précautions ; <strong>11</strong> : effets sur la santé.</td>
 </tr>
 <tr>
-<td>7. Manipulation et stockage</td>
-<td>Précautions, incompatibilités, conditions d&#39;entreposage</td>
-<td>Quand tu ouvres un nouveau contenant</td>
+<td>Comment préparer la tâche ?</td>
+<td><strong>7</strong> : manipulation et stockage ; <strong>8</strong> : maîtrise de l&#39;exposition et protections.</td>
 </tr>
 <tr>
-<td>8. Contrôle de l&#39;exposition et protection</td>
-<td>Quel <a href="../../../../w/hygiene/20-articles-internes/prevention-et-programmes/apr.html" title="Protection respiratoire (APR)">Protection respiratoire (APR)</a>, quels gants, quelles lunettes</td>
-<td>Quand tu prépares ton <a href="../../../../w/legislation/40-concepts-juridiques-transverses/epi.html" title="EPI">EPI</a></td>
+<td>Quelles incompatibilités éviter ?</td>
+<td><strong>10</strong> : stabilité, réactivité, matières et conditions à éviter.</td>
+</tr>
+<tr>
+<td>Que faut-il prévoir en cas d&#39;incident ?</td>
+<td><strong>4</strong> : premiers soins ; <strong>5</strong> : incendie ; <strong>6</strong> : déversement.</td>
 </tr>
 </tbody></table>
-<h3 id="lire-les-pictogrammes-en-un-coup-doeil">Lire les pictogrammes en un coup d&#39;oeil</h3>
-<table>
-<thead>
-<tr>
-<th>Pictogramme</th>
-<th>Ce que ça veut dire concrètement</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Flamme</td>
-<td>Peut prendre feu, garde loin des sources de chaleur</td>
-</tr>
-<tr>
-<td>Flamme sur cercle</td>
-<td>Comburant, aggrave un feu</td>
-</tr>
-<tr>
-<td>Bombe explosant</td>
-<td>Explosif, manipulation très encadrée</td>
-</tr>
-<tr>
-<td>Corrosion</td>
-<td>Brûle la peau ou les <a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/metaux.html" title="Métaux toxiques en milieu de travail">Métaux toxiques en milieu de travail</a></td>
-</tr>
-<tr>
-<td>Bouteille à gaz</td>
-<td>Gaz sous pression</td>
-</tr>
-<tr>
-<td>Tête de mort</td>
-<td>Très toxique, même à petite dose</td>
-</tr>
-<tr>
-<td>Point d&#39;exclamation</td>
-<td>Irritant ou allergisant</td>
-</tr>
-<tr>
-<td>Danger pour la santé</td>
-<td>Effet long terme (cancer, foie, reins, etc.)</td>
-</tr>
-<tr>
-<td>Risque biologique</td>
-<td>Microorganismes</td>
-</tr>
-</tbody></table>
-<h3 id="reperer-les-gestes-critiques">Repérer les gestes critiques</h3>
-<p>Dans la section 4 (Premiers soins), tu vas voir des phrases comme « Rincer abondamment à l&#39;eau pendant 15 minutes ». Note où sont les douches et les rince-yeux les plus proches de ton poste avant d&#39;ouvrir le produit, pas après l&#39;éclaboussure.</p>
-<p>Dans la section 8 (Protection), si la FDS demande un « <a href="../../../../w/hygiene/20-articles-internes/prevention-et-programmes/apr.html" title="Protection respiratoire (APR)">Protection respiratoire (APR)</a> avec cartouche pour vapeurs organiques » et que tu n&#39;as qu&#39;un N95, c&#39;est le moment de t&#39;arrêter et d&#39;aller chercher l&#39;équipement adéquat.</p>
-<h3 id="ou-trouver-les-fds-sur-le-site">Où trouver les FDS sur le site</h3>
-<p>Trois endroits typiques</p>
-<ol>
-<li>Affichées près du poste où le produit est utilisé.</li>
-<li>Dans un classeur central (magasin, salle SST, salle de quart).</li>
-<li>Sur le portail intranet du site (téléphone, kiosque).</li>
-</ol>
-<p>Si tu ne trouves pas la FDS d&#39;un produit, c&#39;est ton droit de la demander avant de l&#39;utiliser.</p>
-<h3 id="a-eviter">À éviter</h3>
-<table>
-<thead>
-<tr>
-<th>À éviter</th>
-<th>Pourquoi</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Transvaser un produit sans étiqueter le nouveau contenant</td>
-<td>Personne d&#39;autre ne saura ce qu&#39;il y a dedans</td>
-</tr>
-<tr>
-<td>Te fier à la couleur ou à l&#39;odeur pour identifier un produit</td>
-<td>Beaucoup de produits dangereux se ressemblent</td>
-</tr>
-<tr>
-<td>Mélanger deux produits sans vérifier la section 10 (incompatibilités)</td>
-<td>Réaction possible (chaleur, gaz toxique)</td>
-</tr>
-<tr>
-<td>Sauter la formation <a href="../../../../w/hygiene/20-articles-internes/substances-dangereuses/simdut-et-classes-de-danger.html" title="SIMDUT et classes de danger">SIMDUT et classes de danger</a> renouvelée aux 3 ans</td>
-<td>Les pictogrammes et la lecture des FDS sont des compétences à rafraîchir</td>
-</tr>
-</tbody></table>
-<h3 id="a-qui-tu-peux-en-parler">À qui tu peux en parler</h3>
+<p>Synthèse de la structure présentée par la CNESST. Les autres rubriques restent à consulter selon le besoin, notamment pour la composition, les propriétés et l&#39;élimination. Lire des mesures d&#39;urgence <strong>ne t&#39;autorise pas à intervenir au-delà de ta formation</strong>. <a href="#ref-fds-1">1</a> <a href="#ref-fds-3">3</a></p>
+<h2 id="lire-les-pictogrammes-en-un-coup-doeil">Lire les pictogrammes en un coup d&#39;oeil</h2>
+<p>Les pictogrammes attirent l&#39;attention sur des dangers, mais ne donnent ni toutes les précautions ni les équipements à choisir. Certains dangers n&#39;ont pas de pictogramme : <strong>absence de symbole ne veut pas dire absence de danger</strong>. Lis aussi les mentions de danger et les conseils de prudence. <a href="#ref-fds-4">4</a></p>
+<p>Pour voir les symboles officiels et leurs classes de danger, consulte le <a class="external" target="_blank" rel="noopener" href="https://www.cchst.ca/oshanswers/chemicals/whmis_ghs/pictograms.html">guide des pictogrammes du CCHST</a>.</p>
+<h2 id="reperer-les-gestes-critiques">Repérer les gestes critiques</h2>
+<p>Avant la tâche, fais-toi expliquer les protections prévues, l&#39;emplacement des moyens d&#39;urgence et la personne à alerter. En cas d&#39;exposition, les premiers soins dépendent du produit et de la voie d&#39;exposition : cette page ne donne pas une durée de rinçage universelle. <a href="#ref-fds-1">1</a> <a href="#ref-fds-3">3</a></p>
+<p>La rubrique 8 ne suffit pas toujours à choisir un appareil respiratoire ou des gants adaptés au travail réel. Si les mesures restent imprécises ou que la protection prévue n&#39;est pas disponible, <strong>ne commence pas la tâche et fais clarifier la situation par le responsable compétent</strong>. <a href="#ref-fds-2">2</a></p>
+<h2 id="ou-trouver-les-fds-sur-le-site">Où trouver les FDS sur le site</h2>
+<p>Demande où se trouve le registre utilisé dans ta mine et essaie d&#39;y accéder avant d&#39;en avoir besoin. Il peut être sur papier ou informatique : un lien inutilisable au poste n&#39;est pas un accès réel. Vérifie l&#39;identification du produit et la date de révision avec le responsable du registre. <a href="#ref-fds-2">2</a></p>
+<p><strong>Exemple fictif :</strong> un contenant de nettoyant porte un nom différent de la fiche disponible au magasin. Ne présume pas qu&#39;il s&#39;agit du même produit ; fais confirmer la bonne fiche avant utilisation. <a href="#ref-fds-2">2</a></p>
+<h2 id="a-eviter">À éviter</h2>
 <ul>
-<li>Ton contremaître ou ton compagnon.</li>
-<li>Le magasinier (souvent un bon point d&#39;accès aux FDS).</li>
-<li>Le département SST ou hygiène.</li>
-<li>Le comité SST si un produit te semble mal géré sur le site.</li>
+<li><strong>Prendre la rubrique 10 pour une autorisation de mélange.</strong> Elle signale des incompatibilités ; la méthode de travail doit aussi être définie et expliquée. <a href="#ref-fds-1">1</a> <a href="#ref-fds-3">3</a></li>
+<li><strong>Sauter une formation parce que tu connais déjà les symboles.</strong> La formation doit aussi couvrir les produits, les tâches et les urgences du lieu de travail. <a href="#ref-fds-3">3</a></li>
+<li><strong>Attendre un délai fixe pour signaler un besoin de rappel.</strong> La CNESST distingue la révision annuelle du programme de formation des rappels adaptés aux compétences et aux changements. Ce n&#39;est pas une règle universelle de renouvellement tous les trois ans. <a href="#ref-fds-3">3</a></li>
 </ul>
-<p><a href="../../../../w/hygiene/00-accueil/00-accueil.html" title="🏠 Wiki Hygiène industrielle, mines">← Accueil</a></p>
+<h2 id="a-qui-tu-peux-en-parler">À qui tu peux en parler</h2>
+<p>Ton contremaître, le responsable des produits au magasin ou l&#39;équipe SST/hygiène peuvent t&#39;aider à trouver la fiche et à comprendre les mesures du poste. Signale une fiche introuvable, un produit non identifié ou une consigne contradictoire avant la tâche. Le comité SST peut aussi être saisi d&#39;un problème récurrent d&#39;accès à l&#39;information.</p>
+<h2 id="references-et-portee">Références et portée</h2>
+<ol>
+<li><span id="ref-fds-1"></span><strong>CNESST, Répertoire toxicologique.</strong> <a class="external" target="_blank" rel="noopener" href="https://reptox.cnesst.gouv.qc.ca/simdut/Pages/fiche-securite-sgh.aspx">Fiche de données de sécurité du fournisseur</a>. Structure des rubriques et renseignements à y retrouver.</li>
+<li><span id="ref-fds-2"></span><strong>CCHST.</strong> <a class="external" target="_blank" rel="noopener" href="https://www.cchst.ca/oshanswers/chemicals/whmis_ghs/sds.html">SIMDUT — Fiches de données de sécurité</a>. Correspondance avec le produit, accès et limites des indications générales.</li>
+<li><span id="ref-fds-3"></span><strong>CNESST, Répertoire toxicologique.</strong> <a class="external" target="_blank" rel="noopener" href="https://reptox.cnesst.gouv.qc.ca/section-faq/faq/Pages/simdut.aspx">Foire aux questions SIMDUT</a>. Formation, information et fréquence des rappels.</li>
+<li><span id="ref-fds-4"></span><strong>CCHST.</strong> <a class="external" target="_blank" rel="noopener" href="https://www.cchst.ca/oshanswers/chemicals/whmis_ghs/pictograms.html">SIMDUT — Pictogrammes</a>. Symboles, classes de danger et limites de leur lecture.</li>
+</ol>
+<p>Sources consultées le <strong>6 septembre 2026</strong>. Cette page explique comment lire une FDS ; elle ne remplace ni la fiche du produit ni les procédures du site. Vérification documentaire uniquement : aucune validation spécialisée ni choix d&#39;équipement pour un poste précis n&#39;est attesté.</p>
 
 </div>
-<div class="page-meta">Révision déclarée dans la note : 2026-05-20 · Relecture éditoriale : non attestée · Vérification des sources : non attestée · Site généré le 2026-09-06 · <a href="../../../../w/hygiene/25-articles-travailleurs/simdut-et-fds.html">Voir cette page dans le fond documentaire</a></div>
+<div class="page-meta">Révision déclarée dans la note : 2026-09-06 · Relecture éditoriale : non attestée · Sources vérifiées : 2026-09-06 · Site généré le 2026-09-06 · <a href="../../../../w/hygiene/25-articles-travailleurs/simdut-et-fds.html">Voir cette page dans le fond documentaire</a></div>
 </main>
 </div>
 <footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours<span id="version"></span></footer>
-<script src="../../../../assets/app.js?v=20260906201055"></script>
+<script src="../../../../assets/app.js?v=20260906224400"></script>
 </body>
 </html>

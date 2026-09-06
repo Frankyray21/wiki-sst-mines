@@ -1316,10 +1316,47 @@
   var burger = document.getElementById('burger');
   var sidebar = document.getElementById('sidebar');
   if (burger && sidebar) {
-    burger.addEventListener('click', function () {
-      var ouvert = sidebar.classList.toggle('open');
+    var mediaMenu = window.matchMedia('(max-width: 900px)');
+    function etatMenu(ouvert, rendreFocus) {
+      var mobile = mediaMenu.matches;
+      var focusDansMenu = sidebar.contains(document.activeElement);
+      ouvert = mobile && ouvert;
+      sidebar.classList.toggle('open', ouvert);
+      sidebar.inert = mobile && !ouvert;
+      if (mobile && !ouvert) sidebar.setAttribute('aria-hidden', 'true');
+      else sidebar.removeAttribute('aria-hidden');
       burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+      burger.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
+      if (rendreFocus || (mobile && !ouvert && focusDansMenu)) burger.focus();
+    }
+    function synchroniserMenu() { etatMenu(sidebar.classList.contains('open'), false); }
+    burger.setAttribute('aria-controls', 'sidebar');
+    synchroniserMenu();
+    burger.addEventListener('click', function () {
+      var ouvrir = !sidebar.classList.contains('open');
+      etatMenu(ouvrir, false);
+      if (ouvrir && mediaMenu.matches) {
+        var premier = sidebar.querySelector('a[href]');
+        if (premier) premier.focus();
+      }
     });
+    sidebar.addEventListener('click', function (ev) {
+      if (ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey || (ev.button !== undefined && ev.button !== 0)) return;
+      var lien = ev.target.closest ? ev.target.closest('a[href]') : null;
+      if (lien && sidebar.contains(lien) && mediaMenu.matches) etatMenu(false, false);
+      // L'action native du lien (et son historique) est conservée.
+    });
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && mediaMenu.matches && sidebar.classList.contains('open')) {
+        etatMenu(false, true);
+        ev.preventDefault();
+      }
+    });
+    document.addEventListener('click', function (ev) {
+      if (mediaMenu.matches && sidebar.classList.contains('open') && !sidebar.contains(ev.target) && !burger.contains(ev.target)) etatMenu(false, false);
+    });
+    if (mediaMenu.addEventListener) mediaMenu.addEventListener('change', synchroniserMenu);
+    else window.addEventListener('resize', synchroniserMenu);
   }
 
   // ---------- sommaire repliable ----------
@@ -1358,26 +1395,31 @@
   });
 
   // ---------- ancres accentuées : repli si le hash ne correspond à rien ----------
-  function ancreRepli() {
-    if (!location.hash || location.hash.length < 2) return;
-    var brut = decodeURIComponent(location.hash.slice(1));
-    try { if (document.getElementById(brut)) return; } catch (e) { return; }
+  function cibleAncre() {
+    if (!location.hash || location.hash.length < 2) return null;
+    var brut;
+    try { brut = decodeURIComponent(location.hash.slice(1)); } catch (e) { return null; }
+    var exacte = document.getElementById(brut);
+    if (exacte) return exacte;
     var cible = norm(brut).replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
     var titres = document.querySelectorAll('.page-body [id]');
     for (var i = 0; i < titres.length; i++) {
-      if (titres[i].id === cible || norm(titres[i].id) === cible) {
-        titres[i].scrollIntoView();
-        return;
-      }
+      if (titres[i].id === cible || norm(titres[i].id) === cible) return titres[i];
     }
     // dernier recours : comparer le texte visible des titres
     var hs = document.querySelectorAll('.page-body h1, .page-body h2, .page-body h3, .page-body h4');
     for (var j = 0; j < hs.length; j++) {
-      if (norm(hs[j].textContent).trim() === norm(brut).trim()) { hs[j].scrollIntoView(); return; }
+      if (norm(hs[j].textContent).trim() === norm(brut).trim()) return hs[j];
     }
+    return null;
+  }
+  function ancreRepli() {
+    var cible = cibleAncre();
+    var exacte;
+    try { exacte = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (e) { return; }
+    if (cible && !exacte) cible.scrollIntoView({ block: 'start' });
   }
   window.addEventListener('hashchange', ancreRepli);
-  ancreRepli();
 
   // ---------- confort de lecture : taille du texte, mode lecture ----------
   // Les réglages sont relus dans le <head> (SCRIPT_THEME) pour éviter tout saut de mise en page.
@@ -1424,6 +1466,47 @@
       etat();
     });
     etat();
+  })();
+
+  // ---------- hauteur d'en-tête et arrivée sur une section ----------
+  (function navigationArticles() {
+    var entete = document.querySelector('.site-header');
+    if (!entete) return; // les portails tableaux de bord ont leur propre disposition
+    var racine = document.documentElement, derniereHauteur = -1;
+    var hashInitial = location.hash, interaction = false;
+    // Lors d'un retour arrière/avant, laisser le navigateur restaurer la position.
+    var performancePage = window.performance;
+    var navigationPage = performancePage && performancePage.getEntriesByType ? performancePage.getEntriesByType('navigation')[0] : null;
+    var retourHistorique = navigationPage ? navigationPage.type === 'back_forward' : !!(performancePage && performancePage.navigation && performancePage.navigation.type === 2);
+    function mesurerEntete() {
+      var hauteur = Math.max(0, Math.ceil(entete.getBoundingClientRect().height));
+      if (!Number.isFinite(hauteur) || hauteur === derniereHauteur) return;
+      racine.style.setProperty('--hh', hauteur + 'px');
+      derniereHauteur = hauteur;
+    }
+    function alignerArrivee() {
+      mesurerEntete();
+      if (interaction || retourHistorique || !hashInitial || location.hash !== hashInitial) return;
+      var cible = cibleAncre();
+      if (cible) cible.scrollIntoView({ block: 'start', behavior: 'auto' });
+    }
+    function interventionLecteur() { interaction = true; }
+    ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(function (nom) {
+      window.addEventListener(nom, interventionLecteur, { passive: true, once: true });
+    });
+    mesurerEntete();
+    if (window.ResizeObserver) new window.ResizeObserver(mesurerEntete).observe(entete);
+    window.addEventListener('resize', mesurerEntete);
+    window.addEventListener('load', alignerArrivee, { once: true });
+    window.addEventListener('pageshow', mesurerEntete);
+    // Après les injections synchrones, notamment les commandes Lecture ci-dessus.
+    if (window.requestAnimationFrame) window.requestAnimationFrame(alignerArrivee);
+    else setTimeout(alignerArrivee, 0);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignerArrivee).catch(function () {});
+    document.querySelectorAll('.page-body a[href^="#ref-"]').forEach(function (lien) {
+      var numero = lien.textContent.trim();
+      if (/^\d+$/.test(numero) && !lien.hasAttribute('aria-label')) lien.setAttribute('aria-label', 'Consulter la référence ' + numero);
+    });
   })();
 
   // ---------- bouton « haut de page » ----------

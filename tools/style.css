@@ -166,6 +166,8 @@
 }
 
 html { scroll-behavior: smooth; }
+/* Un seul décalage, ajusté à la hauteur réelle de la barre par app.js. */
+html[data-wiki-entete] { scroll-padding-top: calc(var(--hh) + .75rem); }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Lato, Helvetica, Arial, sans-serif;
   background: var(--bg);
@@ -279,6 +281,13 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
   padding-block: .2em;
   padding-inline: .12em;
   white-space: nowrap;
+}
+.page-body :is(h2, h3, h4):target,
+.page-body li:has(> span[id^="ref-"]:target) {
+  background: var(--tag-bg);
+  outline: 2px solid var(--border);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 .page-body h1, .page-body h2, .page-body h3, .page-body h4 {
   font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif;
@@ -670,8 +679,9 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
     background: var(--content-bg); border-right: 1px solid var(--border-light);
     transform: translateX(-105%); transition: transform .18s ease; z-index: 45;
     max-height: none; box-shadow: 4px 0 18px var(--ombre);
+    visibility: hidden;
   }
-  .sidebar.open { transform: translateX(0); }
+  .sidebar.open { transform: translateX(0); visibility: visible; }
   .content { padding: 16px 16px 36px; border: 0; }
   /* L'infobox liste des métadonnées techniques : sur téléphone elle atteignait 511 px et
      repoussait le résumé introductif hors de l'écran. On la borne, elle défile à l'intérieur. */
@@ -691,6 +701,28 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   .toc-title { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
   .toc-toggle { min-height: 44px; padding: 0 12px; font-size: 14px; }
   .search-filters .filtre { min-height: 40px; }
+}
+@media (max-width: 600px) {
+  /* Une rangée d'actions, une rangée de recherche, même après ajout de l'aide/PWA. */
+  .site-header {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) repeat(4, 44px);
+    gap: 8px 4px;
+    padding: 8px;
+  }
+  .site-header > .burger { grid-area: 1 / 1; padding-inline: 0; }
+  .site-header > .brand { grid-area: 1 / 2; min-width: 0; }
+  .site-header .brand-icon { display: none; }
+  .site-header .brand-text strong { font-size: clamp(.875rem, 4vw, 1rem); letter-spacing: 0; }
+  .site-header > #btnFav { grid-area: 1 / 3; }
+  .site-header > #btnAide { grid-area: 1 / 4; }
+  .site-header > #btnHorsLigne { grid-area: 1 / 5; }
+  .site-header > #btnTheme { grid-area: 1 / 6; }
+  .site-header > .searchbox { grid-area: 2 / 1 / auto / -1; width: 100%; min-width: 0; margin: 0; }
+  .site-header:has(> #btnInstall) > .searchbox { grid-column-end: -2; }
+  .site-header > #btnInstall { grid-area: 2 / 6; }
+  .site-header .searchbox input { min-height: 44px; font-size: 1rem; }
+  .page-body { font-size: calc(1rem * var(--echelle, 1)); }
 }
 @media print {
   .site-header, .sidebar, .site-footer, .backlinks, .toc-toggle, .btn-haut, .btn-theme { display: none !important; }

@@ -1,5 +1,5 @@
 // Service worker du WIKI SST — généré à la construction
-const VERSION = '20260906201055';
+const VERSION = '20260906224400';
 const P = 'wiki-sst-pages';
 const M = 'wiki-sst-medias';
 const ETAT = './__hl_etat__'; // état de synchronisation (hash déjà appliqués), rangé dans P

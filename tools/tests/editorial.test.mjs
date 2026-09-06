@@ -46,3 +46,25 @@ test('une source interne seule appelle une vérification sans certifier absence 
 test('coupures constatées détectées', () => {
   for (const body of ['La sanction ne peut être imposée à un travaille', 'Tu peux simplement décrire ce q']) assert.ok(analyserQualite({ body }).defauts.some(d => d.code === 'tronque'));
 });
+
+test('les deux fins de puces interrompues des fiches Espaces clos sont signalées', () => {
+  for (const fin of ['- Le comi', '- L\r\n']) {
+    assert.ok(analyserQualite({ body: '## Contacts\n- Le département SST.\n' + fin }).defauts.some(d => d.code === 'tronque'));
+  }
+  for (const fin of ['- Le comité SST.', '- Le volume est de 5 L', '- L : symbole du litre.']) {
+    assert.ok(!analyserQualite({ body: fin }).defauts.some(d => d.code === 'tronque'));
+  }
+});
+
+test('une introduction peut commencer par un lien sans confondre prose, navigation et image', () => {
+  const suite = '\n## Détails\n' + 'Ce paragraphe présente des explications complémentaires. '.repeat(20);
+  for (const debut of [
+    '[[Obligations]] : cette page présente les responsabilités et les ressources à consulter.',
+    '> [[Obligations|Les obligations]] sont expliquées dans cette page destinée aux responsables.',
+  ]) assert.ok(!analyserQualite({ body: debut + suite }).defauts.some(d => d.code === 'sans-intro'));
+  for (const debut of [
+    '[[Un lien de navigation particulièrement long qui ne constitue pas une introduction]]',
+    '![[Une illustration dont le nom est long mais ne constitue pas une introduction.png]]',
+    '- [[Obligations]] : cette puce est un élément de liste et non une introduction.',
+  ]) assert.ok(analyserQualite({ body: debut + suite }).defauts.some(d => d.code === 'sans-intro'));
+});
