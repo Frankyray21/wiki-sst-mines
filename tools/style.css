@@ -290,6 +290,11 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .page-body table th, .page-body table td { border: 1px solid var(--border-light); padding: 5px 10px; text-align: left; }
 .page-body table th { background: var(--th-bg); }
 .page-body table tr:nth-child(even) td { background: var(--tr-alt); }
+/* Comparaison cadenassage : texte visible, colonnes souples, sans image requise. */
+.page-body table.table-energies { display: table; width: 100%; table-layout: fixed; font-size: calc(1rem * var(--echelle, 1)); }
+.page-body .table-energies th, .page-body .table-energies td { padding: .5rem .625rem; vertical-align: top; overflow-wrap: anywhere; hyphens: auto; }
+.page-body .table-energies thead th:first-child { width: 38%; }
+.page-body .table-energies tbody th { background: transparent; font-weight: 600; }
 .page-img { display: block; text-align: center; margin: 14px 0; }
 /* !important : neutralise le max-width en pixels hérité de l'alias Obsidian (|650), qui débordait sur mobile */
 .page-img img { max-width: 100% !important; height: auto; border: 1px solid var(--border-light); background: var(--img-bg); padding: 4px; }
@@ -699,3 +704,54 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
    n'a simplement pas été versé. */
 .doc-absent { color: var(--text-soft); cursor: help; }
 .doc-absent small { font-size: .85em; opacity: .75; }
+
+/* Infographies éditoriales : image agrandissable, équivalent textuel natif. */
+.infographie { margin: 1.25rem 0 1.75rem; padding: 1rem; border: 1px solid var(--border-light); border-inline-start: 4px solid var(--accent); border-radius: .75rem; background: var(--content-bg); }
+.infographie .page-img { margin: 0 auto 1rem; max-width: 34rem; }
+.infographie .page-img a { display: block; }
+.infographie .page-img img { display: block; width: 100%; height: auto; padding: 0; border-radius: .5rem; filter: none !important; }
+.infographie .img-zoom { display: block; padding: .5rem; font-size: .875rem; }
+.infographie-legende { font-size: 1rem; line-height: 1.6; }
+.infographie-texte { margin: 1rem 0; border: 1px solid var(--border-light); border-radius: .5rem; }
+.infographie-texte summary { cursor: pointer; padding: .85rem 1rem; font-size: 1rem; font-weight: 600; min-height: 44px; }
+.infographie-texte summary:hover { background: var(--hover); }
+.infographie-texte summary:focus-visible, .infographie a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.infographie-texte[open] summary { border-bottom: 1px solid var(--border-light); }
+.infographie-texte ul { margin: 1rem 1.25rem 1rem 2.25rem; }
+.infographie-texte li { margin: .65rem 0; line-height: 1.6; }
+.infographie-texte > p, .infographie-texte > h4 { margin-inline: 1rem; }
+.infographie-texte > table { width: calc(100% - 2rem); margin: 1rem; }
+.infographie-sources { color: var(--text-soft); font-size: .875rem; line-height: 1.6; overflow-wrap: anywhere; }
+.infographie.infographie-compacte { padding: .65rem .8rem; margin-block: .85rem 1.15rem; }
+.infographie-compacte .page-img { margin-bottom: .35rem; }
+.infographie-compacte .img-zoom { padding: .25rem; }
+.infographie-compacte .infographie-legende { margin: .35rem 0 .5rem; font-size: .9375rem; line-height: 1.45; }
+.infographie-compacte .infographie-texte { margin: .5rem 0; }
+.infographie-compacte .infographie-texte summary { padding: .65rem .8rem; }
+.infographie-compacte .infographie-sources { margin: .35rem 0 0; }
+@media (max-width: 480px) { .infographie { padding: .65rem; } .infographie-texte summary { padding: .75rem; } }
+@media print { .infographie { break-inside: auto; } .infographie .page-img { max-width: 100mm; } .infographie-texte::details-content { content-visibility: visible; } .infographie-texte > :not(summary) { display: block !important; } }
+
+/* En-tête pilote de Cadenassage : aucun autre article n'emploie cette classe. */
+.article-entete { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; margin-bottom: 1.25rem; }
+.article-entete .page-title { grid-column: 1 / -1; font-family: inherit; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 650; line-height: 1.2; border: 0; padding: 0; margin: 0; overflow-wrap: anywhere; }
+.article-entete .page-sub { grid-column: 1; align-self: center; font-size: .875rem; margin: 0; }
+.article-entete .lecture-outils { grid-column: 2; grid-row: 2; display: flex; align-items: center; flex-wrap: wrap; gap: .375rem; margin: 0; }
+.article-entete .lecture-outils button { min-width: 44px; min-height: 44px; height: auto; font-size: .875rem; border-radius: .375rem; }
+.article-entete .toc { grid-column: 1 / -1; display: block; min-width: 0; width: 100%; margin: 0; padding: .5rem .75rem; border-radius: .5rem; }
+.article-entete .toc-title { display: flex; justify-content: space-between; align-items: center; gap: .5rem; flex-wrap: wrap; text-align: left; margin: 0; font-size: 1rem; }
+.article-entete .toc-compte { display: inline-block; font-size: .875rem; margin-inline-start: .375rem; }
+.article-entete .toc-toggle { min-height: 44px; padding: .5rem .625rem; font-size: .875rem; border-radius: .375rem; }
+.article-entete .toc > ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .125rem .75rem; max-height: none; overflow: visible; margin-top: .25rem; }
+.article-entete .toc li { min-width: 0; margin: 0; font-size: .9375rem; }
+.article-entete .toc a { display: flex; align-items: center; min-height: 44px; padding: .375rem .25rem; line-height: 1.35; overflow-wrap: anywhere; }
+.article-entete .toc.collapsed > ul { display: none; }
+.article-entete button:hover:not(:disabled), .article-entete .toc a:hover { background: var(--hover); }
+.article-entete button:focus-visible, .article-entete a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
+@media (max-width: 640px) {
+  .article-entete { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .article-entete .lecture-outils { grid-column: 1; grid-row: auto; }
+  .article-entete .toc > ul { grid-template-columns: minmax(0, 1fr); }
+}
+@media print { .article-entete .lecture-outils { display: none; } .article-entete .toc.collapsed > ul { display: grid; } }

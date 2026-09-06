@@ -1,0 +1,76 @@
+{
+  "date": "2026-09-06",
+  "scope": "Réparation ciblée des destinations et de la syntaxe YAML, sans validation du fond",
+  "changes": [
+    {
+      "path": "Recueil législatif SST/10 - Lois principales/LATMP/LATMP.md",
+      "old": "- [[#Structure de la loi|Structure de la loi]]\n- [[#Champ d'application|Champ d'application]]\n- [[#Articles clés|Articles clés]]\n- [[#Concepts juridiques liés|Concepts juridiques liés]]\n- [[#Organismes et tribunaux|Organismes et tribunaux]]\n- [[#Application en mine|Application en mine]]\n- [[#Sanctions et recours|Sanctions et recours]]\n- [[#Texte intégral|Texte intégral]]\n- [[#Articles wiki connexes|Articles wiki connexes]]\n- [[#Pages chapitres|Pages chapitres]]\n- [[#Structure de la loi|Structure de la loi]]\n- [[#Champ d'application|Champ d'application]]\n- [[#Articles clés|Articles clés]]\n- [[#Concepts juridiques liés|Concepts juridiques liés]]\n- [[#Organismes et tribunaux|Organismes et tribunaux]]\n- [[#Application en mine|Application en mine]]\n- [[#Sanctions et recours|Sanctions et recours]]\n- [[#Texte intégral|Texte intégral]]\n- [[#Articles wiki connexes|Articles wiki connexes]]\n- [[#Pages chapitres|Pages chapitres]]\n",
+      "new": "",
+      "expectedOccurrences": 1,
+      "reason": "Retirer le sommaire manuel doublé ; le site génère déjà le sommaire des six sections présentes."
+    },
+    {
+      "path": "Wiki SST psychosociale/20 - Articles/Supervision et Rôles/Formation des superviseurs à la détection.md",
+      "old": "- [[#Formation des superviseurs à la détection|Formation des superviseurs à la détection]]\n\t- [[#Formation des superviseurs à la détection#Pourquoi former|Pourquoi former]]\n\t- [[#Formation des superviseurs à la détection#Contenus essentiels|Contenus essentiels]]\n\t- [[#Formation des superviseurs à la détection#Format recommandé|Format recommandé]]\n\t- [[#Formation des superviseurs à la détection#Application en mines|Application en mines]]\n\t- [[#Formation des superviseurs à la détection#Documents et outils|Documents et outils]]\n\t- [[#Formation des superviseurs à la détection#Pour aller plus loin|Pour aller plus loin]]\n\n",
+      "new": "",
+      "expectedOccurrences": 1,
+      "reason": "Retirer le sommaire Obsidian imbriqué obsolète, sans toucher au paragraphe L’essentiel ni aux sections."
+    },
+    {
+      "path": "Wiki SST psychosociale/70 - Documents et outils/Analyses sources/Analyse Gouvernement du Canada (2023).md",
+      "old": "- [[#Gouvernement du Canada (2023)|Gouvernement du Canada (2023)]]\n\t- [[#Gouvernement du Canada (2023)#La santé mentale au travail et cadre fédéral canadien de reconnaissance occupationnelle|La santé mentale au travail et cadre fédéral canadien de reconnaissance occupationnelle]]\n\t- [[#Gouvernement du Canada (2023)#Identification de la source|Identification de la source]]\n\t- [[#Gouvernement du Canada (2023)#Contexte et problématique|Contexte et problématique]]\n\t\t- [[#Contexte et problématique#Reconnaissance croissante de la crise santé mentale au Canada|Reconnaissance croissante de la crise santé mentale au Canada]]\n\t\t- [[#Contexte et problématique#Contexte juridictionnel fédéral-provincial|Contexte juridictionnel fédéral-provincial]]\n\t\t- [[#Contexte et problématique#Cadre fédéral Canada 2023 comme priorité national|Cadre fédéral Canada 2023 comme priorité national]]\n\t- [[#Gouvernement du Canada (2023)#Définition fédérale de santé mentale au travail|Définition fédérale de santé mentale au travail]]\n\t\t- [[#Définition fédérale de santé mentale au travail#Énoncé définitionnel principal|Énoncé définitionnel principal]]\n\t\t- [[#Définition fédérale de santé mentale au travail#Éléments clés de la définition fédérale|Éléments clés de la définition fédérale]]\n\t- [[#Gouvernement du Canada (2023)#Cadre des 5 domaines fédéraux de responsabilité employeur|Cadre des 5 domaines fédéraux de responsabilité employeur]]\n\t\t- [[#Cadre des 5 domaines fédéraux de responsabilité employeur#Domaine 1: Culture workplace et environnement psychosocial|Domaine 1: Culture workplace et environnement psychosocial]]\n\t\t- [[Latitude décisionnelle|Domaine 2: Charge travail, demandes, et contrôle/autonomie]]\n\t\t- [[#Cadre des 5 domaines fédéraux de responsabilité employeur#Domaine 3: Sécurité emploi et équité|Domaine 3: Sécurité emploi et équité]]\n\t\t- [[#Cadre des 5 domaines fédéraux de responsabilité employeur#Domaine 4: Soutien et ressources organisationnelles|Domaine 4: Soutien et ressources organisationnelles]]\n\t\t- [[#Cadre des 5 domaines fédéraux de responsabilité employeur#Domaine 5: Évaluation, monitoring, et accountability|Domaine 5: Évaluation, monitoring, et accountability]]\n\t- [[#Gouvernement du Canada (2023)#Cadre légal fédéral Canada: droits travailleurs et obligations employeur|Cadre légal fédéral Canada: droits travailleurs et obligations employeur]]\n\t\t- [[#Cadre légal fédéral Canada: droits travailleurs et obligations employeur#Canadian Human Rights Act (CHRA): Fondations légales|Canadian Human Rights Act (CHRA): Fondations légales]]\n\t\t- [[#Cadre légal fédéral Canada: droits travailleurs et obligations employeur#Canada Labour Code, Part 2 (Industries fédéralement régulées)|Canada Labour Code, Part 2 (Industries fédéralement régulées)]]\n\t\t- [[#Cadre légal fédéral Canada: droits travailleurs et obligations employeur#Employment Equity Act (federally regulated employers > 100 workers)|Employment Equity Act (federally regulated employers > 100 workers)]]\n\t- [[#Gouvernement du Canada (2023)#Coordination fédéral-provincial et reconnaissance mutuelle|Coordination fédéral-provincial et reconnaissance mutuelle]]\n\t\t- [[#Coordination fédéral-provincial et reconnaissance mutuelle#Cadre fédéral 2023 acknowledges jurisdiction limits|Cadre fédéral 2023 acknowledges jurisdiction limits]]\n\t\t- [[#Coordination fédéral-provincial et reconnaissance mutuelle#Alignment avec standards internationaux|Alignment avec standards internationaux]]\n\t- [[#Gouvernement du Canada (2023)#Intégration apprentissages COVID-19 post-pandémie|Intégration apprentissages COVID-19 post-pandémie]]\n\t\t- [[#Intégration apprentissages COVID-19 post-pandémie#Insights COVID-era incorporés dans framework 2023|Insights COVID-era incorporés dans framework 2023]]\n\t- [[#Gouvernement du Canada (2023)#Résultats et constats principaux du framework 2023|Résultats et constats principaux du framework 2023]]\n\t\t- [[#Résultats et constats principaux du framework 2023#Etablissements fédéraux concernant priorités|Etablissements fédéraux concernant priorités]]\n\t\t- [[#Résultats et constats principaux du framework 2023#Lacunes et absences dans le document|Lacunes et absences dans le document]]\n\t\t- [[#Résultats et constats principaux du framework 2023#Implication pour travail SST1010|Implication pour travail SST1010]]\n\t- [[#Gouvernement du Canada (2023)#Concepts clés détaillés et implications|Concepts clés détaillés et implications]]\n\t\t- [[#Concepts clés détaillés et implications#Distinction santé mentale vs. maladie mentale|Distinction santé mentale vs. maladie mentale]]\n\t\t- [[#Concepts clés détaillés et implications#Psychological safety concept (Amy Edmondson research)|Psychological safety concept (Amy Edmondson research)]]\n\t\t- [[#Concepts clés détaillés et implications#Accommodation principle CHRA jurisprudence|Accommodation principle CHRA jurisprudence]]\n\t\t- [[#Concepts clés détaillés et implications#Synthèse illustrative des écarts entre cadre fédéral et réalité minière FIFO|Synthèse illustrative des écarts entre cadre fédéral et réalité minière FIFO]]\n\t- [[#Gouvernement du Canada (2023)#Pertinence pour travail SST1010|Pertinence pour travail SST1010]]\n\t\t- [[#Pertinence pour travail SST1010#Objectif 1: Identifier et classifier RPS contexte national|Objectif 1: Identifier et classifier RPS contexte national]]\n\t\t- [[#Pertinence pour travail SST1010#Objectif 2: Analyser sources et mécanismes systémiques|Objectif 2: Analyser sources et mécanismes systémiques]]\n\t\t- [[#Pertinence pour travail SST1010#Objectif 3: Proposer interventions comprehensive|Objectif 3: Proposer interventions comprehensive]]\n\t- [[#Gouvernement du Canada (2023)#Utilisation citations et passages dans le texte TS|Utilisation citations et passages dans le texte TS]]\n\t\t- [[#Utilisation citations et passages dans le texte TS#Citation 1: Introduction Contexte Canada|Citation 1: Introduction Contexte Canada]]\n\t\t- [[#Utilisation citations et passages dans le texte TS#Utilisation cadre fédéral 5 domaines|Utilisation cadre fédéral 5 domaines]]\n\t- [[#Gouvernement du Canada (2023)#Citations|Citations]]\n\t\t- [[#Citations#Citation 1 - Introduction|Citation 1 - Introduction]]\n\t- [[#Gouvernement du Canada (2023)#Guide de choix des citations et passages prioritaires|Guide de choix des citations et passages prioritaires]]\n\t- [[#Gouvernement du Canada (2023)#Limites et nuances documentées|Limites et nuances documentées]]\n\t- [[#Gouvernement du Canada (2023)#Contribution unique du cadre fédéral Canada 2023|Contribution unique du cadre fédéral Canada 2023]]\n\t\t- [[#Contribution unique du cadre fédéral Canada 2023#Ce que ONLY cette source provides|Ce que ONLY cette source provides]]\n\t\t- [[#Contribution unique du cadre fédéral Canada 2023#Ce qu'autres sources ne provide pas|Ce qu'autres sources ne provide pas]]\n\t- [[#Gouvernement du Canada (2023)#Sources en dialogue et cross-references|Sources en dialogue et cross-references]]\n\t- [[#Gouvernement du Canada (2023)#Notes de cours liées et synchronisation|Notes de cours liées et synchronisation]]\n\t- [[#Gouvernement du Canada (2023)#Pistes pour Partie 2|Pistes pour Partie 2]]\n\t\t- [[#Pistes pour Partie 2#Piste 1: Accommodation CHRA complaint simulation|Piste 1: Accommodation CHRA complaint simulation]]\n\t\t- [[#Pistes pour Partie 2#Piste 2: Cadre fédéral vs. provincial comparison détaillée|Piste 2: Cadre fédéral vs. provincial comparison détaillée]]\n\t\t- [[#Pistes pour Partie 2#Piste 3: Critique federal government own compliance|Piste 3: Critique federal government own compliance]]\n\t\t- [[#Pistes pour Partie 2#Piste 4: Sectorial adaptation framework|Piste 4: Sectorial adaptation framework]]\n\t- [[#Gouvernement du Canada (2023)#Mots-clés et indexation conceptuelle|Mots-clés et indexation conceptuelle]]\n",
+      "new": "",
+      "expectedOccurrences": 1,
+      "reason": "Retirer le sommaire imbriqué périmé. Son unique lien vers une autre page est déplacé sous le Domaine 2 par le changement suivant."
+    },
+    {
+      "path": "Wiki SST psychosociale/70 - Documents et outils/Analyses sources/Analyse Gouvernement du Canada (2023).md",
+      "old": "### Domaine 2: Charge travail, demandes, et contrôle/autonomie\n",
+      "new": "### Domaine 2: Charge travail, demandes, et contrôle/autonomie\n\nVoir aussi : [[Latitude décisionnelle|Domaine 2 : charge de travail, demandes et contrôle/autonomie]].\n\n",
+      "expectedOccurrences": 1,
+      "reason": "Conserver le lien transversal utile du sommaire retiré, dans sa section correspondante."
+    },
+    {
+      "path": "Wiki SST psychosociale/15 - Navigation/🔤 Index alphabétique.md",
+      "old": " · [J](#j)",
+      "new": "",
+      "expectedOccurrences": 1,
+      "reason": "La page ne contient aucune section J : retirer uniquement la destination absente de sa navigation alphabétique."
+    },
+    {
+      "path": "Wiki SST psychosociale/70 - Documents et outils/Analyses sources/Analyse INSPQ (2018).md",
+      "old": "[[#Mécanismes spécifiques FIFO-minier aide-foreur]]",
+      "new": "[[#Mécanismes causaux spécifiques FIFO-minier]]",
+      "expectedOccurrences": 1,
+      "reason": "Aligner le renvoi sur le titre exact de la section présente, dont le texte traite des mécanismes FIFO et du profil aide-foreur."
+    },
+    {
+      "path": "Wiki SST psychosociale/70 - Documents et outils/Analyses sources/Analyse Palinkas et Suedfeld (2021).md",
+      "old": "[[#Social support paradox en ICE environments: mechanism détaillé]]",
+      "new": "[[#Paradoxe du soutien social en environnements ICE : mécanisme détaillé]]",
+      "expectedOccurrences": 1,
+      "reason": "Aligner le renvoi sur la traduction déjà présente du même titre de section."
+    },
+    {
+      "path": "Wiki Sécurité industrielle/20 - Articles internes/Risques mécaniques et opérations/Risques sectoriels.md",
+      "old": "[[Hiérarchie des moyens de prévention#Étape 2a, protecteurs fixes et mobiles]]",
+      "new": "[[Hiérarchie des moyens de prévention#Étape 2b, protecteurs fixes et mobiles]]",
+      "expectedOccurrences": 1,
+      "reason": "La section Protecteurs fixes et mobiles porte désormais le numéro 2b dans la page cible."
+    },
+    {
+      "path": "Wiki Sécurité industrielle/20 - Articles internes/Risques mécaniques et opérations/Risques sectoriels.md",
+      "old": "[[Hiérarchie des moyens de prévention#Étape 2c, cadenassage et alternatives]]",
+      "new": "[[Hiérarchie des moyens de prévention#Étape 2d, cadenassage et alternatives]]",
+      "expectedOccurrences": 2,
+      "reason": "Les deux renvois Cadenassage et alternatives visent désormais l’étape 2d, vérifiée dans la page cible."
+    },
+    {
+      "path": "Recueil législatif SST/60 - Jurisprudence marquante/R. c. Sault Ste-Marie (1978).md",
+      "old": "référence: [1978] 2 R.C.S. 1299",
+      "new": "référence: \"[1978] 2 R.C.S. 1299\"",
+      "expectedOccurrences": 1,
+      "reason": "Protéger la référence bibliographique comme chaîne YAML ; aucune modification juridique."
+    }
+  ]
+}

@@ -33,9 +33,22 @@ const I = {
   calendrier: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
   menu: '<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
   coeur: '<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-9-9c-1.2-2.7.6-6 3.8-6 2 0 3.4 1.2 4.2 2.6C11.8 6.2 13.2 5 15.2 5c3.2 0 5 3.3 3.8 6-2 4.4-7 9-7 9z"/></svg>',
+  air: '<svg viewBox="0 0 24 24"><path d="M3 8h12a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h5a3 3 0 1 1-3 3"/></svg>',
+  lune: '<svg viewBox="0 0 24 24"><path d="M20.8 13.2A9 9 0 0 1 10.8 3.2a9 9 0 1 0 10 10z"/></svg>',
+  ecran: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
+  telephone: '<svg viewBox="0 0 24 24"><path d="m7 3 3 5-3 2c1.5 3 4 5.5 7 7l2-3 5 3v3a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1z"/></svg>',
+  telecharger: '<svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>',
+  horsLigne: '<svg viewBox="0 0 24 24"><path d="M3 9a14 14 0 0 1 18 0M6 12a9 9 0 0 1 12 0M9 15a4 4 0 0 1 6 0"/><circle cx="12" cy="19" r="1"/></svg>',
 };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+// Présentation uniquement : ne renomme ni les notes, ni les liens, ni les données mémorisées.
+export function texteSansEmoji(texte) {
+  return String(texte).replace(/\p{Extended_Pictographic}[\p{Emoji_Modifier}\uFE0E\uFE0F]*(?:\u200D\p{Extended_Pictographic}[\p{Emoji_Modifier}\uFE0E\uFE0F]*)*|\p{Regional_Indicator}{2}/gu, '').replace(/\s+/g, ' ').trim();
+}
+const svgTravailleurs = nom => (I[nom] || I.doc).replace('<svg', '<svg aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"');
+export const faviconTravailleurs = 'data:image/svg+xml,' + encodeURIComponent(svgTravailleurs('casque').replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"').replace('stroke="currentColor"', 'stroke="#648ed9"'));
 
 // --- contenu de la maquette : chaque cible est un chemin de page du site ---
 export const NAV = [
@@ -131,7 +144,7 @@ export function rendrePortailTravailleurs({ R, nbLois, majDate, verifier, rubriq
     if (verifier && !verifier(cible)) { morts.push(cible); return '#'; }
     return R + cible;
   };
-  const ico = (nom, style = '') => (I[nom] || I.doc).replace('<svg', `<svg${style ? ` style="${style}"` : ''}`);
+  const ico = svgTravailleurs;
 
   const aideUrl = 't/w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html';
 
@@ -144,7 +157,7 @@ export function rendrePortailTravailleurs({ R, nbLois, majDate, verifier, rubriq
   ].join('');
 
   const navSujets = rubriques.map((r, i) =>
-    `<a href="#rub-${i}"><span class="tb-nav-emoji">${r.icone}</span><span>${esc(r.titre)}</span></a>`).join('');
+    `<a href="#rub-${i}">${ico(r.icone)}<span>${esc(r.titre)}</span></a>`).join('');
 
   const domaines = DOMAINES.map(d =>
     `<a href="${url(d.cible)}"><span class="tb-pastille" style="background:${d.couleur}"></span><span>${esc(d.nom)}</span></a>`).join('');
@@ -153,14 +166,13 @@ export function rendrePortailTravailleurs({ R, nbLois, majDate, verifier, rubriq
     .map(p => `<button class="tb-puce" data-q="${esc(p)}">${esc(p)}</button>`).join('');
 
   const cartePage = (p) => `<a class="tb-carte tb-situ" href="${url(p.u)}">
-      <span class="tb-situ-ic tb-situ-emoji">${p.icone || '📄'}</span>
-      <span class="tb-situ-txt"><h3>${esc(p.t)}</h3>${p.dom ? `<p>${esc(p.dom)}</p>` : ''}</span>
-      ${I.fleche.replace('<svg', '<svg class="tb-fleche"')}
+      <span class="tb-situ-txt"><h3>${esc(texteSansEmoji(p.t))}</h3>${p.dom ? `<p>${esc(texteSansEmoji(p.dom))}</p>` : ''}</span>
+      ${ico('fleche').replace('<svg', '<svg class="tb-fleche"')}
     </a>`;
 
   const sections = rubriques.map((r, i) => r.membres.length ? `<section class="tb-rub" id="rub-${i}">
-    <h2 class="tb-section"><span class="tb-rub-emoji">${r.icone}</span> ${esc(r.titre)}</h2>
-    <div class="tb-grille tb-g4">${r.membres.map(m => cartePage({ ...m, icone: r.icone })).join('')}</div>
+    <h2 class="tb-section tb-section-repere">${ico(r.icone)}<span>${esc(r.titre)}</span></h2>
+    <div class="tb-grille tb-g4">${r.membres.map(cartePage).join('')}</div>
   </section>` : '').join('');
 
   const barre = [
@@ -199,18 +211,18 @@ export function rendrePortailTravailleurs({ R, nbLois, majDate, verifier, rubriq
     <button class="tb-icone-btn" id="tbFav" aria-label="Mes favoris" title="Mes favoris">${I.etoile}</button>
     <button class="tb-icone-btn" id="tbHist" aria-label="Historique" title="Historique">${I.horloge}</button>
     <div class="tb-profil">
-      <span class="tb-avatar tb-avatar-emoji">👷</span>
+      <span class="tb-avatar tb-avatar-picto">${ico('casque')}</span>
       <span class="tb-profil-txt"><strong>Espace travailleurs</strong><span>Wiki SST — Mines</span></span>
     </div>
   </header>
 
   <div class="tb-corps">
     <main class="tb-centre"><div class="tb-conteneur">
-      <h1 class="tb-bonjour">Salut&nbsp;! 👋</h1>
+      <h1 class="tb-bonjour">Salut&nbsp;!</h1>
       <p class="tb-sous-titre">Tes droits, ta santé, ta sécurité — expliqué simplement, pour toi qui travailles à la mine.</p>
 
       <div class="tb-urgence">
-        <strong>☎ Ça ne va pas&nbsp;?</strong>
+        <strong>${ico('telephone')}<span>Ça ne va pas&nbsp;?</span></strong>
         <span>Urgence <a href="tel:911">911</a> · Info-Santé <a href="tel:811">811</a> (option 2 pour Info-Social) · Prévention du suicide <a href="tel:988">988</a></span>
         <a class="tb-urgence-lien" href="${url(aideUrl)}">Où appeler quand ça ne va pas →</a>
       </div>
@@ -224,12 +236,12 @@ export function rendrePortailTravailleurs({ R, nbLois, majDate, verifier, rubriq
       <div class="tb-populaires"><span>Recherches populaires :</span>${populaires}</div>
 
       ${accueils.length ? `<h2 class="tb-section">Pour commencer</h2>
-      <div class="tb-grille tb-g4">${accueils.map(a => cartePage({ ...a, icone: '🚩' })).join('')}</div>` : ''}
+      <div class="tb-grille tb-g4">${accueils.map(cartePage).join('')}</div>` : ''}
 
       ${sections}
 
-      ${autres.length ? `<section class="tb-rub"><h2 class="tb-section"><span class="tb-rub-emoji">📄</span> Autres pages</h2>
-      <div class="tb-grille tb-g4">${autres.map(a => cartePage({ ...a, icone: '📄' })).join('')}</div></section>` : ''}
+      ${autres.length ? `<section class="tb-rub"><h2 class="tb-section tb-section-repere">${ico('doc')}<span>Autres pages</span></h2>
+      <div class="tb-grille tb-g4">${autres.map(cartePage).join('')}</div></section>` : ''}
 
       <div class="tb-barre">${barre}</div>
     </div></main>
@@ -275,7 +287,10 @@ export function rendrePortailTravailleurs({ R, nbLois, majDate, verifier, rubriq
 </div>
 </div>`;
 
-  return { html, morts: [...new Set(morts)] };
+  // Même nettoyage pour les titres de recherche, historique et favoris, sans toucher leur stockage.
+  const icones = { auto: ico('ecran'), light: ico('soleil'), dark: ico('lune'), horsLigne: ico('horsLigne'), installer: ico('telecharger'), favori: ico('etoile') };
+  const interfaceSobre = `<script>window.WIKI_UI = { texte: ${texteSansEmoji.toString()}, icones: ${JSON.stringify(icones)} };</script>`;
+  return { html: html.replace(/<svg(?![^>]*aria-hidden)/g, '<svg aria-hidden="true" focusable="false"') + interfaceSobre, morts: [...new Set(morts)] };
 }
 
 // Rend le portail. `R` est le chemin racine relatif, `nbLois` le nombre d'articles de loi,
