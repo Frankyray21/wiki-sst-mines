@@ -18,10 +18,22 @@ assert.ok(lire('sw.js').includes('X-Wiki-SST-Hash'), 'worker avec reçus de fra�
 let octetsPages = 0, octetsMedias = 0;
 let appelsReference = 0;
 let entetesArticles = 0;
+let titresGroupes = 0;
+let bibliographiesCompactes = 0;
 for (const [rel, attendu, taille] of manifeste.pages) {
   const brut = fs.readFileSync(path.join(out, rel));
   if (rel.endsWith('.html')) {
     const html = brut.toString('utf8');
+    if (html.includes('<div class="page-meta">') && html.includes('<div class="page-body">')) {
+      const entete = html.match(/<header class="article-(?:titre|entete)">[\s\S]*?<\/header>/)?.[0];
+      assert.ok(entete, 'titre et domaine groupés : ' + rel);
+      assert.ok(entete.includes('class="page-title"') && entete.includes('class="page-sub"'), 'point d’insertion de la barre conservé : ' + rel);
+      if (entete.includes('class="article-titre"')) {
+        assert.ok(!entete.includes('class="toc'), 'sommaire hors de la barre du titre : ' + rel);
+        titresGroupes++;
+      }
+    }
+    bibliographiesCompactes += (html.match(/<ol[^>]*class="[^"]*references-liste[^"]*"/g) || []).length;
     if (html.includes('<header class="site-header">')) {
       assert.ok(html.includes('<html lang="fr" data-wiki-entete>'), 'décalage des ancres activé : ' + rel);
       assert.match(html, /id="burger"[^>]*aria-expanded="false"[^>]*aria-controls="sidebar"/, 'commande du menu reliée : ' + rel);
@@ -221,6 +233,12 @@ const terrainSuite = [
 for (const note of terrainSuite) {
   for (const parcours of note.parcours) {
     const html = lire(parcours + note.page);
+    assert.ok(html.includes('<header class="article-titre">'), 'suite terrain : outils contenus dans le bloc du titre');
+    const bibliographie = html.match(/<ol class="references-liste">([\s\S]*?)<\/ol>/)?.[1];
+    assert.ok(bibliographie, 'suite terrain : bibliographie en une liste');
+    assert.equal((bibliographie.match(/<li value="\d+">/g) || []).length, note.refs, 'suite terrain : une entrée par référence');
+    for (let n = 1; n <= note.refs; n++) assert.ok(bibliographie.includes('<li value="' + n + '"><span id="ref-' + note.prefixe + '-' + n + '">'), 'suite terrain : numérotation et ancre réunies');
+    assert.doesNotMatch(html, /<p>\s*<span id="ref-/, 'suite terrain : plus de ligne vide d’ancrage');
     for (const ancre of note.ancres) assert.equal((html.match(new RegExp('id="' + ancre + '"', 'g')) || []).length, 1, 'suite terrain : ancienne ancre unique');
     for (let n = 1; n <= note.refs; n++) {
       const ancre = 'ref-' + note.prefixe + '-' + n;
@@ -241,4 +259,4 @@ assert.ok(qualite.includes('Contrôles automatiques de forme'));
 assert.ok(qualite.includes('ni une note de fiabilité ni une validation SST'));
 assert.ok(qualite.includes('Résultats par type de contenu'));
 assert.ok(qualite.includes('Validation spécialisée datée et validateur déclaré'));
-console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, entetesArticles, appelsReference, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, tableauxCadenassage: 2, pagesRpsReferencees, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));
+console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, entetesArticles, titresGroupes, bibliographiesCompactes, appelsReference, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, tableauxCadenassage: 2, pagesRpsReferencees, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));

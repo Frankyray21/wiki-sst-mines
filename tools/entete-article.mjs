@@ -3,6 +3,15 @@ const PAGE = 'w/securite/25-articles-travailleurs/risques-mecaniques/cadenassage
 const cibles = new Set([PAGE, 't/' + PAGE]);
 const esc = valeur => String(valeur).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+// Barre de lecture injectée dans un bloc distinct, jamais à côté du sommaire.
+// Le titre garde la typographie du wiki ; le pilote Cadenassage reste séparé.
+export function rendreTitreArticle({ titre, domaineHtml }) {
+  return `<header class="article-titre">
+<h1 class="page-title">${esc(titre)}</h1>
+<div class="page-sub">${domaineHtml}</div>
+</header>`;
+}
+
 export function rendreEnteteCompact({ out, titre, domaineHtml, sections }) {
   if (!cibles.has(out)) return null;
   const nombre = sections.filter(s => s.lv === 2).length || sections.length;

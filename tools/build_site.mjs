@@ -10,7 +10,8 @@ import { rendrePortailEncadrement, rendrePortailTravailleurs, faviconTravailleur
 import { analyserQualite, LIBELLES } from './qualite.mjs';
 import { normaliserNavigationInterne, metadonneesEditoriales, indicateursDocumentaires } from './editorial.mjs';
 import { genererPwa, metaPwa, genererListeHorsLigne } from './pwa.mjs';
-import { rendreEnteteCompact } from './entete-article.mjs';
+import { rendreEnteteCompact, rendreTitreArticle } from './entete-article.mjs';
+import { normaliserBibliographie } from './bibliographie.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -729,7 +730,7 @@ function finalize(html) {
   while (/XBLOCKX\d+X/.test(html) && guard++ < 10) {
     html = html.replace(/(?:<p>)?XBLOCKX(\d+)X(?:<\/p>)?/g, (m, i) => blocks[+i]);
   }
-  return normaliserNavigationInterne(html);
+  return normaliserNavigationInterne(normaliserBibliographie(html));
 }
 
 // ---------- gabarits ----------
@@ -1040,8 +1041,7 @@ for (const p of pages) {
   const enteteCompact = rendreEnteteCompact({ out: p.out, titre: p.title, domaineHtml: `<a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>`, sections: p.toc });
   const content = `
 <div class="breadcrumbs">${crumbs.join(' <span class="crumb-sep">›</span> ')}</div>
-${enteteCompact || `<h1 class="page-title">${esc(p.title)}</h1>
-<div class="page-sub">Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a></div>`}
+${enteteCompact || rendreTitreArticle({ titre: p.title, domaineHtml: `Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>` })}
 ${infobox(p)}
 ${p.chapoHtml ? `<div class="chapo"><div class="chapo-label">${esc(p.chapoLabel)}</div>${p.chapoHtml}</div>` : ''}
 ${enteteCompact ? '' : tocHtml}
@@ -1529,8 +1529,7 @@ function genererWikiPublic(pub) {
     const enteteCompact = rendreEnteteCompact({ out, titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}`, sections: p.toc });
     const contenu = `
 <div class="breadcrumbs"><a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a> <span class="crumb-sep">›</span> ${esc(wiki.name)}</div>
-${enteteCompact || `<h1 class="page-title">${esc(p.title)}</h1>
-<div class="page-sub">${wiki.icon} ${esc(wiki.name)}</div>`}
+${enteteCompact || rendreTitreArticle({ titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}` })}
 ${enteteCompact ? '' : tocHtml}
 <div class="page-body">
 ${corps}
