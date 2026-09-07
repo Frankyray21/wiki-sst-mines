@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import { rendreEnteteCompact } from '../entete-article.mjs';
+import { rendreEnteteCompact, rendreTitreArticle } from '../entete-article.mjs';
 
 const page = 'w/securite/25-articles-travailleurs/risques-mecaniques/cadenassage.html';
 const sections = [
@@ -14,6 +14,21 @@ const sections = [
 ];
 const options = { titre: 'Comprendre le cadenassage en mine', domaineHtml: 'Sécurité industrielle', sections };
 const app = fs.readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+
+test('en-tête commun : titre et domaine groupés, outils hors du sommaire, typographie conservée', () => {
+  const html = rendreTitreArticle({ titre: 'Sommeil <et> quart de nuit', domaineHtml: '<a href="/ergonomie">Ergonomie</a>' });
+  assert.match(html, /^<header class="article-titre">/);
+  assert.ok(html.includes('Sommeil &lt;et&gt; quart de nuit'));
+  assert.ok(html.includes('<div class="page-sub"><a href="/ergonomie">Ergonomie</a></div>'));
+  assert.equal((html.match(/class="page-title"/g) || []).length, 1);
+  assert.doesNotMatch(html, /<nav|lecture-outils/); // Injection unique par le script existant.
+  const css = fs.readFileSync(new URL('../style.css', import.meta.url), 'utf8');
+  assert.match(css, /\.article-titre\s*\{[^}]*display:\s*grid/);
+  assert.match(css, /\.lecture-outils\s*\{\s*display:\s*flex;[^}]*flex-wrap:\s*wrap/);
+  assert.doesNotMatch(css, /\.lecture-outils\s*\{[^}]*inline-flex/);
+  assert.match(css, /\.lecture-outils button\s*\{[^}]*min-width:\s*44px;[^}]*min-height:\s*44px/);
+  assert.doesNotMatch(css, /\.article-titre[^{}]*\{[^}]*font-family/);
+});
 
 test('en-tête limité au fond documentaire et au parcours travailleurs du cadenassage', () => {
   for (const out of [page, 't/' + page]) assert.ok(rendreEnteteCompact({ ...options, out }).includes('article-entete'));

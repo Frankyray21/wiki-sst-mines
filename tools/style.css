@@ -271,6 +271,8 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
   border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 4px;
 }
 .page-sub { font-size: 13px; color: var(--text-soft); margin-bottom: 18px; }
+.article-titre { display: grid; gap: .5rem; margin-bottom: 1rem; min-width: 0; }
+.article-titre .page-title, .article-titre .page-sub, .article-titre .lecture-outils { margin: 0; }
 .page-body { font-size: calc(15px * var(--echelle, 1)); max-width: 100%; }
 /* Appels bibliographiques : discrets dans la phrase, sans modifier la bibliographie. */
 .page-body a[href^="#ref-"] {
@@ -300,6 +302,10 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .page-body p { margin: 9px 0; }
 .page-body ul, .page-body ol { margin: 9px 0 9px 26px; }
 .page-body li { margin: 3px 0; }
+/* Bibliographie : une liste continue, sans ligne vide artificielle. */
+.page-body ol.references-liste { margin: .5rem 0 .75rem; padding-inline-start: 1.65rem; line-height: 1.3; overflow-wrap: anywhere; }
+.page-body .references-liste > li { margin: .25rem 0; padding-inline-start: .125rem; }
+.page-body .references-liste > li > p { margin: 0; }
 .page-body hr { border: 0; border-top: 1px solid var(--border-light); margin: 18px 0; }
 .page-body blockquote { border-left: 4px solid var(--border-light); padding: 4px 16px; color: var(--text-soft); margin: 10px 0; }
 .page-body code { background: var(--code-bg); border: 1px solid var(--border-soft); border-radius: 2px; padding: 1px 4px; font-size: 13px; }
@@ -569,15 +575,17 @@ body.graphe-fige { overflow: hidden; }
 
 /* ---------- confort de lecture ---------- */
 /* --echelle est posée sur <html> depuis localStorage, dans le <head>, avant le premier rendu. */
-.lecture-outils { display: inline-flex; gap: 6px; margin: -8px 0 16px; }
+.lecture-outils { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 16px; }
 .lecture-outils button {
-  min-width: 40px; height: 34px; padding: 0 10px;
+  min-width: 44px; min-height: 44px; padding: 6px 10px;
   background: var(--content-bg); border: 1px solid var(--border-light); border-radius: 3px;
-  font: inherit; font-size: 13.5px; color: var(--text); cursor: pointer;
+  font: inherit; font-size: .875rem; color: var(--text); cursor: pointer;
 }
 .lecture-outils button:hover:not(:disabled) { background: var(--hover); border-color: var(--hover-bd); }
 .lecture-outils button:disabled { opacity: .45; cursor: default; }
 .lecture-outils button.actif { background: var(--tag-bg); border-color: var(--border); font-weight: 600; }
+.lecture-outils button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+@media print { .lecture-outils { display: none; } }
 /* mode lecture : rien que l'article, colonne étroite, interligne aéré */
 html[data-lecture] .sidebar, html[data-lecture] .breadcrumbs, html[data-lecture] .backlinks,
 html[data-lecture] .site-footer, html[data-lecture] .page-sub, html[data-lecture] .page-meta { display: none !important; }
