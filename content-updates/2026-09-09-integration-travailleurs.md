@@ -27,6 +27,26 @@ Lecture retenue : le wiki par public `/t/` (portail en tableau de bord au « tu 
 
 `node tools/verif_site.mjs` : OK (4 443 fichiers hachés, 84 liens de fiches dans l'index). `node tools/verif_liens.mjs` : 247 820 liens et 8 467 fragments vérifiés, 0 erreur. `npm --prefix tools test` : 70 tests, dont les nouveaux `fiches-travailleurs`, `portail-racine` et `commandes-entete`. Ces contrôles sont statiques : ils ne remplacent ni un essai sur téléphone ni une relecture du fond.
 
+## Rendu sur petits écrans
+
+Mesuré le 9 septembre en émulation d'appareil dans Chromium (Playwright), sur cinq formats de 320 à 768 px : Android 320 px, iPhone SE, iPhone 14 Pro, Pixel 7, iPad Mini, et sur cinq pages (index des fiches, une fiche, portail, tableau de bord, page 404). **Ce n'est pas un essai sur téléphone réel** : ni doigt, ni gant, ni clavier logiciel, ni moteur WebKit d'iOS, ni réseau de fond de mine. Les mesures portent sur la mise en page calculée, les zones tactiles réellement atteintes et le comportement du menu.
+
+Constat de départ : l'index et les fiches ne débordaient sur aucun format, mais quatre défauts sont apparus, dont un que la reprise avait introduit.
+
+| Défaut | Mesure avant | Après | Origine |
+| --- | --- | --- | --- |
+| Numéros d'urgence trop petits | 34 × 16 px | zone tactile 45 × 43 px | introduit par l'encadré d'aide de l'index |
+| Domaine sous chaque fiche illisible | 11,5 px, 76 occurrences | 13 px, aucune sous 12 px | introduit par l'index |
+| Portail : débordement horizontal | 322 px pour 320 | plus de débordement | préexistant (grille à 300 px minimum) |
+| Tableau de bord : bloc de profil hors écran | jusqu'à 359 px pour 320 | masqué sous 480 px | préexistant |
+| « ↑ haut » et fil d'Ariane sous le minimum AA | 33 × 14 et 35 × 14 px | 49 × 31 et 41 × 32 px | préexistant |
+
+Après correction : **aucun débordement horizontal sur les 25 combinaisons**, aucune erreur JavaScript, plus aucun texte sous 12 px ni aucune cible sous le minimum WCAG 2.5.8 AA de 24 px. Le menu s'ouvre, expose bien le lien vers l'index et se ferme avec Échap ; le saut vers une rubrique place son titre sous l'en-tête sans le masquer.
+
+Deux points méritent d'être notés. La première correction des numéros d'urgence, par hauteur de ligne de 44 px, disloquait le paragraphe sur quatre lignes très espacées : seule la capture l'a montré, la mesure la déclarait conforme. La zone tactile est donc posée par un pseudo-élément, qui ne touche pas à l'interligne. Et le gras est réservé aux numéros : appliqué aussi aux deux renvois, il chargeait la moitié de l'encadré.
+
+Ces règles sont figées par `tools/tests/rendu-mobile.test.mjs`. Restent à vérifier sur un appareil réel : la composition effective d'un numéro depuis un lien `tel:`, la lisibilité sous casque et poussière, et le comportement hors ligne dans l'application installée.
+
 ## Rubriques de l'index
 
 Le classement se fait sur des mots entiers du titre et du chemin (dossiers du vault compris), première rubrique gagnante, dans cet ordre. Un renommage dans Obsidian peut déplacer une fiche ; le journal de construction indique le nombre de fiches hors rubrique (0 aujourd'hui).
