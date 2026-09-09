@@ -14,6 +14,7 @@ Lecture retenue : le wiki par public `/t/` (portail en tableau de bord au « tu 
 - Barre latérale de toutes les pages, parcours encadrement compris : « 👷 Fiches pour les travailleurs » remplace « 👷 Wiki des travailleurs » (4 420 pages).
 - Script partagé : le mode d'affichage sans émojis (`WIKI_UI`) et la visite guidée « tour-travailleurs », propres à l'ancien portail, sont retirés ; la visite du portail racine est réécrite. Les règles `body.tb[data-pub="t"]` de `portail.css` sont retirées.
 - Site publié transformé par le même code que le générateur (`tools/fiches_travailleurs.mjs`, `tools/portail_racine.mjs`), nouvelle estampille de version et manifeste hors ligne régénéré (4 443 fichiers texte, 3 435 médias).
+- `assets/version.json` garde la date du 7 septembre : c'est la dernière génération réelle depuis le vault Obsidian, qui n'est pas accessible ici. La transformation a porté sur le HTML déjà publié, pas sur une relecture des notes. La prochaine exécution de `node tools/build_site.mjs` sur le poste de Frank produira la même structure et mettra cette date à jour.
 
 ## Ce qui ne change pas
 
