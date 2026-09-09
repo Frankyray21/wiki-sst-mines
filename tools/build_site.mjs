@@ -16,6 +16,7 @@ import { rendreEnteteCompact, rendreTitreArticle } from './entete-article.mjs';
 import { normaliserBibliographie } from './bibliographie.mjs';
 import { motsDePage, encoderListe } from './recherche_mots.mjs';
 import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
+import { estAccueil, decouperAccueil, rendreAccueil, titreAccueil, piedAccueil } from './accueil_wiki.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -1000,6 +1001,13 @@ for (const p of pages) {
     renommerLibelleCapture(p.toc);
     nbTextesLoi[pose.mode] = (nbTextesLoi[pose.mode] || 0) + 1;
   }
+  // Page d'accueil (du wiki ou d'une section) : le corps est découpé en boîtes ; chaque artefact
+  // retiré ou wikilink réparé est signalé, pour être corrigé dans la note.
+  if (estAccueil(p)) {
+    p.accueil = decouperAccueil(p.html, { resoudre: (cible) => { const pg = resolvePage(cible, p); if (!pg) return null; CUR_LINKS.add(pg); return '{{ROOT}}' + pg.out; } });
+    for (const r of p.accueil.retires) console.warn(`  ⚠ accueil ${p.relPath} : retiré ${r}`);
+    for (const r of p.accueil.repares) console.warn(`  ⚠ accueil ${p.relPath} : wikilink brut réparé « ${r} »`);
+  }
   p.liens = [...CUR_LINKS].filter(x => x !== p); // liens sortants, pour le graphe
   blocks.length = 0;
   for (const target of CUR_LINKS) {
@@ -1060,7 +1068,7 @@ for (const p of pages) {
     : '';
   const revisionHtml = metadonneesEditoriales(p, new Date().toISOString().slice(0, 10));
   const enteteCompact = rendreEnteteCompact({ out: p.out, titre: p.title, domaineHtml: `<a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>`, sections: p.toc });
-  const content = `
+  const content = p.accueil ? contenuAccueil(p, crumbs, revisionHtml) : `
 <div class="breadcrumbs">${crumbs.join(' <span class="crumb-sep">›</span> ')}</div>
 ${enteteCompact || rendreTitreArticle({ titre: p.title, domaineHtml: `Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>` })}
 ${infobox(p)}
@@ -1073,12 +1081,38 @@ ${voisinsHtml(p)}
 ${blHtml}
 <div class="page-meta">${revisionHtml} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
   const html = pageShell({
-    out: p.out, title: p.title, wikiKey: p.wikiKey, content,
+    out: p.out, title: p.accueil ? titreAccueil(p.title) : p.title, wikiKey: p.wikiKey, content,
     sidebarExtra: wikiSidebar(p.wikiKey, wikiSections[p.wikiKey]),
   }).replace(/\{\{ROOT\}\}/g, rootOf(p.out));
   const dest = path.join(OUT, p.out);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, html);
+}
+
+// Contenu d'une page d'accueil : bandeau (titre, wiki, nombre de pages), chapeau, index, boîtes.
+// L'accueil du wiki compte toutes ses pages ; l'accueil d'une section (travailleurs, gestionnaires)
+// compte les pages de son dossier. Le fil d'Ariane de l'accueil du wiki s'arrête au wiki : le
+// dernier maillon mènerait à la catégorie « Accueil », qui ne contient que cette page.
+function contenuAccueil(p, crumbs, revisionHtml) {
+  const wiki = WIKIS[p.wikiKey];
+  const parts = p.relPath.split('/');
+  const accueilDuWiki = wikiHome(p.wikiKey) === p || /^00 - /.test(parts[1] || '');
+  const prefixe = accueilDuWiki ? parts[0] + '/' : parts.slice(0, 2).join('/') + '/';
+  const compte = pages.filter(q => q.relPath.startsWith(prefixe)).length.toLocaleString('fr-CA');
+  const lienWiki = `<a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>`;
+  const sousTitre = accueilDuWiki
+    ? `Page d’accueil du wiki ${lienWiki} · ${compte} pages`
+    : `Section « ${esc(cleanLabel(parts[1]))} » du wiki ${lienWiki} · ${compte} pages`;
+  const index = [{ url: `{{ROOT}}w/${wiki.slug}/index-alphabetique.html`, libelle: 'Index alphabétique' }];
+  if (p.wikiKey === 'Recueil législatif SST') index.push({ url: `{{ROOT}}w/${wiki.slug}/index-par-loi.html`, libelle: 'Index par loi' });
+  index.push({ url: '{{ROOT}}categories.html', libelle: 'Catégories' });
+  if (accueilDuWiki || /travailleurs/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}' + INDEX_FICHES.out, libelle: INDEX_FICHES.titre });
+  if (/gestionnaires/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}g/index.html', libelle: 'Espace encadrement' });
+  const fil = accueilDuWiki ? crumbs.slice(0, 2) : crumbs;
+  return `
+<div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
+${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: p.accueil.chapeau, sections: p.accueil.sections, index })}
+${piedAccueil(new Date().toISOString().slice(0, 10))}`;
 }
 
 // ---------- pages de catégorie (une par dossier) ----------

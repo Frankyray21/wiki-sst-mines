@@ -683,6 +683,41 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .site-footer { text-align: center; font-size: 12px; color: var(--text-soft); padding: 22px 10px 30px; }
 
 /* ---------- responsive ---------- */
+/* ---------- pages d'accueil des wikis : bandeau et boîtes, comme la page d'accueil d'un wiki ---------- */
+.accueil-banniere { display: flex; align-items: center; gap: 16px; padding: 14px 18px; border: 1px solid var(--chapo-bd); background: var(--chapo-bg); border-radius: 3px; }
+.accueil-icone { font-size: 46px; line-height: 1; flex: none; }
+.accueil-banniere .article-titre { min-width: 0; margin: 0; gap: .3rem; }
+.accueil-banniere .page-title { border-bottom: 0; margin: 0; }
+.accueil-banniere .page-sub { margin: 0; }
+.accueil-chapeau { font-size: 15.5px; line-height: 1.55; margin: 14px 0 8px; }
+.accueil-chapeau p { margin: 0 0 8px; }
+.accueil-index { font-size: 14px; margin: 4px 0 16px; color: var(--text-soft); }
+.accueil-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.accueil-boite { border: 1px solid var(--chapo-bd); background: var(--content-bg); border-radius: 3px; min-width: 0; }
+.accueil-large { grid-column: 1 / -1; }
+.page-body .accueil-titre { font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif; font-size: 19px; font-weight: 600; margin: 0; padding: 7px 12px; background: var(--infobox-titre-bg); border-bottom: 1px solid var(--chapo-bd); line-height: 1.3; }
+.accueil-corps { padding: 8px 12px 10px; }
+.accueil-corps > p:first-child { margin-top: 2px; }
+.accueil-corps ul { margin: 4px 0 4px 20px; }
+.accueil-corps li { margin: 3px 0; break-inside: avoid; }
+/* colonnes par largeur : elles s'ajoutent quand la boîte est large, retombent seules à une sur téléphone */
+.accueil-colonnes { columns: 12em 3; column-gap: 28px; }
+.accueil-large .accueil-colonnes { columns: 13em 3; }
+.accueil-colonnes-courtes, .accueil-large .accueil-colonnes-courtes { columns: 9em 3; column-gap: 18px; }
+/* points d'entrée (rôles) en tuiles, toute la tuile touchable */
+.page-body .accueil-tuiles { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin: 4px 0; }
+.page-body .accueil-tuiles li { margin: 0; padding: 9px 12px; min-height: 44px; display: flex; align-items: center; gap: 9px; border: 1px solid var(--border-light); border-radius: 3px; background: var(--bg); font-weight: 600; line-height: 1.35; }
+.page-body .accueil-tuiles li:hover { background: var(--hover); border-color: var(--hover-bd); }
+.page-body .accueil-tuiles a { flex: 1; }
+.accueil-groupes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 4px 22px; }
+.accueil-groupe { min-width: 0; }
+.page-body .accueil-groupe h3 { font-size: 15.5px; margin: 8px 0 2px; padding: 0 0 2px; border-bottom: 1px solid var(--border-soft); }
+.accueil-corps table { display: block; overflow-x: auto; max-width: 100%; }
+@media (max-width: 480px) {
+  .accueil-groupes { grid-template-columns: 1fr; }
+  .accueil-corps li { padding: 3px 0; }
+}
+
 @media (max-width: 900px) {
   :root { --hh: 106px; } /* l'en-tête passe sur deux lignes */
   .burger { display: block; min-width: 44px; min-height: 44px; font-size: 22px; }
@@ -742,6 +777,12 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   /* Fil d'Ariane : 35 x 14 px, seul élément resté sous le minimum WCAG 2.5.8 AA.
      Le padding vertical tient dans l'interligne, la ligne ne se déplace pas. */
   .breadcrumbs a { display: inline-block; padding: 6px 3px; }
+  /* pages d'accueil : boîtes en une colonne, listes sur deux */
+  .accueil-grille { grid-template-columns: 1fr; gap: 12px; }
+  .accueil-banniere { padding: 12px; gap: 12px; }
+  .accueil-icone { font-size: 36px; }
+  .accueil-groupes { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .page-body .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); }
 }
 @media (max-width: 600px) {
   /* Une rangée d'actions, une rangée de recherche, même après ajout de l'aide/PWA. */
