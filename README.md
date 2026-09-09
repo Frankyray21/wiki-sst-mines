@@ -16,17 +16,21 @@ Les pages sont réparties en 6 wikis thématiques + 1 recueil législatif. Les [
 
 **En ligne : https://frankyray21.github.io/wiki-sst-mines/**
 
-## Trois entrées
+## Entrées du site
 
 | Entrée | Pour qui | Contenu |
 | --- | --- | --- |
-| 👷 [`/t/`](https://frankyray21.github.io/wiki-sst-mines/t/) | Travailleurs | Pages vulgarisées, rangées par problème vécu, plus les articles de loi qui fondent leurs droits |
+| 📚 [`/w/`](https://frankyray21.github.io/wiki-sst-mines/) | Tout le monde : travailleurs, conseiller SST, recherche documentaire | Le fond documentaire classé par discipline, fiches pour les travailleurs comprises |
+| 👷 [`travailleurs.html`](https://frankyray21.github.io/wiki-sst-mines/travailleurs.html) | Travailleurs | Index des fiches courtes du fond documentaire, classées par situation vécue |
 | 🎓 [`/g/`](https://frankyray21.github.io/wiki-sst-mines/g/) | Superviseurs, gestionnaires, direction | Portail en tableau de bord : entrée par rôle, par situation à gérer, ou par thème |
-| 📚 [`/w/`](https://frankyray21.github.io/wiki-sst-mines/) | Conseiller SST, recherche documentaire | Le fond documentaire classé par discipline |
 
-La répartition est automatique, à partir du frontmatter du vault : `publication-travailleur`,
-`publication-gestionnaire` et `public-cible`, avec veto sur `niveau-sensibilité` (interne ou ≥ 2).
-**Une page n'entre jamais dans le wiki des travailleurs sans autorisation explicite.**
+L'ancien wiki des travailleurs (`/t/` : portail en tableau de bord et copie des pages) est abandonné
+depuis le 9 septembre 2026. Ses pages n'ont pas bougé : elles vivent dans le fond documentaire, où
+l'index `travailleurs.html` les regroupe par situation, et `404.html` redirige les anciennes adresses
+`t/…` vers les mêmes pages. La sélection est inchangée, à partir du frontmatter du vault :
+`publication-travailleur` et `public-cible`, avec veto sur `niveau-sensibilité` (interne ou ≥ 2).
+**Une page n'entre jamais dans l'index des travailleurs sans autorisation explicite.**
+Le parcours de l'encadrement suit `publication-gestionnaire` selon la même logique.
 Le Recueil législatif n'est pas dupliqué : le texte de loi est public et identique pour tous.
 
 **Ces parcours ne sont pas un contrôle d'accès.** GitHub Pages est public : les contenus confidentiels ne doivent pas y être publiés. Le champ « interne » historiquement utilisé pour désigner un public n'assure aucune protection. Une authentification réelle nécessiterait une décision d'hébergement distincte.
@@ -38,6 +42,9 @@ Le Recueil législatif n'est pas dupliqué : le texte de loi est public et ident
 - `tools/png_palette.mjs` — recompression PNG sans perte (palette 8 bits, zlib natif)
 - `tools/portail_encadrement.mjs` — portail `/g/` en tableau de bord : contenu des cartes, icônes SVG.
   Les cibles sont vérifiées à la construction ; le build avertit si l'une disparaît du site.
+- `tools/portail_racine.mjs` — contenu du portail racine (`index.html`)
+- `tools/fiches_travailleurs.mjs` — index `travailleurs.html` (rubriques par situation, doublons, numéros
+  d'aide repris des notes du vault) et page `404.html` de redirection des anciennes adresses `t/…`
 - `tools/portail.css` — feuille de style de ce portail (chargée par lui seul)
 - `tools/serve.mjs` — serveur local de prévisualisation (port 8090)
 
@@ -48,7 +55,7 @@ Le Recueil législatif n'est pas dupliqué : le texte de loi est public et ident
 node tools/build_site.mjs
 
 # Vérifier qu'aucun lien interne ne pointe dans le vide
-node tools/verif_liens.mjs        # tout docs/, fichiers et ancres — ou passer t / g / w
+node tools/verif_liens.mjs        # tout docs/, fichiers et ancres — ou passer g / w
 
 # Tests de non-régression
 npm --prefix tools test
@@ -70,9 +77,9 @@ node tools/serve.mjs
 - Captures officielles des articles de loi + PDF sources, images cliquables pour agrandir
 - **Mobile** : styles adaptatifs, cibles tactiles, bouton de retour en haut ; la vérification sur appareils réels reste distincte des tests automatiques
 - **Catégories** : une page par mot-clé du frontmatter porté par au moins 5 pages, tous domaines confondus
-- **Visite guidée** : se lance à la première venue sur chaque type de page (portail, wiki travailleurs,
-  tableau de bord, article), puis se relance à la demande par le bouton « ? » de l'en-tête. Les étapes
-  dont l'élément est absent sont ignorées.
+- **Visite guidée** : se lance à la première venue sur chaque type de page (portail, tableau de bord,
+  article), puis se relance à la demande par le bouton « ? » de l'en-tête. Les étapes dont l'élément
+  est absent sont ignorées.
 - **Thème clair / sombre / automatique** : bouton dans l'en-tête, choix mémorisé. Les captures d'articles
   de loi (texte noir sur blanc) sont détectées à la construction et **inversées** en thème sombre, pour
   ne pas laisser un rectangle éblouissant au milieu de la page. L'impression reste toujours en clair.
@@ -86,7 +93,7 @@ node tools/serve.mjs
 - Cinq infographies restent intégrées : Manutention, Bruit, Vibrations, Exposition chimique et Silice. Le lot 2 historique (incluant alors Cadenassage) est archivé dans `content-updates/2026-09-06-visuels-lot2.json`, après la révision éditoriale du même jour ; les prompts sont dans `content-updates/prompts-visuels-lot2.md`. Les archives sont des instantanés successifs, pas des fichiers à réappliquer sans comparaison.
 - Après validation, la section « Arrêter ne suffit pas » du cadenassage utilise un tableau visible à deux colonnes, à la place de l’image et de son volet déroulant. La dernière note figure dans `content-updates/2026-09-06-cadenassage-tableau.json`, après `2026-09-06-cadenassage-compact.json`. L’ancre historique est conservée ; les images v1 et v2 restent dans le vault.
 - En-tête pilote : `tools/entete-article.mjs` regroupe titre, domaine, commandes de lecture et sommaire uniquement pour les deux versions de Cadenassage. Sur petit écran, le sommaire se replie par défaut, tout en respectant la préférence existante du lecteur. Le corps de l’article et les autres en-têtes restent inchangés.
-- Portail travailleurs : pictogrammes SVG pour les rubriques et commandes, cartes sans icônes répétitives. Les émojis des titres sont retirés uniquement à l’affichage du portail, y compris dans ses suggestions, son historique et ses favoris. Notes, liens, index et données mémorisées restent intacts ; les autres pages conservent leur présentation.
+- Fiches pour les travailleurs (9 septembre 2026) : le wiki des travailleurs `/t/` n'est plus généré. Ses 84 pages, retenues par la même autorisation du vault, sont indexées par situation dans `travailleurs.html` (habillage ordinaire du wiki, numéros d'aide repris des notes « Où appeler quand ça ne va pas » et « Lignes d'aide ») ; quand une fiche existe en deux versions, seule la version « (pour toi) » est listée, l'autre reste dans la section « Articles travailleurs » de son wiki. `404.html` redirige `t/index.html` vers l'index et `t/w/…` vers `w/…`. Le mode d'affichage sans émojis (`WIKI_UI`), propre à l'ancien portail, est retiré du script partagé. Le portail racine présente d'abord le fond documentaire, puis « Parcourir par sujet » (catégories, fiches, contrôles de forme), puis l'espace encadrement. Aucune note du vault n'est modifiée ; le détail et la proposition de renvois vers les notes d'analyse universitaires sont dans `content-updates/2026-09-09-integration-travailleurs.md`.
 - Iso-strain : la page « Ce que ça signifie » est complétée et référencée (INRS, INSPQ, études de Johnson et collègues). La note est archivée dans `content-updates/2026-09-06-iso-strain.json`. Exemple minier fictif, associations et causalité distinguées ; aucune validation spécialisée ni extension aux parcours par public.
 - Suite documentaire RPS : « Demandes psychologiques », « Latitude décisionnelle » et « Soutien social au travail » sont enrichies avec des références INRS, INSPQ et CNESST, appelées dans le texte. Les notes figurent dans `content-updates/2026-09-06-rps-references-lot2.json`. Tableaux à deux colonnes, exemples fictifs, anciennes ancres et parcours conservés ; aucun chiffre médical non étayé ni validation spécialisée revendiquée.
 - Suite documentaire RPS, lot 3 : « Reconnaissance au travail », « Justice organisationnelle » et « Définition du stress professionnel » comportent chacune quatre références appelées et un tableau compact. Archive : `content-updates/2026-09-06-rps-references-lot3.json`. Modèles distingués, chiffres non vérifiés retirés et exemples miniers fictifs ; anciens liens et indicateurs de publication conservés. Le schéma de cours marqué « usage personnel » n'est plus intégré à la page Stress, sans suppression de son fichier source. Cette vérification documentaire n'atteste aucune validation spécialisée.

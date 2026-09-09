@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page introuvable — Wiki SST</title>
+<meta name="robots" content="noindex">
+<script>(function () {
+  var m = location.pathname.match(/^(.*?)\/t\/(?:w\/(.+)|index\.html)?$/);
+  if (m) location.replace(m[1] + (m[2] ? '/w/' + m[2] : '/travailleurs.html') + location.search + location.hash);
+})();</script>
+<style>body{font-family:-apple-system,'Segoe UI',sans-serif;background:#16181d;color:#e4e6e8;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;text-align:center;padding:20px}
+.b{max-width:420px}h1{font-size:44px;margin:0 0 8px}p{line-height:1.6;color:#a9b1ba}a{color:#7ab0ff}</style></head>
+<body><div class="b"><h1>🔍</h1><h2>Page introuvable</h2>
+<p>Cette adresse ne correspond à aucune page du wiki. <a id="lien-accueil" href="./">Retourner au portail</a> ou <a id="lien-recherche" href="./recherche.html">lancer une recherche</a>.</p></div>
+<script>(function () {
+  var p = location.pathname;
+  var base = /\/(?:w|g|t|categorie|files|assets)\//.test(p) ? p.replace(/\/(?:w|g|t|categorie|files|assets)\/.*$/, '/') : p.replace(/[^\/]*$/, '');
+  document.getElementById('lien-accueil').href = base + 'index.html';
+  document.getElementById('lien-recherche').href = base + 'recherche.html';
+})();</script></body></html>

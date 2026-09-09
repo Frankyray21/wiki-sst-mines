@@ -30,9 +30,9 @@ test('en-tête commun : titre et domaine groupés, outils hors du sommaire, typo
   assert.doesNotMatch(css, /\.article-titre[^{}]*\{[^}]*font-family/);
 });
 
-test('en-tête limité au fond documentaire et au parcours travailleurs du cadenassage', () => {
-  for (const out of [page, 't/' + page]) assert.ok(rendreEnteteCompact({ ...options, out }).includes('article-entete'));
-  for (const out of ['w/ergonomie/20-articles-internes/contraintes/postures-contraignantes.html', 'g/' + page, 'w/securite/27-articles-gestionnaires/cadenassage.html']) {
+test('en-tête limité à la fiche Cadenassage du fond documentaire', () => {
+  assert.ok(rendreEnteteCompact({ ...options, out: page }).includes('article-entete'));
+  for (const out of ['w/ergonomie/20-articles-internes/contraintes/postures-contraignantes.html', 't/' + page, 'g/' + page, 'w/securite/27-articles-gestionnaires/cadenassage.html']) {
     assert.equal(rendreEnteteCompact({ ...options, out }), null);
   }
 });

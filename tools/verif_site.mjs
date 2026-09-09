@@ -40,6 +40,8 @@ for (const [rel, attendu, taille] of manifeste.pages) {
       assert.ok(html.includes('id="sidebar" aria-label="Navigation du wiki"'), 'navigation nommée : ' + rel);
       entetesArticles++;
     }
+    assert.doesNotMatch(html, /href="(?:\.\.\/)*t\/(?:index\.html|w\/)/, 'aucun lien vers l’ancien wiki des travailleurs : ' + rel);
+    if (html.includes('<nav class="sidebar"')) assert.ok(html.includes('travailleurs.html">👷 Fiches pour les travailleurs</a>'), 'index des fiches dans la barre latérale : ' + rel);
     for (const appel of brut.toString('utf8').matchAll(/<a\b[^>]*href="#ref-[^"]+"[^>]*>([\s\S]*?)<\/a>/g)) {
       assert.match(appel[1], /^\s*\d+\s*$/, 'exposant réservé aux appels numériques : ' + rel);
       appelsReference++;
@@ -60,13 +62,13 @@ assert.ok(entetesArticles > 0, 'en-têtes partagés présents');
 assert.equal(octetsMedias, manifeste.octetsMedias);
 
 const visuels = [
-  { page: 'ergonomie/25-articles-travailleurs/manutention.html', fichier: 'wiki-manutention-reperes-v1.png', parcours: ['w/', 't/w/'] },
+  { page: 'ergonomie/25-articles-travailleurs/manutention.html', fichier: 'wiki-manutention-reperes-v1.png', parcours: ['w/'] },
   { page: 'hygiene/20-articles-internes/environnement-de-travail/bruit.html', fichier: 'wiki-bruit-mesurer-v1.png', parcours: ['w/', 'g/w/'] },
   { page: 'ergonomie/20-articles-internes/contraintes/vibrations.html', fichier: 'wiki-vibrations-transmission-v1.png', parcours: ['w/', 'g/w/'] },
-  { page: 'toxicologie/25-articles-travailleurs/reconnaitre-une-exposition.html', fichier: 'wiki-exposition-voies-v1.png', parcours: ['w/', 't/w/'] },
+  { page: 'toxicologie/25-articles-travailleurs/reconnaitre-une-exposition.html', fichier: 'wiki-exposition-voies-v1.png', parcours: ['w/'] },
   { page: 'hygiene/27-articles-gestionnaires/programmes-de-prevention/silice-cristalline.html', fichier: 'wiki-silice-prevention-v1.png', parcours: ['w/', 'g/w/'] },
   { page: 'toxicologie/20-articles-internes/voies-dexposition.html', fichier: 'wiki-exposition-voies-v1.png', parcours: ['w/'] },
-  { page: 'ergonomie/25-articles-travailleurs/vibrations.html', fichier: 'wiki-vibrations-transmission-v1.png', parcours: ['w/', 't/w/'] },
+  { page: 'ergonomie/25-articles-travailleurs/vibrations.html', fichier: 'wiki-vibrations-transmission-v1.png', parcours: ['w/'] },
 ];
 let pagesVisuelles = 0;
 for (const visuel of visuels) {
@@ -86,7 +88,7 @@ for (const visuel of visuels) {
   }
 }
 
-for (const parcours of ['w/', 't/w/']) {
+for (const parcours of ['w/']) {
   const rel = parcours + 'securite/25-articles-travailleurs/risques-mecaniques/cadenassage.html';
   const html = lire(rel);
   const entete = html.match(/<header class="article-entete">[\s\S]*?<\/header>/)?.[0];
@@ -117,20 +119,30 @@ for (const parcours of ['w/', 't/w/']) {
   assert.ok(html.includes('Relecture éditoriale : non attestée'), rel + ' : aucune relecture inventée');
 }
 
-const portailTravailleurs = lire('t/index.html');
-const textePortail = portailTravailleurs.replace(/<script>[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, '').replace(/©/g, '');
-assert.doesNotMatch(textePortail, /\p{Extended_Pictographic}|\p{Regional_Indicator}|[\u200D\uFE0F]/u, 'portail travailleurs sans emojis visibles');
-assert.ok(portailTravailleurs.includes('window.WIKI_UI'), 'traitement des titres et commandes dynamiques présent');
-assert.ok(portailTravailleurs.includes('tb-section-repere'), 'repères SVG présents');
-assert.ok(!lire('g/index.html').includes('window.WIKI_UI'), 'portail encadrement exclu');
-for (const numero of ['911', '811', '988']) assert.ok(portailTravailleurs.includes('href="tel:' + numero + '"'), 'accès téléphonique conservé');
+// Wiki des travailleurs abandonné : ni portail ni copie t/w/ ; un index dans le fond
+// documentaire, des redirections pour les anciennes adresses, et le parcours encadrement intact.
+assert.ok(!fs.existsSync(path.join(out, 't')), 'ancien wiki des travailleurs retiré');
+const indexFiches = lire('travailleurs.html');
+assert.ok(indexFiches.includes('<nav class="sidebar"'), 'index des fiches dans l’habillage ordinaire du wiki');
+assert.ok(indexFiches.includes('<h1 class="page-title" id="haut">Fiches pour les travailleurs</h1>'), 'titre de l’index');
+assert.ok(!indexFiches.includes('tb-layout') && !indexFiches.includes('WIKI_UI'), 'aucun tableau de bord');
+for (const numero of ['911', '811', '988']) assert.ok(indexFiches.includes('href="tel:' + numero + '"'), 'accès téléphonique conservé');
+assert.ok(indexFiches.includes('href="w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html"'), 'renvoi vers la note d’aide du vault');
+const fichesIndexees = [...indexFiches.matchAll(/<li><a href="(w\/[^"]+)"/g)].map(m => m[1]);
+assert.ok(fichesIndexees.length >= 50, 'fiches listées : ' + fichesIndexees.length);
+assert.equal(new Set(fichesIndexees).size, fichesIndexees.length, 'chaque fiche listée une seule fois');
+for (const rel of fichesIndexees) assert.ok(fs.existsSync(path.join(out, rel)), 'fiche indexée présente : ' + rel);
+assert.ok(!lire('g/index.html').includes('window.WIKI_UI') && lire('g/index.html').includes('tb-layout'), 'portail encadrement conservé');
+const page404 = lire('404.html');
+assert.ok(page404.includes('location.replace') && page404.includes("'/travailleurs.html'") && page404.includes("'/w/'"), 'redirection des anciennes adresses t/');
+assert.ok(!page404.includes('<link') && !page404.includes('assets/'), 'page 404 autonome, sans ressource relative');
 
-const exposition = lire('t/w/toxicologie/25-articles-travailleurs/reconnaitre-une-exposition.html');
+const exposition = lire('w/toxicologie/25-articles-travailleurs/reconnaitre-une-exposition.html');
 assert.ok(!lire('w/ergonomie/20-articles-internes/contraintes/postures-contraignantes.html').includes('class="article-entete"'), 'en-tête des autres articles inchangé');
 const voiesExposition = lire('w/toxicologie/20-articles-internes/voies-dexposition.html');
 assert.ok(voiesExposition.includes('ne signifie pas qu’un produit la traverse'), 'contact et absorption distingués');
 assert.ok(voiesExposition.includes('<strong>Injection :</strong>'), 'voie non illustrée conservée en texte');
-const vibrationsTravailleurs = lire('t/w/ergonomie/25-articles-travailleurs/vibrations.html');
+const vibrationsTravailleurs = lire('w/ergonomie/25-articles-travailleurs/vibrations.html');
 assert.ok(vibrationsTravailleurs.includes('pas les seules zones du corps'), 'couleurs de transmission contextualisées');
 assert.ok(vibrationsTravailleurs.includes('Les signes à surveiller'), 'signes à surveiller conservés hors du volet');
 assert.ok(exposition.includes('Agir sans attendre après une exposition aiguë suspectée'));
@@ -157,7 +169,6 @@ assert.ok(isoStrain.includes('ne constituent pas automatiquement'), 'pas de gén
 assert.ok(isoStrain.includes('ne permet pas de conclure à une relation causale'), 'limite de causalité conservée');
 assert.ok(isoStrain.includes('Relecture éditoriale : non attestée'), 'pas de relecture humaine inventée');
 assert.ok(!isoStrain.includes('Article en construction'), 'ancienne coquille remplacée');
-assert.ok(!fs.existsSync(path.join(out, 't/w/psychosocial/20-articles/modeles-et-theories/iso-strain-ce-que-ca-signifie.html')), 'publication travailleurs inchangée');
 assert.ok(!fs.existsSync(path.join(out, 'g/w/psychosocial/20-articles/modeles-et-theories/iso-strain-ce-que-ca-signifie.html')), 'publication gestionnaires inchangée');
 
 const lotRps = [
@@ -199,7 +210,7 @@ for (const note of lotRps) {
     }
     pagesRpsReferencees++;
   }
-  for (const parcours of ['t/w/', 'g/w/'].filter(p => !note.parcours.includes(p))) {
+  for (const parcours of ['g/w/'].filter(p => !note.parcours.includes(p))) {
     assert.ok(!fs.existsSync(path.join(out, parcours + note.page)), 'RPS : parcours non élargi');
   }
 }
@@ -211,7 +222,7 @@ const terrain = [
   ['hygiene/25-articles-travailleurs/simdut-et-fds.html', 'fds', 'les-4-sections-a-connaitre-par-coeur'],
 ];
 for (const [page, prefixe, ancienneAncre] of terrain) {
-  for (const parcours of ['w/', 't/w/']) {
+  for (const parcours of ['w/']) {
     const html = lire(parcours + page);
     assert.equal((html.match(new RegExp('id="' + ancienneAncre + '"', 'g')) || []).length, 1, 'ancienne ancre terrain unique');
     for (let i = 1; i <= 4; i++) {
@@ -226,8 +237,8 @@ for (const [page, prefixe, ancienneAncre] of terrain) {
   assert.ok(!fs.existsSync(path.join(out, 'g/w/' + page)), 'parcours encadrement non élargi');
 }
 const terrainSuite = [
-  { page: 'toxicologie/25-articles-travailleurs/solvants.html', prefixe: 'sol', refs: 5, parcours: ['w/', 't/w/'], ancres: ['trois-signes-que-tu-en-respires-trop', 'le-piege-du-5-minutes-sans-masque', 'si-tu-es-expose-fortement'] },
-  { page: 'ergonomie/25-articles-travailleurs/sommeil-et-quart-de-nuit.html', prefixe: 'nuit', refs: 4, parcours: ['w/', 't/w/'], ancres: ['contenu'] },
+  { page: 'toxicologie/25-articles-travailleurs/solvants.html', prefixe: 'sol', refs: 5, parcours: ['w/'], ancres: ['trois-signes-que-tu-en-respires-trop', 'le-piege-du-5-minutes-sans-masque', 'si-tu-es-expose-fortement'] },
+  { page: 'ergonomie/25-articles-travailleurs/sommeil-et-quart-de-nuit.html', prefixe: 'nuit', refs: 4, parcours: ['w/'], ancres: ['contenu'] },
   { page: 'droit-travail/10-themes/obligations-de-lemployeur.html', prefixe: 'emp', refs: 4, parcours: ['w/', 'g/w/'], ancres: ['articles-couverts', 'articles-de-loi-pertinents'] },
 ];
 for (const note of terrainSuite) {
@@ -253,10 +264,10 @@ for (const note of terrainSuite) {
     assert.ok(html.includes('Relecture éditoriale : non attestée'), 'suite terrain : aucune validation humaine inventée');
     assert.doesNotMatch(html, /class="redlink"/, 'suite terrain : aucun lien non résolu');
   }
-  for (const parcours of ['t/w/', 'g/w/'].filter(p => !note.parcours.includes(p))) assert.ok(!fs.existsSync(path.join(out, parcours + note.page)), 'suite terrain : parcours non élargi');
+  for (const parcours of ['g/w/'].filter(p => !note.parcours.includes(p))) assert.ok(!fs.existsSync(path.join(out, parcours + note.page)), 'suite terrain : parcours non élargi');
 }
 assert.ok(qualite.includes('Contrôles automatiques de forme'));
 assert.ok(qualite.includes('ni une note de fiabilité ni une validation SST'));
 assert.ok(qualite.includes('Résultats par type de contenu'));
 assert.ok(qualite.includes('Validation spécialisée datée et validateur déclaré'));
-console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, entetesArticles, titresGroupes, bibliographiesCompactes, appelsReference, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, tableauxCadenassage: 2, pagesRpsReferencees, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));
+console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, entetesArticles, titresGroupes, bibliographiesCompactes, appelsReference, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, tableauxCadenassage: 2, pagesRpsReferencees, fichesIndexees: fichesIndexees.length, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));

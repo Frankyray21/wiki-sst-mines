@@ -1,6 +1,6 @@
-// Première application limitée aux deux versions de la fiche Cadenassage.
+// Première application limitée à la fiche Cadenassage du fond documentaire.
 const PAGE = 'w/securite/25-articles-travailleurs/risques-mecaniques/cadenassage.html';
-const cibles = new Set([PAGE, 't/' + PAGE]);
+const cibles = new Set([PAGE]);
 const esc = valeur => String(valeur).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 // Barre de lecture injectée dans un bloc distinct, jamais à côté du sommaire.
