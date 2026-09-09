@@ -46,6 +46,11 @@ Le Recueil législatif n'est pas dupliqué : le texte de loi est public et ident
 - `tools/fiches_travailleurs.mjs` — index `travailleurs.html` (rubriques par situation, doublons, numéros
   d'aide repris des notes du vault) et page `404.html` de redirection des anciennes adresses `t/…`
 - `tools/portail.css` — feuille de style de ce portail (chargée par lui seul)
+- `tools/extraire_textes_loi.mjs` — extrait des PDF de LégisQuébec le texte de chaque article (couche texte,
+  sans OCR) vers `tools/textes-loi/*.json` ; `tools/textes_loi.mjs` le pose dans les pages d'articles
+- `tools/appliquer_renvois.mjs` — pose dans les notes du vault les renvois tranchés vers les notes d'analyse
+  (`content-updates/2026-09-09-renvois-sources.json`) ; essai par défaut, sauvegarde avant écriture
+- `tools/recherche_mots.mjs` — découpage en mots de l'index plein texte, partagé avec les retouches du site
 - `tools/serve.mjs` — serveur local de prévisualisation (port 8090)
 
 ## Utilisation
@@ -59,6 +64,14 @@ node tools/verif_liens.mjs        # tout docs/, fichiers et ancres — ou passer
 
 # Tests de non-régression
 npm --prefix tools test
+
+# Ré-extraire le texte des lois depuis les PDF du recueil (après une mise à jour des PDF)
+npm --prefix tools install          # installe pdfjs-dist (dépendance de développement)
+node tools/extraire_textes_loi.mjs  # → tools/textes-loi/*.json, puis reconstruire le site
+
+# Poser les renvois tranchés dans le vault : essai, puis application avec sauvegarde
+node tools/appliquer_renvois.mjs
+node tools/appliquer_renvois.mjs --appliquer
 
 # Vérifier le résultat construit : assets, hashes et infographies
 npm --prefix tools run check:site
@@ -74,7 +87,8 @@ node tools/serve.mjs
 - **Wikilinks Obsidian** résolus, y compris les variantes (chiffres romains/arabes, zéros de tête) ; liens rouges pour les pages réellement absentes du vault
 - Callouts, **infobox** générée depuis le frontmatter YAML (réparé automatiquement s'il est invalide), sommaires, backlinks
 - **Recueil législatif** : tri naturel des articles (art-1, art-2, art-10…), sommaire par règlement, index par loi
-- Captures officielles des articles de loi + PDF sources, images cliquables pour agrandir
+- **Articles de loi** : texte officiel extrait de la couche texte du PDF LégisQuébec (copiable, lisible au
+  lecteur d'écran, cherchable), posé avant la capture officielle conservée ; PDF sources, images cliquables
 - **Mobile** : styles adaptatifs, cibles tactiles, bouton de retour en haut ; la vérification sur appareils réels reste distincte des tests automatiques
 - **Catégories** : une page par mot-clé du frontmatter porté par au moins 5 pages, tous domaines confondus
 - **Visite guidée** : se lance à la première venue sur chaque type de page (portail, tableau de bord,
@@ -108,6 +122,8 @@ node tools/serve.mjs
 - Suite terrain, lot 2 : « Solvants », « Sommeil et quart de nuit » et « Obligations de l’employeur » sont référencés dans `content-updates/2026-09-06-terrain-references-lot2.json`. Protection chimique conditionnelle, fatigue traitée aussi par l’organisation et renvois LSST corrigés vers le texte officiel. Un tableau à deux colonnes par note ; anciennes ancres, statuts et publics conservés. Les anciennes fiches juridiques mal intitulées restent à auditer séparément. Aucune validation spécialisée ni garantie de conformité n’est revendiquée.
 - Intégrité de publication : `.gitattributes` préserve les octets de `docs/` sans conversion de fins de ligne. Après construction et préparation des fichiers, `node tools/verif_publication.mjs --staged` compare les objets Git au manifeste hors ligne ; `npm --prefix tools run check:publication` vérifie le commit courant. Ce contrôle complète celui des fichiers locaux et évite les empreintes invalidées par une conversion Windows/Git.
 - Les sources `tools/app.js` et `tools/style.css`, copiées directement dans les assets, gardent également leurs octets dans Git : un changement de branche sous Windows ne doit pas faire diverger source et copie générée.
+- Texte officiel des articles de loi (9 septembre 2026) : `tools/extraire_textes_loi.mjs` lit les sept PDF du recueil (LSST, LATMP, LNT, LMRSST, RSST, RSSM, CSTC) page par page avec les coordonnées de chaque item — corps 11 pt, numéros d'article plus grands, historique législatif en 9 pt écarté, bandes d'en-tête et de pied ignorées, marge gauche mesurée par page pour découper les alinéas — et écrit `tools/textes-loi/*.json` (2,1 Mo, commis). Contrôles à l'extraction : aucun article vide, aucun doublon, numéros croissants à profondeur égale, aucun titre courant dans un texte ; croisement avec le site : les 2 833 articles publiés sont retrouvés et leur page PDF concorde avec le renvoi `#page=` de la note (sauf RSSM art. 83, dont la note renvoie à la page 9 alors que l'article est page 34). `tools/textes_loi.mjs` pose le texte sous le titre « Texte officiel » (le titre du vault « Texte officiel : capture du PDF » est renommé au rendu, la capture reste dessous) et l'ajoute à l'index plein texte. Aucune note du vault n'est modifiée ; le texte n'est ni corrigé ni complété. Détail dans `content-updates/2026-09-09-textes-de-loi.md`.
+- Renvois vers les notes d'analyse : les 59 renvois tranchés (13 à appliquer, 45 resserrés, 1 écarté) sont dans `content-updates/2026-09-09-renvois-sources.json` avec, pour chacun, l'ancrage et la ligne définitifs (`ancrageFinal`, `ligneFinale`). `tools/appliquer_renvois.mjs` les pose dans les notes (appel `[n](#ref-uni-n)` après l'ancrage, ligne dans « ## Références » avec lien vers la note d'analyse) ; sans `--appliquer`, il ne fait qu'afficher chaque pose avec son contexte. Le vault n'étant pas accessible depuis l'environnement de génération, rien n'y a encore été écrit.
 - Réutilisation ciblée : les schémas d’exposition et de vibrations enrichissent aussi « Voies d’exposition » et « Vibrations (pour toi) ». Notes archivées dans `content-updates/2026-09-06-images-utiles.json`. Ajouter un visuel seulement s’il explique un mécanisme, situe des éléments ou facilite une comparaison ; conserver le texte, les limites et les sources. Ne pas illustrer systématiquement les procédures ou les textes de loi.
 - Renvois vers les notes universitaires (9 septembre 2026) : `content-updates/2026-09-09-renvois-sources.json` liste 59 renvois entre les fiches pour les travailleurs et les notes « Analyse … » du vault, chacun avec son verdict (appliquer, resserrer, écarter), l'ancrage exact recopié de la fiche et la ligne de bibliographie à écrire. Proposés, relus par deux relecteurs contradictoires, tranchés puis contrôlés ; les 59 ancrages ont été vérifiés mot à mot. Ce fichier ne modifie aucune note : il dit où poser chaque renvoi, la décision d'écrire reste à prendre dans Obsidian.
 - Rendu sur petits écrans (9 septembre 2026) : les numéros d'urgence de l'index des fiches reçoivent une zone tactile de 44 px posée par un pseudo-élément, sans changer l'interligne du paragraphe ; le domaine affiché sous chaque fiche passe de 11,5 à 13 px ; la grille du portail cesse de déborder d'un écran de 320 px et le bloc de profil du tableau de bord s'efface sous 480 px ; « ↑ haut » et le fil d'Ariane atteignent le minimum WCAG 2.5.8 AA. Mesuré en émulation d'appareil sur cinq formats, figé par `tools/tests/rendu-mobile.test.mjs`. L'émulation ne remplace pas un essai sur téléphone réel.

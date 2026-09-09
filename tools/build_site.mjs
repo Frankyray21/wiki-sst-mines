@@ -14,6 +14,8 @@ import { normaliserNavigationInterne, metadonneesEditoriales, indicateursDocumen
 import { genererPwa, metaPwa, genererListeHorsLigne } from './pwa.mjs';
 import { rendreEnteteCompact, rendreTitreArticle } from './entete-article.mjs';
 import { normaliserBibliographie } from './bibliographie.mjs';
+import { motsDePage, encoderListe } from './recherche_mots.mjs';
+import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -965,6 +967,7 @@ const categories = [...parTag.entries()]
 const slugTag = new Map(categories.map(([t]) => [t, slugify(t)]));
 
 const backlinks = new Map(); // page -> Set(pages qui pointent vers elle)
+const nbTextesLoi = {};      // articles de loi dont le texte officiel a été posé, par mode d'insertion
 for (const p of pages) {
   CUR = p; p.toc = []; p.headIds = new Set();
   CUR_LINKS = new Set();
@@ -986,6 +989,17 @@ for (const p of pages) {
   }
 
   p.html = finalize(renderBody(corpsMd));
+  // Article de loi : le texte officiel extrait du PDF (tools/textes-loi) est posé avant la capture,
+  // et le sommaire reprend le titre renommé. Le texte compte aussi pour la recherche.
+  const tl = texteLoiDeLaPage(p.fm.loi, p.base);
+  if (tl) {
+    const pose = insererTexteLoi(p.html, tl);
+    p.html = pose.html;
+    p.texteLoi = texteBrut(tl);
+    if (pose.ajoutTitre) p.toc.push({ lv: 2, id: pose.ajoutTitre, text: LIBELLE_TEXTE });
+    renommerLibelleCapture(p.toc);
+    nbTextesLoi[pose.mode] = (nbTextesLoi[pose.mode] || 0) + 1;
+  }
   p.liens = [...CUR_LINKS].filter(x => x !== p); // liens sortants, pour le graphe
   blocks.length = 0;
   for (const target of CUR_LINKS) {
@@ -993,6 +1007,12 @@ for (const p of pages) {
     if (!backlinks.has(target)) backlinks.set(target, new Set());
     backlinks.get(target).add(p);
   }
+}
+
+{
+  const total = Object.values(nbTextesLoi).reduce((a, b) => a + b, 0);
+  const sansTexte = pages.filter(p => p.fm.loi && numeroDeLaPage(p.base) && !p.texteLoi).length;
+  console.log(`  texte officiel posé sur ${total} articles de loi (${Object.entries(nbTextesLoi).map(([m, n]) => m + ' ' + n).join(', ')}) · ${sansTexte} article(s) sans texte extrait`);
 }
 
 // Pages voisines : précédente et suivante dans le même dossier du vault, en ordre naturel
@@ -1416,7 +1436,8 @@ const searchIndex = pages.map(p => {
       ...(Array.isArray(p.fm.aliases) ? p.fm.aliases : []),
       p.base !== p.title ? p.base : '',
     ].filter(Boolean).join(' '),
-    x: extrait(p.body),
+    // sur un article de loi, l'extrait montre le texte officiel plutôt que le nom de la capture
+    x: p.texteLoi ? extrait(p.texteLoi) : extrait(p.body),
   };
   // chemin de catégorie : distingue les 31 groupes de pages homonymes
   const cat = p.relPath.split('/').slice(1, -1).map(cleanLabel).filter(Boolean).join(' › ');
@@ -1448,13 +1469,10 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
 // où elle apparaît, pas seulement dans les titres. Les identifiants sont les
 // positions dans search-index.json (les pages y viennent en premier, même ordre).
 {
-  const STOP = new Set(('le la les de des du un une et en au aux ou est sont pour par sur dans avec sans que qui dont ce cet cette ces se sa son ses leur leurs ne pas plus moins tout tous toute toutes comme mais donc car ni aussi ainsi entre vers chez sous selon lors puis afin etre avoir fait faire peut peuvent doit doivent elle elles ils lui nous vous votre vos notre nos meme memes autre autres cela ceci celui celle ceux celles ont ete etait sera soit').split(' '));
-  const normIdx = (s) => String(s).toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae').normalize('NFKD').replace(/[̀-ͯ]/g, '');
   const postings = new Map();
   pages.forEach((p, id) => {
-    const mots = new Set(normIdx(stripMd(p.body)).split(/[^a-z0-9.]+/)
-      .map(w => w.replace(/^\.+|\.+$/g, ''))
-      .filter(w => (w.length >= 3 || (w.length === 2 && /^\d+$/.test(w))) && w.length <= 40 && !STOP.has(w)));
+    // le texte officiel extrait du PDF (textes_loi) compte comme le corps : un mot de loi se cherche
+    const mots = motsDePage(stripMd(p.body) + (p.texteLoi ? '\n' + p.texteLoi : ''));
     for (const m of mots) {
       if (!postings.has(m)) postings.set(m, []);
       postings.get(m).push(id);
@@ -1465,8 +1483,7 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
   let nbPost = 0;
   for (const [mot, ids] of [...postings].sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
     if (ids.length > maxDf) continue; // présent dans 40 % des pages : ne discrimine rien
-    let prev = 0;
-    m[mot] = ids.map(id => { const d = (id - prev).toString(36); prev = id; return d; }).join(',');
+    m[mot] = encoderListe(ids);
     nbPost += ids.length;
   }
   const json = JSON.stringify({ n: pages.length, m });
