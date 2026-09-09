@@ -6,7 +6,9 @@ import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
-import { rendrePortailEncadrement, rendrePortailTravailleurs, faviconTravailleurs } from './portail_encadrement.mjs';
+import { rendrePortailEncadrement } from './portail_encadrement.mjs';
+import { INDEX_FICHES, LIEN_INDEX_FICHES, rendreIndexFiches, rendrePage404 } from './fiches_travailleurs.mjs';
+import { rendrePortailContenu } from './portail_racine.mjs';
 import { analyserQualite, LIBELLES } from './qualite.mjs';
 import { normaliserNavigationInterne, metadonneesEditoriales, indicateursDocumentaires } from './editorial.mjs';
 import { genererPwa, metaPwa, genererListeHorsLigne } from './pwa.mjs';
@@ -27,12 +29,11 @@ const WIKIS = {
   'Recueil législatif SST':    { slug: 'legislation',    icon: '⚖️', name: 'Recueil législatif',   desc: 'Lois, règlements, article par article, jurisprudence' },
 };
 
+// Un seul parcours par public subsiste : l'encadrement. L'ancien wiki des travailleurs (t/)
+// est abandonné ; ses pages restent dans le fond documentaire et sont indexées dans
+// travailleurs.html (fiches_travailleurs.mjs). L'autorisation « t » calculée plus bas
+// (publication-travailleur, public-cible, veto de sensibilité) sert désormais à cet index.
 const PUBLICS = {
-  t: {
-    slug: 't', icon: '👷', nom: 'Wiki des travailleurs',
-    tagline: 'Tes droits, ta santé, ta sécurité — expliqué simplement',
-    intro: 'Ce wiki est écrit pour toi qui travailles à la mine. Tu y trouves ce qu\'il faut savoir sur les risques du métier, ce que la loi te garantit, et où trouver de l\'aide.',
-  },
   g: {
     slug: 'g', icon: '🎓', nom: 'Gestion & prévention',
     tagline: 'Superviseurs, gestionnaires et direction — obligations, programmes et outils',
@@ -366,7 +367,7 @@ const articlesRetires = new Map(); // basename minuscule -> 'remplacé' | 'abrog
 }
 
 // Chemin de sortie dans le fond documentaire : miroir du vault, slugifié.
-// Les wikis par public préfixent ce chemin (t/… ou g/…) sans le recalculer.
+// Le parcours de l'encadrement préfixe ce chemin (g/…) sans le recalculer.
 const usedOut = new Set();
 for (const p of pages) {
   const parts = p.relPath.slice(0, -3).split('/');
@@ -564,7 +565,7 @@ let pngGain = 0, pngOptim = 0, pngIntacts = 0;
 // inversées en thème sombre au lieu d'éblouir le lecteur.
 const docsTexte = new Set();
 
-// Public en cours de génération : null pour le fond documentaire, 't' ou 'g' pour les wikis par public.
+// Public en cours de génération : null pour le fond documentaire, 'g' pour le parcours de l'encadrement.
 // Un lien vers une page du même public reste dans le wiki ; sinon il renvoie au fond documentaire.
 let PUB = null;
 function urlDe(pg) {
@@ -785,7 +786,7 @@ ${metaPwa(ROOT)}
   </div>
   <div class="nav-group"><div class="nav-title">Selon qui vous êtes</div>
     <ul>
-      <li><a href="${ROOT}t/index.html">${PUBLICS.t.icon} ${esc(PUBLICS.t.nom)}</a></li>
+      <li><a href="${ROOT}${INDEX_FICHES.out}">${LIEN_INDEX_FICHES}</a></li>
       <li><a href="${ROOT}g/index.html">${PUBLICS.g.icon} ${esc(PUBLICS.g.nom)}</a></li>
     </ul>
   </div>
@@ -1484,30 +1485,10 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
   fs.writeFileSync(path.join(OUT, 'recherche.html'), html);
 }
 
-// ---------- wikis par public (travailleurs / encadrement) ----------
-// Chaque public a son portail, sa navigation et ses pages. Le Recueil législatif n'est pas
-// dupliqué : le texte de loi est public et identique pour tous, les deux wikis y renvoient.
-// (déplacé en tête de fichier : la barre latérale en a besoin)
-
-// Rubriques du portail travailleurs : on entre par le problème vécu, pas par la discipline.
-const RUBRIQUES_T = [
-  { titre: 'J\'ai mal quelque part', icone: 'personne', mots: ['postures', 'manutention', 'travail répétitif', 'vibrations', 'tms'] },
-  { titre: 'Je respire quelque chose', icone: 'air', mots: ['poussières', 'diesel', 'silice', 'solvants', 'gaz', 'simdut', 'amiante'] },
-  { titre: 'Il fait trop chaud, j\'entends moins bien', icone: 'soleil', mots: ['chaleur', 'bruit', 'froid', 'thermique'] },
-  { titre: 'Ça ne va pas dans ma tête', icone: 'cerveau', mots: ['détresse', 'santé mentale', 'stress', 'aide', 'pae', 'appeler', 'rps'] },
-  { titre: 'Je ne dors plus', icone: 'lune', mots: ['sommeil', 'fatigue', 'quart de nuit', 'récupération'] },
-  { titre: 'Ça chauffe avec l\'équipe ou le boss', icone: 'gens', mots: ['équipe', 'reconnaissance', 'conflit', 'harcèlement', 'soutien'] },
-  { titre: 'Est-ce que j\'ai le droit ?', icone: 'balance', mots: ['droit de refus', 'réclamation', 'retour au travail', 'droits', 'lésion'] },
-  { titre: 'C\'est dangereux ici', icone: 'alerte', mots: ['danger', 'presqu', 'cadenassage', 'espaces clos', 'machines', 'protection'] },
-  { titre: 'La vie au camp', icone: 'accueil', mots: ['camp', 'fifo', 'famille', 'séjour'] },
-];
-
-const RUBRIQUES_G = [
-  { titre: 'Mes obligations légales', icone: '📋', mots: ['obligation', 'diligence', 'conformité', 'inspecteur', 'infraction', 'tarification', 'lmrsst'] },
-  { titre: 'Programmes et prévention', icone: '🛠️', mots: ['programme', 'prévention', 'aménagement', 'conception', 'politique', 'surveillance'] },
-  { titre: 'Gérer une situation', icone: '🚨', mots: ['accident', 'lésion', 'retour au travail', 'assignation', 'réclamation', 'refus', 'enquête'] },
-  { titre: 'Évaluer et mesurer', icone: '📊', mots: ['évaluation', 'mesure', 'questionnaire', 'indicateur', 'score', 'grille', 'analyse'] },
-];
+// ---------- parcours de l'encadrement ----------
+// Un portail en tableau de bord et une copie des pages autorisées, sous g/. Le Recueil
+// législatif n'est pas dupliqué : le texte de loi est public et identique pour tous.
+// L'ancien wiki des travailleurs (t/) n'est plus généré : ses pages sont indexées plus bas.
 
 function genererWikiPublic(pub) {
   const conf = PUBLICS[pub];
@@ -1542,71 +1523,29 @@ ${corps}
     fs.writeFileSync(dest, html);
   }
 
-  // --- rubriques du portail, remplies avec les pages réellement disponibles ---
-  // Comparaison sur des mots entiers normalisés : « équipe » ne doit pas attraper « équipements ».
-  const motsDe = (s) => ' ' + String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, ' ').trim() + ' ';
-  const contientExpression = (texte, expr) => texte.includes(' ' + motsDe(expr).trim() + ' ');
-
-  const accueils = horsLoi.filter(p => /accueil|démarrage|bienvenue/i.test(p.title) || /^\d+ - Articles/.test(p.base));
-  const articles = horsLoi.filter(p => !accueils.includes(p));
-
-  // Le vault contient souvent deux versions du même sujet : « Manutention (travailleurs) » et
-  // « Manutention (pour toi) ». On n'en montre qu'une, en préférant la formulation vulgarisée.
-  const sujetDe = (p) => motsDe(p.title.replace(/\s*\([^)]*\)\s*$/, '')).trim();
-  const vulgarisee = (p) => /\(pour toi\)/i.test(p.title);
-  const meilleure = new Map();
-  for (const p of articles) {
-    const s = sujetDe(p);
-    const dejaLa = meilleure.get(s);
-    if (!dejaLa || (vulgarisee(p) && !vulgarisee(dejaLa))) meilleure.set(s, p);
-  }
-  const articlesUniques = [...meilleure.values()];
-
-  const rubriques = (pub === 't' ? RUBRIQUES_T : RUBRIQUES_G).map(r => {
-    const membres = articlesUniques.filter(p => {
-      const t = motsDe(p.title + ' ' + p.relPath);
-      return r.mots.some(m => contientExpression(t, m));
-    });
-    return { ...r, membres };
-  });
-  const casees = new Set(rubriques.flatMap(r => r.membres));
-  const autres = articlesUniques.filter(p => !casees.has(p));
-
-  // Les deux publics partagent l'habillage tableau de bord ; seul le contenu diffère.
   fs.mkdirSync(path.join(OUT, pub), { recursive: true });
-  const donnees = {
+  const rendu = rendrePortailEncadrement({
     R: '../',
     nbLois: pagesPub.length - horsLoi.length,
     majDate: new Date().toLocaleDateString('fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }),
     verifier: (c) => existeDansLeSite(c),
-  };
-  const versCarte = (p) => ({ t: p.title, u: pub + '/' + p.out, dom: `${WIKIS[p.wikiKey].icon} ${WIKIS[p.wikiKey].name}` });
-  const rendu = pub === 'g'
-    ? rendrePortailEncadrement(donnees)
-    : rendrePortailTravailleurs({
-        ...donnees,
-        rubriques: rubriques.map(r => ({ titre: r.titre, icone: r.icone, membres: r.membres.map(versCarte) })),
-        accueils: accueils.map(versCarte),
-        autres: autres.map(versCarte),
-      });
+  });
   if (rendu.morts.length) console.warn(`  ⚠ portail ${pub} : ${rendu.morts.length} cible(s) introuvable(s) — ${rendu.morts.slice(0, 4).join(', ')}`);
   fs.writeFileSync(path.join(OUT, pub, 'index.html'), pageTableauDeBord({
     out: pub + '/index.html', titre: conf.nom, corps: rendu.html, dataPub: pub,
   }));
 
   PUB = null;
-  return { total: pagesPub.length, horsLoi: horsLoi.length, rubriques };
+  return { total: pagesPub.length, horsLoi: horsLoi.length };
 }
 
 function sidebarPublic(pub) {
   const conf = PUBLICS[pub];
-  const autre = pub === 't' ? PUBLICS.g : PUBLICS.t;
   return `<div class="nav-group"><div class="nav-title">${conf.icon} ${esc(conf.nom)}</div>
   <ul>
     <li><a href="{{ROOT}}${pub}/index.html">Accueil</a></li>
     <li><a href="{{ROOT}}w/legislation/index-par-loi.html">Les articles de loi</a></li>
-    <li><a href="{{ROOT}}${autre.slug}/index.html">${autre.icon} ${esc(autre.nom)}</a></li>
+    <li><a href="{{ROOT}}${INDEX_FICHES.out}">${LIEN_INDEX_FICHES}</a></li>
     <li><a href="{{ROOT}}index.html">🏠 Tous les wikis</a></li>
   </ul></div>`;
 }
@@ -1627,7 +1566,7 @@ function pageTableauDeBord({ out, titre, corps, dataPub }) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(titre)} — WIKI SST Mines</title>
 <link rel="stylesheet" href="${R}assets/portail.css?v=${V}">
-<link rel="icon" href="${dataPub === 't' ? faviconTravailleurs : "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>"}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 ${metaPwa(R)}
 <script>window.ROOT='${R}';${SCRIPT_THEME}</script>
 </head>
@@ -1659,11 +1598,33 @@ function pageAutonome({ out, titre, contenu }) {
 </html>`;
 }
 
-console.log('Wikis par public…');
-const statT = genererWikiPublic('t');
+console.log('Parcours de l\'encadrement…');
 const statG = genererWikiPublic('g');
-console.log(`  👷 travailleurs : ${statT.horsLoi} pages + ${statT.total - statT.horsLoi} articles de loi`);
 console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - statG.horsLoi} articles de loi`);
+
+// ---------- index des fiches pour les travailleurs ----------
+// Mêmes pages que l'ancien wiki des travailleurs, même autorisation (frontmatter du vault),
+// mais listées dans le fond documentaire au lieu d'être dupliquées dans un site à part.
+// 404.html redirige les anciennes adresses t/… vers ces pages.
+const fiches = pages
+  .filter(p => p.publics.has('t') && p.wikiKey !== 'Recueil législatif SST')
+  .map(p => ({ titre: p.title, out: p.out, base: p.base, domaine: WIKIS[p.wikiKey] }));
+const siPresent = (cible) => existeDansLeSite(cible) ? cible : null;
+const indexFiches = rendreIndexFiches({
+  fiches,
+  liens: {
+    aide: siPresent('w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html'),
+    ressources: siPresent('w/psychosocial/50-ressources-daide/lignes-daide-et-pae.html'),
+    categorie: siPresent('categorie/travailleur.html'),
+    lois: siPresent('w/legislation/index-par-loi.html'),
+    encadrement: 'g/index.html',
+  },
+});
+fs.writeFileSync(path.join(OUT, INDEX_FICHES.out),
+  pageShell({ out: INDEX_FICHES.out, title: INDEX_FICHES.titre, wikiKey: null, content: indexFiches.html })
+    .replace(/\{\{ROOT\}\}/g, ''));
+fs.writeFileSync(path.join(OUT, '404.html'), rendrePage404());
+console.log(`  👷 fiches pour les travailleurs : ${indexFiches.total} pages indexées dans ${INDEX_FICHES.out} (${indexFiches.nonClassees} hors rubrique, ${indexFiches.ecartees} doublon(s) écarté(s))`);
 
 // ---------- portail ----------
 {
@@ -1677,41 +1638,11 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
     </a>`;
   }).join('');
   const total = pages.length;
-  const content = `
-<div class="portal-hero">
-  <div class="portal-globe">⛏️</div>
-  <h1>WIKI SST — Mines</h1>
-  <p class="portal-tagline">L'encyclopédie santé et sécurité du travail en milieu minier<br>${total.toLocaleString('fr-CA')} articles en français · construite à partir des notes de cours</p>
-  <div class="portal-search"><input type="search" id="q2" aria-label="Rechercher dans le wiki" placeholder="Rechercher parmi ${total.toLocaleString('fr-CA')} articles…" autocomplete="off"><div id="suggest2" class="suggest" hidden></div></div>
-</div>
-<h2 class="portal-section">Deux wikis selon qui tu es</h2>
-<div class="portal-grid portal-publics">
-  <a class="portal-card carte-public" href="t/index.html">
-    <span class="portal-icon">👷</span>
-    <span class="portal-info"><strong>Je suis travailleur</strong><span class="portal-desc">${esc(PUBLICS.t.tagline)}</span><span class="portal-count">${statT.horsLoi} pages + les articles de loi</span></span>
-  </a>
-  <a class="portal-card carte-public" href="g/index.html">
-    <span class="portal-icon">🎓</span>
-    <span class="portal-info"><strong>Je supervise ou je dirige</strong><span class="portal-desc">${esc(PUBLICS.g.tagline)}</span><span class="portal-count">${statG.horsLoi} pages + les articles de loi</span></span>
-  </a>
-</div>
-<h2 class="portal-section">Le fond documentaire complet</h2>
-<p class="portal-note">Les ${total.toLocaleString('fr-CA')} pages, classées par discipline. Destiné au conseiller SST et à la recherche documentaire.</p>
-<div class="portal-grid">${cards}</div>
-<h2 class="portal-section">Parcourir par sujet</h2>
-<div class="portal-grid">
-  <a class="portal-card" href="categories.html">
-    <span class="portal-icon">🏷️</span>
-    <span class="portal-info"><strong>Catégories</strong><span class="portal-desc">Les mots-clés qui traversent les disciplines : bruit, explosifs, espaces clos, silice… Chaque catégorie réunit les articles du même sujet, quel que soit le domaine.</span><span class="portal-count">${categories.length} catégories</span></span>
-  </a>
-  <a class="portal-card" href="qualite.html">
-    <span class="portal-icon">🔧</span>
-    <span class="portal-info"><strong>Contrôles de forme</strong><span class="portal-desc">Repérer les textes coupés, sections vides et références à vérifier. Ces signalements automatiques ne valident ni le contenu SST ni sa conformité.</span><span class="portal-count">${rapportQualite.length} pages à examiner</span></span>
-  </a>
-</div>
-<div class="portal-foot">
-  <a href="#" id="randomLink2">🎲 Une page au hasard</a>
-</div>`;
+  const content = rendrePortailContenu({
+    total, cartesWikis: cards, nbFiches: indexFiches.total,
+    nbPagesEncadrement: statG.horsLoi, taglineEncadrement: PUBLICS.g.tagline,
+    nbCategories: categories.length, nbPagesQualite: rapportQualite.length,
+  });
   const html = `<!DOCTYPE html>
 <html lang="fr">
 <head>

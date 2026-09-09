@@ -55,7 +55,7 @@ function fauxDocument() {
     getAttribute(name) { return this.attrs[name] ?? null; }
     hasAttribute(name) { return name in this.attrs; }
     removeAttribute(name) { delete this.attrs[name]; }
-    get href() { return new URL(this.attrs.href || '', 'https://example.test/wiki-sst-mines/t/').href; }
+    get href() { return new URL(this.attrs.href || '', 'https://example.test/wiki-sst-mines/g/').href; }
     appendChild(child) { this.children.push(child); child.parentNode = this; return child; }
     insertBefore(child, next) {
       const at = this.children.indexOf(next);
@@ -131,7 +131,6 @@ let nombre = 0;
 async function test(nom, fn) { await fn(); nombre++; console.log('OK ' + nom); }
 
 async function main() {
-  const { texteSansEmoji } = await import('../portail_encadrement.mjs');
   await test('Références légales exactes : espaces, tirets, art., article et ordre inversé', () => {
     const ctx = recherche();
     const attendu = 'w/legislation/10-lois-principales/lsst/art-51-lsst-obligations-employeur.html';
@@ -211,26 +210,14 @@ async function main() {
     assert.equal(box.hidden, true);
     assert.equal(input.getAttribute('aria-expanded'), 'false');
   });
-  await test('Suggestions travailleurs : emojis retirés à l’affichage, recherche et destination conservées', async () => {
-    const { input, box, ctx, fixture } = barreRecherche();
-    fixture[0].t = '🎯 Silice'; fixture[0].i = '🌫️';
-    ctx.window.WIKI_UI = { texte: texteSansEmoji };
-    input.value = 'silice'; input.dispatch('input'); await flush();
-    assert.ok(!/🎯|🌫|\uFE0F/.test(box.innerHTML));
-    assert.ok(box.innerHTML.includes('Silice'));
-    input.dispatch('keydown', { key: 'ArrowDown' });
-    input.dispatch('keydown', { key: 'Enter' });
-    assert.equal(ctx.location.href, 'https://example.test/wiki-sst-mines/w/silice.html');
-    assert.equal(fixture[0].t, '🎯 Silice');
-  });
-  for (const sobre of [false, true]) await test('Historique et favoris : dépliage et stockage conservés' + (sobre ? ', sans emojis' : ', historique'), () => {
+  await test('Historique et favoris : dépliage et stockage conservés, titres affichés tels quels', () => {
     const doc = fauxDocument(); doc.body.className = 'tb';
     for (const [liste, voir] of [['tbRecents', 'tbVoirHist'], ['tbFavoris', 'tbVoirFav']]) {
       doc.make('ul', liste).innerHTML = '<li>Liste vide</li>';
       const old = doc.make('a', voir); old.className = 'tb-voir'; old.hidden = true;
     }
     const values = Array.from({ length: 8 }, (_, i) => ({ u: 'w/page-' + i + '.html', t: '🎯 Page ' + i, d: 0 }));
-    const ctx = { document: doc, window: sobre ? { WIKI_UI: { texte: texteSansEmoji, icones: { favori: '<svg aria-hidden="true"></svg>' } } } : {}, ROOT: '../', MEM: { lire: () => values }, escHtml: s => s,
+    const ctx = { document: doc, window: {}, ROOT: '../', MEM: { lire: () => values }, escHtml: s => s,
       ilYA: () => 'hier', fetch: () => Promise.resolve({ ok: false }), vUrl: s => s };
     vm.createContext(ctx);
     const start = code.indexOf('  (function tableauDeBord()');
@@ -238,7 +225,7 @@ async function main() {
     vm.runInContext(code.slice(start, end), ctx);
     for (const [liste, voir] of [['tbRecents', 'tbVoirHist'], ['tbFavoris', 'tbVoirFav']]) {
       const ul = doc.getElementById(liste), button = doc.getElementById(voir);
-      assert.equal(ul.innerHTML.includes('🎯'), !sobre);
+      assert.ok(ul.innerHTML.includes('🎯'), 'titres affichés tels quels');
       assert.equal(values[0].t, '🎯 Page 0', 'stockage intact');
       assert.equal(ul.querySelectorAll('a').length, 5);
       assert.equal(button.tagName, 'BUTTON');

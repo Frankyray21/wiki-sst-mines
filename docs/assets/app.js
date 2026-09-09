@@ -276,7 +276,7 @@
     function open(res, q) {
       if (!res.items.length) { message('Aucun résultat pour « ' + escHtml(q) + ' »'); return; }
       var html = res.items.map(function (e) {
-        return '<a href="' + ROOT + e.u + '"><span class="s-title">' + (window.WIKI_UI ? '' : e.i + ' ') + hl(window.WIKI_UI ? window.WIKI_UI.texte(e.t) : e.t, q) +
+        return '<a href="' + ROOT + e.u + '"><span class="s-title">' + e.i + ' ' + hl(e.t, q) +
           (pastille[e.q] || '') + '</span><span class="s-meta">' + ligneMeta(e) + '</span></a>';
       }).join('');
       html += '<a class="s-all" href="' + ROOT + 'recherche.html?q=' + encodeURIComponent(q) + '">' +
@@ -543,8 +543,8 @@
       function peindre() {
         var visibles = deplie ? items : items.slice(0, 5);
         ul.innerHTML = visibles.map(function (e) {
-          var lien = '<a href="' + ROOT + e.u + '">' + escHtml(window.WIKI_UI ? window.WIKI_UI.texte(e.t) : e.t) + (avecEtoile ? '' : '<span class="tb-quand">' + ilYA(e.d) + '</span>') + '</a>';
-          return avecEtoile ? '<li><span class="tb-etoile">' + (window.WIKI_UI ? window.WIKI_UI.icones.favori : '★') + '</span>' + lien + '</li>' : '<li>' + lien + '</li>';
+          var lien = '<a href="' + ROOT + e.u + '">' + escHtml(e.t) + (avecEtoile ? '' : '<span class="tb-quand">' + ilYA(e.d) + '</span>') + '</a>';
+          return avecEtoile ? '<li><span class="tb-etoile">★</span>' + lien + '</li>' : '<li>' + lien + '</li>';
         }).join('');
         if (bouton) {
           bouton.setAttribute('aria-expanded', deplie ? 'true' : 'false');
@@ -781,17 +781,6 @@
 
   // Étapes selon la page affichée
   function etapesDeLaPage() {
-    if (document.body.classList.contains('tb') && document.body.getAttribute('data-pub') === 't') {
-      return ['tour-travailleurs', [
-        { titre: 'Bienvenue', texte: 'Cet espace est écrit pour toi qui travailles à la mine. On y entre par ce qui t’arrive, pas par des termes techniques.' },
-        { titre: 'Si ça ne va pas, c’est ici', texte: 'Ce bandeau reste en haut de l’accueil. Les numéros sont cliquables : un toucher et le téléphone compose.', cible: '.tb-urgence' },
-        { titre: 'Cherche avec tes mots', texte: 'Un risque, un droit, un malaise — tape-le comme tu le dirais. Les puces reprennent les recherches les plus fréquentes.', cible: '.tb-recherche' },
-        { titre: 'Trouve par ta situation', texte: '« J’ai mal quelque part », « Je ne dors plus », « Est-ce que j’ai le droit ? » : choisis la phrase qui te ressemble.', cible: '.tb-rub' },
-        { titre: 'Tes droits, en toutes lettres', texte: 'Le refus de travail, le retrait préventif, la réclamation : ce que la loi te garantit, dans son texte officiel.', cible: '.tb-legal' },
-        { titre: 'Tes pages te suivent', texte: 'Ce que tu ouvres s’inscrit dans « Récemment consulté », et l’étoile d’un article le garde dans tes favoris.', cible: '#tbRecents' },
-        { titre: 'Tout est aussi rangé à gauche', texte: 'La barre latérale reprend les sujets et les domaines. Le bouton « ? » relance cette visite quand tu veux.', cible: '.tb-side' },
-      ]];
-    }
     if (document.body.classList.contains('tb')) {
       return ['tour-encadrement', [
         { titre: 'Bienvenue dans Gestion & prévention', texte: 'Cet espace réunit ce qu’un superviseur, un gestionnaire ou un dirigeant doit savoir. Voici comment vous y retrouver en quelques secondes.' },
@@ -803,19 +792,12 @@
         { titre: 'Tout est aussi rangé à gauche', texte: 'La barre latérale donne accès aux obligations, aux programmes, aux outils et aux domaines. Vous pouvez relancer cette visite à tout moment par le bouton « ? ».', cible: '.tb-side' },
       ]];
     }
-    if (document.getElementById('tbRecents') === null && document.querySelector('.encart-urgence')) {
-      return ['tour-travailleurs', [
-        { titre: 'Bienvenue', texte: 'Ce wiki est écrit pour vous qui travaillez à la mine. On y entre par ce qui vous arrive, pas par des termes techniques.' },
-        { titre: 'Si ça ne va pas, c’est ici', texte: 'Ce bandeau reste en haut de la page. Les numéros sont cliquables : un toucher et le téléphone compose.', cible: '.encart-urgence' },
-        { titre: 'Trouvez par votre problème', texte: '« J’ai mal quelque part », « Je ne dors plus », « Est-ce que j’ai le droit ? » : choisissez la phrase qui vous ressemble.', cible: '.rubrique' },
-        { titre: 'Vos droits, en toutes lettres', texte: 'Le refus de travail, le retrait préventif, la réclamation : ce que la loi vous garantit, dans son texte officiel.', cible: '.portal-grid' },
-      ]];
-    }
     if (document.querySelector('.portal-publics')) {
       return ['tour-portail', [
-        { titre: 'Bienvenue dans le wiki SST', texte: 'Ce site réunit vos notes de cours en une encyclopédie consultable. Trois entrées, selon qui consulte.' },
-        { titre: 'Deux espaces selon qui vous êtes', texte: 'L’espace travailleurs parle simplement des risques et des droits. Gestion & prévention traite des obligations et des programmes.', cible: '.portal-publics' },
-        { titre: 'Le fond documentaire complet', texte: 'Les 4 500 pages classées par discipline, pour le conseiller SST et la recherche documentaire.', cible: '.portal-section + .portal-note + .portal-grid' },
+        { titre: 'Bienvenue dans le wiki SST', texte: 'Ce site réunit vos notes de cours en une encyclopédie consultable. Voici comment s’y retrouver en quelques secondes.' },
+        { titre: 'Le fond documentaire', texte: 'Les pages sont classées par discipline : ergonomie, hygiène, toxicologie, sécurité, droit du travail, psychosocial, et le recueil des lois et règlements, article par article.', cible: '.portal-section + .portal-note + .portal-grid' },
+        { titre: 'Par sujet ou par situation', texte: 'Les catégories traversent les disciplines. Les fiches pour les travailleurs, courtes et en mots simples, sont classées par situation vécue : douleurs, air, chaleur, sommeil, droits, dangers.', cible: '.portal-sujets' },
+        { titre: 'L’espace de l’encadrement', texte: 'Gestion & prévention réunit obligations, programmes et outils pour les superviseurs, les gestionnaires et la direction.', cible: '.portal-publics' },
         { titre: 'Chercher partout à la fois', texte: 'La recherche lit le texte entier des pages, pas seulement les titres : un mot cité au détour d’un paragraphe se retrouve. Essayez « art 4 RSST », « silice » ou « boulonneur ».', cible: '.portal-search' },
       ]];
     }
@@ -1037,7 +1019,7 @@
         dlg = document.createElement('div');
         dlg.className = 'pwa-aide';
         dlg.innerHTML = '<div class="pwa-aide-boite" role="dialog" aria-label="Hors-ligne">' +
-          '<h3>' + (window.WIKI_UI ? '' : '📶 ') + 'Consultation hors ligne</h3>' +
+          '<h3>📶 Consultation hors ligne</h3>' +
           '<p id="hl-etat" role="status" aria-live="polite" aria-atomic="true">Interrogation du cache…</p>' +
           '<div class="hl-barre" id="hl-barre" hidden><div class="hl-barre-plein" id="hl-plein"></div></div>' +
           '<p id="hl-note" class="hl-note"></p>' +
@@ -1206,8 +1188,7 @@
         var b = document.createElement('button');
         b.id = 'btnHorsLigne';
         b.className = ancre.className;
-        if (window.WIKI_UI) b.innerHTML = window.WIKI_UI.icones.horsLigne;
-        else b.textContent = '📶';
+        b.textContent = '📶';
         b.setAttribute('title', 'Consultation hors ligne');
         b.setAttribute('aria-label', 'Consultation hors ligne');
         b.addEventListener('click', ouvrirPanneau);
@@ -1227,8 +1208,7 @@
       var b = document.createElement('button');
       b.id = 'btnInstall';
       b.className = ancre.className;
-      if (window.WIKI_UI) b.innerHTML = window.WIKI_UI.icones.installer;
-      else b.textContent = '📲';
+      b.textContent = '📲';
       b.setAttribute('title', 'Installer l’application');
       b.setAttribute('aria-label', 'Installer l’application');
       b.addEventListener('click', function () {
@@ -1250,7 +1230,7 @@
       var v = document.createElement('div');
       v.className = 'pwa-aide';
       v.innerHTML = '<div class="pwa-aide-boite" role="dialog" aria-label="Installer l’application">' +
-        '<h3>' + (window.WIKI_UI ? '' : '📲 ') + 'Installer le Wiki SST</h3>' +
+        '<h3>📲 Installer le Wiki SST</h3>' +
         '<p>Ouvre le menu <strong>Partager</strong> de ton navigateur (l’icône <strong>⎋</strong> ou <strong>⋮</strong>), ' +
         'puis choisis <strong>« Sur l’écran d’accueil »</strong> ou <strong>« Installer l’application »</strong>.</p>' +
         '<p>Le wiki s’ouvrira ensuite comme une app. Sur iPhone/iPad, ouvre l’app installée au moins une fois avec du réseau : le contenu hors ligne se télécharge dans l’app, pas dans Safari.</p>' +
@@ -1296,8 +1276,7 @@
       if (v === 'auto') document.documentElement.removeAttribute('data-theme');
       else document.documentElement.setAttribute('data-theme', v);
       var e = ETATS.filter(function (x) { return x.cle === v; })[0] || ETATS[0];
-      if (window.WIKI_UI) btn.innerHTML = window.WIKI_UI.icones[e.cle];
-      else btn.textContent = e.icone;
+      btn.textContent = e.icone;
       btn.setAttribute('title', e.libelle + ' — cliquer pour changer');
       btn.setAttribute('aria-label', e.libelle + ' — cliquer pour changer');
     }
