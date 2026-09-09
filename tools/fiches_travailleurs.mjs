@@ -83,7 +83,9 @@ export function rendreIndexFiches({ fiches, liens = {} }) {
   // Numéros et formulation repris des notes du vault (Où appeler quand ça ne va pas ; Lignes d'aide).
   const renvoisAide = [lien(liens.aide, 'Où appeler quand ça ne va pas'), lien(liens.ressources, 'Lignes d’aide et ressources de soutien')]
     .filter(Boolean).map(l => ' ' + l + '.').join('');
-  const aide = `<div class="callout callout-warning"><div class="callout-title"><span class="callout-icon">⚠️</span>Détresse immédiate</div><div class="callout-body"><p>Urgence : <a href="tel:911">9-1-1</a>. Crise psychologique non urgente : Info-Social <a href="tel:811">8-1-1</a>, option 2, 24 heures sur 24. Prévention du suicide : <a href="tel:988">9-8-8</a> ou <a href="tel:18662773553">1-866-APPELLE</a>.${renvoisAide}</p></div></div>`;
+  // « encadre-urgence » : les numéros doivent rester touchables avec des gants, la feuille
+  // de style leur donne une cible de 44 px sur petit écran.
+  const aide = `<div class="callout callout-warning encadre-urgence"><div class="callout-title"><span class="callout-icon">⚠️</span>Détresse immédiate</div><div class="callout-body"><p>Urgence : <a href="tel:911">9-1-1</a>. Crise psychologique non urgente : Info-Social <a href="tel:811">8-1-1</a>, option 2, 24 heures sur 24. Prévention du suicide : <a href="tel:988">9-8-8</a> ou <a href="tel:18662773553">1-866-APPELLE</a>.${renvoisAide}</p></div></div>`;
   const voirAussi = [
     lien(liens.lois, 'Les articles de loi, classés par loi et par article'),
     lien(liens.categorie, 'Catégorie : travailleur') && `${lien(liens.categorie, 'Catégorie : travailleur')} — toutes les pages qui portent ce mot-clé`,

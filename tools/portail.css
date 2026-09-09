@@ -231,6 +231,13 @@ body.tb a { color: inherit; text-decoration: none; }
 .tb-urgence .tb-urgence-lien { margin-left: auto; font-weight: 600; white-space: normal; }
 .tb-rub { scroll-margin-top: 84px; }
 
+/* Le bloc de profil de l'en-tête (avatar + nom + fonction) débordait de l'écran sur
+   téléphone : mesuré jusqu'à 359 px de bord droit pour une fenêtre de 320 px. Il est
+   décoratif — le nom du profil n'est pas une commande — donc il s'efface sous 480 px. */
+@media (max-width: 480px) {
+  .tb-profil { display: none; }
+}
+
 /* suggestions de recherche réutilisées */
 .tb-sugg {
   position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 40;

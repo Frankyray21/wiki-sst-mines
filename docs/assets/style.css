@@ -709,6 +709,31 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   .toc-title { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
   .toc-toggle { min-height: 44px; padding: 0 12px; font-size: 14px; }
   .search-filters .filtre { min-height: 40px; }
+  /* Numéros d'urgence de l'index des fiches : mesurés à 34 x 16 px, ils étaient les liens
+     les plus petits de la page alors qu'ils sont les plus importants — composés d'une main
+     gantée, parfois dans l'urgence. La zone tactile est portée à 44 px par un pseudo-élément
+     posé par-dessus : la hauteur de ligne du paragraphe ne bouge pas, sinon la phrase se
+     disloque sur quatre lignes très espacées. */
+  .encadre-urgence .callout-body a { position: relative; }
+  /* Le gras est réservé aux numéros : les deux renvois vers les pages d'aide restent des
+     liens ordinaires, sinon la moitié de l'encadré est en gras et plus rien ne ressort. */
+  .encadre-urgence .callout-body a[href^="tel:"] { font-weight: 700; }
+  .encadre-urgence .callout-body a::after {
+    content: ''; position: absolute; left: -6px; right: -6px; top: 50%;
+    transform: translateY(-50%); height: 44px; min-width: 44px;
+  }
+  /* Le domaine affiché à côté de chaque fiche descendait à 11,5 px : trop petit sous terre. */
+  .cat-pages .cat-compte { font-size: 13px; }
+  /* Une carte de 300 px ne tient pas dans les 276 px utiles d'un écran de 320 px : la grille
+     débordait de 2 px et faisait apparaître une barre horizontale. */
+  .portal-grid { grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
+  .portal-main { padding: 32px 14px 36px; }
+  /* « ↑ haut » mesurait 33 x 14 px, sous le minimum WCAG 2.5.8 AA de 24 px. Le padding
+     l'amène au-dessus sans faire grossir la ligne du titre qui le porte. */
+  .retour-haut { display: inline-block; padding: 6px 8px; }
+  /* Fil d'Ariane : 35 x 14 px, seul élément resté sous le minimum WCAG 2.5.8 AA.
+     Le padding vertical tient dans l'interligne, la ligne ne se déplace pas. */
+  .breadcrumbs a { display: inline-block; padding: 6px 3px; }
 }
 @media (max-width: 600px) {
   /* Une rangée d'actions, une rangée de recherche, même après ajout de l'aide/PWA. */

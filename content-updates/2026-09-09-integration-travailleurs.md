@@ -27,6 +27,26 @@ Lecture retenue : le wiki par public `/t/` (portail en tableau de bord au « tu 
 
 `node tools/verif_site.mjs` : OK (4 443 fichiers hachés, 84 liens de fiches dans l'index). `node tools/verif_liens.mjs` : 247 820 liens et 8 467 fragments vérifiés, 0 erreur. `npm --prefix tools test` : 70 tests, dont les nouveaux `fiches-travailleurs`, `portail-racine` et `commandes-entete`. Ces contrôles sont statiques : ils ne remplacent ni un essai sur téléphone ni une relecture du fond.
 
+## Rendu sur petits écrans
+
+Mesuré le 9 septembre en émulation d'appareil dans Chromium (Playwright), sur cinq formats de 320 à 768 px : Android 320 px, iPhone SE, iPhone 14 Pro, Pixel 7, iPad Mini, et sur cinq pages (index des fiches, une fiche, portail, tableau de bord, page 404). **Ce n'est pas un essai sur téléphone réel** : ni doigt, ni gant, ni clavier logiciel, ni moteur WebKit d'iOS, ni réseau de fond de mine. Les mesures portent sur la mise en page calculée, les zones tactiles réellement atteintes et le comportement du menu.
+
+Constat de départ : l'index et les fiches ne débordaient sur aucun format, mais quatre défauts sont apparus, dont un que la reprise avait introduit.
+
+| Défaut | Mesure avant | Après | Origine |
+| --- | --- | --- | --- |
+| Numéros d'urgence trop petits | 34 × 16 px | zone tactile 45 × 43 px | introduit par l'encadré d'aide de l'index |
+| Domaine sous chaque fiche illisible | 11,5 px, 76 occurrences | 13 px, aucune sous 12 px | introduit par l'index |
+| Portail : débordement horizontal | 322 px pour 320 | plus de débordement | préexistant (grille à 300 px minimum) |
+| Tableau de bord : bloc de profil hors écran | jusqu'à 359 px pour 320 | masqué sous 480 px | préexistant |
+| « ↑ haut » et fil d'Ariane sous le minimum AA | 33 × 14 et 35 × 14 px | 49 × 31 et 41 × 32 px | préexistant |
+
+Après correction : **aucun débordement horizontal sur les 25 combinaisons**, aucune erreur JavaScript, plus aucun texte sous 12 px ni aucune cible sous le minimum WCAG 2.5.8 AA de 24 px. Le menu s'ouvre, expose bien le lien vers l'index et se ferme avec Échap ; le saut vers une rubrique place son titre sous l'en-tête sans le masquer.
+
+Deux points méritent d'être notés. La première correction des numéros d'urgence, par hauteur de ligne de 44 px, disloquait le paragraphe sur quatre lignes très espacées : seule la capture l'a montré, la mesure la déclarait conforme. La zone tactile est donc posée par un pseudo-élément, qui ne touche pas à l'interligne. Et le gras est réservé aux numéros : appliqué aussi aux deux renvois, il chargeait la moitié de l'encadré.
+
+Ces règles sont figées par `tools/tests/rendu-mobile.test.mjs`. Restent à vérifier sur un appareil réel : la composition effective d'un numéro depuis un lien `tel:`, la lisibilité sous casque et poussière, et le comportement hors ligne dans l'application installée.
+
 ## Rubriques de l'index
 
 Le classement se fait sur des mots entiers du titre et du chemin (dossiers du vault compris), première rubrique gagnante, dans cet ordre. Un renommage dans Obsidian peut déplacer une fiche ; le journal de construction indique le nombre de fiches hors rubrique (0 aujourd'hui).
@@ -259,6 +279,106 @@ Renvois retenus par les deux relecteurs :
 Renvois refusés à la relecture (conservés pour mémoire) :
 
 - Bien vivre son séjour au camp → INSPQ (2018) - RPS en milieu minier québécois et impacts du régime FIFO — « Le sommeil est le premier facteur qui change tout dans la rotation. » — motif : La note documente une prévalence (70 % de troubles de sommeil, 45 % souvent très fatigués) et rattache cette fatigue à des déterminants organisationnels — longues heures, courtes récupérations entre quarts, qualité de l'hébergement — mais ne hiérarchise jamais les facteurs et ne présente pas le sommeil comme le premier d'entre eux ; le sommeil y figure comme manifestation du facteur « exigences psychologiques élevées », un RPS parmi les cinq identifiés. L'affirmation « premier facteur qui change tout » attribue à l'INSPQ un classement absent de la note et déplace vers l'individu ce que la source impute aux conditions de travail.
+
+### Décision finale sur les renvois retenus
+
+Chaque renvoi retenu a ensuite été tranché : l'appliquer tel quel, resserrer son ancrage sur la portion que la note appuie vraiment, ou l'écarter. Un contrôleur a vérifié chaque décision contre les deux textes. Résultat : **13 à appliquer tels quels, 45 à resserrer, 1 à écarter**, dont 52 décisions confirmées et 7 corrigées par le contrôleur.
+
+Que presque tous les renvois demandent un resserrement n'est pas un échec : c'est le constat que ces notes appuient une proposition précise, rarement une puce entière. Le détail applicable — ancrage exact recopié de la fiche, ligne de bibliographie, motif, contrôle — est dans `content-updates/2026-09-09-renvois-sources.json`, au format des archives du dépôt. **Rien n'a été écrit dans le vault** : le fichier dit où poser chaque renvoi, il ne le pose pas.
+
+#### Douleurs, postures et efforts
+
+| Fiche | Note du vault | Décision | Ancrage exact dans la fiche |
+| --- | --- | --- | --- |
+| Ça fait mal et ça revient, est-ce un TMS | Moore et Garg (1995) - Le Strain Index (outil ergonomique TMS distaux) | resserrer | « Plus c'est intense, long et fréquent, plus c'est risqué » |
+| Manutention (pour toi) | Snook et Ciriello (1991) - Tables psychophysiques de manutention (Liberty Mutual) | resserrer (corrigée au contrôle) | « Le poids seul ne suffit pas à évaluer le risque. » |
+| Manutention (pour toi) | IRSST (2016) - Guide de manutention manuelle (référentiel québécois) | appliquer | « Aides à examiner selon la tâche : chariot, palan et autres équipements de manutention adaptés. Leur choix et leur utilisation demandent une évaluation du travail réel. » |
+| Postures (pour toi) | Moore et Garg (1995) - Le Strain Index (outil ergonomique TMS distaux) | resserrer | « Plus loin du neutre = pire. » |
+| Travail répétitif (pour toi) | Moore et Garg (1995) - Le Strain Index (outil ergonomique TMS distaux) | resserrer | « Répéter le même geste à grande vitesse. » |
+
+#### Santé mentale et soutien
+
+| Fiche | Note du vault | Décision | Ancrage exact dans la fiche |
+| --- | --- | --- | --- |
+| Après un accident grave ou un événement marquant au travail | CNESST (2023) - Statistiques et cadre légal de la santé mentale au travail au Québec | resserrer | « peut être reconnu comme lésion professionnelle » |
+| Après un accident grave ou un événement marquant au travail | Labra et al. (2021) - Rapport scientifique FIFO : hommes québécois et travail loin du domicile | resserrer | « Te dire « je vais m'en remettre tout seul » » |
+| Bien utiliser les ressources de soutien | Labra et al. (2021) - Rapport scientifique FIFO : hommes québécois et travail loin du domicile | resserrer | « Savoir ce qui existe » |
+| Dépression ou choc après un accident, est-ce reconnu par la CNESST | CNESST (2023) - Statistiques et cadre légal de la santé mentale au travail au Québec | resserrer | « Le travail n'a pas à être la seule cause. » |
+| Dépression ou choc après un accident, est-ce reconnu par la CNESST | CNESST (2023) - Statistiques et cadre légal de la santé mentale au travail au Québec | appliquer | « Un diagnostic posé par un médecin ou un professionnel reconnu. » |
+| Dépression ou choc après un accident, est-ce reconnu par la CNESST | Theorell et al. (2015) - Revue systématique et méta-analyse : RPS et symptômes dépressifs | resserrer | « dépression après un harcèlement répété » |
+| Idées noires, chez toi ou chez un collègue | Bowers et al. (2018) - Détresse psychologique chez les travailleurs miniers et de construction éloignés en Australie | appliquer (corrigée au contrôle) | « La culture du « tough guy » : on endure, on n'en parle pas. » |
+| Idées noires, chez toi ou chez un collègue | INSPQ (2018) - RPS en milieu minier québécois et impacts du régime FIFO | appliquer | « L'alcool ou les substances utilisés pour geler ce qui fait mal. » |
+| Idées noires, chez toi ou chez un collègue | Labra et al. (2022) - Santé globale des hommes FIFO miniers au Québec | resserrer | « lui dire de « tougher » » |
+| Le PAE, comment ça marche | Labra et al. (2022) - Santé globale des hommes FIFO miniers au Québec | resserrer | « « Demander de l'aide, ce n'est pas pour moi. » » |
+| Quand ça va moins bien au travail | Kroenke et al. (2001) : validation du PHQ-9 | resserrer | « Plusieurs en même temps depuis plusieurs semaines, c'est un signal à prendre au sérieux. » |
+| Quand ça va moins bien au travail | Tissot et al. (2022) - Risques psychosociaux et détresse psychologique au Québec | resserrer | « un cumul de petites choses » |
+| Quand ça va moins bien au travail | INRS (2024) - Épuisement professionnel : modèle Maslach et progression RPS vers le burnout clinique | appliquer | « Fatigue qui ne passe pas après une journée de congé » |
+| Revenir au travail après un arrêt pour ta santé mentale | St-Arnaud, Briand, Corbière et al. (2011, IRSST R-706) - Programme intégré de pratiques de soutien au retour au travail après absence pour santé mentale | resserrer | « Autour de la table : toi, ton médecin traitant, le médecin du travail, ton employeur » |
+| Revenir au travail après un arrêt pour ta santé mentale | St-Arnaud, Briand, Corbière et al. (2011, IRSST R-706) - Programme intégré de pratiques de soutien au retour au travail après absence pour santé mentale | resserrer | « Des contacts réguliers et sans pression de ton employeur sont normaux. » |
+| Revenir au travail après un arrêt pour ta santé mentale | St-Arnaud, Briand, Corbière et al. (2011, IRSST R-706) - Programme intégré de pratiques de soutien au retour au travail après absence pour santé mentale | resserrer | « Ça doit être abordé dans le plan. » |
+| Travailler sous terre, quand la tête fatigue aussi | Analyse Folkard & Tucker (2003) | appliquer (corrigée au contrôle) | « Sur un quart de 12 heures, la performance baisse à partir de la 9e ou 10e heure, et nettement aux 11e et 12e. » |
+| Travailler sous terre, quand la tête fatigue aussi | Matamala Pizarro et Aguayo Fuenzalida (2021) | resserrer | « n'invente pas de nouveaux risques psychosociaux, il amplifie ceux qui existent » |
+| Travailler sous terre, quand la tête fatigue aussi | INSPQ (2024) - Cinq facteurs RPS spécifiques au régime FIFO minier post-COVID | appliquer | « Et en rotation FIFO, la fatigue ne se résorbe pas complètement entre les quarts. » |
+
+#### Sommeil, fatigue et récupération
+
+| Fiche | Note du vault | Décision | Ancrage exact dans la fiche |
+| --- | --- | --- | --- |
+| Gérer la fatigue de fin de quart | Analyse Folkard & Tucker (2003) | resserrer | « En fin de quart, l'attention baisse. » |
+| Gérer la fatigue de fin de quart | INSPQ (2018) - RPS en milieu minier québécois et impacts du régime FIFO | appliquer | « tu as moins de patience, tu te demandes deux fois si tu as bien fait quelque chose » |
+| Revenir à la maison après une période de travail | Labra et al. (2022) - Santé globale des hommes FIFO miniers au Québec | resserrer | « plus fatigué que tu ne le pensais, moins patient » |
+| Sommeil et quart de nuit (pour toi) | Torquati et al. (2019) - Travail posté, dépression et désalignement circadien : 31 études prospectives | resserrer (corrigée au contrôle) | « Travailler la nuit peut compliquer le sommeil » |
+| Sommeil et quart de nuit (pour toi) | INSPQ (2018) - RPS en milieu minier québécois et impacts du régime FIFO | resserrer | « la prévention de la fatigue ne repose pas seulement sur toi » |
+| Sommeil et quart de nuit (pour toi) | Matamala Pizarro et Aguayo Fuenzalida (2021) | resserrer | « La fatigue peut ralentir les réactions » |
+
+#### Équipe, reconnaissance et conflits
+
+| Fiche | Note du vault | Décision | Ancrage exact dans la fiche |
+| --- | --- | --- | --- |
+| Conflit ou harcèlement, comment faire la différence | Theorell et al. (2015) - Revue systématique et méta-analyse : RPS et symptômes dépressifs | resserrer | « La santé de la personne visée en prend un coup. » |
+| Conflit ou harcèlement, comment faire la différence | Palinkas et Suedfeld (2021) | appliquer | « Au camp, tu ne peux pas éviter la personne. » |
+| Se sentir épaulé par l'équipe | Karasek et Theorell (1990) - Modèle DCS (Demandes-Contrôle-Soutien) | resserrer | « Ce n'est pas une question de quantité. » |
+| Se sentir épaulé par l'équipe | INSPQ (2018) - RPS en milieu minier québécois et impacts du régime FIFO | resserrer | « Quand tu vois quelqu'un en difficulté, propose » |
+| Se sentir épaulé par l'équipe | Labra et al. (2022) - Santé globale des hommes FIFO miniers au Québec | resserrer (corrigée au contrôle) | « Demander un coup de main, ce n'est pas reconnaître une faiblesse. » |
+| Se sentir reconnu, reconnaître ses collègues | Siegrist (1996) - Modèle Effort-Récompense (ERI) : déséquilibre et effets adverses sur la santé | appliquer | « La reconnaissance entre collègues, ce ne sont pas que les superviseurs qui peuvent en donner. » |
+| Se sentir reconnu, reconnaître ses collègues | Dolan et Arsenault (2009) - Stress, estime de soi, reconnaissance et santé au travail | resserrer (corrigée au contrôle) | « pas juste corriger » |
+| Si tu vis du harcèlement, quoi faire | Palinkas et Suedfeld (2021) | resserrer | « tu partages le camp avec la personne pendant toute la rotation » |
+| Si tu vis du harcèlement, quoi faire | Labra et al. (2021) - Rapport scientifique FIFO : hommes québécois et travail loin du domicile | resserrer | « Si tu es sous-traitant ou en statut précaire, tu peux hésiter à signaler. » |
+
+#### Droits, réclamations et démarches
+
+| Fiche | Note du vault | Décision | Ancrage exact dans la fiche |
+| --- | --- | --- | --- |
+| Avertissement, suspension ou congédiement, ce que ton boss a le droit de faire | CNESST (2023) - Statistiques et cadre légal de la santé mentale au travail au Québec | resserrer | « dans le respect de ta dignité » |
+| Avertissement, suspension ou congédiement, ce que ton boss a le droit de faire | Gouvernement du Canada (2023) - Cadre fédéral de reconnaissance et promotion de la santé mentale au travail | resserrer | « des attentes claires, avec les moyens » |
+| Droits et ressources après lésion | Labra et al. (2022) - Santé globale des hommes FIFO miniers au Québec | resserrer | « Tu te sens mal psychologiquement » |
+| Droits et ressources après lésion | CNESST (2023) - Statistiques et cadre légal de la santé mentale au travail au Québec | resserrer | « Ton syndicat » |
+| Le comité SST et le représentant à la prévention, à quoi ils servent | CNESST (2023) - Statistiques et cadre légal de la santé mentale au travail au Québec | resserrer | « les risques chimiques, physiques et psychosociaux » |
+| Le comité SST et le représentant à la prévention, à quoi ils servent | INSPQ (2018) - RPS en milieu minier québécois et impacts du régime FIFO | écarter | — |
+| Retour au travail après une lésion | St-Arnaud, Briand, Corbière et al. (2011, IRSST R-706) - Programme intégré de pratiques de soutien au retour au travail après absence pour santé mentale | resserrer | « Tu peux dire si quelque chose ne fonctionne pas pour toi. » |
+| Retour au travail après une lésion | St-Arnaud, Briand, Corbière et al. (2011, IRSST R-706) - Programme intégré de pratiques de soutien au retour au travail après absence pour santé mentale | resserrer | « Un retour progressif » |
+| Tes heures, tes vacances et tes congés quand tu travailles en rotation | INSPQ (2018) - RPS en milieu minier québécois et impacts du régime FIFO | resserrer | « des semaines comprimées » |
+| Tes heures, tes vacances et tes congés quand tu travailles en rotation | Labra et al. (2022) - Santé globale des hommes FIFO miniers au Québec | resserrer | « Une urgence familiale pendant ta rotation » |
+
+#### Dangers, machines et procédures
+
+| Fiche | Note du vault | Décision | Ancrage exact dans la fiche |
+| --- | --- | --- | --- |
+| Après un accident, ce qui se passe et ton rôle | Analyse Daniellou (dir., 1996) - L'ergonomie en quête de ses principes | resserrer | « c'est une information de prévention, pas une accusation » |
+| Après un accident, ce qui se passe et ton rôle | Analyse ergonomique du travail | resserrer | « c'est une information de prévention, pas une accusation » |
+| Reconnaître les dangers sur un chantier en mine | Analyse Folkard & Tucker (2003) | appliquer | « Tu es fatigué, l'attention baisse » |
+| Reconnaître les dangers sur un chantier en mine | INSPQ (2018) - RPS en milieu minier québécois et impacts du régime FIFO | resserrer | « Coéquipier qui semble fatigué » |
+| Travailler en sécurité près des machines | Analyse Folkard & Tucker (2003) | appliquer | « Attention baisse » |
+
+#### Vie au camp et rotation
+
+| Fiche | Note du vault | Décision | Ancrage exact dans la fiche |
+| --- | --- | --- | --- |
+| Alcool et consommation au camp, ce qu'il faut savoir | INSPQ (2018) - RPS en milieu minier québécois et impacts du régime FIFO | appliquer (corrigée au contrôle) | « la consommation pour gérer le sommeil ou le stress est documentée » |
+| Alcool et consommation au camp, ce qu'il faut savoir | Labra et al. (2021) - Rapport scientifique FIFO : hommes québécois et travail loin du domicile | resserrer | « La honte : on cache » |
+| Alcool et consommation au camp, ce qu'il faut savoir | Palinkas et Suedfeld (2021) | resserrer | « L'isolement » |
+| Bien vivre son séjour au camp | Fruhen et al. (2023) - Santé mentale, vie personnelle et régime FIFO en contexte minier | resserrer | « Garde au moins un appel ou un texto régulier » |
+| Bien vivre son séjour au camp | Labra et al. (2021) - Rapport scientifique FIFO : hommes québécois et travail loin du domicile | resserrer | « Le grignotage continu à la cantine est facile » |
 
 ### Bilan
 
