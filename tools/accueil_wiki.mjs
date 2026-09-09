@@ -10,6 +10,8 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 // même règle que le sommaire du générateur : préfixe « 15 - » retiré, titres numérotés légitimes conservés
 const EMOJIS_DE_TETE = /^(?:\p{Extended_Pictographic}(?:️|\p{Emoji_Modifier})?(?:‍\p{Extended_Pictographic}️?)*|\s)+/u;
 const MEDIA = /^!?[^\s<>]+\.(?:mp4|m4a|mp3|png|jpe?g|gif|svg|webp|pdf)$/i;
+// entrée « point d'entrée » : un emoji, un lien, au plus une courte description après un tiret
+const ENTREE_TUILE = /^\s*(?:\p{Extended_Pictographic}(?:️|\p{Emoji_Modifier})?(?:‍\p{Extended_Pictographic}️?)*)\s*<a [^>]*>[^<]+<\/a>\s*(?:[-–—:]\s*[^<]*)?$/u;
 
 export function estAccueil({ fm, base }) {
   return String(fm?.type ?? '').trim().toLowerCase() === 'accueil' || /^00 - .*Accueil/u.test(String(base));
@@ -51,6 +53,8 @@ export function decouperAccueil(html, { resoudre } = {}) {
   h = h.replace(/<p>\s*<span class="missing-file">([^<]*)<\/span>\s*<\/p>\n?/g, (m, texte) => { retires.push(`paragraphe « ${texte.trim()} »`); return ''; });
   // 2. item qui ne mène nulle part : source interne non publiée, article retiré, fichier introuvable
   h = h.replace(/<li>\s*[^<\n]*<span class="(?:interne-inline|abroge-inline|missing-file)"[^>]*>[\s\S]*?<\/span>\s*<\/li>\n?/g, (m) => { retires.push(`item « ${m.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()} »`); return ''; });
+  // 2 bis. item vide
+  h = h.replace(/<li>\s*<\/li>\n?/g, () => { retires.push('item vide'); return ''; });
   // 3. wikilinks restés bruts dans la note (crochets non fermés, alias imbriqué) : l'alias qui porte
   //    déjà des liens rendus est gardé tel quel ; sinon il devient un lien vers la cible, ou un lien rouge
   h = h.replace(/\[\[([^\[\]|<\n]+)\|([\s\S]*?)\]{0,2}(?=<\/li>|<\/p>)/g, (m, cible, alias) => {
@@ -92,7 +96,9 @@ function entreesNiveau1(bloc) {
   return entrees;
 }
 
-// Les listes de huit entrées ou plus coulent en colonnes (classe posée sur les <ul> de premier niveau).
+// Les listes de huit entrées ou plus coulent en colonnes ; une liste de deux à huit points d'entrée
+// (emoji + lien, comme « Démarrage rapide par rôle ») devient une grille de tuiles. Classes posées
+// sur les <ul> de premier niveau.
 export function colonnes(html) {
   let sortie = '', profondeur = 0, i = 0;
   while (i < html.length) {
@@ -103,7 +109,9 @@ export function colonnes(html) {
         // entrées courtes (au plus 24 caractères) : deux colonnes même sur un petit téléphone
         const entrees = entreesNiveau1(bloc);
         const courtes = entrees.every(e => e.replace(/<[^>]+>/g, '').trim().length <= 24);
-        sortie += entrees.length >= 8 ? `<ul class="accueil-colonnes${courtes ? ' accueil-colonnes-courtes' : ''}">` + bloc.slice(4) : bloc;
+        const tuiles = entrees.length >= 2 && entrees.length <= 8 && entrees.every(e => ENTREE_TUILE.test(e));
+        sortie += tuiles ? '<ul class="accueil-tuiles">' + bloc.slice(4)
+          : entrees.length >= 8 ? `<ul class="accueil-colonnes${courtes ? ' accueil-colonnes-courtes' : ''}">` + bloc.slice(4) : bloc;
         i = fin; continue;
       }
       profondeur++;
@@ -120,6 +128,12 @@ function finDeListe(html, debut) {
     i++;
   }
   return html.length;
+}
+
+// Pied d'une page d'accueil : la date de génération seule — les indicateurs éditoriaux (relecture,
+// vérification des sources) et les outils qualifient des articles, pas une page de navigation.
+export function piedAccueil(date) {
+  return `<div class="page-meta">Site généré le ${esc(date)}</div>`;
 }
 
 // HTML de la page (sans fil d'Ariane ni pied de page, fournis par l'habillage commun).

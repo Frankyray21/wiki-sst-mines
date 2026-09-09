@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, extraireCorps, rendreAccueil } from '../accueil_wiki.mjs';
+import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, extraireCorps, rendreAccueil, piedAccueil } from '../accueil_wiki.mjs';
 
 // Pages d'accueil des wikis et des sections : découpage du corps en boîtes, nettoyage des artefacts,
 // rendu façon page d'accueil de wiki, et état du site publié (docs/).
@@ -35,7 +35,7 @@ test('découpage : chapeau, boîtes, artefacts retirés et wikilinks bruts répa
     '<p>!RPS___Virage_stratégique.mp4</p>',
     '<p>Base de connaissances sur les <strong>RPS</strong>.</p>',
     '<h2 id="demarrage">Démarrage rapide</h2>',
-    '<ul>\n<li>👷 <a href="a.html">Travailleur</a></li>\n<li><span class="interne-inline" title="Source interne du vault, non publiée sur le site">Index images <small>(source interne)</small></span></li>\n</ul>',
+    '<ul>\n<li>👷 <a href="a.html">Travailleur</a></li>\n<li>👨‍💼 <a href="s.html">Superviseur</a> - responsable</li>\n<li></li>\n<li><span class="interne-inline" title="Source interne du vault, non publiée sur le site">Index images <small>(source interne)</small></span></li>\n</ul>',
     '<h2 id="15---navigation">15 - Navigation</h2>',
     '<ul>\n' + Array.from({ length: 9 }, (_, i) => `<li><a href="n${i}.html">Page ${i}</a></li>`).join('\n') + '\n</ul>',
     '<h2 id="20---articles">20 - Articles (conseiller)</h2>',
@@ -52,6 +52,7 @@ test('découpage : chapeau, boîtes, artefacts retirés et wikilinks bruts répa
   assert.deepEqual(d.sections.map(s => s.id), ['demarrage', '15---navigation', '20---articles'], 'ancres d’origine conservées');
   assert.deepEqual(d.sections.map(s => s.grand), [false, false, true]);
   assert.ok(!d.sections[0].html.includes('interne-inline'), 'item « source interne » retiré');
+  assert.ok(d.sections[0].html.startsWith('<ul class="accueil-tuiles">') && !d.sections[0].html.includes('<li></li>'), 'rôles en tuiles, item vide retiré');
   assert.ok(d.sections[1].html.startsWith('<ul class="accueil-colonnes accueil-colonnes-courtes">'), 'neuf entrées courtes : colonnes');
   const articles = d.sections[2].html;
   assert.ok(articles.startsWith('<div class="accueil-groupes"><div class="accueil-groupe"><h3 id="communication">Communication</h3>'), 'premier groupe h3 inclus dans la grille');
@@ -61,7 +62,7 @@ test('découpage : chapeau, boîtes, artefacts retirés et wikilinks bruts répa
   assert.ok(articles.includes('<li><a href="l.html">art-2-LATMP</a></li>'), 'alias imbriqué : lien intérieur conservé');
   assert.ok(articles.includes('<li><a href="a.html">LATMP</a> <a href="b.html">art. 3</a>, défin</li>'), 'alias à plusieurs liens, jamais fermé : contenu conservé');
   assert.ok(!articles.includes('[['));
-  assert.deepEqual(d.retires, ['paragraphe « !RPS___Virage_stratégique.mp4 »', 'item « Index images (source interne) »', 'item « Ancien (abrogé) »', 'section vide « Section vide »']);
+  assert.deepEqual(d.retires, ['paragraphe « !RPS___Virage_stratégique.mp4 »', 'item « Index images (source interne) »', 'item « Ancien (abrogé) »', 'item vide', 'section vide « Section vide »']);
   assert.deepEqual(d.repares, ['Postures', '[[art-2-LATMP, termes|art-2-LATMP]]', '[[art-3, termes|LATMP art. 3, défin', 'Gestion (page introuvable)']);
 });
 
@@ -72,6 +73,10 @@ test('colonnes : listes de premier niveau seulement, huit entrées et plus', () 
   assert.ok(colonnes(longue).startsWith('<ul class="accueil-colonnes">') && !colonnes(longue).includes('courtes'));
   const imbriquee = '<ul>\n<li>A<ul>\n' + Array.from({ length: 9 }, () => '<li>x</li>').join('') + '</ul></li>\n</ul>';
   assert.equal(colonnes(imbriquee), imbriquee, 'la sous-liste n’est pas touchée, la liste englobante a une entrée');
+  const roles = '<ul>\n<li>👷 <a href="a">Travailleur</a></li>\n<li>🏢 <a href="b">Direction, RH</a></li>\n</ul>';
+  assert.ok(colonnes(roles).startsWith('<ul class="accueil-tuiles">'), 'deux points d’entrée : tuiles');
+  assert.equal(colonnes('<ul>\n<li>👷 <a href="a">Travailleur</a></li>\n<li><a href="b">Sans emoji</a></li>\n</ul>').startsWith('<ul>'), true, 'une entrée sans emoji : liste ordinaire');
+  assert.equal(piedAccueil('2026-09-09'), '<div class="page-meta">Site généré le 2026-09-09</div>');
 });
 
 test('extraireCorps : entre le corps et les blocs voisins, backlinks et pied', () => {
@@ -105,6 +110,8 @@ test('site publié : les dix-sept accueils sont rendus en bandeau et boîtes, sa
     assert.ok(!corps.includes('[[') && !/<p>!/.test(corps), rel + ' : aucun wikilink brut ni nom de média');
     for (const m of corps.matchAll(/<h[23][^>]*>((?:<[^>]+>)*)([^<]*)/g)) assert.ok(!/^\d{1,3} +[-–—] +\p{L}/u.test(m[2]), rel + ' : titre sans préfixe de classement : ' + m[2]);
     assert.ok(html.includes('<nav class="accueil-index"') && html.includes('index-alphabetique.html'), rel + ' : index du wiki');
+    assert.match(html, /<div class="page-meta">Site généré le \d{4}-\d{2}-\d{2}<\/div>/, rel + ' : pied réduit à la date de génération');
+    assert.ok(!html.includes('<details class="backlinks">') && !html.includes('Relecture éditoriale'), rel + ' : ni pages liées ni indicateurs éditoriaux');
     assert.match(html, /<div class="page-sub">(?:Page d’accueil du wiki|Section « [^»]+ » du wiki) <a href="[^"]*">[^<]*<\/a> · [\d\s\u00a0\u202f]+ pages<\/div>/, rel + ' : domaine et nombre de pages');
   }
   // l'accueil du wiki : fil d'Ariane arrêté au wiki, compteur = pages du wiki
@@ -112,6 +119,7 @@ test('site publié : les dix-sept accueils sont rendus en bandeau et boîtes, sa
   assert.match(psy, /<div class="breadcrumbs"><a href="[^"]*index\.html">Portail<\/a> <span class="crumb-sep">›<\/span> <a href="[^"]*w\/psychosocial\/index\.html">SST psychosociale<\/a><\/div>/);
   assert.ok(psy.includes('<span class="new" title="Page introuvable : Gestion">Gestion</span>'), 'wikilink brut « [[Gestion » rendu en lien rouge');
   assert.ok(!psy.includes('Virage_strat'), 'nom de la vidéo non publiée retiré');
+  assert.ok(psy.includes('<ul class="accueil-tuiles">'), 'démarrage rapide par rôle en tuiles');
   const ergo = fs.readFileSync(path.join(DOCS, 'w/ergonomie/25-articles-travailleurs/25-articles-travailleurs.html'), 'utf8');
   assert.ok(ergo.includes('Section « Articles travailleurs » du wiki'));
 });

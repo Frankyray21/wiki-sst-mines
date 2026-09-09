@@ -19,8 +19,14 @@ un téléphone, elles ne ressemblaient pas à l'accueil d'un wiki.
 - Une boîte par section de la note (titre de la note, préfixe « NN - » retiré, ancre conservée) :
   deux colonnes de boîtes sur ordinateur, une sur téléphone ; les sections à sous-titres h3 et les
   longues listes occupent toute la largeur, leurs sous-groupes coulent en colonnes ; les listes de
-  huit entrées et plus se lisent sur deux ou trois colonnes (deux même sur un petit téléphone quand
-  toutes les entrées font 24 caractères ou moins).
+  huit entrées et plus se répartissent en colonnes selon la largeur disponible (`columns: 12em 3`,
+  9 em pour les entrées de 24 caractères ou moins), jamais en nombre fixe : elles retombent seules
+  à une colonne sur téléphone.
+- Les listes de deux à huit points d'entrée « emoji + lien » (« Démarrage rapide par rôle », « par
+  profil ») deviennent une grille de tuiles d'au moins 44 px, toute la tuile touchable.
+- Le pied de page se réduit à « Site généré le … » : les indicateurs éditoriaux (relecture,
+  vérification des sources), le bloc « Pages qui pointent ici » (3 283 entrées sur l'accueil du
+  recueil) et le lien vers le graphe qualifient des articles, pas une page de navigation.
 - Le fil d'Ariane de l'accueil d'un wiki s'arrête au wiki : le maillon « Accueil » menait à la
   catégorie « Accueil », qui ne contient que cette page. Le titre de fenêtre perd l'emoji de tête.
 - Le rendu est le même dans le générateur (`tools/build_site.mjs`, module `tools/accueil_wiki.mjs`)
@@ -32,6 +38,7 @@ un téléphone, elles ne ressemblaient pas à l'accueil d'un wiki.
 Le contenu reste celui des notes ; seuls sont écartés les éléments qui ne mènent nulle part sur le
 site, chacun signalé à la construction par une ligne « ⚠ accueil … » pour être corrigé dans Obsidian :
 
+- Sécurité industrielle, section gestionnaires : un item de liste vide.
 - SST psychosociale : le paragraphe « !RPS___Virage_stratégique.mp4 » (vidéo non publiée dont seul le
   nom s'affichait) ; les items « Index images », « Harcèlement psychologique », « Harcèlement vs
   conflit », « Harcèlement, recours », « Violence travail », tous marqués « (source interne) » ;
@@ -53,6 +60,20 @@ Aucune autre page n'est touchée ; les articles gardent leur infobox et leur som
   colonnes, extraction du corps publié, rendu, et état des 17 pages publiées.
 - `verif_site` (le groupe titre + domaine reste présent pour la barre de lecture), `verif_liens`,
   `verif_publication --staged`, suite de tests complète.
+
+## À corriger dans les notes (relevé de l'atelier, non modifié ici)
+
+- Descriptions coupées en fin de ligne dans trois sous-accueils : Droit du travail travailleurs
+  (« interdiction des représailles si tu a »), Toxicologie travailleurs (« art-2-LATMP : défi ») et
+  gestionnaires (« art-2-LATMP : » sans suite) ; l'item « [[art-2-LATMP, termes utilisés|… », jamais
+  fermé, de l'accueil Toxicologie s'arrête aussi sur « défin ».
+- Liens « Hub », « Pages travailleurs », « Pages gestionnaires », « Section travailleurs » des accueils
+  Hygiène, Sécurité, Toxicologie et de leurs sous-accueils qui mènent aux sous-accueils du wiki
+  Ergonomie plutôt qu'à ceux de leur propre wiki ; « Wikis frères » de la section gestionnaires
+  d'Ergonomie dont les deux liens mènent à l'accueil Ergonomie.
+- Sections « Articles de loi pertinents » réduites à leur paragraphe d'introduction (Droit du travail
+  gestionnaires, Sécurité travailleurs) ; deux titres de section d'Hygiène travailleurs qui répètent
+  leur unique item.
 
 ## Limites
 

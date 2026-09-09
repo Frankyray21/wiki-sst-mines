@@ -16,7 +16,7 @@ import { rendreEnteteCompact, rendreTitreArticle } from './entete-article.mjs';
 import { normaliserBibliographie } from './bibliographie.mjs';
 import { motsDePage, encoderListe } from './recherche_mots.mjs';
 import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
-import { estAccueil, decouperAccueil, rendreAccueil, titreAccueil } from './accueil_wiki.mjs';
+import { estAccueil, decouperAccueil, rendreAccueil, titreAccueil, piedAccueil } from './accueil_wiki.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -1112,7 +1112,7 @@ function contenuAccueil(p, crumbs, revisionHtml) {
   return `
 <div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
 ${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: p.accueil.chapeau, sections: p.accueil.sections, index })}
-<div class="page-meta">${revisionHtml} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
+${piedAccueil(new Date().toISOString().slice(0, 10))}`;
 }
 
 // ---------- pages de catégorie (une par dossier) ----------
