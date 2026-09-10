@@ -66,9 +66,23 @@ Aucune autre page n'est touchée ; les articles gardent leur infobox et leur som
 - Intégrité contre les notes d'origine (état `ac27d00b9`, hors voisins et pages liées) : sur les
   22 pages, 0 lien perdu ; les seuls mots absents viennent des retraits annoncés (items « source
   interne » de l'accueil SST psychosociale, « termes utilisés » du wikilink brut de Toxicologie).
-- Un premier défaut réel n'était visible que sur capture : la section CSS des accueils, ajoutée en fin
-  de feuille, passait après le bloc mobile et gardait deux colonnes de boîtes à 390 px ; corrigé en la
-  plaçant avant ce bloc.
+- Quatre défauts n'étaient visibles que sur le rendu réel, aucun n'était détectable par les tests de
+  structure :
+  1. la section CSS des accueils, ajoutée en fin de feuille, passait **après** le bloc mobile : ses
+     règles de base l'emportaient à spécificité égale et les boîtes restaient sur deux colonnes à
+     390 px. Corrigé en plaçant la section avant ce bloc ;
+  2. les liens de liste, d'index et de chapeau mesuraient moins de 24 px de haut sur téléphone
+     (WCAG 2.5.8 AA) : 4 px de marge interne verticale, sans déplacer les lignes ;
+  3. un en-tête de boîte qui est un lien (« Articles internes … », cinq pages) s'affichait en bleu de
+     lien : **4,27:1** sur le fond pastel en thème clair, sous le seuil AA de 4,5:1 — 19 px en graisse
+     600 n'est pas du « texte large » au sens WCAG, qui commence à 18,66 px en graisse 700. Il garde
+     désormais la couleur de titre (12,84:1 en clair, 9,19:1 en sombre) et tous les en-têtes ont le
+     même aspect, comme sur un accueil de wiki ;
+  4. la description des tuiles était à 12,5 px, sous le plancher de 13 px retenu pour les textes
+     secondaires du site sur petit écran.
+- L'arbre de la hiérarchie normative (accueil du Recueil) reste le seul élément plus large que l'écran :
+  il défile dans son cadre, comme les tableaux du site. Le faire passer à la ligne casserait son
+  alignement ; sa bordure devient franche sur téléphone pour qu'on voie que c'est un cadre défilant.
 - `tools/tests/accueil-wiki.test.mjs` : reconnaissance des accueils, nettoyage des titres, découpage
   (chapeau, boîtes, artefacts, réparation des wikilinks avec et sans page cible, premier groupe h3),
   colonnes, extraction du corps publié, rendu, et état des 17 pages publiées.
