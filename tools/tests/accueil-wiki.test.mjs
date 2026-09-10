@@ -105,6 +105,21 @@ test('rendu : bandeau avec titre et domaine, chapeau, index, boîtes', () => {
   assert.ok(!html.includes('infobox') && !html.includes('class="toc'));
 });
 
+test('feuille de style : les règles que seul un rendu réel révèle', () => {
+  const css = fs.readFileSync(path.join(R, 'tools/style.css'), 'utf8');
+  // un en-tête de boîte qui est un lien garde la couleur de titre : en bleu de lien, 4,27:1 sur le
+  // fond pastel en thème clair, sous le seuil WCAG AA de 4,5:1
+  assert.match(css, /\.page-body \.accueil-titre a \{ color: inherit; \}/);
+  // les règles mobiles des accueils vivent dans le dernier bloc 900 px (celui que lit rendu-mobile)
+  const bloc900 = css.slice(css.lastIndexOf('@media (max-width: 900px)'));
+  assert.match(bloc900, /\.accueil-grille \{ grid-template-columns: 1fr;/, 'boîtes en une colonne sur téléphone');
+  assert.match(bloc900, /\.accueil-corps a, \.accueil-index a, \.accueil-chapeau a, \.accueil-titre a \{ padding: 4px 0; \}/, 'cibles tactiles de 24 px');
+  assert.match(bloc900, /\.accueil-tuile-desc \{ font-size: 13px; \}/, 'description de tuile au plancher du site');
+  assert.match(bloc900, /\.accueil-corps pre \{ border-color: var\(--border\); \}/, 'cadre défilant visible');
+  // la section de base précède le bloc mobile, sinon ses règles l'emportent à spécificité égale
+  assert.ok(css.indexOf('.accueil-grille { display: grid') < css.lastIndexOf('@media (max-width: 900px)'), 'section accueil avant le bloc mobile');
+});
+
 test('site publié : les dix-sept accueils et leurs cinq copies encadrement sont rendus en bandeau et boîtes, sans artefact', () => {
   for (const rel of [...ACCUEILS.map(r => 'w/' + r), ...ACCUEILS_G.map(r => 'g/w/' + r)]) {
     const html = fs.readFileSync(path.join(DOCS, rel), 'utf8');

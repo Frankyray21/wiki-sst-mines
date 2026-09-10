@@ -696,6 +696,11 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .accueil-boite { border: 1px solid var(--chapo-bd); background: var(--content-bg); border-radius: 3px; min-width: 0; }
 .accueil-large { grid-column: 1 / -1; }
 .page-body .accueil-titre { font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif; font-size: 19px; font-weight: 600; margin: 0; padding: 7px 12px; background: var(--infobox-titre-bg); border-bottom: 1px solid var(--chapo-bd); line-height: 1.3; }
+/* Un en-tête de boîte peut être un lien (« Articles internes … ») : il garde la couleur de titre.
+   En bleu de lien il tombait à 4,27:1 sur le fond pastel en thème clair, sous le seuil AA de 4,5:1
+   (19 px en graisse 600 n'est pas du « texte large », qui commence à 18,66 px en graisse 700), et
+   un en-tête sur cinq n'avait pas l'aspect des autres. */
+.page-body .accueil-titre a { color: inherit; }
 .accueil-corps { padding: 8px 12px 10px; }
 .accueil-corps > p:first-child { margin-top: 2px; }
 .accueil-corps ul { margin: 4px 0 4px 20px; }
@@ -784,6 +789,14 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   .accueil-icone { font-size: 36px; }
   .accueil-groupes { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
   .page-body .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); }
+  /* cibles tactiles : la zone d'un lien de liste atteint 24 px de haut (WCAG 2.5.8) sans changer la ligne */
+  .accueil-corps a, .accueil-index a, .accueil-chapeau a, .accueil-titre a { padding: 4px 0; }
+  .accueil-corps { font-size: 15px; }
+  /* Même plancher que les autres textes secondaires du site sur petit écran (13 px). */
+  .page-body .accueil-tuile-desc { font-size: 13px; }
+  /* L'arbre de la hiérarchie normative défile dans son cadre plutôt que de passer à la ligne, qui
+     casserait son alignement ; encore faut-il voir que c'est un cadre : bordure franche. */
+  .accueil-corps pre { border-color: var(--border); }
 }
 @media (max-width: 600px) {
   /* Une rangée d'actions, une rangée de recherche, même après ajout de l'aide/PWA. */

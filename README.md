@@ -53,6 +53,8 @@ Le Recueil législatif n'est pas dupliqué : le texte de loi est public et ident
 - `tools/recherche_mots.mjs` — découpage en mots de l'index plein texte, partagé avec les retouches du site
 - `tools/accueil_wiki.mjs` — pages d'accueil des wikis et des sections rendues en bandeau et boîtes, comme
   la page d'accueil d'un wiki (découpage du corps de la note, artefacts retirés et signalés)
+- `tools/verif_rendu.mjs` — contrôle du rendu réel dans Chromium (playwright-core, dépendance de développement) :
+  ce que les tests de structure ne voient pas
 - `tools/serve.mjs` — serveur local de prévisualisation (port 8090)
 
 ## Utilisation
@@ -77,6 +79,10 @@ node tools/appliquer_renvois.mjs --appliquer
 
 # Vérifier le résultat construit : assets, hashes et infographies
 npm --prefix tools run check:site
+
+# Vérifier le rendu réel dans Chromium (390 px clair et sombre, 1200 px) : défilement horizontal,
+# cibles tactiles, tuiles, infobox ou sommaire sur un accueil — les 22 accueils par défaut
+CHROME=/chemin/vers/chrome node tools/verif_rendu.mjs --captures   # captures et mesures dans rendu/
 
 # Prévisualiser en local
 node tools/serve.mjs
