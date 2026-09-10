@@ -784,6 +784,9 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   .accueil-icone { font-size: 36px; }
   .accueil-groupes { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
   .page-body .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); }
+  /* cibles tactiles : la zone d'un lien de liste atteint 24 px de haut (WCAG 2.5.8) sans changer la ligne */
+  .accueil-corps a, .accueil-index a, .accueil-chapeau a, .accueil-titre a { padding: 4px 0; }
+  .accueil-corps { font-size: 15px; }
 }
 @media (max-width: 600px) {
   /* Une rangée d'actions, une rangée de recherche, même après ajout de l'aide/PWA. */

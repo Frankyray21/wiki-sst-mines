@@ -57,9 +57,18 @@ Aucune autre page n'est touchée ; les articles gardent leur infobox et leur som
 
 ## Vérification
 
-- Captures réelles (Chromium, 390 px clair et sombre, 1200 px) des accueils SST psychosociale,
-  Hygiène industrielle, Recueil législatif et de la section Articles travailleurs (Ergonomie) :
-  aucun défilement horizontal, boîtes collées à leur en-tête, thème sombre sans surface éblouissante.
+- Captures réelles (Chromium) des 22 pages en trois modes (390 px clair et sombre, 1200 px), soit
+  66 rendus mesurés par `tools/verif_rendu.mjs` : aucun défilement horizontal, aucun lien de moins
+  de 24 px de haut sur téléphone (les liens des boîtes, de l'index, du chapeau et des en-têtes reçoivent
+  4 px de marge interne verticale sous 900 px ; le texte des boîtes passe à 15 px), tuiles d'au moins
+  59 px, un seul h1, ni infobox ni sommaire. Seul le bloc de code de la hiérarchie normative (recueil)
+  dépasse — dans son propre cadre défilant, pas la page.
+- Intégrité contre les notes d'origine (état `ac27d00b9`, hors voisins et pages liées) : sur les
+  22 pages, 0 lien perdu ; les seuls mots absents viennent des retraits annoncés (items « source
+  interne » de l'accueil SST psychosociale, « termes utilisés » du wikilink brut de Toxicologie).
+- Un premier défaut réel n'était visible que sur capture : la section CSS des accueils, ajoutée en fin
+  de feuille, passait après le bloc mobile et gardait deux colonnes de boîtes à 390 px ; corrigé en la
+  plaçant avant ce bloc.
 - `tools/tests/accueil-wiki.test.mjs` : reconnaissance des accueils, nettoyage des titres, découpage
   (chapeau, boîtes, artefacts, réparation des wikilinks avec et sans page cible, premier groupe h3),
   colonnes, extraction du corps publié, rendu, et état des 17 pages publiées.
