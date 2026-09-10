@@ -84,6 +84,20 @@ export function decouperAccueil(html, { resoudre } = {}) {
 }
 
 function nbItems(html) { return (html.match(/<li>/g) || []).length; }
+
+// Une tuile : emoji, libellé du lien, puis une ligne de description — le texte qui suit le lien
+// dans la note (« - tes droits, tes recours ») ou, à défaut, le titre de la page cible (attribut
+// title posé par le générateur), quand il ne répète pas le libellé.
+export function tuile(entree) {
+  const m = entree.match(/^(\s*[^<]*?)<a ([^>]*)>([^<]+)<\/a>\s*(?:[-–—:]\s*)?([^<]*)$/u);
+  if (!m) return entree;
+  const [, emoji, attrs, libelle, suite] = m;
+  const titre = (attrs.match(/title="([^"]*)"/) || [])[1] || '';
+  const sansEmoji = (t) => t.replace(EMOJIS_DE_TETE, '').trim();
+  let desc = suite.trim();
+  if (!desc && titre && sansEmoji(titre).toLowerCase() !== libelle.trim().toLowerCase()) desc = sansEmoji(titre);
+  return `${emoji}<a ${attrs}><span class="accueil-tuile-libelle">${libelle.trim()}</span>${desc ? `<small class="accueil-tuile-desc">${desc}</small>` : ''}</a>`;
+}
 // entrées de premier niveau d'une liste (les sous-listes ne comptent pas)
 function entreesNiveau1(bloc) {
   const entrees = []; let p = 0, i = 0;
@@ -110,7 +124,7 @@ export function colonnes(html) {
         const entrees = entreesNiveau1(bloc);
         const courtes = entrees.every(e => e.replace(/<[^>]+>/g, '').trim().length <= 24);
         const tuiles = entrees.length >= 2 && entrees.length <= 8 && entrees.every(e => ENTREE_TUILE.test(e));
-        sortie += tuiles ? '<ul class="accueil-tuiles">' + bloc.slice(4)
+        sortie += tuiles ? '<ul class="accueil-tuiles">' + bloc.slice(4).replace(/<li>([\s\S]*?)<\/li>/g, (m, e) => '<li>' + tuile(e) + '</li>')
           : entrees.length >= 8 ? `<ul class="accueil-colonnes${courtes ? ' accueil-colonnes-courtes' : ''}">` + bloc.slice(4) : bloc;
         i = fin; continue;
       }
@@ -132,8 +146,8 @@ function finDeListe(html, debut) {
 
 // Pied d'une page d'accueil : la date de génération seule — les indicateurs éditoriaux (relecture,
 // vérification des sources) et les outils qualifient des articles, pas une page de navigation.
-export function piedAccueil(date) {
-  return `<div class="page-meta">Site généré le ${esc(date)}</div>`;
+export function piedAccueil(date, complement = '') {
+  return `<div class="page-meta">Site généré le ${esc(date)}${complement ? ' · ' + complement : ''}</div>`;
 }
 
 // HTML de la page (sans fil d'Ariane ni pied de page, fournis par l'habillage commun).

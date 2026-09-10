@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, extraireCorps, rendreAccueil, piedAccueil } from '../accueil_wiki.mjs';
+import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, extraireCorps, rendreAccueil, piedAccueil, tuile } from '../accueil_wiki.mjs';
 
 // Pages d'accueil des wikis et des sections : découpage du corps en boîtes, nettoyage des artefacts,
 // rendu façon page d'accueil de wiki, et état du site publié (docs/).
@@ -17,6 +17,8 @@ const ACCUEILS = [
   'securite/00-accueil/00-accueil.html', 'securite/25-articles-travailleurs/00-accueil-travailleurs.html', 'securite/27-articles-gestionnaires/00-accueil-gestionnaires.html',
   'toxicologie/00-accueil/00-accueil.html', 'toxicologie/25-articles-travailleurs/00-accueil-travailleurs.html', 'toxicologie/27-articles-gestionnaires/00-accueil-gestionnaires.html',
 ];
+// copies des accueils gestionnaires dans l'espace encadrement
+const ACCUEILS_G = ['droit-travail/27-articles-gestionnaires/27-articles-gestionnaires.html', 'ergonomie/27-articles-gestionnaires/27-articles-gestionnaires.html', 'hygiene/27-articles-gestionnaires/00-accueil-gestionnaires.html', 'securite/27-articles-gestionnaires/00-accueil-gestionnaires.html', 'toxicologie/27-articles-gestionnaires/00-accueil-gestionnaires.html'];
 
 test('reconnaissance d’une page d’accueil et nettoyage des titres', () => {
   assert.equal(estAccueil({ fm: { type: 'accueil' }, base: 'Bienvenue, travailleur' }), true);
@@ -77,6 +79,12 @@ test('colonnes : listes de premier niveau seulement, huit entrées et plus', () 
   assert.ok(colonnes(roles).startsWith('<ul class="accueil-tuiles">'), 'deux points d’entrée : tuiles');
   assert.equal(colonnes('<ul>\n<li>👷 <a href="a">Travailleur</a></li>\n<li><a href="b">Sans emoji</a></li>\n</ul>').startsWith('<ul>'), true, 'une entrée sans emoji : liste ordinaire');
   assert.equal(piedAccueil('2026-09-09'), '<div class="page-meta">Site généré le 2026-09-09</div>');
+  assert.equal(piedAccueil('2026-09-09', '<a href="x">Voir</a>'), '<div class="page-meta">Site généré le 2026-09-09 · <a href="x">Voir</a></div>');
+  // tuile : libellé + description tirée du texte qui suit ou du titre de la cible, jamais quand il répète le libellé
+  assert.equal(tuile('👷 <a href="a" title="👷 Bienvenue, travailleur">Travailleur, opérateur</a>'), '👷 <a href="a" title="👷 Bienvenue, travailleur"><span class="accueil-tuile-libelle">Travailleur, opérateur</span><small class="accueil-tuile-desc">Bienvenue, travailleur</small></a>');
+  assert.equal(tuile('👷 <a href="a" title="x">Démarrage - Travailleur</a> - tes droits'), '👷 <a href="a" title="x"><span class="accueil-tuile-libelle">Démarrage - Travailleur</span><small class="accueil-tuile-desc">tes droits</small></a>');
+  assert.equal(tuile('👨‍💼 <a href="a" title="Superviseur">Superviseur</a>'), '👨‍💼 <a href="a" title="Superviseur"><span class="accueil-tuile-libelle">Superviseur</span></a>');
+  assert.ok(colonnes(roles).includes('accueil-tuile-libelle'), 'les tuiles portent le libellé structuré');
 });
 
 test('extraireCorps : entre le corps et les blocs voisins, backlinks et pied', () => {
@@ -97,9 +105,10 @@ test('rendu : bandeau avec titre et domaine, chapeau, index, boîtes', () => {
   assert.ok(!html.includes('infobox') && !html.includes('class="toc'));
 });
 
-test('site publié : les dix-sept accueils sont rendus en bandeau et boîtes, sans artefact', () => {
-  for (const rel of ACCUEILS) {
-    const html = fs.readFileSync(path.join(DOCS, 'w', rel), 'utf8');
+test('site publié : les dix-sept accueils et leurs cinq copies encadrement sont rendus en bandeau et boîtes, sans artefact', () => {
+  for (const rel of [...ACCUEILS.map(r => 'w/' + r), ...ACCUEILS_G.map(r => 'g/w/' + r)]) {
+    const html = fs.readFileSync(path.join(DOCS, rel), 'utf8');
+    if (rel.startsWith('g/')) assert.match(html, /<div class="page-meta">Site généré le \d{4}-\d{2}-\d{2} · <a href="[^"]*">Voir cette page dans le fond documentaire<\/a><\/div>/, rel + ' : lien vers le fond documentaire conservé');
     assert.ok(html.includes('<div class="accueil-banniere">') && html.includes('<header class="article-titre">'), rel + ' : bandeau');
     assert.ok(!html.includes('<aside class="infobox"') && !html.includes('<nav class="toc') && !html.includes('Un article du wiki'), rel + ' : ni infobox, ni sommaire, ni « Un article du wiki »');
     assert.ok(/<title>[^<🏠👷👔🏢]/.test(html), rel + ' : titre de fenêtre sans emoji de tête');
@@ -110,7 +119,7 @@ test('site publié : les dix-sept accueils sont rendus en bandeau et boîtes, sa
     assert.ok(!corps.includes('[[') && !/<p>!/.test(corps), rel + ' : aucun wikilink brut ni nom de média');
     for (const m of corps.matchAll(/<h[23][^>]*>((?:<[^>]+>)*)([^<]*)/g)) assert.ok(!/^\d{1,3} +[-–—] +\p{L}/u.test(m[2]), rel + ' : titre sans préfixe de classement : ' + m[2]);
     assert.ok(html.includes('<nav class="accueil-index"') && html.includes('index-alphabetique.html'), rel + ' : index du wiki');
-    assert.match(html, /<div class="page-meta">Site généré le \d{4}-\d{2}-\d{2}<\/div>/, rel + ' : pied réduit à la date de génération');
+    assert.match(html, /<div class="page-meta">Site généré le \d{4}-\d{2}-\d{2}(?: · <a [^>]*>Voir cette page dans le fond documentaire<\/a>)?<\/div>/, rel + ' : pied réduit à la date de génération');
     assert.ok(!html.includes('<details class="backlinks">') && !html.includes('Relecture éditoriale'), rel + ' : ni pages liées ni indicateurs éditoriaux');
     assert.match(html, /<div class="page-sub">(?:Page d’accueil du wiki|Section « [^»]+ » du wiki) <a href="[^"]*">[^<]*<\/a> · [\d\s\u00a0\u202f]+ pages<\/div>/, rel + ' : domaine et nombre de pages');
   }
@@ -120,6 +129,7 @@ test('site publié : les dix-sept accueils sont rendus en bandeau et boîtes, sa
   assert.ok(psy.includes('<span class="new" title="Page introuvable : Gestion">Gestion</span>'), 'wikilink brut « [[Gestion » rendu en lien rouge');
   assert.ok(!psy.includes('Virage_strat'), 'nom de la vidéo non publiée retiré');
   assert.ok(psy.includes('<ul class="accueil-tuiles">'), 'démarrage rapide par rôle en tuiles');
+  assert.ok(psy.includes('<small class="accueil-tuile-desc">'), 'tuiles décrites par le titre de la page cible');
   const ergo = fs.readFileSync(path.join(DOCS, 'w/ergonomie/25-articles-travailleurs/25-articles-travailleurs.html'), 'utf8');
   assert.ok(ergo.includes('Section « Articles travailleurs » du wiki'));
 });

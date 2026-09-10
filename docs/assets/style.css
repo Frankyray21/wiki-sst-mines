@@ -708,7 +708,8 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .page-body .accueil-tuiles { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin: 4px 0; }
 .page-body .accueil-tuiles li { margin: 0; padding: 9px 12px; min-height: 44px; display: flex; align-items: center; gap: 9px; border: 1px solid var(--border-light); border-radius: 3px; background: var(--bg); font-weight: 600; line-height: 1.35; }
 .page-body .accueil-tuiles li:hover { background: var(--hover); border-color: var(--hover-bd); }
-.page-body .accueil-tuiles a { flex: 1; }
+.page-body .accueil-tuiles a { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.page-body .accueil-tuile-desc { font-weight: 400; font-size: 12.5px; line-height: 1.35; color: var(--text-soft); }
 .accueil-groupes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 4px 22px; }
 .accueil-groupe { min-width: 0; }
 .page-body .accueil-groupe h3 { font-size: 15.5px; margin: 8px 0 2px; padding: 0 0 2px; border-bottom: 1px solid var(--border-soft); }

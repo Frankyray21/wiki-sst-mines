@@ -1004,7 +1004,7 @@ for (const p of pages) {
   // Page d'accueil (du wiki ou d'une section) : le corps est découpé en boîtes ; chaque artefact
   // retiré ou wikilink réparé est signalé, pour être corrigé dans la note.
   if (estAccueil(p)) {
-    p.accueil = decouperAccueil(p.html, { resoudre: (cible) => { const pg = resolvePage(cible, p); if (!pg) return null; CUR_LINKS.add(pg); return '{{ROOT}}' + pg.out; } });
+    p.accueil = decouperAccueil(p.html, { resoudre: (cible) => { const pg = resolvePage(cible, p); if (!pg) return null; CUR_LINKS.add(pg); return '{{ROOT}}' + urlDe(pg); } });
     for (const r of p.accueil.retires) console.warn(`  ⚠ accueil ${p.relPath} : retiré ${r}`);
     for (const r of p.accueil.repares) console.warn(`  ⚠ accueil ${p.relPath} : wikilink brut réparé « ${r} »`);
   }
@@ -1068,7 +1068,7 @@ for (const p of pages) {
     : '';
   const revisionHtml = metadonneesEditoriales(p, new Date().toISOString().slice(0, 10));
   const enteteCompact = rendreEnteteCompact({ out: p.out, titre: p.title, domaineHtml: `<a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>`, sections: p.toc });
-  const content = p.accueil ? contenuAccueil(p, crumbs, revisionHtml) : `
+  const content = p.accueil ? contenuAccueil(p, { crumbs, accueil: p.accueil, chapoHtml: p.chapoHtml, pied: piedAccueil(new Date().toISOString().slice(0, 10)) }) : `
 <div class="breadcrumbs">${crumbs.join(' <span class="crumb-sep">›</span> ')}</div>
 ${enteteCompact || rendreTitreArticle({ titre: p.title, domaineHtml: `Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>` })}
 ${infobox(p)}
@@ -1093,7 +1093,7 @@ ${blHtml}
 // L'accueil du wiki compte toutes ses pages ; l'accueil d'une section (travailleurs, gestionnaires)
 // compte les pages de son dossier. Le fil d'Ariane de l'accueil du wiki s'arrête au wiki : le
 // dernier maillon mènerait à la catégorie « Accueil », qui ne contient que cette page.
-function contenuAccueil(p, crumbs, revisionHtml) {
+function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
   const wiki = WIKIS[p.wikiKey];
   const parts = p.relPath.split('/');
   const accueilDuWiki = wikiHome(p.wikiKey) === p || /^00 - /.test(parts[1] || '');
@@ -1109,10 +1109,11 @@ function contenuAccueil(p, crumbs, revisionHtml) {
   if (accueilDuWiki || /travailleurs/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}' + INDEX_FICHES.out, libelle: INDEX_FICHES.titre });
   if (/gestionnaires/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}g/index.html', libelle: 'Espace encadrement' });
   const fil = accueilDuWiki ? crumbs.slice(0, 2) : crumbs;
+  // un éventuel « En bref » de la note ouvre le chapeau, sans son étiquette
   return `
 <div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
-${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: p.accueil.chapeau, sections: p.accueil.sections, index })}
-${piedAccueil(new Date().toISOString().slice(0, 10))}`;
+${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: (chapoHtml || '') + accueil.chapeau, sections: accueil.sections, index })}
+${pied}`;
 }
 
 // ---------- pages de catégorie (une par dossier) ----------
@@ -1559,15 +1560,18 @@ function genererWikiPublic(pub) {
       ? `<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">${p.toc.filter(t => t.lv === 2).length || p.toc.length} sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul>${p.toc.map(t => `<li class="toc-l${t.lv}"><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ul></nav>`
       : '';
     const enteteCompact = rendreEnteteCompact({ out, titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}`, sections: p.toc });
-    const contenu = `
+    const filPublic = [`<a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a>`, esc(wiki.name)];
+    const versFond = `<a href="{{ROOT}}${p.out}">Voir cette page dans le fond documentaire</a>`;
+    const accueil = estAccueil(p) ? decouperAccueil(corps, { resoudre: (cible) => { const pg = resolvePage(cible, p); return pg ? '{{ROOT}}' + urlDe(pg) : null; } }) : null;
+    const contenu = accueil ? contenuAccueil(p, { crumbs: filPublic, accueil, chapoHtml: p.chapoHtml, pied: piedAccueil(new Date().toISOString().slice(0, 10), versFond) }) : `
 <div class="breadcrumbs"><a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a> <span class="crumb-sep">›</span> ${esc(wiki.name)}</div>
 ${enteteCompact || rendreTitreArticle({ titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}` })}
 ${enteteCompact ? '' : tocHtml}
 <div class="page-body">
 ${corps}
 </div>
-<div class="page-meta">${metadonneesEditoriales(p, new Date().toISOString().slice(0, 10))} · <a href="{{ROOT}}${p.out}">Voir cette page dans le fond documentaire</a></div>`;
-    const html = pageShell({ out, title: p.title, wikiKey: null, content: contenu, sidebarExtra: sidebarPublic(pub) })
+<div class="page-meta">${metadonneesEditoriales(p, new Date().toISOString().slice(0, 10))} · ${versFond}</div>`;
+    const html = pageShell({ out, title: accueil ? titreAccueil(p.title) : p.title, wikiKey: null, content: contenu, sidebarExtra: sidebarPublic(pub) })
       .replace(/\{\{ROOT\}\}/g, R);
     const dest = path.join(OUT, out);
     fs.mkdirSync(path.dirname(dest), { recursive: true });
