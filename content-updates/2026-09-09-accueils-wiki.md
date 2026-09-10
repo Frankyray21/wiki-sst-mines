@@ -24,6 +24,11 @@ un téléphone, elles ne ressemblaient pas à l'accueil d'un wiki.
   à une colonne sur téléphone.
 - Les listes de deux à huit points d'entrée « emoji + lien » (« Démarrage rapide par rôle », « par
   profil ») deviennent une grille de tuiles d'au moins 44 px, toute la tuile touchable.
+  Chaque tuile porte une ligne de description : le texte qui suit le lien dans la note, sinon le
+  titre de la page cible (attribut `title` posé par le générateur), jamais quand il répète le libellé.
+- Les cinq copies des accueils gestionnaires dans l'espace encadrement (`g/w/…/27-articles-gestionnaires/`)
+  reçoivent le même rendu, avec leur lien « Voir cette page dans le fond documentaire » dans le pied.
+- Un « En bref » d'une note d'accueil, s'il en apparaît un, ouvre le chapeau sans son étiquette.
 - Le pied de page se réduit à « Site généré le … » : les indicateurs éditoriaux (relecture,
   vérification des sources), le bloc « Pages qui pointent ici » (3 283 entrées sur l'accueil du
   recueil) et le lien vers le graphe qualifient des articles, pas une page de navigation.
