@@ -166,6 +166,8 @@
 }
 
 html { scroll-behavior: smooth; }
+/* Un seul décalage, ajusté à la hauteur réelle de la barre par app.js. */
+html[data-wiki-entete] { scroll-padding-top: calc(var(--hh) + .75rem); }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Lato, Helvetica, Arial, sans-serif;
   background: var(--bg);
@@ -269,7 +271,26 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
   border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 4px;
 }
 .page-sub { font-size: 13px; color: var(--text-soft); margin-bottom: 18px; }
+.article-titre { display: grid; gap: .5rem; margin-bottom: 1rem; min-width: 0; }
+.article-titre .page-title, .article-titre .page-sub, .article-titre .lecture-outils { margin: 0; }
 .page-body { font-size: calc(15px * var(--echelle, 1)); max-width: 100%; }
+/* Appels bibliographiques : discrets dans la phrase, sans modifier la bibliographie. */
+.page-body a[href^="#ref-"] {
+  font-size: max(.75rem, .72em);
+  line-height: 0;
+  vertical-align: super;
+  font-weight: 600;
+  padding-block: .2em;
+  padding-inline: .12em;
+  white-space: nowrap;
+}
+.page-body :is(h2, h3, h4):target,
+.page-body li:has(> span[id^="ref-"]:target) {
+  background: var(--tag-bg);
+  outline: 2px solid var(--border);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
 .page-body h1, .page-body h2, .page-body h3, .page-body h4 {
   font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif;
   font-weight: 400; margin: 26px 0 10px; line-height: 1.3;
@@ -281,6 +302,10 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .page-body p { margin: 9px 0; }
 .page-body ul, .page-body ol { margin: 9px 0 9px 26px; }
 .page-body li { margin: 3px 0; }
+/* Bibliographie : une liste continue, sans ligne vide artificielle. */
+.page-body ol.references-liste { margin: .5rem 0 .75rem; padding-inline-start: 1.65rem; line-height: 1.3; overflow-wrap: anywhere; }
+.page-body .references-liste > li { margin: .25rem 0; padding-inline-start: .125rem; }
+.page-body .references-liste > li > p { margin: 0; }
 .page-body hr { border: 0; border-top: 1px solid var(--border-light); margin: 18px 0; }
 .page-body blockquote { border-left: 4px solid var(--border-light); padding: 4px 16px; color: var(--text-soft); margin: 10px 0; }
 .page-body code { background: var(--code-bg); border: 1px solid var(--border-soft); border-radius: 2px; padding: 1px 4px; font-size: 13px; }
@@ -290,11 +315,24 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .page-body table th, .page-body table td { border: 1px solid var(--border-light); padding: 5px 10px; text-align: left; }
 .page-body table th { background: var(--th-bg); }
 .page-body table tr:nth-child(even) td { background: var(--tr-alt); }
+/* Comparaison cadenassage : texte visible, colonnes souples, sans image requise. */
+.page-body table.table-energies { display: table; width: 100%; table-layout: fixed; font-size: calc(1rem * var(--echelle, 1)); }
+.page-body .table-energies th, .page-body .table-energies td { padding: .5rem .625rem; vertical-align: top; overflow-wrap: anywhere; hyphens: auto; }
+.page-body .table-energies thead th:first-child { width: 38%; }
+.page-body .table-energies tbody th { background: transparent; font-weight: 600; }
 .page-img { display: block; text-align: center; margin: 14px 0; }
 /* !important : neutralise le max-width en pixels hérité de l'alias Obsidian (|650), qui débordait sur mobile */
 .page-img img { max-width: 100% !important; height: auto; border: 1px solid var(--border-light); background: var(--img-bg); padding: 4px; }
 .page-img a { display: inline-block; max-width: 100%; }
 .img-zoom { display: block; font-size: 12px; color: var(--text-soft); margin-top: 2px; }
+
+/* Texte officiel d'un article de loi, extrait de la couche texte du PDF (tools/textes-loi) et posé
+   avant la capture : il se copie, se lit au lecteur d'écran et sur téléphone, et se cherche. */
+.texte-loi { margin: 10px 0 18px; padding: 2px 0 2px 16px; border-left: 3px solid var(--border); }
+.texte-loi p { margin: 0 0 10px; }
+.texte-loi p.alinea { margin-left: 18px; }
+.texte-loi p:last-child { margin-bottom: 0; }
+.texte-loi-source { font-size: 12px; color: var(--text-soft); }
 .missing-file { color: var(--link-new); font-style: italic; font-size: 13px; }
 
 /* ---------- sommaire ---------- */
@@ -545,15 +583,17 @@ body.graphe-fige { overflow: hidden; }
 
 /* ---------- confort de lecture ---------- */
 /* --echelle est posée sur <html> depuis localStorage, dans le <head>, avant le premier rendu. */
-.lecture-outils { display: inline-flex; gap: 6px; margin: -8px 0 16px; }
+.lecture-outils { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 16px; }
 .lecture-outils button {
-  min-width: 40px; height: 34px; padding: 0 10px;
+  min-width: 44px; min-height: 44px; padding: 6px 10px;
   background: var(--content-bg); border: 1px solid var(--border-light); border-radius: 3px;
-  font: inherit; font-size: 13.5px; color: var(--text); cursor: pointer;
+  font: inherit; font-size: .875rem; color: var(--text); cursor: pointer;
 }
 .lecture-outils button:hover:not(:disabled) { background: var(--hover); border-color: var(--hover-bd); }
 .lecture-outils button:disabled { opacity: .45; cursor: default; }
 .lecture-outils button.actif { background: var(--tag-bg); border-color: var(--border); font-weight: 600; }
+.lecture-outils button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+@media print { .lecture-outils { display: none; } }
 /* mode lecture : rien que l'article, colonne étroite, interligne aéré */
 html[data-lecture] .sidebar, html[data-lecture] .breadcrumbs, html[data-lecture] .backlinks,
 html[data-lecture] .site-footer, html[data-lecture] .page-sub, html[data-lecture] .page-meta { display: none !important; }
@@ -643,6 +683,47 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .site-footer { text-align: center; font-size: 12px; color: var(--text-soft); padding: 22px 10px 30px; }
 
 /* ---------- responsive ---------- */
+/* ---------- pages d'accueil des wikis : bandeau et boîtes, comme la page d'accueil d'un wiki ---------- */
+.accueil-banniere { display: flex; align-items: center; gap: 16px; padding: 14px 18px; border: 1px solid var(--chapo-bd); background: var(--chapo-bg); border-radius: 3px; }
+.accueil-icone { font-size: 46px; line-height: 1; flex: none; }
+.accueil-banniere .article-titre { min-width: 0; margin: 0; gap: .3rem; }
+.accueil-banniere .page-title { border-bottom: 0; margin: 0; }
+.accueil-banniere .page-sub { margin: 0; }
+.accueil-chapeau { font-size: 15.5px; line-height: 1.55; margin: 14px 0 8px; }
+.accueil-chapeau p { margin: 0 0 8px; }
+.accueil-index { font-size: 14px; margin: 4px 0 16px; color: var(--text-soft); }
+.accueil-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.accueil-boite { border: 1px solid var(--chapo-bd); background: var(--content-bg); border-radius: 3px; min-width: 0; }
+.accueil-large { grid-column: 1 / -1; }
+.page-body .accueil-titre { font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif; font-size: 19px; font-weight: 600; margin: 0; padding: 7px 12px; background: var(--infobox-titre-bg); border-bottom: 1px solid var(--chapo-bd); line-height: 1.3; }
+/* Un en-tête de boîte peut être un lien (« Articles internes … ») : il garde la couleur de titre.
+   En bleu de lien il tombait à 4,27:1 sur le fond pastel en thème clair, sous le seuil AA de 4,5:1
+   (19 px en graisse 600 n'est pas du « texte large », qui commence à 18,66 px en graisse 700), et
+   un en-tête sur cinq n'avait pas l'aspect des autres. */
+.page-body .accueil-titre a { color: inherit; }
+.accueil-corps { padding: 8px 12px 10px; }
+.accueil-corps > p:first-child { margin-top: 2px; }
+.accueil-corps ul { margin: 4px 0 4px 20px; }
+.accueil-corps li { margin: 3px 0; break-inside: avoid; }
+/* colonnes par largeur : elles s'ajoutent quand la boîte est large, retombent seules à une sur téléphone */
+.accueil-colonnes { columns: 12em 3; column-gap: 28px; }
+.accueil-large .accueil-colonnes { columns: 13em 3; }
+.accueil-colonnes-courtes, .accueil-large .accueil-colonnes-courtes { columns: 9em 3; column-gap: 18px; }
+/* points d'entrée (rôles) en tuiles, toute la tuile touchable */
+.page-body .accueil-tuiles { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin: 4px 0; }
+.page-body .accueil-tuiles li { margin: 0; padding: 9px 12px; min-height: 44px; display: flex; align-items: center; gap: 9px; border: 1px solid var(--border-light); border-radius: 3px; background: var(--bg); font-weight: 600; line-height: 1.35; }
+.page-body .accueil-tuiles li:hover { background: var(--hover); border-color: var(--hover-bd); }
+.page-body .accueil-tuiles a { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.page-body .accueil-tuile-desc { font-weight: 400; font-size: 12.5px; line-height: 1.35; color: var(--text-soft); }
+.accueil-groupes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 4px 22px; }
+.accueil-groupe { min-width: 0; }
+.page-body .accueil-groupe h3 { font-size: 15.5px; margin: 8px 0 2px; padding: 0 0 2px; border-bottom: 1px solid var(--border-soft); }
+.accueil-corps table { display: block; overflow-x: auto; max-width: 100%; }
+@media (max-width: 480px) {
+  .accueil-groupes { grid-template-columns: 1fr; }
+  .accueil-corps li { padding: 3px 0; }
+}
+
 @media (max-width: 900px) {
   :root { --hh: 106px; } /* l'en-tête passe sur deux lignes */
   .burger { display: block; min-width: 44px; min-height: 44px; font-size: 22px; }
@@ -655,8 +736,9 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
     background: var(--content-bg); border-right: 1px solid var(--border-light);
     transform: translateX(-105%); transition: transform .18s ease; z-index: 45;
     max-height: none; box-shadow: 4px 0 18px var(--ombre);
+    visibility: hidden;
   }
-  .sidebar.open { transform: translateX(0); }
+  .sidebar.open { transform: translateX(0); visibility: visible; }
   .content { padding: 16px 16px 36px; border: 0; }
   /* L'infobox liste des métadonnées techniques : sur téléphone elle atteignait 511 px et
      repoussait le résumé introductif hors de l'écran. On la borne, elle défile à l'intérieur. */
@@ -676,6 +758,67 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   .toc-title { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
   .toc-toggle { min-height: 44px; padding: 0 12px; font-size: 14px; }
   .search-filters .filtre { min-height: 40px; }
+  /* Numéros d'urgence de l'index des fiches : mesurés à 34 x 16 px, ils étaient les liens
+     les plus petits de la page alors qu'ils sont les plus importants — composés d'une main
+     gantée, parfois dans l'urgence. La zone tactile est portée à 44 px par un pseudo-élément
+     posé par-dessus : la hauteur de ligne du paragraphe ne bouge pas, sinon la phrase se
+     disloque sur quatre lignes très espacées. */
+  .encadre-urgence .callout-body a { position: relative; }
+  /* Le gras est réservé aux numéros : les deux renvois vers les pages d'aide restent des
+     liens ordinaires, sinon la moitié de l'encadré est en gras et plus rien ne ressort. */
+  .encadre-urgence .callout-body a[href^="tel:"] { font-weight: 700; }
+  .encadre-urgence .callout-body a::after {
+    content: ''; position: absolute; left: -6px; right: -6px; top: 50%;
+    transform: translateY(-50%); height: 44px; min-width: 44px;
+  }
+  /* Le domaine affiché à côté de chaque fiche descendait à 11,5 px : trop petit sous terre. */
+  .cat-pages .cat-compte { font-size: 13px; }
+  /* Une carte de 300 px ne tient pas dans les 276 px utiles d'un écran de 320 px : la grille
+     débordait de 2 px et faisait apparaître une barre horizontale. */
+  .portal-grid { grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
+  .portal-main { padding: 32px 14px 36px; }
+  /* « ↑ haut » mesurait 33 x 14 px, sous le minimum WCAG 2.5.8 AA de 24 px. Le padding
+     l'amène au-dessus sans faire grossir la ligne du titre qui le porte. */
+  .retour-haut { display: inline-block; padding: 6px 8px; }
+  /* Fil d'Ariane : 35 x 14 px, seul élément resté sous le minimum WCAG 2.5.8 AA.
+     Le padding vertical tient dans l'interligne, la ligne ne se déplace pas. */
+  .breadcrumbs a { display: inline-block; padding: 6px 3px; }
+  /* pages d'accueil : boîtes en une colonne, listes sur deux */
+  .accueil-grille { grid-template-columns: 1fr; gap: 12px; }
+  .accueil-banniere { padding: 12px; gap: 12px; }
+  .accueil-icone { font-size: 36px; }
+  .accueil-groupes { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .page-body .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); }
+  /* cibles tactiles : la zone d'un lien de liste atteint 24 px de haut (WCAG 2.5.8) sans changer la ligne */
+  .accueil-corps a, .accueil-index a, .accueil-chapeau a, .accueil-titre a { padding: 4px 0; }
+  .accueil-corps { font-size: 15px; }
+  /* Même plancher que les autres textes secondaires du site sur petit écran (13 px). */
+  .page-body .accueil-tuile-desc { font-size: 13px; }
+  /* L'arbre de la hiérarchie normative défile dans son cadre plutôt que de passer à la ligne, qui
+     casserait son alignement ; encore faut-il voir que c'est un cadre : bordure franche. */
+  .accueil-corps pre { border-color: var(--border); }
+}
+@media (max-width: 600px) {
+  /* Une rangée d'actions, une rangée de recherche, même après ajout de l'aide/PWA. */
+  .site-header {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) repeat(4, 44px);
+    gap: 8px 4px;
+    padding: 8px;
+  }
+  .site-header > .burger { grid-area: 1 / 1; padding-inline: 0; }
+  .site-header > .brand { grid-area: 1 / 2; min-width: 0; }
+  .site-header .brand-icon { display: none; }
+  .site-header .brand-text strong { font-size: clamp(.875rem, 4vw, 1rem); letter-spacing: 0; }
+  .site-header > #btnFav { grid-area: 1 / 3; }
+  .site-header > #btnAide { grid-area: 1 / 4; }
+  .site-header > #btnHorsLigne { grid-area: 1 / 5; }
+  .site-header > #btnTheme { grid-area: 1 / 6; }
+  .site-header > .searchbox { grid-area: 2 / 1 / auto / -1; width: 100%; min-width: 0; margin: 0; }
+  .site-header:has(> #btnInstall) > .searchbox { grid-column-end: -2; }
+  .site-header > #btnInstall { grid-area: 2 / 6; }
+  .site-header .searchbox input { min-height: 44px; font-size: 1rem; }
+  .page-body { font-size: calc(1rem * var(--echelle, 1)); }
 }
 @media print {
   .site-header, .sidebar, .site-footer, .backlinks, .toc-toggle, .btn-haut, .btn-theme { display: none !important; }
@@ -699,3 +842,54 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
    n'a simplement pas été versé. */
 .doc-absent { color: var(--text-soft); cursor: help; }
 .doc-absent small { font-size: .85em; opacity: .75; }
+
+/* Infographies éditoriales : image agrandissable, équivalent textuel natif. */
+.infographie { margin: 1.25rem 0 1.75rem; padding: 1rem; border: 1px solid var(--border-light); border-inline-start: 4px solid var(--accent); border-radius: .75rem; background: var(--content-bg); }
+.infographie .page-img { margin: 0 auto 1rem; max-width: 34rem; }
+.infographie .page-img a { display: block; }
+.infographie .page-img img { display: block; width: 100%; height: auto; padding: 0; border-radius: .5rem; filter: none !important; }
+.infographie .img-zoom { display: block; padding: .5rem; font-size: .875rem; }
+.infographie-legende { font-size: 1rem; line-height: 1.6; }
+.infographie-texte { margin: 1rem 0; border: 1px solid var(--border-light); border-radius: .5rem; }
+.infographie-texte summary { cursor: pointer; padding: .85rem 1rem; font-size: 1rem; font-weight: 600; min-height: 44px; }
+.infographie-texte summary:hover { background: var(--hover); }
+.infographie-texte summary:focus-visible, .infographie a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.infographie-texte[open] summary { border-bottom: 1px solid var(--border-light); }
+.infographie-texte ul { margin: 1rem 1.25rem 1rem 2.25rem; }
+.infographie-texte li { margin: .65rem 0; line-height: 1.6; }
+.infographie-texte > p, .infographie-texte > h4 { margin-inline: 1rem; }
+.infographie-texte > table { width: calc(100% - 2rem); margin: 1rem; }
+.infographie-sources { color: var(--text-soft); font-size: .875rem; line-height: 1.6; overflow-wrap: anywhere; }
+.infographie.infographie-compacte { padding: .65rem .8rem; margin-block: .85rem 1.15rem; }
+.infographie-compacte .page-img { margin-bottom: .35rem; }
+.infographie-compacte .img-zoom { padding: .25rem; }
+.infographie-compacte .infographie-legende { margin: .35rem 0 .5rem; font-size: .9375rem; line-height: 1.45; }
+.infographie-compacte .infographie-texte { margin: .5rem 0; }
+.infographie-compacte .infographie-texte summary { padding: .65rem .8rem; }
+.infographie-compacte .infographie-sources { margin: .35rem 0 0; }
+@media (max-width: 480px) { .infographie { padding: .65rem; } .infographie-texte summary { padding: .75rem; } }
+@media print { .infographie { break-inside: auto; } .infographie .page-img { max-width: 100mm; } .infographie-texte::details-content { content-visibility: visible; } .infographie-texte > :not(summary) { display: block !important; } }
+
+/* En-tête pilote de Cadenassage : aucun autre article n'emploie cette classe. */
+.article-entete { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; margin-bottom: 1.25rem; }
+.article-entete .page-title { grid-column: 1 / -1; font-family: inherit; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 650; line-height: 1.2; border: 0; padding: 0; margin: 0; overflow-wrap: anywhere; }
+.article-entete .page-sub { grid-column: 1; align-self: center; font-size: .875rem; margin: 0; }
+.article-entete .lecture-outils { grid-column: 2; grid-row: 2; display: flex; align-items: center; flex-wrap: wrap; gap: .375rem; margin: 0; }
+.article-entete .lecture-outils button { min-width: 44px; min-height: 44px; height: auto; font-size: .875rem; border-radius: .375rem; }
+.article-entete .toc { grid-column: 1 / -1; display: block; min-width: 0; width: 100%; margin: 0; padding: .5rem .75rem; border-radius: .5rem; }
+.article-entete .toc-title { display: flex; justify-content: space-between; align-items: center; gap: .5rem; flex-wrap: wrap; text-align: left; margin: 0; font-size: 1rem; }
+.article-entete .toc-compte { display: inline-block; font-size: .875rem; margin-inline-start: .375rem; }
+.article-entete .toc-toggle { min-height: 44px; padding: .5rem .625rem; font-size: .875rem; border-radius: .375rem; }
+.article-entete .toc > ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .125rem .75rem; max-height: none; overflow: visible; margin-top: .25rem; }
+.article-entete .toc li { min-width: 0; margin: 0; font-size: .9375rem; }
+.article-entete .toc a { display: flex; align-items: center; min-height: 44px; padding: .375rem .25rem; line-height: 1.35; overflow-wrap: anywhere; }
+.article-entete .toc.collapsed > ul { display: none; }
+.article-entete button:hover:not(:disabled), .article-entete .toc a:hover { background: var(--hover); }
+.article-entete button:focus-visible, .article-entete a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
+@media (max-width: 640px) {
+  .article-entete { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .article-entete .lecture-outils { grid-column: 1; grid-row: auto; }
+  .article-entete .toc > ul { grid-template-columns: minmax(0, 1fr); }
+}
+@media print { .article-entete .lecture-outils { display: none; } .article-entete .toc.collapsed > ul { display: grid; } }

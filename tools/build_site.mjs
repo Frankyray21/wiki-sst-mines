@@ -6,9 +6,17 @@ import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
-import { rendrePortailEncadrement, rendrePortailTravailleurs } from './portail_encadrement.mjs';
+import { rendrePortailEncadrement } from './portail_encadrement.mjs';
+import { INDEX_FICHES, LIEN_INDEX_FICHES, rendreIndexFiches, rendrePage404 } from './fiches_travailleurs.mjs';
+import { rendrePortailContenu } from './portail_racine.mjs';
 import { analyserQualite, LIBELLES } from './qualite.mjs';
+import { normaliserNavigationInterne, metadonneesEditoriales, indicateursDocumentaires } from './editorial.mjs';
 import { genererPwa, metaPwa, genererListeHorsLigne } from './pwa.mjs';
+import { rendreEnteteCompact, rendreTitreArticle } from './entete-article.mjs';
+import { normaliserBibliographie } from './bibliographie.mjs';
+import { motsDePage, encoderListe } from './recherche_mots.mjs';
+import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
+import { estAccueil, decouperAccueil, rendreAccueil, titreAccueil, piedAccueil } from './accueil_wiki.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -24,12 +32,11 @@ const WIKIS = {
   'Recueil législatif SST':    { slug: 'legislation',    icon: '⚖️', name: 'Recueil législatif',   desc: 'Lois, règlements, article par article, jurisprudence' },
 };
 
+// Un seul parcours par public subsiste : l'encadrement. L'ancien wiki des travailleurs (t/)
+// est abandonné ; ses pages restent dans le fond documentaire et sont indexées dans
+// travailleurs.html (fiches_travailleurs.mjs). L'autorisation « t » calculée plus bas
+// (publication-travailleur, public-cible, veto de sensibilité) sert désormais à cet index.
 const PUBLICS = {
-  t: {
-    slug: 't', icon: '👷', nom: 'Wiki des travailleurs',
-    tagline: 'Tes droits, ta santé, ta sécurité — expliqué simplement',
-    intro: 'Ce wiki est écrit pour toi qui travailles à la mine. Tu y trouves ce qu\'il faut savoir sur les risques du métier, ce que la loi te garantit, et où trouver de l\'aide.',
-  },
   g: {
     slug: 'g', icon: '🎓', nom: 'Gestion & prévention',
     tagline: 'Superviseurs, gestionnaires et direction — obligations, programmes et outils',
@@ -363,7 +370,7 @@ const articlesRetires = new Map(); // basename minuscule -> 'remplacé' | 'abrog
 }
 
 // Chemin de sortie dans le fond documentaire : miroir du vault, slugifié.
-// Les wikis par public préfixent ce chemin (t/… ou g/…) sans le recalculer.
+// Le parcours de l'encadrement préfixe ce chemin (g/…) sans le recalculer.
 const usedOut = new Set();
 for (const p of pages) {
   const parts = p.relPath.slice(0, -3).split('/');
@@ -561,7 +568,7 @@ let pngGain = 0, pngOptim = 0, pngIntacts = 0;
 // inversées en thème sombre au lieu d'éblouir le lecteur.
 const docsTexte = new Set();
 
-// Public en cours de génération : null pour le fond documentaire, 't' ou 'g' pour les wikis par public.
+// Public en cours de génération : null pour le fond documentaire, 'g' pour le parcours de l'encadrement.
 // Un lien vers une page du même public reste dans le wiki ; sinon il renvoie au fond documentaire.
 let PUB = null;
 function urlDe(pg) {
@@ -727,7 +734,7 @@ function finalize(html) {
   while (/XBLOCKX\d+X/.test(html) && guard++ < 10) {
     html = html.replace(/(?:<p>)?XBLOCKX(\d+)X(?:<\/p>)?/g, (m, i) => blocks[+i]);
   }
-  return html;
+  return normaliserNavigationInterne(normaliserBibliographie(html));
 }
 
 // ---------- gabarits ----------
@@ -748,7 +755,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
   const wikiLinks = Object.entries(WIKIS).map(([k, w]) =>
     `<li${wiki && w.slug === wiki.slug ? ' class="active"' : ''}><a href="${ROOT}w/${w.slug}/index.html">${w.icon} ${w.name}</a></li>`).join('');
   return `<!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-wiki-entete>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -760,29 +767,29 @@ ${metaPwa(ROOT)}
 </head>
 <body>
 <header class="site-header">
-  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">☰</button>
   <a class="brand" href="${ROOT}index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
   <div class="searchbox">
-    <input type="search" id="q" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <input type="search" id="q" aria-label="Rechercher dans le wiki" placeholder="Rechercher dans le wiki…" autocomplete="off">
     <div id="suggest" class="suggest" hidden></div>
   </div>
   <button class="btn-theme" id="btnFav" aria-label="Ajouter aux favoris" title="Ajouter aux favoris">☆</button>
   <button class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 </header>
 <div class="layout">
-<nav class="sidebar" id="sidebar">
+<nav class="sidebar" id="sidebar" aria-label="Navigation du wiki">
   <div class="nav-group"><div class="nav-title">Navigation</div>
     <ul>
       <li><a href="${ROOT}index.html">🏠 Portail</a></li>
       <li><a href="${ROOT}categories.html">🏷️ Catégories</a></li>
-      <li><a href="${ROOT}qualite.html">🔧 Qualité rédactionnelle</a></li>
+      <li><a href="${ROOT}qualite.html">🔧 Contrôles de forme</a></li>
       <li><a href="${ROOT}graphe.html">🕸️ Graphe des liens</a></li>
       <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
     </ul>
   </div>
   <div class="nav-group"><div class="nav-title">Selon qui vous êtes</div>
     <ul>
-      <li><a href="${ROOT}t/index.html">${PUBLICS.t.icon} ${esc(PUBLICS.t.nom)}</a></li>
+      <li><a href="${ROOT}${INDEX_FICHES.out}">${LIEN_INDEX_FICHES}</a></li>
       <li><a href="${ROOT}g/index.html">${PUBLICS.g.icon} ${esc(PUBLICS.g.nom)}</a></li>
     </ul>
   </div>
@@ -846,7 +853,7 @@ const FM_LABELS = [
   ['en-vigueur-depuis', 'En vigueur depuis'], ['chapitre', 'Chapitre'], ['section', 'Section'], ['bloc', 'Bloc'],
   ['nature', 'Nature'], ['sujet', 'Sujet'], ['visé', 'Visé'], ['type', 'Type'], ['theme', 'Thème'], ['thème', 'Thème'],
   ['auteur', 'Auteur'], ['année', 'Année'],
-  ['révision', 'Révision'], ['revision', 'Révision'],
+  ['révision', 'Révision déclarée'], ['revision', 'Révision déclarée'],
 ];
 // « statut », « qualité », « public-cible » et « niveau-sensibilité » sont volontairement absents :
 // ce sont des étiquettes de travail. Afficher « Sensibilité : 3 » signale au lecteur qu'il existe
@@ -891,6 +898,10 @@ console.log('Rendu des pages…');
 // On vide le contenu sans supprimer OUT lui-même : sous Windows le dossier racine reste
 // verrouillé dès qu'un terminal ou un serveur l'a comme répertoire courant.
 if (fs.existsSync(OUT)) {
+  const attendu = path.resolve(__dirname, '..', 'docs');
+  if (OUT !== attendu || fs.lstatSync(OUT).isSymbolicLink() || fs.realpathSync(OUT).toLowerCase() !== attendu.toLowerCase()) {
+    throw new Error('Sortie de génération non sûre : nettoyage refusé.');
+  }
   for (const e of fs.readdirSync(OUT)) {
     fs.rmSync(path.join(OUT, e), { recursive: true, force: true, maxRetries: 20, retryDelay: 400 });
   }
@@ -957,6 +968,7 @@ const categories = [...parTag.entries()]
 const slugTag = new Map(categories.map(([t]) => [t, slugify(t)]));
 
 const backlinks = new Map(); // page -> Set(pages qui pointent vers elle)
+const nbTextesLoi = {};      // articles de loi dont le texte officiel a été posé, par mode d'insertion
 for (const p of pages) {
   CUR = p; p.toc = []; p.headIds = new Set();
   CUR_LINKS = new Set();
@@ -978,6 +990,24 @@ for (const p of pages) {
   }
 
   p.html = finalize(renderBody(corpsMd));
+  // Article de loi : le texte officiel extrait du PDF (tools/textes-loi) est posé avant la capture,
+  // et le sommaire reprend le titre renommé. Le texte compte aussi pour la recherche.
+  const tl = texteLoiDeLaPage(p.fm.loi, p.base);
+  if (tl) {
+    const pose = insererTexteLoi(p.html, tl);
+    p.html = pose.html;
+    p.texteLoi = texteBrut(tl);
+    if (pose.ajoutTitre) p.toc.push({ lv: 2, id: pose.ajoutTitre, text: LIBELLE_TEXTE });
+    renommerLibelleCapture(p.toc);
+    nbTextesLoi[pose.mode] = (nbTextesLoi[pose.mode] || 0) + 1;
+  }
+  // Page d'accueil (du wiki ou d'une section) : le corps est découpé en boîtes ; chaque artefact
+  // retiré ou wikilink réparé est signalé, pour être corrigé dans la note.
+  if (estAccueil(p)) {
+    p.accueil = decouperAccueil(p.html, { resoudre: (cible) => { const pg = resolvePage(cible, p); if (!pg) return null; CUR_LINKS.add(pg); return '{{ROOT}}' + urlDe(pg); } });
+    for (const r of p.accueil.retires) console.warn(`  ⚠ accueil ${p.relPath} : retiré ${r}`);
+    for (const r of p.accueil.repares) console.warn(`  ⚠ accueil ${p.relPath} : wikilink brut réparé « ${r} »`);
+  }
   p.liens = [...CUR_LINKS].filter(x => x !== p); // liens sortants, pour le graphe
   blocks.length = 0;
   for (const target of CUR_LINKS) {
@@ -985,6 +1015,12 @@ for (const p of pages) {
     if (!backlinks.has(target)) backlinks.set(target, new Set());
     backlinks.get(target).add(p);
   }
+}
+
+{
+  const total = Object.values(nbTextesLoi).reduce((a, b) => a + b, 0);
+  const sansTexte = pages.filter(p => p.fm.loi && numeroDeLaPage(p.base) && !p.texteLoi).length;
+  console.log(`  texte officiel posé sur ${total} articles de loi (${Object.entries(nbTextesLoi).map(([m, n]) => m + ' ' + n).join(', ')}) · ${sansTexte} article(s) sans texte extrait`);
 }
 
 // Pages voisines : précédente et suivante dans le même dossier du vault, en ordre naturel
@@ -1030,27 +1066,54 @@ for (const p of pages) {
   const blHtml = bl && bl.size
     ? `<details class="backlinks"><summary>Pages qui pointent ici (${bl.size})</summary><ul>${[...bl].sort((a, b) => a.title.localeCompare(b.title, 'fr')).slice(0, 60).map(b => `<li><a href="{{ROOT}}${b.out}">${esc(b.title)}</a> <small class="bl-wiki">${WIKIS[b.wikiKey].name}</small></li>`).join('')}${bl.size > 60 ? '<li>…</li>' : ''}</ul></details>`
     : '';
-  const rev = p.fm['révision'] || p.fm['revision'] || p.mtime.toISOString().slice(0, 10);
-  const content = `
+  const revisionHtml = metadonneesEditoriales(p, new Date().toISOString().slice(0, 10));
+  const enteteCompact = rendreEnteteCompact({ out: p.out, titre: p.title, domaineHtml: `<a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>`, sections: p.toc });
+  const content = p.accueil ? contenuAccueil(p, { crumbs, accueil: p.accueil, chapoHtml: p.chapoHtml, pied: piedAccueil(new Date().toISOString().slice(0, 10)) }) : `
 <div class="breadcrumbs">${crumbs.join(' <span class="crumb-sep">›</span> ')}</div>
-<h1 class="page-title">${esc(p.title)}</h1>
-<div class="page-sub">Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a></div>
+${enteteCompact || rendreTitreArticle({ titre: p.title, domaineHtml: `Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>` })}
 ${infobox(p)}
 ${p.chapoHtml ? `<div class="chapo"><div class="chapo-label">${esc(p.chapoLabel)}</div>${p.chapoHtml}</div>` : ''}
-${tocHtml}
+${enteteCompact ? '' : tocHtml}
 <div class="page-body">
 ${p.html}
 </div>
 ${voisinsHtml(p)}
 ${blHtml}
-<div class="page-meta">Dernière révision : ${esc(String(rev))} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
+<div class="page-meta">${revisionHtml} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
   const html = pageShell({
-    out: p.out, title: p.title, wikiKey: p.wikiKey, content,
+    out: p.out, title: p.accueil ? titreAccueil(p.title) : p.title, wikiKey: p.wikiKey, content,
     sidebarExtra: wikiSidebar(p.wikiKey, wikiSections[p.wikiKey]),
   }).replace(/\{\{ROOT\}\}/g, rootOf(p.out));
   const dest = path.join(OUT, p.out);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, html);
+}
+
+// Contenu d'une page d'accueil : bandeau (titre, wiki, nombre de pages), chapeau, index, boîtes.
+// L'accueil du wiki compte toutes ses pages ; l'accueil d'une section (travailleurs, gestionnaires)
+// compte les pages de son dossier. Le fil d'Ariane de l'accueil du wiki s'arrête au wiki : le
+// dernier maillon mènerait à la catégorie « Accueil », qui ne contient que cette page.
+function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
+  const wiki = WIKIS[p.wikiKey];
+  const parts = p.relPath.split('/');
+  const accueilDuWiki = wikiHome(p.wikiKey) === p || /^00 - /.test(parts[1] || '');
+  const prefixe = accueilDuWiki ? parts[0] + '/' : parts.slice(0, 2).join('/') + '/';
+  const compte = pages.filter(q => q.relPath.startsWith(prefixe)).length.toLocaleString('fr-CA');
+  const lienWiki = `<a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>`;
+  const sousTitre = accueilDuWiki
+    ? `Page d’accueil du wiki ${lienWiki} · ${compte} pages`
+    : `Section « ${esc(cleanLabel(parts[1]))} » du wiki ${lienWiki} · ${compte} pages`;
+  const index = [{ url: `{{ROOT}}w/${wiki.slug}/index-alphabetique.html`, libelle: 'Index alphabétique' }];
+  if (p.wikiKey === 'Recueil législatif SST') index.push({ url: `{{ROOT}}w/${wiki.slug}/index-par-loi.html`, libelle: 'Index par loi' });
+  index.push({ url: '{{ROOT}}categories.html', libelle: 'Catégories' });
+  if (accueilDuWiki || /travailleurs/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}' + INDEX_FICHES.out, libelle: INDEX_FICHES.titre });
+  if (/gestionnaires/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}g/index.html', libelle: 'Espace encadrement' });
+  const fil = accueilDuWiki ? crumbs.slice(0, 2) : crumbs;
+  // un éventuel « En bref » de la note ouvre le chapeau, sans son étiquette
+  return `
+<div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
+${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: (chapoHtml || '') + accueil.chapeau, sections: accueil.sections, index })}
+${pied}`;
 }
 
 // ---------- pages de catégorie (une par dossier) ----------
@@ -1291,14 +1354,27 @@ rapportQualite.sort((a, b) => b.score - a.score || a.p.title.localeCompare(b.p.t
 
   const total = pages.length;
   const saines = total - rapportQualite.length;
+  const avecDefaut = new Set(rapportQualite.map(r => r.p));
+  const fiches = pages.filter(p => p.wikiKey !== 'Recueil législatif SST');
+  const groupes = [
+    ['Fiches et autres pages non législatives', fiches],
+    ['Recueil législatif', pages.filter(p => p.wikiKey === 'Recueil législatif SST')],
+  ];
+  const indicateurs = fiches.map(indicateursDocumentaires);
   const content = `
 <div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a></div>
-<h1 class="page-title">Qualité rédactionnelle</h1>
-<div class="page-sub">${saines.toLocaleString('fr-CA')} pages sur ${total.toLocaleString('fr-CA')} ne présentent aucun défaut détecté (${Math.round(saines / total * 100)} %). Cette page liste les autres, les plus atteintes d'abord.</div>
+<h1 class="page-title">Contrôles automatiques de forme</h1>
+<div class="page-sub">${saines.toLocaleString('fr-CA')} pages sur ${total.toLocaleString('fr-CA')} sans signalement automatique. Ce résultat n'est ni une note de fiabilité ni une validation SST.</div>
 
 <div class="callout callout-info"><div class="callout-title"><span class="callout-icon">ℹ️</span>Ce que cette page mesure — et ce qu'elle ne mesure pas</div><div class="callout-body">
 <p>Elle repère des défauts <strong>mécaniques</strong> : un texte coupé, une section annoncée mais vide, une mention « à compléter » restée visible, une référence sans auteur ni année. Elle ne juge <strong>ni la justesse ni l'intérêt</strong> du contenu : une page peut être irréprochable ici et rester à étoffer, ou apparaître ci-dessous alors qu'elle est excellente sur le fond.</p>
 </div></div>
+
+<h2>Résultats par type de contenu</h2>
+<table class="q-resume"><thead><tr><th>Périmètre</th><th>Pages</th><th>Avec signalement</th></tr></thead><tbody>${groupes.map(([nom, liste]) => `<tr><td>${nom}</td><td>${liste.length}</td><td>${liste.filter(p => avecDefaut.has(p)).length}</td></tr>`).join('')}</tbody></table>
+<h2>Traçabilité des ${fiches.length} pages non législatives</h2>
+<p>Ces indicateurs comptent des liens et des métadonnées explicites. Un lien externe ne prouve pas à lui seul la justesse d'une affirmation ; une date n'est affichée comme relecture que si un relecteur est renseigné.</p>
+<table class="q-resume"><thead><tr><th>Indicateur</th><th>Renseigné</th><th>Non renseigné</th></tr></thead><tbody>${[['lienSource', 'Lien externe présent'], ['relecture', 'Relecture datée et relecteur déclaré'], ['sourcesDatees', 'Date de vérification des sources déclarée'], ['validationSpecialisee', 'Validation spécialisée datée et validateur déclaré']].map(([cle, label]) => { const n = indicateurs.filter(i => i[cle]).length; return `<tr><td>${label}</td><td>${n}</td><td>${indicateurs.length - n}</td></tr>`; }).join('')}</tbody></table>
 
 <h2>Défauts par type</h2>
 <table class="q-resume">
@@ -1317,7 +1393,7 @@ ${codes.map(([c, n]) => {
 ${lignes}
 </table>`;
   fs.writeFileSync(path.join(OUT, 'qualite.html'),
-    pageShell({ out: 'qualite.html', title: 'Qualité rédactionnelle', wikiKey: null, content })
+    pageShell({ out: 'qualite.html', title: 'Contrôles automatiques de forme', wikiKey: null, content })
       .replace(/\{\{ROOT\}\}/g, ''));
 
   // récapitulatif dans la console : c'est là que Frank verra le travail à faire
@@ -1395,7 +1471,8 @@ const searchIndex = pages.map(p => {
       ...(Array.isArray(p.fm.aliases) ? p.fm.aliases : []),
       p.base !== p.title ? p.base : '',
     ].filter(Boolean).join(' '),
-    x: extrait(p.body),
+    // sur un article de loi, l'extrait montre le texte officiel plutôt que le nom de la capture
+    x: p.texteLoi ? extrait(p.texteLoi) : extrait(p.body),
   };
   // chemin de catégorie : distingue les 31 groupes de pages homonymes
   const cat = p.relPath.split('/').slice(1, -1).map(cleanLabel).filter(Boolean).join(' › ');
@@ -1407,7 +1484,7 @@ const searchIndex = pages.map(p => {
 });
 searchIndex.push({ t: 'Graphe des liens 3D', u: 'graphe3d.html', w: 'Outil', i: '🕸️', g: 'graphe 3d liens réseau obsidian', x: 'Le réseau des pages en trois dimensions, en rotation libre.' });
 searchIndex.push({ t: 'Graphe des liens', u: 'graphe.html', w: 'Outil', i: '🕸️', g: 'graphe liens réseau obsidian', x: 'Toutes les pages et leurs liens, en réseau interactif.' });
-searchIndex.push({ t: 'Qualité rédactionnelle', u: 'qualite.html', w: 'Outil', i: '🔧', g: 'qualité relecture ébauche atelier', x: `${rapportQualite.length} pages présentent au moins un défaut de forme.` });
+searchIndex.push({ t: 'Contrôles automatiques de forme', u: 'qualite.html', w: 'Outil', i: '🔧', g: 'qualité rédactionnelle relecture ébauche atelier', x: `${rapportQualite.length} pages présentent au moins un signalement de forme. Ce contrôle ne valide pas le fond SST.` });
 // Les catégories sont cherchables au même titre que les articles.
 for (const [tag, membres] of categories) {
   searchIndex.push({
@@ -1427,13 +1504,10 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
 // où elle apparaît, pas seulement dans les titres. Les identifiants sont les
 // positions dans search-index.json (les pages y viennent en premier, même ordre).
 {
-  const STOP = new Set(('le la les de des du un une et en au aux ou est sont pour par sur dans avec sans que qui dont ce cet cette ces se sa son ses leur leurs ne pas plus moins tout tous toute toutes comme mais donc car ni aussi ainsi entre vers chez sous selon lors puis afin etre avoir fait faire peut peuvent doit doivent elle elles ils lui nous vous votre vos notre nos meme memes autre autres cela ceci celui celle ceux celles ont ete etait sera soit').split(' '));
-  const normIdx = (s) => String(s).toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae').normalize('NFKD').replace(/[̀-ͯ]/g, '');
   const postings = new Map();
   pages.forEach((p, id) => {
-    const mots = new Set(normIdx(stripMd(p.body)).split(/[^a-z0-9.]+/)
-      .map(w => w.replace(/^\.+|\.+$/g, ''))
-      .filter(w => (w.length >= 3 || (w.length === 2 && /^\d+$/.test(w))) && w.length <= 40 && !STOP.has(w)));
+    // le texte officiel extrait du PDF (textes_loi) compte comme le corps : un mot de loi se cherche
+    const mots = motsDePage(stripMd(p.body) + (p.texteLoi ? '\n' + p.texteLoi : ''));
     for (const m of mots) {
       if (!postings.has(m)) postings.set(m, []);
       postings.get(m).push(id);
@@ -1444,8 +1518,7 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
   let nbPost = 0;
   for (const [mot, ids] of [...postings].sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
     if (ids.length > maxDf) continue; // présent dans 40 % des pages : ne discrimine rien
-    let prev = 0;
-    m[mot] = ids.map(id => { const d = (id - prev).toString(36); prev = id; return d; }).join(',');
+    m[mot] = encoderListe(ids);
     nbPost += ids.length;
   }
   const json = JSON.stringify({ n: pages.length, m });
@@ -1464,30 +1537,10 @@ fs.writeFileSync(path.join(OUT, 'assets', 'search-index.json'), JSON.stringify(s
   fs.writeFileSync(path.join(OUT, 'recherche.html'), html);
 }
 
-// ---------- wikis par public (travailleurs / encadrement) ----------
-// Chaque public a son portail, sa navigation et ses pages. Le Recueil législatif n'est pas
-// dupliqué : le texte de loi est public et identique pour tous, les deux wikis y renvoient.
-// (déplacé en tête de fichier : la barre latérale en a besoin)
-
-// Rubriques du portail travailleurs : on entre par le problème vécu, pas par la discipline.
-const RUBRIQUES_T = [
-  { titre: 'J\'ai mal quelque part', icone: '🤕', mots: ['postures', 'manutention', 'travail répétitif', 'vibrations', 'tms'] },
-  { titre: 'Je respire quelque chose', icone: '😷', mots: ['poussières', 'diesel', 'silice', 'solvants', 'gaz', 'simdut', 'amiante'] },
-  { titre: 'Il fait trop chaud, j\'entends moins bien', icone: '🌡️', mots: ['chaleur', 'bruit', 'froid', 'thermique'] },
-  { titre: 'Ça ne va pas dans ma tête', icone: '🧠', mots: ['détresse', 'santé mentale', 'stress', 'aide', 'pae', 'appeler', 'rps'] },
-  { titre: 'Je ne dors plus', icone: '😴', mots: ['sommeil', 'fatigue', 'quart de nuit', 'récupération'] },
-  { titre: 'Ça chauffe avec l\'équipe ou le boss', icone: '💬', mots: ['équipe', 'reconnaissance', 'conflit', 'harcèlement', 'soutien'] },
-  { titre: 'Est-ce que j\'ai le droit ?', icone: '⚖️', mots: ['droit de refus', 'réclamation', 'retour au travail', 'droits', 'lésion'] },
-  { titre: 'C\'est dangereux ici', icone: '⚠️', mots: ['danger', 'presqu', 'cadenassage', 'espaces clos', 'machines', 'protection'] },
-  { titre: 'La vie au camp', icone: '🏕️', mots: ['camp', 'fifo', 'famille', 'séjour'] },
-];
-
-const RUBRIQUES_G = [
-  { titre: 'Mes obligations légales', icone: '📋', mots: ['obligation', 'diligence', 'conformité', 'inspecteur', 'infraction', 'tarification', 'lmrsst'] },
-  { titre: 'Programmes et prévention', icone: '🛠️', mots: ['programme', 'prévention', 'aménagement', 'conception', 'politique', 'surveillance'] },
-  { titre: 'Gérer une situation', icone: '🚨', mots: ['accident', 'lésion', 'retour au travail', 'assignation', 'réclamation', 'refus', 'enquête'] },
-  { titre: 'Évaluer et mesurer', icone: '📊', mots: ['évaluation', 'mesure', 'questionnaire', 'indicateur', 'score', 'grille', 'analyse'] },
-];
+// ---------- parcours de l'encadrement ----------
+// Un portail en tableau de bord et une copie des pages autorisées, sous g/. Le Recueil
+// législatif n'est pas dupliqué : le texte de loi est public et identique pour tous.
+// L'ancien wiki des travailleurs (t/) n'est plus généré : ses pages sont indexées plus bas.
 
 function genererWikiPublic(pub) {
   const conf = PUBLICS[pub];
@@ -1506,87 +1559,48 @@ function genererWikiPublic(pub) {
     const tocHtml = p.toc.length >= 3
       ? `<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">${p.toc.filter(t => t.lv === 2).length || p.toc.length} sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul>${p.toc.map(t => `<li class="toc-l${t.lv}"><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ul></nav>`
       : '';
-    const contenu = `
+    const enteteCompact = rendreEnteteCompact({ out, titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}`, sections: p.toc });
+    const filPublic = [`<a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a>`, esc(wiki.name)];
+    const versFond = `<a href="{{ROOT}}${p.out}">Voir cette page dans le fond documentaire</a>`;
+    const accueil = estAccueil(p) ? decouperAccueil(corps, { resoudre: (cible) => { const pg = resolvePage(cible, p); return pg ? '{{ROOT}}' + urlDe(pg) : null; } }) : null;
+    const contenu = accueil ? contenuAccueil(p, { crumbs: filPublic, accueil, chapoHtml: p.chapoHtml, pied: piedAccueil(new Date().toISOString().slice(0, 10), versFond) }) : `
 <div class="breadcrumbs"><a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a> <span class="crumb-sep">›</span> ${esc(wiki.name)}</div>
-<h1 class="page-title">${esc(p.title)}</h1>
-<div class="page-sub">${wiki.icon} ${esc(wiki.name)}</div>
-${tocHtml}
+${enteteCompact || rendreTitreArticle({ titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}` })}
+${enteteCompact ? '' : tocHtml}
 <div class="page-body">
 ${corps}
 </div>
-<div class="page-meta">Dernière révision : ${esc(String(p.fm['révision'] || p.fm['revision'] || p.mtime.toISOString().slice(0, 10)))} · <a href="{{ROOT}}${p.out}">Voir cette page dans le fond documentaire</a></div>`;
-    const html = pageShell({ out, title: p.title, wikiKey: null, content: contenu, sidebarExtra: sidebarPublic(pub) })
+<div class="page-meta">${metadonneesEditoriales(p, new Date().toISOString().slice(0, 10))} · ${versFond}</div>`;
+    const html = pageShell({ out, title: accueil ? titreAccueil(p.title) : p.title, wikiKey: null, content: contenu, sidebarExtra: sidebarPublic(pub) })
       .replace(/\{\{ROOT\}\}/g, R);
     const dest = path.join(OUT, out);
     fs.mkdirSync(path.dirname(dest), { recursive: true });
     fs.writeFileSync(dest, html);
   }
 
-  // --- rubriques du portail, remplies avec les pages réellement disponibles ---
-  // Comparaison sur des mots entiers normalisés : « équipe » ne doit pas attraper « équipements ».
-  const motsDe = (s) => ' ' + String(s).toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, ' ').trim() + ' ';
-  const contientExpression = (texte, expr) => texte.includes(' ' + motsDe(expr).trim() + ' ');
-
-  const accueils = horsLoi.filter(p => /accueil|démarrage|bienvenue/i.test(p.title) || /^\d+ - Articles/.test(p.base));
-  const articles = horsLoi.filter(p => !accueils.includes(p));
-
-  // Le vault contient souvent deux versions du même sujet : « Manutention (travailleurs) » et
-  // « Manutention (pour toi) ». On n'en montre qu'une, en préférant la formulation vulgarisée.
-  const sujetDe = (p) => motsDe(p.title.replace(/\s*\([^)]*\)\s*$/, '')).trim();
-  const vulgarisee = (p) => /\(pour toi\)/i.test(p.title);
-  const meilleure = new Map();
-  for (const p of articles) {
-    const s = sujetDe(p);
-    const dejaLa = meilleure.get(s);
-    if (!dejaLa || (vulgarisee(p) && !vulgarisee(dejaLa))) meilleure.set(s, p);
-  }
-  const articlesUniques = [...meilleure.values()];
-
-  const rubriques = (pub === 't' ? RUBRIQUES_T : RUBRIQUES_G).map(r => {
-    const membres = articlesUniques.filter(p => {
-      const t = motsDe(p.title + ' ' + p.relPath);
-      return r.mots.some(m => contientExpression(t, m));
-    });
-    return { ...r, membres };
-  });
-  const casees = new Set(rubriques.flatMap(r => r.membres));
-  const autres = articlesUniques.filter(p => !casees.has(p));
-
-  // Les deux publics partagent l'habillage tableau de bord ; seul le contenu diffère.
   fs.mkdirSync(path.join(OUT, pub), { recursive: true });
-  const donnees = {
+  const rendu = rendrePortailEncadrement({
     R: '../',
     nbLois: pagesPub.length - horsLoi.length,
     majDate: new Date().toLocaleDateString('fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }),
     verifier: (c) => existeDansLeSite(c),
-  };
-  const versCarte = (p) => ({ t: p.title, u: pub + '/' + p.out, dom: `${WIKIS[p.wikiKey].icon} ${WIKIS[p.wikiKey].name}` });
-  const rendu = pub === 'g'
-    ? rendrePortailEncadrement(donnees)
-    : rendrePortailTravailleurs({
-        ...donnees,
-        rubriques: rubriques.map(r => ({ titre: r.titre, icone: r.icone, membres: r.membres.map(versCarte) })),
-        accueils: accueils.map(versCarte),
-        autres: autres.map(versCarte),
-      });
+  });
   if (rendu.morts.length) console.warn(`  ⚠ portail ${pub} : ${rendu.morts.length} cible(s) introuvable(s) — ${rendu.morts.slice(0, 4).join(', ')}`);
   fs.writeFileSync(path.join(OUT, pub, 'index.html'), pageTableauDeBord({
     out: pub + '/index.html', titre: conf.nom, corps: rendu.html, dataPub: pub,
   }));
 
   PUB = null;
-  return { total: pagesPub.length, horsLoi: horsLoi.length, rubriques };
+  return { total: pagesPub.length, horsLoi: horsLoi.length };
 }
 
 function sidebarPublic(pub) {
   const conf = PUBLICS[pub];
-  const autre = pub === 't' ? PUBLICS.g : PUBLICS.t;
   return `<div class="nav-group"><div class="nav-title">${conf.icon} ${esc(conf.nom)}</div>
   <ul>
     <li><a href="{{ROOT}}${pub}/index.html">Accueil</a></li>
     <li><a href="{{ROOT}}w/legislation/index-par-loi.html">Les articles de loi</a></li>
-    <li><a href="{{ROOT}}${autre.slug}/index.html">${autre.icon} ${esc(autre.nom)}</a></li>
+    <li><a href="{{ROOT}}${INDEX_FICHES.out}">${LIEN_INDEX_FICHES}</a></li>
     <li><a href="{{ROOT}}index.html">🏠 Tous les wikis</a></li>
   </ul></div>`;
 }
@@ -1639,11 +1653,33 @@ function pageAutonome({ out, titre, contenu }) {
 </html>`;
 }
 
-console.log('Wikis par public…');
-const statT = genererWikiPublic('t');
+console.log('Parcours de l\'encadrement…');
 const statG = genererWikiPublic('g');
-console.log(`  👷 travailleurs : ${statT.horsLoi} pages + ${statT.total - statT.horsLoi} articles de loi`);
 console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - statG.horsLoi} articles de loi`);
+
+// ---------- index des fiches pour les travailleurs ----------
+// Mêmes pages que l'ancien wiki des travailleurs, même autorisation (frontmatter du vault),
+// mais listées dans le fond documentaire au lieu d'être dupliquées dans un site à part.
+// 404.html redirige les anciennes adresses t/… vers ces pages.
+const fiches = pages
+  .filter(p => p.publics.has('t') && p.wikiKey !== 'Recueil législatif SST')
+  .map(p => ({ titre: p.title, out: p.out, base: p.base, domaine: WIKIS[p.wikiKey] }));
+const siPresent = (cible) => existeDansLeSite(cible) ? cible : null;
+const indexFiches = rendreIndexFiches({
+  fiches,
+  liens: {
+    aide: siPresent('w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html'),
+    ressources: siPresent('w/psychosocial/50-ressources-daide/lignes-daide-et-pae.html'),
+    categorie: siPresent('categorie/travailleur.html'),
+    lois: siPresent('w/legislation/index-par-loi.html'),
+    encadrement: 'g/index.html',
+  },
+});
+fs.writeFileSync(path.join(OUT, INDEX_FICHES.out),
+  pageShell({ out: INDEX_FICHES.out, title: INDEX_FICHES.titre, wikiKey: null, content: indexFiches.html })
+    .replace(/\{\{ROOT\}\}/g, ''));
+fs.writeFileSync(path.join(OUT, '404.html'), rendrePage404());
+console.log(`  👷 fiches pour les travailleurs : ${indexFiches.total} pages indexées dans ${INDEX_FICHES.out} (${indexFiches.nonClassees} hors rubrique, ${indexFiches.ecartees} doublon(s) écarté(s))`);
 
 // ---------- portail ----------
 {
@@ -1657,41 +1693,11 @@ console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - stat
     </a>`;
   }).join('');
   const total = pages.length;
-  const content = `
-<div class="portal-hero">
-  <div class="portal-globe">⛏️</div>
-  <h1>WIKI SST — Mines</h1>
-  <p class="portal-tagline">L'encyclopédie santé et sécurité du travail en milieu minier<br>${total.toLocaleString('fr-CA')} articles en français · construite à partir des notes de cours</p>
-  <div class="portal-search"><input type="search" id="q2" placeholder="Rechercher parmi ${total.toLocaleString('fr-CA')} articles…" autocomplete="off"><div id="suggest2" class="suggest" hidden></div></div>
-</div>
-<h2 class="portal-section">Deux wikis selon qui tu es</h2>
-<div class="portal-grid portal-publics">
-  <a class="portal-card carte-public" href="t/index.html">
-    <span class="portal-icon">👷</span>
-    <span class="portal-info"><strong>Je suis travailleur</strong><span class="portal-desc">${esc(PUBLICS.t.tagline)}</span><span class="portal-count">${statT.horsLoi} pages + les articles de loi</span></span>
-  </a>
-  <a class="portal-card carte-public" href="g/index.html">
-    <span class="portal-icon">🎓</span>
-    <span class="portal-info"><strong>Je supervise ou je dirige</strong><span class="portal-desc">${esc(PUBLICS.g.tagline)}</span><span class="portal-count">${statG.horsLoi} pages + les articles de loi</span></span>
-  </a>
-</div>
-<h2 class="portal-section">Le fond documentaire complet</h2>
-<p class="portal-note">Les ${total.toLocaleString('fr-CA')} pages, classées par discipline. Destiné au conseiller SST et à la recherche documentaire.</p>
-<div class="portal-grid">${cards}</div>
-<h2 class="portal-section">Parcourir par sujet</h2>
-<div class="portal-grid">
-  <a class="portal-card" href="categories.html">
-    <span class="portal-icon">🏷️</span>
-    <span class="portal-info"><strong>Catégories</strong><span class="portal-desc">Les mots-clés qui traversent les disciplines : bruit, explosifs, espaces clos, silice… Chaque catégorie réunit les articles du même sujet, quel que soit le domaine.</span><span class="portal-count">${categories.length} catégories</span></span>
-  </a>
-  <a class="portal-card" href="qualite.html">
-    <span class="portal-icon">🔧</span>
-    <span class="portal-info"><strong>Qualité rédactionnelle</strong><span class="portal-desc">Atelier de l'auteur : les pages dont le texte est coupé, les sections restées vides, les mentions « à compléter » encore visibles. Les plus atteintes d'abord.</span><span class="portal-count">${rapportQualite.length} pages à reprendre</span></span>
-  </a>
-</div>
-<div class="portal-foot">
-  <a href="#" id="randomLink2">🎲 Une page au hasard</a>
-</div>`;
+  const content = rendrePortailContenu({
+    total, cartesWikis: cards, nbFiches: indexFiches.total,
+    nbPagesEncadrement: statG.horsLoi, taglineEncadrement: PUBLICS.g.tagline,
+    nbCategories: categories.length, nbPagesQualite: rapportQualite.length,
+  });
   const html = `<!DOCTYPE html>
 <html lang="fr">
 <head>

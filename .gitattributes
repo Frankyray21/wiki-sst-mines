@@ -1,0 +1,5 @@
+# Le manifeste hors ligne vérifie les octets générés : Git ne doit pas les convertir.
+docs/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Ces deux sources sont copiées telles quelles dans les assets générés.
+tools/app.js -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tools/style.css -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

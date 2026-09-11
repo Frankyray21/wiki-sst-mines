@@ -164,7 +164,8 @@ self.addEventListener('fetch', (e) => {
 // renvoie la même demande (chien de garde) et tout reprend où c'était rendu.
 let manif = null;
 async function liste() {
-  if (manif) return manif;
+  // Un manifeste de secours plus ancien doit être revalidé au retour du réseau.
+  if (manif && manif.version === VERSION) return manif;
   const c = await caches.open(P);
   try {
     const r = await fetch('./assets/hors-ligne.json?v=' + VERSION, { cache: 'no-store' });
@@ -181,8 +182,43 @@ async function liste() {
 }
 async function lireEtat(c) {
   const m = await c.match(ETAT);
-  if (m) { try { return await m.json(); } catch (err) { /* on repart à neuf */ } }
+  if (m) {
+    try {
+      const etat = await m.json();
+      if (etat && etat.h && typeof etat.h === 'object') return etat;
+    } catch (err) { /* on repart à neuf */ }
+  }
   return { h: {} };
+}
+
+// Le reçu de hash voyage avec la réponse dans le cache : une navigation réseau
+// qui remplace la réponse invalide aussi ce reçu, même si l'ancien état subsiste.
+function pageAJour(rep, chemin, h, etat) {
+  return !!(rep && etat.h[chemin] === h && rep.headers.get('X-Wiki-SST-Hash') === h);
+}
+async function verifierPage(rep, attendu, version) {
+  const brut = await rep.arrayBuffer();
+  const octets = new Uint8Array(brut);
+  const marque = new TextEncoder().encode(String(version));
+  const normalise = new Uint8Array(octets.length);
+  let n = 0;
+  // Même normalisation binaire que le générateur : retirer l'estampille de build.
+  for (let i = 0; i < octets.length;) {
+    let correspond = marque.length > 0 && i + marque.length <= octets.length;
+    for (let j = 0; correspond && j < marque.length; j++) {
+      if (octets[i + j] !== marque[j]) correspond = false;
+    }
+    if (correspond) i += marque.length;
+    else normalise[n++] = octets[i++];
+  }
+  const empreinte = await crypto.subtle.digest('SHA-1', normalise.subarray(0, n));
+  const h = Array.from(new Uint8Array(empreinte)).map((b) => b.toString(16).padStart(2, '0')).join('').slice(0, 10);
+  if (h !== attendu) throw new Error('contenu différent du manifeste');
+  const entetes = new Headers(rep.headers);
+  entetes.delete('Content-Encoding');
+  entetes.delete('Content-Length');
+  entetes.set('X-Wiki-SST-Hash', h);
+  return new Response(brut, { status: rep.status, statusText: rep.statusText, headers: entetes });
 }
 const enCours = new Set();
 
@@ -218,21 +254,33 @@ async function tranchePages(depuis, source, gen) {
     verif += lot.length;
     await Promise.all(lot.map(async ([chemin, h]) => {
       const u = './' + chemin;
-      if (etat.h[chemin] === h && await c.match(u)) return;
+      if (pageAJour(await c.match(u), chemin, h, etat)) return;
       charges++;
       try {
         const r = await fetch(u + '?v=' + VERSION, { cache: 'no-store' });
-        if (r.ok) { await c.put(u, r); etat.h[chemin] = h; } else rate++;
+        if (r.ok) {
+          // Ne jamais remplacer l'ancienne copie avant validation du contenu.
+          const verifiee = await verifierPage(r, h, l.version);
+          await c.put(u, verifiee);
+          etat.h[chemin] = h;
+        } else rate++;
       } catch (err) {
         if (err && err.name === 'QuotaExceededError') quota = true; else rate++;
       }
     }));
   }
-  await c.put(ETAT, new Response(JSON.stringify(etat))).catch(() => {});
+  await c.put(ETAT, new Response(JSON.stringify(etat))).catch((err) => {
+    if (err && err.name === 'QuotaExceededError') quota = true; else rate++;
+  });
   if (quota) { repondre(source, { type: 'erreur-quota', quoi: 'pages', gen }); return; }
   if (i >= l.pages.length) {
-    await nettoyer(c, l, etat);
-    repondre(source, { type: 'sync-fin', quoi: 'pages', total: l.pages.length, rate, gen });
+    const pages = await compterPages(l, c);
+    const complet = l.version === VERSION && pages.aJour === pages.total;
+    // Pas de purge pendant une mise à jour incomplète : les anciennes copies
+    // restent consultables. La prochaine passe repartira de zéro, sans les effacer.
+    if (complet) await nettoyer(c, l, etat);
+    repondre(source, { type: 'sync-fin', quoi: 'pages', total: l.pages.length,
+      rate, gen, complet, version: l.version, pages });
   } else {
     repondre(source, { type: 'tranche', quoi: 'pages', suivant: i, total: l.pages.length, rate, gen });
   }
@@ -261,7 +309,10 @@ async function trancheMedias(depuis, source, gen) {
   }
   if (quota) { repondre(source, { type: 'erreur-quota', quoi: 'medias', gen }); return; }
   if (i >= l.medias.length) {
-    repondre(source, { type: 'sync-fin', quoi: 'medias', total: l.medias.length, rate, gen });
+    const medias = await compterMedias(l, c);
+    repondre(source, { type: 'sync-fin', quoi: 'medias', total: l.medias.length,
+      rate, gen, complet: l.version === VERSION && medias.en === medias.total,
+      version: l.version, medias });
   } else {
     repondre(source, { type: 'tranche', quoi: 'medias', suivant: i, total: l.medias.length, rate, gen });
   }
@@ -275,13 +326,19 @@ function repondre(source, msg) {
 }
 
 async function compterPages(l, c) {
-  let en = 0;
+  let en = 0, aJour = 0;
+  const etat = await lireEtat(c);
   const LOT = 50;
   for (let i = 0; i < l.pages.length; i += LOT) {
-    const r = await Promise.all(l.pages.slice(i, i + LOT).map((p) => c.match('./' + p[0])));
-    en += r.filter(Boolean).length;
+    const lot = l.pages.slice(i, i + LOT);
+    const r = await Promise.all(lot.map((p) => c.match('./' + p[0])));
+    r.forEach((rep, j) => {
+      if (rep) en++;
+      if (pageAJour(rep, lot[j][0], lot[j][1], etat)) aJour++;
+    });
   }
-  return { en, total: l.pages.length, octets: l.octetsPages };
+  return { en, aJour, anciens: en - aJour, manquants: l.pages.length - en,
+    total: l.pages.length, octets: l.octetsPages };
 }
 async function compterMedias(l, c) {
   let en = 0, restant = 0;
@@ -317,7 +374,8 @@ self.addEventListener('message', (e) => {
         const l = await liste();
         repondre(source, {
           type: 'etat',
-          version: VERSION,
+          version: l.version,
+          manifesteActuel: l.version === VERSION,
           enCours: Array.from(enCours),
           pages: await compterPages(l, await caches.open(P)),
           medias: await compterMedias(l, await caches.open(M)),

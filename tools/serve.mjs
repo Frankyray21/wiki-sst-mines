@@ -5,22 +5,26 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'docs');
-const PORT = 8090;
+const PORT = Number(process.env.WIKI_PREVIEW_PORT || 8090);
+if (!Number.isInteger(PORT) || PORT < 1024 || PORT > 65535) throw new Error('Port de prévisualisation invalide');
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',
-  '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
+  '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
   '.gif': 'image/gif', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.pdf': 'application/pdf',
   '.mp4': 'video/mp4', '.m4a': 'audio/mp4', '.mp3': 'audio/mpeg', '.ico': 'image/x-icon',
 };
 
 http.createServer((req, res) => {
-  let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+  let p;
+  try { p = decodeURIComponent(new URL(req.url, 'http://x').pathname); }
+  catch { res.writeHead(400); res.end('Adresse invalide'); return; }
   if (p.endsWith('/')) p += 'index.html';
   const file = path.join(ROOT, p);
-  if (!file.startsWith(ROOT)) { res.writeHead(403); res.end(); return; }
+  const relatif = path.relative(ROOT, file);
+  if (relatif === '..' || relatif.startsWith('..' + path.sep) || path.isAbsolute(relatif)) { res.writeHead(403); res.end(); return; }
   fs.readFile(file, (err, data) => {
     if (err) { res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }); res.end('404 — page introuvable'); return; }
     res.writeHead(200, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream' });
     res.end(data);
   });
-}).listen(PORT, () => console.log(`WIKI SST : http://localhost:${PORT}`));
+}).listen(PORT, '127.0.0.1', () => console.log(`WIKI SST : http://127.0.0.1:${PORT}`));
