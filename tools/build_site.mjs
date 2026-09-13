@@ -1244,18 +1244,22 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
   if (accueilDuWiki) index.push({ url: '{{ROOT}}themes.html', libelle: 'Tous les thèmes' });
   if (/gestionnaires/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}g/index.html', libelle: 'Espace encadrement' });
   const fil = accueilDuWiki ? crumbs.slice(0, 2) : crumbs;
-  // Sur l'accueil du wiki (six wikis), une grille des thèmes ouvre les boîtes, avant les
-  // sections rédigées de la note elle-même : c'est la porte d'entrée par sujet du wiki.
+  // Sur l'accueil du wiki (six wikis), les thèmes ouvrent les boîtes, avant les sections
+  // rédigées de la note elle-même : c'est la porte d'entrée par sujet du wiki. Un groupe par
+  // thème (titre cliquable vers la page de thème), et dessous ses articles en puces, tous
+  // cliquables — Frank, 13 sept. 2026 : « pas emoji dossier, sous-thèmes en sous-points
+  // cliquables ». Même grille que les sous-groupes h3 des sections rédigées (.accueil-groupes).
   let sections = accueil.sections;
   if (accueilDuWiki && p.wikiKey !== 'Recueil législatif SST') {
     const themes = themesParWiki.get(p.wikiKey) || [];
     if (themes.length) {
-      const cartes = themes.map(t => {
-        const notions = pages.filter(q => q.wikiKey === p.wikiKey && q.role === 'notion' && (q.themes || []).includes(t));
-        const apercu = notions.slice(0, 3).map(q => esc(q.title)).join(', ');
-        return `<a class="cat-card" href="{{ROOT}}${t.out}"><span class="cat-icon">🗂️</span><span><strong>${esc(t.title)}</strong><small>${notions.length} article${notions.length > 1 ? 's' : ''}${apercu ? ' · ' + apercu : ''}</small></span></a>`;
+      const groupes = themes.map(t => {
+        const notions = pages.filter(q => q.wikiKey === p.wikiKey && q.role === 'notion' && (q.themes || []).includes(t))
+          .sort((a, b) => a.title.localeCompare(b.title, 'fr'));
+        const items = notions.map(q => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`).join('');
+        return `<div class="accueil-groupe"><h3 id="theme-${slugify(t.base)}"><a href="{{ROOT}}${t.out}">${esc(t.title)}</a> <small>${notions.length} article${notions.length > 1 ? 's' : ''}</small></h3>${items ? `<ul>${items}</ul>` : '<p class="page-sub">Aucun article rattaché pour l’instant.</p>'}</div>`;
       }).join('');
-      sections = [{ id: 'themes-du-wiki', titre: 'Thèmes', html: `<div class="cat-grid">${cartes}</div>`, grand: true }, ...sections];
+      sections = [{ id: 'themes-du-wiki', titre: 'Thèmes', html: `<div class="accueil-groupes">${groupes}</div>`, grand: true }, ...sections];
     }
   }
   // un éventuel « En bref » de la note ouvre le chapeau, sans son étiquette
