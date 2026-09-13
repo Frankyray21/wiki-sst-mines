@@ -1500,4 +1500,23 @@
     window.addEventListener('scroll', afficheHaut, { passive: true });
     afficheHaut();
   }
+
+  // ---------- thèmes de l'accueil d'un wiki : volets repliables (13 sept. 2026) ----------
+  // Rendus ouverts par le générateur (sans script, tout se lit). Sur téléphone on les referme,
+  // sauf celui visé par l'ancre ; un raccourci de la barre ouvre son volet avant d'y descendre.
+  (function themesAccueil() {
+    var volets = document.querySelectorAll('details.accueil-theme');
+    if (!volets.length) return;
+    var vise = location.hash ? location.hash.slice(1) : '';
+    if (window.innerWidth <= 900) {
+      for (var i = 0; i < volets.length; i++) if (volets[i].id !== vise) volets[i].open = false;
+    }
+    var liens = document.querySelectorAll('.accueil-themes-nav a[href^="#theme-"]');
+    for (var j = 0; j < liens.length; j++) {
+      liens[j].addEventListener('click', function () {
+        var d = document.getElementById(this.getAttribute('href').slice(1));
+        if (d) d.open = true;
+      });
+    }
+  })();
 })();

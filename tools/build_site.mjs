@@ -1224,6 +1224,22 @@ ${blHtml}
   fs.writeFileSync(dest, html);
 }
 
+// Sous-titre d'un thème sur l'accueil : sa première phrase (son « En bref » s'il en a un,
+// stripMd le lit en premier), jamais un texte inventé. Deux artefacts connus sont retirés :
+// un nom de média non rendu en tête (« c !Système nerveux en mine.mp4 », psychosociale) et un
+// chemin mort « archive Wiki SST unifié/… » (hygiène). Les notes index d'Ergonomie n'ont
+// qu'un texte générique (« Cette page regroupe… ») : pas de sous-titre.
+function sousTitreTheme(t) {
+  const s = extrait(t.body, 170)
+    .replace(/^(?:c\s+)?!?[^.]{0,80}\.(?:mp4|m4a|mp3|png|jpe?g|gif|svg|webp|pdf)\s*/i, '')
+    .replace(/\s*:?\s*archive Wiki SST unifié\S*/g, '')
+    .trim();
+  if (!s || /^Cette page regroupe/i.test(s)) return '';
+  // la première phrase entière plutôt qu'une coupe en plein mot ; sinon points de suspension
+  const phrase = s.match(/^[\s\S]{40,}?[.!?](?=\s|$)/);
+  return phrase ? phrase[0] : (s.length > 150 ? s + '…' : s);
+}
+
 // Contenu d'une page d'accueil : bandeau (titre, wiki, nombre de pages), chapeau, index, boîtes.
 // L'accueil du wiki compte toutes ses pages ; l'accueil d'une section (travailleurs, gestionnaires)
 // compte les pages de son dossier. Le fil d'Ariane de l'accueil du wiki s'arrête au wiki : le
@@ -1245,21 +1261,39 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
   if (/gestionnaires/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}g/index.html', libelle: 'Espace encadrement' });
   const fil = accueilDuWiki ? crumbs.slice(0, 2) : crumbs;
   // Sur l'accueil du wiki (six wikis), les thèmes ouvrent les boîtes, avant les sections
-  // rédigées de la note elle-même : c'est la porte d'entrée par sujet du wiki. Un groupe par
-  // thème (titre cliquable vers la page de thème), et dessous ses articles en puces, tous
-  // cliquables — Frank, 13 sept. 2026 : « pas emoji dossier, sous-thèmes en sous-points
-  // cliquables ». Même grille que les sous-groupes h3 des sections rédigées (.accueil-groupes).
+  // rédigées de la note elle-même : c'est la porte d'entrée par sujet du wiki. Frank,
+  // 13 sept. 2026 (« interface trop lourde, on doit se retrouver facilement ») : une barre
+  // de raccourcis, puis un volet repliable par thème — titre, compte, sous-titre tiré du
+  // texte du thème — ouvert par défaut (sans script, tout se lit) et refermé sur téléphone
+  // par app.js ; dans le volet, les notions, puis à part les études et rapports (titre avec
+  // auteur et année) ; la section rédigée « Thèmes » de la note, qui ferait doublon, n'est
+  // plus affichée (la note du vault n'est pas touchée).
   let sections = accueil.sections;
   if (accueilDuWiki && p.wikiKey !== 'Recueil législatif SST') {
     const themes = themesParWiki.get(p.wikiKey) || [];
     if (themes.length) {
-      const groupes = themes.map(t => {
+      const estEtude = (q) => /\((?:19|20)\d{2}[a-z]?\)/.test(q.title) || /^Analyse\s*[-–]/i.test(q.title);
+      const lien = (q) => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`;
+      const raccourcis = themes.map(t => `<a href="#theme-${slugify(t.base)}">${esc(t.title)}</a>`).join('');
+      const volets = themes.map(t => {
         const notions = pages.filter(q => q.wikiKey === p.wikiKey && q.role === 'notion' && (q.themes || []).includes(t))
           .sort((a, b) => a.title.localeCompare(b.title, 'fr'));
-        const items = notions.map(q => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`).join('');
-        return `<div class="accueil-groupe"><h3 id="theme-${slugify(t.base)}"><a href="{{ROOT}}${t.out}">${esc(t.title)}</a> <small>${notions.length} article${notions.length > 1 ? 's' : ''}</small></h3>${items ? `<ul>${items}</ul>` : '<p class="page-sub">Aucun article rattaché pour l’instant.</p>'}</div>`;
+        const etudes = notions.filter(estEtude), autres = notions.filter(q => !estEtude(q));
+        const desc = sousTitreTheme(t);
+        const listes = notions.length
+          ? (autres.length ? `${etudes.length ? '<h4>Notions</h4>' : ''}<ul>${autres.map(lien).join('')}</ul>` : '')
+            + (etudes.length ? `<h4>Études et rapports</h4><ul>${etudes.map(lien).join('')}</ul>` : '')
+          : '<p class="page-sub">Aucun article rattaché pour l’instant.</p>';
+        return `<details class="accueil-theme" id="theme-${slugify(t.base)}" open><summary><span class="accueil-theme-titre">${esc(t.title)}</span> <small>${notions.length} article${notions.length > 1 ? 's' : ''}</small>${desc ? `<span class="accueil-theme-desc">${esc(desc)}</span>` : ''}</summary>${listes}<a class="accueil-theme-page" href="{{ROOT}}${t.out}">Page du thème →</a></details>`;
       }).join('');
-      sections = [{ id: 'themes-du-wiki', titre: 'Thèmes', html: `<div class="accueil-groupes accueil-themes">${groupes}</div>`, grand: true }, ...sections];
+      sections = [
+        { id: 'themes-du-wiki', titre: 'Thèmes', html: `<nav class="accueil-themes-nav" aria-label="Aller à un thème">${raccourcis}</nav><div class="accueil-groupes accueil-themes">${volets}</div>`, grand: true },
+        ...accueil.sections.filter(s => {
+          const doublon = /^th[èe]mes$/i.test(String(s.titre).replace(/<[^>]+>/g, '').trim());
+          if (doublon) console.log(`  accueil ${p.relPath} : section rédigée « Thèmes » masquée (doublon de la grille des thèmes)`);
+          return !doublon;
+        }),
+      ];
     }
   }
   // un éventuel « En bref » de la note ouvre le chapeau, sans son étiquette
