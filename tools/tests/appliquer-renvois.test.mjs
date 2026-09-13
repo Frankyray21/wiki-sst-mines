@@ -100,9 +100,14 @@ test('le lot des 59 renvois tranchés est complet et pointe vers des pages publi
   const verdicts = {};
   const analyses = new Set();
   (function walk(d) { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (/^analyse-.*\.html$/.test(e.name)) analyses.add(e.name.replace(/\.html$/, '')); } })(path.join(R, 'docs/w'));
+  // Ce lot ne visait que des fiches du wiki des travailleurs (24/25/26 - …), abandonné et
+  // archivé le 12 septembre 2026 (publish: false dans 98 - Archives) : ces adresses ne sont
+  // plus publiées, par décision de Frank, pas par régression. On l'accepte ici plutôt que
+  // de faire disparaître la vérification pour les autres lots à venir.
+  const archivee = (fiche) => /\/(?:24-references-internes-pages-travailleurs|25-articles-travailleurs|26-brouillons-travailleurs)\//.test(fiche);
   for (const r of lot.renvois) {
     verdicts[r.verdict] = (verdicts[r.verdict] || 0) + 1;
-    assert.ok(fs.existsSync(path.join(R, 'docs', r.fiche)), `fiche publiée : ${r.fiche}`);
+    assert.ok(fs.existsSync(path.join(R, 'docs', r.fiche)) || archivee(r.fiche), `fiche publiée ou archivée avec le wiki des travailleurs : ${r.fiche}`);
     if (r.verdict === 'ecarter') { assert.equal(r.ancrageFinal, 'aucun'); continue; }
     assert.ok(analyses.has(r.source), `note d’analyse publiée : ${r.source}`);
     for (const champ of ['ancrageFinal', 'ligneFinale']) {

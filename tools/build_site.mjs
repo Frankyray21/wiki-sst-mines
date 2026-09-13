@@ -1585,7 +1585,7 @@ ${corps}
     majDate: new Date().toLocaleDateString('fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }),
     verifier: (c) => existeDansLeSite(c),
   });
-  if (rendu.morts.length) console.warn(`  ⚠ portail ${pub} : ${rendu.morts.length} cible(s) introuvable(s) — ${rendu.morts.slice(0, 4).join(', ')}`);
+  if (rendu.morts.length) throw new Error(`portail ${pub} : ${rendu.morts.length} cible(s) introuvable(s) — ${rendu.morts.join(', ')}`);
   fs.writeFileSync(path.join(OUT, pub, 'index.html'), pageTableauDeBord({
     out: pub + '/index.html', titre: conf.nom, corps: rendu.html, dataPub: pub,
   }));
