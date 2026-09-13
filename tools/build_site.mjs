@@ -1259,7 +1259,7 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
         const items = notions.map(q => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`).join('');
         return `<div class="accueil-groupe"><h3 id="theme-${slugify(t.base)}"><a href="{{ROOT}}${t.out}">${esc(t.title)}</a> <small>${notions.length} article${notions.length > 1 ? 's' : ''}</small></h3>${items ? `<ul>${items}</ul>` : '<p class="page-sub">Aucun article rattaché pour l’instant.</p>'}</div>`;
       }).join('');
-      sections = [{ id: 'themes-du-wiki', titre: 'Thèmes', html: `<div class="accueil-groupes">${groupes}</div>`, grand: true }, ...sections];
+      sections = [{ id: 'themes-du-wiki', titre: 'Thèmes', html: `<div class="accueil-groupes accueil-themes">${groupes}</div>`, grand: true }, ...sections];
     }
   }
   // un éventuel « En bref » de la note ouvre le chapeau, sans son étiquette

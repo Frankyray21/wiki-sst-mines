@@ -702,6 +702,18 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .accueil-groupes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 4px 22px; }
 .accueil-groupe { min-width: 0; }
 .page-body .accueil-groupe h3 { font-size: 15.5px; margin: 8px 0 2px; padding: 0 0 2px; border-bottom: 1px solid var(--border-soft); }
+/* Thèmes sur l'accueil du wiki (13 sept. 2026, Frank : « le thème doit mieux ressortir ») :
+   le titre du thème est un vrai titre, en bandeau, plus grand et en couleur de texte, pas en
+   bleu de lien au même poids que ses puces ; il reste cliquable vers la page de thème. */
+.page-body .accueil-themes h3 {
+  font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif; font-size: 19px; font-weight: 700;
+  margin: 14px 0 6px; padding: 7px 10px; border: 0; border-left: 4px solid var(--accent);
+  background: var(--infobox-titre-bg); border-radius: 0 3px 3px 0; line-height: 1.3;
+}
+.page-body .accueil-themes h3 a { color: inherit; text-decoration: none; }
+.page-body .accueil-themes h3 a:hover { text-decoration: underline; }
+.page-body .accueil-themes h3 small { font-family: inherit; font-size: 12.5px; font-weight: 400; color: var(--text-soft); margin-left: 6px; white-space: nowrap; }
+.page-body .accueil-themes .accueil-groupe:first-child h3 { margin-top: 4px; }
 .accueil-corps table { display: block; overflow-x: auto; max-width: 100%; }
 @media (max-width: 480px) {
   .accueil-groupes { grid-template-columns: 1fr; }
