@@ -12,8 +12,8 @@ const R = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DOCS = path.join(R, 'docs');
 const lire = (rel) => fs.readFileSync(path.join(DOCS, rel), 'utf8');
 
-test('un thème par wiki : compte attendu, quatre notes internes (interne-non-publie) écartées en psychosociale', () => {
-  const attendu = { ergonomie: 5, hygiene: 4, toxicologie: 4, securite: 3, 'droit-travail': 4, psychosocial: 12 };
+test('un thème par wiki : compte attendu (psychosociale : 16 depuis l’ouverture des 4 thèmes internes, 13 sept. 2026)', () => {
+  const attendu = { ergonomie: 5, hygiene: 4, toxicologie: 4, securite: 3, 'droit-travail': 4, psychosocial: 16 };
   for (const [wiki, n] of Object.entries(attendu)) {
     const dir = path.join(DOCS, 'w', wiki, 'theme');
     const themes = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith('.html')) : [];

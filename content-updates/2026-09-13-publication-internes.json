@@ -1,0 +1,231 @@
+{
+ "date": "2026-09-13",
+ "decision": "Frank : « tu peux publier — tout (les 32) », site public assumé",
+ "sauvegarde": "sauvegarde-vault/2026-09-13-publication (locale, non versionnée)",
+ "notes": [
+  {
+   "note": "Recueil législatif SST/10 - Lois principales/LATMP/art-221.1-LATMP, BEM diagnostic.md",
+   "motifAvant": "publish: false",
+   "modifications": [
+    "publish: false retiré"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/10 - Thèmes/Invalidité et Lésions.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/10 - Thèmes/Modèles et Théories.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/10 - Thèmes/Santé Mentale.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/10 - Thèmes/Évaluation et Outils.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/15 - Navigation/🖼️ Index des images du cours.md",
+   "motifAvant": "a-archiver",
+   "modifications": [
+    "traitement-publication: a-archiver -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Conflits et Harcèlement/Harcèlement psychologique au travail.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Conflits et Harcèlement/Harcèlement psychologique vs conflit.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Conflits et Harcèlement/Harcèlement psychologique, recours.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Conflits et Harcèlement/Violence au travail.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Invalidité et Lésions/Causes psychologiques d'invalidité.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Invalidité et Lésions/Invalidité de courte vs longue durée.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Invalidité et Lésions/Reconnaissance d'une dépression comme lésion professionnelle.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Invalidité et Lésions/TSPT et présomption.md",
+   "motifAvant": "interne-strict",
+   "modifications": [
+    "traitement-publication: interne-strict -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Milieu Minier et FIFO/Consommation d'alcool et substances en milieu FIFO.md",
+   "motifAvant": "interne-strict",
+   "modifications": [
+    "traitement-publication: interne-strict -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Milieu Minier et FIFO/Prévention du suicide en milieu minier.md",
+   "motifAvant": "interne-strict",
+   "modifications": [
+    "traitement-publication: interne-strict -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Modèles et Théories/Théories de la motivation au travail.md",
+   "motifAvant": "a-archiver",
+   "modifications": [
+    "traitement-publication: a-archiver -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Modèles et Théories/Types de personnalité et lieu de contrôle.md",
+   "motifAvant": "a-archiver",
+   "modifications": [
+    "traitement-publication: a-archiver -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Modèles et Théories/✅ Modèle cognitif et conditionnel de Dolan et Arsenault.md",
+   "motifAvant": "a-archiver",
+   "modifications": [
+    "traitement-publication: a-archiver -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Modèles et Théories/✅Iso-strain.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Reconnaissance et Motivation/Motivation intrinsèque vs extrinsèque.md",
+   "motifAvant": "a-archiver",
+   "modifications": [
+    "traitement-publication: a-archiver -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Reconnaissance et Motivation/Satisfaction et performance.md",
+   "motifAvant": "a-archiver",
+   "modifications": [
+    "traitement-publication: a-archiver -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Santé Mentale/Conséquences du stress sur la santé.md",
+   "motifAvant": "interne-strict",
+   "modifications": [
+    "traitement-publication: interne-strict -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Santé Mentale/Symptômes et signaux d'alerte.md",
+   "motifAvant": "interne-strict",
+   "modifications": [
+    "traitement-publication: interne-strict -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Évaluation et Outils/Bonnes pratiques pour administrer un questionnaire.md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Évaluation et Outils/Interpréter les scores.md",
+   "motifAvant": "interne-strict",
+   "modifications": [
+    "traitement-publication: interne-strict -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Évaluation et Outils/K10.md",
+   "motifAvant": "interne-strict",
+   "modifications": [
+    "traitement-publication: interne-strict -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Évaluation et Outils/MBI, épuisement professionnel.md",
+   "motifAvant": "interne-strict",
+   "modifications": [
+    "traitement-publication: interne-strict -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Évaluation et Outils/PCL-5.md",
+   "motifAvant": "interne-strict",
+   "modifications": [
+    "traitement-publication: interne-strict -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Évaluation et Outils/PHQ-9.md",
+   "motifAvant": "interne-strict",
+   "modifications": [
+    "traitement-publication: interne-strict -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Évaluation et Outils/Questionnaire de Karasek (JCQ).md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  },
+  {
+   "note": "Wiki SST psychosociale/20 - Articles/Évaluation et Outils/Questionnaire de Siegrist (ERI).md",
+   "motifAvant": "interne-non-publie",
+   "modifications": [
+    "traitement-publication: interne-non-publie -> publie"
+   ]
+  }
+ ]
+}

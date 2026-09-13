@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr" data-wiki-entete>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K10 — WIKI SST Mines</title>
+<link rel="stylesheet" href="../../assets/style.css?v=20260913205732">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#2563eb">
+<link rel="apple-touch-icon" href="../../assets/icone-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Wiki SST">
+<script>window.ROOT='../../';window.V='20260913205732';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+  <a class="brand" href="../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" aria-label="Rechercher dans le wiki" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+  <button class="btn-theme" id="btnFav" aria-label="Ajouter aux favoris" title="Ajouter aux favoris">☆</button>
+  <button class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Navigation du wiki">
+  <div class="nav-group"><div class="nav-title">Navigation</div>
+    <ul>
+      <li><a href="../../index.html">🏠 Portail</a></li>
+      <li><a href="../../themes.html">🗂️ Thèmes</a></li>
+      <li><a href="../../categories.html">🏷️ Catégories</a></li>
+      <li><a href="../../qualite.html">🔧 Contrôles de forme</a></li>
+      <li><a href="../../graphe.html">🕸️ Graphe des liens</a></li>
+      <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+      <li><a href="../../g/index.html">🎓 Gestion &amp; prévention</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">🧠 SST psychosociale</div>
+  <ul>
+    <li><a href="../../w/psychosocial/index.html">Accueil du wiki</a></li>
+    <li><a href="../../w/psychosocial/theme/communication.html">Communication</a></li><li><a href="../../w/psychosocial/theme/conditions-de-travail.html">Conditions de Travail</a></li><li><a href="../../w/psychosocial/theme/conflits-et-harcelement.html">Conflits et Harcèlement</a></li><li><a href="../../w/psychosocial/theme/evaluation-et-outils.html">Évaluation et Outils</a></li><li><a href="../../w/psychosocial/theme/facteurs-organisationnels.html">Facteurs Organisationnels</a></li><li><a href="../../w/psychosocial/theme/gestion-et-prevention.html">Gestion et Prévention</a></li><li><a href="../../w/psychosocial/theme/invalidite-et-lesions.html">Invalidité et Lésions</a></li><li><a href="../../w/psychosocial/theme/legislation-et-normes.html">Législation et Normes</a></li><li><a href="../../w/psychosocial/theme/milieu-minier-et-fifo.html">Milieu Minier et FIFO</a></li><li><a href="../../w/psychosocial/theme/modeles-et-theories.html">Modèles et Théories</a></li><li><a href="../../w/psychosocial/theme/reconnaissance-et-motivation.html">Reconnaissance et Motivation</a></li><li><a href="../../w/psychosocial/theme/retour-au-travail.html">Retour au Travail</a></li><li><a href="../../w/psychosocial/theme/risques-psychosociaux-rps.html">Risques Psychosociaux (RPS)</a></li><li><a href="../../w/psychosocial/theme/sante-mentale.html">Santé Mentale</a></li><li><a href="../../w/psychosocial/theme/soutien-et-ressources.html">Soutien et Ressources</a></li><li><a href="../../w/psychosocial/theme/supervision-et-roles.html">Supervision et Rôles</a></li>
+    <li><a href="../../w/psychosocial/index-alphabetique.html">Index alphabétique</a></li>
+    
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Les wikis</div><ul><li><a href="../../w/ergonomie/index.html">🦺 Ergonomie</a></li><li><a href="../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></li><li><a href="../../w/toxicologie/index.html">☣️ Toxicologie</a></li><li><a href="../../w/securite/index.html">⛑️ Sécurité industrielle</a></li><li><a href="../../w/droit-travail/index.html">📋 Droit du travail</a></li><li class="active"><a href="../../w/psychosocial/index.html">🧠 SST psychosociale</a></li><li><a href="../../w/legislation/index.html">⚖️ Recueil législatif</a></li></ul></div>
+</nav>
+<main class="content">
+
+<div class="breadcrumbs"><a href="../../index.html">Portail</a> <span class="crumb-sep">›</span> <a href="../../w/psychosocial/index.html">SST psychosociale</a> <span class="crumb-sep">›</span> <a href="../../w/psychosocial/theme/evaluation-et-outils.html">Évaluation et Outils</a></div>
+<header class="article-titre">
+<h1 class="page-title">K10</h1>
+<div class="page-sub">Un article du wiki <a href="../../w/psychosocial/index.html">🧠 SST psychosociale</a></div>
+</header>
+<aside class="infobox"><div class="infobox-title">🧠 K10</div><table><tr><th>Thème</th><td><a href="../../w/psychosocial/evaluation-et-outils.html">Évaluation et Outils</a></td></tr><tr><th>Révision déclarée</th><td>2026-09-03</td></tr></table><div class="infobox-tags"><span class="tag">wiki</span><a class="tag tag-lien" href="../../categorie/mesure.html">mesure</a><a class="tag tag-lien" href="../../categorie/instruments.html">instruments</a><span class="tag">K10</span><span class="tag">détresse-psychologique</span><span class="tag">sensible</span></div></aside>
+
+<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">7 sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul><li class="toc-l2"><a href="#definition">Définition</a></li><li class="toc-l2"><a href="#mesure">Mesure</a></li><li class="toc-l2"><a href="#quand-lutiliser">Quand l'utiliser</a></li><li class="toc-l2"><a href="#application-en-mines">Application en mines</a></li><li class="toc-l2"><a href="#cadre-legal">Cadre légal</a></li><li class="toc-l2"><a href="#documents-et-outils">Documents et outils</a></li><li class="toc-l2"><a href="#pour-aller-plus-loin">Pour aller plus loin</a></li></ul></nav>
+<div class="page-body">
+
+<p><strong>L&#39;essentiel</strong> : Le K10 est un questionnaire de <strong>10 questions</strong> qui mesure le niveau de <strong><a href="../../w/psychosocial/detresse-psychologique.html" title="Détresse psychologique">détresse psychologique</a> générale</strong> (anxiété + dépression confondues) dans les 4 dernières semaines. Plus court et moins ciblé que le <a href="../../w/psychosocial/phq-9.html" title="PHQ-9">PHQ-9</a> : utile pour un dépistage large quand on ne sait pas encore ce qu&#39;on cherche. Il prend 2 minutes. Comme tous les instruments cliniques : ne diagnostique pas, signale qu&#39;un suivi est justifié.</p>
+<div class="callout callout-warning"><div class="callout-title"><span class="callout-icon">⚠️</span>Sujet sensible</div><div class="callout-body"><p>Cet instrument touche à la détresse psychologique. Tout score élevé doit être suivi d&#39;un protocole de prise en charge. Voir <a href="../../w/psychosocial/lignes-daide-et-pae.html" title="🆘 Lignes d'aide et ressources de soutien">🆘 Lignes d&#39;aide et ressources de soutien</a>.</p>
+</div></div>
+<h2 id="definition">Définition</h2>
+<p><strong>K10 (Kessler Psychological Distress Scale)</strong> : échelle de 10 items développée par Ronald Kessler et son équipe (2002) pour mesurer la <strong>détresse psychologique non spécifique</strong> dans la population générale.</p>
+<p>Contrairement au <a href="../../w/psychosocial/phq-9.html" title="PHQ-9">PHQ-9</a> qui cible spécifiquement la dépression, le K10 capture un état plus large mêlant <strong>symptômes anxieux et dépressifs</strong>. C&#39;est le questionnaire utilisé dans plusieurs grandes enquêtes de santé publique au Québec (notamment l&#39;Enquête québécoise sur la santé de la population, ESCC, EQCOTESST).</p>
+<p>Pour un conseiller SST en mine : c&#39;est l&#39;outil de dépistage <strong>le plus large et le plus rapide</strong>. Idéal pour un premier portrait d&#39;équipe ou pour un suivi post-incident.</p>
+<h2 id="mesure">Mesure</h2>
+<table>
+<thead>
+<tr>
+<th>Élément</th>
+<th>Détail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nombre d&#39;items</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Période évaluée</td>
+<td>4 dernières semaines</td>
+</tr>
+<tr>
+<td>Échelle</td>
+<td>1 (jamais) à 5 (tout le temps)</td>
+</tr>
+<tr>
+<td>Score total</td>
+<td>10 à 50</td>
+</tr>
+<tr>
+<td>Durée d&#39;administration</td>
+<td>2 minutes</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>Auto-administré, papier ou numérique</td>
+</tr>
+<tr>
+<td>Source</td>
+<td>Kessler et al. (2002)</td>
+</tr>
+</tbody></table>
+<p><strong>Items mesurés</strong></p>
+<p>Le questionnaire demande à quelle fréquence, dans les 4 dernières semaines, la personne s&#39;est sentie : fatiguée sans raison, nerveuse, agitée, triste, déprimée, sans valeur, etc. Aucune question directe sur le suicide (contrairement au <a href="../../w/psychosocial/phq-9.html" title="PHQ-9">PHQ-9</a>, item 9).</p>
+<p><strong>Interprétation des scores</strong> (catégories Statistique Canada / EQCOTESST)</p>
+<table>
+<thead>
+<tr>
+<th>Score</th>
+<th>Niveau de détresse</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10 à 15</td>
+<td>Faible</td>
+<td>Suivi normal</td>
+</tr>
+<tr>
+<td>16 à 21</td>
+<td>Modérée</td>
+<td>Surveiller, conversation</td>
+</tr>
+<tr>
+<td>22 à 29</td>
+<td>Élevée</td>
+<td>Référence vers professionnel</td>
+</tr>
+<tr>
+<td>30 à 50</td>
+<td>Très élevée</td>
+<td>Référence prioritaire, soutien actif</td>
+</tr>
+</tbody></table>
+<p><strong>Sensibilité et spécificité</strong> : pour le seuil ≥ 22, sensibilité de 70-80 % et spécificité de 90 % pour les troubles anxieux et dépressifs combinés (Andrews &amp; Slade, 2001).</p>
+<div class="callout callout-warning"><div class="callout-title"><span class="callout-icon">⚠️</span>Limite à ne pas oublier</div><div class="callout-body"><p>Le K10 mesure un état général. Il ne distingue pas anxiété, dépression, burnout ou <a href="../../w/legislation/40-concepts-juridiques-transverses/tspt.html" title="TSPT">TSPT</a>. Pour un diagnostic différentiel, des instruments ciblés sont nécessaires (<a href="../../w/psychosocial/phq-9.html" title="PHQ-9">PHQ-9</a>, <a href="../../w/psychosocial/pcl-5.html" title="PCL-5">PCL-5</a>, <a href="../../w/psychosocial/mbi-epuisement-professionnel.html" title="MBI, épuisement professionnel">MBI, épuisement professionnel</a>).</p>
+</div></div>
+<h2 id="quand-lutiliser">Quand l&#39;utiliser</h2>
+<p><strong>Indications</strong></p>
+<ul>
+<li>Premier dépistage large (équipe, département, site)</li>
+<li>Suivi post-incident (accident, mort d&#39;un collègue, presque-incident grave)</li>
+<li>Comparaison entre équipes ou dans le temps</li>
+<li>Recherche organisationnelle sur l&#39;état psychosocial</li>
+<li>Quand le <a href="../../w/psychosocial/phq-9.html" title="PHQ-9">PHQ-9</a> paraît trop ciblé sur la dépression seule</li>
+</ul>
+<p><strong>Contre-indications</strong></p>
+<ul>
+<li>À l&#39;embauche (illégal au Québec)</li>
+<li>Comme outil de surveillance individuelle imposée</li>
+<li>Sans plan de suivi établi</li>
+</ul>
+<p><strong>K10 ou PHQ-9, lequel choisir?</strong></p>
+<table>
+<thead>
+<tr>
+<th>Critère</th>
+<th>K10</th>
+<th>PHQ-9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Champ couvert</td>
+<td>Large (anxiété + dépression)</td>
+<td>Spécifique (dépression DSM)</td>
+</tr>
+<tr>
+<td>Période</td>
+<td>4 semaines</td>
+<td>2 semaines</td>
+</tr>
+<tr>
+<td>Item suicide</td>
+<td>Non</td>
+<td>Oui (item 9)</td>
+</tr>
+<tr>
+<td>Durée</td>
+<td>2 min</td>
+<td>3 min</td>
+</tr>
+<tr>
+<td>Usage typique</td>
+<td>Dépistage initial, surveillance population</td>
+<td>Suivi clinique, dépistage ciblé dépression</td>
+</tr>
+</tbody></table>
+<p>Beaucoup de programmes utilisent les deux : K10 d&#39;abord pour cibler, PHQ-9 ensuite pour préciser.</p>
+<h2 id="application-en-mines">Application en mines</h2>
+<p><strong>Configurations d&#39;utilisation typique en milieu minier</strong></p>
+<table>
+<thead>
+<tr>
+<th>Contexte</th>
+<th>Méthode</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Diagnostic initial d&#39;un site</td>
+<td>K10 administré à un échantillon représentatif (50+ travailleurs)</td>
+</tr>
+<tr>
+<td>Suivi post-incident grave</td>
+<td>K10 à toute l&#39;équipe à 2, 4 et 8 semaines après l&#39;événement</td>
+</tr>
+<tr>
+<td>Surveillance de la santé mentale en camp <a href="../../w/psychosocial/comparatif-des-cycles-fifo-14-14-20-10-21-7.html" title="Comparatif des cycles FIFO (14/14, 20/10, 21/7)">Comparatif des cycles FIFO (14/14, 20/10, 21/7)</a></td>
+<td>K10 trimestriel, avec accès <a href="../../w/legislation/40-concepts-juridiques-transverses/pae.html" title="PAE">PAE</a> assuré</td>
+</tr>
+<tr>
+<td>Évaluation d&#39;une intervention organisationnelle</td>
+<td>K10 avant et 6 mois après l&#39;intervention</td>
+</tr>
+</tbody></table>
+<p><strong>Précautions FIFO et souterrain</strong></p>
+<ul>
+<li>Administrer hors période de fatigue extrême (pas en sortie de quart de 12h)</li>
+<li>Confidentialité totale : résultats individuels jamais accessibles à l&#39;employeur</li>
+<li>Toujours offrir un accès PAE le jour même pour les scores ≥ 22</li>
+<li>En camp éloigné : prévoir l&#39;accès à un intervenant (téléphone, vidéo) avant d&#39;administrer</li>
+</ul>
+<h2 id="cadre-legal">Cadre légal</h2>
+<ul>
+<li><strong>Confidentialité</strong> : les résultats individuels sont des renseignements de santé. Loi sur la protection des renseignements personnels.</li>
+<li><strong><a href="../../w/legislation/10-lois-principales/latmp/latmp.html" title="LATMP">LATMP</a></strong> : un score K10 documenté peut soutenir une réclamation pour lésion psychologique d&#39;origine professionnelle.</li>
+<li><strong>Discrimination</strong> : utilisation à l&#39;embauche ou pour des décisions de poste interdite.</li>
+<li>Lien : <a href="../../w/psychosocial/index-lmrsst-cnesst.html" title="⚖️ Index LMRSST, CNESST">⚖️ Index LMRSST, CNESST</a></li>
+</ul>
+<h2 id="documents-et-outils">Documents et outils</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Type</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>K10, version française canadienne</td>
+<td>Instrument PDF, 1 page</td>
+<td>Statistique Canada</td>
+</tr>
+<tr>
+<td>Guide d&#39;interprétation des scores K10</td>
+<td>PDF</td>
+<td>Statistique Canada, <a href="../../w/legislation/30-organismes-et-tribunaux/inspq.html" title="INSPQ">INSPQ</a></td>
+</tr>
+<tr>
+<td>Trousse INSPQ de surveillance de la santé mentale</td>
+<td>PDF gratuit</td>
+<td>INSPQ</td>
+</tr>
+<tr>
+<td>EQCOTESST, données québécoises de référence</td>
+<td>Rapport</td>
+<td>INSPQ</td>
+</tr>
+<tr>
+<td>Affiche ressources d&#39;aide à diffuser après administration</td>
+<td>À créer</td>
+<td><a href="../../w/psychosocial/lignes-daide-et-pae.html" title="🆘 Lignes d'aide et ressources de soutien">🆘 Lignes d&#39;aide et ressources de soutien</a></td>
+</tr>
+</tbody></table>
+<p>Voir le centre de ressources : <a href="../../w/psychosocial/documents-et-outils.html" title="📁 Documents et outils">📁 Documents et outils</a>.</p>
+<h2 id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<p><strong>Références</strong></p>
+<ul>
+<li>Kessler, R. C. et al. (2002). Short screening scales to monitor population prevalences and trends in non-specific psychological distress. <em>Psychological Medicine</em>, 32(6), 959-976.</li>
+<li>Andrews, G. &amp; Slade, T. (2001). Interpreting scores on the Kessler Psychological Distress Scale (K10). <em>Australian and New Zealand Journal of Public Health</em>, 25(6), 494-497.</li>
+<li>Statistique Canada. <em>Indice de détresse psychologique de Kessler (K10)</em>, version canadienne validée.</li>
+<li><a href="../../w/legislation/40-concepts-juridiques-transverses/eqcotesst-irsst.html" title="EQCOTESST : enquête québécoise sur les conditions de travail et la SST">EQCOTESST : enquête québécoise sur les conditions de travail et la SST</a> : enquête québécoise sur des conditions de travail, d&#39;emploi et de SST.</li>
+</ul>
+<p><strong>Articles wiki connexes</strong></p>
+<ul>
+<li><a href="../../w/psychosocial/phq-9.html" title="PHQ-9">PHQ-9</a> : dépression spécifique</li>
+<li><a href="../../w/psychosocial/pcl-5.html" title="PCL-5">PCL-5</a> : trouble de stress post-traumatique</li>
+<li><a href="../../w/psychosocial/mbi-epuisement-professionnel.html" title="MBI, épuisement professionnel">MBI, épuisement professionnel</a> : burnout</li>
+<li><a href="../../w/psychosocial/bonnes-pratiques-pour-administrer-un-questionnaire.html" title="Bonnes pratiques pour administrer un questionnaire">Bonnes pratiques pour administrer un questionnaire</a></li>
+<li><a href="../../w/psychosocial/confidentialite-et-ethique-des-mesures-rps.html" title="Confidentialité et éthique des mesures RPS">Confidentialité et éthique des mesures RPS</a></li>
+</ul>
+<div class="callout callout-warning"><div class="callout-title"><span class="callout-icon">⚠️</span>Ressources d'aide</div><div class="callout-body"><p>Si toi ou un collègue avez besoin de soutien : <strong>Info-Social 811</strong> ou <strong>1-866-APPELLE</strong>. Liste complète dans <a href="../../w/psychosocial/lignes-daide-et-pae.html" title="🆘 Lignes d'aide et ressources de soutien">🆘 Lignes d&#39;aide et ressources de soutien</a>.</p>
+</div></div>
+<p><a href="../../w/psychosocial/index.html" title="🏠 Wiki SST psychosociale, mines">← Accueil</a></p>
+
+</div>
+<nav class="voir-aussi" aria-label="Voir aussi"><h2>Voir aussi</h2><ul><li><a href="../../w/psychosocial/audit-psychosocial-complet-methodologie.html">Audit psychosocial complet, méthodologie</a></li><li><a href="../../w/psychosocial/bonnes-pratiques-pour-administrer-un-questionnaire.html">Bonnes pratiques pour administrer un questionnaire</a></li><li><a href="../../w/psychosocial/confidentialite-et-ethique-des-mesures-rps.html">Confidentialité et éthique des mesures RPS</a></li><li><a href="../../w/psychosocial/cout-economique-des-rps-pour-lemployeur.html">Coût économique des RPS pour l'employeur</a></li><li><a href="../../w/psychosocial/grille-inspq-didentification-des-rps.html">Grille INSPQ d'identification des RPS</a></li><li><a href="../../w/psychosocial/indicateurs-rh-pour-suivre-les-rps.html">Indicateurs RH pour suivre les RPS</a></li><li><a href="../../w/psychosocial/analyse-inspq-2021a.html">INSPQ (2021a) - Les 7 indicateurs officiels de risques psychosociaux au Québec</a></li><li><a href="../../w/psychosocial/interpreter-les-scores.html">Interpréter les scores</a></li><li><a href="../../w/psychosocial/analyse-karasek-1979.html">Karasek (1979) - Modèle Demandes-Contrôle (DC)</a></li></ul></nav>
+<details class="backlinks"><summary>Pages qui pointent ici (22)</summary><ul><li><a href="../../w/psychosocial/sante-mentale-au-travail-concepts-de-base.html">✅ Santé mentale au travail, concepts de base</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/top-20-articles-essentiels.html">⭐ Top 20 articles</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/documents-et-outils.html">📁 Documents et outils</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/glossaire.html">📖 Glossaire</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/index-alphabetique-note.html">🔤 Index alphabétique des articles</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/audit-psychosocial-complet-methodologie.html">Audit psychosocial complet, méthodologie</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/bonnes-pratiques-pour-administrer-un-questionnaire.html">Bonnes pratiques pour administrer un questionnaire</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/confidentialite-et-ethique-des-mesures-rps.html">Confidentialité et éthique des mesures RPS</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/consequences-du-stress-sur-la-sante.html">Conséquences du stress sur la santé</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/detresse-psychologique.html">Détresse psychologique</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/eqsp.html">EQSP (Enquête québécoise sur la santé de la population)</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/theme/evaluation-et-outils.html">Évaluation et Outils</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/evaluation-et-outils.html">Évaluation et Outils</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/instruments-valides-en-sst-psychosociale.html">Instruments validés en SST psychosociale</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/interpreter-les-scores.html">Interpréter les scores</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/analyse-kroenke-2001.html">Kroenke et al. (2001) : validation du PHQ-9</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/modele-de-karasek.html">Modèle de Karasek</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/modele-de-siegrist-desequilibre-efforts-recompenses.html">Modèle de Siegrist, déséquilibre efforts récompenses</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/pcl-5.html">PCL-5</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/phq-9.html">PHQ-9</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/reference-vers-ressources-cliniques.html">Référence vers ressources cliniques</a> <small class="bl-wiki">SST psychosociale</small></li><li><a href="../../w/psychosocial/analyse-tissot-et-al-inspq-2022.html">Tissot et al. (2022) - Risques psychosociaux et détresse psychologique au Québec</a> <small class="bl-wiki">SST psychosociale</small></li></ul></details>
+<div class="page-meta">Révision déclarée dans la note : 2026-09-03 · Relecture éditoriale : non attestée · Vérification des sources : non attestée · Site généré le 2026-09-13 · <a href="../../graphe.html?focus=w%2Fpsychosocial%2Fk10.html">🕸️ Voir cette page dans le graphe</a></div>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours<span id="version"></span></footer>
+<script src="../../assets/app.js?v=20260913205732"></script>
+</body>
+</html>

@@ -74,6 +74,21 @@ de sa Définition. 3902 → 3908 pages, 3430 médias. Les deux « Équipements d
 Frank le veut. Points 3 à 6 : acceptés tels quels sur ma recommandation (rien à faire) ; point 4
 laissé fermé.
 
+## Suite du 13 septembre 2026 (bis) : ouverture des 32 notes internes (« tu peux publier — tout »)
+
+`tools/publier_internes.mjs` (journal `content-updates/2026-09-13-publication-internes.json`,
+sauvegarde locale `sauvegarde-vault/2026-09-13-publication/`) : les 32 notes encore retenues
+hors archives sont ouvertes — `publish: false` retiré, `traitement-publication` interne passé à
+`publie`, trace `publication-ouverte-le: 2026-09-13`. Frank a choisi « tout », en connaissance
+du caractère public du site : les 8 questionnaires cliniques (PHQ-9, K10, PCL-5, MBI, JCQ, ERI,
+scores, administration), Prévention du suicide, Alcool en FIFO, TSPT, les 4 Harcèlement/Violence,
+les 3 Invalidité, les 5 notes marquées « à archiver », Iso-strain, l'index des images du cours,
+et `art-221.1-LATMP` (dont l'existence restait à confirmer : sa page garde son encadré
+d'avertissement). Effet : 3908 → 3940 pages ; psychosociale 12 → 16 thèmes (Invalidité et
+Lésions, Modèles et Théories, Santé Mentale, Évaluation et Outils) ; 142 notions rattachées
+au lieu de 109. Le point 4 ci-dessous est donc tranché. La note « Notes internes citées sur le
+site » du vault (3 septembre) est périmée : plus aucune note interne hors archives.
+
 ## Points soumis à Frank (aucune action sans sa réponse)
 
 1. **Cinq fiches disparaissent sans équivalent notionnel** *(fait le 13 septembre, voir ci-dessus)* : « Équipements de protection »

@@ -254,11 +254,15 @@
     },
     {
      "titre": "Conditions de Travail",
-     "notions": 16
+     "notions": 15
     },
     {
      "titre": "Conflits et Harcèlement",
-     "notions": 8
+     "notions": 12
+    },
+    {
+     "titre": "Évaluation et Outils",
+     "notions": 19
     },
     {
      "titre": "Facteurs Organisationnels",
@@ -269,24 +273,36 @@
      "notions": 22
     },
     {
+     "titre": "Invalidité et Lésions",
+     "notions": 14
+    },
+    {
      "titre": "Législation et Normes",
-     "notions": 15
+     "notions": 18
     },
     {
      "titre": "Milieu Minier et FIFO",
-     "notions": 28
+     "notions": 29
+    },
+    {
+     "titre": "Modèles et Théories",
+     "notions": 17
     },
     {
      "titre": "Reconnaissance et Motivation",
-     "notions": 10
+     "notions": 13
     },
     {
      "titre": "Retour au Travail",
-     "notions": 14
+     "notions": 15
     },
     {
      "titre": "Risques Psychosociaux (RPS)",
      "notions": 11
+    },
+    {
+     "titre": "Santé Mentale",
+     "notions": 13
     },
     {
      "titre": "Soutien et Ressources",
@@ -305,6 +321,7 @@
     "⭐ Top 20 articles",
     "📘 Comment utiliser ce wiki",
     "🔤 Index alphabétique des articles",
+    "🖼️ Index des images du cours SST1010",
     "Accomplissement personnel",
     "Activité physique et santé cardiovasculaire",
     "Amplification des stresseurs",
@@ -349,6 +366,7 @@
     "Interventions",
     "Recommandations - Interventions RPS en milieu de travail",
     "Intégration des RPS aux systèmes de management SST",
+    "Invalidité et Lésions",
     "Isolement social",
     "Isolement géographique",
     "Job strain et maladies cardio-vasculaires",
@@ -366,11 +384,9 @@
     "Modèle demande-contrôle-soutien (DCS)",
     "Modèle ERI (effort-récompense)",
     "Modèle demande-contrôle (Karasek)",
-    "Définition du stress professionnel",
     "Karasek et Theorell (1990)",
     "Latitude décisionnelle",
-    "Modèle de Siegrist, déséquilibre efforts récompenses",
-    "Modèle de Sélye, syndrome général d'adaptation",
+    "Modèles et Théories",
     "Progression du risque - Modèle de Sélye",
     "Organisation du travail",
     "Programme SHEEP",
@@ -392,6 +408,7 @@
     "RPS (risques psychosociaux)",
     "Rythme circadien",
     "Rétroaction sur la performance",
+    "Santé Mentale",
     "Santé mentale au travail",
     "Santé mentale en milieu minier",
     "Secteur minier québécois",
@@ -430,17 +447,12 @@
     "Épuisement émotionnel",
     "Équité, diversité et inclusion (protocole TSM)",
     "Évaluation ergonomique des postes de travail",
-    "Audit psychosocial complet, méthodologie",
-    "Confidentialité et éthique des mesures RPS",
-    "Indicateurs RH pour suivre les RPS",
-    "Tableau de bord SST psychosociale pour direction",
     "Évaluation et Outils",
     "📖 Glossaire",
     "Analyse Bourbonnais et al. (2007)",
     "Charbonneau (2012) - Contexte minier québécois et conditions de travail",
     "Analyse Daniellou (dir., 1996) - L'ergonomie en quête de ses principes",
     "Analyse Dolan & Arsenault (1980) - Stress, santé et rendement au travail",
-    "Dolan et Arsenault (2009) - Stress, estime de soi, reconnaissance et santé au travail",
     "Analyse ergonomique du travail",
     "Analyse Folkard & Tucker (2003)",
     "INSPQ (2021) - Grille d'identification des risques psychosociaux du travail",
@@ -448,7 +460,6 @@
     "Analyse Karasek et al. (1998) - The Job Content Questionnaire (JCQ)",
     "Analyse Katzmarzyk et al. (2010) - Sitting time and mortality",
     "Analyse Kivimäki et al. (2006)",
-    "Kivimäki et al. (2012) - Job strain et maladies coronariennes : méta-analyse de 197 473 travailleurs",
     "Kroenke et al. (2001) : validation du PHQ-9",
     "Labra et al. (2022) - Santé globale des hommes FIFO miniers au Québec",
     "Moore et Garg (1995) - Le Strain Index (outil ergonomique TMS distaux)",
@@ -459,7 +470,6 @@
     "Siffre (1962), l'expérience hors du temps",
     "Snook et Ciriello (1991) - Tables psychophysiques de manutention (Liberty Mutual)",
     "Analyse Theorell et al. (2001) - Decision latitude, job strain, and myocardial infarction",
-    "Theorell et al. (2015) - Revue systématique et méta-analyse : RPS et symptômes dépressifs",
     "Index des 7 Notes Wiki Créées - SST1010",
     "LOT 3 - NOTES INSTITUTIONNELLES/COMPLÉMENTAIRES",
     "Résumé Theorell, T. A systematic review including meta-analysis of work environment and depressive symptoms",
