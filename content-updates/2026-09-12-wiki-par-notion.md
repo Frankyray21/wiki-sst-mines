@@ -59,9 +59,24 @@ organisé par notion et par thème. Détail du plan exécuté : `plans/2026-09-1
   avec lui — 10 articles de loi sans texte extrait du PDF). `verif_liens.mjs` : 0 erreur sur
   239 045 liens internes. `verif_site.mjs` : conforme.
 
+## Suite du 13 septembre 2026 : points 1, 2 et 7 tranchés par Frank (« go »)
+
+`tools/promouvoir_fiches.mjs` (journal `content-updates/2026-09-13-promotion-fiches.json`,
+sauvegarde locale `sauvegarde-vault/2026-09-13-promotion/`) : les cinq fiches sans équivalent et
+la fiche Cadenassage sont revenues de « 98 - Archives » dans un dossier de notions de leur wiki,
+frontmatter d'archivage retiré, rien d'autre réécrit (ni titre, ni corps, ni ton). Cadenassage
+entre en collision de nom avec la jumelle du dossier « 27 - Articles gestionnaires » : la règle
+C7 donne le slug nu (`w/securite/cadenassage.html`) à la note de « 20 - … », la jumelle passe à
+`cadenassage-encadrement.html` (8e collision, redirigée). L'infographie « Quatre repères »
+(image, version texte, sources) est réinsérée dans la notion « Manutention manuelle », à la fin
+de sa Définition. 3902 → 3908 pages, 3430 médias. Les deux « Équipements de protection »
+(Hygiène, Sécurité) restent des doublons : publiés chacun dans son wiki, à fusionner un jour si
+Frank le veut. Points 3 à 6 : acceptés tels quels sur ma recommandation (rien à faire) ; point 4
+laissé fermé.
+
 ## Points soumis à Frank (aucune action sans sa réponse)
 
-1. **Cinq fiches disparaissent sans équivalent notionnel** : « Équipements de protection »
+1. **Cinq fiches disparaissent sans équivalent notionnel** *(fait le 13 septembre, voir ci-dessus)* : « Équipements de protection »
    (Hygiène/25 et Sécurité/25, doublons de 7 Ko), « Où appeler quand ça ne va pas »
    (psychosociale/25), « Presqu'accident » (Sécurité/25, 9 liens entrants), « Le risque électrique,
    ce que tu dois savoir » (Sécurité/26). Écrire une notion dans « 20 - … » ou accepter la perte.

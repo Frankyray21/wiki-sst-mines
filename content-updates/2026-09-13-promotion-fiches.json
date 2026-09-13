@@ -1,0 +1,72 @@
+{
+ "date": "2026-09-13",
+ "sauvegarde": "sauvegarde-vault/2026-09-13-promotion (locale, non versionnée)",
+ "operations": [
+  {
+   "source": "Wiki Hygiène industrielle/98 - Archives/25 - Articles travailleurs/Équipements de protection.md",
+   "destination": "Wiki Hygiène industrielle/20 - Articles internes/Prévention et programmes/Équipements de protection.md",
+   "clesRetirees": [
+    "publish: false",
+    "chemin-origine: \"Wiki Hygiène industrielle/25 - Articles travailleurs/Équipements de protection\"",
+    "archive-date: 2026-09-12",
+    "motif-archivage: \"Wiki des travailleurs abandonne le 12 septembre 2026 ; la notion vit dans l article principal, voir version-jumelle.\""
+   ]
+  },
+  {
+   "source": "Wiki Sécurité industrielle/98 - Archives/25 - Articles travailleurs/Équipements de protection.md",
+   "destination": "Wiki Sécurité industrielle/20 - Articles internes/Équipements de protection.md",
+   "clesRetirees": [
+    "publish: false",
+    "chemin-origine: \"Wiki Sécurité industrielle/25 - Articles travailleurs/Équipements de protection\"",
+    "archive-date: 2026-09-12",
+    "motif-archivage: \"Wiki des travailleurs abandonne le 12 septembre 2026 ; la notion vit dans l article principal, voir version-jumelle.\""
+   ]
+  },
+  {
+   "source": "Wiki SST psychosociale/98 - Archives/25 - Articles travailleurs/20 - Ressources et aide/Où appeler quand ça ne va pas.md",
+   "destination": "Wiki SST psychosociale/20 - Articles/Soutien et Ressources/Où appeler quand ça ne va pas.md",
+   "clesRetirees": [
+    "publish: false",
+    "chemin-origine: \"Wiki SST psychosociale/25 - Articles travailleurs/20 - Ressources et aide/Où appeler quand ça ne va pas\"",
+    "archive-date: 2026-09-12",
+    "motif-archivage: \"Wiki des travailleurs abandonne le 12 septembre 2026 ; la notion vit dans l article principal, voir version-jumelle.\""
+   ]
+  },
+  {
+   "source": "Wiki Sécurité industrielle/98 - Archives/25 - Articles travailleurs/Presqu'accident.md",
+   "destination": "Wiki Sécurité industrielle/20 - Articles internes/Presqu'accident.md",
+   "clesRetirees": [
+    "publish: false",
+    "chemin-origine: \"Wiki Sécurité industrielle/25 - Articles travailleurs/Presqu'accident\"",
+    "archive-date: 2026-09-12",
+    "motif-archivage: \"Wiki des travailleurs abandonne le 12 septembre 2026 ; la notion vit dans l article principal, voir version-jumelle.\""
+   ]
+  },
+  {
+   "source": "Wiki Sécurité industrielle/98 - Archives/26 - Brouillons travailleurs/Le risque électrique, ce que tu dois savoir.md",
+   "destination": "Wiki Sécurité industrielle/20 - Articles internes/Risques mécaniques et opérations/Le risque électrique, ce que tu dois savoir.md",
+   "clesRetirees": [
+    "publish: false",
+    "chemin-origine: \"Wiki Sécurité industrielle/26 - Brouillons travailleurs/Le risque électrique, ce que tu dois savoir\"",
+    "archive-date: 2026-09-12",
+    "motif-archivage: \"Wiki des travailleurs abandonne le 12 septembre 2026 ; la notion vit dans l article principal, voir version-jumelle.\""
+   ]
+  },
+  {
+   "source": "Wiki Sécurité industrielle/98 - Archives/25 - Articles travailleurs/Risques mécaniques/Cadenassage.md",
+   "destination": "Wiki Sécurité industrielle/20 - Articles internes/Risques mécaniques et opérations/Cadenassage.md",
+   "clesRetirees": [
+    "publish: false",
+    "chemin-origine: \"Wiki Sécurité industrielle/25 - Articles travailleurs/Risques mécaniques/Cadenassage\"",
+    "archive-date: 2026-09-12",
+    "motif-archivage: \"Wiki des travailleurs abandonne le 12 septembre 2026 ; la notion vit dans l article principal, voir version-jumelle.\""
+   ]
+  },
+  {
+   "infographie": "wiki-manutention-reperes-v1.png",
+   "depuis": "Wiki Ergonomie/98 - Archives/25 - Articles travailleurs/Manutention.md",
+   "vers": "Wiki Ergonomie/20 - Articles internes/Contraintes/Manutention manuelle.md",
+   "avant": "### Statistiques et lésions"
+  }
+ ]
+}
