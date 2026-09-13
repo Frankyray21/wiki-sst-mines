@@ -796,7 +796,7 @@
       return ['tour-portail', [
         { titre: 'Bienvenue dans le wiki SST', texte: 'Ce site réunit vos notes de cours en une encyclopédie consultable. Voici comment s’y retrouver en quelques secondes.' },
         { titre: 'Le fond documentaire', texte: 'Les pages sont classées par discipline : ergonomie, hygiène, toxicologie, sécurité, droit du travail, psychosocial, et le recueil des lois et règlements, article par article.', cible: '.portal-section + .portal-note + .portal-grid' },
-        { titre: 'Par sujet ou par situation', texte: 'Les catégories traversent les disciplines. Les fiches pour les travailleurs, courtes et en mots simples, sont classées par situation vécue : douleurs, air, chaleur, sommeil, droits, dangers.', cible: '.portal-sujets' },
+        { titre: 'Par sujet ou par thème', texte: 'Les catégories traversent les disciplines : bruit, silice, espaces clos… Les thèmes rassemblent, à l’intérieur d’un même wiki, les articles d’un même sujet.', cible: '.portal-sujets' },
         { titre: 'L’espace de l’encadrement', texte: 'Gestion & prévention réunit obligations, programmes et outils pour les superviseurs, les gestionnaires et la direction.', cible: '.portal-publics' },
         { titre: 'Chercher partout à la fois', texte: 'La recherche lit le texte entier des pages, pas seulement les titres : un mot cité au détour d’un paragraphe se retrouve. Essayez « art 4 RSST », « silice » ou « boulonneur ».', cible: '.portal-search' },
       ]];

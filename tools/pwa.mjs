@@ -67,7 +67,7 @@ export function genererPwa(OUT, version) {
   fs.writeFileSync(path.join(OUT, 'manifest.webmanifest'), JSON.stringify({
     name: 'WIKI SST — Mines',
     short_name: 'Wiki SST',
-    description: 'Encyclopédie santé et sécurité du travail en milieu minier — travailleurs, gestion et prévention, recueil législatif.',
+    description: 'Encyclopédie santé et sécurité du travail en milieu minier : notions par thème, gestion et prévention, recueil législatif.',
     lang: 'fr',
     start_url: './',
     scope: './',

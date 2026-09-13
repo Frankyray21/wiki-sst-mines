@@ -1,0 +1,466 @@
+{
+ "genere": "2026-09-13",
+ "parWiki": {
+  "Ergonomie": {
+   "themes": [
+    {
+     "titre": "Anatomie et biomécanique",
+     "notions": 5
+    },
+    {
+     "titre": "Contraintes",
+     "notions": 8
+    },
+    {
+     "titre": "Démarche",
+     "notions": 7
+    },
+    {
+     "titre": "Fondements",
+     "notions": 4
+    },
+    {
+     "titre": "TMS",
+     "notions": 4
+    }
+   ],
+   "orphelines": [
+    "🚀 Démarrage rapide - Conseiller SST, ergonome",
+    "🚀 Démarrage rapide - Direction, RH",
+    "🚀 Démarrage rapide - Superviseur, contremaître",
+    "🚀 Démarrage rapide - Travailleur",
+    "Articles internes",
+    "Confort thermique",
+    "Ergonomie du travail",
+    "Travail en milieu froid",
+    "🏢 Bienvenue, gestionnaire",
+    "Aménagement des horaires",
+    "Conception ergonomique du poste",
+    "Politique d'hydratation et de chaleur",
+    "Programme de prévention TMS",
+    "Programme manutention",
+    "Évaluation et surveillance ergonomique",
+    "📖 Glossaire ergonomie",
+    "art-51-LSST",
+    "art-51-11-LSST",
+    "art-51-4-LSST",
+    "LSST",
+    "art-116-RSST, qualité air milieu travail",
+    "art-117-RSST",
+    "art-118-RSST, ventilation milieu travail",
+    "art-119-RSST",
+    "art-121-RSST",
+    "art-122-RSST",
+    "art-123-RSST",
+    "art-124-RSST",
+    "art-130-RSST",
+    "art-166-RSST",
+    "art-167-RSST",
+    "RSST"
+   ]
+  },
+  "Hygiène industrielle": {
+   "themes": [
+    {
+     "titre": "Agresseurs biologiques",
+     "notions": 5
+    },
+    {
+     "titre": "Agresseurs chimiques",
+     "notions": 19
+    },
+    {
+     "titre": "Agresseurs physiques",
+     "notions": 11
+    },
+    {
+     "titre": "Démarche en hygiène industrielle",
+     "notions": 13
+    }
+   ],
+   "orphelines": [
+    "🎯 Démarrage rapide, conseiller SST",
+    "🎯 Démarrage rapide, direction et RH",
+    "🎯 Démarrage rapide, superviseur",
+    "🎯 Démarrage rapide, travailleur",
+    "Environnement de travail",
+    "Hygiène du travail",
+    "Prévention et programmes",
+    "Substances dangereuses",
+    "Évaluation et mesure",
+    "👔 Bienvenue, gestionnaire",
+    "Prévention de la contrainte thermique en mine",
+    "Programme amiante en mine",
+    "Programme espaces clos en mine",
+    "Programmes de prévention",
+    "Choisir un programme de protection auditive en mine",
+    "Gestion du SIMDUT et FDS en mine",
+    "📖 Glossaire commun",
+    "art-2-LATMP",
+    "art-51-11-LSST",
+    "art-51-4-LSST",
+    "LSST",
+    "art-116-RSST, qualité air milieu travail",
+    "art-117-RSST",
+    "art-118-RSST, ventilation milieu travail",
+    "art-119-RSST",
+    "art-121-RSST",
+    "art-188.1-RSST",
+    "art-188.4-RSST",
+    "art-296.1-RSST",
+    "art-39-RSST",
+    "art-41-RSST",
+    "RSST"
+   ]
+  },
+  "Toxicologie": {
+   "themes": [
+    {
+     "titre": "Évaluation et priorisation chimique",
+     "notions": 13
+    },
+    {
+     "titre": "Familles de contaminants",
+     "notions": 12
+    },
+    {
+     "titre": "Toxicité par organe",
+     "notions": 14
+    },
+    {
+     "titre": "Toxicocinétique",
+     "notions": 10
+    }
+   ],
+   "orphelines": [
+    "🎯 Démarrage rapide, conseiller SST",
+    "🎯 Démarrage rapide, direction et RH",
+    "🎯 Démarrage rapide, superviseur",
+    "🎯 Démarrage rapide, travailleur",
+    "Articles internes",
+    "CSTC",
+    "Amiante",
+    "Solvants organiques",
+    "Substances dangereuses",
+    "Surveillance biologique des métaux en mine",
+    "Mutagénicité et cancérogénicité",
+    "Toxicologie clinique",
+    "Toxicologie industrielle",
+    "Voies d'exposition",
+    "👔 Wiki Toxicologie mines - Gestionnaires",
+    "📖 Glossaire commun",
+    "art-188.1-RSST",
+    "art-188.4-RSST",
+    "RSST"
+   ]
+  },
+  "Sécurité industrielle": {
+   "themes": [
+    {
+     "titre": "Analyse des accidents",
+     "notions": 7
+    },
+    {
+     "titre": "Hiérarchie de la prévention",
+     "notions": 11
+    },
+    {
+     "titre": "Sécurité machines",
+     "notions": 18
+    }
+   ],
+   "orphelines": [
+    "🎯 Démarrage rapide, conseiller SST",
+    "🎯 Démarrage rapide, direction et RH",
+    "🎯 Démarrage rapide, superviseur",
+    "🎯 Démarrage rapide, travailleur",
+    "Articles internes",
+    "Analyse de risques",
+    "Explosifs",
+    "Indicateurs avancés et tardifs en SST",
+    "LSST partie 1",
+    "LSST partie 2",
+    "Risques mécaniques et opérations",
+    "Sécurité industrielle",
+    "👔 Wiki Sécurité industrielle mines - Gestionnaires",
+    "Programme espaces clos en mine",
+    "Gestion des risques opérationnels",
+    "📖 Glossaire commun",
+    "art-2-LATMP",
+    "art-51-11-LSST",
+    "LSST",
+    "art-131-RSST",
+    "art-132-RSST",
+    "art-133-RSST",
+    "art-135-RSST",
+    "art-141-RSST",
+    "art-174-RSST",
+    "art-188.1-RSST",
+    "art-188.4-RSST",
+    "art-192-RSST",
+    "art-296.1-RSST",
+    "RSST"
+   ]
+  },
+  "Droit du travail": {
+   "themes": [
+    {
+     "titre": "Démarche en cas de lésion",
+     "notions": 8
+    },
+    {
+     "titre": "Droits et recours du travailleur",
+     "notions": 7
+    },
+    {
+     "titre": "Obligations de l'employeur",
+     "notions": 0
+    },
+    {
+     "titre": "Régime CNESST",
+     "notions": 13
+    }
+   ],
+   "orphelines": [
+    "🎯 Démarrage rapide, conseiller SST",
+    "🎯 Démarrage rapide, direction et RH",
+    "🎯 Démarrage rapide, superviseur",
+    "🎯 Démarrage rapide, travailleur",
+    "Articles internes",
+    "Cadre légal SST Québec",
+    "Conciliation travail-famille",
+    "Constat d'infraction",
+    "Droit du travail",
+    "Droits du travailleur",
+    "Infractions et sanctions SST",
+    "LMRSST - Loi modernisant le régime de santé et sécurité du travail",
+    "LSST - Loi sur la santé et la sécurité du travail",
+    "Règlement sur la santé et la sécurité du travail dans les mines",
+    "👔 Wiki Droit du travail mines - Gestionnaires",
+    "Conformité et inspection",
+    "Préparer une visite d'inspecteur CNESST",
+    "📖 Glossaire commun"
+   ]
+  },
+  "SST psychosociale": {
+   "themes": [
+    {
+     "titre": "Communication",
+     "notions": 8
+    },
+    {
+     "titre": "Conditions de Travail",
+     "notions": 16
+    },
+    {
+     "titre": "Conflits et Harcèlement",
+     "notions": 8
+    },
+    {
+     "titre": "Facteurs Organisationnels",
+     "notions": 12
+    },
+    {
+     "titre": "Gestion et Prévention",
+     "notions": 22
+    },
+    {
+     "titre": "Législation et Normes",
+     "notions": 15
+    },
+    {
+     "titre": "Milieu Minier et FIFO",
+     "notions": 28
+    },
+    {
+     "titre": "Reconnaissance et Motivation",
+     "notions": 10
+    },
+    {
+     "titre": "Retour au Travail",
+     "notions": 14
+    },
+    {
+     "titre": "Risques Psychosociaux (RPS)",
+     "notions": 11
+    },
+    {
+     "titre": "Soutien et Ressources",
+     "notions": 11
+    },
+    {
+     "titre": "Supervision et Rôles",
+     "notions": 6
+    }
+   ],
+   "orphelines": [
+    "🎯 Démarrage rapide pour conseillers SST",
+    "🎯 Démarrage rapide pour direction et RH",
+    "🎯 Démarrage rapide pour superviseurs",
+    "❓ FAQ démarrage",
+    "⭐ Top 20 articles",
+    "📘 Comment utiliser ce wiki",
+    "🔤 Index alphabétique des articles",
+    "Accomplissement personnel",
+    "Activité physique et santé cardiovasculaire",
+    "Amplification des stresseurs",
+    "Écart entre aspirations et réalité",
+    "Autonomie décisionnelle",
+    "Axe HHS et stress chronique",
+    "Bien-être psychologique au travail",
+    "Blending et fracturing en FIFO",
+    "Cohésion d'équipe",
+    "Communication",
+    "Conditions de Travail",
+    "Conflit travail-famille",
+    "Conflits et Harcèlement",
+    "Critères diagnostiques du TSPT (DSM-5)",
+    "Culture organisationnelle en milieu minier",
+    "Cumul d'expositions",
+    "Demandes et contrôle",
+    "Dynamique des petits groupes isolés",
+    "Démarche de prévention des RPS",
+    "Démarche ergonomique participative",
+    "Dépersonnalisation (cynisme au travail)",
+    "Dépression professionnelle",
+    "Déséquilibre effort-récompense",
+    "Détresse psychologique",
+    "Effort et récompense au travail",
+    "EQSP (Enquête québécoise sur la santé de la population)",
+    "Ergonomie de l'activité",
+    "Ergonomie posturale",
+    "Estime de soi au travail",
+    "Facteurs de risque psychosociaux en milieu minier",
+    "Facteurs Organisationnels",
+    "FIFO et santé psychologique",
+    "FIFO (fly-in, fly-out)",
+    "Gestion et Prévention",
+    "Gestion post-incident en SST",
+    "GRADE (gradation des niveaux de preuve)",
+    "Histoire de la SST psychosociale au Québec",
+    "Incivilité et climat d'équipe",
+    "Inconsistance de statut",
+    "Instruments validés en SST psychosociale",
+    "Interventions en santé mentale au travail",
+    "Interventions",
+    "Recommandations - Interventions RPS en milieu de travail",
+    "Intégration des RPS aux systèmes de management SST",
+    "Isolement social",
+    "Isolement géographique",
+    "Job strain et maladies cardio-vasculaires",
+    "Job strain",
+    "Réaménagement du travail (job redesign)",
+    "Justice organisationnelle",
+    "Karasek (1979), modèle Demandes-Contrôle",
+    "Job strain et maladie coronarienne (Kivimäki, 2012)",
+    "Latitude décisionnelle",
+    "Législation et Normes",
+    "Maladies cardiovasculaires et travail",
+    "Comparatif des cycles FIFO",
+    "Milieu Minier et FIFO",
+    "Mobilier de bureau et santé",
+    "Modèle demande-contrôle-soutien (DCS)",
+    "Modèle ERI (effort-récompense)",
+    "Modèle demande-contrôle (Karasek)",
+    "Définition du stress professionnel",
+    "Karasek et Theorell (1990)",
+    "Latitude décisionnelle",
+    "Modèle de Siegrist, déséquilibre efforts récompenses",
+    "Modèle de Sélye, syndrome général d'adaptation",
+    "Progression du risque - Modèle de Sélye",
+    "Organisation du travail",
+    "Programme SHEEP",
+    "Promotion de la santé en milieu de travail",
+    "Prévalence au Québec",
+    "Prévention des risques psychosociaux",
+    "Prévention collective des risques psychosociaux",
+    "Évaluation des preuves - Système GRADE",
+    "Reconnaissance au travail",
+    "Reconnaissance et Motivation",
+    "Relation stress-performance",
+    "Retour au Travail",
+    "Revue systématique",
+    "Risques Psychosociaux (RPS)",
+    "Risques psychosociaux au travail",
+    "Rotations jour-nuit",
+    "Risques psychosociaux au Québec",
+    "RPS au travail",
+    "RPS (risques psychosociaux)",
+    "Rythme circadien",
+    "Rétroaction sur la performance",
+    "Santé mentale au travail",
+    "Santé mentale en milieu minier",
+    "Secteur minier québécois",
+    "Secteur minier",
+    "Qualité du sommeil",
+    "Soutien et Ressources",
+    "Paradoxe du soutien social",
+    "Horaires atypiques et santé",
+    "Risques psychosociaux",
+    "RPS - Effets cumulatifs",
+    "Stress au travail",
+    "Stress et facteurs de risque",
+    "Stress et santé",
+    "Stress professionnel - cadre intégré",
+    "Stress chronique",
+    "Stress extrinsèque",
+    "Stress professionnel",
+    "Supervision et Rôles",
+    "Symptômes dépressifs",
+    "Systèmes de gestion de la SST",
+    "Sécurité psychologique",
+    "Sédentarité au travail",
+    "Tension interpersonnelle",
+    "Tension mentale",
+    "Transition de carrière",
+    "Travail FIFO et cycles de rotation",
+    "Travail posté",
+    "Travail prescrit et travail réel",
+    "Troubles musculosquelettiques (TMS)",
+    "Troubles de santé mentale au travail",
+    "Tâches prescrites",
+    "Utilisation des compétences au travail",
+    "Éloignement familial",
+    "Épidémiologie professionnelle",
+    "Épuisement émotionnel",
+    "Équité, diversité et inclusion (protocole TSM)",
+    "Évaluation ergonomique des postes de travail",
+    "Audit psychosocial complet, méthodologie",
+    "Confidentialité et éthique des mesures RPS",
+    "Indicateurs RH pour suivre les RPS",
+    "Tableau de bord SST psychosociale pour direction",
+    "Évaluation et Outils",
+    "📖 Glossaire",
+    "Analyse Bourbonnais et al. (2007)",
+    "Charbonneau (2012) - Contexte minier québécois et conditions de travail",
+    "Analyse Daniellou (dir., 1996) - L'ergonomie en quête de ses principes",
+    "Analyse Dolan & Arsenault (1980) - Stress, santé et rendement au travail",
+    "Dolan et Arsenault (2009) - Stress, estime de soi, reconnaissance et santé au travail",
+    "Analyse ergonomique du travail",
+    "Analyse Folkard & Tucker (2003)",
+    "INSPQ (2021) - Grille d'identification des risques psychosociaux du travail",
+    "IRSST (2016) - Guide de manutention manuelle (référentiel québécois)",
+    "Analyse Karasek et al. (1998) - The Job Content Questionnaire (JCQ)",
+    "Analyse Katzmarzyk et al. (2010) - Sitting time and mortality",
+    "Analyse Kivimäki et al. (2006)",
+    "Kivimäki et al. (2012) - Job strain et maladies coronariennes : méta-analyse de 197 473 travailleurs",
+    "Kroenke et al. (2001) : validation du PHQ-9",
+    "Labra et al. (2022) - Santé globale des hommes FIFO miniers au Québec",
+    "Moore et Garg (1995) - Le Strain Index (outil ergonomique TMS distaux)",
+    "Analyse Morris et al. (1953) - Coronary heart disease and physical activity of work",
+    "Analyse Pronk et al. (2012) - Postes de travail assis-debout et indicateurs de santé",
+    "Analyse Selye (1956) - The Stress of Life - General Adaptation Syndrome",
+    "Analyse Siegrist (2017) - Mise à jour du modèle Effort-Reward Imbalance (ERI)",
+    "Siffre (1962), l'expérience hors du temps",
+    "Snook et Ciriello (1991) - Tables psychophysiques de manutention (Liberty Mutual)",
+    "Analyse Theorell et al. (2001) - Decision latitude, job strain, and myocardial infarction",
+    "Theorell et al. (2015) - Revue systématique et méta-analyse : RPS et symptômes dépressifs",
+    "Index des 7 Notes Wiki Créées - SST1010",
+    "LOT 3 - NOTES INSTITUTIONNELLES/COMPLÉMENTAIRES",
+    "Résumé Theorell, T. A systematic review including meta-analysis of work environment and depressive symptoms",
+    "RPS et symptômes dépressifs au travail - Fiche Obsidian centrée sur Theorell et al. 2015, avec mises à jour 2015-2025",
+    "📁 Documents et outils"
+   ]
+  }
+ }
+}

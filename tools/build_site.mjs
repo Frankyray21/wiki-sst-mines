@@ -7,12 +7,13 @@ import { marked } from 'marked';
 import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
-import { INDEX_FICHES, LIEN_INDEX_FICHES, rendreIndexFiches, rendrePage404 } from './fiches_travailleurs.mjs';
+import { rendrePage404 } from './redirections.mjs';
 import { rendrePortailContenu } from './portail_racine.mjs';
+import { slugify, cleanLabel, attribuerAdresses, ancienneAdresse, formuleMiroir } from './adresses.mjs';
 import { analyserQualite, LIBELLES } from './qualite.mjs';
 import { normaliserNavigationInterne, metadonneesEditoriales, indicateursDocumentaires } from './editorial.mjs';
 import { genererPwa, metaPwa, genererListeHorsLigne } from './pwa.mjs';
-import { rendreEnteteCompact, rendreTitreArticle } from './entete-article.mjs';
+import { rendreTitreArticle } from './entete-article.mjs';
 import { normaliserBibliographie } from './bibliographie.mjs';
 import { motsDePage, encoderListe } from './recherche_mots.mjs';
 import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
@@ -32,10 +33,9 @@ const WIKIS = {
   'Recueil législatif SST':    { slug: 'legislation',    icon: '⚖️', name: 'Recueil législatif',   desc: 'Lois, règlements, article par article, jurisprudence' },
 };
 
-// Un seul parcours par public subsiste : l'encadrement. L'ancien wiki des travailleurs (t/)
-// est abandonné ; ses pages restent dans le fond documentaire et sont indexées dans
-// travailleurs.html (fiches_travailleurs.mjs). L'autorisation « t » calculée plus bas
-// (publication-travailleur, public-cible, veto de sensibilité) sert désormais à cet index.
+// Un seul parcours par public : l'encadrement. Le wiki des travailleurs est abandonné le
+// 12 septembre 2026 ; ses notes sont archivées dans 98 - Archives de chaque wiki (voir
+// tools/archiver_travailleurs.mjs). Le fond documentaire est organisé par notion et par thème.
 const PUBLICS = {
   g: {
     slug: 'g', icon: '🎓', nom: 'Gestion & prévention',
@@ -73,16 +73,6 @@ marked.setOptions({ gfm: true, breaks: true, mangle: false, headerIds: false });
 // ---------- utilitaires ----------
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-function slugify(s) {
-  return String(s)
-    .normalize('NFKD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/['’]/g, '')
-    .replace(/[^A-Za-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .toLowerCase() || 'page';
-}
-
 // Décode les entités produites par marked, sinon « d&#39;ensemble » finit dans les id ET dans le texte du sommaire
 function decodeEntities(s) {
   return String(s)
@@ -106,22 +96,9 @@ function headingSlug(text) {
     .replace(/\s+/g, '-') || 'section';
 }
 
-// Libellé du sommaire : on retire uniquement le préfixe de classement du vault
-// (« 15 - Navigation »). Règle volontairement étroite : elle exige des espaces
-// autour du tiret et une lettre derrière, pour ne pas toucher aux titres
-// légitimement numérotés dans les notes (« 1. Diligence raisonnable », « 2.1 Comment mesurer »).
-// Consomme une grappe d'emoji entière, y compris les emojis composés reliés par un
-// ZWJ (U+200D) comme 🧑‍💼 : sinon on mange la première moitié et on laisse un liant orphelin.
-const EMOJIS_DE_TETE = /^(?:\p{Extended_Pictographic}(?:️|\p{Emoji_Modifier})?(?:‍\p{Extended_Pictographic}️?)*|\s)+/u;
-
 function libelleTdm(texte) {
   const t = texte.replace(/^\d{1,3} +[-–—] +(?=\p{L})/u, '').trim();
   return t || texte.trim();
-}
-
-function cleanLabel(name) {
-  // "20 - Articles" -> "Articles" ; retire aussi les emojis de tête
-  return name.replace(/^\d+\s*-\s*/, '').replace(EMOJIS_DE_TETE, '').trim() || name;
 }
 
 function stripMd(s) {
@@ -213,8 +190,8 @@ function sanitizeFm(block) {
   }).join('\n');
 }
 
-// ---------- répartition des pages entre les deux publics ----------
-// Le vault marque déjà chaque note : publication-travailleur / publication-gestionnaire.
+// ---------- répartition des pages vers le parcours de l'encadrement ----------
+// Le vault marque déjà chaque note : publication-gestionnaire.
 // Principe de prudence : ce qui n'est pas explicitement autorisé n'est pas publié.
 // Seule exception, assumée : le Recueil législatif (texte de loi du Québec, public par nature,
 // et vérifié sans aucune note « interne » ni refus explicite).
@@ -235,9 +212,7 @@ const REFUS_ABSOLU = new Set(['interne-non-publie', 'interne-strict', 'a-archive
 
 const estNon = (v) => String(v ?? '').trim().toLowerCase() === 'non';
 
-// « public-cible » désigne le LECTEUR visé. À ne pas confondre avec « visé », qui désigne
-// le destinataire d'une obligation légale : router dessus retirerait aux travailleurs
-// les articles qui fondent leurs propres droits.
+// « public-cible » désigne le LECTEUR visé.
 const ENCADREMENT = ['direction', 'superviseur', 'gestionnaire', 'rh', 'employeur', 'contremaitre', 'contremaître'];
 
 function publicsDeLaPage(p) {
@@ -251,16 +226,10 @@ function publicsDeLaPage(p) {
 
   // Le texte de loi est public : il fonde les droits du travailleur comme les obligations de l'employeur.
   if (LEGISLATION_PUBLIQUE && p.wikiKey === 'Recueil législatif SST' && !sensibiliteRestreinte(fm['niveau-sensibilité'])) {
-    S.add('t'); S.add('g');
+    S.add('g');
     return S;
   }
-  // Travailleurs : autorisation explicite ou public-cible, plus veto de sensibilité.
-  const okTravailleur = estOui(fm['publication-travailleur'])
-    || (cible.includes('travailleur') && !estNon(fm['publication-travailleur']));
-  if (okTravailleur && !sensibiliteRestreinte(fm['niveau-sensibilité'])) S.add('t');
-
-  // Encadrement : même logique. Ici « interne » signifie « pas pour les travailleurs »,
-  // pas « pas pour l'encadrement » — ce n'est donc pas un veto.
+  // Encadrement : autorisation explicite ou public-cible.
   if (estOui(fm['publication-gestionnaire'])
     || (cible.some(c => ENCADREMENT.includes(c)) && !estNon(fm['publication-gestionnaire']))) S.add('g');
   return S;
@@ -347,6 +316,26 @@ for (const p of refusees) {
   if (Array.isArray(al)) for (const a of al) notesInternes.set(String(a).toLowerCase(), nature);
 }
 
+// Renvoi des liens qui visaient une fiche du wiki des travailleurs, archivée le 12 septembre
+// 2026 dans 98 - Archives : si elle déclarait une version-jumelle (frontmatter posé par
+// tools/archiver_travailleurs.mjs), le lien la suit et mène directement à la notion, plutôt
+// que de rester une mention grise. Indexé PAR WIKI : un même nom peut avoir des jumelles
+// différentes selon le wiki citant (« Chaleur » mène à une notion en Ergonomie, une autre en
+// Hygiène) — une table globale enverrait au mauvais wiki (lecture du 12 septembre 2026).
+const renvois = new Map(); // wikiKey -> Map(nom ou alias en minuscules -> cible textuelle du wikilink)
+for (const p of refusees) {
+  const brut = p.fm && p.fm['version-jumelle'];
+  if (!brut) continue;
+  const m = String(brut).match(/\[\[([^\]|#]+)/);
+  if (!m) continue;
+  const cible = m[1].trim();
+  if (!cible) continue;
+  if (!renvois.has(p.wikiKey)) renvois.set(p.wikiKey, new Map());
+  const table = renvois.get(p.wikiKey);
+  const noms = [p.base, ...(Array.isArray(p.fm.aliases) ? p.fm.aliases : [])];
+  for (const n of noms) table.set(String(n).trim().toLowerCase(), cible);
+}
+
 // Un article de loi remplacé ou abrogé n'a rien à dire : pas de page.
 // Les liens qui le visaient afficheront une mention grisée « (remplacé) » à la place.
 const articlesRetires = new Map(); // basename minuscule -> 'remplacé' | 'abrogé'
@@ -369,16 +358,55 @@ const articlesRetires = new Map(); // basename minuscule -> 'remplacé' | 'abrog
   console.log(`Articles remplacés ou abrogés : ${coquilles.length} coquilles vides écartées (mention grisée à la place)`);
 }
 
-// Chemin de sortie dans le fond documentaire : miroir du vault, slugifié.
-// Le parcours de l'encadrement préfixe ce chemin (g/…) sans le recalculer.
-const usedOut = new Set();
+// ---------- rôles des pages, adresses par notion (12 septembre 2026) ----------
+// Une page a un rôle : 'loi' (Recueil, adresse inchangée — miroir du vault, slugifié) ;
+// 'accueil' (page d'accueil du wiki) ; 'theme' (portail de thème : note authored « type:
+// thème », ou — pour Ergonomie, qui n'en a aucune — la note index du sous-dossier de
+// « 20 - … » qui en tient lieu) ; sinon 'notion', adresse = son propre nom slugifié.
+// Voir plans/2026-09-12-wiki-par-notion.md, choix C1-C7.
+const SIX_WIKIS = Object.keys(WIKIS).filter(k => k !== 'Recueil législatif SST');
+const typeNorm = (v) => String(v ?? '').trim().toLowerCase();
+
+// Un wiki qui n'a aucune note « type: thème » PUBLIÉE (donc comptée sur `pages`, après le
+// retrait des refusees) bascule ses notes index de sous-dossier de « 20 - … » en thèmes.
+const themesAuthoredParWiki = new Set();
 for (const p of pages) {
-  const parts = p.relPath.slice(0, -3).split('/');
-  let out = 'w/' + WIKIS[p.wikiKey].slug + '/' + parts.slice(1).map(slugify).join('/') + '.html';
-  let n = 2;
-  while (usedOut.has(out.toLowerCase())) out = out.replace(/\.html$/, '') + '-' + (n++) + '.html';
-  usedOut.add(out.toLowerCase());
-  p.out = out;
+  if (SIX_WIKIS.includes(p.wikiKey) && (typeNorm(p.fm.type) === 'thème' || typeNorm(p.fm.type) === 'theme')) {
+    themesAuthoredParWiki.add(p.wikiKey);
+  }
+}
+
+for (const p of pages) {
+  if (p.wikiKey === 'Recueil législatif SST') { p.role = 'loi'; continue; }
+  if (wikiHome(p.wikiKey) === p) { p.role = 'accueil'; continue; }
+  const parts = p.relPath.split('/'); // parts[0] = wiki, parts[1] = section, parts[2] = sous-dossier…
+  const t = typeNorm(p.fm.type);
+  if (t === 'thème' || t === 'theme') { p.role = 'theme'; continue; }
+  if (!themesAuthoredParWiki.has(p.wikiKey) && t === 'index'
+    && /^20 - /.test(parts[1] || '') && parts.length === 4 && p.base === parts[2]) {
+    p.role = 'theme'; continue;
+  }
+  p.role = 'notion';
+}
+
+const collisionsAdresses = attribuerAdresses(pages, WIKIS).collisions;
+if (collisionsAdresses.length) {
+  console.log(`  ${collisionsAdresses.length} collision(s) de nom résolue(s) :`);
+  for (const c of collisionsAdresses) {
+    console.log(`    ${WIKIS[c.wikiKey].name} « ${c.slug} » → ${c.gagnantOut} (gagnant : ${c.gagnant}) ; ` +
+      c.perdants.map(x => `${x.out} (${x.relPath})`).join(' ; '));
+  }
+}
+
+// Thèmes par wiki : source de la barre latérale, de la grille d'accueil, et — via leurs
+// liens sortants — du rattachement des notions (voir plus bas, après le rendu des pages).
+const themesParWiki = new Map(); // wikiKey -> [pages de rôle 'theme'], triées par titre
+for (const wikiKey of SIX_WIKIS) {
+  themesParWiki.set(wikiKey, pages.filter(p => p.wikiKey === wikiKey && p.role === 'theme').sort((a, b) => a.title.localeCompare(b.title, 'fr')));
+}
+{
+  const parWiki = SIX_WIKIS.map(k => `${WIKIS[k].name} ${themesParWiki.get(k).length}`).join(', ');
+  console.log(`  Thèmes par wiki : ${parWiki}`);
 }
 
 // index de résolution des liens
@@ -497,7 +525,7 @@ function lierReferencesLegales(html) {
   return morceaux.join('');
 }
 
-function resolvePage(target, from) {
+function resolvePage(target, from, profondeur = 0) {
   let t = target.trim().replace(/^🏠 WIKI SST - Mines\//u, '');
   if (!t) return null;
   if (t.includes('/')) {
@@ -506,7 +534,15 @@ function resolvePage(target, from) {
     t = t.split('/').pop();
   }
   const cands = byBase.get(t.toLowerCase()) || byLoose.get(looseKey(t));
-  if (!cands || !cands.length) return null;
+  if (!cands || !cands.length) {
+    // Fiche du wiki des travailleurs archivée le 12 septembre 2026 : si elle déclarait une
+    // version-jumelle, le lien la suit plutôt que de s'afficher en gris. Cherché d'abord dans
+    // le wiki de la page citante — un même nom peut avoir des jumelles différentes selon le wiki.
+    const table = renvois.get(from.wikiKey);
+    const cible = table && table.get(t.toLowerCase());
+    if (cible && profondeur < 2) return resolvePage(cible, from, profondeur + 1);
+    return null;
+  }
   if (cands.length === 1) return cands[0];
   const sameDir = cands.filter(c => c.dir === from.dir);
   if (sameDir.length) return sameDir[0];
@@ -781,15 +817,11 @@ ${metaPwa(ROOT)}
   <div class="nav-group"><div class="nav-title">Navigation</div>
     <ul>
       <li><a href="${ROOT}index.html">🏠 Portail</a></li>
+      <li><a href="${ROOT}themes.html">🗂️ Thèmes</a></li>
       <li><a href="${ROOT}categories.html">🏷️ Catégories</a></li>
       <li><a href="${ROOT}qualite.html">🔧 Contrôles de forme</a></li>
       <li><a href="${ROOT}graphe.html">🕸️ Graphe des liens</a></li>
       <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
-    </ul>
-  </div>
-  <div class="nav-group"><div class="nav-title">Selon qui vous êtes</div>
-    <ul>
-      <li><a href="${ROOT}${INDEX_FICHES.out}">${LIEN_INDEX_FICHES}</a></li>
       <li><a href="${ROOT}g/index.html">${PUBLICS.g.icon} ${esc(PUBLICS.g.nom)}</a></li>
     </ul>
   </div>
@@ -809,7 +841,11 @@ ${content}
 function wikiSidebar(wikiKey, sections) {
   const wiki = WIKIS[wikiKey];
   const ROOT = '{{ROOT}}';
-  const items = sections.map(s => `<li><a href="${ROOT}w/${wiki.slug}/${s.slug}/index.html">${esc(s.label)}</a></li>`).join('');
+  // Le Recueil garde ses sections par dossier (sommaires de lois) ; les six wikis listent
+  // leurs thèmes à la place (12 septembre 2026 : adresses par notion, plus de dossiers de cours).
+  const items = wikiKey === 'Recueil législatif SST'
+    ? sections.map(s => `<li><a href="${ROOT}w/${wiki.slug}/${s.slug}/index.html">${esc(s.label)}</a></li>`).join('')
+    : (themesParWiki.get(wikiKey) || []).map(t => `<li><a href="${ROOT}${t.out}">${esc(t.title)}</a></li>`).join('');
   return `<div class="nav-group"><div class="nav-title">${wiki.icon} ${esc(wiki.name)}</div>
   <ul>
     <li><a href="${ROOT}w/${wiki.slug}/index.html">Accueil du wiki</a></li>
@@ -876,6 +912,11 @@ function infobox(p) {
       continue;
     }
     rows.push(`<tr><th>${label}</th><td>${esc(v)}</td></tr>`);
+  }
+  // Thème calculé (rattachement du 12 septembre 2026) : seulement si la note n'a pas déjà
+  // sa propre clé theme:/thème: (déjà affichée ci-dessus par FM_LABELS).
+  if (!vus.has('Thème') && p.themePrincipal) {
+    rows.push(`<tr><th>Thème</th><td><a href="{{ROOT}}${p.themePrincipal.out}">${esc(p.themePrincipal.title)}</a></td></tr>`);
   }
   let tags = p.fm.tags;
   if (tags && !Array.isArray(tags)) tags = String(tags).split(/[,\s]+/);
@@ -1023,6 +1064,57 @@ for (const p of pages) {
   console.log(`  texte officiel posé sur ${total} articles de loi (${Object.entries(nbTextesLoi).map(([m, n]) => m + ' ' + n).join(', ')}) · ${sansTexte} article(s) sans texte extrait`);
 }
 
+// ---------- rattachement des notions aux thèmes ----------
+// Calculé après le rendu (p.liens existe) : (1) clé frontmatter theme:/thème: qui résout vers
+// une note de thème du même wiki ; (2) wikilien sortant DE la note de thème VERS la notion
+// (table « Articles couverts » ou prose) ; (3) Ergonomie seulement, faute de thème authored :
+// appartenance au sous-dossier de la note index qui en tient lieu. Rien n'est écrit dans le
+// vault ; une notion sans thème reste joignable par l'index alphabétique et la recherche.
+for (const wikiKey of SIX_WIKIS) {
+  const themes = themesParWiki.get(wikiKey);
+  const notions = pages.filter(p => p.wikiKey === wikiKey && p.role === 'notion');
+  for (const p of notions) {
+    const trouves = new Set();
+    let principal = null;
+    const cleTheme = p.fm.theme ?? p.fm['thème'];
+    if (cleTheme) {
+      const m = String(cleTheme).match(/\[\[([^\]|#]+)/);
+      const cible = resolvePage((m ? m[1] : String(cleTheme)).trim(), p);
+      if (cible && cible.wikiKey === wikiKey && cible.role === 'theme') { trouves.add(cible); principal = principal || cible; }
+    }
+    for (const th of themes) {
+      if ((th.liens || []).includes(p)) { trouves.add(th); if (!principal) principal = th; }
+    }
+    if (wikiKey === 'Wiki Ergonomie' && !themesAuthoredParWiki.has(wikiKey)) {
+      const dossierTheme = themes.find(th => p.relPath.startsWith(th.relPath.slice(0, th.relPath.lastIndexOf('/')) + '/'));
+      if (dossierTheme) { trouves.add(dossierTheme); if (!principal) principal = dossierTheme; }
+    }
+    p.themes = [...trouves];
+    p.themePrincipal = principal;
+  }
+}
+{
+  const resume = SIX_WIKIS.map(k => {
+    const notions = pages.filter(p => p.wikiKey === k && p.role === 'notion');
+    const reliees = notions.filter(p => p.themePrincipal).length;
+    return `${WIKIS[k].name} ${reliees}/${notions.length}`;
+  }).join(', ');
+  console.log(`  Rattachement aux thèmes (notions reliées/total) : ${resume}`);
+  try {
+    fs.mkdirSync(path.join(__dirname, 'rapports'), { recursive: true });
+    fs.writeFileSync(path.join(__dirname, 'rapports', 'themes.json'), JSON.stringify({
+      genere: new Date().toISOString().slice(0, 10),
+      parWiki: Object.fromEntries(SIX_WIKIS.map(k => {
+        const notions = pages.filter(p => p.wikiKey === k && p.role === 'notion');
+        return [WIKIS[k].name, {
+          themes: themesParWiki.get(k).map(t => ({ titre: t.title, notions: notions.filter(p => p.themes.includes(t)).length })),
+          orphelines: notions.filter(p => !p.themePrincipal).map(p => p.title),
+        }];
+      })),
+    }, null, 1));
+  } catch (e) { console.warn('  ⚠ rapport thèmes non écrit :', e.message); }
+}
+
 // Pages voisines : précédente et suivante dans le même dossier du vault, en ordre naturel
 // (« art-9 » avant « art-10 ») — sur téléphone, on enchaîne les articles sans remonter au sommaire.
 const voisins = new Map();
@@ -1047,15 +1139,38 @@ function voisinsHtml(p) {
   return `<nav class="voisins" aria-label="Pages voisines">${lien(v.prec, 'voisin-prec', '← Précédent')}${lien(v.suiv, 'voisin-suiv', 'Suivant →')}</nav>`;
 }
 
+// Six wikis seulement (le Recueil garde les voisins par dossier) : la version jumelle
+// publiée, s'il y en a une, puis jusqu'à huit notions du même thème principal.
+function voirAussiHtml(p) {
+  const items = [];
+  const brut = p.fm && p.fm['version-jumelle'];
+  if (brut) {
+    const m = String(brut).match(/\[\[([^\]|#]+)/);
+    const cible = resolvePage((m ? m[1] : String(brut)).trim(), p);
+    if (cible && cible !== p) items.push(cible);
+  }
+  if (p.themePrincipal) {
+    const autres = pages.filter(q => q !== p && q.role === 'notion' && (q.themes || []).includes(p.themePrincipal))
+      .sort((a, b) => a.title.localeCompare(b.title, 'fr'));
+    for (const q of autres) { if (items.length >= 9) break; if (!items.includes(q)) items.push(q); }
+  }
+  if (!items.length) return '';
+  return `<nav class="voir-aussi" aria-label="Voir aussi"><h2>Voir aussi</h2><ul>${items.map(q => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`).join('')}</ul></nav>`;
+}
+
 console.log('Écriture des fichiers…');
 for (const p of pages) {
   const wiki = WIKIS[p.wikiKey];
   const parts = p.relPath.split('/');
   const crumbs = [`<a href="{{ROOT}}index.html">Portail</a>`, `<a href="{{ROOT}}w/${wiki.slug}/index.html">${esc(wiki.name)}</a>`];
-  let acc = 'w/' + wiki.slug;
-  for (let i = 1; i < parts.length - 1; i++) {
-    acc += '/' + slugify(parts[i]);
-    crumbs.push(`<a href="{{ROOT}}${acc}/index.html">${esc(cleanLabel(parts[i]))}</a>`);
+  if (p.wikiKey === 'Recueil législatif SST') {
+    let acc = 'w/' + wiki.slug;
+    for (let i = 1; i < parts.length - 1; i++) {
+      acc += '/' + slugify(parts[i]);
+      crumbs.push(`<a href="{{ROOT}}${acc}/index.html">${esc(cleanLabel(parts[i]))}</a>`);
+    }
+  } else if (p.role === 'notion' && p.themePrincipal) {
+    crumbs.push(`<a href="{{ROOT}}${p.themePrincipal.out}">${esc(p.themePrincipal.title)}</a>`);
   }
   // Le compteur reste lisible quand le sommaire est replié : le lecteur sait ce qu'il y a derrière le bouton.
   const nbSections = p.toc.filter(t => t.lv === 2).length || p.toc.length;
@@ -1067,19 +1182,39 @@ for (const p of pages) {
     ? `<details class="backlinks"><summary>Pages qui pointent ici (${bl.size})</summary><ul>${[...bl].sort((a, b) => a.title.localeCompare(b.title, 'fr')).slice(0, 60).map(b => `<li><a href="{{ROOT}}${b.out}">${esc(b.title)}</a> <small class="bl-wiki">${WIKIS[b.wikiKey].name}</small></li>`).join('')}${bl.size > 60 ? '<li>…</li>' : ''}</ul></details>`
     : '';
   const revisionHtml = metadonneesEditoriales(p, new Date().toISOString().slice(0, 10));
-  const enteteCompact = rendreEnteteCompact({ out: p.out, titre: p.title, domaineHtml: `<a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>`, sections: p.toc });
-  const content = p.accueil ? contenuAccueil(p, { crumbs, accueil: p.accueil, chapoHtml: p.chapoHtml, pied: piedAccueil(new Date().toISOString().slice(0, 10)) }) : `
+  let content;
+  if (p.role === 'theme') {
+    // Page de thème : le corps rédigé de la note (tables « Articles couverts », prose…) reste
+    // intact ; le site y ajoute seulement la liste des notions rattachées et les autres thèmes.
+    const notionsDuTheme = pages.filter(q => q.wikiKey === p.wikiKey && q.role === 'notion' && (q.themes || []).includes(p))
+      .sort((a, b) => a.title.localeCompare(b.title, 'fr'));
+    const autresThemes = themesParWiki.get(p.wikiKey).filter(t => t !== p);
+    content = `
 <div class="breadcrumbs">${crumbs.join(' <span class="crumb-sep">›</span> ')}</div>
-${enteteCompact || rendreTitreArticle({ titre: p.title, domaineHtml: `Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>` })}
+${rendreTitreArticle({ titre: p.title, domaineHtml: `Un thème du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>` })}
+<div class="page-body">
+${p.html}
+<h2>Articles de ce thème (${notionsDuTheme.length})</h2>
+${notionsDuTheme.length ? `<ul class="cat-pages">${notionsDuTheme.map(q => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`).join('')}</ul>` : '<p class="page-sub">Aucun article n’est pour l’instant rattaché à ce thème.</p>'}
+${autresThemes.length ? `<h2>Autres thèmes du wiki</h2><ul class="cat-pages">${autresThemes.map(t => `<li><a href="{{ROOT}}${t.out}">${esc(t.title)}</a></li>`).join('')}</ul>` : ''}
+</div>
+<div class="page-meta">${revisionHtml} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
+  } else if (p.accueil) {
+    content = contenuAccueil(p, { crumbs, accueil: p.accueil, chapoHtml: p.chapoHtml, pied: piedAccueil(new Date().toISOString().slice(0, 10)) });
+  } else {
+    content = `
+<div class="breadcrumbs">${crumbs.join(' <span class="crumb-sep">›</span> ')}</div>
+${rendreTitreArticle({ titre: p.title, domaineHtml: `Un article du wiki <a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>` })}
 ${infobox(p)}
 ${p.chapoHtml ? `<div class="chapo"><div class="chapo-label">${esc(p.chapoLabel)}</div>${p.chapoHtml}</div>` : ''}
-${enteteCompact ? '' : tocHtml}
+${tocHtml}
 <div class="page-body">
 ${p.html}
 </div>
-${voisinsHtml(p)}
+${p.wikiKey === 'Recueil législatif SST' ? voisinsHtml(p) : voirAussiHtml(p)}
 ${blHtml}
 <div class="page-meta">${revisionHtml} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
+  }
   const html = pageShell({
     out: p.out, title: p.accueil ? titreAccueil(p.title) : p.title, wikiKey: p.wikiKey, content,
     sidebarExtra: wikiSidebar(p.wikiKey, wikiSections[p.wikiKey]),
@@ -1106,13 +1241,27 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
   const index = [{ url: `{{ROOT}}w/${wiki.slug}/index-alphabetique.html`, libelle: 'Index alphabétique' }];
   if (p.wikiKey === 'Recueil législatif SST') index.push({ url: `{{ROOT}}w/${wiki.slug}/index-par-loi.html`, libelle: 'Index par loi' });
   index.push({ url: '{{ROOT}}categories.html', libelle: 'Catégories' });
-  if (accueilDuWiki || /travailleurs/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}' + INDEX_FICHES.out, libelle: INDEX_FICHES.titre });
+  if (accueilDuWiki) index.push({ url: '{{ROOT}}themes.html', libelle: 'Tous les thèmes' });
   if (/gestionnaires/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}g/index.html', libelle: 'Espace encadrement' });
   const fil = accueilDuWiki ? crumbs.slice(0, 2) : crumbs;
+  // Sur l'accueil du wiki (six wikis), une grille des thèmes ouvre les boîtes, avant les
+  // sections rédigées de la note elle-même : c'est la porte d'entrée par sujet du wiki.
+  let sections = accueil.sections;
+  if (accueilDuWiki && p.wikiKey !== 'Recueil législatif SST') {
+    const themes = themesParWiki.get(p.wikiKey) || [];
+    if (themes.length) {
+      const cartes = themes.map(t => {
+        const notions = pages.filter(q => q.wikiKey === p.wikiKey && q.role === 'notion' && (q.themes || []).includes(t));
+        const apercu = notions.slice(0, 3).map(q => esc(q.title)).join(', ');
+        return `<a class="cat-card" href="{{ROOT}}${t.out}"><span class="cat-icon">🗂️</span><span><strong>${esc(t.title)}</strong><small>${notions.length} article${notions.length > 1 ? 's' : ''}${apercu ? ' · ' + apercu : ''}</small></span></a>`;
+      }).join('');
+      sections = [{ id: 'themes-du-wiki', titre: 'Thèmes', html: `<div class="cat-grid">${cartes}</div>`, grand: true }, ...sections];
+    }
+  }
   // un éventuel « En bref » de la note ouvre le chapeau, sans son étiquette
   return `
 <div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
-${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: (chapoHtml || '') + accueil.chapeau, sections: accueil.sections, index })}
+${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: (chapoHtml || '') + accueil.chapeau, sections, index })}
 ${pied}`;
 }
 
@@ -1140,8 +1289,13 @@ function triNaturel(a, b) {
   if (nb) return -1;
   return a.title.localeCompare(b.title, 'fr', { numeric: true });
 }
+// Sommaires par dossier : réservés au Recueil législatif. Les six wikis n'ont plus de
+// dossiers de cours dans leurs adresses depuis le 12 septembre 2026 ; leur navigation par
+// sujet passe par les pages de thème (w/<wiki>/theme/…) plutôt que par un sommaire par
+// dossier. Une ancienne adresse de sommaire est redirigée (voir tools/redirections.mjs).
 const dirsAll = new Set();
 for (const p of pages) {
+  if (p.wikiKey !== 'Recueil législatif SST') continue;
   const parts = p.relPath.split('/');
   for (let i = 1; i < parts.length; i++) dirsAll.add(parts.slice(0, i).join('/'));
 }
@@ -1331,6 +1485,31 @@ ${lettres.map(l => `<h2 id="lettre-${l}">${l} <a class="retour-haut" href="#haut
 }
 console.log(`  ${categories.length} catégories générées (seuil : ${SEUIL_CATEGORIE} pages)`);
 
+// ---------- page « Thèmes » (12 septembre 2026) ----------
+// Tous les thèmes des six wikis, groupés par wiki. Remplace la carte « Fiches pour les
+// travailleurs » du portail racine dans « Parcourir par sujet ».
+let nbThemesTotal = 0;
+{
+  const blocsWiki = SIX_WIKIS.map(k => {
+    const themes = themesParWiki.get(k) || [];
+    nbThemesTotal += themes.length;
+    if (!themes.length) return '';
+    const items = themes.map(t => {
+      const n = pages.filter(q => q.wikiKey === k && q.role === 'notion' && (q.themes || []).includes(t)).length;
+      return `<li><a href="{{ROOT}}${t.out}">${esc(t.title)}</a> <small class="cat-compte">${n}</small></li>`;
+    }).join('');
+    return `<h2>${WIKIS[k].icon} ${esc(WIKIS[k].name)} <small>(${themes.length})</small></h2><ul class="cat-pages">${items}</ul>`;
+  }).join('');
+  const content = `
+<div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a></div>
+<h1 class="page-title">Thèmes</h1>
+<div class="page-sub">${nbThemesTotal} thème${nbThemesTotal > 1 ? 's' : ''}, un par sujet curé dans chaque discipline. Chaque thème réunit les notions qui s'y rattachent.</div>
+${blocsWiki}`;
+  fs.writeFileSync(path.join(OUT, 'themes.html'),
+    pageShell({ out: 'themes.html', title: 'Thèmes', wikiKey: null, content })
+      .replace(/\{\{ROOT\}\}/g, ''));
+}
+
 // ---------- tableau de bord qualité ----------
 // Il ne juge pas le fond : il signale ce qu'un lecteur verrait qui cloche, et rien d'autre.
 console.log('Contrôle qualité…');
@@ -1474,8 +1653,11 @@ const searchIndex = pages.map(p => {
     // sur un article de loi, l'extrait montre le texte officiel plutôt que le nom de la capture
     x: p.texteLoi ? extrait(p.texteLoi) : extrait(p.body),
   };
-  // chemin de catégorie : distingue les 31 groupes de pages homonymes
-  const cat = p.relPath.split('/').slice(1, -1).map(cleanLabel).filter(Boolean).join(' › ');
+  // chemin de catégorie : distingue les pages homonymes dans les résultats de recherche.
+  // Six wikis : le ou les thèmes de la notion (plus parlant qu'un dossier de cours) ; Recueil
+  // et pages sans thème : chemin de dossiers nettoyé, comme avant le 12 septembre 2026.
+  const cat = (p.themes && p.themes.length) ? p.themes.map(t => t.title).join(' · ')
+    : p.relPath.split('/').slice(1, -1).map(cleanLabel).filter(Boolean).join(' › ');
   if (cat) e.c = cat;
   // 2 = ébauche, 1 = article abrogé/remplacé → dépriorisés dans les résultats
   if (/Stub créé automatiquement|page vide à documenter/i.test(p.body)) e.q = 2;
@@ -1485,6 +1667,10 @@ const searchIndex = pages.map(p => {
 searchIndex.push({ t: 'Graphe des liens 3D', u: 'graphe3d.html', w: 'Outil', i: '🕸️', g: 'graphe 3d liens réseau obsidian', x: 'Le réseau des pages en trois dimensions, en rotation libre.' });
 searchIndex.push({ t: 'Graphe des liens', u: 'graphe.html', w: 'Outil', i: '🕸️', g: 'graphe liens réseau obsidian', x: 'Toutes les pages et leurs liens, en réseau interactif.' });
 searchIndex.push({ t: 'Contrôles automatiques de forme', u: 'qualite.html', w: 'Outil', i: '🔧', g: 'qualité rédactionnelle relecture ébauche atelier', x: `${rapportQualite.length} pages présentent au moins un signalement de forme. Ce contrôle ne valide pas le fond SST.` });
+searchIndex.push({ t: 'Thèmes', u: 'themes.html', w: 'Outil', i: '🗂️', g: 'thèmes sujets portails', x: `${nbThemesTotal} thèmes, groupés par discipline.` });
+// Les pages de thème elles-mêmes sont déjà dans `pages` (rôle 'theme') et donc déjà indexées
+// ci-dessus ; seule leur étiquette de wiki (w) suit le nom du wiki, pas « Thème » à part —
+// elles restent trouvables comme n'importe quelle page du fond documentaire.
 // Les catégories sont cherchables au même titre que les articles.
 for (const [tag, membres] of categories) {
   searchIndex.push({
@@ -1559,14 +1745,13 @@ function genererWikiPublic(pub) {
     const tocHtml = p.toc.length >= 3
       ? `<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">${p.toc.filter(t => t.lv === 2).length || p.toc.length} sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul>${p.toc.map(t => `<li class="toc-l${t.lv}"><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ul></nav>`
       : '';
-    const enteteCompact = rendreEnteteCompact({ out, titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}`, sections: p.toc });
     const filPublic = [`<a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a>`, esc(wiki.name)];
     const versFond = `<a href="{{ROOT}}${p.out}">Voir cette page dans le fond documentaire</a>`;
     const accueil = estAccueil(p) ? decouperAccueil(corps, { resoudre: (cible) => { const pg = resolvePage(cible, p); return pg ? '{{ROOT}}' + urlDe(pg) : null; } }) : null;
     const contenu = accueil ? contenuAccueil(p, { crumbs: filPublic, accueil, chapoHtml: p.chapoHtml, pied: piedAccueil(new Date().toISOString().slice(0, 10), versFond) }) : `
 <div class="breadcrumbs"><a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a> <span class="crumb-sep">›</span> ${esc(wiki.name)}</div>
-${enteteCompact || rendreTitreArticle({ titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}` })}
-${enteteCompact ? '' : tocHtml}
+${rendreTitreArticle({ titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}` })}
+${tocHtml}
 <div class="page-body">
 ${corps}
 </div>
@@ -1600,7 +1785,6 @@ function sidebarPublic(pub) {
   <ul>
     <li><a href="{{ROOT}}${pub}/index.html">Accueil</a></li>
     <li><a href="{{ROOT}}w/legislation/index-par-loi.html">Les articles de loi</a></li>
-    <li><a href="{{ROOT}}${INDEX_FICHES.out}">${LIEN_INDEX_FICHES}</a></li>
     <li><a href="{{ROOT}}index.html">🏠 Tous les wikis</a></li>
   </ul></div>`;
 }
@@ -1657,29 +1841,28 @@ console.log('Parcours de l\'encadrement…');
 const statG = genererWikiPublic('g');
 console.log(`  🎓 encadrement  : ${statG.horsLoi} pages + ${statG.total - statG.horsLoi} articles de loi`);
 
-// ---------- index des fiches pour les travailleurs ----------
-// Mêmes pages que l'ancien wiki des travailleurs, même autorisation (frontmatter du vault),
-// mais listées dans le fond documentaire au lieu d'être dupliquées dans un site à part.
-// 404.html redirige les anciennes adresses t/… vers ces pages.
-const fiches = pages
-  .filter(p => p.publics.has('t') && p.wikiKey !== 'Recueil législatif SST')
-  .map(p => ({ titre: p.title, out: p.out, base: p.base, domaine: WIKIS[p.wikiKey] }));
-const siPresent = (cible) => existeDansLeSite(cible) ? cible : null;
-const indexFiches = rendreIndexFiches({
-  fiches,
-  liens: {
-    aide: siPresent('w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html'),
-    ressources: siPresent('w/psychosocial/50-ressources-daide/lignes-daide-et-pae.html'),
-    categorie: siPresent('categorie/travailleur.html'),
-    lois: siPresent('w/legislation/index-par-loi.html'),
-    encadrement: 'g/index.html',
-  },
-});
-fs.writeFileSync(path.join(OUT, INDEX_FICHES.out),
-  pageShell({ out: INDEX_FICHES.out, title: INDEX_FICHES.titre, wikiKey: null, content: indexFiches.html })
-    .replace(/\{\{ROOT\}\}/g, ''));
-fs.writeFileSync(path.join(OUT, '404.html'), rendrePage404());
-console.log(`  👷 fiches pour les travailleurs : ${indexFiches.total} pages indexées dans ${INDEX_FICHES.out} (${indexFiches.nonClassees} hors rubrique, ${indexFiches.ecartees} doublon(s) écarté(s))`);
+// ---------- table de redirection et page 404 ----------
+// Anciennes adresses (dossiers de cours, wiki des travailleurs) vers les adresses par notion
+// du 12 septembre 2026. Toute page dont l'adresse a changé (accueil, thème, collision
+// suffixée) entre dans la table ; les notes archivées y ajoutent leur ancienne adresse vers
+// leur version-jumelle (ou l'accueil du wiki, à défaut).
+const tableRedirections = {};
+for (const p of pages) {
+  if (p.ancienOut && p.ancienOut !== p.out) tableRedirections[p.ancienOut] = p.out;
+}
+for (const p of refusees) {
+  if (!SIX_WIKIS.includes(p.wikiKey)) continue;
+  const origine = p.fm && p.fm['chemin-origine'];
+  if (!origine) continue;
+  const ancienne = formuleMiroir(String(origine), WIKIS[p.wikiKey].slug);
+  const table = renvois.get(p.wikiKey);
+  const cibleBrute = table && table.get(String(p.base).trim().toLowerCase());
+  const cible = (cibleBrute && resolvePage(cibleBrute, p)) || wikiHome(p.wikiKey);
+  if (cible) tableRedirections[ancienne] = cible.out;
+}
+console.log(`  Table de redirection : ${Object.keys(tableRedirections).length} ancienne(s) adresse(s)`);
+fs.writeFileSync(path.join(OUT, 'assets', 'redirections.json'), JSON.stringify(tableRedirections));
+fs.writeFileSync(path.join(OUT, '404.html'), rendrePage404(tableRedirections));
 
 // ---------- portail ----------
 {
@@ -1694,7 +1877,7 @@ console.log(`  👷 fiches pour les travailleurs : ${indexFiches.total} pages in
   }).join('');
   const total = pages.length;
   const content = rendrePortailContenu({
-    total, cartesWikis: cards, nbFiches: indexFiches.total,
+    total, cartesWikis: cards, nbThemes: nbThemesTotal,
     nbPagesEncadrement: statG.horsLoi, taglineEncadrement: PUBLICS.g.tagline,
     nbCategories: categories.length, nbPagesQualite: rapportQualite.length,
   });

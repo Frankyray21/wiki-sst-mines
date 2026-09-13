@@ -36,7 +36,7 @@ test('les termes que l’audit d’août déclarait muets répondent', () => {
 
 test('le plein texte trouve une page par un mot absent de son titre et de son extrait', () => {
   const cas = [
-    ['décibel', 'w/hygiene/20-articles-internes/environnement-de-travail/bruit.html'],
+    ['décibel', 'w/hygiene/bruit.html'],
     ['anthracose', 'w/toxicologie/'],
     ['consignation', 'w/'],
     ['boulonneur', 'w/'],

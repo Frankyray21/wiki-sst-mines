@@ -1,30 +1,17 @@
-// Première application limitée à la fiche Cadenassage du fond documentaire.
-const PAGE = 'w/securite/25-articles-travailleurs/risques-mecaniques/cadenassage.html';
-const cibles = new Set([PAGE]);
+// En-tête commun à toutes les pages d'article : titre et domaine groupés dans un même bloc,
+// pour que les commandes de confort de lecture s'insèrent au bon endroit (juste après).
+//
+// Un en-tête compact avec sommaire intégré existait ici, réservé à la seule fiche Cadenassage
+// du wiki des travailleurs (« Première application limitée… », pilote jamais étendu). Cette
+// fiche a été archivée le 12 septembre 2026 avec le reste du wiki des travailleurs ; l'en-tête
+// compact est retiré avec elle plutôt que repointé sur sa jumelle du dossier « 27 - Articles
+// gestionnaires », qui n'a ni le même contenu ni le même sommaire. Voir
+// plans/2026-09-12-wiki-par-notion.md, § 9.2.
 const esc = valeur => String(valeur).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-// Barre de lecture injectée dans un bloc distinct, jamais à côté du sommaire.
-// Le titre garde la typographie du wiki ; le pilote Cadenassage reste séparé.
 export function rendreTitreArticle({ titre, domaineHtml }) {
   return `<header class="article-titre">
 <h1 class="page-title">${esc(titre)}</h1>
 <div class="page-sub">${domaineHtml}</div>
-</header>`;
-}
-
-export function rendreEnteteCompact({ out, titre, domaineHtml, sections }) {
-  if (!cibles.has(out)) return null;
-  const nombre = sections.filter(s => s.lv === 2).length || sections.length;
-  const sommaire = sections.length < 3 ? '' : `
-<nav class="toc toc-compacte" aria-label="Sommaire de la page" data-mobile-replie="true">
-<div class="toc-title"><span>Sommaire <span class="toc-compte">${nombre} section${nombre > 1 ? 's' : ''}</span></span><button type="button" class="toc-toggle" aria-expanded="true" aria-controls="sommaire-sections" data-label-ouvert="Masquer" data-label-ferme="Afficher">Masquer</button></div>
-<ul id="sommaire-sections">${sections.map(s => `<li class="toc-l${s.lv}"><a href="#${esc(s.id)}">${esc(s.text)}</a></li>`).join('')}</ul>
-</nav>`;
-  // Les commandes injectées après .page-sub restent hors de cet élément :
-  // celui-ci disparaît en mode Lecture, mais le bouton de sortie doit rester visible.
-  return `<header class="article-entete">
-<h1 class="page-title">${esc(titre)}</h1>
-<div class="page-sub">${domaineHtml}</div>
-${sommaire}
 </header>`;
 }

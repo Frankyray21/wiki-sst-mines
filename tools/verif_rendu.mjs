@@ -20,14 +20,19 @@ const opt = (n, d) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] :
 const SORTIE = path.resolve(opt('--sortie', path.join(__dirname, '..', 'rendu')));
 const CAPTURES = args.includes('--captures');
 
+// Adresses par notion (12 septembre 2026) : accueil de wiki = w/<wiki>/index.html ; le wiki
+// des travailleurs est archivé (plus de « 25 - Articles travailleurs ») ; les accueils de
+// l'encadrement gardent leur propre adresse de notion (« 27 - Articles gestionnaires » en
+// Droit et Ergonomie, « 00 - Accueil gestionnaires » ailleurs). Le Recueil garde sa formule
+// miroir, inchangée.
 export const ACCUEILS = [
-  'w/droit-travail/00-accueil/00-accueil.html', 'w/droit-travail/25-articles-travailleurs/25-articles-travailleurs.html', 'w/droit-travail/27-articles-gestionnaires/27-articles-gestionnaires.html',
-  'w/ergonomie/00-accueil/00-accueil.html', 'w/ergonomie/25-articles-travailleurs/25-articles-travailleurs.html', 'w/ergonomie/27-articles-gestionnaires/27-articles-gestionnaires.html',
-  'w/hygiene/00-accueil/00-accueil.html', 'w/hygiene/25-articles-travailleurs/00-accueil-travailleurs.html', 'w/hygiene/27-articles-gestionnaires/00-accueil-gestionnaires.html',
-  'w/legislation/00-accueil/00-accueil.html', 'w/psychosocial/00-accueil/00-accueil.html',
-  'w/securite/00-accueil/00-accueil.html', 'w/securite/25-articles-travailleurs/00-accueil-travailleurs.html', 'w/securite/27-articles-gestionnaires/00-accueil-gestionnaires.html',
-  'w/toxicologie/00-accueil/00-accueil.html', 'w/toxicologie/25-articles-travailleurs/00-accueil-travailleurs.html', 'w/toxicologie/27-articles-gestionnaires/00-accueil-gestionnaires.html',
-  'g/w/droit-travail/27-articles-gestionnaires/27-articles-gestionnaires.html', 'g/w/ergonomie/27-articles-gestionnaires/27-articles-gestionnaires.html', 'g/w/hygiene/27-articles-gestionnaires/00-accueil-gestionnaires.html', 'g/w/securite/27-articles-gestionnaires/00-accueil-gestionnaires.html', 'g/w/toxicologie/27-articles-gestionnaires/00-accueil-gestionnaires.html',
+  'w/droit-travail/index.html', 'w/droit-travail/27-articles-gestionnaires.html',
+  'w/ergonomie/index.html', 'w/ergonomie/27-articles-gestionnaires.html',
+  'w/hygiene/index.html', 'w/hygiene/00-accueil-gestionnaires.html',
+  'w/legislation/00-accueil/00-accueil.html', 'w/psychosocial/index.html',
+  'w/securite/index.html', 'w/securite/00-accueil-gestionnaires.html',
+  'w/toxicologie/index.html', 'w/toxicologie/00-accueil-gestionnaires.html',
+  'g/w/droit-travail/27-articles-gestionnaires.html', 'g/w/ergonomie/27-articles-gestionnaires.html', 'g/w/hygiene/00-accueil-gestionnaires.html', 'g/w/securite/00-accueil-gestionnaires.html', 'g/w/toxicologie/00-accueil-gestionnaires.html',
 ];
 const MODES = [['mobile-clair', { width: 390, height: 844 }, true, false], ['mobile-sombre', { width: 390, height: 844 }, true, true], ['bureau', { width: 1200, height: 900 }, false, false]];
 

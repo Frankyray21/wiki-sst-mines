@@ -46,11 +46,11 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 // --- contenu de la maquette : chaque cible est un chemin de page du site ---
 export const NAV = [
   { libelle: 'Accueil', icone: 'accueil', cible: null, actif: true },
-  { libelle: 'Démarrage', icone: 'fusee', cible: 'w/droit-travail/05-demarrage-rapide/demarrage-rapide-superviseur.html' },
-  { libelle: 'Obligations légales', icone: 'balance', cible: 'w/droit-travail/27-articles-gestionnaires/conformite-et-inspection/mecanismes-lmrsst.html' },
-  { libelle: 'Programmes de prévention', icone: 'bouclier', cible: 'w/ergonomie/27-articles-gestionnaires/programme-de-prevention-tms.html' },
-  { libelle: 'Situations terrain', icone: 'alerte', cible: 'w/securite/27-articles-gestionnaires/gestion-des-risques-operationnels/enquete-daccidents.html' },
-  { libelle: 'Outils et modèles', icone: 'doc', cible: 'w/psychosocial/20-articles/evaluation-et-outils/tableau-de-bord-sst-psychosociale-pour-direction.html' },
+  { libelle: 'Démarrage', icone: 'fusee', cible: 'w/droit-travail/demarrage-rapide-superviseur.html' },
+  { libelle: 'Obligations légales', icone: 'balance', cible: 'w/droit-travail/mecanismes-lmrsst.html' },
+  { libelle: 'Programmes de prévention', icone: 'bouclier', cible: 'w/ergonomie/programme-de-prevention-tms.html' },
+  { libelle: 'Situations terrain', icone: 'alerte', cible: 'w/securite/enquete-daccidents.html' },
+  { libelle: 'Outils et modèles', icone: 'doc', cible: 'w/psychosocial/tableau-de-bord-sst-psychosociale-pour-direction.html' },
   { libelle: 'Lois et règlements', icone: 'livre', cible: 'w/legislation/index-par-loi.html' },
   { libelle: 'Favoris', icone: 'etoile', cible: null, id: 'navFavoris' },
 ];
@@ -58,58 +58,58 @@ export const NAV = [
 export const ROLES = [
   { titre: 'Superviseur', icone: 'casque', couleur: '#2563eb',
     desc: 'Vos responsabilités essentielles et vos actions prioritaires au quotidien.',
-    cible: 'w/droit-travail/05-demarrage-rapide/demarrage-rapide-superviseur.html' },
+    cible: 'w/droit-travail/demarrage-rapide-superviseur.html' },
   { titre: 'Gestionnaire', icone: 'mallette', couleur: '#059669',
     desc: 'Vos obligations légales et vos devoirs en matière de santé et sécurité.',
-    cible: 'w/droit-travail/27-articles-gestionnaires/27-articles-gestionnaires.html' },
+    cible: 'w/droit-travail/27-articles-gestionnaires.html' },
   { titre: 'Direction / RH', icone: 'gens', couleur: '#2563eb',
     desc: 'Gouvernance, conformité et gestion des risques à l’échelle de l’organisation.',
-    cible: 'w/ergonomie/05-demarrage-rapide/demarrage-rapide-direction-rh.html' },
+    cible: 'w/ergonomie/demarrage-rapide-direction-rh.html' },
   { titre: 'Conseiller SST', icone: 'bouclier', couleur: '#0891b2',
     desc: 'Outils, référentiels et ressources pour mettre en place une démarche SST efficace.',
-    cible: 'w/ergonomie/05-demarrage-rapide/demarrage-rapide-conseiller-sst.html' },
+    cible: 'w/ergonomie/demarrage-rapide-conseiller-sst.html' },
 ];
 
 export const SITUATIONS = [
   { titre: 'Accident ou incident', icone: 'alerte', couleur: '#dc2626',
     desc: 'Intervenir rapidement et respecter la loi.',
-    cible: 'w/securite/27-articles-gestionnaires/gestion-des-risques-operationnels/enquete-daccidents.html' },
+    cible: 'w/securite/enquete-daccidents.html' },
   { titre: 'Visite d’un inspecteur CNESST', icone: 'casque', couleur: '#2563eb',
     desc: 'Se préparer et savoir quoi présenter.',
-    cible: 'w/droit-travail/27-articles-gestionnaires/conformite-et-inspection/visite-dinspecteur.html' },
+    cible: 'w/droit-travail/visite-dinspecteur.html' },
   { titre: 'Constat d’infraction', icone: 'doc', couleur: '#ea580c',
     desc: 'Comprendre le constat et les étapes à suivre.',
-    cible: 'w/droit-travail/20-articles-internes/constat-dinfraction.html' },
+    cible: 'w/droit-travail/constat-dinfraction.html' },
   { titre: 'Travailleur blessé / Assignation temporaire', icone: 'personne', couleur: '#059669',
     desc: 'Assurer un retour sécuritaire et conforme.',
-    cible: 'w/droit-travail/27-articles-gestionnaires/retour-au-travail-et-assignation.html' },
+    cible: 'w/droit-travail/retour-au-travail-et-assignation.html' },
   { titre: 'Contrainte thermique', icone: 'soleil', couleur: '#ea580c',
     desc: 'Prévenir les effets de la chaleur en milieu de travail.',
-    cible: 'w/hygiene/27-articles-gestionnaires/contrainte-thermique.html' },
+    cible: 'w/hygiene/contrainte-thermique-encadrement.html' },
   { titre: 'Risques psychosociaux', icone: 'cerveau', couleur: '#7c3aed',
     desc: 'Identifier, prévenir et intervenir efficacement.',
-    cible: 'w/psychosocial/20-articles/legislation-et-normes/obligation-didentifier-les-risques-psychosociaux.html' },
+    cible: 'w/psychosocial/obligation-didentifier-les-risques-psychosociaux.html' },
   { titre: 'Espace clos', icone: 'cercle', couleur: '#0891b2',
     desc: 'Exigences et mesures de sécurité à respecter.',
-    cible: 'w/securite/27-articles-gestionnaires/espaces-clos.html' },
+    cible: 'w/securite/espaces-clos-encadrement.html' },
   { titre: 'Amiante', icone: 'alerte', couleur: '#ca8a04',
     desc: 'Travaux avec amiante : obligations et précautions.',
-    cible: 'w/hygiene/27-articles-gestionnaires/programmes-de-prevention/amiante.html' },
+    cible: 'w/hygiene/amiante-encadrement.html' },
 ];
 
 export const EXPLORER = [
   { titre: 'Obligations légales', icone: 'balance', couleur: '#2563eb',
     desc: 'Responsabilités, mécanismes de prévention, sanctions, obligations spécifiques.',
     lien: 'Voir les obligations',
-    cible: 'w/droit-travail/27-articles-gestionnaires/conformite-et-inspection/mecanismes-lmrsst.html' },
+    cible: 'w/droit-travail/mecanismes-lmrsst.html' },
   { titre: 'Programmes de prévention', icone: 'bouclier', couleur: '#059669',
     desc: 'Programmes obligatoires, mesures de prévention et démarches de contrôle.',
     lien: 'Voir les programmes',
-    cible: 'w/ergonomie/27-articles-gestionnaires/27-articles-gestionnaires.html' },
+    cible: 'w/ergonomie/27-articles-gestionnaires.html' },
   { titre: 'Outils et modèles', icone: 'doc', couleur: '#7c3aed',
     desc: 'Formulaires, guides pratiques, listes de vérification et modèles téléchargeables.',
     lien: 'Voir les outils',
-    cible: 'w/psychosocial/20-articles/evaluation-et-outils/tableau-de-bord-sst-psychosociale-pour-direction.html' },
+    cible: 'w/psychosocial/tableau-de-bord-sst-psychosociale-pour-direction.html' },
   { titre: 'Lois et règlements', icone: 'livre', couleur: '#2563eb',
     desc: 'Accéder aux lois, règlements, normes et autres références légales.',
     lien: 'Voir les règlements',
@@ -167,8 +167,8 @@ export function rendrePortailEncadrement({ R, nbLois, majDate, verifier }) {
     { t: 'Tous les articles', s: 'Parcourir tout le contenu', i: 'doc', c: 'categories.html' },
     { t: 'Nouveautés', s: 'Contenu récemment ajouté', i: 'nouveau', c: 'w/psychosocial/index-alphabetique.html' },
     { t: 'Mises à jour', s: 'Articles mis à jour récemment', i: 'maj', c: 'w/legislation/index-par-loi.html' },
-    { t: 'Glossaire', s: 'Termes et définitions', i: 'livre', c: 'w/psychosocial/30-glossaire/glossaire.html' },
-    { t: 'Nous joindre', s: 'Équipe et contacts', i: 'courriel', c: 'w/psychosocial/50-ressources-daide/index.html' },
+    { t: 'Glossaire', s: 'Termes et définitions', i: 'livre', c: 'w/psychosocial/glossaire.html' },
+    { t: 'Nous joindre', s: 'Équipe et contacts', i: 'courriel', c: 'w/psychosocial/lignes-daide-et-pae.html' },
   ].map(b => `<a href="${url(b.c)}"><span class="tb-barre-ic">${ico(b.i)}</span><span><strong>${esc(b.t)}</strong><span>${esc(b.s)}</span></span></a>`).join('');
 
   const html = `<div class="tb-layout">
@@ -264,7 +264,7 @@ export function rendrePortailEncadrement({ R, nbLois, majDate, verifier }) {
   </div>
 
   <footer class="tb-pied">
-    <a href="${url('w/psychosocial/50-ressources-daide/index.html')}">Confidentialité</a>
+    <a href="${url('w/psychosocial/lignes-daide-et-pae.html')}">Confidentialité</a>
     <a href="${R}index.html">Conditions d’utilisation</a>
     <a href="${R}index.html">Accessibilité</a>
     <span class="tb-droite-pied"><span>© ${new Date().getFullYear()} Machines Roger inc.</span><span id="tbVersion">Version 1.0.0</span></span>

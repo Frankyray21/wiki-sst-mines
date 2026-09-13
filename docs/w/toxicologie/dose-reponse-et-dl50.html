@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr" data-wiki-entete>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toxicité, dose-réponse et DL50 — WIKI SST Mines</title>
+<link rel="stylesheet" href="../../assets/style.css?v=20260913032045">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<link rel="manifest" href="../../manifest.webmanifest">
+<meta name="theme-color" content="#2563eb">
+<link rel="apple-touch-icon" href="../../assets/icone-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Wiki SST">
+<script>window.ROOT='../../';window.V='20260913032045';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}</script>
+</head>
+<body>
+<header class="site-header">
+  <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+  <a class="brand" href="../../index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" aria-label="Rechercher dans le wiki" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+  <button class="btn-theme" id="btnFav" aria-label="Ajouter aux favoris" title="Ajouter aux favoris">☆</button>
+  <button class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
+</header>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Navigation du wiki">
+  <div class="nav-group"><div class="nav-title">Navigation</div>
+    <ul>
+      <li><a href="../../index.html">🏠 Portail</a></li>
+      <li><a href="../../themes.html">🗂️ Thèmes</a></li>
+      <li><a href="../../categories.html">🏷️ Catégories</a></li>
+      <li><a href="../../qualite.html">🔧 Contrôles de forme</a></li>
+      <li><a href="../../graphe.html">🕸️ Graphe des liens</a></li>
+      <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+      <li><a href="../../g/index.html">🎓 Gestion &amp; prévention</a></li>
+    </ul>
+  </div>
+  <div class="nav-group"><div class="nav-title">☣️ Toxicologie</div>
+  <ul>
+    <li><a href="../../w/toxicologie/index.html">Accueil du wiki</a></li>
+    <li><a href="../../w/toxicologie/theme/evaluation-et-priorisation-chimique.html">Évaluation et priorisation chimique</a></li><li><a href="../../w/toxicologie/theme/familles-de-contaminants.html">Familles de contaminants</a></li><li><a href="../../w/toxicologie/theme/toxicite-par-organe.html">Toxicité par organe</a></li><li><a href="../../w/toxicologie/theme/toxicocinetique.html">Toxicocinétique</a></li>
+    <li><a href="../../w/toxicologie/index-alphabetique.html">Index alphabétique</a></li>
+    
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Les wikis</div><ul><li><a href="../../w/ergonomie/index.html">🦺 Ergonomie</a></li><li><a href="../../w/hygiene/index.html">🌫️ Hygiène industrielle</a></li><li class="active"><a href="../../w/toxicologie/index.html">☣️ Toxicologie</a></li><li><a href="../../w/securite/index.html">⛑️ Sécurité industrielle</a></li><li><a href="../../w/droit-travail/index.html">📋 Droit du travail</a></li><li><a href="../../w/psychosocial/index.html">🧠 SST psychosociale</a></li><li><a href="../../w/legislation/index.html">⚖️ Recueil législatif</a></li></ul></div>
+</nav>
+<main class="content">
+
+<div class="breadcrumbs"><a href="../../index.html">Portail</a> <span class="crumb-sep">›</span> <a href="../../w/toxicologie/index.html">Toxicologie</a> <span class="crumb-sep">›</span> <a href="../../w/toxicologie/theme/evaluation-et-priorisation-chimique.html">Évaluation et priorisation chimique</a></div>
+<header class="article-titre">
+<h1 class="page-title">Toxicité, dose-réponse et DL50</h1>
+<div class="page-sub">Un article du wiki <a href="../../w/toxicologie/index.html">☣️ Toxicologie</a></div>
+</header>
+<aside class="infobox"><div class="infobox-title">☣️ Toxicité, dose-réponse et DL50</div><table><tr><th>Thème</th><td><a href="../../w/toxicologie/toxicologie-industrielle.html">Toxicologie industrielle</a></td></tr><tr><th>Révision déclarée</th><td>2026-05-22</td></tr></table><div class="infobox-tags"><span class="tag">wiki</span><a class="tag tag-lien" href="../../categorie/toxicologie.html">toxicologie</a><span class="tag">dose-réponse</span><span class="tag">vtr</span></div></aside>
+
+<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">7 sections</span> <button class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul><li class="toc-l3"><a href="#notion-deffet-toxique">Notion d'effet toxique</a></li><li class="toc-l3"><a href="#dose-et-relation-dose-reponse">Dose et relation dose-réponse</a></li><li class="toc-l3"><a href="#seuils-et-indicateurs">Seuils et indicateurs</a></li><li class="toc-l3"><a href="#valeurs-toxicologiques-de-reference-vtr">Valeurs toxicologiques de référence (VTR)</a></li><li class="toc-l3"><a href="#aigu-vs-chronique">Aigu vs chronique</a></li><li class="toc-l3"><a href="#application-terrain">Application terrain</a></li><li class="toc-l3"><a href="#ressources">Ressources</a></li></ul></nav>
+<div class="page-body">
+<p>La toxicité d&#39;une substance dépend de la dose, du seuil d&#39;apparition et du type d&#39;effet (aigu vs chronique). On la caractérise par les courbes dose-réponse, les indicateurs DL50 / CL50, et les valeurs toxicologiques de référence (NOAEL, LOAEL, DJA, DVS). Pour les cancérogènes génotoxiques, on suppose qu&#39;il n&#39;y a pas de seuil sécuritaire.</p>
+
+<h3 id="notion-deffet-toxique">Notion d&#39;effet toxique</h3>
+<p>L&#39;effet toxique = perturbation des processus d&#39;adaptation de l&#39;organisme. Trois types</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+<th>Réversibilité typique</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fonctionnel</td>
+<td>Atteinte transitoire d&#39;une fonction (par ex. ↑ fréquence respiratoire)</td>
+<td>Réversible</td>
+</tr>
+<tr>
+<td>Lésionnel</td>
+<td>Lésion morphologique (par ex. fibrose pulmonaire)</td>
+<td>Souvent irréversible</td>
+</tr>
+<tr>
+<td>Biochimique</td>
+<td>Altération sans lésion visible (par ex. inhibition cholinestérases par organophosphorés)</td>
+<td>Variable</td>
+</tr>
+</tbody></table>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001204913.png"><img src="../../files/images-wiki/pasted-image-20251001204913.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<p><strong>Réversibilité</strong> : foie = grande capacité de régénération ; SNC = atteintes souvent irréversibles. <strong>Toujours irréversibles</strong> : mutagenèse, cancérogenèse, tératogenèse, sensibilisation allergique, <a href="../../w/toxicologie/neurotoxicite-hematotoxicite-endocrinien.html" title="Neurotoxicité, hématotoxicité et toxicité endocrinienne">neurotoxicité</a> permanente.</p>
+<p><strong>Facteurs de modulation</strong> : voie de pénétration, toxicité intrinsèque, dose, élimination, variation biologique (âge, sexe, génétique, médicaments, alcool, tabac).</p>
+<h3 id="dose-et-relation-dose-reponse">Dose et relation dose-réponse</h3>
+<ul>
+<li><strong>Dose-effet (individu)</strong> : intensité ou nombre de symptômes en fonction de la dose.</li>
+</ul>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001212051.png"><img src="../../files/images-wiki/pasted-image-20251001212051.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<ul>
+<li><strong>Dose-réponse (population)</strong> : pourcentage d&#39;individus présentant un effet donné. Utilisée pour établir les valeurs limites d&#39;exposition.</li>
+</ul>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001213353.png"><img src="../../files/images-wiki/pasted-image-20251001213353.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<p>Représentation : axe x logarithmique (large plage de doses).</p>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001214347.png"><img class="img-doc" src="../../files/images-wiki/pasted-image-20251001214347.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<p>La courbe cumulative est utilisée pour situer la DL50 et autres percentiles d&#39;effet.</p>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001214426.png"><img class="img-doc" src="../../files/images-wiki/pasted-image-20251001214426.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<p>Pour certains éléments essentiels (Zn, Se, Cu), la courbe a un aspect en U : carence à faible dose, toxicité à forte dose.</p>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001214458.png"><img src="../../files/images-wiki/pasted-image-20251001214458.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<h4 id="courbes-avec-seuil-vs-sans-seuil">Courbes avec seuil vs sans seuil</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Hypothèse</th>
+<th>Substances concernées</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Avec seuil</td>
+<td>Dose minimale en dessous = aucun effet</td>
+<td>Non cancérogènes, cancérogènes non génotoxiques</td>
+</tr>
+<tr>
+<td>Sans seuil</td>
+<td>Tout niveau d&#39;exposition implique un risque</td>
+<td>Cancérogènes génotoxiques, mutagènes</td>
+</tr>
+</tbody></table>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001214556.png"><img class="img-doc" src="../../files/images-wiki/pasted-image-20251001214556.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001220401.png"><img class="img-doc" src="../../files/images-wiki/pasted-image-20251001220401.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<h3 id="seuils-et-indicateurs">Seuils et indicateurs</h3>
+<table>
+<thead>
+<tr>
+<th>Acronyme</th>
+<th>Signification</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NOEL</td>
+<td>No Observed Effect Level</td>
+<td>Aucun effet, toxique ou non</td>
+</tr>
+<tr>
+<td>LOEL</td>
+<td>Lowest Observed Effect Level</td>
+<td>Plus faible dose avec effet</td>
+</tr>
+<tr>
+<td>NOAEL</td>
+<td>No Observed Adverse Effect Level</td>
+<td>Aucun effet <strong>nocif</strong> observé</td>
+</tr>
+<tr>
+<td>LOAEL</td>
+<td>Lowest Observed Adverse Effect Level</td>
+<td>Plus faible dose avec effet <strong>nocif</strong></td>
+</tr>
+<tr>
+<td>DL50</td>
+<td>Dose létale 50 % (orale ou cutanée)</td>
+<td>Toxicité aiguë</td>
+</tr>
+<tr>
+<td>CL50</td>
+<td>Concentration létale 50 % (inhalation)</td>
+<td>Toxicité aiguë</td>
+</tr>
+</tbody></table>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001220515.png"><img src="../../files/images-wiki/pasted-image-20251001220515.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<p>NOAEL et LOAEL sont la base de l&#39;évaluation des risques.</p>
+<p><strong>DL50 indicatives</strong> : toxine botulique 0,001 µg/kg (extrêmement toxique) ; nicotine ~1 mg/kg ; sel de table ~3000 mg/kg.</p>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001214530.png"><img class="img-doc" src="../../files/images-wiki/pasted-image-20251001214530.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001221401.png"><img src="../../files/images-wiki/pasted-image-20251001221401.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<h3 id="valeurs-toxicologiques-de-reference-vtr">Valeurs toxicologiques de référence (VTR)</h3>
+<h4 id="avec-seuil-dja">Avec seuil : DJA</h4>
+<p><strong>DJA</strong> (dose journalière acceptable) = NOAEL (ou LOAEL) / FS</p>
+<span class="page-img"><a class="img-lien" href="../../files/images-wiki/pasted-image-20251001220548.png"><img src="../../files/images-wiki/pasted-image-20251001220548.png" alt="Illustration — Toxicité, dose-réponse et DL50" loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>
+<ul>
+<li><strong>Facteur de sécurité (FS)</strong> : produit de facteurs d&#39;incertitude. Classiquement FS = 100 (10 animal → humain × 10 humain → humain).</li>
+<li>FS supplémentaires si : LOAEL au lieu de NOAEL, durée d&#39;étude courte, données limitées.</li>
+<li>Base d&#39;exposition : 70 ans (population générale, EPA) ou 40 ans (milieu de travail).</li>
+</ul>
+<h4 id="sans-seuil-dvs">Sans seuil : DVS</h4>
+<p>Pour cancérogènes génotoxiques. <strong>DVS</strong> (dose virtuellement sécuritaire) = dose pour laquelle l&#39;excès de risque acceptable (ERC) ≤ 1 cas / 10^5 ou 10^6 personnes exposées.</p>
+<h3 id="aigu-vs-chronique">Aigu vs chronique</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Durée d&#39;exposition</th>
+<th>Délai effet</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Suraigu</td>
+<td>Secondes à minutes</td>
+<td>Immédiat</td>
+<td>Inhalation H2S concentré</td>
+</tr>
+<tr>
+<td>Aigu</td>
+<td>Minutes à heures, dose unique</td>
+<td>&lt; 24 h ou jours</td>
+<td>Intoxication CO au sautage</td>
+</tr>
+<tr>
+<td>Subchronique</td>
+<td>Semaines à mois</td>
+<td>Variable</td>
+<td><a href="../../w/toxicologie/solvants-articles-internes.html" title="Solvants">Solvants</a> à doses modérées</td>
+</tr>
+<tr>
+<td>Chronique</td>
+<td>Années, vie professionnelle</td>
+<td>Latence longue (10-30 ans)</td>
+<td>Silicose, mésothéliome, cancer professionnel</td>
+</tr>
+</tbody></table>
+<p>Une même substance peut changer d&#39;organe-cible : éthanol aigu = SNC ; chronique = foie. Benzène aigu = SNC ; chronique = moelle osseuse (leucémie).</p>
+<p>Le plus fréquent en milieu de travail = <strong>chronique</strong>. Plus difficile à diagnostiquer.</p>
+<h3 id="application-terrain">Application terrain</h3>
+<table>
+<thead>
+<tr>
+<th>Type d&#39;effet</th>
+<th>Exemple minier</th>
+<th>VTR ou seuil applicable</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Aigu létal</td>
+<td>H2S dans sulfures, CO post-tir</td>
+<td><a href="../../w/legislation/40-concepts-juridiques-transverses/vecd.html" title="VECD">VECD</a> H2S 15 ppm ; <a href="../../w/legislation/40-concepts-juridiques-transverses/vemp.html" title="VEMP">VEMP</a> CO 35 ppm</td>
+</tr>
+<tr>
+<td>Aigu non létal</td>
+<td>NOx post-sautage (œdème pulmonaire retardé)</td>
+<td>VEMP NO2 0,2 ppm</td>
+</tr>
+<tr>
+<td>Chronique fibrosant</td>
+<td>Silicose chez foreurs et concassage</td>
+<td>VEMP <a href="../../w/toxicologie/silice-cristalline.html" title="Programme de prévention silice cristalline">Programme de prévention silice cristalline</a> respirable 0,025 mg/m³</td>
+</tr>
+<tr>
+<td>Chronique cancérogène</td>
+<td><a href="../../w/legislation/40-concepts-juridiques-transverses/dpm.html" title="DPM">DPM</a> (<a href="../../w/legislation/30-organismes-et-tribunaux/circ.html" title="CIRC">CIRC</a> 1), <a href="../../w/toxicologie/amiante-articles-internes.html" title="Amiante">Amiante</a> des bâtiments anciens</td>
+<td>Approche sans seuil, DVS</td>
+</tr>
+<tr>
+<td>Bioaccumulation</td>
+<td>Plomb (peintures anciennes), arsenic (gisements Au)</td>
+<td>Surveillance Pb-S, As urinaire</td>
+</tr>
+</tbody></table>
+<p>La majorité des risques chimiques en mine relève du <strong>chronique</strong> : exposition modérée mais répétée sur 20-30 ans de carrière, avec latence longue avant manifestation clinique. D&#39;où l&#39;importance d&#39;un programme de <a href="../../w/toxicologie/surveillance-biologique-des-metaux-en-mine.html" title="Surveillance biologique des métaux en mine">surveillance biologique</a> et d&#39;un suivi des <a href="../../w/hygiene/vea-et-normes.html" title="VEA et normes RSST">expositions par poste</a>.</p>
+<h3 id="ressources">Ressources</h3>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Type</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fiches toxicologiques (NOAEL, LOAEL, DJA)</td>
+<td>Fiches</td>
+<td><a href="../../w/legislation/30-organismes-et-tribunaux/inrs.html" title="INRS">INRS</a>, <a href="../../w/legislation/30-organismes-et-tribunaux/irsst.html" title="IRSST">IRSST</a></td>
+</tr>
+<tr>
+<td>Liste DL50/CL50 par substance</td>
+<td>Référentiel</td>
+<td>HSDB, ECHA</td>
+</tr>
+<tr>
+<td>Recueil VTR par voie</td>
+<td>Référentiel</td>
+<td>RIVM, US-EPA IRIS</td>
+</tr>
+</tbody></table>
+<p><strong>Articles wiki connexes</strong></p>
+<ul>
+<li><a href="../../w/toxicologie/adme.html" title="ADME, cheminement des contaminants dans l'organisme">ADME, cheminement des contaminants dans l&#39;organisme</a></li>
+<li><a href="../../w/toxicologie/simdut-et-classes-de-danger.html" title="SIMDUT et classes de danger">SIMDUT et classes de danger</a></li>
+<li><a href="../../w/toxicologie/cancerogenicite.html" title="Mutagénicité et cancérogénicité">Mutagénicité et cancérogénicité</a></li>
+<li><a href="../../w/toxicologie/priorisation-des-risques-chimiques.html" title="Outils de priorisation des risques chimiques">Outils de priorisation des risques chimiques</a></li>
+<li><a href="../../w/hygiene/vea-et-normes.html" title="VEA et normes RSST">VEA et normes RSST</a></li>
+</ul>
+<p><a href="../../w/toxicologie/index.html" title="🏠 Wiki Toxicologie, mines">← Accueil</a></p>
+
+</div>
+<nav class="voir-aussi" aria-label="Voir aussi"><h2>Voir aussi</h2><ul><li><a href="../../w/toxicologie/art-101-rsst-qualite-air.html">art-101-RSST</a></li><li><a href="../../w/toxicologie/art-2-latmp-termes-utilises.html">art-2-LATMP</a></li><li><a href="../../w/toxicologie/art-51-lsst-obligations-employeur.html">art-51-LSST</a></li><li><a href="../../w/toxicologie/diesel-sous-terre.html">Gestion des moteurs diesel sous terre</a></li><li><a href="../../w/toxicologie/toxicologie-introduction.html">Introduction à la toxicologie industrielle</a></li><li><a href="../../w/toxicologie/multiexposition.html">Multiexposition aux contaminants</a></li><li><a href="../../w/toxicologie/priorisation-des-risques-chimiques.html">Outils de priorisation des risques chimiques</a></li><li><a href="../../w/toxicologie/priorisation-et-substitution-chimique.html">Priorisation et substitution chimique</a></li><li><a href="../../w/toxicologie/silice-cristalline.html">Programme de prévention silice cristalline</a></li></ul></nav>
+<details class="backlinks"><summary>Pages qui pointent ici (21)</summary><ul><li><a href="../../w/toxicologie/demarrage-rapide-conseiller-sst.html">🎯 Démarrage rapide, conseiller SST</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/toxicologie/index.html">🏠 Wiki Toxicologie, mines</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/toxicologie/adme.html">ADME, cheminement des contaminants dans l'organisme</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/toxicologie/theme/evaluation-et-priorisation-chimique.html">Évaluation et priorisation chimique</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/toxicologie/hepatotoxicite-et-nephrotoxicite.html">Hépatotoxicité et néphrotoxicité</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/toxicologie/toxicologie-introduction.html">Introduction à la toxicologie industrielle</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/toxicologie/maladies-professionnelles.html">Maladies professionnelles en mine</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/hygiene/metaux.html">Métaux toxiques en milieu de travail</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../w/toxicologie/metaux.html">Métaux toxiques en milieu de travail</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/hygiene/multiexposition.html">Multiexposition aux contaminants</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../w/toxicologie/multiexposition.html">Multiexposition aux contaminants</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/toxicologie/cancerogenicite.html">Mutagénicité et cancérogénicité</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/toxicologie/neurotoxicite-hematotoxicite-endocrinien.html">Neurotoxicité, hématotoxicité et toxicité endocrinienne</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/hygiene/priorisation-des-risques-chimiques.html">Outils de priorisation des risques chimiques</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../w/toxicologie/priorisation-des-risques-chimiques.html">Outils de priorisation des risques chimiques</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/hygiene/simdut-et-classes-de-danger.html">SIMDUT et classes de danger</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../w/toxicologie/simdut-et-classes-de-danger.html">SIMDUT et classes de danger</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/hygiene/solvants.html">Solvants organiques</a> <small class="bl-wiki">Hygiène industrielle</small></li><li><a href="../../w/toxicologie/solvants.html">Solvants organiques</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/toxicologie/theme/toxicocinetique.html">Toxicocinétique</a> <small class="bl-wiki">Toxicologie</small></li><li><a href="../../w/toxicologie/toxicologie-clinique.html">Toxicologie clinique</a> <small class="bl-wiki">Toxicologie</small></li></ul></details>
+<div class="page-meta">Révision déclarée dans la note : 2026-05-22 · Relecture éditoriale : non attestée · Vérification des sources : non attestée · Site généré le 2026-09-13 · <a href="../../graphe.html?focus=w%2Ftoxicologie%2Fdose-reponse-et-dl50.html">🕸️ Voir cette page dans le graphe</a></div>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Mines · encyclopédie interne construite à partir des notes de cours<span id="version"></span></footer>
+<script src="../../assets/app.js?v=20260913032045"></script>
+</body>
+</html>

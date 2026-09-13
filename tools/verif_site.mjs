@@ -40,8 +40,10 @@ for (const [rel, attendu, taille] of manifeste.pages) {
       assert.ok(html.includes('id="sidebar" aria-label="Navigation du wiki"'), 'navigation nommée : ' + rel);
       entetesArticles++;
     }
+    // Wiki des travailleurs abandonné le 12 septembre 2026 : aucun lien vers son ancien portail
+    // (t/) ni vers son ancien index (travailleurs.html), sur aucune page.
     assert.doesNotMatch(html, /href="(?:\.\.\/)*t\/(?:index\.html|w\/)/, 'aucun lien vers l’ancien wiki des travailleurs : ' + rel);
-    if (html.includes('<nav class="sidebar"')) assert.ok(html.includes('travailleurs.html">👷 Fiches pour les travailleurs</a>'), 'index des fiches dans la barre latérale : ' + rel);
+    assert.doesNotMatch(html, /travailleurs\.html">👷/, 'aucun lien vers l’ancien index des fiches : ' + rel);
     for (const appel of brut.toString('utf8').matchAll(/<a\b[^>]*href="#ref-[^"]+"[^>]*>([\s\S]*?)<\/a>/g)) {
       assert.match(appel[1], /^\s*\d+\s*$/, 'exposant réservé aux appels numériques : ' + rel);
       appelsReference++;
@@ -61,14 +63,16 @@ assert.ok(appelsReference > 0, 'appels bibliographiques présents');
 assert.ok(entetesArticles > 0, 'en-têtes partagés présents');
 assert.equal(octetsMedias, manifeste.octetsMedias);
 
+// Infographies : seules celles dont la page hôte survit à l'archivage du wiki des travailleurs
+// (12 septembre 2026) sont vérifiées ici. « wiki-manutention-reperes-v1.png » et
+// « wiki-exposition-voies-v1.png » (côté « Reconnaître une exposition ») n'étaient embarquées
+// QUE dans des fiches travailleurs désormais archivées ; la première a disparu du site avec
+// elles (perte réelle, signalée à Frank), la seconde survit par ailleurs (voies d'exposition).
 const visuels = [
-  { page: 'ergonomie/25-articles-travailleurs/manutention.html', fichier: 'wiki-manutention-reperes-v1.png', parcours: ['w/'] },
-  { page: 'hygiene/20-articles-internes/environnement-de-travail/bruit.html', fichier: 'wiki-bruit-mesurer-v1.png', parcours: ['w/', 'g/w/'] },
-  { page: 'ergonomie/20-articles-internes/contraintes/vibrations.html', fichier: 'wiki-vibrations-transmission-v1.png', parcours: ['w/', 'g/w/'] },
-  { page: 'toxicologie/25-articles-travailleurs/reconnaitre-une-exposition.html', fichier: 'wiki-exposition-voies-v1.png', parcours: ['w/'] },
-  { page: 'hygiene/27-articles-gestionnaires/programmes-de-prevention/silice-cristalline.html', fichier: 'wiki-silice-prevention-v1.png', parcours: ['w/', 'g/w/'] },
-  { page: 'toxicologie/20-articles-internes/voies-dexposition.html', fichier: 'wiki-exposition-voies-v1.png', parcours: ['w/'] },
-  { page: 'ergonomie/25-articles-travailleurs/vibrations.html', fichier: 'wiki-vibrations-transmission-v1.png', parcours: ['w/'] },
+  { page: 'hygiene/bruit.html', fichier: 'wiki-bruit-mesurer-v1.png', parcours: ['w/', 'g/w/'] },
+  { page: 'ergonomie/vibrations.html', fichier: 'wiki-vibrations-transmission-v1.png', parcours: ['w/', 'g/w/'] },
+  { page: 'hygiene/silice-cristalline.html', fichier: 'wiki-silice-prevention-v1.png', parcours: ['w/', 'g/w/'] },
+  { page: 'toxicologie/voies-dexposition.html', fichier: 'wiki-exposition-voies-v1.png', parcours: ['w/'] },
 ];
 let pagesVisuelles = 0;
 for (const visuel of visuels) {
@@ -88,74 +92,53 @@ for (const visuel of visuels) {
   }
 }
 
-for (const parcours of ['w/']) {
-  const rel = parcours + 'securite/25-articles-travailleurs/risques-mecaniques/cadenassage.html';
-  const html = lire(rel);
-  const entete = html.match(/<header class="article-entete">[\s\S]*?<\/header>/)?.[0];
-  assert.ok(entete, rel + ' : en-tête compact présent');
-  assert.equal((entete.match(/class="page-title"/g) || []).length, 1, rel + ' : titre unique');
-  assert.equal((html.match(/<nav class="toc\b/g) || []).length, 1, rel + ' : sommaire unique');
-  assert.ok(entete.includes('aria-controls="sommaire-sections"'), rel + ' : commande reliée au sommaire');
-  assert.equal((entete.match(/<li class="toc-l/g) || []).length, 5, rel + ' : cinq sections accessibles');
-  for (const lien of entete.matchAll(/href="#([^"]+)"/g)) assert.ok(html.includes('id="' + lien[1] + '"'), rel + ' : destination du sommaire existante');
-  const tableau = html.match(/<table class="table-energies"[\s\S]*?<\/table>/)?.[0];
-  assert.ok(tableau, rel + ' : tableau des énergies présent');
-  assert.equal((tableau.match(/scope="col"/g) || []).length, 2, rel + ' : deux colonnes nommées');
-  assert.equal((tableau.match(/scope="row"/g) || []).length, 6, rel + ' : six énergies nommées');
-  assert.ok(tableau.includes('aria-label='), rel + ' : tableau nommé');
-  for (const exemple of ['Un condensateur encore chargé', 'Un ressort encore comprimé', 'Une charge en hauteur pouvant redescendre', 'De la pression emprisonnée dans un circuit', 'Une pièce encore chaude', 'Des substances pouvant encore réagir']) {
-    assert.ok(tableau.includes(exemple), rel + ' : exemple validé conservé');
-  }
-  assert.equal((html.match(/id="exemples-denergies-a-rechercher-en-mine"/g) || []).length, 1, rel + ' : ancienne ancre unique');
-  assert.ok(html.includes('id="arreter-ne-suffit-pas"'), rel + ' : nouveau titre accessible');
-  assert.ok(!/wiki-cadenassage-energies-v\d+\.png/.test(html), rel + ' : illustration remplacée');
-  let detailsOuverts = 0;
-  for (const tag of html.slice(0, html.indexOf(tableau)).matchAll(/<\/?details\b[^>]*>/g)) {
-    detailsOuverts += tag[0].startsWith('</') ? -1 : 1;
-  }
-  assert.equal(detailsOuverts, 0, rel + ' : tableau hors de tout volet repliable');
-  assert.ok(html.includes('Ces exemples ne sont pas exhaustifs'), rel + ' : portée conservée');
-  assert.ok(html.includes('https://www.cchst.ca/oshanswers/hsprograms/hazardous_energy.html'), rel + ' : source conservée');
-  assert.ok(html.includes('Relecture éditoriale : non attestée'), rel + ' : aucune relecture inventée');
-}
-
-// Wiki des travailleurs abandonné : ni portail ni copie t/w/ ; un index dans le fond
-// documentaire, des redirections pour les anciennes adresses, et le parcours encadrement intact.
+// Wiki des travailleurs abandonné (12 septembre 2026) : ni portail ni copie t/w/, ni index
+// travailleurs.html ; les anciennes adresses (dossiers de cours, wiki des travailleurs) sont
+// redirigées par 404.html, autonome, à partir d'une table écrite par build_site.mjs ; le
+// parcours de l'encadrement (/g/) reste intact.
 assert.ok(!fs.existsSync(path.join(out, 't')), 'ancien wiki des travailleurs retiré');
-const indexFiches = lire('travailleurs.html');
-assert.ok(indexFiches.includes('<nav class="sidebar"'), 'index des fiches dans l’habillage ordinaire du wiki');
-assert.ok(indexFiches.includes('<h1 class="page-title" id="haut">Fiches pour les travailleurs</h1>'), 'titre de l’index');
-assert.ok(!indexFiches.includes('tb-layout') && !indexFiches.includes('WIKI_UI'), 'aucun tableau de bord');
-for (const numero of ['911', '811', '988']) assert.ok(indexFiches.includes('href="tel:' + numero + '"'), 'accès téléphonique conservé');
-assert.ok(indexFiches.includes('href="w/psychosocial/25-articles-travailleurs/20-ressources-et-aide/ou-appeler-quand-ca-ne-va-pas.html"'), 'renvoi vers la note d’aide du vault');
-const fichesIndexees = [...indexFiches.matchAll(/<li><a href="(w\/[^"]+)"/g)].map(m => m[1]);
-assert.ok(fichesIndexees.length >= 50, 'fiches listées : ' + fichesIndexees.length);
-assert.equal(new Set(fichesIndexees).size, fichesIndexees.length, 'chaque fiche listée une seule fois');
-for (const rel of fichesIndexees) assert.ok(fs.existsSync(path.join(out, rel)), 'fiche indexée présente : ' + rel);
+assert.ok(!fs.existsSync(path.join(out, 'travailleurs.html')), 'ancien index des fiches retiré');
 assert.ok(!lire('g/index.html').includes('window.WIKI_UI') && lire('g/index.html').includes('tb-layout'), 'portail encadrement conservé');
 const page404 = lire('404.html');
-assert.ok(page404.includes('location.replace') && page404.includes("'/travailleurs.html'") && page404.includes("'/w/'"), 'redirection des anciennes adresses t/');
+assert.ok(page404.includes('location.replace'), 'redirection des anciennes adresses');
 assert.ok(!page404.includes('<link') && !page404.includes('assets/'), 'page 404 autonome, sans ressource relative');
+const redirections = JSON.parse(lire('assets/redirections.json'));
+const nbRedirections = Object.keys(redirections).length;
+assert.ok(nbRedirections > 100, 'table de redirection substantielle : ' + nbRedirections + ' entrée(s)');
+for (const [ancienne, nouvelle] of Object.entries(redirections)) {
+  assert.ok(fs.existsSync(path.join(out, nouvelle)), 'cible de redirection existante : ' + ancienne + ' → ' + nouvelle);
+}
 
-const exposition = lire('w/toxicologie/25-articles-travailleurs/reconnaitre-une-exposition.html');
-assert.ok(!lire('w/ergonomie/20-articles-internes/contraintes/postures-contraignantes.html').includes('class="article-entete"'), 'en-tête des autres articles inchangé');
-const voiesExposition = lire('w/toxicologie/20-articles-internes/voies-dexposition.html');
+// Adresses par notion (12 septembre 2026) : aucune page des six wikis à plus d'un niveau sous
+// w/<wiki>/ (hors theme/) — le rangement en dossiers de cours a disparu des adresses.
+const SIX = ['droit-travail', 'ergonomie', 'hygiene', 'psychosocial', 'securite', 'toxicologie'];
+for (const wiki of SIX) {
+  const profondes = [];
+  (function marcher(d, prof) {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) { if (e.name !== 'theme') marcher(p, prof + 1); continue; }
+      if (prof > 1 && e.name.endsWith('.html')) profondes.push(p);
+    }
+  })(path.join(out, 'w', wiki), 0);
+  assert.equal(profondes.length, 0, `w/${wiki} : aucune page sous un dossier de cours, trouvé ${profondes.slice(0, 3).join(', ')}`);
+}
+assert.ok(fs.existsSync(path.join(out, 'themes.html')), 'page Thèmes présente');
+for (const wiki of SIX) {
+  const home = lire(`w/${wiki}/index.html`);
+  assert.ok(home.includes('id="themes-du-wiki"') || home.includes('>Thèmes<'), `w/${wiki}/index.html : grille des thèmes`);
+}
+
+const voiesExposition = lire('w/toxicologie/voies-dexposition.html');
+assert.ok(!lire('w/ergonomie/postures-contraignantes.html').includes('class="article-entete"'), 'en-tête compact retiré du site (pilote Cadenassage archivé avec sa fiche)');
 assert.ok(voiesExposition.includes('ne signifie pas qu’un produit la traverse'), 'contact et absorption distingués');
 assert.ok(voiesExposition.includes('<strong>Injection :</strong>'), 'voie non illustrée conservée en texte');
-const vibrationsTravailleurs = lire('w/ergonomie/25-articles-travailleurs/vibrations.html');
-assert.ok(vibrationsTravailleurs.includes('pas les seules zones du corps'), 'couleurs de transmission contextualisées');
-assert.ok(vibrationsTravailleurs.includes('Les signes à surveiller'), 'signes à surveiller conservés hors du volet');
-assert.ok(exposition.includes('Agir sans attendre après une exposition aiguë suspectée'));
-assert.ok(!exposition.includes('Signaler dans le quart même'));
-assert.ok(exposition.includes('sauvetage improvisé'));
-assert.ok(exposition.includes('1 800 463-5060'));
-assert.ok(exposition.includes('l’injection à travers la peau'), 'voies non exhaustives');
-for (const id of ['les-trois-portes-dentree-dans-ton-corps', '1-les-poumons-inhalation', '2-la-peau-cutane', '3-la-bouche-digestif']) {
-  assert.ok(exposition.includes('id="' + id + '"'), 'ancienne ancre conservée : ' + id);
-}
-assert.ok(lire('w/securite/25-articles-travailleurs/risques-mecaniques/cadenassage.html').includes('Cette page ne constitue pas une procédure'));
-assert.ok(lire('w/hygiene/27-articles-gestionnaires/programmes-de-prevention/silice-cristalline.html').includes('une protection respiratoire appropriée peut rester requise'));
-const isoStrain = lire('w/psychosocial/20-articles/modeles-et-theories/iso-strain-ce-que-ca-signifie.html');
+// « couleurs de transmission contextualisées » et « signes à surveiller hors du volet » :
+// assertions du 1er septembre sur la fiche travailleur « 25 - .../Vibrations », archivée le
+// 12 septembre 2026 avec le reste du wiki des travailleurs — leur texte précis n'a pas
+// d'équivalent sur la notion « Vibrations » de 20 - Articles internes, retirées ici.
+assert.ok(lire('w/hygiene/silice-cristalline.html').includes('une protection respiratoire appropriée peut rester requise'));
+const isoStrain = lire('w/psychosocial/iso-strain-ce-que-ca-signifie.html');
 for (const id of ['comprendre-les-trois-dimensions', 'ce-que-montrent-les-recherches', 'application-en-mine-un-exemple-a-verifier', 'comment-le-reperer-sans-surinterpreter', 'orienter-la-prevention', 'references']) {
   assert.ok(isoStrain.includes('id="' + id + '"'), 'iso-strain : section ' + id);
 }
@@ -169,15 +152,15 @@ assert.ok(isoStrain.includes('ne constituent pas automatiquement'), 'pas de gén
 assert.ok(isoStrain.includes('ne permet pas de conclure à une relation causale'), 'limite de causalité conservée');
 assert.ok(isoStrain.includes('Relecture éditoriale : non attestée'), 'pas de relecture humaine inventée');
 assert.ok(!isoStrain.includes('Article en construction'), 'ancienne coquille remplacée');
-assert.ok(!fs.existsSync(path.join(out, 'g/w/psychosocial/20-articles/modeles-et-theories/iso-strain-ce-que-ca-signifie.html')), 'publication gestionnaires inchangée');
+assert.ok(!fs.existsSync(path.join(out, 'g/w/psychosocial/iso-strain-ce-que-ca-signifie.html')), 'publication gestionnaires inchangée');
 
 const lotRps = [
-  { page: 'psychosocial/20-articles/modeles-et-theories/demandes-psychologiques.html', prefixe: 'dem', parcours: ['w/'] },
-  { page: 'psychosocial/20-articles/modeles-et-theories/latitude-decisionnelle.html', prefixe: 'lat', parcours: ['w/'] },
-  { page: 'psychosocial/20-articles/facteurs-organisationnels/soutien-social-au-travail.html', prefixe: 'sou', parcours: ['w/', 'g/w/'] },
-  { page: 'psychosocial/20-articles/reconnaissance-au-travail.html', prefixe: 'rec', parcours: ['w/'], ancres: ['definition', 'les-quatre-formes-brun-et-dugas', 'pourquoi-cest-un-enjeu-de-sante', 'les-regles-dor-de-la-pratique', 'application-terrain', 'ressources'] },
-  { page: 'psychosocial/20-articles/justice-organisationnelle.html', prefixe: 'jus', parcours: ['w/'], ancres: ['definition', 'ce-que-dit-la-recherche', 'mesure', 'application-terrain', 'ressources'] },
-  { page: 'psychosocial/20-articles/modeles-et-theories/definition-du-stress-professionnel.html', prefixe: 'str', parcours: ['w/', 'g/w/'], ancres: ['definition', 'stress-aigu-vs-chronique', 'mecanismes', 'application-en-mines', 'documents-et-outils', 'pour-aller-plus-loin'] },
+  { page: 'psychosocial/demandes-psychologiques.html', prefixe: 'dem', parcours: ['w/'] },
+  { page: 'psychosocial/latitude-decisionnelle.html', prefixe: 'lat', parcours: ['w/'] },
+  { page: 'psychosocial/soutien-social-au-travail.html', prefixe: 'sou', parcours: ['w/', 'g/w/'] },
+  { page: 'psychosocial/reconnaissance-au-travail.html', prefixe: 'rec', parcours: ['w/'], ancres: ['definition', 'les-quatre-formes-brun-et-dugas', 'pourquoi-cest-un-enjeu-de-sante', 'les-regles-dor-de-la-pratique', 'application-terrain', 'ressources'] },
+  { page: 'psychosocial/justice-organisationnelle.html', prefixe: 'jus', parcours: ['w/'], ancres: ['definition', 'ce-que-dit-la-recherche', 'mesure', 'application-terrain', 'ressources'] },
+  { page: 'psychosocial/definition-du-stress-professionnel.html', prefixe: 'str', parcours: ['w/', 'g/w/'], ancres: ['definition', 'stress-aigu-vs-chronique', 'mecanismes', 'application-en-mines', 'documents-et-outils', 'pour-aller-plus-loin'] },
 ];
 let pagesRpsReferencees = 0;
 for (const note of lotRps) {
@@ -210,36 +193,15 @@ for (const note of lotRps) {
     }
     pagesRpsReferencees++;
   }
-  for (const parcours of ['g/w/'].filter(p => !note.parcours.includes(p))) {
-    assert.ok(!fs.existsSync(path.join(out, parcours + note.page)), 'RPS : parcours non élargi');
-  }
 }
 
 const qualite = lire('qualite.html');
-const terrain = [
-  ['securite/25-articles-travailleurs/risques-mecaniques/espaces-clos.html', 'ec', 'avant-dentrer-verifie-ces-5-choses'],
-  ['hygiene/25-articles-travailleurs/espaces-clos.html', 'ec', 'avant-dentrer-verifie-ces-5-choses'],
-  ['hygiene/25-articles-travailleurs/simdut-et-fds.html', 'fds', 'les-4-sections-a-connaitre-par-coeur'],
-];
-for (const [page, prefixe, ancienneAncre] of terrain) {
-  for (const parcours of ['w/']) {
-    const html = lire(parcours + page);
-    assert.equal((html.match(new RegExp('id="' + ancienneAncre + '"', 'g')) || []).length, 1, 'ancienne ancre terrain unique');
-    for (let i = 1; i <= 4; i++) {
-      assert.equal((html.match(new RegExp('id="ref-' + prefixe + '-' + i + '"', 'g')) || []).length, 1, 'référence terrain unique');
-      assert.ok(html.includes('href="#ref-' + prefixe + '-' + i + '"'), 'référence terrain appelée');
-    }
-    assert.equal((html.match(/<thead>/g) || []).length, 1, 'un tableau de compréhension');
-    assert.ok(html.includes('aucune validation spécialisée'), 'pas de validation spécialisée inventée');
-    assert.ok(html.includes('Relecture éditoriale : non attestée'), 'pas de relecture humaine inventée');
-    assert.doesNotMatch(html, /4 sections suffisent|20,5 et 23|moitié des morts|<li>Le comi<|<li>L</);
-  }
-  assert.ok(!fs.existsSync(path.join(out, 'g/w/' + page)), 'parcours encadrement non élargi');
-}
+// Chantiers « terrain » (3 septembre 2026, sécurité/hygiène) et fiche cadenassage : appliqués
+// à des pages du wiki des travailleurs, archivées le 12 septembre 2026. Leur contenu vit
+// désormais dans 98 - Archives (non publié) ; les ancres et références qu'ils vérifiaient ne
+// sont plus sur le site publié, ce n'est pas une régression de ce chantier-ci.
 const terrainSuite = [
-  { page: 'toxicologie/25-articles-travailleurs/solvants.html', prefixe: 'sol', refs: 5, parcours: ['w/'], ancres: ['trois-signes-que-tu-en-respires-trop', 'le-piege-du-5-minutes-sans-masque', 'si-tu-es-expose-fortement'] },
-  { page: 'ergonomie/25-articles-travailleurs/sommeil-et-quart-de-nuit.html', prefixe: 'nuit', refs: 4, parcours: ['w/'], ancres: ['contenu'] },
-  { page: 'droit-travail/10-themes/obligations-de-lemployeur.html', prefixe: 'emp', refs: 4, parcours: ['w/', 'g/w/'], ancres: ['articles-couverts', 'articles-de-loi-pertinents'] },
+  { page: 'droit-travail/theme/obligations-de-lemployeur.html', prefixe: 'emp', refs: 4, parcours: ['w/', 'g/w/'], ancres: ['articles-couverts', 'articles-de-loi-pertinents'] },
 ];
 for (const note of terrainSuite) {
   for (const parcours of note.parcours) {
@@ -264,10 +226,9 @@ for (const note of terrainSuite) {
     assert.ok(html.includes('Relecture éditoriale : non attestée'), 'suite terrain : aucune validation humaine inventée');
     assert.doesNotMatch(html, /class="redlink"/, 'suite terrain : aucun lien non résolu');
   }
-  for (const parcours of ['g/w/'].filter(p => !note.parcours.includes(p))) assert.ok(!fs.existsSync(path.join(out, parcours + note.page)), 'suite terrain : parcours non élargi');
 }
 assert.ok(qualite.includes('Contrôles automatiques de forme'));
 assert.ok(qualite.includes('ni une note de fiabilité ni une validation SST'));
 assert.ok(qualite.includes('Résultats par type de contenu'));
 assert.ok(qualite.includes('Validation spécialisée datée et validateur déclaré'));
-console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, entetesArticles, titresGroupes, bibliographiesCompactes, appelsReference, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, tableauxCadenassage: 2, pagesRpsReferencees, fichesIndexees: fichesIndexees.length, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));
+console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, entetesArticles, titresGroupes, bibliographiesCompactes, appelsReference, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, redirections: nbRedirections, pagesRpsReferencees, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));

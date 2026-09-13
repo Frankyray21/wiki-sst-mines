@@ -1,12 +1,11 @@
 // Contenu du portail racine (index.html). L'habillage (en-tête, pied, scripts) reste dans
 // build_site.mjs ; ce module ne produit que l'intérieur de <main>, pour être testable.
-import { INDEX_FICHES } from './fiches_travailleurs.mjs';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const nb = (n) => Number(n).toLocaleString('fr-CA');
 
 // cartesWikis : le HTML des sept cartes du fond documentaire, déjà rendu par le générateur.
-export function rendrePortailContenu({ total, cartesWikis, nbFiches, nbPagesEncadrement, taglineEncadrement, nbCategories, nbPagesQualite }) {
+export function rendrePortailContenu({ total, cartesWikis, nbThemes, nbPagesEncadrement, taglineEncadrement, nbCategories, nbPagesQualite }) {
   return `
 <div class="portal-hero">
   <div class="portal-globe">⛏️</div>
@@ -15,7 +14,7 @@ export function rendrePortailContenu({ total, cartesWikis, nbFiches, nbPagesEnca
   <div class="portal-search"><input type="search" id="q2" aria-label="Rechercher dans le wiki" placeholder="Rechercher parmi ${nb(total)} articles…" autocomplete="off"><div id="suggest2" class="suggest" hidden></div></div>
 </div>
 <h2 class="portal-section">Le fond documentaire</h2>
-<p class="portal-note">Les ${nb(total)} pages, classées par discipline : fiches pour les travailleurs, articles internes, pages pour l'encadrement et articles de loi.</p>
+<p class="portal-note">Les ${nb(total)} pages, classées par discipline, par thème et par notion, avec le recueil des lois et règlements.</p>
 <div class="portal-grid">${cartesWikis}</div>
 <h2 class="portal-section">Parcourir par sujet</h2>
 <div class="portal-grid portal-sujets">
@@ -23,9 +22,9 @@ export function rendrePortailContenu({ total, cartesWikis, nbFiches, nbPagesEnca
     <span class="portal-icon">🏷️</span>
     <span class="portal-info"><strong>Catégories</strong><span class="portal-desc">Les mots-clés qui traversent les disciplines : bruit, explosifs, espaces clos, silice… Chaque catégorie réunit les articles du même sujet, quel que soit le domaine.</span><span class="portal-count">${nbCategories} catégories</span></span>
   </a>
-  <a class="portal-card" href="${INDEX_FICHES.out}">
-    <span class="portal-icon">${INDEX_FICHES.icone}</span>
-    <span class="portal-info"><strong>${esc(INDEX_FICHES.titre)}</strong><span class="portal-desc">Pages courtes, en français simple, classées par situation : douleurs, air et poussières, chaleur et bruit, santé mentale, sommeil, droits, dangers, vie au camp.</span><span class="portal-count">${nbFiches} pages</span></span>
+  <a class="portal-card" href="themes.html">
+    <span class="portal-icon">🗂️</span>
+    <span class="portal-info"><strong>Thèmes</strong><span class="portal-desc">Les portails de chaque discipline : chaque thème réunit ses articles, ses lois et ses outils.</span><span class="portal-count">${nbThemes} thèmes</span></span>
   </a>
   <a class="portal-card" href="qualite.html">
     <span class="portal-icon">🔧</span>

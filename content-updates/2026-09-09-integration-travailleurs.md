@@ -1,5 +1,12 @@
 # Fiches pour les travailleurs — intégration au fond documentaire, 9 septembre 2026
 
+> **Remplacé le 12 septembre 2026.** L'index `travailleurs.html` décrit ci-dessous est à son tour
+> abandonné : Frank a choisi un vrai wiki organisé par notion et par thème plutôt qu'un index par
+> public. Les 84 pages qu'il listait sont, pour la plupart, archivées avec le reste du wiki des
+> travailleurs (`98 - Archives` de chaque wiki). Voir `content-updates/2026-09-12-wiki-par-notion.md`
+> et `plans/2026-09-12-wiki-par-notion.md`. Ce document reste comme trace de la décision du 9
+> septembre, qu'il ne faut pas reproduire.
+
 **Demande de Frank :** abandonner le wiki des travailleurs et l'inclure discrètement dans le wiki référencé, comme un vrai wiki, en n'utilisant que les sources de ses notes universitaires dans Obsidian.
 
 Lecture retenue : le wiki par public `/t/` (portail en tableau de bord au « tu », copie des pages sous `t/w/…`) disparaît ; ses pages, qui sont déjà des articles du fond documentaire, y restent et y sont indexées comme dans n'importe quel wiki. Rien n'est rédigé hors du vault : les seuls textes nouveaux sont des libellés de navigation et un encadré d'aide dont les numéros et la formulation viennent des notes « Où appeler quand ça ne va pas » et « Lignes d'aide et ressources de soutien ». Les renvois vers les notes d'analyse universitaires sont proposés en fin de document, sans être appliqués : ils relèvent d'une décision éditoriale dans Obsidian.

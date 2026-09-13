@@ -9,16 +9,21 @@ import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, ex
 // rendu façon page d'accueil de wiki, et état du site publié (docs/).
 const R = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DOCS = path.join(R, 'docs');
+// Adresses par notion (12 septembre 2026) : l'accueil de chaque wiki est directement
+// w/<wiki>/index.html (plus de dossier « 00 - Accueil »). Le wiki des travailleurs est
+// archivé : les six accueils de section « 25 - Articles travailleurs » ont disparu avec lui.
+// Restent les cinq pages d'accueil de l'encadrement (« 27 - Articles gestionnaires » en Droit
+// et Ergonomie, « 00 - Accueil gestionnaires » ailleurs), à leur propre adresse de notion.
 const ACCUEILS = [
-  'droit-travail/00-accueil/00-accueil.html', 'droit-travail/25-articles-travailleurs/25-articles-travailleurs.html', 'droit-travail/27-articles-gestionnaires/27-articles-gestionnaires.html',
-  'ergonomie/00-accueil/00-accueil.html', 'ergonomie/25-articles-travailleurs/25-articles-travailleurs.html', 'ergonomie/27-articles-gestionnaires/27-articles-gestionnaires.html',
-  'hygiene/00-accueil/00-accueil.html', 'hygiene/25-articles-travailleurs/00-accueil-travailleurs.html', 'hygiene/27-articles-gestionnaires/00-accueil-gestionnaires.html',
-  'legislation/00-accueil/00-accueil.html', 'psychosocial/00-accueil/00-accueil.html',
-  'securite/00-accueil/00-accueil.html', 'securite/25-articles-travailleurs/00-accueil-travailleurs.html', 'securite/27-articles-gestionnaires/00-accueil-gestionnaires.html',
-  'toxicologie/00-accueil/00-accueil.html', 'toxicologie/25-articles-travailleurs/00-accueil-travailleurs.html', 'toxicologie/27-articles-gestionnaires/00-accueil-gestionnaires.html',
+  'droit-travail/index.html', 'droit-travail/27-articles-gestionnaires.html',
+  'ergonomie/index.html', 'ergonomie/27-articles-gestionnaires.html',
+  'hygiene/index.html', 'hygiene/00-accueil-gestionnaires.html',
+  'legislation/00-accueil/00-accueil.html', 'psychosocial/index.html',
+  'securite/index.html', 'securite/00-accueil-gestionnaires.html',
+  'toxicologie/index.html', 'toxicologie/00-accueil-gestionnaires.html',
 ];
 // copies des accueils gestionnaires dans l'espace encadrement
-const ACCUEILS_G = ['droit-travail/27-articles-gestionnaires/27-articles-gestionnaires.html', 'ergonomie/27-articles-gestionnaires/27-articles-gestionnaires.html', 'hygiene/27-articles-gestionnaires/00-accueil-gestionnaires.html', 'securite/27-articles-gestionnaires/00-accueil-gestionnaires.html', 'toxicologie/27-articles-gestionnaires/00-accueil-gestionnaires.html'];
+const ACCUEILS_G = ['droit-travail/27-articles-gestionnaires.html', 'ergonomie/27-articles-gestionnaires.html', 'hygiene/00-accueil-gestionnaires.html', 'securite/00-accueil-gestionnaires.html', 'toxicologie/00-accueil-gestionnaires.html'];
 
 test('reconnaissance d’une page d’accueil et nettoyage des titres', () => {
   assert.equal(estAccueil({ fm: { type: 'accueil' }, base: 'Bienvenue, travailleur' }), true);
@@ -127,7 +132,10 @@ test('site publié : les dix-sept accueils et leurs cinq copies encadrement sont
     assert.ok(html.includes('<div class="accueil-banniere">') && html.includes('<header class="article-titre">'), rel + ' : bandeau');
     assert.ok(!html.includes('<aside class="infobox"') && !html.includes('<nav class="toc') && !html.includes('Un article du wiki'), rel + ' : ni infobox, ni sommaire, ni « Un article du wiki »');
     assert.ok(/<title>[^<🏠👷👔🏢]/.test(html), rel + ' : titre de fenêtre sans emoji de tête');
-    assert.ok((html.match(/<section class="accueil-boite/g) || []).length >= 3, rel + ' : au moins trois boîtes');
+    // Les cinq accueils de l'encadrement perdent une boîte entière (« Section travailleurs »
+    // n'avait plus aucun lien réel après l'archivage) : le seuil est plus bas pour eux.
+    const seuilBoites = ACCUEILS_G.includes(rel.replace(/^(?:g\/)?w\//, '')) ? 2 : 3;
+    assert.ok((html.match(/<section class="accueil-boite/g) || []).length >= seuilBoites, rel + ' : au moins ' + seuilBoites + ' boîte(s)');
     const corps = html.slice(html.indexOf('<div class="page-body accueil-grille">'), html.indexOf('<div class="page-meta">'));
     // un item réduit à une mention « (source interne) » ou « (abrogé) » est retiré ; un item qui l'accompagne d'une explication reste
     assert.ok(!/<li>\s*[^<\n]*<span class="(?:interne-inline|abroge-inline|missing-file)"[^>]*>[\s\S]*?<\/span>\s*<\/li>/.test(corps), rel + ' : aucun item réduit à une source non publiée');
@@ -139,12 +147,12 @@ test('site publié : les dix-sept accueils et leurs cinq copies encadrement sont
     assert.match(html, /<div class="page-sub">(?:Page d’accueil du wiki|Section « [^»]+ » du wiki) <a href="[^"]*">[^<]*<\/a> · [\d\s\u00a0\u202f]+ pages<\/div>/, rel + ' : domaine et nombre de pages');
   }
   // l'accueil du wiki : fil d'Ariane arrêté au wiki, compteur = pages du wiki
-  const psy = fs.readFileSync(path.join(DOCS, 'w/psychosocial/00-accueil/00-accueil.html'), 'utf8');
+  const psy = fs.readFileSync(path.join(DOCS, 'w/psychosocial/index.html'), 'utf8');
   assert.match(psy, /<div class="breadcrumbs"><a href="[^"]*index\.html">Portail<\/a> <span class="crumb-sep">›<\/span> <a href="[^"]*w\/psychosocial\/index\.html">SST psychosociale<\/a><\/div>/);
   assert.ok(psy.includes('<span class="new" title="Page introuvable : Gestion">Gestion</span>'), 'wikilink brut « [[Gestion » rendu en lien rouge');
   assert.ok(!psy.includes('Virage_strat'), 'nom de la vidéo non publiée retiré');
   assert.ok(psy.includes('<ul class="accueil-tuiles">'), 'démarrage rapide par rôle en tuiles');
   assert.ok(psy.includes('<small class="accueil-tuile-desc">'), 'tuiles décrites par le titre de la page cible');
-  const ergo = fs.readFileSync(path.join(DOCS, 'w/ergonomie/25-articles-travailleurs/25-articles-travailleurs.html'), 'utf8');
-  assert.ok(ergo.includes('Section « Articles travailleurs » du wiki'));
+  // grille des thèmes : première boîte de l'accueil de chaque wiki
+  assert.ok(psy.includes('id="themes-du-wiki"') && psy.includes('w/psychosocial/theme/'), 'grille des thèmes en tête de l’accueil');
 });

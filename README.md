@@ -20,18 +20,24 @@ Les pages sont réparties en 6 wikis thématiques + 1 recueil législatif. Les [
 
 | Entrée | Pour qui | Contenu |
 | --- | --- | --- |
-| 📚 [`/w/`](https://frankyray21.github.io/wiki-sst-mines/) | Tout le monde : travailleurs, conseiller SST, recherche documentaire | Le fond documentaire classé par discipline, fiches pour les travailleurs comprises |
-| 👷 [`travailleurs.html`](https://frankyray21.github.io/wiki-sst-mines/travailleurs.html) | Travailleurs | Index des fiches courtes du fond documentaire, classées par situation vécue |
+| 📚 [`/w/`](https://frankyray21.github.io/wiki-sst-mines/) | Tout le monde | Le fond documentaire, organisé par notion et par thème (une page par sujet, adresse `w/<wiki>/<notion>.html`) |
+| 🗂️ [`themes.html`](https://frankyray21.github.io/wiki-sst-mines/themes.html) | Tout le monde | Tous les thèmes, groupés par discipline |
 | 🎓 [`/g/`](https://frankyray21.github.io/wiki-sst-mines/g/) | Superviseurs, gestionnaires, direction | Portail en tableau de bord : entrée par rôle, par situation à gérer, ou par thème |
 
-L'ancien wiki des travailleurs (`/t/` : portail en tableau de bord et copie des pages) est abandonné
-depuis le 9 septembre 2026. Ses pages n'ont pas bougé : elles vivent dans le fond documentaire, où
-l'index `travailleurs.html` les regroupe par situation, et `404.html` redirige les anciennes adresses
-`t/…` vers les mêmes pages. La sélection est inchangée, à partir du frontmatter du vault :
-`publication-travailleur` et `public-cible`, avec veto sur `niveau-sensibilité` (interne ou ≥ 2).
-**Une page n'entre jamais dans l'index des travailleurs sans autorisation explicite.**
-Le parcours de l'encadrement suit `publication-gestionnaire` selon la même logique.
-Le Recueil législatif n'est pas dupliqué : le texte de loi est public et identique pour tous.
+Le wiki séparé des travailleurs (`/t/`, abandonné le 9 septembre 2026, puis son index
+`travailleurs.html` dans le fond documentaire) est à son tour abandonné le **12 septembre 2026** :
+Frank a choisi un vrai wiki organisé par notion et par thème plutôt qu'un site distinct par
+public. Les 112 notes des dossiers `24/25/26 - …` des six wikis sont archivées dans `98 - Archives`
+de chaque wiki (`publish: false`, sauvegarde locale `sauvegarde-vault/2026-09-12-travailleurs/`,
+journal versionné `content-updates/2026-09-12-archivage-travailleurs.json`) ; les adresses des
+articles ne reflètent plus le rangement en dossiers du vault (`w/ergonomie/manutention-manuelle.html`
+plutôt que `w/ergonomie/20-articles-internes/contraintes/manutention-manuelle.html`) ; `404.html`
+redirige les anciennes adresses (dossiers de cours, `/t/…`, `travailleurs.html`) à partir d'une table
+écrite par le générateur. Détail complet : `plans/2026-09-12-wiki-par-notion.md`.
+Le parcours de l'encadrement suit `publication-gestionnaire` (frontmatter du vault, veto sur
+`niveau-sensibilité` interne ou ≥ 2), inchangé par ce chantier.
+Le Recueil législatif n'est pas dupliqué : le texte de loi est public et identique pour tous, et ses
+adresses n'ont pas changé.
 
 **Ces parcours ne sont pas un contrôle d'accès.** GitHub Pages est public : les contenus confidentiels ne doivent pas y être publiés. Le champ « interne » historiquement utilisé pour désigner un public n'assure aucune protection. Une authentification réelle nécessiterait une décision d'hébergement distincte.
 
@@ -43,8 +49,12 @@ Le Recueil législatif n'est pas dupliqué : le texte de loi est public et ident
 - `tools/portail_encadrement.mjs` — portail `/g/` en tableau de bord : contenu des cartes, icônes SVG.
   Les cibles sont vérifiées à la construction ; le build avertit si l'une disparaît du site.
 - `tools/portail_racine.mjs` — contenu du portail racine (`index.html`)
-- `tools/fiches_travailleurs.mjs` — index `travailleurs.html` (rubriques par situation, doublons, numéros
-  d'aide repris des notes du vault) et page `404.html` de redirection des anciennes adresses `t/…`
+- `tools/adresses.mjs` — formule d'adresse par notion (`w/<wiki>/<notion>.html`), thèmes
+  (`w/<wiki>/theme/<slug>.html`) et règle de collision (12 septembre 2026)
+- `tools/redirections.mjs` — page `404.html` autonome : anciennes adresses (dossiers de cours,
+  wiki des travailleurs) vers les adresses par notion, à partir d'une table écrite par le générateur
+- `tools/archiver_travailleurs.mjs` — archive les dossiers `24/25/26 - …` dans `98 - Archives` de
+  chaque wiki (`--appliquer`, `--annuler`), sauvegarde datée et journal versionné
 - `tools/portail.css` — feuille de style de ce portail (chargée par lui seul)
 - `tools/extraire_textes_loi.mjs` — extrait des PDF de LégisQuébec le texte de chaque article (couche texte,
   sans OCR) vers `tools/textes-loi/*.json` ; `tools/textes_loi.mjs` le pose dans les pages d'articles
@@ -94,9 +104,13 @@ node tools/serve.mjs
 - **Recherche plein texte** : numéros d'article (`art 4 RSST`, `RSST 51`), tolérance aux pluriels et aux accents, filtres par wiki, pagination, suggestion en cas de zéro résultat
 - **Wikilinks Obsidian** résolus, y compris les variantes (chiffres romains/arabes, zéros de tête) ; liens rouges pour les pages réellement absentes du vault
 - Callouts, **infobox** générée depuis le frontmatter YAML (réparé automatiquement s'il est invalide), sommaires, backlinks
-- **Pages d'accueil** (chaque wiki, sections travailleurs et gestionnaires) : bandeau avec le nom du wiki et son
-  nombre de pages, chapeau, index, puis une boîte par section de la note avec listes en colonnes — ni infobox,
-  ni sommaire, ni préfixe de classement dans les titres, comme la page d'accueil d'un vrai wiki
+- **Pages d'accueil** (chaque wiki, et les pages d'accueil de l'encadrement) : bandeau avec le nom du wiki et son
+  nombre de pages, chapeau, une grille des thèmes en tête sur l'accueil du wiki, puis une boîte par section de la
+  note avec listes en colonnes — ni infobox, ni sommaire, ni préfixe de classement dans les titres, comme la page
+  d'accueil d'un vrai wiki
+- **Thèmes** : une page par thème (`w/<wiki>/theme/<slug>.html`), source authored (« type: thème ») ou — faute de
+  thème, en Ergonomie — la note index d'un sous-dossier ; chaque notion rattachée porte un fil d'Ariane à trois
+  maillons (Portail › Wiki › Thème) et un bloc « Voir aussi » (version jumelle publiée, notions du même thème)
 - **Recueil législatif** : tri naturel des articles (art-1, art-2, art-10…), sommaire par règlement, index par loi
 - **Articles de loi** : texte officiel extrait de la couche texte du PDF LégisQuébec (copiable, lisible au
   lecteur d'écran, cherchable), posé avant la capture officielle conservée ; PDF sources, images cliquables
@@ -117,8 +131,9 @@ node tools/serve.mjs
 - Les infographies conservent une version texte et des sources ; leurs notes et médias doivent rester dans le vault pour survivre à la prochaine génération.
 - Cinq infographies restent intégrées : Manutention, Bruit, Vibrations, Exposition chimique et Silice. Le lot 2 historique (incluant alors Cadenassage) est archivé dans `content-updates/2026-09-06-visuels-lot2.json`, après la révision éditoriale du même jour ; les prompts sont dans `content-updates/prompts-visuels-lot2.md`. Les archives sont des instantanés successifs, pas des fichiers à réappliquer sans comparaison.
 - Après validation, la section « Arrêter ne suffit pas » du cadenassage utilise un tableau visible à deux colonnes, à la place de l’image et de son volet déroulant. La dernière note figure dans `content-updates/2026-09-06-cadenassage-tableau.json`, après `2026-09-06-cadenassage-compact.json`. L’ancre historique est conservée ; les images v1 et v2 restent dans le vault.
-- En-tête pilote : `tools/entete-article.mjs` regroupe titre, domaine, commandes de lecture et sommaire uniquement pour les deux versions de Cadenassage. Sur petit écran, le sommaire se replie par défaut, tout en respectant la préférence existante du lecteur. Le corps de l’article et les autres en-têtes restent inchangés.
-- Fiches pour les travailleurs (9 septembre 2026) : le wiki des travailleurs `/t/` n'est plus généré. Ses 84 pages, retenues par la même autorisation du vault, sont indexées par situation dans `travailleurs.html` (habillage ordinaire du wiki, numéros d'aide repris des notes « Où appeler quand ça ne va pas » et « Lignes d'aide ») ; quand une fiche existe en deux versions, seule la version « (pour toi) » est listée, l'autre reste dans la section « Articles travailleurs » de son wiki. `404.html` redirige `t/index.html` vers l'index et `t/w/…` vers `w/…`. Le mode d'affichage sans émojis (`WIKI_UI`), propre à l'ancien portail, est retiré du script partagé. Le portail racine présente d'abord le fond documentaire, puis « Parcourir par sujet » (catégories, fiches, contrôles de forme), puis l'espace encadrement. Aucune note du vault n'est modifiée ; le détail et la proposition de renvois vers les notes d'analyse universitaires sont dans `content-updates/2026-09-09-integration-travailleurs.md`.
+- ~~En-tête pilote~~ : `tools/entete-article.mjs` regroupait titre, domaine, commandes de lecture et sommaire pour la seule fiche Cadenassage du wiki des travailleurs. Cette fiche a été archivée le 12 septembre 2026 avec le reste du wiki des travailleurs ; l'en-tête compact est retiré avec elle (sa jumelle du dossier « 27 - Articles gestionnaires » n'a ni le même contenu ni le même sommaire).
+- Fiches pour les travailleurs (9 septembre 2026, **abandonné le 12 septembre 2026**, voir l'entrée suivante) : le wiki des travailleurs `/t/` n'était plus généré, ses 84 pages étaient indexées par situation dans `travailleurs.html`. Historique conservé dans `content-updates/2026-09-09-integration-travailleurs.md`.
+- **Wiki par notion et par thème (12 septembre 2026)** : Frank abandonne le wiki séparé des travailleurs pour un vrai wiki organisé par notion et par thème. Les 112 notes des dossiers `24/25/26 - …` des six wikis sont archivées dans `98 - Archives` de chaque wiki (`tools/archiver_travailleurs.mjs`, sauvegarde locale `sauvegarde-vault/2026-09-12-travailleurs/`). Les adresses deviennent `w/<wiki>/<notion>.html` (`tools/adresses.mjs`) ; les thèmes vivent sous `w/<wiki>/theme/<slug>.html` (notes authored « type: thème », ou les 5 notes index de sous-dossier en Ergonomie, qui n'en a aucune) ; les collisions de nom reçoivent un suffixe explicite (`-encadrement`, ou le dossier d'origine) plutôt qu'un « -2 » silencieux. Les liens qui visaient une fiche archivée suivent sa `version-jumelle` quand elle en déclare une, sinon restent grisés « (source non publiée) ». Les sommaires par dossier des six wikis ne sont plus générés (simplification assumée : ils n'étaient qu'une vue secondaire) ; leurs anciennes adresses, comme celles du wiki des travailleurs, sont redirigées par une `404.html` autonome (`tools/redirections.mjs`) à partir d'une table écrite par le générateur (`docs/assets/redirections.json`). Le portail de l'encadrement (`/g/`) est inchangé dans sa forme ; une de ses cibles introuvable arrête désormais le build plutôt que de devenir un lien mort silencieux. Détail complet, décisions, risques et points soumis à Frank : `plans/2026-09-12-wiki-par-notion.md`.
 - Iso-strain : la page « Ce que ça signifie » est complétée et référencée (INRS, INSPQ, études de Johnson et collègues). La note est archivée dans `content-updates/2026-09-06-iso-strain.json`. Exemple minier fictif, associations et causalité distinguées ; aucune validation spécialisée ni extension aux parcours par public.
 - Suite documentaire RPS : « Demandes psychologiques », « Latitude décisionnelle » et « Soutien social au travail » sont enrichies avec des références INRS, INSPQ et CNESST, appelées dans le texte. Les notes figurent dans `content-updates/2026-09-06-rps-references-lot2.json`. Tableaux à deux colonnes, exemples fictifs, anciennes ancres et parcours conservés ; aucun chiffre médical non étayé ni validation spécialisée revendiquée.
 - Suite documentaire RPS, lot 3 : « Reconnaissance au travail », « Justice organisationnelle » et « Définition du stress professionnel » comportent chacune quatre références appelées et un tableau compact. Archive : `content-updates/2026-09-06-rps-references-lot3.json`. Modèles distingués, chiffres non vérifiés retirés et exemples miniers fictifs ; anciens liens et indicateurs de publication conservés. Le schéma de cours marqué « usage personnel » n'est plus intégré à la page Stress, sans suppression de son fichier source. Cette vérification documentaire n'atteste aucune validation spécialisée.

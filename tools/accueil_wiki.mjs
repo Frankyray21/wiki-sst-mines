@@ -51,6 +51,11 @@ export function decouperAccueil(html, { resoudre } = {}) {
   //    n'a pas pu être rendu, et un nom de fichier ne dit rien au lecteur
   h = h.replace(/<p>([^<\n]+)<\/p>\n?/g, (m, texte) => { if (!MEDIA.test(texte.trim())) return m; retires.push(`paragraphe « ${texte.trim()} »`); return ''; });
   h = h.replace(/<p>\s*<span class="missing-file">([^<]*)<\/span>\s*<\/p>\n?/g, (m, texte) => { retires.push(`paragraphe « ${texte.trim()} »`); return ''; });
+  // 1 bis. paragraphe réduit à un renvoi vers une source interne, non publiée sur le site, ou un
+  //    article retiré — même chose que l'item de liste ci-dessous, mais pour un « Hub : … » en
+  //    paragraphe (archivage du wiki des travailleurs, 12 septembre 2026 : un « Hub » de fiches
+  //    archivées ne mène plus nulle part, mais reste entouré d'items réels dans la même boîte)
+  h = h.replace(/<p>\s*[^<\n]*<span class="(?:interne-inline|abroge-inline|missing-file)"[^>]*>[\s\S]*?<\/span>\s*<\/p>\n?/g, (m) => { retires.push(`paragraphe « ${m.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()} »`); return ''; });
   // 2. item qui ne mène nulle part : source interne non publiée, article retiré, fichier introuvable
   h = h.replace(/<li>\s*[^<\n]*<span class="(?:interne-inline|abroge-inline|missing-file)"[^>]*>[\s\S]*?<\/span>\s*<\/li>\n?/g, (m) => { retires.push(`item « ${m.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()} »`); return ''; });
   // 2 bis. item vide
