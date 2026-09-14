@@ -851,6 +851,7 @@ function wikiSidebar(wikiKey, sections) {
     <li><a href="${ROOT}w/${wiki.slug}/index.html">Accueil du wiki</a></li>
     ${items}
     <li><a href="${ROOT}w/${wiki.slug}/index-alphabetique.html">Index alphabétique</a></li>
+    ${pageEtudes(wikiKey) ? `<li><a href="${ROOT}${pageEtudes(wikiKey)}">Études et rapports</a></li>` : ''}
     ${wikiKey === 'Recueil législatif SST' ? `<li><a href="${ROOT}w/${wiki.slug}/index-par-loi.html">Index par loi</a></li>` : ''}
   </ul></div>`;
 }
@@ -1093,6 +1094,21 @@ for (const wikiKey of SIX_WIKIS) {
     p.themePrincipal = principal;
   }
 }
+// ---------- études et rapports ----------
+// Une notion dont le titre porte une année entre parenthèses (« Karasek (1979) - … ») ou commence
+// par « Analyse - » est la fiche d'une source, pas une notion du sujet. Frank, 14 sept. 2026 :
+// elles quittent les volets de l'accueil, qui redevient une entrée par notion, et se retrouvent
+// sur une page « Études et rapports » du wiki, classées par thème. Aucune n'est perdue : la page
+// du thème, elle, continue de lister toutes ses pages, études comprises.
+const estEtude = (q) => /\((?:19|20)\d{2}[a-z]?\)/.test(q.title) || /^Analyse\s*[-–]/i.test(q.title);
+const etudesParWiki = new Map(SIX_WIKIS.map(k => [k,
+  pages.filter(q => q.wikiKey === k && q.role === 'notion' && estEtude(q)).sort((a, b) => a.title.localeCompare(b.title, 'fr'))]));
+const pageEtudes = (wikiKey) => (etudesParWiki.get(wikiKey) || []).length ? `w/${WIKIS[wikiKey].slug}/etudes-et-rapports.html` : null;
+{
+  const avec = SIX_WIKIS.filter(k => pageEtudes(k)).map(k => `${WIKIS[k].name} ${etudesParWiki.get(k).length}`);
+  console.log(`  études et rapports : ${avec.length ? avec.join(', ') : 'aucune'}`);
+}
+
 {
   const resume = SIX_WIKIS.map(k => {
     const notions = pages.filter(p => p.wikiKey === k && p.role === 'notion');
@@ -1256,6 +1272,7 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
     : `Section « ${esc(cleanLabel(parts[1]))} » du wiki ${lienWiki} · ${compte} pages`;
   const index = [{ url: `{{ROOT}}w/${wiki.slug}/index-alphabetique.html`, libelle: 'Index alphabétique' }];
   if (p.wikiKey === 'Recueil législatif SST') index.push({ url: `{{ROOT}}w/${wiki.slug}/index-par-loi.html`, libelle: 'Index par loi' });
+  if (accueilDuWiki && pageEtudes(p.wikiKey)) index.push({ url: '{{ROOT}}' + pageEtudes(p.wikiKey), libelle: 'Études et rapports' });
   index.push({ url: '{{ROOT}}categories.html', libelle: 'Catégories' });
   if (accueilDuWiki) index.push({ url: '{{ROOT}}themes.html', libelle: 'Tous les thèmes' });
   if (/gestionnaires/i.test(parts[1] || '')) index.push({ url: '{{ROOT}}g/index.html', libelle: 'Espace encadrement' });
@@ -1272,19 +1289,19 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
   if (accueilDuWiki && p.wikiKey !== 'Recueil législatif SST') {
     const themes = themesParWiki.get(p.wikiKey) || [];
     if (themes.length) {
-      const estEtude = (q) => /\((?:19|20)\d{2}[a-z]?\)/.test(q.title) || /^Analyse\s*[-–]/i.test(q.title);
       const lien = (q) => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`;
       const raccourcis = themes.map(t => `<a href="#theme-${slugify(t.base)}">${esc(t.title)}</a>`).join('');
       const volets = themes.map(t => {
-        const notions = pages.filter(q => q.wikiKey === p.wikiKey && q.role === 'notion' && (q.themes || []).includes(t))
+        // les études du thème sont sur la page « Études et rapports » du wiki ; la page du thème,
+        // elle, les liste avec le reste
+        const notions = pages.filter(q => q.wikiKey === p.wikiKey && q.role === 'notion' && (q.themes || []).includes(t) && !estEtude(q))
           .sort((a, b) => a.title.localeCompare(b.title, 'fr'));
-        const etudes = notions.filter(estEtude), autres = notions.filter(q => !estEtude(q));
         const desc = sousTitreTheme(t);
         const listes = notions.length
-          ? (autres.length ? `${etudes.length ? '<h4>Notions</h4>' : ''}<ul>${autres.map(lien).join('')}</ul>` : '')
-            + (etudes.length ? `<h4>Études et rapports</h4><ul>${etudes.map(lien).join('')}</ul>` : '')
+          ? `<ul>${notions.map(lien).join('')}</ul>`
           : '<p class="page-sub">Aucun article rattaché pour l’instant.</p>';
-        return `<details class="accueil-theme" id="theme-${slugify(t.base)}" open><summary><span class="accueil-theme-titre">${esc(t.title)}</span> <small>${notions.length} article${notions.length > 1 ? 's' : ''}</small>${desc ? `<span class="accueil-theme-desc">${esc(desc)}</span>` : ''}</summary>${listes}<a class="accueil-theme-page" href="{{ROOT}}${t.out}">Page du thème →</a></details>`;
+        // Le titre mène à la page du thème (le volet se replie par la flèche ou le reste de la ligne).
+        return `<details class="accueil-theme" id="theme-${slugify(t.base)}" open><summary><span class="accueil-theme-titre"><a href="{{ROOT}}${t.out}">${esc(t.title)}</a></span> <small>${notions.length} article${notions.length > 1 ? 's' : ''}</small>${desc ? `<span class="accueil-theme-desc">${esc(desc)}</span>` : ''}</summary>${listes}<a class="accueil-theme-page" href="{{ROOT}}${t.out}">Page du thème →</a></details>`;
       }).join('');
       sections = [
         { id: 'themes-du-wiki', titre: 'Thèmes', html: `<nav class="accueil-themes-nav" aria-label="Aller à un thème">${raccourcis}</nav><div class="accueil-groupes accueil-themes">${volets}</div>`, grand: true },
@@ -1546,6 +1563,31 @@ ${blocsWiki}`;
   fs.writeFileSync(path.join(OUT, 'themes.html'),
     pageShell({ out: 'themes.html', title: 'Thèmes', wikiKey: null, content })
       .replace(/\{\{ROOT\}\}/g, ''));
+}
+
+// ---------- page « Études et rapports » par wiki (14 septembre 2026) ----------
+// Les fiches de sources retirées des volets de l'accueil, classées par thème. Une étude rattachée
+// à deux thèmes paraît sous chacun ; une étude sans thème est listée à part, pour qu'aucune ne
+// disparaisse. La page n'existe que pour un wiki qui en a (aujourd'hui, la SST psychosociale).
+for (const k of SIX_WIKIS) {
+  const out = pageEtudes(k);
+  if (!out) continue;
+  const wiki = WIKIS[k];
+  const etudes = etudesParWiki.get(k);
+  const lien = (q) => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`;
+  const blocs = (themesParWiki.get(k) || []).map(t => {
+    const liste = etudes.filter(q => (q.themes || []).includes(t));
+    return liste.length ? `<h2 id="theme-${slugify(t.base)}">${esc(t.title)} <small>(${liste.length})</small></h2><ul class="cat-pages">${liste.map(lien).join('')}</ul>` : '';
+  }).join('');
+  const sans = etudes.filter(q => !(q.themes || []).length);
+  const content = `
+<div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a> <span class="crumb-sep">›</span> <a href="{{ROOT}}w/${wiki.slug}/index.html">${esc(wiki.name)}</a></div>
+<h1 class="page-title">Études et rapports</h1>
+<div class="page-sub">${etudes.length} pages d'analyse de sources — études, rapports et guides — du wiki ${wiki.icon} ${esc(wiki.name)}, classées par thème. Les notions du sujet restent sur <a href="{{ROOT}}w/${wiki.slug}/index.html">l'accueil du wiki</a>.</div>
+${blocs}${sans.length ? `<h2 id="sans-theme">Sans thème <small>(${sans.length})</small></h2><ul class="cat-pages">${sans.map(lien).join('')}</ul>` : ''}`;
+  fs.writeFileSync(path.join(OUT, out),
+    pageShell({ out, title: 'Études et rapports — ' + wiki.name, wikiKey: k, content, sidebarExtra: wikiSidebar(k, wikiSections[k]) })
+      .replace(/\{\{ROOT\}\}/g, rootOf(out)));
 }
 
 // ---------- tableau de bord qualité ----------
