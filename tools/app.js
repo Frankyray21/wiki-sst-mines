@@ -1519,4 +1519,106 @@
       });
     }
   })();
+
+  // ---------- avis sur la page : pouce et commentaire (15 septembre 2026) ----------
+  // Le générateur rend le bloc masqué : il n'apparaît que si assets/avis.json donne l'adresse d'un
+  // relais. Changer de relais ne demande donc pas de reconstruire les 4 000 pages, et tant qu'il n'y
+  // en a pas, personne ne voit un formulaire qui n'enverrait nulle part.
+  // Le pouce part tout de suite (un avis sans commentaire compte) ; le commentaire envoyé ensuite
+  // met à jour la même ligne, grâce à la clé « Réf » = lecteur + page. Hors ligne — sous terre, le
+  // cas normal ici — l'avis attend dans localStorage et repart à la connexion suivante.
+  (function avisPage() {
+    var bloc = document.querySelector('.avis');
+    var CLE_FILE = 'wiki-avis-file', CLE_LECTEUR = 'wiki-avis-lecteur';
+    var relais = '';
+
+    function lire(cle) { try { return localStorage.getItem(cle) || ''; } catch (e) { return ''; } }
+    function ecrire(cle, v) { try { localStorage.setItem(cle, v); } catch (e) { /* navigation privée */ } }
+    function lecteur() {
+      var id = lire(CLE_LECTEUR);
+      // identifiant local et anonyme : il ne sert qu'à relier le commentaire à son pouce
+      if (!id) { id = 'L' + Math.random().toString(36).slice(2, 10); ecrire(CLE_LECTEUR, id); }
+      return id;
+    }
+    function file() { try { return JSON.parse(lire(CLE_FILE) || '[]'); } catch (e) { return []; } }
+    function poserFile(f) { ecrire(CLE_FILE, JSON.stringify(f.slice(-20))); }
+
+    function envoyer(avis) {
+      return fetch(relais, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(avis)
+      }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r; });
+    }
+    function viderFile() {
+      var attente = file();
+      if (!relais || !attente.length) return;
+      poserFile([]);
+      var restants = [], suite = Promise.resolve();
+      attente.forEach(function (a) {
+        suite = suite.then(function () { return envoyer(a).catch(function () { restants.push(a); }); });
+      });
+      suite.then(function () { if (restants.length) poserFile(restants); });
+    }
+
+    if (!bloc) { if (relais) viderFile(); return; }
+    var pouces = bloc.querySelectorAll('.avis-pouce');
+    var formulaire = bloc.querySelector('.avis-mot');
+    var commentaire = bloc.querySelector('#avis-commentaire');
+    var nom = bloc.querySelector('#avis-nom');
+    var envoi = bloc.querySelector('.avis-envoyer');
+    var etat = bloc.querySelector('.avis-etat');
+    var choisi = '';
+
+    function dire(texte, merci) {
+      etat.textContent = texte;
+      etat.className = 'avis-etat' + (merci ? ' avis-merci' : '');
+    }
+    function avisCourant() {
+      return {
+        ref: lecteur() + '·' + bloc.getAttribute('data-avis-adresse'),
+        avis: choisi === 'haut' ? '👍 Utile' : '👎 À revoir',
+        page: bloc.getAttribute('data-avis-titre'),
+        adresse: bloc.getAttribute('data-avis-adresse'),
+        wiki: bloc.getAttribute('data-avis-wiki'),
+        lien: location.href.split('#')[0],
+        commentaire: commentaire.value.trim(),
+        nom: nom.value.trim(),
+        source: 'wiki-sst-mines'
+      };
+    }
+    function transmettre(merci) {
+      var avis = avisCourant();
+      dire('Envoi…');
+      envoyer(avis).then(function () { dire(merci, true); }).catch(function () {
+        var f = file(); f.push(avis); poserFile(f);
+        dire('Pas de réseau : votre avis partira à la prochaine connexion.');
+      });
+    }
+
+    for (var i = 0; i < pouces.length; i++) {
+      pouces[i].addEventListener('click', function () {
+        choisi = this.getAttribute('data-avis');
+        for (var j = 0; j < pouces.length; j++) pouces[j].setAttribute('aria-pressed', String(pouces[j] === this));
+        formulaire.hidden = false;
+        transmettre('Merci, c’est noté. Un mot pour expliquer ?');
+      });
+    }
+    formulaire.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!choisi) return;
+      envoi.disabled = true;
+      transmettre('Merci, votre commentaire est enregistré.');
+    });
+
+    // adresse du relais : un seul fichier à changer le jour où il bouge
+    fetch(vUrl(ROOT + 'assets/avis.json'))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (conf) {
+        if (!conf || !conf.url) return;          // pas de relais : le bloc reste masqué
+        relais = conf.url;
+        bloc.hidden = false;
+        viderFile();
+        window.addEventListener('online', viderFile);
+      })
+      .catch(function () { /* hors ligne au chargement : le bloc reste masqué */ });
+  })();
 })();

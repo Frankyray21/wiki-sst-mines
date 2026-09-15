@@ -1,0 +1,12 @@
+# Relais des avis du wiki vers Airtable. Déploiement : voir README.md, à côté.
+name = "avis-wiki"
+main = "worker.js"
+compatibility_date = "2026-09-15"
+
+[vars]
+AIRTABLE_BASE = "appmq82YjvEUglYZU"     # base « Formations »
+AIRTABLE_TABLE = "tbl3kDCV13AFkd6X6"    # table « Avis wiki SST (web) »
+ORIGINES = "https://frankyray21.github.io"
+
+# AIRTABLE_TOKEN n'est pas ici : c'est un secret.
+#   npx wrangler secret put AIRTABLE_TOKEN

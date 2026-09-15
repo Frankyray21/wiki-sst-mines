@@ -1,0 +1,6 @@
+{
+  "name": "avis-wiki",
+  "private": true,
+  "type": "module",
+  "description": "Relais des avis du wiki vers Airtable (Cloudflare Worker). tools/package.json déclare CommonJS : ce fichier rétablit les modules ES pour worker.js."
+}
