@@ -1,11 +1,11 @@
 // Service worker du WIKI SST — généré à la construction
-const VERSION = '20260915004507';
+const VERSION = '20260915010144';
 const P = 'wiki-sst-pages';
 const M = 'wiki-sst-medias';
 const ETAT = './__hl_etat__'; // état de synchronisation (hash déjà appliqués), rangé dans P
 
 const NOYAU = ['./index.html', './assets/style.css', './assets/portail.css',
-  './assets/app.js', './assets/hors-ligne.json', './offline.html'];
+  './assets/app.js', './assets/hors-ligne.json', './assets/avis.json', './offline.html'];
 
 self.addEventListener('install', (e) => {
   // noyau minimal — ?v= et cache:'reload' contournent le cache HTTP de 10 min

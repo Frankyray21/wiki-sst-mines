@@ -36,7 +36,10 @@ déjà traité ne repasse pas en « Nouveau » si le lecteur ajoute un mot.
    { "url": "https://avis-wiki.votre-sous-domaine.workers.dev", "base": "Formations", "table": "Avis wiki SST (web)" }
    ```
    puis commiter. C'est le seul fichier à changer : les pages le relisent au chargement, et le
-   générateur ne l'écrase jamais.
+   générateur ne l'écrase jamais. Il est volontairement **hors du manifeste hors ligne**
+   (`assets/hors-ligne.json`) : `verif_publication` ne le contrôle pas et la synchronisation ne le
+   retélécharge pas ; le service worker le garde dans son noyau et le rafraîchit à chaque visite en
+   ligne, si bien que le bloc d'avis fonctionne aussi sous terre.
 
 Tant que `url` est vide, **le bloc d'avis reste invisible** sur toutes les pages : personne ne voit
 un formulaire qui n'enverrait nulle part.
@@ -56,7 +59,9 @@ l'essai). Relancer la même commande doit répondre `"mis_a_jour":true` sans cr�
 
 - une origine hors de `ORIGINES` (403) ;
 - un `avis` autre que « 👍 Utile » ou « 👎 À revoir » (400) ;
-- une requête sans `ref` ni `adresse` (400).
+- une requête sans `ref` ni `adresse` (400) ;
+- une `ref` contenant un guillemet, une barre oblique inverse ou un caractère de contrôle (400) :
+  elle entre dans une formule Airtable, et le site n'en produit jamais.
 
 Les textes sont coupés (commentaire 1 500 caractères, nom 80) et le `Wiki` n'est écrit que s'il
 fait partie des huit valeurs attendues. En cas de panne d'Airtable, le relais répond 502 et le

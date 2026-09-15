@@ -70,11 +70,18 @@ test('ce que le relais refuse', async () => {
     [{ ...AVIS, avis: '⭐ Génial' }, 400, 'avis inattendu'],
     [{ ...AVIS, ref: '' }, 400, 'page manquante'],
     [{ ...AVIS, adresse: '' }, 400, 'page manquante'],
+    // la Réf entre dans une formule Airtable : rien qui puisse en sortir
+    [{ ...AVIS, ref: 'L1·x" != "y' }, 400, 'référence inattendue'],
+    [{ ...AVIS, ref: 'L1·x\\" != \\"y' }, 400, 'référence inattendue'],
+    [{ ...AVIS, ref: 'L1·x\u0007y' }, 400, 'référence inattendue'],
   ];
-  for (const [corps, statut] of cas) {
+  for (const [corps, statut, erreur] of cas) {
     const r = await worker.fetch(poste(corps), ENV);
     assert.equal(r.status, statut, JSON.stringify(corps.avis || corps.ref));
+    assert.equal((await r.json()).erreur, erreur);
   }
+  // l'apostrophe typographique et le séparateur « · » d'une Réf normale passent
+  assert.equal((await worker.fetch(poste({ ...AVIS, ref: 'L1·w/psychosocial/l’équipe.html' }), ENV)).status, 200);
   // origine étrangère
   const etranger = await worker.fetch(poste(AVIS, 'https://ailleurs.example'), ENV);
   assert.equal(etranger.status, 403);

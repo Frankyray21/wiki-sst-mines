@@ -93,7 +93,7 @@ const M = 'wiki-sst-medias';
 const ETAT = './__hl_etat__'; // état de synchronisation (hash déjà appliqués), rangé dans P
 
 const NOYAU = ['./index.html', './assets/style.css', './assets/portail.css',
-  './assets/app.js', './assets/hors-ligne.json', './offline.html'];
+  './assets/app.js', './assets/hors-ligne.json', './assets/avis.json', './offline.html'];
 
 self.addEventListener('install', (e) => {
   // noyau minimal — ?v= et cache:'reload' contournent le cache HTTP de 10 min
@@ -407,8 +407,10 @@ export function genererListeHorsLigne(OUT, version) {
   (function walk(d, rel) {
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {
       const chemin = rel + e.name;
-      // sw.js se gère lui-même ; hors-ligne.json ne peut pas se lister lui-même
-      if (chemin === 'sw.js' || chemin === 'assets/hors-ligne.json' || e.name === '.nojekyll') continue;
+      // sw.js se gère lui-même ; hors-ligne.json ne peut pas se lister lui-même ; avis.json est
+      // une configuration modifiée à la main, sans reconstruction : hors du manifeste (sinon son
+      // hash périmé ferait échouer chaque synchronisation), mais dans le NOYAU du service worker.
+      if (chemin === 'sw.js' || chemin === 'assets/hors-ligne.json' || chemin === 'assets/avis.json' || e.name === '.nojekyll') continue;
       const abs = path.join(d, e.name);
       if (e.isDirectory()) { walk(abs, chemin + '/'); continue; }
       const taille = fs.statSync(abs).size;

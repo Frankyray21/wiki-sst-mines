@@ -53,6 +53,9 @@ export default {
     const adresse = coupe(recu.adresse, LIMITES.adresse);
     if (!AVIS_VALIDES.includes(avis)) return reponse({ erreur: 'avis inattendu' }, 400, origine);
     if (!ref || !adresse) return reponse({ erreur: 'page manquante' }, 400, origine);
+    // la Réf entre dans une formule Airtable : guillemet, barre oblique inverse et caractères de
+    // contrôle n'y ont rien à faire (le site n'en produit jamais) — refusés plutôt qu'échappés
+    if (/["\\\u0000-\u001f\u007f]/.test(ref)) return reponse({ erreur: 'référence inattendue' }, 400, origine);
 
     const wiki = coupe(recu.wiki, 60);
     const champs = {

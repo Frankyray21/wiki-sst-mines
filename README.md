@@ -117,8 +117,9 @@ node tools/serve.mjs
   replient le volet
 - **Avis des lecteurs** : sur chaque page issue d'une note, un pouce en haut, un pouce en bas et un commentaire
   facultatif, enregistrés dans Airtable (base Formations, table « Avis wiki SST (web) ») par un relais Cloudflare.
-  Le bloc reste invisible tant que `docs/assets/avis.json` ne donne pas l'adresse d'un relais ; hors ligne, l'avis
-  attend dans le navigateur et repart à la connexion suivante
+  Le bloc reste invisible tant que `docs/assets/avis.json` ne donne pas l'adresse d'un relais (fichier modifié à la
+  main, hors du manifeste hors ligne, gardé dans le noyau du service worker) ; hors ligne, l'avis attend dans le
+  navigateur et repart à la connexion suivante, depuis n'importe quelle page
 - **Études et rapports** : les fiches de sources (titre avec une année entre parenthèses, ou « Analyse - … »)
   quittent les volets de l'accueil pour une page `w/<wiki>/etudes-et-rapports.html`, classée par thème, avec un
   groupe « Sans thème » pour n'en perdre aucune ; la page du thème, elle, continue de toutes les lister

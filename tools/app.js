@@ -1544,6 +1544,7 @@
     function poserFile(f) { ecrire(CLE_FILE, JSON.stringify(f.slice(-20))); }
 
     function envoyer(avis) {
+      if (!relais) return Promise.reject(new Error('sans relais'));
       return fetch(relais, {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(avis)
       }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r; });
@@ -1556,69 +1557,74 @@
       attente.forEach(function (a) {
         suite = suite.then(function () { return envoyer(a).catch(function () { restants.push(a); }); });
       });
-      suite.then(function () { if (restants.length) poserFile(restants); });
+      // un avis donné pendant l'envoi s'est ajouté à la file entre-temps : on le garde
+      suite.then(function () { if (restants.length) poserFile(file().concat(restants)); });
     }
 
-    if (!bloc) { if (relais) viderFile(); return; }
-    var pouces = bloc.querySelectorAll('.avis-pouce');
-    var formulaire = bloc.querySelector('.avis-mot');
-    var commentaire = bloc.querySelector('#avis-commentaire');
-    var nom = bloc.querySelector('#avis-nom');
-    var envoi = bloc.querySelector('.avis-envoyer');
-    var etat = bloc.querySelector('.avis-etat');
-    var choisi = '';
+    function brancher() {
+      var pouces = bloc.querySelectorAll('.avis-pouce');
+      var formulaire = bloc.querySelector('.avis-mot');
+      var commentaire = bloc.querySelector('#avis-commentaire');
+      var nom = bloc.querySelector('#avis-nom');
+      var envoi = bloc.querySelector('.avis-envoyer');
+      var etat = bloc.querySelector('.avis-etat');
+      var choisi = '';
 
-    function dire(texte, merci) {
-      etat.textContent = texte;
-      etat.className = 'avis-etat' + (merci ? ' avis-merci' : '');
-    }
-    function avisCourant() {
-      return {
-        ref: lecteur() + '·' + bloc.getAttribute('data-avis-adresse'),
-        avis: choisi === 'haut' ? '👍 Utile' : '👎 À revoir',
-        page: bloc.getAttribute('data-avis-titre'),
-        adresse: bloc.getAttribute('data-avis-adresse'),
-        wiki: bloc.getAttribute('data-avis-wiki'),
-        lien: location.href.split('#')[0],
-        commentaire: commentaire.value.trim(),
-        nom: nom.value.trim(),
-        source: 'wiki-sst-mines'
-      };
-    }
-    function transmettre(merci) {
-      var avis = avisCourant();
-      dire('Envoi…');
-      envoyer(avis).then(function () { dire(merci, true); }).catch(function () {
-        var f = file(); f.push(avis); poserFile(f);
-        dire('Pas de réseau : votre avis partira à la prochaine connexion.');
+      function dire(texte, merci) {
+        etat.textContent = texte;
+        etat.className = 'avis-etat' + (merci ? ' avis-merci' : '');
+      }
+      function avisCourant() {
+        return {
+          ref: lecteur() + '·' + bloc.getAttribute('data-avis-adresse'),
+          avis: choisi === 'haut' ? '👍 Utile' : '👎 À revoir',
+          page: bloc.getAttribute('data-avis-titre'),
+          adresse: bloc.getAttribute('data-avis-adresse'),
+          wiki: bloc.getAttribute('data-avis-wiki'),
+          lien: location.href.split('#')[0],
+          commentaire: commentaire.value.trim(),
+          nom: nom.value.trim(),
+          source: 'wiki-sst-mines'
+        };
+      }
+      function transmettre(merci) {
+        var avis = avisCourant();
+        dire('Envoi…');
+        envoyer(avis).then(function () { dire(merci, true); }).catch(function () {
+          var f = file(); f.push(avis); poserFile(f);
+          dire('Pas de réseau : votre avis partira à la prochaine connexion.');
+        });
+      }
+
+      for (var i = 0; i < pouces.length; i++) {
+        pouces[i].addEventListener('click', function () {
+          choisi = this.getAttribute('data-avis');
+          for (var j = 0; j < pouces.length; j++) pouces[j].setAttribute('aria-pressed', String(pouces[j] === this));
+          formulaire.hidden = false;
+          transmettre('Merci, c’est noté. Un mot pour expliquer ?');
+        });
+      }
+      formulaire.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!choisi) return;
+        envoi.disabled = true;
+        transmettre('Merci, votre commentaire est enregistré.');
       });
     }
+    if (bloc) brancher();
 
-    for (var i = 0; i < pouces.length; i++) {
-      pouces[i].addEventListener('click', function () {
-        choisi = this.getAttribute('data-avis');
-        for (var j = 0; j < pouces.length; j++) pouces[j].setAttribute('aria-pressed', String(pouces[j] === this));
-        formulaire.hidden = false;
-        transmettre('Merci, c’est noté. Un mot pour expliquer ?');
-      });
-    }
-    formulaire.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!choisi) return;
-      envoi.disabled = true;
-      transmettre('Merci, votre commentaire est enregistré.');
-    });
-
-    // adresse du relais : un seul fichier à changer le jour où il bouge
+    // Adresse du relais : un seul fichier à changer le jour où il bouge. Lu sur chaque page, bloc
+    // ou non : une page d'index vide aussi la file d'attente laissée par une page précédente.
+    // Le service worker garde ce fichier dans son noyau, donc l'avis fonctionne aussi hors ligne.
     fetch(vUrl(ROOT + 'assets/avis.json'))
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (conf) {
         if (!conf || !conf.url) return;          // pas de relais : le bloc reste masqué
         relais = conf.url;
-        bloc.hidden = false;
+        if (bloc) bloc.hidden = false;
         viderFile();
         window.addEventListener('online', viderFile);
       })
-      .catch(function () { /* hors ligne au chargement : le bloc reste masqué */ });
+      .catch(function () { /* fichier injoignable et sans copie en cache : le bloc reste masqué */ });
   })();
 })();

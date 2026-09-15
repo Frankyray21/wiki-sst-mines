@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import os from 'node:os';
 import { blocAvis, CONF_AVIS } from '../avis.mjs';
+import { genererListeHorsLigne } from '../pwa.mjs';
 
 // Bloc d'avis (15 septembre 2026) : pouce en haut, pouce en bas, commentaire facultatif, envoyés
 // à un relais qui garde le jeton Airtable. Contrôles de forme et état du site publié.
@@ -43,6 +45,27 @@ test('feuille de style et script : le formulaire reste caché, les cibles font 4
   assert.match(js, /wiki-avis-file/, 'file d’attente hors ligne');
   assert.ok(!/api\.airtable\.com/.test(js), 'aucun appel direct à Airtable depuis le navigateur');
   assert.ok(!/(?:pat|key)[A-Za-z0-9]{14,}/.test(js), 'aucun jeton dans le script');
+});
+
+test('avis.json : hors du manifeste hors ligne, dans le noyau du service worker', () => {
+  // Modifié à la main après déploiement du relais, sans reconstruction : un hash figé dans le
+  // manifeste ferait échouer chaque synchronisation et le contrôle de publication.
+  const pwa = fs.readFileSync(path.join(R, 'tools/pwa.mjs'), 'utf8');
+  assert.match(pwa, /const NOYAU = \[[^\]]*'\.\/assets\/avis\.json'/, 'mis en cache à l’installation, conservé au nettoyage');
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'avis-'));
+  fs.mkdirSync(path.join(tmp, 'assets'));
+  fs.writeFileSync(path.join(tmp, 'assets', 'avis.json'), '{"url":""}');
+  fs.writeFileSync(path.join(tmp, 'a.html'), '<p>a</p>');
+  genererListeHorsLigne(tmp, '20260915000000');
+  const liste = JSON.parse(fs.readFileSync(path.join(tmp, 'assets', 'hors-ligne.json'), 'utf8'));
+  assert.deepEqual(liste.pages.map(p => p[0]), ['a.html']);
+  fs.rmSync(tmp, { recursive: true, force: true });
+  const publie = JSON.parse(fs.readFileSync(path.join(DOCS, 'assets/hors-ligne.json'), 'utf8'));
+  assert.ok(!publie.pages.some(p => p[0] === CONF_AVIS), 'manifeste publié sans avis.json');
+  assert.match(fs.readFileSync(path.join(DOCS, 'sw.js'), 'utf8'), /NOYAU = \[[^\]]*'\.\/assets\/avis\.json'/, 'service worker publié');
+  const js = fs.readFileSync(path.join(R, 'tools/app.js'), 'utf8');
+  assert.ok(!js.includes('if (!bloc) { if (relais) viderFile(); return; }'), 'la file d’attente se vide aussi sur une page sans bloc');
+  assert.ok(js.indexOf('if (bloc) brancher();') < js.indexOf("fetch(vUrl(ROOT + 'assets/avis.json'))"), 'la configuration est lue quel que soit le bloc');
 });
 
 test('configuration du relais : présente, vide, sans jeton', () => {
