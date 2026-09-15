@@ -18,6 +18,7 @@ import { normaliserBibliographie } from './bibliographie.mjs';
 import { motsDePage, encoderListe } from './recherche_mots.mjs';
 import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
 import { estAccueil, decouperAccueil, rendreAccueil, titreAccueil, piedAccueil } from './accueil_wiki.mjs';
+import { blocAvis, CONF_AVIS } from './avis.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -1214,6 +1215,7 @@ ${p.html}
 ${notionsDuTheme.length ? `<ul class="cat-pages">${notionsDuTheme.map(q => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`).join('')}</ul>` : '<p class="page-sub">Aucun article n’est pour l’instant rattaché à ce thème.</p>'}
 ${autresThemes.length ? `<h2>Autres thèmes du wiki</h2><ul class="cat-pages">${autresThemes.map(t => `<li><a href="{{ROOT}}${t.out}">${esc(t.title)}</a></li>`).join('')}</ul>` : ''}
 </div>
+${blocAvis({ adresse: p.out, titre: p.title, wiki: WIKIS[p.wikiKey].name })}
 <div class="page-meta">${revisionHtml} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
   } else if (p.accueil) {
     content = contenuAccueil(p, { crumbs, accueil: p.accueil, chapoHtml: p.chapoHtml, pied: piedAccueil(new Date().toISOString().slice(0, 10)) });
@@ -1229,6 +1231,7 @@ ${p.html}
 </div>
 ${p.wikiKey === 'Recueil législatif SST' ? voisinsHtml(p) : voirAussiHtml(p)}
 ${blHtml}
+${blocAvis({ adresse: p.out, titre: p.title, wiki: WIKIS[p.wikiKey].name })}
 <div class="page-meta">${revisionHtml} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
   }
   const html = pageShell({
@@ -1317,6 +1320,7 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
   return `
 <div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
 ${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: (chapoHtml || '') + accueil.chapeau, sections, index })}
+${blocAvis({ adresse: p.out, titre: titreAccueil(p.title), wiki: wiki.name })}
 ${pied}`;
 }
 
@@ -1835,6 +1839,7 @@ ${tocHtml}
 <div class="page-body">
 ${corps}
 </div>
+${blocAvis({ adresse: out, titre: p.title, wiki: 'Espace encadrement' })}
 <div class="page-meta">${metadonneesEditoriales(p, new Date().toISOString().slice(0, 10))} · ${versFond}</div>`;
     const html = pageShell({ out, title: accueil ? titreAccueil(p.title) : p.title, wikiKey: null, content: contenu, sidebarExtra: sidebarPublic(pub) })
       .replace(/\{\{ROOT\}\}/g, R);
@@ -1990,6 +1995,12 @@ genererPwa(OUT, V);
 
 // La date de génération vit dans un seul fichier, lu par le pied de page. Écrite dans les
 // 4970 pages, elle changeait tout le site à chaque reconstruction — ~60 Mo de dépôt pour une date.
+{
+  const conf = path.join(OUT, CONF_AVIS);
+  if (!fs.existsSync(conf)) fs.writeFileSync(conf, JSON.stringify({ url: '', base: 'Formations', table: 'Avis wiki SST (web)' }, null, 1) + '\n');
+  const url = JSON.parse(fs.readFileSync(conf, 'utf8')).url;
+  console.log(`  avis : relais ${url ? url : 'non configuré — le bloc reste masqué'}`);
+}
 fs.writeFileSync(path.join(OUT, 'assets', 'version.json'), JSON.stringify({
   date: new Date().toISOString().slice(0, 10),
   pages: pages.length,
