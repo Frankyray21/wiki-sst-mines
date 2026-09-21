@@ -10,7 +10,10 @@ const RE_LIEN = /\[\[([^\]]+)\]\]/g;
 // Note d'analyse d'une étude ou d'un rapport : « Karasek (1979) - … », « Analyse - … ». Son gabarit
 // commence par un titre de section, pas par une phrase : le contrôle d'introduction ne s'y
 // applique pas. Même règle que la page « Études et rapports » du générateur.
-export const estEtude = (titre) => /\((?:19|20)\d{2}[a-z]?\)/.test(String(titre || '')) || /^Analyse\s*[-–]/i.test(String(titre || ''));
+// « (1996) », mais aussi « (dir., 1996) », « (éd., 2001) » : l'année entre parenthèses, précédée ou
+// non d'une mention de rôle éditorial. Pas d'un nom d'auteur : « Job strain et maladie coronarienne
+// (Kivimäki, 2012) » est une notion qui cite une étude, laquelle a sa propre note d'analyse.
+export const estEtude = (titre) => /\((?:(?:dir|éd|ed|eds|coord)\.,?\s*)?(?:19|20)\d{2}[a-z]?\)/i.test(String(titre || '')) || /^Analyse\s*[-–]/i.test(String(titre || ''));
 
 // Source directe d'une note d'analyse : son DOI, sinon sa première adresse externe. Une page qui
 // cite cette note a sa source à un clic ; le générateur l'affiche à côté de la citation.

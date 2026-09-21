@@ -67,6 +67,8 @@ adresses n'ont pas changé.
   ce que les tests de structure ne voient pas. Cinq modes : téléphone (clair et sombre), tablette de chantier
   en paysage et en portrait, bureau ; échec sur défilement horizontal, cible tactile sous 24 px, sommaire ou
   infobox sur un accueil, titre à plusieurs h1
+- `tools/appliquer_intros.mjs` — pose dans les notes du vault les phrases d'ouverture d'un lot (`tools/intros.mjs`) ;
+  essai par défaut, sauvegarde avant écriture
 - `tools/avis.mjs` — bloc « Cette page vous a-t-elle été utile ? » (pouce et commentaire) posé sur chaque page
   issue d'une note ; `tools/avis-worker/` — le relais Cloudflare qui écrit dans Airtable, et son mode d'emploi
 - `tools/serve.mjs` — serveur local de prévisualisation (port 8090)
@@ -131,7 +133,8 @@ node tools/serve.mjs
   notes d'analyse d'études, dont le gabarit commence par un titre ; une page qui cite une note d'analyse porteuse
   d'un DOI compte comme sourcée, et la source s'affiche à côté de la citation (pastille « DOI » ou « source » dans
   les listes et les tableaux, 629 citations sur 169 pages). Ce qui reste à faire dans le vault est listé dans
-  `content-updates/2026-09-21-controles-de-forme.json`
+  `content-updates/2026-09-21-controles-de-forme.json` ; les phrases d'ouverture des pages qui n'en avaient pas
+  sont dans `content-updates/2026-09-21-phrases-introduction.json`, à poser avec `tools/appliquer_intros.mjs`
 - **Avis des lecteurs** : sur chaque page issue d'une note, un pouce en haut, un pouce en bas et un commentaire
   facultatif, enregistrés dans Airtable (base Formations, table « Avis wiki SST (web) ») par un relais Cloudflare.
   Le bloc reste invisible tant que `docs/assets/avis.json` ne donne pas l'adresse d'un relais (fichier modifié à la

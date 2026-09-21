@@ -101,11 +101,12 @@ test('la table des matières manuelle ne cache pas la phrase d’ouverture qui l
 
 test('une note d’analyse commence par un titre de section : ce n’est pas une page sans introduction', () => {
   const corps = '## Identification de la source\n\n| Attribut | Valeur |\n|---|---|\n| Auteur | Siegrist |\n\n## Résultats\n\n' + 'mot '.repeat(120);
-  for (const title of ['Siegrist (1996) - Modèle Effort-Récompense', 'Analyse - INSPQ 2021', 'Analyse Kivimäki et al. (2006)']) {
+  for (const title of ['Siegrist (1996) - Modèle Effort-Récompense', 'Analyse - INSPQ 2021', 'Analyse Kivimäki et al. (2006)', 'Analyse Daniellou (dir., 1996) - L’ergonomie en quête de ses principes', 'Guide (éd., 2001a)']) {
     assert.ok(estEtude(title), title);
     assert.ok(!analyserQualite({ body: corps, title }).defauts.some(d => d.code === 'sans-intro'), title);
   }
   assert.ok(!estEtude('Charge de travail élevée'));
+  assert.ok(!estEtude('Job strain et maladie coronarienne (Kivimäki, 2012)'), 'une notion qui cite une étude n’est pas l’étude');
   assert.ok(analyserQualite({ body: corps, title: 'Charge de travail élevée' }).defauts.some(d => d.code === 'sans-intro'));
 });
 

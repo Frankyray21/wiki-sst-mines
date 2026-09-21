@@ -15,7 +15,8 @@ tient de la mesure de ce qui tient des notes.
   du vault (versées dans les lots du 6 et du 9 septembre) et sur une table de quinze entrées.
 - **Notes d'analyse d'études** : 18 des 25 cas restants sont des notes « Auteur (année) - … », dont le
   gabarit (19 sections) commence par un titre. Le contrôle ne s'y applique plus, comme la page « Études
-  et rapports » du générateur ne les compte pas parmi les notions.
+  et rapports » du générateur ne les compte pas parmi les notions. La règle reconnaît aussi « (dir.,
+  1996) » : l'analyse de Daniellou rejoint la page « Études et rapports » du wiki psychosocial (45).
 - **« Source directe » et notes d'analyse citées** : 107 pages citent dans leur corps une note d'analyse
   qui porte elle-même le DOI de la source — la source était à un clic, mais invisible sur la page. Le
   générateur affiche maintenant cette source **à côté de la citation** (pastille « DOI », ou « source »
@@ -27,37 +28,21 @@ Le tableau de bord ne se recalcule qu'à la construction depuis le vault. Estima
 les règles corrigées, sur le site publié : **≈ 320 pages** signalées au lieu de 450 — le détail par page
 est dans `content-updates/2026-09-21-controles-de-forme.json` (champ `restants`).
 
-## 2. Ce qui vient des notes, à faire dans le vault
+## 2. Ce qui vient des notes
 
-Rien de ceci ne peut être fait d'ici : aucun site externe n'est joignable (impossible de vérifier une
-référence), et le vault n'est pas accessible. La liste est prête ; chaque entrée nomme la page et ce
-qui manque.
+Aucun site externe n'est joignable d'ici (impossible de vérifier une référence) et le vault n'est pas
+accessible : les sources, les outils et les références vagues restent à faire sur votre poste. La liste
+est prête ; chaque entrée nomme la page et ce qui manque.
 
 | Ce qui manque | Pages | Où |
 | --- | ---: | --- |
 | Aucune source repérable (ni adresse externe, ni note d'analyse citée qui en porte une) | 306 | SST psychosociale 150, Hygiène industrielle 37, Ergonomie 37, Toxicologie 31, Droit du travail 28, Sécurité industrielle 23 |
 | Outil annoncé « À créer / À adapter » dans un tableau | 31 | SST psychosociale 30, Droit du travail 1 |
-| Aucune phrase d'introduction (hors notes d'analyse) | 13 | SST psychosociale 8, Droit du travail 2, Ergonomie 2, Toxicologie 1 |
-| Références invérifiables sous « Références / Pour aller plus loin » | 9 | SST psychosociale 8, Hygiène industrielle 1 |
-| Phrases de plus de 45 mots | 2 | repris de la liste publiée |
+| Aucune phrase d'introduction (hors notes d'analyse) | 7 | SST psychosociale 7 — **phrases prêtes, voir § 3** |
+| Références invérifiables sous « Références / Pour aller plus loin » | 15 | SST psychosociale 14, Hygiène industrielle 1 |
+| Phrases de plus de 45 mots | 2 listées (3 selon le tableau de bord) | repris de la liste publiée |
 
-### Les 13 pages sans phrase d'introduction
-
-- `w/psychosocial/charge-de-travail-elevee.html` — Charge de travail élevée (SST psychosociale) : la page s’ouvre sur un titre
-- `w/psychosocial/theorell-et-al-2015-avec-mises-a-jour-2015-2025.html` — RPS et symptômes dépressifs au travail - Fiche Obsidian centrée sur Theorell et al. 2015, avec mises à jour 2015-2025 (SST psychosociale) : la page s’ouvre sur un titre
-- `w/psychosocial/top-20-articles-essentiels.html` — ⭐ Top 20 articles (SST psychosociale) : la page s’ouvre sur une liste
-- `w/psychosocial/de-la-conformite-a-la-prevention-comprendre-et-faire-evoluer-la-culture-sst.html` — 🔄 De la conformité à la prévention - Comprendre et faire évoluer la culture SST (SST psychosociale) : la page s’ouvre sur une citation
-- `w/droit-travail/latmp.html` — LATMP - Loi sur les accidents du travail et les maladies professionnelles (Droit du travail) : la page s’ouvre sur une citation
-- `w/droit-travail/lsst.html` — LSST - Loi sur la santé et la sécurité du travail (Droit du travail) : la page s’ouvre sur une citation
-- `w/ergonomie/art-166-rsst-posture-assise.html` — art-166-RSST (Ergonomie) : la page s’ouvre sur une ligne trop courte
-- `w/ergonomie/art-167-rsst-siege-ergonomique.html` — art-167-RSST (Ergonomie) : la page s’ouvre sur une ligne trop courte
-- `w/psychosocial/analyse-daniellou-1996.html` — Analyse Daniellou (dir., 1996) - L'ergonomie en quête de ses principes (SST psychosociale) : la page s’ouvre sur un titre
-- `w/psychosocial/index-notes-wiki.html` — Index des 7 Notes Wiki Créées - SST1010 (SST psychosociale) : la page s’ouvre sur un titre
-- `w/psychosocial/iso-strain.html` — Iso-strain (SST psychosociale) : la page s’ouvre sur une liste
-- `w/psychosocial/readme-notes-lot3.html` — LOT 3 - NOTES INSTITUTIONNELLES/COMPLÉMENTAIRES (SST psychosociale) : la page s’ouvre sur un titre
-- `w/toxicologie/art-2-latmp-termes-utilises.html` — art-2-LATMP (Toxicologie) : la page s’ouvre sur une ligne trop courte
-
-### Les 9 pages avec des références invérifiables
+### Les 15 pages avec des références invérifiables
 
 - `w/psychosocial/communication-en-situation-difficile.html` — Communication en situation difficile : Guides de communication interpersonnelle. | Études sur la communication post-incident traumatique.
 - `w/psychosocial/communication-laterale.html` — Communication latérale : Études en communication organisationnelle : aucune référence précise n'est consignée dans  | Recherches sur les communautés de pratique (Wenger) : aucun titre ni année n'est consigné 
@@ -67,7 +52,13 @@ qui manque.
 - `w/psychosocial/aide-foreur-profil-rps.html` — Aide-foreur, profil RPS : IRSST. Études sur les métiers miniers québécois. | Études internationales sur les profils RPS en industrie minière.
 - `w/psychosocial/communication-ascendante.html` — Communication ascendante : Notes de cours SST1010, module 11. | Études en communication organisationnelle (Tourish & Robson, Detert & Edmondson).
 - `w/psychosocial/formation-des-superviseurs-a-la-detection.html` — Formation des superviseurs à la détection : Commission de la santé mentale du Canada. Premiers soins en santé mentale. | INRS. Stress au travail, le rôle du manager.
+- `w/psychosocial/theme/conflits-et-harcelement.html` — Conflits et Harcèlement
 - `w/psychosocial/demarche-de-prevention-en-rps-etapes.html` — Démarche de prévention en RPS, étapes : INRS. Risques psychosociaux, démarche de prévention. | INSPQ. Trousse d'outils pour la surveillance de la santé mentale en milieu de travail.
+- `w/psychosocial/theme/invalidite-et-lesions.html` — Invalidité et Lésions
+- `w/psychosocial/theme/legislation-et-normes.html` — Législation et Normes
+- `w/psychosocial/theme/modeles-et-theories.html` — Modèles et Théories
+- `w/psychosocial/theme/reconnaissance-et-motivation.html` — Reconnaissance et Motivation
+- `w/psychosocial/reseau-de-la-sante-publique-en-sst-drsp-inspq.html` — Réseau de la santé publique en SST (DRSP, INSPQ)
 
 ### Les 31 pages avec un outil « À créer / À adapter »
 
@@ -135,25 +126,30 @@ vérifiable pèse plus qu'une fiche de 160 mots) :
 - `w/securite/theorie-causale-des-accidents.html` — Accidents et incidents, théorie causale (Sécurité industrielle, 1119 mots)
 - … et 281 autres, dans le JSON.
 
-## 3. Suite proposée
+## 3. Les 7 phrases d'ouverture, prêtes à poser
+
+(en cours)
+
+## 4. Suite proposée
 
 1. **Sources** : lot par lot et par wiki, à partir des sources primaires que vous consultez (CNESST,
    IRSST, INRS, INSPQ, LegisQuébec, articles à DOI), comme les lots « références » du 6 septembre. Une
    fois une note d'analyse créée pour une source, toutes les pages qui la citent héritent de sa
    pastille : c'est le levier le plus rentable pour le wiki psychosocial (150 pages).
-2. **Introductions** : 13 pages — une phrase d'ouverture chacune, à écrire à partir du contenu déjà
-   présent ; je peux les proposer en lot si vous le demandez, avec la phrase et son emplacement, pour
-   relecture avant pose.
-3. **Outils annoncés** : 31 pages — décider, tableau par tableau, si l'outil existe (le lier), sera
+2. **Outils annoncés** : 31 pages — décider, tableau par tableau, si l'outil existe (le lier), sera
    créé (garder la mention, avec un responsable) ou n'existera pas (retirer la ligne).
-4. **Références vagues** : 9 pages — remplacer « Guides de communication interpersonnelle. » par la
+3. **Références vagues** : 15 pages — remplacer « Guides de communication interpersonnelle. » par la
    référence réelle, ou retirer la ligne.
 
 ## Vérifications
 
-- 141 tests (1 échec connu et antérieur : textes-loi), dont 3 nouveaux : table des matières sur deux
-  notes réelles et une table de quinze entrées, exemption des notes d'analyse, source héritée et pastille
-  (listes et tableaux seulement, idempotente).
+- 147 tests (1 échec connu et antérieur : textes-loi), dont : table des matières sur deux notes réelles
+  et une table de quinze entrées, exemption des notes d'analyse (y compris « (dir., 1996) », et non
+  « (Kivimäki, 2012) » qui est une notion citant une étude), source héritée et pastille (listes et
+  tableaux seulement, idempotente), pose des phrases d'ouverture (après le H1, avant la table des
+  matières, CRLF et BOM conservés, jamais deux fois).
 - `verif_site`, `verif_liens` (0 erreur), `verif_publication --staged`, `verif_rendu` sur des pages à
   pastilles (cible de 29 px sur écran tactile).
+- Les phrases d'ouverture : rédigées par un agent à partir de la page seule, avec l'appui textuel de
+  chaque élément, puis réfutées par un second agent (fidélité au contenu, forme) ; relues ensuite.
 

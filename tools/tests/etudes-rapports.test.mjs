@@ -10,7 +10,8 @@ import { fileURLToPath } from 'node:url';
 const R = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DOCS = path.join(R, 'docs');
 const WIKIS = ['ergonomie', 'hygiene', 'toxicologie', 'securite', 'droit-travail', 'psychosocial'];
-const estEtude = (t) => /\((?:19|20)\d{2}[a-z]?\)/.test(t) || /^Analyse\s*[-–]/i.test(t);
+// même règle que le générateur et le contrôle de forme : une seule définition, dans qualite.mjs
+import { estEtude } from '../qualite.mjs';
 const texte = (h) => h.replace(/<[^>]+>/g, '').replace(/&#39;/g, '’').replace(/&amp;/g, '&').trim();
 const lire = (rel) => fs.readFileSync(path.join(DOCS, rel), 'utf8');
 const volets = (html) => [...html.matchAll(/<details class="accueil-theme" id="([^"]*)" open><summary>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/g)]
