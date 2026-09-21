@@ -24,7 +24,6 @@
   --th-bg: #eaecf0;
   --tr-alt: #f8f9fa;
   --img-bg: #ffffff;
-  --img-filtre: none;          /* les captures de documents sont inversées en sombre */
 
   --surlignage-bg: #ffe49c;
   --surlignage-fg: inherit;
@@ -56,11 +55,12 @@
   color-scheme: light;
 }
 
-/* ---------- thème sombre ---------- */
-/* Deux déclencheurs : la préférence du système, et le choix explicite du lecteur.
-   Le choix explicite l'emporte dans les deux sens (data-theme="light" annule le système). */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+/* ---------- thème ---------- */
+/* Le wiki s'affiche en sombre par défaut : il se lit sous terre, sur tablette, souvent de
+   nuit — et la tablette de chantier arrive réglée en clair d'usine. Trois états, portés par
+   data-theme : absent (ou « dark ») = sombre, « light » = clair, « auto » = comme l'appareil. */
+@media screen and (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
     --bg: #16181d;
     --content-bg: #1d2026;
     --border: #4d545e;
@@ -81,10 +81,8 @@
     --pre-bg: #22262c;
     --th-bg: #2b3038;
     --tr-alt: #212429;
-    /* Les captures d'articles de loi sont du texte noir sur blanc : les inverser
-       les rend lisibles au lieu d'éblouir. Voir .img-doc plus bas. */
+    /* Les captures de documents sont du texte noir sur blanc : elles gardent un fond clair. */
     --img-bg: #e8e8e8;
-    --img-filtre: invert(1) hue-rotate(180deg);
 
     --surlignage-bg: #6d5a1c;
     --surlignage-fg: #ffe9b0;
@@ -114,55 +112,60 @@
   }
 }
 
-:root[data-theme="dark"] {
-  --bg: #16181d;
-  --content-bg: #1d2026;
-  --border: #4d545e;
-  --border-light: #3a404a;
-  --border-soft: #2b3038;
-  --text: #e4e6e8;
-  --text-soft: #a9b1ba;
-  --text-faint: #8b939c;
-  --link: #7ab0ff;
-  --link-visited: #c3a0f0;
-  --link-new: #ff8b82;
-  --accent: #ff9a9a;
-  --focus: #7ab0ff;
-  --hover: #253247;
-  --hover-bd: #3f5f8f;
+@media screen {
+  /* Défaut du wiki : sombre. Le lecteur n’a rien à régler pour descendre sous terre ;
+     data-theme="light" donne le thème clair, data-theme="auto" suit l’appareil.
+     Hors écran (impression), aucun de ces blocs ne s’applique : la palette claire de
+     :root reste seule, et une page imprimée l’est en noir sur blanc. */
+  :root:not([data-theme="light"]):not([data-theme="auto"]) {
+    --bg: #16181d;
+    --content-bg: #1d2026;
+    --border: #4d545e;
+    --border-light: #3a404a;
+    --border-soft: #2b3038;
+    --text: #e4e6e8;
+    --text-soft: #a9b1ba;
+    --text-faint: #8b939c;
+    --link: #7ab0ff;
+    --link-visited: #c3a0f0;
+    --link-new: #ff8b82;
+    --accent: #ff9a9a;
+    --focus: #7ab0ff;
+    --hover: #253247;
+    --hover-bd: #3f5f8f;
 
-  --code-bg: #262a31;
-  --pre-bg: #22262c;
-  --th-bg: #2b3038;
-  --tr-alt: #212429;
-  --img-bg: #e8e8e8;
-  --img-filtre: invert(1) hue-rotate(180deg);
+    --code-bg: #262a31;
+    --pre-bg: #22262c;
+    --th-bg: #2b3038;
+    --tr-alt: #212429;
+    --img-bg: #e8e8e8;
 
-  --surlignage-bg: #6d5a1c;
-  --surlignage-fg: #ffe9b0;
+    --surlignage-bg: #6d5a1c;
+    --surlignage-fg: #ffe9b0;
 
-  --infobox-titre-bg: #2c3a4f;
-  --tag-bg: #2b3038;
-  --tag-hover-bg: #33445e;
-  --tag-hover-bd: #5c7fae;
+    --infobox-titre-bg: #2c3a4f;
+    --tag-bg: #2b3038;
+    --tag-hover-bg: #33445e;
+    --tag-hover-bd: #5c7fae;
 
-  --chapo-bg: #1b2530;
-  --chapo-bd: #3f6491;
-  --chapo-fg: #9ec8ff;
+    --chapo-bg: #1b2530;
+    --chapo-bd: #3f6491;
+    --chapo-fg: #9ec8ff;
 
-  --info-bd: #35597f; --info-bg: #1a2735; --info-fg: #a3caf5;
-  --tip-bd: #38724a;  --tip-bg: #17281d;  --tip-fg: #94d8ab;
-  --warn-bd: #7d6526; --warn-bg: #2e2711; --warn-fg: #f0cf85;
-  --danger-bd: #8a3c3c; --danger-bg: #2f1a1a; --danger-fg: #ffabab;
-  --quote-bd: #4e535d; --quote-bg: #24262b; --quote-fg: #c2c7cf;
-  --example-bd: #64508c; --example-bg: #251f31; --example-fg: #d2b8f2;
+    --info-bd: #35597f; --info-bg: #1a2735; --info-fg: #a3caf5;
+    --tip-bd: #38724a;  --tip-bg: #17281d;  --tip-fg: #94d8ab;
+    --warn-bd: #7d6526; --warn-bg: #2e2711; --warn-fg: #f0cf85;
+    --danger-bd: #8a3c3c; --danger-bg: #2f1a1a; --danger-fg: #ffabab;
+    --quote-bd: #4e535d; --quote-bg: #24262b; --quote-fg: #c2c7cf;
+    --example-bd: #64508c; --example-bg: #251f31; --example-fg: #d2b8f2;
 
-  --stub-bg: #2a2c33; --stub-fg: #9aa1ab; --stub-bd: #40444d;
-  --portal-grad: #10131a;
-  --carte-public-grad: #212936;
-  --carte-public-hover: #7ab0ff;
-  --ombre: rgba(0,0,0,.5);
-  color-scheme: dark;
+    --stub-bg: #2a2c33; --stub-fg: #9aa1ab; --stub-bd: #40444d;
+    --portal-grad: #10131a;
+    --carte-public-grad: #212936;
+    --carte-public-hover: #7ab0ff;
+    --ombre: rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
 }
 
 html { scroll-behavior: smooth; }
@@ -264,7 +267,7 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 
 /* ---------- article ---------- */
 .breadcrumbs { font-size: 12.5px; color: var(--text-soft); margin-bottom: 10px; }
-.crumb-sep { color: var(--border); margin: 0 2px; }
+.crumb-sep { color: var(--text-faint); margin: 0 2px; }
 .page-title {
   font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif;
   font-size: 30px; font-weight: 400; line-height: 1.25;
@@ -866,7 +869,7 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   .site-header, .sidebar, .site-footer, .backlinks, .toc-toggle, .btn-haut, .btn-theme { display: none !important; }
   .content { border: 0; padding: 0; }
   /* toujours imprimer en clair, quel que soit le thème affiché */
-  :root { --bg: #fff; --content-bg: #fff; --text: #000; --img-filtre: none; }
+  :root { --bg: #fff; --content-bg: #fff; --text: #000; }
 }
 
 /* Renvoi vers une note que le vault marque « interne » ou « ne pas publier ».
@@ -935,3 +938,72 @@ html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
   .article-entete .toc > ul { grid-template-columns: minmax(0, 1fr); }
 }
 @media print { .article-entete .lecture-outils { display: none; } .article-entete .toc.collapsed > ul { display: grid; } }
+
+/* Le tableau de bord « qualité » est large par nature (une colonne par contrôle) : sur
+   téléphone il poussait la page à 557 px pour 390 px d'écran. Il défile dans son cadre, comme
+   les tableaux des articles. */
+.q-table { display: block; overflow-x: auto; max-width: 100%; }
+
+/* ---------- tablette de chantier (21 septembre 2026) ---------- */
+/* Galaxy Tab Active4 Pro : 1 920 × 1 200 à densité 1,5, soit 1 280 × 800 px CSS en paysage et
+   800 × 1 280 en portrait — l'appareil qui descend sous terre, tenu avec des gants. Deux manques
+   mesurés : en paysage la page dépasse 900 px, donc aucune règle « téléphone » ne s'appliquait
+   (boutons d'entête à 38 px, liens de barre latérale à 33 px, champ de recherche à 32 px) et la
+   ligne de texte atteignait 130 caractères. On borne la colonne de lecture sur les grands écrans,
+   et on agrandit les cibles dès que le pointeur est grossier, quelle que soit la largeur. */
+
+/* 1. Longueur de ligne. Au-delà du téléphone (dès 700 px : le portrait de la tablette est la
+   plage où la colonne est la plus large), le texte courant se borne à ~80 caractères ; tableaux,
+   images, blocs de code, infobox, grilles et index en colonnes gardent toute la largeur. Le texte
+   officiel des articles de loi (.texte-loi) et les pages sans .page-body (recherche, thèmes,
+   catégories, contrôles) sont de la prose comme les autres. */
+@media screen and (min-width: 701px) {
+  .page-body > p, .page-body > ul:not(.cat-pages):not(.accueil-tuiles), .page-body > ol, .page-body > dl,
+  .page-body > blockquote, .page-body > .callout, .page-body > .texte-loi, .chapo, .accueil-chapeau,
+  .content > p, .content > ul:not(.cat-pages), .content > ol, .content > blockquote, .content > .callout { max-width: 80ch; }
+}
+
+/* 2. Cibles tactiles, à toute largeur : c'est le pointeur qui décide, pas la taille de l'écran.
+   Écrit après le bloc téléphone : là où les deux s'appliquent (téléphone), les valeurs sont
+   les mêmes, pour ne pas défaire un réglage choisi plus haut. */
+@media screen and (pointer: coarse) {
+  .btn-theme { width: 44px; height: 44px; }
+  .searchbox input, .portal-search input { min-height: 44px; font-size: 16px; }
+  /* 15 px de haut à l'origine sur tablette (aucune règle ne s'y appliquait) ; 44 px comme sur
+     téléphone : la barre de 33 entrées défile dans son cadre, elle ne tenait déjà pas à l'écran */
+  .sidebar a, .cat-pages li a { display: block; padding: 11px 4px; }
+  .toc a { display: block; padding: 6px 4px; }
+  .breadcrumbs a, .retour-haut, .portal-foot a, .accueil-index a { display: inline-block; padding: 8px 4px; }
+  .letters-nav a { display: inline-block; min-width: 44px; min-height: 44px; line-height: 44px; text-align: center; margin: 2px; }
+  .accueil-themes-nav a { min-height: 44px; padding: 6px 14px; }
+  .accueil-theme > summary { min-height: 44px; }
+  .accueil-corps li > a, .voir-aussi li a, .backlinks li a, .liste-pages li a { display: block; padding: 8px 2px; }
+  /* 15 px sous une lampe frontale, à bout de bras, avec la visière : un point de plus */
+  .page-body, .accueil-corps { font-size: calc(16px * var(--echelle, 1)); }
+  .page-body .accueil-tuile-desc, .accueil-corps .accueil-tuile-desc { font-size: 13.5px; }
+  /* Commandes isolées : 44 px pleins. */
+  .toc-toggle { min-height: 44px; padding: 0 12px; }
+  .backlinks > summary, .search-filters .filtre { min-height: 44px; }
+  .accueil-theme-page { display: inline-block; padding: 9px 2px; }
+  .avis-mot input, .avis-mot textarea { min-height: 44px; font-size: 16px; }
+  /* Liens dans le texte, les listes, les tableaux et les titres : la ligne ne bouge pas, la zone
+     touchable passe au-dessus des 24 px exigés (WCAG 2.5.8 AA). Un lien de phrase ne peut pas
+     faire 44 px sans disloquer le paragraphe : c'est l'exception « lien en ligne » de la norme. */
+  .page-body p a, .page-body li a, .page-body td a, .page-body th a,
+  .page-body h2 a, .page-body h3 a, .page-body h4 a, .page-body h5 a,
+  .accueil-chapeau a, .page-sub a, .page-meta a, .infobox a { padding-top: 5px; padding-bottom: 5px; }
+  .accueil-theme-titre a { display: inline-block; padding: 6px 0; }
+  /* titres de boîte et de groupe cliquables sur les accueils */
+  .accueil-titre a, .accueil-groupe > h3 > a { display: inline-block; padding: 5px 0; }
+  .infobox-tags a.tag { padding-top: 6px; padding-bottom: 6px; }
+}
+
+/* 3. Portrait (800 px) : trop large pour la colonne unique du téléphone, trop étroit pour les
+   trois colonnes du bureau — les volets de thèmes y tenaient sur 240 px. */
+@media screen and (min-width: 700px) and (max-width: 900px) {
+  .content { padding: 20px 26px 40px; }
+  .accueil-groupes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .page-body .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); }
+  .accueil-colonnes, .accueil-large .accueil-colonnes { columns: 2; }
+  .accueil-colonnes-courtes, .accueil-large .accueil-colonnes-courtes { columns: 3; }
+}

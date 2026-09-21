@@ -44,7 +44,7 @@ function environnement(liste, corps = new Map()) {
     location: new URL('sw.js', origine), caches,
     self: { addEventListener(k, fn) { evenements[k] = fn; }, skipWaiting: async () => {}, clients: { claim: async () => {}, matchAll: async () => [] } },
     fetch: async u => {
-      const url = new URL(u, origine);
+      const url = new URL(typeof u === 'string' ? u : u.url, origine);
       if (url.pathname.endsWith('/assets/hors-ligne.json')) {
         if (!manifesteDisponible) throw new Error('hors ligne');
         return new Response(JSON.stringify(manifesteReseau));
@@ -60,7 +60,7 @@ function environnement(liste, corps = new Map()) {
   vm.runInContext(sw, ctx);
   const source = { postMessage(m) { messages.push(m); } };
   return {
-    ctx, caches, messages, demandes, quota, corps,
+    ctx, caches, messages, demandes, quota, corps, evenements,
     changerManifeste(l) { manifesteReseau = l; },
     reseauManifeste(on) { manifesteDisponible = on; },
     async semer(chemin, texte, h, recu = h) {
@@ -145,6 +145,25 @@ await test('Quota sur métadonnées : aucune fausse complétude', async () => {
   env.quota.add(new URL('__hl_etat__', origine).href);
   assert.equal((await env.tranche()).type, 'erreur-quota');
   assert.equal((await env.compte()).en, 1); assert.equal((await env.compte()).aJour, 0);
+});
+
+await test('avis.json : chargé à l’installation, hors du delta par hash, gardé au nettoyage, servi hors ligne', async () => {
+  // Configuration modifiée à la main après déploiement du relais : elle ne passe pas par le
+  // manifeste (un hash figé ferait échouer chaque synchronisation) mais par le noyau du SW.
+  const l = manifeste([['a.html', 'A']]);
+  const corps = new Map([['a.html', 'A'], ['assets/avis.json', '{"url":"https://relais.test"}'], ['index.html', 'i'],
+    ['assets/style.css', 'css'], ['assets/portail.css', 'css'], ['assets/app.js', 'js'], ['offline.html', 'o']]);
+  const env = environnement(l, corps);
+  let installation; env.evenements.install({ waitUntil(p) { installation = p; } }); await installation;
+  assert.equal(await env.contenu('assets/avis.json'), '{"url":"https://relais.test"}');
+  env.demandes.length = 0;
+  assert.equal((await env.tranche()).complet, true, 'synchronisation complète, donc nettoyage');
+  assert.deepEqual(env.demandes, ['a.html'], 'la synchronisation ne touche pas avis.json');
+  assert.equal(await env.contenu('assets/avis.json'), '{"url":"https://relais.test"}', 'conservé au nettoyage');
+  // hors ligne, la page reçoit la copie du noyau : le bloc d'avis reste utilisable sous terre
+  corps.set('assets/avis.json', new Error('hors ligne'));
+  let reponse; env.evenements.fetch({ request: { url: origine + 'assets/avis.json?v=' + version, method: 'GET', mode: 'cors' }, respondWith(p) { reponse = p; } });
+  assert.equal(await (await reponse).text(), '{"url":"https://relais.test"}');
 });
 
 await test('Manifeste ancien hors ligne : jamais courant, rechargé au retour réseau', async () => {

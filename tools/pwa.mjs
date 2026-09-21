@@ -93,7 +93,7 @@ const M = 'wiki-sst-medias';
 const ETAT = './__hl_etat__'; // état de synchronisation (hash déjà appliqués), rangé dans P
 
 const NOYAU = ['./index.html', './assets/style.css', './assets/portail.css',
-  './assets/app.js', './assets/hors-ligne.json', './offline.html'];
+  './assets/app.js', './assets/hors-ligne.json', './assets/avis.json', './offline.html'];
 
 self.addEventListener('install', (e) => {
   // noyau minimal — ?v= et cache:'reload' contournent le cache HTTP de 10 min
@@ -391,8 +391,8 @@ self.addEventListener('message', (e) => {
   fs.writeFileSync(path.join(OUT, 'offline.html'), `<!DOCTYPE html>
 <html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hors ligne — Wiki SST</title>
-<style>body{font-family:-apple-system,'Segoe UI',sans-serif;background:#16181d;color:#e4e6e8;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;text-align:center;padding:20px}
-.b{max-width:420px}h1{font-size:44px;margin:0 0 8px}p{line-height:1.6;color:#a9b1ba}a{color:#7ab0ff}</style></head>
+<style>html{color-scheme:dark}body{font-family:-apple-system,'Segoe UI',sans-serif;background:#16181d;color:#e4e6e8;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;text-align:center;padding:20px}
+.b{max-width:420px}h1{font-size:44px;margin:0 0 8px}p{line-height:1.6;color:#a9b1ba}a{color:#7ab0ff}@media print{body{background:#fff;color:#000}p{color:#333}a{color:#00c}}</style></head>
 <body><div class="b"><h1>📡</h1><h2>Pas de réseau</h2>
 <p>Cette page n'est pas encore dans le cache de l'application. Le wiki se télécharge tout seul quand le réseau est là — <a href="./">retourner à l'accueil</a> ou réessayer quand le signal revient.</p></div></body></html>
 `);
@@ -407,8 +407,10 @@ export function genererListeHorsLigne(OUT, version) {
   (function walk(d, rel) {
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {
       const chemin = rel + e.name;
-      // sw.js se gère lui-même ; hors-ligne.json ne peut pas se lister lui-même
-      if (chemin === 'sw.js' || chemin === 'assets/hors-ligne.json' || e.name === '.nojekyll') continue;
+      // sw.js se gère lui-même ; hors-ligne.json ne peut pas se lister lui-même ; avis.json est
+      // une configuration modifiée à la main, sans reconstruction : hors du manifeste (sinon son
+      // hash périmé ferait échouer chaque synchronisation), mais dans le NOYAU du service worker.
+      if (chemin === 'sw.js' || chemin === 'assets/hors-ligne.json' || chemin === 'assets/avis.json' || e.name === '.nojekyll') continue;
       const abs = path.join(d, e.name);
       if (e.isDirectory()) { walk(abs, chemin + '/'); continue; }
       const taille = fs.statSync(abs).size;

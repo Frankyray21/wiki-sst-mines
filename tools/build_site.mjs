@@ -18,7 +18,7 @@ import { normaliserBibliographie } from './bibliographie.mjs';
 import { motsDePage, encoderListe } from './recherche_mots.mjs';
 import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
 import { estAccueil, decouperAccueil, rendreAccueil, titreAccueil, piedAccueil } from './accueil_wiki.mjs';
-import { blocAvis, CONF_AVIS } from './avis.mjs';
+import { blocAvis, lireConfAvis, ecrireConfAvis } from './avis.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -784,7 +784,7 @@ function rootOf(out) { return '../'.repeat(out.split('/').length - 1); }
 // une fraction de seconde avant de basculer en sombre.
 // version de build : casse le cache HTTP de 10 minutes de GitHub Pages à chaque déploiement
 const V = new Date().toISOString().slice(0, 19).replace(/[-T:]/g, '');
-const SCRIPT_THEME = `window.V='${V}';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}`;
+const SCRIPT_THEME = `window.V='${V}';try{var t=localStorage.getItem('theme');if(t==='light'||t==='auto')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}`;
 
 function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
   const ROOT = rootOf(out);
@@ -938,6 +938,13 @@ function infobox(p) {
 
 // ---------- rendu de toutes les pages ----------
 console.log('Rendu des pages…');
+// L'adresse du relais des avis est écrite à la main après le déploiement du Worker, dans
+// docs/assets/avis.json. Le nettoyage ci-dessous l'emporterait : on la relit d'abord, et on la
+// réécrit dès que le dossier existe à nouveau — pas en fin de construction, où un arrêt en route
+// (cible morte du portail, par exemple) l'aurait perdue pour la construction suivante.
+const relaisAvis = lireConfAvis(fs, OUT, path);
+if (relaisAvis.avertissement) console.warn(`  ⚠ avis : ${relaisAvis.avertissement}`);
+
 // On vide le contenu sans supprimer OUT lui-même : sous Windows le dossier racine reste
 // verrouillé dès qu'un terminal ou un serveur l'a comme répertoire courant.
 if (fs.existsSync(OUT)) {
@@ -950,6 +957,7 @@ if (fs.existsSync(OUT)) {
   }
 }
 fs.mkdirSync(OUT, { recursive: true });
+ecrireConfAvis(fs, OUT, path, relaisAvis.conf);   // fenêtre de perte nulle : réécrit avant tout rendu
 
 // Résumé introductif, façon Wikipédia. On ne fabrique jamais de texte : on promeut le callout
 // « En bref » que 3408 pages portent déjà, et on le retire du corps pour éviter le doublon.
@@ -1263,7 +1271,7 @@ function sousTitreTheme(t) {
 // L'accueil du wiki compte toutes ses pages ; l'accueil d'une section (travailleurs, gestionnaires)
 // compte les pages de son dossier. Le fil d'Ariane de l'accueil du wiki s'arrête au wiki : le
 // dernier maillon mènerait à la catégorie « Accueil », qui ne contient que cette page.
-function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
+function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied, adresse = p.out, wikiAvis = null }) {
   const wiki = WIKIS[p.wikiKey];
   const parts = p.relPath.split('/');
   const accueilDuWiki = wikiHome(p.wikiKey) === p || /^00 - /.test(parts[1] || '');
@@ -1320,7 +1328,7 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
   return `
 <div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
 ${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: (chapoHtml || '') + accueil.chapeau, sections, index })}
-${blocAvis({ adresse: p.out, titre: titreAccueil(p.title), wiki: wiki.name })}
+${blocAvis({ adresse, titre: titreAccueil(p.title), wiki: wikiAvis || wiki.name })}
 ${pied}`;
 }
 
@@ -1376,7 +1384,7 @@ for (const dir of dirsAll) {
     const target = home ? rootOf(outDir + '/index.html') + home.out : '';
     fs.mkdirSync(path.join(OUT, outDir), { recursive: true });
     fs.writeFileSync(path.join(OUT, outDir, 'index.html'),
-      `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;url=${target}"><title>${esc(wiki.name)}</title></head><body><a href="${target}">${esc(wiki.name)}</a></body></html>`);
+      `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;url=${target}"><title>${esc(wiki.name)}</title><style>html{color-scheme:dark;background:#16181d;color:#e4e6e8;font-family:sans-serif}a{color:#7ab0ff}@media print{html{background:#fff;color:#000}}</style></head><body><a href="${target}">${esc(wiki.name)}</a></body></html>`);
     continue;
   }
   const label = cleanLabel(parts[parts.length - 1]);
@@ -1832,7 +1840,9 @@ function genererWikiPublic(pub) {
     const filPublic = [`<a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a>`, esc(wiki.name)];
     const versFond = `<a href="{{ROOT}}${p.out}">Voir cette page dans le fond documentaire</a>`;
     const accueil = estAccueil(p) ? decouperAccueil(corps, { resoudre: (cible) => { const pg = resolvePage(cible, p); return pg ? '{{ROOT}}' + urlDe(pg) : null; } }) : null;
-    const contenu = accueil ? contenuAccueil(p, { crumbs: filPublic, accueil, chapoHtml: p.chapoHtml, pied: piedAccueil(new Date().toISOString().slice(0, 10), versFond) }) : `
+    // adresse et wiki de la copie, pas ceux de la page du fond documentaire : l'avis doit
+    // désigner la page que le gestionnaire a sous les yeux
+    const contenu = accueil ? contenuAccueil(p, { crumbs: filPublic, accueil, chapoHtml: p.chapoHtml, adresse: out, wikiAvis: 'Espace encadrement', pied: piedAccueil(new Date().toISOString().slice(0, 10), versFond) }) : `
 <div class="breadcrumbs"><a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a> <span class="crumb-sep">›</span> ${esc(wiki.name)}</div>
 ${rendreTitreArticle({ titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}` })}
 ${tocHtml}
@@ -1993,14 +2003,9 @@ fs.writeFileSync(path.join(OUT, 'assets', 'portail.css'), fs.readFileSync(path.j
 fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas passer par Jekyll
 genererPwa(OUT, V);
 
-// La date de génération vit dans un seul fichier, lu par le pied de page. Écrite dans les
-// 4970 pages, elle changeait tout le site à chaque reconstruction — ~60 Mo de dépôt pour une date.
-{
-  const conf = path.join(OUT, CONF_AVIS);
-  if (!fs.existsSync(conf)) fs.writeFileSync(conf, JSON.stringify({ url: '', base: 'Formations', table: 'Avis wiki SST (web)' }, null, 1) + '\n');
-  const url = JSON.parse(fs.readFileSync(conf, 'utf8')).url;
-  console.log(`  avis : relais ${url ? url : 'non configuré — le bloc reste masqué'}`);
-}
+console.log(`  avis : relais ${relaisAvis.conf.url && !relaisAvis.avertissement ? relaisAvis.conf.url : 'non configuré — le bloc reste masqué'}`);
+// Compteurs et date de la construction, lus par le pied de page : un seul fichier, pour que la
+// date ne soit pas écrite dans chaque page (ce qui changeait tout le site à chaque reconstruction).
 fs.writeFileSync(path.join(OUT, 'assets', 'version.json'), JSON.stringify({
   date: new Date().toISOString().slice(0, 10),
   pages: pages.length,

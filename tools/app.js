@@ -1252,28 +1252,31 @@
     if (estIos) creerBouton();
   })();
 
-  // ---------- thème clair / sombre ----------
-  // Trois états : « auto » suit le réglage du téléphone ou de l'ordinateur, les deux autres
-  // forcent un thème. Le choix est retenu d'une page à l'autre.
+  // ---------- thème sombre (défaut), clair, automatique ----------
+  // Le wiki s'affiche en sombre sans rien régler : il se lit sous terre et de nuit, et la
+  // tablette de chantier arrive en clair d'usine. Deux autres états au bouton : « clair », et
+  // « automatique » qui suit l'appareil. Le choix est retenu d'une page à l'autre.
   (function theme() {
     var btn = document.getElementById('btnTheme');
     if (!btn) return;
     var ETATS = [
-      { cle: 'auto', icone: '🌗', libelle: 'Thème : automatique (suit votre appareil)' },
+      { cle: 'dark', icone: '🌙', libelle: 'Thème : sombre (par défaut)' },
       { cle: 'light', icone: '☀️', libelle: 'Thème : clair' },
-      { cle: 'dark', icone: '🌙', libelle: 'Thème : sombre' },
+      { cle: 'auto', icone: '🌗', libelle: 'Thème : automatique (suit votre appareil)' },
     ];
 
     function lire() {
-      try { var v = localStorage.getItem('theme'); return (v === 'dark' || v === 'light') ? v : 'auto'; }
-      catch (e) { return 'auto'; }
+      try { var v = localStorage.getItem('theme'); return (v === 'light' || v === 'auto') ? v : 'dark'; }
+      catch (e) { return 'dark'; }
     }
     function ecrire(v) {
-      try { if (v === 'auto') localStorage.removeItem('theme'); else localStorage.setItem('theme', v); }
+      try { if (v === 'dark') localStorage.removeItem('theme'); else localStorage.setItem('theme', v); }
       catch (e) { /* navigation privée : le thème vaut pour la page courante seulement */ }
     }
     function appliquer(v) {
-      if (v === 'auto') document.documentElement.removeAttribute('data-theme');
+      // « dark » ne pose rien : c'est l'état de la feuille de style sans attribut, donc celui
+      // qu'obtient aussi un lecteur dont le stockage est bloqué.
+      if (v === 'dark') document.documentElement.removeAttribute('data-theme');
       else document.documentElement.setAttribute('data-theme', v);
       var e = ETATS.filter(function (x) { return x.cle === v; })[0] || ETATS[0];
       btn.textContent = e.icone;
@@ -1530,95 +1533,154 @@
   (function avisPage() {
     var bloc = document.querySelector('.avis');
     var CLE_FILE = 'wiki-avis-file', CLE_LECTEUR = 'wiki-avis-lecteur';
+    var DELAI = 15000;   // un portail captif accepte la connexion et ne répond jamais : on n'attend pas
     var relais = '';
+    var idLecteur = '';
+    // Un seul envoi à la fois, file comprise : deux tapes rapides sur un pouce partiraient en
+    // parallèle, le relais ne trouverait la ligne ni pour l'une ni pour l'autre, et Airtable
+    // garderait deux lignes. La chaîne ne se bloque jamais : chaque envoi est borné par DELAI.
+    var chaine = Promise.resolve();
 
     function lire(cle) { try { return localStorage.getItem(cle) || ''; } catch (e) { return ''; } }
-    function ecrire(cle, v) { try { localStorage.setItem(cle, v); } catch (e) { /* navigation privée */ } }
+    function ecrire(cle, v) { try { localStorage.setItem(cle, v); return true; } catch (e) { return false; } }
     function lecteur() {
-      var id = lire(CLE_LECTEUR);
-      // identifiant local et anonyme : il ne sert qu'à relier le commentaire à son pouce
-      if (!id) { id = 'L' + Math.random().toString(36).slice(2, 10); ecrire(CLE_LECTEUR, id); }
-      return id;
+      // gardé en mémoire : sans localStorage (cookies bloqués, navigation privée), un tirage par
+      // appel donnerait au commentaire une autre Réf que le pouce, donc deux lignes au lieu d'une
+      if (idLecteur) return idLecteur;
+      idLecteur = lire(CLE_LECTEUR);
+      if (!idLecteur) { idLecteur = 'L' + Math.random().toString(36).slice(2, 10); ecrire(CLE_LECTEUR, idLecteur); }
+      return idLecteur;
     }
     function file() { try { return JSON.parse(lire(CLE_FILE) || '[]'); } catch (e) { return []; } }
-    function poserFile(f) { ecrire(CLE_FILE, JSON.stringify(f.slice(-20))); }
+    function poserFile(f) { return ecrire(CLE_FILE, JSON.stringify(f.slice(-20))); }
+    function retirer(a) {
+      var f = file(), cle = JSON.stringify(a);
+      for (var i = 0; i < f.length; i++) if (JSON.stringify(f[i]) === cle) { f.splice(i, 1); poserFile(f); return; }
+    }
 
+    // Un refus du relais (origine, forme, base qui refuse la valeur) ne se réparera pas tout seul :
+    // l'avis est perdu, mais on ne le rejoue pas à chaque page en annonçant « pas de réseau » à
+    // quelqu'un qui a le réseau. Une panne (502, 429, coupure, délai dépassé) se retente, elle.
+    // Le relais dit lui-même ce qui est définitif (« definitif » dans sa réponse) ; le statut
+    // HTTP ne sert que de repli quand le corps n'est pas lisible.
     function envoyer(avis) {
-      return fetch(relais, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(avis)
-      }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r; });
+      if (!relais) return Promise.reject(new Error('sans relais'));
+      var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var minuterie = null;
+      var options = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(avis) };
+      if (ctrl) { options.signal = ctrl.signal; minuterie = setTimeout(function () { ctrl.abort(); }, DELAI); }
+      var course = fetch(relais, options).then(function (r) {
+        return r.json().then(null, function () { return {}; }).then(function (corps) {
+          if (r.ok) return corps;
+          var erreur = new Error('HTTP ' + r.status);
+          erreur.definitif = (corps && corps.definitif === true) ||
+            (r.status >= 400 && r.status < 500 && r.status !== 408 && r.status !== 429);
+          throw erreur;
+        });
+      });
+      if (!ctrl) {
+        course = Promise.race([course, new Promise(function (_, rejeter) {
+          minuterie = setTimeout(function () { rejeter(new Error('délai dépassé')); }, DELAI);
+        })]);
+      }
+      return course.then(function (v) { clearTimeout(minuterie); return v; }, function (e) { clearTimeout(minuterie); throw e; });
     }
+    // Chaque avis ne quitte la mémoire qu'une fois parti, ou définitivement refusé : si la page
+    // meurt au milieu du renvoi (onglet fermé, tué par Android), ce qui restait est encore là.
     function viderFile() {
-      var attente = file();
-      if (!relais || !attente.length) return;
-      poserFile([]);
-      var restants = [], suite = Promise.resolve();
-      attente.forEach(function (a) {
-        suite = suite.then(function () { return envoyer(a).catch(function () { restants.push(a); }); });
-      });
-      suite.then(function () { if (restants.length) poserFile(restants); });
-    }
-
-    if (!bloc) { if (relais) viderFile(); return; }
-    var pouces = bloc.querySelectorAll('.avis-pouce');
-    var formulaire = bloc.querySelector('.avis-mot');
-    var commentaire = bloc.querySelector('#avis-commentaire');
-    var nom = bloc.querySelector('#avis-nom');
-    var envoi = bloc.querySelector('.avis-envoyer');
-    var etat = bloc.querySelector('.avis-etat');
-    var choisi = '';
-
-    function dire(texte, merci) {
-      etat.textContent = texte;
-      etat.className = 'avis-etat' + (merci ? ' avis-merci' : '');
-    }
-    function avisCourant() {
-      return {
-        ref: lecteur() + '·' + bloc.getAttribute('data-avis-adresse'),
-        avis: choisi === 'haut' ? '👍 Utile' : '👎 À revoir',
-        page: bloc.getAttribute('data-avis-titre'),
-        adresse: bloc.getAttribute('data-avis-adresse'),
-        wiki: bloc.getAttribute('data-avis-wiki'),
-        lien: location.href.split('#')[0],
-        commentaire: commentaire.value.trim(),
-        nom: nom.value.trim(),
-        source: 'wiki-sst-mines'
-      };
-    }
-    function transmettre(merci) {
-      var avis = avisCourant();
-      dire('Envoi…');
-      envoyer(avis).then(function () { dire(merci, true); }).catch(function () {
-        var f = file(); f.push(avis); poserFile(f);
-        dire('Pas de réseau : votre avis partira à la prochaine connexion.');
+      if (!relais || !file().length) return;
+      chaine = chaine.then(function () {
+        var suite = Promise.resolve();
+        file().forEach(function (a) {
+          suite = suite.then(function () {
+            return envoyer(a).then(function () { retirer(a); }, function (e) { if (e && e.definitif) retirer(a); });
+          });
+        });
+        return suite;
       });
     }
 
-    for (var i = 0; i < pouces.length; i++) {
-      pouces[i].addEventListener('click', function () {
-        choisi = this.getAttribute('data-avis');
-        for (var j = 0; j < pouces.length; j++) pouces[j].setAttribute('aria-pressed', String(pouces[j] === this));
-        formulaire.hidden = false;
-        transmettre('Merci, c’est noté. Un mot pour expliquer ?');
+    function brancher() {
+      var pouces = bloc.querySelectorAll('.avis-pouce');
+      var formulaire = bloc.querySelector('.avis-mot');
+      var commentaire = bloc.querySelector('#avis-commentaire');
+      var nom = bloc.querySelector('#avis-nom');
+      var envoi = bloc.querySelector('.avis-envoyer');
+      var etat = bloc.querySelector('.avis-etat');
+      var choisi = '';
+
+      function dire(texte, merci) {
+        etat.textContent = texte;
+        etat.className = 'avis-etat' + (merci ? ' avis-merci' : '');
+      }
+      function avisCourant() {
+        return {
+          ref: lecteur() + '·' + bloc.getAttribute('data-avis-adresse'),
+          avis: choisi === 'haut' ? '👍 Utile' : '👎 À revoir',
+          page: bloc.getAttribute('data-avis-titre'),
+          adresse: bloc.getAttribute('data-avis-adresse'),
+          wiki: bloc.getAttribute('data-avis-wiki'),
+          lien: location.href.split('#')[0],
+          commentaire: commentaire.value.trim(),
+          nom: nom.value.trim(),
+          source: 'wiki-sst-mines'
+        };
+      }
+      function transmettre(merci) {
+        var avis = avisCourant();
+        dire('Envoi…');
+        // Boîte d'envoi : l'avis est rangé en mémoire AVANT de partir, et n'en sort qu'une fois
+        // parti ou refusé. Un onglet tué pendant l'envoi ne perd rien : il repartira à la visite
+        // suivante. Puis à son tour dans la chaîne, qui continue quoi qu'il advienne de cet envoi.
+        var garde = poserFile(file().concat([avis]));
+        var envoiCourant = chaine.then(function () { return envoyer(avis); });
+        chaine = envoiCourant.then(null, function () {});
+        envoiCourant.then(function () { retirer(avis); dire(merci, true); }, function (e) {
+          if (e && e.definitif) { retirer(avis); dire('Cet avis n’a pas pu être enregistré. Écrivez à l’équipe SST si cela se répète.'); return; }
+          if (garde) dire('Pas de réseau : votre avis partira à la prochaine connexion.');
+          else dire('Pas de réseau, et ce navigateur ne garde rien en mémoire : réessayez quand le signal revient.');
+        }).then(function () { envoi.disabled = false; });
+      }
+
+      for (var i = 0; i < pouces.length; i++) {
+        pouces[i].addEventListener('click', function () {
+          choisi = this.getAttribute('data-avis');
+          for (var j = 0; j < pouces.length; j++) pouces[j].setAttribute('aria-pressed', String(pouces[j] === this));
+          formulaire.hidden = false;
+          transmettre('Merci, c’est noté. Un mot pour expliquer ?');
+        });
+      }
+      formulaire.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!choisi) return;
+        // rendu au retour de l'envoi : une correction tapée ensuite doit pouvoir partir
+        envoi.disabled = true;
+        transmettre('Merci, votre commentaire est enregistré.');
       });
     }
-    formulaire.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!choisi) return;
-      envoi.disabled = true;
-      transmettre('Merci, votre commentaire est enregistré.');
-    });
+    if (bloc) brancher();
 
-    // adresse du relais : un seul fichier à changer le jour où il bouge
-    fetch(vUrl(ROOT + 'assets/avis.json'))
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (conf) {
-        if (!conf || !conf.url) return;          // pas de relais : le bloc reste masqué
-        relais = conf.url;
-        bloc.hidden = false;
-        viderFile();
-        window.addEventListener('online', viderFile);
-      })
-      .catch(function () { /* hors ligne au chargement : le bloc reste masqué */ });
+    // Adresse du relais : un seul fichier à changer le jour où il bouge. Lu sur chaque page, bloc
+    // ou non : une page d'index vide aussi la file d'attente laissée par une page précédente.
+    // Le service worker garde ce fichier dans son noyau, donc l'avis fonctionne aussi hors ligne ;
+    // « no-cache » fait revalider la copie HTTP (ETag), pour qu'une adresse changée à la main
+    // sans reconstruction arrive sans attendre les dix minutes du cache de GitHub Pages.
+    function chargerConf() {
+      if (relais) { viderFile(); return; }
+      fetch(vUrl(ROOT + 'assets/avis.json'), { cache: 'no-cache' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (conf) {
+          // une adresse qui n'est pas https ne fera que des « pas de réseau » : on la tient pour absente
+          if (!conf || typeof conf.url !== 'string' || !/^https:\/\//.test(conf.url)) return;
+          relais = conf.url;
+          if (bloc) bloc.hidden = false;
+          viderFile();
+        })
+        .then(null, function () { /* première visite hors ligne : on retentera au retour du réseau */ });
+    }
+    // posé quoi qu'il arrive : si la configuration n'a pas pu être lue, le retour du réseau est
+    // justement le moment de la relire et de vider la file
+    window.addEventListener('online', chargerConf);
+    chargerConf();
   })();
 })();
