@@ -14,17 +14,17 @@
   "parType": {
    "Aucune source repérable": 306,
    "Outil annoncé « À créer / À adapter »": 31,
-   "Références invérifiables": 9,
-   "Aucune phrase d’introduction": 13,
+   "Références invérifiables": 15,
+   "Aucune phrase d’introduction": 7,
    "Phrases de plus de 45 mots": 2
   },
   "parWiki": {
-   "SST psychosociale": 159,
-   "Droit du travail": 30,
+   "SST psychosociale": 164,
+   "Droit du travail": 28,
    "Hygiène industrielle": 37,
-   "Ergonomie": 39,
+   "Ergonomie": 37,
    "Sécurité industrielle": 23,
-   "Toxicologie": 32
+   "Toxicologie": 31
   }
  },
  "pages": [
@@ -308,8 +308,8 @@
    "wiki": "SST psychosociale",
    "mots": 4262,
    "restants": [
-    "Aucune phrase d’introduction : la page s’ouvre sur un titre",
-    "Phrases de plus de 45 mots (3 ou plus)"
+    "Phrases de plus de 45 mots (3 ou plus)",
+    "Aucune phrase d’introduction : la page s’ouvre sur un titre"
    ]
   },
   {
@@ -508,24 +508,6 @@
    "mots": 1387,
    "restants": [
     "Aucune source repérable : ni adresse externe, ni note d’analyse citée qui en porte une"
-   ]
-  },
-  {
-   "page": "w/droit-travail/latmp.html",
-   "titre": "LATMP - Loi sur les accidents du travail et les maladies professionnelles",
-   "wiki": "Droit du travail",
-   "mots": 81,
-   "restants": [
-    "Aucune phrase d’introduction : la page s’ouvre sur une citation"
-   ]
-  },
-  {
-   "page": "w/droit-travail/lsst.html",
-   "titre": "LSST - Loi sur la santé et la sécurité du travail",
-   "wiki": "Droit du travail",
-   "mots": 117,
-   "restants": [
-    "Aucune phrase d’introduction : la page s’ouvre sur une citation"
    ]
   },
   {
@@ -934,24 +916,6 @@
    ]
   },
   {
-   "page": "w/ergonomie/art-166-rsst-posture-assise.html",
-   "titre": "art-166-RSST",
-   "wiki": "Ergonomie",
-   "mots": 561,
-   "restants": [
-    "Aucune phrase d’introduction : la page s’ouvre sur une ligne trop courte"
-   ]
-  },
-  {
-   "page": "w/ergonomie/art-167-rsst-siege-ergonomique.html",
-   "titre": "art-167-RSST",
-   "wiki": "Ergonomie",
-   "mots": 492,
-   "restants": [
-    "Aucune phrase d’introduction : la page s’ouvre sur une ligne trop courte"
-   ]
-  },
-  {
    "page": "w/ergonomie/evaluation-des-risques-de-tms.html",
    "titre": "Évaluation des risques de TMS",
    "wiki": "Ergonomie",
@@ -1357,15 +1321,6 @@
    ]
   },
   {
-   "page": "w/psychosocial/analyse-daniellou-1996.html",
-   "titre": "Analyse Daniellou (dir., 1996) - L'ergonomie en quête de ses principes",
-   "wiki": "SST psychosociale",
-   "mots": 782,
-   "restants": [
-    "Aucune phrase d’introduction : la page s’ouvre sur un titre"
-   ]
-  },
-  {
    "page": "w/psychosocial/analyse-folkard-tucker-2003.html",
    "titre": "Analyse Folkard & Tucker (2003)",
    "wiki": "SST psychosociale",
@@ -1489,6 +1444,15 @@
    "mots": 291,
    "restants": [
     "Aucune source repérable : ni adresse externe, ni note d’analyse citée qui en porte une"
+   ]
+  },
+  {
+   "page": "w/psychosocial/theme/conflits-et-harcelement.html",
+   "titre": "Conflits et Harcèlement",
+   "wiki": "SST psychosociale",
+   "mots": 806,
+   "restants": [
+    "Références invérifiables (sans auteur, année ni adresse), signalées par le tableau de bord"
    ]
   },
   {
@@ -1708,6 +1672,15 @@
    ]
   },
   {
+   "page": "w/psychosocial/theme/invalidite-et-lesions.html",
+   "titre": "Invalidité et Lésions",
+   "wiki": "SST psychosociale",
+   "mots": 722,
+   "restants": [
+    "Références invérifiables (sans auteur, année ni adresse), signalées par le tableau de bord"
+   ]
+  },
+  {
    "page": "w/psychosocial/iso-strain.html",
    "titre": "Iso-strain",
    "wiki": "SST psychosociale",
@@ -1789,6 +1762,15 @@
    ]
   },
   {
+   "page": "w/psychosocial/theme/legislation-et-normes.html",
+   "titre": "Législation et Normes",
+   "wiki": "SST psychosociale",
+   "mots": 697,
+   "restants": [
+    "Références invérifiables (sans auteur, année ni adresse), signalées par le tableau de bord"
+   ]
+  },
+  {
    "page": "w/psychosocial/lesion-professionnelle-dorigine-psychologique.html",
    "titre": "Lésion professionnelle d'origine psychologique",
    "wiki": "SST psychosociale",
@@ -1867,6 +1849,15 @@
    "mots": 482,
    "restants": [
     "Aucune source repérable : ni adresse externe, ni note d’analyse citée qui en porte une"
+   ]
+  },
+  {
+   "page": "w/psychosocial/theme/modeles-et-theories.html",
+   "titre": "Modèles et Théories",
+   "wiki": "SST psychosociale",
+   "mots": 740,
+   "restants": [
+    "Références invérifiables (sans auteur, année ni adresse), signalées par le tableau de bord"
    ]
   },
   {
@@ -2050,6 +2041,15 @@
    ]
   },
   {
+   "page": "w/psychosocial/theme/reconnaissance-et-motivation.html",
+   "titre": "Reconnaissance et Motivation",
+   "wiki": "SST psychosociale",
+   "mots": 791,
+   "restants": [
+    "Références invérifiables (sans auteur, année ni adresse), signalées par le tableau de bord"
+   ]
+  },
+  {
    "page": "w/psychosocial/reconnaissance-et-desequilibre-efforts-recompenses.html",
    "titre": "Reconnaissance et déséquilibre efforts récompenses",
    "wiki": "SST psychosociale",
@@ -2119,6 +2119,15 @@
    "mots": 513,
    "restants": [
     "Aucune source repérable : ni adresse externe, ni note d’analyse citée qui en porte une"
+   ]
+  },
+  {
+   "page": "w/psychosocial/reseau-de-la-sante-publique-en-sst-drsp-inspq.html",
+   "titre": "Réseau de la santé publique en SST (DRSP, INSPQ)",
+   "wiki": "SST psychosociale",
+   "mots": 609,
+   "restants": [
+    "Références invérifiables (sans auteur, année ni adresse), signalées par le tableau de bord"
    ]
   },
   {
@@ -2893,15 +2902,6 @@
    "mots": 336,
    "restants": [
     "Aucune source repérable : ni adresse externe, ni note d’analyse citée qui en porte une"
-   ]
-  },
-  {
-   "page": "w/toxicologie/art-2-latmp-termes-utilises.html",
-   "titre": "art-2-LATMP",
-   "wiki": "Toxicologie",
-   "mots": 1614,
-   "restants": [
-    "Aucune phrase d’introduction : la page s’ouvre sur une ligne trop courte"
    ]
   },
   {
