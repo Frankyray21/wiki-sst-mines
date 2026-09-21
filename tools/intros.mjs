@@ -37,3 +37,28 @@ export function poserIntroHtml(html, phrase) {
   if (html.slice(i + marque.length, i + marque.length + p.length + 2).includes(p)) return { html, pose: false };
   return { html: html.slice(0, i + marque.length) + p + html.slice(i + marque.length), pose: true };
 }
+
+// Retrouve la note du vault qui a produit une page publiée : par son titre H1 (normalisé comme le
+// fait le générateur : un wikilink dans le titre devient son libellé), sinon par l'adresse de la
+// page (slug du nom de fichier). Les archives sont ignorées. Une seule note doit répondre.
+export function trouverNote(vault, { titre, slug }, { fs, path, slugify }) {
+  const normaliser = (t) => String(t).replace(/\[\[([^\]]+)\]\]/g, (m, x) => { const s = x.replace(/\\\|/g, '|').split('|'); return s[s.length - 1].split('#')[0]; }).replace(/\s+/g, ' ').trim();
+  const voulu = normaliser(titre);
+  const candidats = [];
+  (function walk(d, rel) {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      if (e.isDirectory()) { if (!/^98 - Archives|^_archive|^\.|^sauvegarde/i.test(e.name)) walk(path.join(d, e.name), rel + e.name + '/'); continue; }
+      if (!e.name.endsWith('.md')) continue;
+      const base = e.name.slice(0, -3);
+      let parTitre = false;
+      if (voulu) {
+        const texte = fs.readFileSync(path.join(d, e.name), 'utf8').replace(/^\uFEFF/, '').replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
+        const h1 = texte.match(/^[ \t]*#[ \t]+(.+?)[ \t]*$/m);
+        parTitre = !!h1 && normaliser(h1[1]) === voulu;
+      }
+      const parSlug = !!slug && slugify && slugify(base) === slug;
+      if (parTitre || parSlug) candidats.push({ chemin: rel + e.name, par: parTitre ? 'titre' : 'adresse' });
+    }
+  })(vault, '');
+  return candidats;
+}

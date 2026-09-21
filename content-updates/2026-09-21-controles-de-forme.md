@@ -128,7 +128,35 @@ vérifiable pèse plus qu'une fiche de 160 mots) :
 
 ## 3. Les 7 phrases d'ouverture, prêtes à poser
 
-(en cours)
+Chaque phrase a été rédigée par un agent à partir de la page seule, avec l'appui textuel de chaque élément, puis soumise à un second agent chargé de la réfuter (tout fait, nom, année, nuance ou jugement sans appui dans la page ; forme : une à deux phrases, 40-220 caractères, ton encyclopédique). Trois formulations ont été réfutées et corrigées sans rien ajouter ; quatre ont tenu. Aucun contenu SST nouveau.
+
+- **Charge de travail élevée** (`w/psychosocial/charge-de-travail-elevee.html`)
+  > Facteur de risque psychosocial, la charge de travail élevée comporte trois dimensions (quantitative, cognitive et émotionnelle); ses conséquences, son application en mines et les outils pour l'évaluer sont présentés.
+  _La section « Application en mines » ne contient que deux images ; « Pour aller plus loin » se termine sur un « L » orphelin (artefact du vault)._
+- **RPS et symptômes dépressifs au travail - Fiche Obsidian centrée sur Theorell et al. 2015, avec mises à jour 2015-2025** (`w/psychosocial/theorell-et-al-2015-avec-mises-a-jour-2015-2025.html`)
+  > Synthèse de la revue systématique de Theorell et al. (2015) sur les risques psychosociaux et les symptômes dépressifs au travail, avec les mises à jour 2015-2025 et les implications pour la SST minière québécoise.
+  _Note de travail Obsidian (tutoiement, jetons de génération « citeturn6view2 », bloc Mermaid en texte brut, sources non attestées) : à nettoyer un jour, indépendamment de la phrase._
+- **⭐ Top 20 articles** (`w/psychosocial/top-20-articles-essentiels.html`)
+  > Sélection de vingt articles essentiels du wiki SST psychosociale, classés en cinq volets (comprendre, mesurer, cadre légal, contexte minier, agir), chacun assorti d'un mot sur le pourquoi.
+  _Page de navigation ; le corps commence par une liste qui répète le sommaire automatique (pourrait être retirée)._
+- **🔄 De la conformité à la prévention - Comprendre et faire évoluer la culture SST** (`w/psychosocial/de-la-conformite-a-la-prevention-comprendre-et-faire-evoluer-la-culture-sst.html`)
+  > Une culture de conformité en SST est réactive; une culture de prévention va au-delà. L'article compare les deux, présente la courbe de Bradley, l'échec de la conformité sur les RPS et les leviers du changement.
+  _Le corps s'ouvre sur « 📎 Retour à l'accueil (source interne) », renvoi vers une note non publiée : à retirer de la note._
+- **Index des 7 Notes Wiki Créées - SST1010** (`w/psychosocial/index-notes-wiki.html`)
+  > Index des sept notes d'analyse Obsidian sur les risques psychosociaux d'un aide-foreur en mine québécoise FIFO, classées par progression théorique, avec le profil de risque global et leur usage pour le cours SST1010.
+  _Document de travail (« INDEX_NOTES_WIKI.md ← Vous êtes ici », tailles de fichiers) ; le « 7 » est dépassé : une trentaine d'analyses ajoutées sont listées en fin de page. Candidat à l'archivage plutôt qu'à la publication._
+- **Iso-strain** (`w/psychosocial/iso-strain.html`)
+  > L'iso-strain combine le job strain (forte demande, faible contrôle) et un faible soutien social au travail. L'article en présente la définition, la mesure dérivée du JCQ, l'application en mines et la prévention.
+  _Le corps commence par un fragment de liste orphelin (« Maladies cardiovasculaires (Belkic et al., 2004; Kivimäki et al., 2006) », « Trouble ») avant la première image : à corriger dans la note._
+- **LOT 3 - NOTES INSTITUTIONNELLES/COMPLÉMENTAIRES** (`w/psychosocial/readme-notes-lot3.html`)
+  > Compte rendu de la génération des six notes institutionnelles et complémentaires (AMC, INRS, INSPQ, Gouvernement du Canada, CNESST) du travail SST1010 sur l'aide-foreur : contenu clé, structure commune et statistiques.
+  _README d'un lot de génération (script Python, date, modèle) : document de travail, candidat à l'archivage plutôt qu'à la publication._
+
+Pose sur votre poste : `node tools/appliquer_intros.mjs` (essai), puis `node tools/appliquer_intros.mjs
+--appliquer` (sauvegarde de chaque note dans `sauvegarde-vault/<date>-intros/`, phrase posée juste après
+le titre H1, avant la table des matières). Le site publié montre déjà ces phrases en tête de page,
+comme la prochaine construction les rendra une fois le lot appliqué — sans le lot dans le vault, elles
+disparaîtraient à cette construction.
 
 ## 4. Suite proposée
 

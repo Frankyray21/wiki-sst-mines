@@ -30,3 +30,24 @@ test('sur la page publiée : premier paragraphe du corps, échappé, une seule f
   assert.equal(poserIntroHtml(r.html, 'Une phrase avec <b> & "guillemets".').pose, false);
   assert.throws(() => poserIntroHtml('<p>x</p>', PHRASE), /corps introuvable/);
 });
+
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { trouverNote } from '../intros.mjs';
+import { slugify } from '../adresses.mjs';
+
+test('la note est retrouvée par son titre H1 (wikilink réduit), sinon par l’adresse ; les archives sont ignorées', () => {
+  const v = fs.mkdtempSync(path.join(os.tmpdir(), 'vault-'));
+  const ecrire = (rel, texte) => { fs.mkdirSync(path.dirname(path.join(v, rel)), { recursive: true }); fs.writeFileSync(path.join(v, rel), texte); };
+  ecrire('Wiki SST psychosociale/20 - Articles/Facteurs/Charge de travail élevée.md', '---\ntags: [a]\n---\n\n# Charge de travail élevée\n\n## A\n');
+  ecrire('Wiki SST psychosociale/20 - Articles/Nav/⭐Top 20.md', '# ⭐ Top 20 [[Articles wiki|articles]]\n\n- a\n');
+  ecrire('Wiki SST psychosociale/98 - Archives/Charge de travail élevée.md', '# Charge de travail élevée\n');
+  ecrire('Wiki SST psychosociale/20 - Articles/Sans titre/iso-strain.md', 'Pas de H1 ici.\n');
+  const outils = { fs, path, slugify };
+  assert.deepEqual(trouverNote(v, { titre: 'Charge de travail élevée', slug: 'charge-de-travail-elevee' }, outils), [{ chemin: 'Wiki SST psychosociale/20 - Articles/Facteurs/Charge de travail élevée.md', par: 'titre' }]);
+  assert.equal(trouverNote(v, { titre: '⭐ Top 20 articles', slug: 'top-20-articles' }, outils)[0].par, 'titre', 'le wikilink du titre est réduit à son libellé');
+  assert.deepEqual(trouverNote(v, { titre: 'Iso-strain', slug: 'iso-strain' }, outils), [{ chemin: 'Wiki SST psychosociale/20 - Articles/Sans titre/iso-strain.md', par: 'adresse' }]);
+  assert.deepEqual(trouverNote(v, { titre: 'Inconnue', slug: 'inconnue' }, outils), []);
+  fs.rmSync(v, { recursive: true, force: true });
+});
