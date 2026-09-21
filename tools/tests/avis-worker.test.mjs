@@ -45,9 +45,16 @@ test('un avis nouveau crée une ligne, avec le statut « Nouveau »', async () =
   assert.equal(champs['Wiki'], 'SST psychosociale');
   assert.equal(champs['Statut'], 'Nouveau');
   assert.match(champs['Date'], /^\d{4}-\d{2}-\d{2}$/);
-  assert.equal(champs['Date'], new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()),
-    'le jour est celui du Québec : un avis de 21 h n’est pas daté du lendemain');
   assert.equal(champs['Réf'], AVIS.ref);
+});
+
+test('la date est le jour au Québec : un avis de 21 h 45 n’est pas daté du lendemain', async (t) => {
+  // 02:45 UTC le 1er janvier = 21:45 la veille à Montréal (heure normale)
+  t.mock.timers.enable({ apis: ['Date'], now: new Date('2026-01-01T02:45:00Z') });
+  const appels = simuler();
+  await worker.fetch(poste(AVIS), ENV);
+  assert.equal(appels[1].corps.fields['Date'], '2025-12-31');
+  t.mock.timers.reset();
 });
 
 test('le commentaire garde ses paragraphes ; le champ est multiligne', async () => {
@@ -101,16 +108,35 @@ test('ce que le relais refuse', async () => {
     assert.equal(r.status, statut);
     assert.equal(r.headers.get('Access-Control-Allow-Origin'), ORIGINE);
   }
-  // origine étrangère : refusée, et jamais reflétée dans l'en-tête
-  const etranger = await worker.fetch(poste(AVIS, 'https://ailleurs.example'), ENV);
-  assert.equal(etranger.status, 403);
-  assert.notEqual(etranger.headers.get('Access-Control-Allow-Origin'), 'https://ailleurs.example');
+  // Origine étrangère : refusée, aucune écriture. Le refus renvoie l'origine du demandeur (la
+  // réponse ne contient rien) pour que le navigateur lise « definitif » et cesse de rejouer l'avis.
+  {
+    const appels = simuler();
+    const etranger = await worker.fetch(poste(AVIS, 'https://ailleurs.example'), ENV);
+    assert.equal(etranger.status, 403);
+    assert.equal(appels.length, 0);
+    assert.equal(etranger.headers.get('Access-Control-Allow-Origin'), 'https://ailleurs.example');
+    assert.equal((await etranger.json()).definitif, true);
+  }
   // une origine écrite avec une barre finale ou un chemin désigne la même origine
   for (const ecrit of ['https://frankyray21.github.io/', 'https://frankyray21.github.io/wiki-sst-mines']) {
     assert.equal((await worker.fetch(poste(AVIS), { ...ENV, ORIGINES: ecrit })).status, 200, ecrit);
   }
-  // rien n'est ouvert par défaut : sans ORIGINES, le relais refuse au lieu de servir tout le monde
-  assert.equal((await worker.fetch(poste(AVIS), { ...ENV, ORIGINES: '' })).status, 503);
+  // rien n'est ouvert par défaut : sans ORIGINES, AUCUNE origine ne passe — pas même localhost
+  for (const org of ['https://frankyray21.github.io', 'http://localhost', 'http://localhost:5173']) {
+    const appels = simuler();
+    const r = await worker.fetch(poste(AVIS, org), { ...ENV, ORIGINES: '' });
+    assert.equal(r.status, 503, org);
+    assert.equal(appels.length, 0, 'aucun appel Airtable quand le relais n’est pas configuré');
+    assert.equal((await r.json()).definitif, true);
+  }
+  // localhost n'est admis que s'il est écrit dans ORIGINES, comme n'importe quelle origine
+  assert.equal((await worker.fetch(poste(AVIS, 'http://localhost:8090'), ENV)).status, 403);
+  assert.equal((await worker.fetch(poste(AVIS, 'http://localhost:8090'), { ...ENV, ORIGINES: ORIGINE + ', http://localhost:8090' })).status, 200);
+  // sans en-tête Origin (curl nu) : refusé, et aucun Access-Control-Allow-Origin — jamais « null »
+  const nu = await worker.fetch(new Request('https://relais.test/avis', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(AVIS) }), ENV);
+  assert.equal(nu.status, 403);
+  assert.equal(nu.headers.get('Access-Control-Allow-Origin'), null);
   // méthode
   const get = await worker.fetch(new Request('https://relais.test/avis', { headers: { Origin: ORIGINE } }), ENV);
   assert.equal(get.status, 405);
@@ -118,18 +144,38 @@ test('ce que le relais refuse', async () => {
   const vol = await worker.fetch(new Request('https://relais.test/avis', { method: 'OPTIONS', headers: { Origin: ORIGINE } }), ENV);
   assert.equal(vol.status, 204);
   assert.equal(vol.headers.get('Access-Control-Allow-Methods'), 'POST, OPTIONS');
-  const volEtranger = await worker.fetch(new Request('https://relais.test/avis', { method: 'OPTIONS', headers: { Origin: 'https://ailleurs.example' } }), ENV);
-  assert.notEqual(volEtranger.headers.get('Access-Control-Allow-Origin'), 'https://ailleurs.example');
   // une Réf normale, avec l'adresse de la page, passe
   assert.equal((await worker.fetch(poste(AVIS), ENV)).status, 200);
+});
+
+test('un lien difforme n’est pas écrit : le champ Airtable est de type URL et refuserait la ligne', async () => {
+  for (const [lien, attendu] of [['https://frankyray21.github.io/wiki-sst-mines/w/x.html', 'https://frankyray21.github.io/wiki-sst-mines/w/x.html'], ['file:///C:/wiki/x.html', undefined], ['pas une adresse', undefined], ['', undefined], ['javascript:alert(1)', undefined]]) {
+    const appels = simuler();
+    assert.equal((await worker.fetch(poste({ ...AVIS, lien }), ENV)).status, 200, lien);
+    assert.equal(appels[1].corps.fields['Lien'], attendu, lien);
+  }
+});
+
+test('corps borné avant lecture : Content-Length menteur ou absent, flux coupé à 8 Ko', async () => {
+  simuler();
+  const gros = JSON.stringify({ ...AVIS, commentaire: 'x'.repeat(20000) });
+  // annoncé trop long : refusé sans lire
+  let r = await worker.fetch(new Request('https://relais.test/avis', { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: ORIGINE, 'Content-Length': String(gros.length) }, body: gros }), ENV);
+  assert.equal(r.status, 413);
+  // annoncé petit mais long en réalité : lu par morceaux et coupé
+  const flux = new ReadableStream({ start(c) { for (let i = 0; i < gros.length; i += 1024) c.enqueue(new TextEncoder().encode(gros.slice(i, i + 1024))); c.close(); } });
+  r = await worker.fetch(new Request('https://relais.test/avis', { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: ORIGINE, 'Content-Length': '10' }, body: flux, duplex: 'half' }), ENV);
+  assert.equal(r.status, 413);
+  assert.equal(r.headers.get('Access-Control-Allow-Origin'), ORIGINE, 'en-têtes CORS présents sur un refus');
 });
 
 test('débit borné : au-delà de la limite, 429 — et le navigateur garde l’avis', async () => {
   const appels = simuler();
   let reste = 2;
-  const LIMITE = { limit: async ({ key }) => { assert.equal(key, '203.0.113.7'); return { success: reste-- > 0 }; } };
-  const requete = () => new Request('https://relais.test/avis', {
-    method: 'POST', headers: { 'Content-Type': 'application/json', Origin: ORIGINE, 'CF-Connecting-IP': '203.0.113.7' }, body: JSON.stringify(AVIS),
+  const cles = [];
+  const LIMITE = { limit: async ({ key }) => { cles.push(key); return { success: reste-- > 0 }; } };
+  const requete = (ip = '203.0.113.7') => new Request('https://relais.test/avis', {
+    method: 'POST', headers: { 'Content-Type': 'application/json', Origin: ORIGINE, 'CF-Connecting-IP': ip }, body: JSON.stringify(AVIS),
   });
   assert.equal((await worker.fetch(requete(), { ...ENV, LIMITE })).status, 200);
   assert.equal((await worker.fetch(requete(), { ...ENV, LIMITE })).status, 200);
@@ -137,6 +183,19 @@ test('débit borné : au-delà de la limite, 429 — et le navigateur garde l’
   assert.equal(trop.status, 429);
   assert.ok(!(await trop.json()).definitif, 'une limite passe : l’avis repartira plus tard');
   assert.equal(appels.filter(a => a.methode !== 'GET').length, 2, 'aucune écriture Airtable au-delà de la limite');
+  assert.deepEqual(cles, ['203.0.113.7', '203.0.113.7', '203.0.113.7']);
+  // IPv6 : le seau est le préfixe /64, pas l'adresse complète — sinon 2^64 clés par abonné
+  reste = 10; cles.length = 0;
+  await worker.fetch(requete('2001:db8:85a3:8d3:1319:8a2e:370:7348'), { ...ENV, LIMITE });
+  await worker.fetch(requete('2001:db8:85a3:8d3:ffff:ffff:ffff:1'), { ...ENV, LIMITE });
+  assert.deepEqual(cles, ['2001:db8:85a3:8d3', '2001:db8:85a3:8d3']);
+  // une liaison absente de forme, mal nommée ou qui lève ne ferme pas le relais
+  for (const L of [{}, 20, { limit: async () => { throw new Error('indisponible'); } }, { limit: async () => undefined }]) {
+    simuler();
+    const r = await worker.fetch(requete(), { ...ENV, LIMITE: L });
+    assert.equal(r.status, 200, 'liaison ' + JSON.stringify(L));
+    assert.equal(r.headers.get('Access-Control-Allow-Origin'), ORIGINE, 'en-têtes CORS présents même en panne de liaison');
+  }
 });
 
 test('Airtable : un refus définitif n’est pas une panne', async () => {

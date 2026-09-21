@@ -18,7 +18,7 @@ import { normaliserBibliographie } from './bibliographie.mjs';
 import { motsDePage, encoderListe } from './recherche_mots.mjs';
 import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
 import { estAccueil, decouperAccueil, rendreAccueil, titreAccueil, piedAccueil } from './accueil_wiki.mjs';
-import { blocAvis, CONF_AVIS } from './avis.mjs';
+import { blocAvis, lireConfAvis, ecrireConfAvis } from './avis.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -940,10 +940,10 @@ function infobox(p) {
 console.log('Rendu des pages…');
 // L'adresse du relais des avis est écrite à la main après le déploiement du Worker, dans
 // docs/assets/avis.json. Le nettoyage ci-dessous l'emporterait : on la relit d'abord, et on la
-// réécrit en fin de construction. Sans cela, chaque reconstruction éteindrait le bloc d'avis.
-let relaisAvis = '';
-try { relaisAvis = String(JSON.parse(fs.readFileSync(path.join(OUT, CONF_AVIS), 'utf8')).url || ''); }
-catch (e) { /* première construction, ou fichier illisible : relais non configuré */ }
+// réécrit dès que le dossier existe à nouveau — pas en fin de construction, où un arrêt en route
+// (cible morte du portail, par exemple) l'aurait perdue pour la construction suivante.
+const relaisAvis = lireConfAvis(fs, OUT, path);
+if (relaisAvis.avertissement) console.warn(`  ⚠ avis : ${relaisAvis.avertissement}`);
 
 // On vide le contenu sans supprimer OUT lui-même : sous Windows le dossier racine reste
 // verrouillé dès qu'un terminal ou un serveur l'a comme répertoire courant.
@@ -957,6 +957,7 @@ if (fs.existsSync(OUT)) {
   }
 }
 fs.mkdirSync(OUT, { recursive: true });
+ecrireConfAvis(fs, OUT, path, relaisAvis.conf);   // fenêtre de perte nulle : réécrit avant tout rendu
 
 // Résumé introductif, façon Wikipédia. On ne fabrique jamais de texte : on promeut le callout
 // « En bref » que 3408 pages portent déjà, et on le retire du corps pour éviter le doublon.
@@ -1383,7 +1384,7 @@ for (const dir of dirsAll) {
     const target = home ? rootOf(outDir + '/index.html') + home.out : '';
     fs.mkdirSync(path.join(OUT, outDir), { recursive: true });
     fs.writeFileSync(path.join(OUT, outDir, 'index.html'),
-      `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;url=${target}"><title>${esc(wiki.name)}</title></head><body><a href="${target}">${esc(wiki.name)}</a></body></html>`);
+      `<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;url=${target}"><title>${esc(wiki.name)}</title><style>html{color-scheme:dark;background:#16181d;color:#e4e6e8;font-family:sans-serif}a{color:#7ab0ff}@media print{html{background:#fff;color:#000}}</style></head><body><a href="${target}">${esc(wiki.name)}</a></body></html>`);
     continue;
   }
   const label = cleanLabel(parts[parts.length - 1]);
@@ -2002,14 +2003,9 @@ fs.writeFileSync(path.join(OUT, 'assets', 'portail.css'), fs.readFileSync(path.j
 fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas passer par Jekyll
 genererPwa(OUT, V);
 
-// La date de génération vit dans un seul fichier, lu par le pied de page. Écrite dans les
-// 4970 pages, elle changeait tout le site à chaque reconstruction — ~60 Mo de dépôt pour une date.
-{
-  // relu avant le nettoyage de docs/ : une reconstruction ne débranche pas les avis
-  fs.writeFileSync(path.join(OUT, CONF_AVIS),
-    JSON.stringify({ url: relaisAvis, base: 'Formations', table: 'Avis wiki SST (web)' }, null, 1) + '\n');
-  console.log(`  avis : relais ${relaisAvis ? relaisAvis : 'non configuré — le bloc reste masqué'}`);
-}
+console.log(`  avis : relais ${relaisAvis.conf.url && !relaisAvis.avertissement ? relaisAvis.conf.url : 'non configuré — le bloc reste masqué'}`);
+// Compteurs et date de la construction, lus par le pied de page : un seul fichier, pour que la
+// date ne soit pas écrite dans chaque page (ce qui changeait tout le site à chaque reconstruction).
 fs.writeFileSync(path.join(OUT, 'assets', 'version.json'), JSON.stringify({
   date: new Date().toISOString().slice(0, 10),
   pages: pages.length,

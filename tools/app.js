@@ -1533,14 +1533,16 @@
   (function avisPage() {
     var bloc = document.querySelector('.avis');
     var CLE_FILE = 'wiki-avis-file', CLE_LECTEUR = 'wiki-avis-lecteur';
+    var DELAI = 15000;   // un portail captif accepte la connexion et ne répond jamais : on n'attend pas
     var relais = '';
     var idLecteur = '';
-    // Un seul envoi à la fois : deux tapes rapides sur un pouce partiraient en parallèle, le relais
-    // ne trouverait la ligne ni pour l'une ni pour l'autre, et Airtable garderait deux lignes.
+    // Un seul envoi à la fois, file comprise : deux tapes rapides sur un pouce partiraient en
+    // parallèle, le relais ne trouverait la ligne ni pour l'une ni pour l'autre, et Airtable
+    // garderait deux lignes. La chaîne ne se bloque jamais : chaque envoi est borné par DELAI.
     var chaine = Promise.resolve();
 
     function lire(cle) { try { return localStorage.getItem(cle) || ''; } catch (e) { return ''; } }
-    function ecrire(cle, v) { try { localStorage.setItem(cle, v); } catch (e) { /* navigation privée */ } }
+    function ecrire(cle, v) { try { localStorage.setItem(cle, v); return true; } catch (e) { return false; } }
     function lecteur() {
       // gardé en mémoire : sans localStorage (cookies bloqués, navigation privée), un tirage par
       // appel donnerait au commentaire une autre Réf que le pouce, donc deux lignes au lieu d'une
@@ -1550,35 +1552,52 @@
       return idLecteur;
     }
     function file() { try { return JSON.parse(lire(CLE_FILE) || '[]'); } catch (e) { return []; } }
-    function poserFile(f) { ecrire(CLE_FILE, JSON.stringify(f.slice(-20))); }
+    function poserFile(f) { return ecrire(CLE_FILE, JSON.stringify(f.slice(-20))); }
+    function retirer(a) {
+      var f = file(), cle = JSON.stringify(a);
+      for (var i = 0; i < f.length; i++) if (JSON.stringify(f[i]) === cle) { f.splice(i, 1); poserFile(f); return; }
+    }
 
     // Un refus du relais (origine, forme, base qui refuse la valeur) ne se réparera pas tout seul :
     // l'avis est perdu, mais on ne le rejoue pas à chaque page en annonçant « pas de réseau » à
-    // quelqu'un qui a le réseau. Une panne (502, 429, coupure) se retente, elle.
+    // quelqu'un qui a le réseau. Une panne (502, 429, coupure, délai dépassé) se retente, elle.
+    // Le relais dit lui-même ce qui est définitif (« definitif » dans sa réponse) ; le statut
+    // HTTP ne sert que de repli quand le corps n'est pas lisible.
     function envoyer(avis) {
       if (!relais) return Promise.reject(new Error('sans relais'));
-      return fetch(relais, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(avis)
-      }).then(function (r) {
-        if (r.ok) return r;
-        var erreur = new Error('HTTP ' + r.status);
-        erreur.definitif = r.status >= 400 && r.status < 500 && r.status !== 408 && r.status !== 429;
-        throw erreur;
-      });
-    }
-    function viderFile() {
-      var attente = file();
-      if (!relais || !attente.length) return;
-      poserFile([]);
-      var restants = [], suite = Promise.resolve();
-      attente.forEach(function (a) {
-        suite = suite.then(function () {
-          return envoyer(a).catch(function (e) { if (!e || !e.definitif) restants.push(a); });
+      var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var minuterie = null;
+      var options = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(avis) };
+      if (ctrl) { options.signal = ctrl.signal; minuterie = setTimeout(function () { ctrl.abort(); }, DELAI); }
+      var course = fetch(relais, options).then(function (r) {
+        return r.json().then(null, function () { return {}; }).then(function (corps) {
+          if (r.ok) return corps;
+          var erreur = new Error('HTTP ' + r.status);
+          erreur.definitif = (corps && corps.definitif === true) ||
+            (r.status >= 400 && r.status < 500 && r.status !== 408 && r.status !== 429);
+          throw erreur;
         });
       });
-      // les avis mis en file pendant le renvoi sont plus récents : ils restent après les anciens,
-      // sinon le rejeu suivant écraserait le nouvel avis par l'ancien (même Réf, donc même ligne)
-      chaine = suite.then(function () { if (restants.length) poserFile(restants.concat(file())); });
+      if (!ctrl) {
+        course = Promise.race([course, new Promise(function (_, rejeter) {
+          minuterie = setTimeout(function () { rejeter(new Error('délai dépassé')); }, DELAI);
+        })]);
+      }
+      return course.then(function (v) { clearTimeout(minuterie); return v; }, function (e) { clearTimeout(minuterie); throw e; });
+    }
+    // Chaque avis ne quitte la mémoire qu'une fois parti, ou définitivement refusé : si la page
+    // meurt au milieu du renvoi (onglet fermé, tué par Android), ce qui restait est encore là.
+    function viderFile() {
+      if (!relais || !file().length) return;
+      chaine = chaine.then(function () {
+        var suite = Promise.resolve();
+        file().forEach(function (a) {
+          suite = suite.then(function () {
+            return envoyer(a).then(function () { retirer(a); }, function (e) { if (e && e.definitif) retirer(a); });
+          });
+        });
+        return suite;
+      });
     }
 
     function brancher() {
@@ -1610,12 +1629,16 @@
       function transmettre(merci) {
         var avis = avisCourant();
         dire('Envoi…');
-        chaine = chaine.then(function () {
-          return envoyer(avis).then(function () { dire(merci, true); }).catch(function (e) {
-            if (e && e.definitif) { dire('Cet avis n’a pas pu être enregistré. Écrivez à l’équipe SST si cela se répète.'); return; }
-            var f = file(); f.push(avis); poserFile(f);
-            dire('Pas de réseau : votre avis partira à la prochaine connexion.');
-          });
+        // Boîte d'envoi : l'avis est rangé en mémoire AVANT de partir, et n'en sort qu'une fois
+        // parti ou refusé. Un onglet tué pendant l'envoi ne perd rien : il repartira à la visite
+        // suivante. Puis à son tour dans la chaîne, qui continue quoi qu'il advienne de cet envoi.
+        var garde = poserFile(file().concat([avis]));
+        var envoiCourant = chaine.then(function () { return envoyer(avis); });
+        chaine = envoiCourant.then(null, function () {});
+        envoiCourant.then(function () { retirer(avis); dire(merci, true); }, function (e) {
+          if (e && e.definitif) { retirer(avis); dire('Cet avis n’a pas pu être enregistré. Écrivez à l’équipe SST si cela se répète.'); return; }
+          if (garde) dire('Pas de réseau : votre avis partira à la prochaine connexion.');
+          else dire('Pas de réseau, et ce navigateur ne garde rien en mémoire : réessayez quand le signal revient.');
         }).then(function () { envoi.disabled = false; });
       }
 
@@ -1639,18 +1662,21 @@
 
     // Adresse du relais : un seul fichier à changer le jour où il bouge. Lu sur chaque page, bloc
     // ou non : une page d'index vide aussi la file d'attente laissée par une page précédente.
-    // Le service worker garde ce fichier dans son noyau, donc l'avis fonctionne aussi hors ligne.
+    // Le service worker garde ce fichier dans son noyau, donc l'avis fonctionne aussi hors ligne ;
+    // « no-cache » fait revalider la copie HTTP (ETag), pour qu'une adresse changée à la main
+    // sans reconstruction arrive sans attendre les dix minutes du cache de GitHub Pages.
     function chargerConf() {
       if (relais) { viderFile(); return; }
-      fetch(vUrl(ROOT + 'assets/avis.json'))
+      fetch(vUrl(ROOT + 'assets/avis.json'), { cache: 'no-cache' })
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (conf) {
-          if (!conf || !conf.url) return;        // pas de relais : le bloc reste masqué
+          // une adresse qui n'est pas https ne fera que des « pas de réseau » : on la tient pour absente
+          if (!conf || typeof conf.url !== 'string' || !/^https:\/\//.test(conf.url)) return;
           relais = conf.url;
           if (bloc) bloc.hidden = false;
           viderFile();
         })
-        .catch(function () { /* première visite hors ligne : on retentera au retour du réseau */ });
+        .then(null, function () { /* première visite hors ligne : on retentera au retour du réseau */ });
     }
     // posé quoi qu'il arrive : si la configuration n'a pas pu être lue, le retour du réseau est
     // justement le moment de la relire et de vider la file

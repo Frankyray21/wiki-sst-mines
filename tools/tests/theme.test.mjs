@@ -23,6 +23,21 @@ test('la palette sombre s’applique sans attribut, la claire sur demande', () =
   }
   // la palette claire reste celle de :root, donc l'impression sort en noir sur blanc
   assert.match(css, /^:root \{[\s\S]*?color-scheme: light;[\s\S]*?^\}/m);
+  // les couleurs système (boutons nus, ascenseur, caret) suivent le thème, sur le portail aussi :
+  // sans color-scheme, le « ? » de l'aide était dessiné en noir sur le fond sombre du portail
+  assert.match(portail, /^:root \{[\s\S]*?color-scheme: light;[\s\S]*?^\}/m, 'portail.css : color-scheme clair sur :root');
+  assert.equal((portail.match(/color-scheme: dark;/g) || []).length, 2, 'portail.css : color-scheme sombre dans les deux blocs');
+  assert.match(portail, /\.tb-icone-btn \{[^}]*color: var\(--p-texte\)/, 'le « ? » de l’aide a une couleur de texte explicite');
+  // les bulles de app.js (visite guidée, hors ligne) lisent --content-bg/--text : le portail les fournit
+  for (const alias of ['--content-bg: var(--p-carte)', '--text: var(--p-texte)', '--text-soft: var(--p-texte-doux)', '--border-light: var(--p-bordure)', '--hover: var(--p-bleu-pale)']) {
+    assert.ok(portail.includes(alias), 'alias ' + alias);
+  }
+  // surfaces pleines à texte blanc : un bleu qui ne s'éclaircit pas en sombre (5,17:1)
+  assert.match(portail, /\.tb-recherche button \{\s*background: var\(--p-bleu-plein\)/);
+  assert.match(portail, /\.tb-avatar \{[^}]*background: var\(--p-bleu-plein\)/);
+  assert.ok(!css.includes('--img-filtre'), 'plus de variable morte d’inversion des captures');
+  // aucun bloc tactile ne s'applique à l'impression
+  for (const feuille of [css, portail]) assert.ok(!/@media \(pointer: coarse\)/.test(feuille), 'les blocs tactiles sont limités à l’écran');
   const print = css.slice(css.indexOf('@media print {\n  .site-header'));
   assert.match(print, /:root \{ --bg: #fff;/, 'l’impression force la palette claire');
   const sombres = [...css.matchAll(/--bg: #16181d/g)].map(m => m.index);
@@ -46,20 +61,30 @@ test('le script d’entête et le bouton s’accordent sur le défaut sombre', (
   assert.deepEqual(etats, ['dark', 'light', 'auto']);
 });
 
+test('les trois sources copiées telles quelles sont identiques à leurs copies publiées', () => {
+  for (const f of ['style.css', 'portail.css', 'app.js']) {
+    const source = fs.readFileSync(path.join(R, 'tools', f));
+    const copie = fs.readFileSync(path.join(R, 'docs/assets', f));
+    assert.ok(source.equals(copie), f + ' : tools/ et docs/assets/ diffèrent (octets ou fins de ligne)');
+  }
+});
+
 test('site publié : le script d’entête est à jour sur toutes les pages', () => {
   const DOCS = path.join(R, 'docs');
-  let vues = 0, anciennes = [];
+  let vues = 0, anciennes = [], sansScript = [];
   (function walk(d, rel = '') {
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {
       const r = rel ? rel + '/' + e.name : e.name;
       if (e.isDirectory()) { if (r !== 'files') walk(path.join(d, e.name), r); continue; }
       if (!e.name.endsWith('.html')) continue;
       const html = fs.readFileSync(path.join(d, e.name), 'utf8');
-      if (!html.includes("localStorage.getItem('theme')")) continue;
+      if (!html.includes("localStorage.getItem('theme')")) { sansScript.push(r); continue; }
       vues++;
       if (!html.includes("if(t==='light'||t==='auto')")) anciennes.push(r);
     }
   })(DOCS);
   assert.ok(vues > 4000, `${vues} pages portent le script de thème`);
+  // seules les pages sans app.js s'en passent : redirection, hors ligne, 404 (toutes stylées en dur)
+  assert.deepEqual(sansScript.sort(), ['404.html', 'offline.html', 'w/legislation/index.html']);
   assert.deepEqual(anciennes.slice(0, 3), [], `${anciennes.length} page(s) avec l’ancien script`);
 });

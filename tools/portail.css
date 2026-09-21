@@ -13,6 +13,18 @@
   --p-ombre: 0 1px 2px rgba(16,24,40,.05);
   --p-ombre-forte: 0 4px 14px rgba(16,24,40,.10);
   --p-rayon: 10px;
+  /* Bleu des surfaces pleines à texte blanc (bouton Rechercher, pastille de profil) : le même
+     dans les deux thèmes — 5,17:1 avec du blanc. En sombre, --p-bleu s'éclaircit pour rester
+     lisible comme couleur de texte, et du blanc dessus tomberait à 2,5:1. */
+  --p-bleu-plein: #2563eb;
+  --p-bleu-plein-fonce: #1d4ed8;
+  /* Alias attendus par app.js (visite guidée, panneaux hors ligne et installation) : sans eux,
+     ces bulles retombaient sur les replis clairs du wiki au milieu d'un portail sombre. */
+  --content-bg: var(--p-carte); --text: var(--p-texte); --text-soft: var(--p-texte-doux);
+  --border-light: var(--p-bordure); --hover: var(--p-bleu-pale);
+  /* Les couleurs système (boutons nus, ascenseur, caret, remplissage automatique) suivent
+     le thème : sans cette déclaration, un bouton sans couleur restait noir sur fond sombre. */
+  color-scheme: light;
 }
 /* Sombre par défaut, comme le wiki : voir l'entête de style.css. */
 @media screen and (prefers-color-scheme: dark) {
@@ -21,6 +33,7 @@
     --p-fond: #14171c; --p-carte: #1b1f26; --p-bordure: #2b3038; --p-bordure-forte: #3a414b;
     --p-texte: #e6e8ea; --p-texte-doux: #a0a8b2;
     --p-ombre: 0 1px 2px rgba(0,0,0,.4); --p-ombre-forte: 0 4px 14px rgba(0,0,0,.55);
+    color-scheme: dark;
   }
 }
 @media screen {
@@ -33,6 +46,7 @@
     --p-fond: #14171c; --p-carte: #1b1f26; --p-bordure: #2b3038; --p-bordure-forte: #3a414b;
     --p-texte: #e6e8ea; --p-texte-doux: #a0a8b2;
     --p-ombre: 0 1px 2px rgba(0,0,0,.4); --p-ombre-forte: 0 4px 14px rgba(0,0,0,.55);
+    color-scheme: dark;
   }
 }
 
@@ -103,12 +117,13 @@ body.tb a { color: inherit; text-decoration: none; }
 .tb-icone-btn {
   width: 38px; height: 38px; border-radius: 9px; border: 0; background: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
+  color: var(--p-texte);   /* le « ? » de l'aide est du texte : jamais une couleur système */
 }
 .tb-icone-btn:hover { background: var(--p-bleu-pale); }
 .tb-icone-btn svg { width: 20px; height: 20px; stroke: var(--p-texte-doux); fill: none; stroke-width: 1.7; }
 .tb-profil { display: flex; align-items: center; gap: 11px; padding-left: 8px; }
 .tb-avatar {
-  width: 38px; height: 38px; border-radius: 50%; background: var(--p-bleu); color: #fff;
+  width: 38px; height: 38px; border-radius: 50%; background: var(--p-bleu-plein); color: #fff;
   display: flex; align-items: center; justify-content: center; font-size: 13.5px; font-weight: 700;
 }
 .tb-profil-txt strong { display: block; font-size: 14px; font-weight: 600; }
@@ -128,10 +143,10 @@ body.tb a { color: inherit; text-decoration: none; }
 .tb-recherche input { flex: 1; border: 0; background: none; font-size: 16px; color: var(--p-texte); font-family: inherit; padding: 8px 0; }
 .tb-recherche input:focus { outline: none; }
 .tb-recherche button {
-  background: var(--p-bleu); color: #fff; border: 0; border-radius: 9px;
+  background: var(--p-bleu-plein); color: #fff; border: 0; border-radius: 9px;
   padding: 11px 22px; font-size: 14.5px; font-weight: 600; cursor: pointer; font-family: inherit;
 }
-.tb-recherche button:hover { background: var(--p-bleu-fonce); }
+.tb-recherche button:hover { background: var(--p-bleu-plein-fonce); }
 .tb-populaires { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin: 13px 0 24px; font-size: 14px; color: var(--p-texte-doux); }
 .tb-puce {
   padding: 6px 15px; border-radius: 999px; border: 1px solid var(--p-bordure-forte);
@@ -290,9 +305,10 @@ body.tb a { color: inherit; text-decoration: none; }
 /* Même principe que style.css : sur un écran tactile, les cibles grandissent quelle que soit la
    largeur. Le tableau de bord s'affiche en 1 280 px de large sur la tablette : aucune règle
    « téléphone » ne s'y appliquait (retour « Accueil » à 22 px, pied de page à 19 px). */
-@media (pointer: coarse) {
-  .tb-nav a, .tb-icone-btn, .tb-recherche input, .tb-recherche button { min-height: 44px; }
+@media screen and (pointer: coarse) {
+  .tb-nav a, .tb-puce, .tb-recherche input, .tb-recherche button { min-height: 44px; }
+  .tb-icone-btn { width: 44px; height: 44px; }
   .tb-retour, .tb-legal-compte { display: inline-flex; align-items: center; min-height: 44px; }
-  .tb-pied a, .tb-carte-lien, .tb-puce a { display: inline-block; padding-top: 6px; padding-bottom: 6px; }
+  .tb-pied a, .tb-carte-lien { display: inline-block; padding-top: 6px; padding-bottom: 6px; }
   .tb-recherche input { font-size: 16px; }
 }

@@ -104,11 +104,61 @@ commentaire sur la même `Réf` ; relais en panne → file locale puis renvoi ; 
 page sans bloc ; refus définitif → rien en file et message explicite ; double tape → un seul envoi
 à la fois.
 
+## Seconde relecture adversariale, sur ce lot même
+
+Six relecteurs (thème, tablette, relais, script, générateur, état publié) ont rendu 46 constats,
+tous contrôlés par mesure ou exécution. Ce qui tenait a été corrigé :
+
+- **Portail de l'encadrement** : `portail.css` ne déclarait pas `color-scheme`, si bien que le
+  « ? » de l'aide (bouton sans couleur propre) était dessiné en noir sur le fond sombre — invisible
+  (1,17:1). Corrigé, avec une couleur explicite sur le bouton. Les bulles de la visite guidée et
+  des panneaux hors ligne lisaient les variables du wiki, absentes du portail, et retombaient sur
+  des replis clairs : le portail les fournit désormais. Le bouton « Rechercher » et la pastille de
+  profil passaient à 2,5:1 en sombre (blanc sur bleu éclairci) : ils gardent le bleu plein (5,17:1).
+- **Réglages tablette** : `.accueil-index a` en bloc empilait les trois liens de l'index des
+  accueils et orphelinait leurs séparateurs (mesuré à 390, 800 et 1 280 px) — ramené en ligne ;
+  la borne de 80 caractères oubliait le texte officiel des articles de loi (2 896 pages, jusqu'à
+  159 caractères à 1 440 px) et les 198 pages sans `.page-body` — couverts, dès 700 px ; les
+  liens dans les titres n'étaient pas agrandis ; les pastilles « Recherches populaires » du
+  portail sont des boutons, pas des liens (sélecteur mort) ; les règles tactiles écrasaient sur
+  téléphone deux réglages choisis exprès (barre latérale 11 px, sommaire 6 px) — mêmes valeurs
+  maintenant ; les champs du formulaire d'avis n'étaient pas agrandis ; les blocs tactiles
+  s'appliquaient à l'impression ; le séparateur du fil d'Ariane était à 2,1:1.
+- **Relais** : la liaison de débit n'était pas protégée (une exception donnait un 500 sans CORS) ;
+  `Origin: http://localhost` était admis d'office, en production aussi — l'en-tête se forge, c'était
+  un contournement complet de `ORIGINES` ; la clé de débit IPv6 était l'adresse complète (2^64 clés
+  par abonné) — préfixe /64 ; le `lien` n'était pas validé alors que le champ Airtable est de type
+  URL (une ligne entière aurait été refusée) ; la borne du corps ne bornait rien (`Content-Length`
+  facultatif) — lecture par morceaux, coupée à 8 Ko ; `Access-Control-Allow-Origin: null` n'est pas
+  neutre — omis, et un refus renvoie l'origine du demandeur pour que le navigateur lise
+  `definitif` ; repli sur le jour UTC si les données de fuseau manquaient.
+- **Script** : la file était vidée de la mémoire avant l'envoi (une page fermée au milieu perdait
+  tout) — chaque avis n'en sort qu'une fois parti ou refusé ; le renvoi de la file partait en
+  parallèle d'un envoi en cours ; aucun délai de garde — un relais qui accepte la connexion sans
+  répondre bloquait tout pour toujours, bouton compris — 15 s par envoi ; le script lit désormais
+  le `definitif` du relais au lieu de deviner par le statut ; un stockage bloqué n'annonce plus
+  « votre avis partira » ; `avis.json` est relu en revalidant le cache HTTP.
+- **Générateur** : l'adresse du relais était réécrite en fin de construction — un arrêt en route
+  (cible morte du portail) la perdait pour la construction suivante ; réécrite dès que `docs/`
+  existe à nouveau, toutes clés conservées, adresse contrôlée (https), avertissement explicite si
+  le fichier manque. Les tests qui prétendaient garder cet invariant étaient des tautologies :
+  remplacés par des tests de comportement sur un dossier temporaire, plus un test d'identité
+  `tools/` ↔ `docs/assets/` et des cas de relais (localhost, liaison cassée, IPv6, horloge figée
+  à 21 h 45 pour la date, corps en flux).
+
+Écartés : la date de `version.json` (13 septembre) est celle de la dernière construction depuis le
+vault, ce qui est exact — ces lots ne reconstruisent pas le contenu ; les 46 titres qui commencent
+par un emoji viennent des notes elles-mêmes ; les pages de graphe qui ne redessinent pas leurs
+couleurs au changement de thème sont un défaut antérieur, noté pour plus tard.
+
 ## Vérifications
 
-- 133 tests (`npm --prefix tools test`), dont 9 nouveaux pour le thème et 4 pour le relais durci ;
+- 138 tests (`npm --prefix tools test`), dont 10 pour le thème et 11 pour le relais ;
 - `verif_site`, `verif_liens` (245 385 liens, 0 erreur), `verif_publication --staged` ;
-- `verif_rendu` : 17 accueils × 5 modes + 11 autres pages × 5 modes, 0 défaut.
+- `verif_rendu` : 17 accueils × 5 modes + 12 autres pages × 5 modes, 0 défaut ;
+- dans Chromium : thème (défaut, clair, auto, impression, tour du bouton), avis de bout en bout
+  (sans relais, pouce, commentaire, panne et renvoi, page sans bloc, refus définitif, double tape,
+  relais qui ne répond jamais → délai, file et bouton rendus).
 
 Reste ouvert, sans rapport avec ce lot : `tools/tests/textes-loi.test.mjs` échoue encore sur
 11 pages d'article de loi sans texte extrait (voir la note du 14 septembre).

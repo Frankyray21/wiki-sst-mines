@@ -24,7 +24,6 @@
   --th-bg: #eaecf0;
   --tr-alt: #f8f9fa;
   --img-bg: #ffffff;
-  --img-filtre: none;          /* les captures de documents sont inversées en sombre */
 
   --surlignage-bg: #ffe49c;
   --surlignage-fg: inherit;
@@ -82,10 +81,8 @@
     --pre-bg: #22262c;
     --th-bg: #2b3038;
     --tr-alt: #212429;
-    /* Les captures d'articles de loi sont du texte noir sur blanc : les inverser
-       les rend lisibles au lieu d'éblouir. Voir .img-doc plus bas. */
+    /* Les captures de documents sont du texte noir sur blanc : elles gardent un fond clair. */
     --img-bg: #e8e8e8;
-    --img-filtre: invert(1) hue-rotate(180deg);
 
     --surlignage-bg: #6d5a1c;
     --surlignage-fg: #ffe9b0;
@@ -142,7 +139,6 @@
     --th-bg: #2b3038;
     --tr-alt: #212429;
     --img-bg: #e8e8e8;
-    --img-filtre: invert(1) hue-rotate(180deg);
 
     --surlignage-bg: #6d5a1c;
     --surlignage-fg: #ffe9b0;
@@ -271,7 +267,7 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 
 /* ---------- article ---------- */
 .breadcrumbs { font-size: 12.5px; color: var(--text-soft); margin-bottom: 10px; }
-.crumb-sep { color: var(--border); margin: 0 2px; }
+.crumb-sep { color: var(--text-faint); margin: 0 2px; }
 .page-title {
   font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif;
   font-size: 30px; font-weight: 400; line-height: 1.25;
@@ -873,7 +869,7 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   .site-header, .sidebar, .site-footer, .backlinks, .toc-toggle, .btn-haut, .btn-theme { display: none !important; }
   .content { border: 0; padding: 0; }
   /* toujours imprimer en clair, quel que soit le thème affiché */
-  :root { --bg: #fff; --content-bg: #fff; --text: #000; --img-filtre: none; }
+  :root { --bg: #fff; --content-bg: #fff; --text: #000; }
 }
 
 /* Renvoi vers une note que le vault marque « interne » ou « ne pas publier ».
@@ -956,26 +952,32 @@ html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
    ligne de texte atteignait 130 caractères. On borne la colonne de lecture sur les grands écrans,
    et on agrandit les cibles dès que le pointeur est grossier, quelle que soit la largeur. */
 
-/* 1. Longueur de ligne. Au-delà du téléphone, le texte courant se borne à ~80 caractères ;
-   tableaux, images, blocs de code, infobox et grilles gardent toute la largeur disponible. */
-@media screen and (min-width: 901px) {
-  .page-body > p, .page-body > ul, .page-body > ol, .page-body > dl,
-  .page-body > blockquote, .page-body > .callout, .chapo, .accueil-chapeau { max-width: 80ch; }
+/* 1. Longueur de ligne. Au-delà du téléphone (dès 700 px : le portrait de la tablette est la
+   plage où la colonne est la plus large), le texte courant se borne à ~80 caractères ; tableaux,
+   images, blocs de code, infobox, grilles et index en colonnes gardent toute la largeur. Le texte
+   officiel des articles de loi (.texte-loi) et les pages sans .page-body (recherche, thèmes,
+   catégories, contrôles) sont de la prose comme les autres. */
+@media screen and (min-width: 701px) {
+  .page-body > p, .page-body > ul:not(.cat-pages):not(.accueil-tuiles), .page-body > ol, .page-body > dl,
+  .page-body > blockquote, .page-body > .callout, .page-body > .texte-loi, .chapo, .accueil-chapeau,
+  .content > p, .content > ul:not(.cat-pages), .content > ol, .content > blockquote, .content > .callout { max-width: 80ch; }
 }
 
-/* 2. Cibles tactiles, à toute largeur : c'est le pointeur qui décide, pas la taille de l'écran. */
-@media (pointer: coarse) {
+/* 2. Cibles tactiles, à toute largeur : c'est le pointeur qui décide, pas la taille de l'écran.
+   Écrit après le bloc téléphone : là où les deux s'appliquent (téléphone), les valeurs sont
+   les mêmes, pour ne pas défaire un réglage choisi plus haut. */
+@media screen and (pointer: coarse) {
   .btn-theme { width: 44px; height: 44px; }
   .searchbox input, .portal-search input { min-height: 44px; font-size: 16px; }
-  /* 33 px à l'origine : une barre de 33 entrées resterait atteignable sans devenir un rouleau */
-  .sidebar a { display: block; padding: 9px 6px; }
-  .toc a { display: block; padding: 8px 4px; }
-  .breadcrumbs a, .retour-haut, .portal-foot a { display: inline-block; padding: 8px 4px; }
+  /* 15 px de haut à l'origine sur tablette (aucune règle ne s'y appliquait) ; 44 px comme sur
+     téléphone : la barre de 33 entrées défile dans son cadre, elle ne tenait déjà pas à l'écran */
+  .sidebar a, .cat-pages li a { display: block; padding: 11px 4px; }
+  .toc a { display: block; padding: 6px 4px; }
+  .breadcrumbs a, .retour-haut, .portal-foot a, .accueil-index a { display: inline-block; padding: 8px 4px; }
   .letters-nav a { display: inline-block; min-width: 44px; min-height: 44px; line-height: 44px; text-align: center; margin: 2px; }
   .accueil-themes-nav a { min-height: 44px; padding: 6px 14px; }
   .accueil-theme > summary { min-height: 44px; }
-  .accueil-corps li > a, .accueil-index a, .cat-pages li a,
-  .voir-aussi li a, .backlinks li a, .liste-pages li a { display: block; padding: 8px 2px; }
+  .accueil-corps li > a, .voir-aussi li a, .backlinks li a, .liste-pages li a { display: block; padding: 8px 2px; }
   /* 15 px sous une lampe frontale, à bout de bras, avec la visière : un point de plus */
   .page-body, .accueil-corps { font-size: calc(16px * var(--echelle, 1)); }
   .page-body .accueil-tuile-desc, .accueil-corps .accueil-tuile-desc { font-size: 13.5px; }
@@ -983,10 +985,12 @@ html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
   .toc-toggle { min-height: 44px; padding: 0 12px; }
   .backlinks > summary, .search-filters .filtre { min-height: 44px; }
   .accueil-theme-page { display: inline-block; padding: 9px 2px; }
-  /* Liens dans le texte, les listes et les tableaux : la ligne ne bouge pas, la zone touchable
-     passe au-dessus des 24 px exigés (WCAG 2.5.8 AA). Un lien de phrase ne peut pas faire 44 px
-     sans disloquer le paragraphe : c'est l'exception « lien en ligne » de la norme. */
+  .avis-mot input, .avis-mot textarea { min-height: 44px; font-size: 16px; }
+  /* Liens dans le texte, les listes, les tableaux et les titres : la ligne ne bouge pas, la zone
+     touchable passe au-dessus des 24 px exigés (WCAG 2.5.8 AA). Un lien de phrase ne peut pas
+     faire 44 px sans disloquer le paragraphe : c'est l'exception « lien en ligne » de la norme. */
   .page-body p a, .page-body li a, .page-body td a, .page-body th a,
+  .page-body h2 a, .page-body h3 a, .page-body h4 a, .page-body h5 a,
   .accueil-chapeau a, .page-sub a, .page-meta a, .infobox a { padding-top: 5px; padding-bottom: 5px; }
   .accueil-theme-titre a { display: inline-block; padding: 6px 0; }
   /* titres de boîte et de groupe cliquables sur les accueils */

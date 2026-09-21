@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import os from 'node:os';
-import { blocAvis, CONF_AVIS } from '../avis.mjs';
+import { blocAvis, CONF_AVIS, lireConfAvis, ecrireConfAvis, urlRelaisValide } from '../avis.mjs';
 import { genererListeHorsLigne } from '../pwa.mjs';
 
 // Bloc d'avis (15 septembre 2026) : pouce en haut, pouce en bas, commentaire facultatif, envoyés
@@ -65,30 +65,70 @@ test('avis.json : hors du manifeste hors ligne, dans le noyau du service worker'
   assert.match(fs.readFileSync(path.join(DOCS, 'sw.js'), 'utf8'), /NOYAU = \[[^\]]*'\.\/assets\/avis\.json'/, 'service worker publié');
   const js = fs.readFileSync(path.join(R, 'tools/app.js'), 'utf8');
   assert.ok(!js.includes('if (!bloc) { if (relais) viderFile(); return; }'), 'la file d’attente se vide aussi sur une page sans bloc');
-  assert.ok(js.indexOf('if (bloc) brancher();') < js.indexOf("fetch(vUrl(ROOT + 'assets/avis.json'))"), 'la configuration est lue quel que soit le bloc');
+  assert.ok(js.indexOf('if (bloc) brancher();') < js.indexOf("fetch(vUrl(ROOT + 'assets/avis.json'), { cache: 'no-cache' })"), 'la configuration est lue quel que soit le bloc, en revalidant la copie HTTP');
 });
 
-test('le générateur ne débranche pas le relais et nomme juste les copies d’encadrement', () => {
+test('configuration du relais : survit au nettoyage de docs/, garde toutes ses clés, refuse ce qui n’est pas https', () => {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'relais-'));
+  const cycle = (contenu) => {
+    // ce que fait le générateur : lire, vider docs/, recréer, réécrire aussitôt
+    for (const e of fs.readdirSync(tmp)) fs.rmSync(path.join(tmp, e), { recursive: true, force: true });   // état de départ propre
+    fs.mkdirSync(path.join(tmp, 'assets'), { recursive: true });
+    if (contenu !== undefined) fs.writeFileSync(path.join(tmp, CONF_AVIS), contenu);
+    const lu = lireConfAvis(fs, tmp, path);
+    for (const e of fs.readdirSync(tmp)) fs.rmSync(path.join(tmp, e), { recursive: true, force: true });
+    fs.mkdirSync(tmp, { recursive: true });
+    ecrireConfAvis(fs, tmp, path, lu.conf);
+    return { ...lu, publie: JSON.parse(fs.readFileSync(path.join(tmp, CONF_AVIS), 'utf8')) };
+  };
+  // 1. une adresse écrite à la main survit, avec base, table et toute clé ajoutée
+  let r = cycle('{"url":"https://avis-wiki.frank.workers.dev","base":"Formations","table":"Avis wiki SST (web)","note":"gardée"}');
+  assert.equal(r.avertissement, '');
+  assert.deepEqual(r.publie, { url: 'https://avis-wiki.frank.workers.dev', base: 'Formations', table: 'Avis wiki SST (web)', note: 'gardée' });
+  // 2. fichier absent (première construction, ou perdu) : relais vide ET avertissement explicite
+  r = cycle(undefined);
+  assert.equal(r.publie.url, '');
+  assert.match(r.avertissement, /absent au démarrage/);
+  // 3. fichier illisible, avec BOM, ou qui n'est pas un objet : réinitialisé, jamais planté
+  r = cycle('\uFEFF{"url":"https://a.b/c"}'); assert.equal(r.publie.url, 'https://a.b/c'); assert.equal(r.avertissement, '');
+  r = cycle('{pas du json'); assert.equal(r.publie.url, ''); assert.match(r.avertissement, /illisible/);
+  r = cycle('[1,2]'); assert.equal(r.publie.url, ''); assert.match(r.avertissement, /objet/);
+  // 4. une adresse qui n'est pas https est conservée (rien n'est détruit) mais signalée
+  r = cycle('{"url":"http://avis-wiki.frank.workers.dev"}');
+  assert.equal(r.publie.url, 'http://avis-wiki.frank.workers.dev');
+  assert.match(r.avertissement, /https attendu/);
+  assert.deepEqual(Object.keys(r.publie).sort(), ['base', 'table', 'url']);
+  fs.rmSync(tmp, { recursive: true, force: true });
+  for (const [u, ok] of [['https://x.y/z', true], ['http://x.y', false], ['', false], [null, false], [42, false], ['javascript:alert(1)', false]]) {
+    assert.equal(urlRelaisValide(u), ok, String(u));
+  }
+});
+
+test('le générateur relit le relais avant de vider docs/ et le réécrit avant tout rendu', () => {
+  // Ordre d'exécution instrumenté : on rejoue les trois lignes du générateur avec un fs espion,
+  // au lieu de comparer des positions de texte dans le source.
   const gen = fs.readFileSync(path.join(R, 'tools/build_site.mjs'), 'utf8');
-  // docs/ est vidé à chaque construction : l'adresse du relais doit être relue AVANT le nettoyage,
-  // sinon écrire l'adresse à la main (seule étape qui reste à Frank) serait effacé au build suivant.
-  const lecture = gen.indexOf('relaisAvis = String(JSON.parse');
+  const lecture = gen.indexOf('const relaisAvis = lireConfAvis(fs, OUT, path);');
   const nettoyage = gen.indexOf('fs.rmSync(path.join(OUT, e)');
-  assert.ok(lecture > 0 && nettoyage > 0 && lecture < nettoyage, 'relais relu avant le nettoyage de docs/');
-  assert.ok(!/if \(!fs\.existsSync\(conf\)\)/.test(gen), 'écriture inconditionnelle : le fichier n’existe plus après le nettoyage');
-  assert.match(gen, /JSON\.stringify\(\{ url: relaisAvis,/, 'l’adresse relue est réécrite');
+  const ecriture = gen.indexOf('ecrireConfAvis(fs, OUT, path, relaisAvis.conf);');
+  const rendu = gen.indexOf("console.log('Contrôle qualité…')");
+  assert.ok(lecture > 0 && nettoyage > lecture && ecriture > nettoyage && rendu > ecriture,
+    'lire → nettoyer → réécrire, le tout avant le rendu et le contrôle qualité');
+  assert.ok(!/JSON\.stringify\(\{ url: relaisAvis/.test(gen), 'plus d’objet littéral qui perdrait base et table');
   // les accueils copiés dans g/ portent leur propre adresse, pas celle du fond documentaire
   assert.match(gen, /contenuAccueil\(p, \{ crumbs: filPublic[\s\S]{0,200}adresse: out, wikiAvis: 'Espace encadrement'/);
   assert.match(gen, /function contenuAccueil\(p, \{[^}]*adresse = p\.out, wikiAvis = null \}\)/);
   assert.match(gen, /blocAvis\(\{ adresse, titre: titreAccueil\(p\.title\), wiki: wikiAvis \|\| wiki\.name \}\)/);
 });
 
-test('configuration du relais : présente, vide, sans jeton', () => {
+test('configuration publiée : présente, sans jeton, et acceptée telle quelle par le lecteur', () => {
   const conf = JSON.parse(fs.readFileSync(path.join(DOCS, CONF_AVIS), 'utf8'));
-  assert.ok('url' in conf, 'la clé url existe');
-  assert.ok(typeof conf.url === 'string');
-  if (conf.url) assert.match(conf.url, /^https:\/\//, 'relais en https');
+  assert.ok('url' in conf && typeof conf.url === 'string', 'la clé url existe');
+  assert.ok(conf.url === '' || urlRelaisValide(conf.url), 'vide, ou https');
   assert.ok(!JSON.stringify(conf).match(/(?:pat|key)[A-Za-z0-9]{14,}/), 'aucun jeton dans le fichier publié');
+  // même règle côté navigateur : une adresse qui n'est pas https laisse le bloc masqué
+  const js = fs.readFileSync(path.join(R, 'tools/app.js'), 'utf8');
+  assert.match(js, /typeof conf\.url !== 'string' \|\| !\/\^https:\\\/\\\/\/\.test\(conf\.url\)/);
 });
 
 test('site publié : le bloc est sur chaque page issue d’une note, et nulle part ailleurs', () => {

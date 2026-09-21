@@ -59,15 +59,22 @@ l'essai). Relancer la même commande doit répondre `"mis_a_jour":true` sans cr�
 ## Ce que le relais refuse
 
 - une origine hors de `ORIGINES` (403), et **toute** origine si `ORIGINES` est absente (503) :
-  rien n'est ouvert par défaut ; une adresse écrite avec une barre finale ou un chemin
-  (`https://frankyray21.github.io/wiki-sst-mines`) désigne bien la même origine ;
-- plus de 20 avis par minute et par adresse IP (429, via la liaison `LIMITE` de `wrangler.toml`) —
-  l'adresse du relais est publique et la base Formations est partagée avec les autres tables ;
+  rien n'est ouvert par défaut, pas même `localhost` — pour essayer en local, l'ajouter à
+  `ORIGINES` (`https://frankyray21.github.io, http://localhost:8090`) ; une adresse écrite avec
+  une barre finale ou un chemin (`https://frankyray21.github.io/wiki-sst-mines`) désigne bien la
+  même origine ;
+- plus de 20 avis par minute et par adresse (429, via la liaison `LIMITE` de `wrangler.toml` ;
+  en IPv6 le seau est le préfixe /64) — l'adresse du relais est publique et la base Formations
+  est partagée avec les autres tables. Une liaison absente ou en panne ne ferme pas le relais :
+  elle ne limite rien, c'est tout ;
 - un `avis` autre que « 👍 Utile » ou « 👎 À revoir » (400) ;
 - une `adresse` qui n'a pas la forme d'une page du site (400) ;
 - une `ref` qui n'est pas exactement « lecteur · adresse » (400) : elle entre dans une formule
   Airtable, et un lecteur ne doit pas pouvoir semer une ligne nouvelle à chaque envoi ;
-- un corps qui n'est pas un objet JSON, ou qui dépasse 8 Ko (400, 413).
+- un corps qui n'est pas un objet JSON, ou qui dépasse 8 Ko — lu par morceaux et coupé, quel que
+  soit le `Content-Length` annoncé (400, 413) ;
+- un `lien` qui n'est pas une adresse http(s) n'est simplement pas écrit (le champ Airtable est
+  de type URL et refuserait toute la ligne).
 
 Les textes sont coupés (commentaire 1 500 caractères, nom 80 ; le commentaire garde ses retours à
 la ligne) et le `Wiki` n'est écrit que s'il fait partie des huit valeurs attendues. La `Date` est le
@@ -76,4 +83,8 @@ jour au Québec, posée à la création seulement.
 **Panne ou refus.** Airtable en panne ou saturé (429, 5xx) : le relais répond 502 et le navigateur
 garde l'avis pour plus tard. Airtable qui refuse (jeton, base, table, valeur : 4xx) : le relais
 répond 422 avec `definitif: true`, et le navigateur jette l'avis au lieu de le rejouer à chaque
-page. Tous les refus ci-dessus portent la même marque.
+page. Tous les refus ci-dessus portent la même marque, et un refus renvoie l'origine du demandeur
+dans `Access-Control-Allow-Origin` (la réponse ne contient rien) pour que le navigateur puisse
+la lire ; en dehors des refus, seule l'origine permise est nommée, jamais `null`. Côté
+navigateur, chaque envoi est borné à 15 s : un relais qui accepte la connexion sans répondre
+(portail captif) ne bloque ni le formulaire ni la file.
