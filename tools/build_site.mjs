@@ -10,7 +10,7 @@ import { rendrePortailEncadrement } from './portail_encadrement.mjs';
 import { rendrePage404 } from './redirections.mjs';
 import { rendrePortailContenu } from './portail_racine.mjs';
 import { slugify, cleanLabel, attribuerAdresses, ancienneAdresse, formuleMiroir } from './adresses.mjs';
-import { analyserQualite, LIBELLES } from './qualite.mjs';
+import { analyserQualite, LIBELLES, estEtude as estEtudeTitre, sourceDeLaNote, poserSourcesHeritees } from './qualite.mjs';
 import { normaliserNavigationInterne, metadonneesEditoriales, indicateursDocumentaires } from './editorial.mjs';
 import { genererPwa, metaPwa, genererListeHorsLigne } from './pwa.mjs';
 import { rendreTitreArticle } from './entete-article.mjs';
@@ -763,6 +763,8 @@ function renderBody(md, nested = false) {
   html = html.replace(/<a href="(https?:\/\/[^"]+)"/g, '<a class="external" target="_blank" rel="noopener" href="$1"');
   // « LSST », « art. 51 » écrits en texte simple deviennent des liens vers le recueil
   if (!nested) html = lierReferencesLegales(html);
+  // la source d'une note d'analyse citée, à côté de la citation
+  if (!nested) html = poserSourcesHeritees(html, sourceDuLien);
   return html;
 }
 
@@ -1018,6 +1020,18 @@ const categories = [...parTag.entries()]
   .sort((a, b) => b[1].length - a[1].length);
 const slugTag = new Map(categories.map(([t]) => [t, slugify(t)]));
 
+// Sources directes des notes d'analyse (DOI, sinon première adresse externe) : affichées à côté
+// de chaque citation dans une liste ou un tableau, et comptées comme source pour la page qui cite.
+const sourceEtudes = new Map();
+for (const q of pages) if (estEtude(q)) { const src = sourceDeLaNote(q.body); if (src) sourceEtudes.set(q, src); }
+const pageParOut = new Map(pages.map(q => [q.out, q]));
+const sourceDuLien = (href) => {
+  const m = href.match(/^\{\{ROOT\}\}(?:g\/)?(.+\.html)$/);
+  const q = m && pageParOut.get(m[1]);
+  return q ? sourceEtudes.get(q) || null : null;
+};
+console.log(`  ${sourceEtudes.size} note(s) d'analyse avec une source directe (DOI ou adresse)`);
+
 const backlinks = new Map(); // page -> Set(pages qui pointent vers elle)
 const nbTextesLoi = {};      // articles de loi dont le texte officiel a été posé, par mode d'insertion
 for (const p of pages) {
@@ -1041,6 +1055,7 @@ for (const p of pages) {
   }
 
   p.html = finalize(renderBody(corpsMd));
+  p.sourcesHeritees = [...CUR_LINKS].filter(q => sourceEtudes.has(q)).map(q => ({ titre: q.title, ...sourceEtudes.get(q) }));
   // Article de loi : le texte officiel extrait du PDF (tools/textes-loi) est posé avant la capture,
   // et le sommaire reprend le titre renommé. Le texte compte aussi pour la recherche.
   const tl = texteLoiDeLaPage(p.fm.loi, p.base);
@@ -1109,7 +1124,7 @@ for (const wikiKey of SIX_WIKIS) {
 // elles quittent les volets de l'accueil, qui redevient une entrée par notion, et se retrouvent
 // sur une page « Études et rapports » du wiki, classées par thème. Aucune n'est perdue : la page
 // du thème, elle, continue de lister toutes ses pages, études comprises.
-const estEtude = (q) => /\((?:19|20)\d{2}[a-z]?\)/.test(q.title) || /^Analyse\s*[-–]/i.test(q.title);
+const estEtude = (q) => estEtudeTitre(q.title);
 const etudesParWiki = new Map(SIX_WIKIS.map(k => [k,
   pages.filter(q => q.wikiKey === k && q.role === 'notion' && estEtude(q)).sort((a, b) => a.title.localeCompare(b.title, 'fr'))]));
 const pageEtudes = (wikiKey) => (etudesParWiki.get(wikiKey) || []).length ? `w/${WIKIS[wikiKey].slug}/etudes-et-rapports.html` : null;
@@ -1607,7 +1622,7 @@ ${blocs}${sans.length ? `<h2 id="sans-theme">Sans thème <small>(${sans.length})
 console.log('Contrôle qualité…');
 const rapportQualite = [];
 for (const p of pages) {
-  const r = analyserQualite(p);
+  const r = analyserQualite(p, { sourcesHeritees: p.sourcesHeritees || [] });
   if (r.defauts.length) rapportQualite.push({ p, ...r });
 }
 rapportQualite.sort((a, b) => b.score - a.score || a.p.title.localeCompare(b.p.title, 'fr'));

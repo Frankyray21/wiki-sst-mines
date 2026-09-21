@@ -126,6 +126,12 @@ node tools/serve.mjs
   grandissent dès que le pointeur est grossier (et non plus sous 900 px seulement : en paysage, aucune règle
   « téléphone » ne s'appliquait), le texte courant passe à 16 px, la ligne se borne à 80 caractères sur les
   grands écrans, et le portrait affiche les volets de thèmes sur deux colonnes
+- **Contrôles de forme (21 septembre 2026)** : le contrôle d'introduction ne s'arrête plus sur la « Table des
+  matières » manuelle des notes (retirée du rendu : le lecteur lit la phrase qui la suit) et ne s'applique pas aux
+  notes d'analyse d'études, dont le gabarit commence par un titre ; une page qui cite une note d'analyse porteuse
+  d'un DOI compte comme sourcée, et la source s'affiche à côté de la citation (pastille « DOI » ou « source » dans
+  les listes et les tableaux, 629 citations sur 169 pages). Ce qui reste à faire dans le vault est listé dans
+  `content-updates/2026-09-21-controles-de-forme.json`
 - **Avis des lecteurs** : sur chaque page issue d'une note, un pouce en haut, un pouce en bas et un commentaire
   facultatif, enregistrés dans Airtable (base Formations, table « Avis wiki SST (web) ») par un relais Cloudflare.
   Le bloc reste invisible tant que `docs/assets/avis.json` ne donne pas l'adresse d'un relais (fichier modifié à la

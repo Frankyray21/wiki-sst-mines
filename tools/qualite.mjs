@@ -7,6 +7,39 @@
 
 const RE_LIEN = /\[\[([^\]]+)\]\]/g;
 
+// Note d'analyse d'une étude ou d'un rapport : « Karasek (1979) - … », « Analyse - … ». Son gabarit
+// commence par un titre de section, pas par une phrase : le contrôle d'introduction ne s'y
+// applique pas. Même règle que la page « Études et rapports » du générateur.
+export const estEtude = (titre) => /\((?:19|20)\d{2}[a-z]?\)/.test(String(titre || '')) || /^Analyse\s*[-–]/i.test(String(titre || ''));
+
+// Source directe d'une note d'analyse : son DOI, sinon sa première adresse externe. Une page qui
+// cite cette note a sa source à un clic ; le générateur l'affiche à côté de la citation.
+export function sourceDeLaNote(body) {
+  const t = String(body || '');
+  const doi = t.match(/https?:\/\/(?:dx\.)?doi\.org\/[^\s)\]>"'<]+/);
+  if (doi) return { url: doi[0], type: 'DOI' };
+  const url = t.match(/https?:\/\/[^\s)\]>"'<]+/);
+  return url ? { url: url[0], type: 'source' } : null;
+}
+
+// Pose, à côté de chaque citation d'une note d'analyse dans une liste ou un tableau, le lien vers
+// la source de cette note. `resoudre(href)` rend { url, type } pour un lien qui mène à une note
+// porteuse d'une source, null sinon. Les mentions dans une phrase restent telles quelles : une
+// pastille au milieu d'un paragraphe gênerait la lecture.
+export function poserSourcesHeritees(html, resoudre) {
+  const echapper = (v) => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  return String(html).replace(/<(li|td)(\s[^>]*)?>([\s\S]*?)<\/\1>/g, (m, balise, attrs = '', interieur) => {
+    // le libellé d'une citation ne contient pas d'autre lien : sinon, une pastille déjà posée
+    // serait avalée dans le libellé et une seconde s'ajouterait à chaque passage
+    const pose = interieur.replace(/<a href="([^"#]+)"([^>]*)>((?:(?!<\/?a\b)[\s\S])*?)<\/a>(?!\s*<a class="ref-source)/g, (mm, href) => {
+      const src = resoudre(href);
+      if (!src || !src.url) return mm;
+      return `${mm} <a class="ref-source external" href="${echapper(src.url)}" target="_blank" rel="noopener" title="Source de l’étude : ${echapper(src.url)}">${src.type === 'DOI' ? 'DOI' : 'source'}</a>`;
+    });
+    return `<${balise}${attrs || ''}>${pose}</${balise}>`;
+  });
+}
+
 // Le texte tel que le lecteur le voit : wikilinks réduits à leur libellé, liens
 // markdown à leur texte, marques de gras et d'italique retirées.
 function texteRendu(s) {
@@ -70,7 +103,7 @@ const RE_A_FAIRE = new RegExp([
   '\\bsection\\s+vide\\b',
 ].join('|'), 'im');
 
-export function analyserQualite(p) {
+export function analyserQualite(p, { sourcesHeritees = [] } = {}) {
   const t = p.body || '';
   const defauts = [];
   const corps = t.replace(/^---[\s\S]*?---/, '');
@@ -105,11 +138,21 @@ export function analyserQualite(p) {
   // Québec. » est une vraie introduction, même courte. Deux pièges évités : le résumé
   // « En bref » vit dans un encadré (lignes préfixées de « > »), et beaucoup de pages
   // ouvrent sur une phrase en gras : ni l'un ni l'autre n'est un titre ou une liste.
+  // Troisième piège : la « Table des matières » manuelle que beaucoup de notes posent avant leur
+  // première phrase. Le générateur la retire du rendu (le lecteur ne la voit jamais) : elle ne
+  // compte donc ni comme une ouverture ni dans les douze lignes examinées. 108 pages étaient
+  // signalées sans introduction alors qu'elles s'ouvrent sur « L'essentiel : … » juste après.
   let premierePros = false;
   let ouverture = 0;
+  let dansLaTable = false;
   for (const l of corps.split('\n')) {
     let s = l.trim();
     if (!s || /^<!--/.test(s) || /^#\s/.test(s)) continue;
+    if (/^\*\*(Table des matières|Sommaire)/i.test(s)) { dansLaTable = true; continue; }
+    if (dansLaTable) {
+      if (/^\d+\.\s/.test(s) || /^[-*]\s+\[/.test(s)) continue;   // ses entrées, numérotées ou à puces
+      dansLaTable = false;
+    }
     if (/^#{2,6}\s/.test(s) || ouverture++ >= 12) break;
     s = s.replace(/^>\s?/, '').trim();                    // corps d'encadré : c'est de la prose
     if (/^\[!/.test(s)) continue;
@@ -118,18 +161,19 @@ export function analyserQualite(p) {
     // une vraie phrase peut en revanche commencer par un terme lié.
     if (/^!\[\[/.test(s) || /^\[\[[^\]]+\]\]\s*$/.test(s)) continue;
     if (/^[-+*]\s/.test(s) || /^\d+\.\s/.test(s)) continue;
-    if (/^\*\*(Table des matières|Sommaire)/i.test(s)) break;
     const r = texteRendu(s).trim();
     if (r.length >= 40 && /\s/.test(r)) { premierePros = true; break; }
   }
-  if (!premierePros && mots > 80 && p.wikiKey !== 'Recueil législatif SST') {
+  if (!premierePros && mots > 80 && p.wikiKey !== 'Recueil législatif SST' && !estEtude(p.title)) {
     defauts.push({ code: 'sans-intro', gravite: 2, texte: 'Aucune phrase d’introduction : la page démarre sur un titre, un tableau ou une liste.' });
   }
 
   const vagues = sourcesVagues(corps);
   if (vagues >= 2) defauts.push({ code: 'sources-vagues', gravite: 1, texte: `${vagues} références sans auteur, année ni lien : invérifiables.` });
-  if (p.wikiKey !== 'Recueil législatif SST' && mots > 150 && !/https?:\/\//.test(corps)) {
-    defauts.push({ code: 'source-directe-absente', gravite: 1, texte: 'Aucun lien direct vers une source externe repéré. Des références peuvent exister dans les pages liées : vérifier leur traçabilité.' });
+  // Une page qui cite une note d'analyse porteuse d'un DOI a sa source à un clic, et le
+  // générateur l'affiche à côté de la citation : ce n'est pas une page sans source.
+  if (p.wikiKey !== 'Recueil législatif SST' && mots > 150 && !/https?:\/\//.test(corps) && !sourcesHeritees.length) {
+    defauts.push({ code: 'source-directe-absente', gravite: 1, texte: 'Aucun lien direct vers une source externe, ni citation d’une note d’analyse qui en porte une : la traçabilité reste à établir.' });
   }
   if (/(?:^|\|)\s*[ÀA] (?:créer|adapter)\s*(?:\||$)/m.test(corps)) {
     defauts.push({ code: 'outil-a-preparer', gravite: 1, texte: 'Un outil est annoncé à créer ou à adapter : vérifier sa disponibilité réelle.' });

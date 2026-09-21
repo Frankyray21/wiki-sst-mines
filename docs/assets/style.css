@@ -309,6 +309,10 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .page-body ol.references-liste { margin: .5rem 0 .75rem; padding-inline-start: 1.65rem; line-height: 1.3; overflow-wrap: anywhere; }
 .page-body .references-liste > li { margin: .25rem 0; padding-inline-start: .125rem; }
 .page-body .references-liste > li > p { margin: 0; }
+/* Source d'une note d'analyse citée (DOI, sinon adresse) : posée par le générateur à côté de la
+   citation, dans les listes et les tableaux, pour que la source soit à un clic de la page. */
+.page-body a.ref-source { display: inline-block; font-size: .78em; font-weight: 600; padding: 1px 7px; margin-left: 5px; border: 1px solid var(--border-light); border-radius: 999px; text-decoration: none; vertical-align: middle; line-height: 1.5; }
+.page-body a.ref-source:hover { background: var(--hover); border-color: var(--hover-bd); text-decoration: none; }
 .page-body hr { border: 0; border-top: 1px solid var(--border-light); margin: 18px 0; }
 .page-body blockquote { border-left: 4px solid var(--border-light); padding: 4px 16px; color: var(--text-soft); margin: 10px 0; }
 .page-body code { background: var(--code-bg); border: 1px solid var(--border-soft); border-radius: 2px; padding: 1px 4px; font-size: 13px; }
@@ -993,6 +997,7 @@ html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
   .page-body h2 a, .page-body h3 a, .page-body h4 a, .page-body h5 a,
   .accueil-chapeau a, .page-sub a, .page-meta a, .infobox a { padding-top: 5px; padding-bottom: 5px; }
   .accueil-theme-titre a { display: inline-block; padding: 6px 0; }
+  .page-body a.ref-source { padding-top: 5px; padding-bottom: 5px; }
   /* titres de boîte et de groupe cliquables sur les accueils */
   .accueil-titre a, .accueil-groupe > h3 > a { display: inline-block; padding: 5px 0; }
   .infobox-tags a.tag { padding-top: 6px; padding-bottom: 6px; }
