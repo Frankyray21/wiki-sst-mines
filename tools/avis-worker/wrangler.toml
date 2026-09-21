@@ -8,5 +8,14 @@ AIRTABLE_BASE = "appmq82YjvEUglYZU"     # base « Formations »
 AIRTABLE_TABLE = "tbl3kDCV13AFkd6X6"    # table « Avis wiki SST (web) »
 ORIGINES = "https://frankyray21.github.io"
 
+# Débit borné par adresse IP : l'adresse du relais est publique, et la base Formations est
+# partagée avec les tables d'attestations et de retours de quiz. 20 avis par minute et par IP
+# laissent passer toute lecture normale ; au-delà, le relais répond 429 et le navigateur garde
+# l'avis pour plus tard. (Liaison Cloudflare gratuite ; sans elle, le relais ne limite rien.)
+[[ratelimits]]
+name = "LIMITE"
+namespace_id = "1001"
+simple = { limit = 20, period = 60 }
+
 # AIRTABLE_TOKEN n'est pas ici : c'est un secret.
 #   npx wrangler secret put AIRTABLE_TOKEN

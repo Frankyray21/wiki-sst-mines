@@ -7,17 +7,20 @@ import vm from 'node:vm';
 // Depuis le retrait du wiki des travailleurs, il n'existe plus de mode « interface sobre » (WIKI_UI).
 const app = fs.readFileSync(new URL('../app.js', import.meta.url), 'utf8');
 
-test('thème : trois états, mémoire et libellés accessibles', () => {
+test('thème : sombre par défaut, trois états, mémoire et libellés accessibles', () => {
   const attrs = {}, store = new Map(); let click;
   const btn = { innerHTML: '', textContent: '', setAttribute(k, v) { attrs[k] = v; }, addEventListener(k, f) { click = f; } };
   const doc = { getElementById: () => btn, documentElement: { setAttribute(k, v) { attrs[k] = v; }, removeAttribute(k) { delete attrs[k]; } } };
   const ctx = { document: doc, window: {}, localStorage: { getItem: k => store.get(k), setItem: (k, v) => store.set(k, v), removeItem: k => store.delete(k) } };
   const start = app.indexOf('  (function theme()');
   vm.runInNewContext(app.slice(start, app.indexOf('  // ---------- menu mobile', start)), ctx);
-  for (const etat of ['auto', 'light', 'dark', 'auto']) {
+  // Rien en mémoire : sombre, sans attribut — l'état d'un lecteur dont le stockage est bloqué.
+  assert.equal(attrs['data-theme'], undefined);
+  for (const etat of ['dark', 'light', 'auto', 'dark']) {
     assert.equal(btn.textContent, { auto: '🌗', light: '☀️', dark: '🌙' }[etat]);
     assert.ok(attrs['aria-label'].includes('Thème :'));
-    assert.equal(store.get('theme'), etat === 'auto' ? undefined : etat);
+    assert.equal(store.get('theme'), etat === 'dark' ? undefined : etat);
+    assert.equal(attrs['data-theme'], etat === 'dark' ? undefined : etat);
     click();
   }
 });

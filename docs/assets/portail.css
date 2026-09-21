@@ -14,19 +14,26 @@
   --p-ombre-forte: 0 4px 14px rgba(16,24,40,.10);
   --p-rayon: 10px;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+/* Sombre par défaut, comme le wiki : voir l'entête de style.css. */
+@media screen and (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] {
     --p-bleu: #6ba4ff; --p-bleu-fonce: #8ab8ff; --p-bleu-pale: #1c2740;
     --p-fond: #14171c; --p-carte: #1b1f26; --p-bordure: #2b3038; --p-bordure-forte: #3a414b;
     --p-texte: #e6e8ea; --p-texte-doux: #a0a8b2;
     --p-ombre: 0 1px 2px rgba(0,0,0,.4); --p-ombre-forte: 0 4px 14px rgba(0,0,0,.55);
   }
 }
-:root[data-theme="dark"] {
-  --p-bleu: #6ba4ff; --p-bleu-fonce: #8ab8ff; --p-bleu-pale: #1c2740;
-  --p-fond: #14171c; --p-carte: #1b1f26; --p-bordure: #2b3038; --p-bordure-forte: #3a414b;
-  --p-texte: #e6e8ea; --p-texte-doux: #a0a8b2;
-  --p-ombre: 0 1px 2px rgba(0,0,0,.4); --p-ombre-forte: 0 4px 14px rgba(0,0,0,.55);
+@media screen {
+  /* Défaut du wiki : sombre. Le lecteur n’a rien à régler pour descendre sous terre ;
+     data-theme="light" donne le thème clair, data-theme="auto" suit l’appareil.
+     Hors écran (impression), aucun de ces blocs ne s’applique : la palette claire de
+     :root reste seule, et une page imprimée l’est en noir sur blanc. */
+  :root:not([data-theme="light"]):not([data-theme="auto"]) {
+    --p-bleu: #6ba4ff; --p-bleu-fonce: #8ab8ff; --p-bleu-pale: #1c2740;
+    --p-fond: #14171c; --p-carte: #1b1f26; --p-bordure: #2b3038; --p-bordure-forte: #3a414b;
+    --p-texte: #e6e8ea; --p-texte-doux: #a0a8b2;
+    --p-ombre: 0 1px 2px rgba(0,0,0,.4); --p-ombre-forte: 0 4px 14px rgba(0,0,0,.55);
+  }
 }
 
 body.tb {
@@ -278,3 +285,14 @@ body.tb a { color: inherit; text-decoration: none; }
 @container centre (max-width: 1049px) { .tb-barre { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @container centre (max-width: 679px) { .tb-barre { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @container centre (max-width: 439px) { .tb-barre { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- tablette de chantier ---------- */
+/* Même principe que style.css : sur un écran tactile, les cibles grandissent quelle que soit la
+   largeur. Le tableau de bord s'affiche en 1 280 px de large sur la tablette : aucune règle
+   « téléphone » ne s'y appliquait (retour « Accueil » à 22 px, pied de page à 19 px). */
+@media (pointer: coarse) {
+  .tb-nav a, .tb-icone-btn, .tb-recherche input, .tb-recherche button { min-height: 44px; }
+  .tb-retour, .tb-legal-compte { display: inline-flex; align-items: center; min-height: 44px; }
+  .tb-pied a, .tb-carte-lien, .tb-puce a { display: inline-block; padding-top: 6px; padding-bottom: 6px; }
+  .tb-recherche input { font-size: 16px; }
+}

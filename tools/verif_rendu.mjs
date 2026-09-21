@@ -34,9 +34,19 @@ export const ACCUEILS = [
   'w/toxicologie/index.html', 'w/toxicologie/00-accueil-gestionnaires.html',
   'g/w/droit-travail/27-articles-gestionnaires.html', 'g/w/ergonomie/27-articles-gestionnaires.html', 'g/w/hygiene/00-accueil-gestionnaires.html', 'g/w/securite/00-accueil-gestionnaires.html', 'g/w/toxicologie/00-accueil-gestionnaires.html',
 ];
-const MODES = [['mobile-clair', { width: 390, height: 844 }, true, false], ['mobile-sombre', { width: 390, height: 844 }, true, true], ['bureau', { width: 1200, height: 900 }, false, false]];
+// Le téléphone, la tablette de chantier (Galaxy Tab Active4 Pro : 1 920 × 1 200 à densité 1,5,
+// soit 1 280 × 800 px CSS en paysage et 800 × 1 280 en portrait) et le bureau. Sur les trois
+// premiers le pointeur est tactile : les cibles sont mesurées.
+const MODES = [
+  { nom: 'mobile-clair', viewport: { width: 390, height: 844 }, mobile: true, echelle: 2, tactile: true, clair: true },
+  { nom: 'mobile-sombre', viewport: { width: 390, height: 844 }, mobile: true, echelle: 2, tactile: true },
+  { nom: 'tablette-paysage', viewport: { width: 1280, height: 800 }, echelle: 1.5, tactile: true },
+  { nom: 'tablette-portrait', viewport: { width: 800, height: 1280 }, echelle: 1.5, tactile: true },
+  { nom: 'bureau', viewport: { width: 1200, height: 900 }, echelle: 1 },
+];
 
-// Mesuré dans la page : ce qu'un lecteur verrait ou toucherait.
+// Mesuré dans la page : ce qu'un lecteur verrait ou toucherait. Les liens de navigation et de
+// liste doivent atteindre 24 px de haut (WCAG 2.5.8 AA) partout où le doigt sert de pointeur.
 function mesurerDansLaPage() {
   const vw = document.documentElement.clientWidth;
   const liens = [...document.querySelectorAll('main .page-body a, main .accueil-index a, main .accueil-chapeau a, main .accueil-titre a')];
@@ -54,7 +64,7 @@ function mesurerDansLaPage() {
 export function anomalies(m) {
   const a = [];
   if (m.scrollWidth > m.vw) a.push(`défilement horizontal (${m.scrollWidth} px pour ${m.vw})`);
-  if (m.mode !== 'bureau' && m.liensPetits.length) a.push(`liens de moins de 24 px : ${m.liensPetits.join(' ; ')}`);
+  if (m.tactile && m.liensPetits.length) a.push(`liens de moins de 24 px : ${m.liensPetits.join(' ; ')}`);
   if (m.tuileMin !== null && m.tuileMin < 44) a.push(`tuile de ${m.tuileMin} px`);
   if (m.h1 !== 1) a.push(`${m.h1} h1`);
   if (m.accueil && (m.infobox || m.toc)) a.push('infobox ou sommaire sur un accueil');
@@ -71,13 +81,14 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const mesures = [];
   let defauts = 0;
   for (const rel of pages) {
-    for (const [mode, viewport, mobile, sombre] of MODES) {
-      const ctx = await navigateur.newContext({ viewport, deviceScaleFactor: mobile ? 2 : 1, isMobile: mobile, hasTouch: mobile });
+    for (const { nom: mode, viewport, mobile = false, echelle, tactile = false, clair = false } of MODES) {
+      const ctx = await navigateur.newContext({ viewport, deviceScaleFactor: echelle, isMobile: mobile, hasTouch: tactile });
       const page = await ctx.newPage();
       await page.goto('file://' + path.join(DOCS, rel), { waitUntil: 'load' });
-      if (sombre) await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+      // le wiki s'affiche en sombre par défaut : c'est le mode clair qui se demande
+      if (clair) await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'light'));
       await page.waitForTimeout(120);
-      const m = { page: rel, mode, ...(await page.evaluate(mesurerDansLaPage)) };
+      const m = { page: rel, mode, tactile, ...(await page.evaluate(mesurerDansLaPage)) };
       const nom = rel.replace(/\.html$/, '').replace(/\//g, '_') + '--' + mode + '.png';
       if (CAPTURES) { await page.screenshot({ path: path.join(SORTIE, nom), fullPage: true }); m.capture = nom; }
       m.anomalies = anomalies(m);

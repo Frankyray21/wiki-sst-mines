@@ -68,6 +68,21 @@ test('avis.json : hors du manifeste hors ligne, dans le noyau du service worker'
   assert.ok(js.indexOf('if (bloc) brancher();') < js.indexOf("fetch(vUrl(ROOT + 'assets/avis.json'))"), 'la configuration est lue quel que soit le bloc');
 });
 
+test('le générateur ne débranche pas le relais et nomme juste les copies d’encadrement', () => {
+  const gen = fs.readFileSync(path.join(R, 'tools/build_site.mjs'), 'utf8');
+  // docs/ est vidé à chaque construction : l'adresse du relais doit être relue AVANT le nettoyage,
+  // sinon écrire l'adresse à la main (seule étape qui reste à Frank) serait effacé au build suivant.
+  const lecture = gen.indexOf('relaisAvis = String(JSON.parse');
+  const nettoyage = gen.indexOf('fs.rmSync(path.join(OUT, e)');
+  assert.ok(lecture > 0 && nettoyage > 0 && lecture < nettoyage, 'relais relu avant le nettoyage de docs/');
+  assert.ok(!/if \(!fs\.existsSync\(conf\)\)/.test(gen), 'écriture inconditionnelle : le fichier n’existe plus après le nettoyage');
+  assert.match(gen, /JSON\.stringify\(\{ url: relaisAvis,/, 'l’adresse relue est réécrite');
+  // les accueils copiés dans g/ portent leur propre adresse, pas celle du fond documentaire
+  assert.match(gen, /contenuAccueil\(p, \{ crumbs: filPublic[\s\S]{0,200}adresse: out, wikiAvis: 'Espace encadrement'/);
+  assert.match(gen, /function contenuAccueil\(p, \{[^}]*adresse = p\.out, wikiAvis = null \}\)/);
+  assert.match(gen, /blocAvis\(\{ adresse, titre: titreAccueil\(p\.title\), wiki: wikiAvis \|\| wiki\.name \}\)/);
+});
+
 test('configuration du relais : présente, vide, sans jeton', () => {
   const conf = JSON.parse(fs.readFileSync(path.join(DOCS, CONF_AVIS), 'utf8'));
   assert.ok('url' in conf, 'la clé url existe');

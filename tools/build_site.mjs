@@ -784,7 +784,7 @@ function rootOf(out) { return '../'.repeat(out.split('/').length - 1); }
 // une fraction de seconde avant de basculer en sombre.
 // version de build : casse le cache HTTP de 10 minutes de GitHub Pages à chaque déploiement
 const V = new Date().toISOString().slice(0, 19).replace(/[-T:]/g, '');
-const SCRIPT_THEME = `window.V='${V}';try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}`;
+const SCRIPT_THEME = `window.V='${V}';try{var t=localStorage.getItem('theme');if(t==='light'||t==='auto')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}`;
 
 function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
   const ROOT = rootOf(out);
@@ -938,6 +938,13 @@ function infobox(p) {
 
 // ---------- rendu de toutes les pages ----------
 console.log('Rendu des pages…');
+// L'adresse du relais des avis est écrite à la main après le déploiement du Worker, dans
+// docs/assets/avis.json. Le nettoyage ci-dessous l'emporterait : on la relit d'abord, et on la
+// réécrit en fin de construction. Sans cela, chaque reconstruction éteindrait le bloc d'avis.
+let relaisAvis = '';
+try { relaisAvis = String(JSON.parse(fs.readFileSync(path.join(OUT, CONF_AVIS), 'utf8')).url || ''); }
+catch (e) { /* première construction, ou fichier illisible : relais non configuré */ }
+
 // On vide le contenu sans supprimer OUT lui-même : sous Windows le dossier racine reste
 // verrouillé dès qu'un terminal ou un serveur l'a comme répertoire courant.
 if (fs.existsSync(OUT)) {
@@ -1263,7 +1270,7 @@ function sousTitreTheme(t) {
 // L'accueil du wiki compte toutes ses pages ; l'accueil d'une section (travailleurs, gestionnaires)
 // compte les pages de son dossier. Le fil d'Ariane de l'accueil du wiki s'arrête au wiki : le
 // dernier maillon mènerait à la catégorie « Accueil », qui ne contient que cette page.
-function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
+function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied, adresse = p.out, wikiAvis = null }) {
   const wiki = WIKIS[p.wikiKey];
   const parts = p.relPath.split('/');
   const accueilDuWiki = wikiHome(p.wikiKey) === p || /^00 - /.test(parts[1] || '');
@@ -1320,7 +1327,7 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied }) {
   return `
 <div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
 ${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: (chapoHtml || '') + accueil.chapeau, sections, index })}
-${blocAvis({ adresse: p.out, titre: titreAccueil(p.title), wiki: wiki.name })}
+${blocAvis({ adresse, titre: titreAccueil(p.title), wiki: wikiAvis || wiki.name })}
 ${pied}`;
 }
 
@@ -1832,7 +1839,9 @@ function genererWikiPublic(pub) {
     const filPublic = [`<a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a>`, esc(wiki.name)];
     const versFond = `<a href="{{ROOT}}${p.out}">Voir cette page dans le fond documentaire</a>`;
     const accueil = estAccueil(p) ? decouperAccueil(corps, { resoudre: (cible) => { const pg = resolvePage(cible, p); return pg ? '{{ROOT}}' + urlDe(pg) : null; } }) : null;
-    const contenu = accueil ? contenuAccueil(p, { crumbs: filPublic, accueil, chapoHtml: p.chapoHtml, pied: piedAccueil(new Date().toISOString().slice(0, 10), versFond) }) : `
+    // adresse et wiki de la copie, pas ceux de la page du fond documentaire : l'avis doit
+    // désigner la page que le gestionnaire a sous les yeux
+    const contenu = accueil ? contenuAccueil(p, { crumbs: filPublic, accueil, chapoHtml: p.chapoHtml, adresse: out, wikiAvis: 'Espace encadrement', pied: piedAccueil(new Date().toISOString().slice(0, 10), versFond) }) : `
 <div class="breadcrumbs"><a href="{{ROOT}}${pub}/index.html">${conf.icon} ${esc(conf.nom)}</a> <span class="crumb-sep">›</span> ${esc(wiki.name)}</div>
 ${rendreTitreArticle({ titre: p.title, domaineHtml: `${wiki.icon} ${esc(wiki.name)}` })}
 ${tocHtml}
@@ -1996,10 +2005,10 @@ genererPwa(OUT, V);
 // La date de génération vit dans un seul fichier, lu par le pied de page. Écrite dans les
 // 4970 pages, elle changeait tout le site à chaque reconstruction — ~60 Mo de dépôt pour une date.
 {
-  const conf = path.join(OUT, CONF_AVIS);
-  if (!fs.existsSync(conf)) fs.writeFileSync(conf, JSON.stringify({ url: '', base: 'Formations', table: 'Avis wiki SST (web)' }, null, 1) + '\n');
-  const url = JSON.parse(fs.readFileSync(conf, 'utf8')).url;
-  console.log(`  avis : relais ${url ? url : 'non configuré — le bloc reste masqué'}`);
+  // relu avant le nettoyage de docs/ : une reconstruction ne débranche pas les avis
+  fs.writeFileSync(path.join(OUT, CONF_AVIS),
+    JSON.stringify({ url: relaisAvis, base: 'Formations', table: 'Avis wiki SST (web)' }, null, 1) + '\n');
+  console.log(`  avis : relais ${relaisAvis ? relaisAvis : 'non configuré — le bloc reste masqué'}`);
 }
 fs.writeFileSync(path.join(OUT, 'assets', 'version.json'), JSON.stringify({
   date: new Date().toISOString().slice(0, 10),

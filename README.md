@@ -64,7 +64,9 @@ adresses n'ont pas changé.
 - `tools/accueil_wiki.mjs` — pages d'accueil des wikis et des sections rendues en bandeau et boîtes, comme
   la page d'accueil d'un wiki (découpage du corps de la note, artefacts retirés et signalés)
 - `tools/verif_rendu.mjs` — contrôle du rendu réel dans Chromium (playwright-core, dépendance de développement) :
-  ce que les tests de structure ne voient pas
+  ce que les tests de structure ne voient pas. Cinq modes : téléphone (clair et sombre), tablette de chantier
+  en paysage et en portrait, bureau ; échec sur défilement horizontal, cible tactile sous 24 px, sommaire ou
+  infobox sur un accueil, titre à plusieurs h1
 - `tools/avis.mjs` — bloc « Cette page vous a-t-elle été utile ? » (pouce et commentaire) posé sur chaque page
   issue d'une note ; `tools/avis-worker/` — le relais Cloudflare qui écrit dans Airtable, et son mode d'emploi
 - `tools/serve.mjs` — serveur local de prévisualisation (port 8090)
@@ -115,6 +117,15 @@ node tools/serve.mjs
   maillons (Portail › Wiki › Thème) et un bloc « Voir aussi » (version jumelle publiée, notions du même thème).
   Sur l'accueil du wiki, le titre de chaque volet mène à la page de son thème ; la flèche et le reste de la ligne
   replient le volet
+- **Thème sombre par défaut (21 septembre 2026)** : le wiki se lit sous terre, de nuit, sur une tablette livrée
+  en clair d'usine — c'est donc le sombre qui ne demande aucun réglage. Le bouton de l'entête fait le tour :
+  sombre (défaut) → clair → automatique (suit l'appareil). Le choix est retenu d'une page à l'autre ; une page
+  imprimée sort toujours en noir sur blanc
+- **Tablette de chantier (21 septembre 2026)** : réglé pour la Galaxy Tab Active4 Pro — 1 920 × 1 200 à densité
+  1,5, soit 1 280 × 800 px CSS en paysage et 800 × 1 280 en portrait, tenue avec des gants. Les cibles tactiles
+  grandissent dès que le pointeur est grossier (et non plus sous 900 px seulement : en paysage, aucune règle
+  « téléphone » ne s'appliquait), le texte courant passe à 16 px, la ligne se borne à 80 caractères sur les
+  grands écrans, et le portrait affiche les volets de thèmes sur deux colonnes
 - **Avis des lecteurs** : sur chaque page issue d'une note, un pouce en haut, un pouce en bas et un commentaire
   facultatif, enregistrés dans Airtable (base Formations, table « Avis wiki SST (web) ») par un relais Cloudflare.
   Le bloc reste invisible tant que `docs/assets/avis.json` ne donne pas l'adresse d'un relais (fichier modifié à la
