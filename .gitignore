@@ -2,3 +2,7 @@ node_modules/
 *.log
 sauvegarde-vault/
 rendu/
+# Application Android : dépendances téléchargées, fichiers intermédiaires, clé de signature
+tools/android/.cache/
+tools/android/build/
+tools/android/cle/

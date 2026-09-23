@@ -2017,6 +2017,15 @@ fs.writeFileSync(path.join(OUT, 'assets', 'style.css'), style);
 fs.writeFileSync(path.join(OUT, 'assets', 'app.js'), appjs);
 fs.writeFileSync(path.join(OUT, 'assets', 'portail.css'), fs.readFileSync(path.join(__dirname, 'portail.css'), 'utf8'));
 fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas passer par Jekyll
+// Application Android : construite à part (tools/android/construire_apk.mjs), versionnée dans
+// tools/android/dist/, publiée ici pour le lien « Application Android » du portail.
+{
+  const dist = path.join(__dirname, 'android', 'dist');
+  if (fs.existsSync(path.join(dist, 'wiki-sst-mines.apk'))) {
+    fs.mkdirSync(path.join(OUT, 'app'), { recursive: true });
+    for (const f of ['wiki-sst-mines.apk', 'wiki-sst-mines.json']) fs.copyFileSync(path.join(dist, f), path.join(OUT, 'app', f));
+  }
+}
 genererPwa(OUT, V);
 
 console.log(`  avis : relais ${relaisAvis.conf.url && !relaisAvis.avertissement ? relaisAvis.conf.url : 'non configuré — le bloc reste masqué'}`);

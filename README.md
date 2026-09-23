@@ -67,6 +67,8 @@ adresses n'ont pas changé.
   ce que les tests de structure ne voient pas. Cinq modes : téléphone (clair et sombre), tablette de chantier
   en paysage et en portrait, bureau ; échec sur défilement horizontal, cible tactile sous 24 px, sommaire ou
   infobox sur un accueil, titre à plusieurs h1
+- `tools/android/construire_apk.mjs` — construit l'APK (coquille WebView sur le site publié) ; `tools/android/binaire.mjs`
+  écrit le manifeste compilé, la table de ressources et l'archive alignée
 - `tools/appliquer_intros.mjs` — pose dans les notes du vault les phrases d'ouverture d'un lot (`tools/intros.mjs`) ;
   essai par défaut, sauvegarde avant écriture
 - `tools/avis.mjs` — bloc « Cette page vous a-t-elle été utile ? » (pouce et commentaire) posé sur chaque page
@@ -119,6 +121,11 @@ node tools/serve.mjs
   maillons (Portail › Wiki › Thème) et un bloc « Voir aussi » (version jumelle publiée, notions du même thème).
   Sur l'accueil du wiki, le titre de chaque volet mène à la page de son thème ; la flèche et le reste de la ligne
   replient le volet
+- **Application Android (23 septembre 2026)** : `docs/app/wiki-sst-mines.apk` (8 Ko), lien « 📱 Application Android »
+  au pied du portail et de l'espace encadrement. L'application ouvre le site publié en plein écran ; le hors-ligne est
+  celui du site (service worker) ; les liens externes et les PDF partent au navigateur. Construite par
+  `tools/android/construire_apk.mjs` (outils Maven Central, formats binaires écrits par `tools/android/binaire.mjs`),
+  hors du manifeste hors ligne. La clé de signature reste hors Git. Détail : `tools/android/README.md`
 - **Bouton « Télécharger hors ligne » (23 septembre 2026)** : le téléchargement du wiki pour consultation sans réseau
   se lançait tout seul, sans commande visible. Un lien « ⬇️ Télécharger hors ligne » est maintenant dans la navigation de
   chaque page et au pied du portail ; il lance le téléchargement et ouvre le panneau, dont le bouton principal montre ce

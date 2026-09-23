@@ -1,0 +1,7 @@
+package io.github.frankyray21.wikisstmines;
+
+/** Écrit par tools/android/construire_apk.mjs à chaque construction. */
+final class BuildConfig {
+    static final String VERSION = "@VERSION@";
+    private BuildConfig() {}
+}
