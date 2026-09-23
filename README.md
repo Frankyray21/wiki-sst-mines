@@ -119,6 +119,12 @@ node tools/serve.mjs
   maillons (Portail › Wiki › Thème) et un bloc « Voir aussi » (version jumelle publiée, notions du même thème).
   Sur l'accueil du wiki, le titre de chaque volet mène à la page de son thème ; la flèche et le reste de la ligne
   replient le volet
+- **Bouton « Télécharger hors ligne » (23 septembre 2026)** : le téléchargement du wiki pour consultation sans réseau
+  se lançait tout seul, sans commande visible. Un lien « ⬇️ Télécharger hors ligne » est maintenant dans la navigation de
+  chaque page et au pied du portail ; il lance le téléchargement et ouvre le panneau, dont le bouton principal montre ce
+  qui reste à prendre (« Télécharger tout le wiki (440 Mo) »), puis l'avancement (« Téléchargement en cours… 34 % »),
+  et disparaît quand tout est là. Sans réseau, le geste est retenu et part au retour du signal ; sans service worker
+  (navigateur ancien, site servi hors https), un message le dit
 - **Thème sombre par défaut (21 septembre 2026)** : le wiki se lit sous terre, de nuit, sur une tablette livrée
   en clair d'usine — c'est donc le sombre qui ne demande aucun réglage. Le bouton de l'entête fait le tour :
   sombre (défaut) → clair → automatique (suit l'appareil). Le choix est retenu d'une page à l'autre ; une page

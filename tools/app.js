@@ -1013,6 +1013,17 @@
           : 'Consultation hors ligne');
       }
       function demanderEtat() { envoyer({ type: 'etat' }); }
+      // Bouton « Télécharger » : le téléchargement se lance de lui-même à la première visite, mais
+      // après trois reprises ratées, un manque d'espace ou une coupure, il attend un geste. Ce geste.
+      function telecharger() {
+        try { sessionStorage.removeItem('hl-quota'); } catch (e) {}
+        clearTimeout(minuterieReprise); minuterieReprise = null;
+        reprises = 0; dernierProbleme = ''; attenteInitiale = false;
+        invaliderFin();
+        if (!sync.quoi) { sync.gen++; lancerAuto(); }
+        if (navigator.onLine === false) dernierProbleme = 'Pas de réseau : le téléchargement partira au retour du signal.';
+        setTimeout(demanderEtat, 400);
+      }
 
       function ouvrirPanneau() {
         if (dlg) dlg.remove();
@@ -1025,7 +1036,8 @@
           '<p id="hl-note" class="hl-note"></p>' +
           '<div class="hl-boutons">' +
           '<button class="tour-btn" data-fermer>Fermer</button>' +
-          '<button class="tour-btn principal" id="hl-verifier" hidden>Vérifier maintenant</button>' +
+          '<button class="tour-btn" id="hl-verifier" hidden>Vérifier maintenant</button>' +
+          '<button class="tour-btn principal" id="hl-telecharger" hidden>⬇️ Télécharger tout le wiki</button>' +
           '</div></div>';
         dlg.addEventListener('click', function (ev) {
           if (ev.target === dlg || ev.target.hasAttribute('data-fermer')) { dlg.remove(); dlg = null; }
@@ -1125,6 +1137,7 @@
         var barre = dlg.querySelector('#hl-barre');
         var plein = dlg.querySelector('#hl-plein');
         var btnV = dlg.querySelector('#hl-verifier');
+        var btnT = dlg.querySelector('#hl-telecharger');
         if (d.type === 'etat' && d.pages && d.medias) {
           var pOk = pagesCompletes(d);
           var mOk = d.medias.en === d.medias.total;
@@ -1138,7 +1151,7 @@
             (mOk ? ' ✓' : ' — reste ' + formatMo(d.medias.restant || 0));
           barre.hidden = !sync.quoi;
           if (quotaPlein()) {
-            note.textContent = 'Espace de stockage insuffisant sur cet appareil : libère de l’espace puis touche « Vérifier maintenant ».';
+            note.textContent = 'Espace de stockage insuffisant sur cet appareil : libère de l’espace puis touche « Télécharger ».';
           } else if (!versionCourante(d)) {
             note.textContent = 'La version actuelle ne peut pas encore être confirmée. Les copies présentes restent consultables ; retrouve du réseau puis vérifie à nouveau.';
           } else if (pOk && mOk) {
@@ -1148,12 +1161,12 @@
           } else {
             note.textContent = (dernierProbleme ? dernierProbleme + ' ' : '') +
               (minuterieReprise !== null ? 'Une nouvelle tentative est prévue.' :
-                'Touche « Vérifier maintenant » ou retrouve du réseau pour reprendre.');
+                'Touche « Télécharger » ou retrouve du réseau pour reprendre.');
           }
           if (iosSansApp) {
             note.textContent += ' Sur iPhone/iPad : installe d’abord l’app (Partager → Sur l’écran d’accueil) — le contenu téléchargé dans Safari ne suit pas dans l’app installée.';
           }
-          btnV.hidden = pOk && mOk && !quotaPlein();
+          btnV.hidden = (pOk && mOk && !quotaPlein()) || !!sync.quoi;
           btnV.onclick = function () {
             try { sessionStorage.removeItem('hl-quota'); } catch (e) {}
             clearTimeout(minuterieReprise); minuterieReprise = null;
@@ -1164,6 +1177,14 @@
             lancerAuto();
             setTimeout(function () { btnV.disabled = false; demanderEtat(); }, 1500);
           };
+          // ce qu'il reste à prendre : le texte si sa version n'est pas confirmée, puis les médias manquants
+          var reste = (pOk ? 0 : (d.pages.octets || 0)) + (mOk ? 0 : (d.medias.restant || 0));
+          btnT.hidden = pOk && mOk && !quotaPlein();
+          btnT.disabled = !!sync.quoi;
+          btnT.textContent = sync.quoi
+            ? 'Téléchargement en cours…' + (sync.total ? ' ' + Math.round(sync.depuis / sync.total * 100) + ' %' : '')
+            : '⬇️ Télécharger tout le wiki' + (reste ? ' (' + formatMo(reste) + ')' : '');
+          btnT.onclick = function () { btnT.disabled = true; telecharger(); };
           if (navigator.storage && navigator.storage.persisted) {
             navigator.storage.persisted().then(function (p) {
               var bloc = dlg && dlg.querySelector('#hl-etat');
@@ -1173,6 +1194,9 @@
         } else if (d.type === 'tranche') {
           barre.hidden = false;
           plein.style.width = (sync.total ? Math.round(sync.depuis / sync.total * 100) : 0) + '%';
+          btnT.hidden = false; btnT.disabled = true;
+          btnT.textContent = 'Téléchargement en cours… ' + (sync.total ? Math.round(sync.depuis / sync.total * 100) : 0) + ' %';
+          btnV.hidden = true;
           note.textContent = (d.quoi === 'medias' ? 'Images et PDF : ' : 'Texte : ') +
             sync.depuis.toLocaleString('fr-CA') + ' / ' + sync.total.toLocaleString('fr-CA') +
             ' — tu peux fermer ce panneau, ça continue tout seul.';
@@ -1189,11 +1213,33 @@
         b.id = 'btnHorsLigne';
         b.className = ancre.className;
         b.textContent = '📶';
-        b.setAttribute('title', 'Consultation hors ligne');
-        b.setAttribute('aria-label', 'Consultation hors ligne');
+        b.setAttribute('title', 'Télécharger pour consultation hors ligne');
+        b.setAttribute('aria-label', 'Télécharger pour consultation hors ligne');
         b.addEventListener('click', ouvrirPanneau);
         ancre.parentNode.insertBefore(b, ancre);
       })();
+      // liens « Télécharger hors ligne » de la barre latérale et du portail : un geste, et le
+      // téléchargement part (s'il n'est pas déjà complet), le panneau montre l'avancement
+      lierEntrees(function (ev) { ev.preventDefault(); telecharger(); ouvrirPanneau(); });
+    } else {
+      // navigateur sans service worker, ou site servi hors https : on le dit, sans mentir
+      lierEntrees(function (ev) {
+        ev.preventDefault();
+        var v = document.createElement('div');
+        v.className = 'pwa-aide';
+        v.innerHTML = '<div class="pwa-aide-boite" role="dialog" aria-label="Hors-ligne"><h3>📶 Consultation hors ligne</h3>' +
+          '<p>Ce navigateur ne prend pas en charge la consultation hors ligne. Sur la tablette ou le téléphone, ouvre le wiki dans Chrome, Edge ou Safari, puis touche « Télécharger hors ligne ».</p>' +
+          '<button class="tour-btn principal" data-fermer>Compris</button></div>';
+        v.addEventListener('click', function (e2) { if (e2.target === v || e2.target.hasAttribute('data-fermer')) v.remove(); });
+        document.body.appendChild(v);
+      });
+    }
+    function lierEntrees(action) {
+      var ids = ['lienHorsLigne', 'lienHorsLigne2'];
+      for (var i = 0; i < ids.length; i++) {
+        var el = document.getElementById(ids[i]);
+        if (el) el.addEventListener('click', action);
+      }
     }
 
     var enApp = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
