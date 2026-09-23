@@ -267,6 +267,7 @@ export function rendrePortailEncadrement({ R, nbLois, majDate, verifier }) {
     <a href="${url('w/psychosocial/lignes-daide-et-pae.html')}">Confidentialité</a>
     <a href="${R}index.html">Conditions d’utilisation</a>
     <a href="${R}index.html">Accessibilité</a>
+    <span class="lien-app"><a href="${R}app/wiki-sst-mines.apk" download>📱 Application Android</a></span>
     <span class="tb-droite-pied"><span>© ${new Date().getFullYear()} Machines Roger inc.</span><span id="tbVersion">Version 1.0.0</span></span>
   </footer>
 </div>

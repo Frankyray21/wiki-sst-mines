@@ -411,6 +411,9 @@ export function genererListeHorsLigne(OUT, version) {
       // une configuration modifiée à la main, sans reconstruction : hors du manifeste (sinon son
       // hash périmé ferait échouer chaque synchronisation), mais dans le NOYAU du service worker.
       if (chemin === 'sw.js' || chemin === 'assets/hors-ligne.json' || chemin === 'assets/avis.json' || e.name === '.nojekyll') continue;
+      // l'application Android se télécharge une fois, pour l'installer : elle n'a rien à faire dans
+      // le cache de chaque lecteur, ni dans celui… de l'application elle-même
+      if (chemin.startsWith('app/')) continue;
       const abs = path.join(d, e.name);
       if (e.isDirectory()) { walk(abs, chemin + '/'); continue; }
       const taille = fs.statSync(abs).size;

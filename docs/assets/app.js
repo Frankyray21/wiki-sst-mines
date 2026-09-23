@@ -1242,7 +1242,14 @@
       }
     }
 
-    var enApp = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+    // Dans l'application Android (sa signature est dans l'agent utilisateur), rien à installer :
+    // ni bouton « Installer », ni lien vers l'APK.
+    var dansApk = /WikiSSTMinesApp\//.test(navigator.userAgent);
+    if (dansApk) {
+      var liens = document.querySelectorAll('.lien-app');
+      for (var la = 0; la < liens.length; la++) liens[la].hidden = true;
+    }
+    var enApp = dansApk || matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
     if (enApp) return; // déjà installée : pas de bouton
 
     var promptInstall = null;
