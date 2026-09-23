@@ -473,8 +473,11 @@ a.tag-lien:hover { background: var(--tag-hover-bg); border-color: var(--tag-hove
 .hl-barre-plein { height: 100%; width: 0; background: #2563eb; transition: width .3s ease; }
 .hl-note { font-size: 12.5px; color: var(--text-soft); min-height: 18px; }
 .hl-boutons { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 10px; }
-.hl-boutons .tour-btn { border: 1px solid var(--border-light); background: none; color: var(--text); border-radius: 8px; padding: 9px 15px; font-size: 13.5px; cursor: pointer; font-family: inherit; }
-.hl-boutons .tour-btn.principal { background: #2563eb; border-color: #2563eb; color: #fff; font-weight: 600; }
+/* Trois boutons dans le panneau : seul « Télécharger » est plein. La règle générale du dialogue
+   (.pwa-aide-boite .tour-btn, plus bas) peint tout en bleu ; celle-ci doit la battre. */
+.pwa-aide-boite .hl-boutons .tour-btn { border: 1px solid var(--border-light); background: none; color: var(--text); border-radius: 8px; padding: 9px 15px; font-size: 13.5px; font-weight: 500; cursor: pointer; font-family: inherit; }
+.pwa-aide-boite .hl-boutons .tour-btn.principal { background: #2563eb; border-color: #2563eb; color: #fff; font-weight: 600; }
+.pwa-aide-boite .hl-boutons .tour-btn[disabled] { opacity: .7; cursor: default; }
 
 /* visionneuse d'image : l'agrandissement se fait sur place, pas dans un autre onglet */
 .visionneuse {
@@ -990,6 +993,7 @@ html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
   .backlinks > summary, .search-filters .filtre { min-height: 44px; }
   .accueil-theme-page { display: inline-block; padding: 9px 2px; }
   .avis-mot input, .avis-mot textarea { min-height: 44px; font-size: 16px; }
+  .pwa-aide-boite .tour-btn, .hl-boutons .tour-btn { min-height: 44px; }
   /* Liens dans le texte, les listes, les tableaux et les titres : la ligne ne bouge pas, la zone
      touchable passe au-dessus des 24 px exigés (WCAG 2.5.8 AA). Un lien de phrase ne peut pas
      faire 44 px sans disloquer le paragraphe : c'est l'exception « lien en ligne » de la norme. */

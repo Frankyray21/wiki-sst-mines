@@ -825,6 +825,7 @@ ${metaPwa(ROOT)}
       <li><a href="${ROOT}qualite.html">🔧 Contrôles de forme</a></li>
       <li><a href="${ROOT}graphe.html">🕸️ Graphe des liens</a></li>
       <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+      <li><a href="#" id="lienHorsLigne">⬇️ Télécharger hors ligne</a></li>
       <li><a href="${ROOT}g/index.html">${PUBLICS.g.icon} ${esc(PUBLICS.g.nom)}</a></li>
     </ul>
   </div>

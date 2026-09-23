@@ -40,6 +40,7 @@ test('les boutons hors ligne et installation gardent actions, noms et pictogramm
   assert.equal(boutons[0].textContent, '📶');
   assert.equal(boutons[1].id, 'btnInstall');
   assert.equal(boutons[1].textContent, '📲');
+  assert.equal(boutons[0].attrs['aria-label'], 'Télécharger pour consultation hors ligne', 'le 📶 dit ce qu’il fait');
   for (const b of boutons) {
     assert.ok(b.attrs['aria-label']);
     assert.equal(typeof b.events.click, 'function');
@@ -49,4 +50,19 @@ test('les boutons hors ligne et installation gardent actions, noms et pictogramm
 test('plus aucune trace du wiki des travailleurs dans le script partagé', () => {
   assert.doesNotMatch(app, /WIKI_UI|tour-travailleurs|encart-urgence|data-pub'\) === 't'/);
   assert.ok(app.includes("'tour-portail'") && app.includes('.portal-sujets') && app.includes('.portal-publics'), 'visite du portail mise à jour');
+});
+
+test('le panneau hors ligne a un bouton « Télécharger », et chaque page publiée un lien pour l’ouvrir', () => {
+  assert.ok(app.includes('id="hl-telecharger" hidden>⬇️ Télécharger tout le wiki</button>'), 'bouton principal du panneau');
+  assert.ok(app.includes("'⬇️ Télécharger tout le wiki' + (reste ? ' (' + formatMo(reste) + ')' : '')"), 'la taille restante est affichée');
+  assert.ok(app.includes("btnT.textContent = 'Téléchargement en cours… '"), 'l’avancement remplace le bouton pendant le téléchargement');
+  assert.ok(app.includes("var ids = ['lienHorsLigne', 'lienHorsLigne2'];"), 'les liens de la barre et du portail sont reliés');
+  assert.ok(app.includes('Ce navigateur ne prend pas en charge la consultation hors ligne.'), 'repli sans service worker');
+  const gen = fs.readFileSync(new URL('../build_site.mjs', import.meta.url), 'utf8');
+  assert.ok(gen.includes('<li><a href="#" id="lienHorsLigne">⬇️ Télécharger hors ligne</a></li>'), 'lien dans la navigation générée');
+  const docs = new URL('../../docs/', import.meta.url);
+  for (const rel of ['w/psychosocial/index.html', 'w/psychosocial/communication-ascendante.html', 'qualite.html', 'g/w/hygiene/00-accueil-gestionnaires.html']) {
+    assert.ok(fs.readFileSync(new URL(rel, docs), 'utf8').includes('id="lienHorsLigne">⬇️ Télécharger hors ligne</a>'), rel);
+  }
+  assert.ok(fs.readFileSync(new URL('index.html', docs), 'utf8').includes('id="lienHorsLigne2">'), 'portail publié');
 });

@@ -18,6 +18,7 @@ test('portail racine : fond documentaire d’abord, thèmes par sujet, un seul e
   assert.ok(html.includes('class="portal-grid portal-sujets"') && html.includes('class="portal-grid portal-publics"'));
   assert.ok(html.includes('143 catégories') && html.includes('415 pages à examiner'));
   assert.ok(html.includes('id="randomLink2"') && html.includes('id="q2"') && html.includes('id="suggest2"'));
+  assert.ok(html.includes('id="lienHorsLigne2">⬇️ Télécharger le wiki hors ligne</a>'), 'le portail propose le téléchargement hors ligne');
   const ordre = ['portal-hero', 'Le fond documentaire', 'Parcourir par sujet', 'Espace encadrement', 'portal-foot'].map(m => html.indexOf(m));
   assert.deepEqual([...ordre].sort((a, b) => a - b), ordre, 'ordre des sections');
 });

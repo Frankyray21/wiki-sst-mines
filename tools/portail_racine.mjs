@@ -39,6 +39,6 @@ export function rendrePortailContenu({ total, cartesWikis, nbThemes, nbPagesEnca
   </a>
 </div>
 <div class="portal-foot">
-  <a href="#" id="randomLink2">🎲 Une page au hasard</a>
+  <a href="#" id="randomLink2">🎲 Une page au hasard</a> · <a href="#" id="lienHorsLigne2">⬇️ Télécharger le wiki hors ligne</a>
 </div>`;
 }
