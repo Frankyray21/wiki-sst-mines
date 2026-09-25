@@ -1,0 +1,25 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-corr-amiante-toxicologie",
+ "portee": "Schémas de la page w/toxicologie/amiante.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Amiante",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/amiante.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "Chrysotile, anthophyllite, trémolite, actinolite",
+   "par": "| Toutes les formes (chrysotile, amosite, crocidolite, trémolite, actinolite, anthophyllite) | 0,1 f/cm³ | — | C1, EM |"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "Crocidolite, amosite",
+   "marqueur": "Toutes les formes (chrysotile, amosite"
+  }
+ ]
+}

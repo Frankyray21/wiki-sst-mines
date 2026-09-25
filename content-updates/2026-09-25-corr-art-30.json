@@ -1,0 +1,84 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-corr-art-30",
+ "portee": "Schémas de la page w/hygiene/art-30-rsst-substitution-cancerogenes.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-30-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-30-rsst-substitution-cancerogenes.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Tout procédé de travail ou produit qui émet",
+   "avant": "Tout procédé de travail ou produit qui émet ou contient une matière dangereuse identifiée à l'annexe I comme cancérogène de catégorie C1 ou C2 doit être remplacé par un procédé ou un produit non dangereux ou moins dangereux pour la santé des travailleurs, lorsqu'il est raisonnablement possible de le faire.",
+   "apres": "Mesures de sécurité : Le travailleur doit: 1° faire face à l’échelle portative ou à l’escabeau en tout temps; 2° se tenir au centre des échelons ou des barreaux de l’échelle portative ou de l’escabeau et respecter la hauteur maximale indiquée par le fabricant en tout temps; 3° maintenir 3 points d’appui en montant ou en descendant l’échelle portative ou l’escabeau, à moins d’utiliser un moyen de protection contre les chutes."
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "est l'obligation de substitution",
+   "par": "L'{{lien:w/legislation/20-reglements/rsst/art-30-rsst-mesures-de-securite.html|art. 30}} du {{lien:w/legislation/20-reglements/rsst/rsst.html|RSST}} vise l'utilisation des échelles portatives et des escabeaux. Le remplacement des produits cancérogènes, dont traite cette page, relève d'autres articles : l'art. 39 exige de remplacer, autant que possible, les matières dangereuses qui sont sources de gaz, de fumées, de vapeurs, de poussières ou de brouillards par des matières qui ne le sont pas ou qui le sont moins ; l'{{lien:w/legislation/20-reglements/rsst/art-41-rsst-controle-de-la-qualite-de-lair.html|art. 41}} fait passer l'élimination du contaminant et le remplacement de la matière dangereuse avant les autres mesures de contrôle ; l'{{lien:w/legislation/20-reglements/rsst/art-42-rsst-substances-cancerogenes-et-isocyanates.html|art. 42}} exige de réduire au minimum l'exposition aux substances que l'annexe I identifie comme ayant un effet cancérogène démontré (C1) ou soupçonné (C2) chez l'humain, même à l'intérieur des normes de l'annexe."
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "pour former le bloc de gestion des contaminants",
+   "par": "S'applique à tout établissement assujetti au {{lien:w/legislation/20-reglements/rsst/rsst.html|RSST}} qui met en oeuvre un procédé ou utilise un produit cancérogène C1 ou C2. L'art. 42 fonctionne avec l'art. 39 (remplacement des matières dangereuses) et l'{{lien:w/legislation/20-reglements/rsst/art-41-rsst-controle-de-la-qualite-de-lair.html|art. 41}} (ordre des mesures de contrôle) pour former le bloc de gestion des contaminants."
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "En mine, les substances visées par",
+   "par": "En mine, les substances de l'annexe I visées par l'{{lien:w/legislation/20-reglements/rsst/art-42-rsst-substances-cancerogenes-et-isocyanates.html|art. 42}} (notation C1 ou C2) incluent :"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "cadmium (C",
+   "avant": "(C1)",
+   "apres": "(C2)"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "émissions de moteurs diesel",
+   "marqueur": "vise l'utilisation des échelles portatives"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "nickel et ses composés",
+   "avant": "(selon la forme, C1 ou C2)",
+   "apres": "(C1 pour les composés insolubles et le subsulfure de nickel)"
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "(VEA et annexe I)",
+   "par": "- [[art-39-RSST, remplacement des matières dangereuses]] : autant que possible, par des matières qui ne sont pas sources de contaminants ou qui le sont moins"
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "(cohérence VEA et FDS)",
+   "par": "- {{lien:w/legislation/20-reglements/rsst/art-41-rsst-controle-de-la-qualite-de-lair.html|art-41-RSST}} : ordre des mesures de contrôle de la qualité de l'air"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "porte sur les exigences de salubrité",
+   "marqueur": "vise l'utilisation des échelles portatives"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "consulter CanLII et Soquij",
+   "avant": "le numéro d'article",
+   "apres": "les art. 39, 41 ou 42 du RSST"
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "échantillonnage de surface dans une zone à forte teneur en silice",
+   "par": "Une entreprise minière utilise des foreuses à sec pour l'échantillonnage de surface dans une zone à forte teneur en silice. La silice cristalline étant C2, l'{{lien:w/legislation/20-reglements/rsst/art-42-rsst-substances-cancerogenes-et-isocyanates.html|art. 42}} impose de réduire l'exposition au minimum, et l'{{lien:w/legislation/20-reglements/rsst/art-41-rsst-controle-de-la-qualite-de-lair.html|art. 41}} range l'abattement de la poussière parmi les mesures de contrôle : l'employeur évalue le passage au forage humide. À défaut de substitution complète, l'employeur doit documenter pourquoi et compenser par captage à la source, ventilation et EPI de classe 100."
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "substitution des équipements diesel par des véhicules électriques",
+   "par": "Un projet minier souterrain en planification doit considérer la substitution des équipements diesel par des véhicules électriques à batterie pour réduire l'exposition aux gaz d'échappement diesel (cancérogènes, groupe 1 du CIRC) : pour respecter les valeurs de l'annexe I (CO, NO₂…), l'{{lien:w/legislation/20-reglements/rsst/art-41-rsst-controle-de-la-qualite-de-lair.html|art. 41}} fait passer l'élimination d'un contaminant de l'air avant les autres mesures de contrôle, et ces mesures doivent être prises lors de la conception d'un établissement. L'analyse de faisabilité technico-économique doit être documentée et révisée à mesure que l'offre commerciale s'étoffe."
+  }
+ ]
+}

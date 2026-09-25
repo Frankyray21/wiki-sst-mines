@@ -1,0 +1,92 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-corr-art-116-hygiene",
+ "portee": "Schémas de la page w/hygiene/art-116-rsst-qualite-air-milieu-travail.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-116-RSST, qualité air milieu travail",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-116-rsst-qualite-air-milieu-travail.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "L'employeur doit prendre les moyens nécessaires",
+   "avant": "L'employeur doit prendre les moyens nécessaires pour que les concentrations de contaminants dans l'air d'un lieu de travail n'excèdent pas les valeurs d'exposition admissibles prescrites à l'annexe I et pour assurer une qualité de l'air convenable dans tout lieu de travail fermé.",
+   "apres": "Température : Sous réserve des articles 117 et 118, dans tout local fermé, une température convenable doit être maintenue, compte tenu de la nature des travaux qui y sont exécutés ainsi que des conditions climatiques extérieures;"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "L'employeur doit notamment mettre à la disposition",
+   "avant": "L'employeur doit notamment mettre à la disposition des travailleurs un endroit chauffé et protégé des intempéries où ils peuvent prendre leurs repas et se reposer.",
+   "apres": "si une telle température ne peut être raisonnablement maintenue, un endroit chauffé doit être mis à la disposition des travailleurs."
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "Article central du",
+   "par": "L'{{lien:w/legislation/20-reglements/rsst/art-116-rsst-temperature-des-locaux.html|art. 116}} du {{lien:w/legislation/20-reglements/rsst/rsst.html|RSST}} porte sur la température à maintenir dans les locaux fermés, pas sur la **qualité de l'air**. Les repères sur la qualité de l'air que regroupe cette page relèvent d'autres articles : les valeurs de l'annexe I s'appliquent par l'{{lien:w/legislation/20-reglements/rsst/art-40-rsst-aucun-travailleur-ne-doit-etre-expose.html|art. 40}} (aucun travailleur ne doit être exposé au-delà) ; l'{{lien:w/legislation/20-reglements/rsst/art-41-rsst-controle-de-la-qualite-de-lair.html|art. 41}} fixe l'ordre des mesures de contrôle de la qualité de l'air ; l'{{lien:w/legislation/20-reglements/rsst/art-101-rsst-necessite.html|art. 101}} exige que tout poste de travail soit ventilé de façon à respecter les normes de l'art. 40, sauf dans le cadre des travaux prévus à l'art. 41.1. En mine souterraine, le {{lien:w/legislation/20-reglements/rssm/rssm.html|RSSM}} encadre aussi la réintégration du poste après un sautage ({{lien:w/legislation/20-reglements/rssm/art-96-rssm-reintegration-poste-apres-sautage.html|art. 96}})."
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "obligation générale de salubrité atmosphérique",
+   "par": "2. **Ventilation** : les établissements doivent être adéquatement ventilés, et tout poste de travail doit l'être de façon à respecter les normes de l'art. 40, sauf dans le cadre des travaux prévus à l'art. 41.1 ({{lien:w/legislation/20-reglements/rsst/art-101-rsst-necessite.html|art. 101}})."
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "chauffé à minimum 20 °C",
+   "par": "3. **Local chauffé** : si une température convenable ne peut être raisonnablement maintenue dans un local fermé, un endroit chauffé doit être mis à la disposition des travailleurs ({{lien:w/legislation/20-reglements/rsst/art-116-rsst-temperature-des-locaux.html|art. 116}}) ; une salle à manger mise à leur disposition doit être maintenue à au moins 20 °C ({{lien:w/legislation/20-reglements/rsst/art-118-rsst-temperature-salle-a-manger.html|art. 118}})."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "S'applique à tout lieu de travail fermé",
+   "avant": "S'applique à tout lieu de travail fermé (bâtiments de surface, galeries souterraines, cabines d'engins fermées).",
+   "apres": "Les valeurs de l'annexe I s'appliquent à l'exposition de tout travailleur ({{lien:w/legislation/20-reglements/rsst/art-40-rsst-aucun-travailleur-ne-doit-etre-expose.html|art. 40}}), y compris à un poste de travail situé dans un véhicule, où qu'il soit."
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "est la base réglementaire de la surveillance atmosphérique",
+   "par": "En hygiène industrielle minière, la surveillance atmosphérique vérifie le respect des valeurs de l'annexe I ({{lien:w/legislation/20-reglements/rsst/art-40-rsst-aucun-travailleur-ne-doit-etre-expose.html|art. 40}}). Les contaminants prioritaires :"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Engins souterrains diesel",
+   "avant": "0,02 mg/m³ EC (recommandation)",
+   "apres": "Moins de 0,4 mg/m³ de carbone total ({{lien:w/legislation/20-reglements/rssm/art-102-rssm-conditions-utilisation-moteur-diesel-souterrain.html|RSSM, art. 102}})",
+   "tableau": true
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Minéraux fibreux naturels",
+   "avant": "VEMP 1 f/cm³",
+   "apres": "VEMP 0,1 f/cm³"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "remplacement des matières dangereuses :",
+   "avant": "valeurs d'exposition admissibles (Annexe I)",
+   "apres": "autant que possible, par des matières qui ne sont pas sources de contaminants ou qui le sont moins"
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "substances dangereuses et FDS",
+   "par": "- {{lien:w/legislation/20-reglements/rsst/art-41-rsst-controle-de-la-qualite-de-lair.html|art-41-RSST}} : ordre des mesures de contrôle de la qualité de l'air"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "absence de protocole de mesure des gaz après dynamitage",
+   "marqueur": "exige que le poste et la voie qui y donne accès aient été ventilés"
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "consulter CanLII et Soquij",
+   "par": "Pour les décisions précises, consulter CanLII et Soquij : « {{lien:w/legislation/20-reglements/rsst/rsst.html|RSST}} {{lien:w/legislation/20-reglements/rsst/art-40-rsst-aucun-travailleur-ne-doit-etre-expose.html|art. 40}} qualité air » ou « valeurs exposition admissibles mine »."
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "mesure du NO₂ à 0,8 ppm",
+   "par": "Des mineurs pénètrent dans un chantier 20 minutes après un sautage sans mesure préalable des gaz. L'inspecteur CNESST mesure du NO₂ à 0,8 ppm. La réintégration après un sautage exige que le poste et la voie qui y donne accès aient été ventilés, et qu'au moins un changement d'air y ait été effectué ({{lien:w/legislation/20-reglements/rssm/art-96-rssm-reintegration-poste-apres-sautage.html|RSSM, art. 96}}) : avis de correction exigeant un protocole de re-entrée post-sautage avec mesures aux détecteurs multi-gaz."
+  }
+ ]
+}
