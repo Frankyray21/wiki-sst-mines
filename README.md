@@ -186,12 +186,17 @@ node tools/serve.mjs
   québécoise, RSSM art. 102 (moins de 0,4 mg/m³ de carbone total), mesures au moins tous les 6 mois (art. 103.1).
   Amiante : toutes les formes 0,1 f/cm³, C1, EM (annexe I). **À poser dans le vault** (lots `2026-09-25-corr-*.json`
   et `2026-09-25-titre-art-116-*.json`). Détail : `content-updates/2026-09-25-art-116-30-dpm-amiante.md`
+- **Moteurs diesel sous terre, schémas redessinés (25 septembre 2026)** : les deux schémas de la page deviennent des
+  dessins (galerie avec chargeuse, ventilation et travailleur ; dispositifs d'échappement en coupe), et deux
+  s'ajoutent : la ventilation d'un chantier en cul-de-sac et la mesure du carbone total selon le RSSM (art. 102 et
+  103.1). Les fichiers v1 quittent le site. **À poser dans le vault** (le lot Diesel remplace la version précédente,
+  qu'elle ait été appliquée ou non). Détail : `content-updates/2026-09-25-diesel-schemas-v2.md`
 - **Pages RPS illustrées (25 septembre 2026)** : schémas sur Médiation (Thomas-Kilmann, niveaux d'intervention),
   Modèle de Siegrist, Communication descendante, Définition des risques psychosociaux, Comparatif des cycles FIFO,
-  Démarche de prévention en RPS et Harcèlement psychologique (LNT, art. 81.18). Quatre captures fausses ou tierces
-  retirées : Selye, Maslow (deux fois) et une diapositive tierce, affichées à cause de noms de fichiers identiques
-  dans le vault. Texte des articles inchangé. **À poser dans le vault** (sept lots `2026-09-25-*-schemas.json`).
-  Détail et erreurs relevées : `content-updates/2026-09-25-rps-schemas.md`
+  Démarche de prévention en RPS, Harcèlement psychologique (LNT, art. 81.18), Les trois niveaux de prévention et
+  Reconnaissance. Six captures fausses ou tierces retirées : Selye (deux fois), Maslow (trois fois) et une diapositive
+  tierce, affichées à cause de noms de fichiers identiques dans le vault. Texte des articles inchangé. **À poser dans
+  le vault** (neuf lots `2026-09-25-*-schemas.json`). Détail et erreurs relevées : `content-updates/2026-09-25-rps-schemas.md`
 - **Application Android (23 septembre 2026)** : `docs/app/wiki-sst-mines.apk` (8 Ko), lien « 📱 Application Android »
   au pied du portail et de l'espace encadrement. L'application ouvre le site publié en plein écran ; le hors-ligne est
   celui du site (service worker) ; les liens externes et les PDF partent au navigateur. Construite par

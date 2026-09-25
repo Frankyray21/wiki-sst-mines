@@ -1,0 +1,56 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-les-trois-niveaux-de-prevention-schemas",
+ "portee": "Schémas de la page w/psychosocial/les-trois-niveaux-de-prevention.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Les trois niveaux de prévention",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/les-trois-niveaux-de-prevention.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-les-trois-niveaux-de-prevention-niveaux-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-les-trois-niveaux-de-prevention-stress-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "img-000.png",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-les-trois-niveaux-de-prevention-niveaux-v1.svg|Trois scènes du même travailleur sur une flèche du temps, d’avant le problème à après son apparition : en prévention primaire, une flèche bleue retire une caisse de la charge qu’il porte (agir sur les causes) ; en secondaire, il plie sous la charge et montre des premiers signes, une personne lui parle (détecter et gérer) ; en tertiaire, il est assis, la tête dans la main, une personne pose la main sur son dos (soutenir le rétablissement), et la charge est toujours là.]]\n\n<p class=\"infographie-legende\">Les trois niveaux se distinguent par le moment où l’on intervient et par leur cible : les causes dans l’organisation du travail (primaire), les capacités à détecter et gérer (secondaire), les conséquences chez les personnes déjà affectées (tertiaire). Les trois sont nécessaires ; seul le primaire change les conditions de travail.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Une flèche, en bas, va d’« avant le problème » à « après son apparition » et rougit vers la droite. La charge que porte le travailleur, des caisses rouges, figure les conditions de travail.</li>\n<li>Primaire, avant le problème : le travailleur porte la charge ; une flèche bleue en retire une caisse. Agir sur les causes, dans l’organisation du travail.</li>\n<li>Secondaire, tôt, avant aggravation : il plie sous toute la charge et montre des premiers signes (traits rouges) ; une personne, en face, lui parle. Détecter et gérer, en renforçant les capacités des travailleurs et des superviseurs.</li>\n<li>Tertiaire, après son apparition : le travailleur, en rouge, est assis, la tête dans la main ; une personne pose la main sur son dos. Soutenir le rétablissement des personnes déjà affectées. La charge est toujours là, posée à côté : ce niveau ne change rien aux conditions qui ont contribué.</li>\n<li>Mention au bas du schéma : « Les trois sont nécessaires ; seul le primaire change le travail. »</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après « L’essentiel », le tableau « Cadre » (cible, quand intervenir) et les définitions, avantages et limites des trois niveaux de cette page ; voir aussi {{lien:w/psychosocial/demarche-de-prevention-en-rps-etapes.html|Démarche de prévention en RPS, étapes}}. Schéma de principe : aucune efficacité comparée, aucun délai.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-les-trois-niveaux-de-prevention-niveaux-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "img-000.png",
+   "marqueur": "Infographies/wiki-les-trois-niveaux-de-prevention-niveaux-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Erreur classique en mine : déployer un PAE de qualité (tertiaire) et une politique anti-harcèlement (secondaire), mais laisser inchangée l'organisation du travail (primaire). Résultat : les indicateurs ne s'améliorent pas malgré les investissements.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-les-trois-niveaux-de-prevention-stress-v1.svg|Exemple minier, cycles FIFO et quarts de nuit, en trois rangées : en primaire, un crayon réaménage un horaire de jours puis de nuits (aménager les horaires) ; en secondaire, un superviseur formé parle à un mineur qui montre des premiers signes (repérer les signaux) ; en tertiaire, une personne soutient le mineur assis, la tête dans la main, et une flèche le mène debout vers son retour au travail (PAE, plan de retour au travail).]]\n\n<p class=\"infographie-legende\">Le même cas, des cycles FIFO et des quarts de nuit, vu par les trois niveaux : agir sur la source (aménager les horaires), sur la réaction (un superviseur formé repère les signaux) et sur les effets (PAE, plan de retour au travail). Sans le primaire, le secondaire et le tertiaire répondent en permanence à un problème qu’on ne règle pas.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Primaire, sur la source : un horaire en rotation, des jours (soleils) puis des nuits (lunes sur fond rouge) ; un crayon bleu le réaménage. Aménager les horaires : choix des cycles FIFO, gestion du quart de nuit.</li>\n<li>Une flèche rouge descend de l’horaire vers un mineur casqué, courbé, qui montre des premiers signes (traits rouges).</li>\n<li>Secondaire, sur la réaction : un superviseur formé, en face, lui parle (bulle bleue) et repère les signaux : formation des superviseurs à la détection des signaux et à la conduite de conversations difficiles.</li>\n<li>Une seconde flèche rouge descend vers le même mineur, en rouge, assis, la tête dans la main. Tertiaire, sur les effets : une personne pose la main sur son dos, et une flèche bleue le mène, debout, vers son retour au travail : programme d’aide aux employés (PAE), plan de retour au travail.</li>\n<li>Mention au bas du schéma : « Sans le primaire, le problème n’est pas réglé. »</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après les tableaux d’actions des trois niveaux de cette page (aménagement des horaires ; formation des superviseurs ; PAE et plan de retour au travail) et la section « Application en mines » ; voir {{lien:w/psychosocial/comparatif-des-cycles-fifo-14-14-20-10-21-7.html|Comparatif des cycles FIFO}}, {{lien:w/psychosocial/formation-des-superviseurs-a-la-detection.html|Formation des superviseurs à la détection}}, {{lien:w/psychosocial/programme-daide-aux-employes-pae.html|Programme d’aide aux employés (PAE)}} et {{lien:w/psychosocial/etapes-dun-retour-au-travail-reussi.html|Étapes d’un retour au travail réussi}}. Schéma de principe : un exemple, pas un lien de cause démontré.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-les-trois-niveaux-de-prevention-stress-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "img-001.png",
+   "marqueur": "Infographies/wiki-les-trois-niveaux-de-prevention-stress-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "Évolution des maladies et nature de la prévention (primordiale, primaire, secondaire, tertiaire). Source : SST1010 (UQAM), séance 6. Usage personnel.",
+   "marqueur": "Infographies/wiki-les-trois-niveaux-de-prevention-niveaux-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "Application aux trois niveaux pour le stress professionnel. Source : SST1010 (UQAM), séance 6. Usage personnel.",
+   "marqueur": "Infographies/wiki-les-trois-niveaux-de-prevention-niveaux-v1.svg"
+  }
+ ]
+}

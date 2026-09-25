@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="540" viewBox="0 0 480 540" role="img" aria-labelledby="t d">
+<title id="t">Trois niveaux, trois moments</title>
+<desc id="d">Trois scènes du même travailleur, posées sur une flèche qui va d’« avant le problème » à « après son apparition » et qui rougit vers la droite. Légende : la charge, des caisses rouges, figure les conditions de travail. Primaire, avant le problème : le travailleur, debout, porte la charge sur le dos ; une flèche bleue en retire une caisse : agir sur les causes. Secondaire, tôt, avant aggravation : il plie sous toute la charge et montre des premiers signes, des traits rouges autour de la tête ; une personne, en face, lui parle (bulle bleue) : détecter et gérer. Tertiaire, après son apparition : le travailleur, en rouge, est assis, la tête dans la main ; une personne pose la main sur son dos (bras bleu) : soutenir le rétablissement ; la charge est toujours là, posée à côté. Mention : « Les trois sont nécessaires ; seul le primaire change le travail. »</desc>
+<defs>
+<linearGradient id="evolution" gradientUnits="userSpaceOnUse" x1="24" y1="0" x2="440" y2="0"><stop offset="0" stop-color="#eceef0"/><stop offset="0.45" stop-color="#fde3e0"/><stop offset="1" stop-color="#c62828"/></linearGradient>
+</defs>
+<rect width="480" height="540" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Trois niveaux, trois moments</text>
+<!-- Légende : la charge portée figure les conditions de travail (les causes) -->
+<rect x="24" y="68" width="26" height="18" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/><path d="M28 77H46" stroke="#c62828" stroke-width="2.5"/>
+<text x="60" y="84" font-size="19" fill="#1f2328">la charge : les conditions de travail</text>
+<!-- En-têtes des niveaux -->
+<text x="96" y="132" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Primaire</text>
+<text x="240" y="132" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Secondaire</text>
+<text x="384" y="132" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Tertiaire</text>
+<!-- Sols -->
+<path d="M36 300H156M180 300H300M324 300H444" stroke="#6e7781" stroke-width="2.5"/>
+<!-- Primaire : avant le problème, on agit sur la charge (les causes), pas sur la personne -->
+<g transform="rotate(6 118 247.2)">
+<rect x="83" y="231" width="26" height="18" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/><path d="M87 240H105" stroke="#c62828" stroke-width="2.5"/>
+<rect x="83" y="213" width="26" height="18" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/><path d="M87 222H105" stroke="#c62828" stroke-width="2.5"/>
+<rect x="83" y="195" width="26" height="18" rx="2" fill="none" stroke="#c62828" stroke-width="2.5" stroke-dasharray="5 4"/><path d="M87 204H105" stroke="#c62828" stroke-width="2.5"/>
+</g>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M114.7 296.7L129 296.7" stroke-width="6.6"/>
+<path d="M118 295.1L118.5 271.4" stroke-width="9.9"/>
+<path d="M118.5 271.4L118 247.2" stroke-width="11"/>
+<path d="M118 247.2L122.3 216.7" stroke-width="16.5"/>
+<path d="M122.3 216.7L124.9 208.1" stroke-width="7.7"/>
+<circle cx="127" cy="198.4" r="9.9" fill="#1f2328" stroke="none"/>
+<path d="M122.1 218.9L124.8 237.6L127 253" stroke="#fbfaf6" stroke-width="12.7"/>
+<path d="M122.1 218.9L124.8 237.6L127 253" stroke="#1f2328" stroke-width="8.2"/>
+</g>
+<rect x="40" y="150" width="26" height="18" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/><path d="M44 159H62" stroke="#c62828" stroke-width="2.5"/>
+<path d="M100 196C100 176 88 164 74 162" stroke="#1565c0" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M76 154L62 161L76 169Z" fill="#1565c0"/>
+<!-- Secondaire : premiers signes (traits rouges), une personne formée les repère et en parle ; la charge reste -->
+<g transform="rotate(25 212 247.2)">
+<rect x="177" y="231" width="26" height="18" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/><path d="M181 240H199" stroke="#c62828" stroke-width="2.5"/>
+<rect x="177" y="213" width="26" height="18" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/><path d="M181 222H199" stroke="#c62828" stroke-width="2.5"/>
+<rect x="177" y="195" width="26" height="18" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/><path d="M181 204H199" stroke="#c62828" stroke-width="2.5"/>
+</g>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M208.7 296.7L223 296.7" stroke-width="6.6"/>
+<path d="M212 295.1L217.5 271.4" stroke-width="9.9"/>
+<path d="M217.5 271.4L212 247.2" stroke-width="11"/>
+<path d="M212 247.2L226 219.8" stroke-width="16.5"/>
+<path d="M226 219.8L231.2 212.5" stroke-width="7.7"/>
+<circle cx="236.4" cy="204" r="9.9" fill="#1f2328" stroke="none"/>
+<path d="M225.1 221.7L227.8 240.4L230 255.8" stroke="#fbfaf6" stroke-width="12.7"/>
+<path d="M225.1 221.7L227.8 240.4L230 255.8" stroke="#1f2328" stroke-width="8.2"/>
+</g>
+<g stroke="#c62828" stroke-width="3" stroke-linecap="round"><path d="M237.6 190L238.2 183"/><path d="M246.8 194.6L252 189.9"/><path d="M250.4 204L257.4 204"/></g>
+<g fill="none" stroke="#6e7781" stroke-linecap="round" stroke-linejoin="round">
+<path d="M287.3 296.7L273 296.7" stroke-width="6.6"/>
+<path d="M284 295.1L283.4 271.4" stroke-width="9.9"/>
+<path d="M283.4 271.4L284 247.2" stroke-width="11"/>
+<path d="M284 247.2L282.9 216.4" stroke-width="16.5"/>
+<path d="M282.9 216.4L281.2 207.6" stroke-width="7.7"/>
+<circle cx="280.1" cy="197.7" r="9.9" fill="#6e7781" stroke="none"/>
+<path d="M282.9 218.6L279.6 237.3L276.3 252.7" stroke="#fbfaf6" stroke-width="12.7"/>
+<path d="M282.9 218.6L279.6 237.3L276.3 252.7" stroke="#6e7781" stroke-width="8.2"/>
+</g>
+<path d="M254 142H296Q306 142 306 152V160Q306 170 296 170H290L284 184L278 170H254Q244 170 244 160V152Q244 142 254 142Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<g fill="#1565c0"><circle cx="263" cy="156" r="3.5"/><circle cx="275" cy="156" r="3.5"/><circle cx="287" cy="156" r="3.5"/></g>
+<!-- Tertiaire : après l’apparition du problème, la personne atteinte (en rouge) est soutenue ; la charge est toujours là -->
+<rect x="348" y="274" width="28" height="26" rx="2" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<g fill="none" stroke="#c62828" stroke-linecap="round" stroke-linejoin="round">
+<path d="M387.1 296.7L401.4 296.7" stroke-width="6.6"/>
+<path d="M390.4 295.1L390.4 270.3" stroke-width="9.9"/>
+<path d="M390.4 270.3L364 270.3" stroke-width="11"/>
+<path d="M364 270.3L379.4 241.7" stroke-width="16.5"/>
+<path d="M379.4 241.7L386 236.2" stroke-width="7.7"/>
+<circle cx="393.7" cy="231.8" r="9.9" fill="#c62828" stroke="none"/>
+<path d="M378.3 243.9L388.2 258.2L395.9 241.7" stroke="#fbfaf6" stroke-width="12.7"/>
+<path d="M378.3 243.9L388.2 258.2L395.9 241.7" stroke="#c62828" stroke-width="8.2"/>
+</g>
+<rect x="410" y="282" width="26" height="18" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/><path d="M414 291H432" stroke="#c62828" stroke-width="2.5"/>
+<rect x="410" y="264" width="26" height="18" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/><path d="M414 273H432" stroke="#c62828" stroke-width="2.5"/>
+<rect x="410" y="246" width="26" height="18" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/><path d="M414 255H432" stroke="#c62828" stroke-width="2.5"/>
+<g fill="none" stroke="#6e7781" stroke-linecap="round" stroke-linejoin="round">
+<path d="M330.7 296.7L345 296.7" stroke-width="6.6"/>
+<path d="M334 295.1L334.6 271.4" stroke-width="9.9"/>
+<path d="M334.6 271.4L334 247.2" stroke-width="11"/>
+<path d="M334 247.2L344.6 218.2" stroke-width="16.5"/>
+<path d="M344.6 218.2L348.9 210.4" stroke-width="7.7"/>
+<circle cx="353" cy="201.3" r="9.9" fill="#6e7781" stroke="none"/>
+<path d="M343.9 220.3L358 229L366 247" stroke="#fbfaf6" stroke-width="12.7"/>
+<path d="M343.9 220.3L358 229L366 247" stroke="#1565c0" stroke-width="8.2"/>
+</g>
+<!-- Ce que fait chaque niveau (mots de la page) -->
+<text x="96" y="334" font-size="19" font-weight="600" fill="#1565c0" text-anchor="middle">agir sur</text>
+<text x="96" y="358" font-size="19" font-weight="600" fill="#1565c0" text-anchor="middle">les causes</text>
+<text x="232" y="334" font-size="19" font-weight="600" fill="#1565c0" text-anchor="middle">détecter</text>
+<text x="232" y="358" font-size="19" font-weight="600" fill="#1565c0" text-anchor="middle">et gérer</text>
+<text x="375" y="334" font-size="19" font-weight="600" fill="#1565c0" text-anchor="middle">soutenir le</text>
+<text x="375" y="358" font-size="19" font-weight="600" fill="#1565c0" text-anchor="middle">rétablissement</text>
+<!-- Évolution du problème : quand intervient chaque niveau -->
+<rect x="24" y="382" width="414" height="12" fill="url(#evolution)"/>
+<path d="M436 375L456 388L436 401Z" fill="#c62828"/>
+<text x="96" y="424" font-size="19" fill="#1f2328" text-anchor="middle">avant le</text>
+<text x="96" y="448" font-size="19" fill="#1f2328" text-anchor="middle">problème</text>
+<text x="240" y="424" font-size="19" fill="#1f2328" text-anchor="middle">tôt, avant</text>
+<text x="240" y="448" font-size="19" fill="#1f2328" text-anchor="middle">aggravation</text>
+<text x="384" y="424" font-size="19" fill="#1f2328" text-anchor="middle">après son</text>
+<text x="384" y="448" font-size="19" fill="#1f2328" text-anchor="middle">apparition</text>
+<text x="24" y="494" font-size="19" fill="#4b535c">Les trois sont nécessaires ;</text>
+<text x="24" y="518" font-size="19" fill="#4b535c">seul le primaire change le travail.</text>
+</g>
+</svg>

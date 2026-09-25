@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="656" viewBox="0 0 480 656" role="img" aria-labelledby="t d">
+<title id="t">Où agir contre les émissions diesel</title>
+<desc id="d">Coupe d’une galerie souterraine : une chargeuse diesel, son opérateur dans une cabine fermée, émet par son échappement un panache de particules rouges qui dérive vers un travailleur à pied, qui porte une protection respiratoire. Un ventilateur et une conduite amènent de l’air frais qui dilue le panache. Quatre leviers sont posés là où ils agissent : à la source (moteur récent, engin à batterie, carburant), sur l’échappement (un dispositif sur le tuyau), dans l’air (ventilation) et autour du travailleur (cabine pressurisée, protection respiratoire pour l’entretien ou les tâches près d’un échappement). Mention : la maîtrise demande une combinaison de ces leviers.</desc>
+<defs>
+<linearGradient id="panache" gradientUnits="userSpaceOnUse" x1="256" y1="0" x2="456" y2="0">
+<stop offset="0" stop-color="#fde3e0"/>
+<stop offset="1" stop-color="#fde3e0" stop-opacity="0.25"/>
+</linearGradient>
+</defs>
+<rect width="480" height="656" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Où agir contre</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">les émissions diesel</text>
+
+<!-- Galerie en coupe : toit et sol -->
+<path d="M24 94H456V117L400 119L330 116L250 120L170 117L90 120L24 118Z" fill="#eceef0"/>
+<path d="M24 118L90 120L170 117L250 120L330 116L400 119L456 117" stroke="#6e7781" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
+<rect x="24" y="430" width="432" height="18" fill="#eceef0"/>
+<path d="M24 430H456" stroke="#6e7781" stroke-width="3.5"/>
+
+<!-- Panache d’émissions : du haut de l’échappement vers le travailleur -->
+<path d="M256 256C298 236 364 230 456 232V350C390 336 312 296 256 268Z" fill="url(#panache)"/>
+
+<!-- Conduite de ventilation (coude vers le bas) et ventilateur -->
+<path d="M72 136H292Q306 136 306 150V180" stroke="#6e7781" stroke-width="23" fill="none"/>
+<path d="M72 136H292Q306 136 306 150V180" stroke="#e1ecfa" stroke-width="18" fill="none"/>
+<circle cx="56" cy="136" r="17" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<g fill="#1f2328" transform="translate(56 136)">
+<ellipse cx="0" cy="-7" rx="3.6" ry="6.5"/>
+<ellipse cx="0" cy="-7" rx="3.6" ry="6.5" transform="rotate(120)"/>
+<ellipse cx="0" cy="-7" rx="3.6" ry="6.5" transform="rotate(240)"/>
+</g>
+<!-- Air frais qui sort de la conduite et entre dans le panache -->
+<g stroke="#1565c0" stroke-width="5" fill="none" stroke-linecap="round">
+<path d="M302 188Q296 206 294 222"/>
+<path d="M310 188Q326 206 338 222"/>
+</g>
+<g fill="#1565c0">
+<path d="M286 220L293 236L301 221Z"/>
+<path d="M331 225L344 236L345 219Z"/>
+</g>
+
+<!-- Particules : denses à la sortie, plus espacées une fois l’air frais mêlé au panache -->
+<g fill="#c62828">
+<circle cx="266" cy="256" r="4.5"/><circle cx="274" cy="266" r="4.5"/><circle cx="280" cy="252" r="4.5"/>
+<circle cx="288" cy="262" r="4.5"/><circle cx="294" cy="248" r="4.5"/><circle cx="298" cy="274" r="4.5"/>
+<circle cx="306" cy="258" r="4.5"/><circle cx="312" cy="270" r="4.5"/><circle cx="318" cy="252" r="4.5"/>
+<circle cx="326" cy="282" r="4.5"/><circle cx="332" cy="264" r="4.5"/>
+<circle cx="352" cy="256" r="4.5"/><circle cx="362" cy="288" r="4.5"/><circle cx="378" cy="268" r="4.5"/>
+<circle cx="392" cy="302" r="4.5"/><circle cx="408" cy="256" r="4.5"/><circle cx="434" cy="286" r="4.5"/>
+<circle cx="390" cy="330" r="4.5"/><circle cx="442" cy="326" r="4.5"/>
+</g>
+
+<!-- Chargeuse-navette (LHD) diesel, vue de côté, godet à gauche -->
+<g stroke-linejoin="round">
+<!-- châssis avant, bras et godet -->
+<path d="M66 402V372Q66 366 72 366H140V402Z" fill="#eceef0" stroke="#4b535c" stroke-width="3"/>
+<path d="M78 386L118 366" stroke="#4b535c" stroke-width="8" stroke-linecap="round"/>
+<path d="M26 424H62Q72 424 72 414V380Q72 372 64 372H56Q40 392 26 424Z" fill="#eceef0" stroke="#4b535c" stroke-width="3"/>
+<rect x="140" y="376" width="10" height="20" fill="#4b535c"/>
+<!-- châssis arrière : cabine à l’avant, moteur à l’arrière -->
+<path d="M150 402V352H202V338H250Q264 338 264 352V402Z" fill="#eceef0" stroke="#4b535c" stroke-width="3"/>
+<rect x="208" y="346" width="48" height="30" rx="3" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M213 373V358H218V353H224V358H229V353H235V358H240V353H246V358H251V373Z" fill="#6e7781"/>
+<!-- cabine de l’opérateur, fermée -->
+<rect x="154" y="304" width="44" height="48" rx="3" fill="#e1ecfa" stroke="#1565c0" stroke-width="3"/>
+<rect x="150" y="297" width="52" height="8" rx="2" fill="#1565c0"/>
+<circle cx="174" cy="320" r="7" fill="#4b535c"/>
+<path d="M164 342Q164 330 174 330Q184 330 184 342Z" fill="#4b535c"/>
+<!-- échappement et dispositif posé dessus -->
+<path d="M256 338V260" stroke="#4b535c" stroke-width="6"/>
+<rect x="246" y="274" width="20" height="36" rx="4" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<!-- roues -->
+<circle cx="96" cy="407" r="23" fill="#4b535c"/><circle cx="96" cy="407" r="8" fill="#eceef0"/>
+<circle cx="220" cy="407" r="23" fill="#4b535c"/><circle cx="220" cy="407" r="8" fill="#eceef0"/>
+</g>
+
+<!-- Travailleur à pied, tourné vers l’engin, avec protection respiratoire -->
+<g fill="#4b535c">
+<rect x="404" y="386" width="8" height="44" rx="3"/>
+<rect x="416" y="386" width="8" height="44" rx="3"/>
+<path d="M402 392V360Q402 352 410 352H418Q426 352 426 360V392Z"/>
+<circle cx="414" cy="337" r="11"/>
+</g>
+<path d="M400 335Q400 321 414 321Q428 321 428 335Z" fill="#6e7781"/>
+<path d="M404 360L398 386M424 360L428 386" stroke="#4b535c" stroke-width="7" stroke-linecap="round"/>
+<path d="M404 336Q400 346 406 351Q413 354 417 346L416 336Z" fill="#1565c0"/>
+<circle cx="402" cy="349" r="4.5" fill="#1565c0"/>
+
+<!-- Étiquettes -->
+<text x="24" y="184" font-size="20" font-weight="700" fill="#1f2328">Dans l’air</text>
+<text x="24" y="208" font-size="19" fill="#1f2328">ventilation</text>
+<text x="206" y="186" font-size="19" font-weight="600" fill="#1565c0">air frais</text>
+<text x="350" y="214" font-size="19" font-weight="600" fill="#c62828">émissions</text>
+
+<text x="240" y="262" font-size="20" font-weight="700" fill="#1f2328" text-anchor="end">Sur l’échappement</text>
+<path d="M242 266L248 274" stroke="#4b535c" stroke-width="2.5"/>
+
+<text x="24" y="476" font-size="20" font-weight="700" fill="#1f2328">À la source</text>
+<text x="24" y="500" font-size="19" fill="#1f2328">moteur récent</text>
+<text x="24" y="524" font-size="19" fill="#1f2328">engin à batterie</text>
+<text x="24" y="548" font-size="19" fill="#1f2328">carburant</text>
+<path d="M156 462L180 420L212 368" stroke="#4b535c" stroke-width="2.5" fill="none"/>
+<circle cx="213" cy="366" r="4" fill="#1f2328"/>
+
+<text x="456" y="476" font-size="20" font-weight="700" fill="#1f2328" text-anchor="end">Autour du travailleur</text>
+<text x="456" y="500" font-size="19" font-weight="600" fill="#1565c0" text-anchor="end">cabine pressurisée</text>
+<text x="456" y="524" font-size="19" font-weight="600" fill="#1565c0" text-anchor="end">protection respiratoire</text>
+<text x="456" y="548" font-size="19" fill="#1f2328" text-anchor="end">pour l’entretien ou</text>
+<text x="456" y="572" font-size="19" fill="#1f2328" text-anchor="end">près d’un échappement</text>
+<path d="M414 458V436" stroke="#4b535c" stroke-width="2.5"/>
+
+<text x="24" y="612" font-size="19" fill="#4b535c">La maîtrise demande une combinaison</text>
+<text x="24" y="636" font-size="19" fill="#4b535c">de ces leviers.</text>
+</g>
+</svg>

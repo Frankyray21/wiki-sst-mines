@@ -1,4 +1,4 @@
-# Pages RPS illustrées (sept pages) — 25 septembre 2026
+# Pages RPS illustrées (neuf pages) — 25 septembre 2026
 
 Demande de Frank : « continue à bonifier des pages dans la section RPS », puis « déploie avant qu'il ne reste plus de
 tokens ». Le texte des articles du wiki SST psychosociale n'est pas modifié (convention de l'auteur) : on ajoute des
@@ -16,18 +16,21 @@ Chaque dessinateur a vérifié ses sources, le rendu en clair et en sombre et la
 | [Modèle de Siegrist](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/modele-de-siegrist-desequilibre-efforts-recompenses.html) | Balance efforts / récompenses dessinée pour le wiki, à la place d'une diapositive tierce (filigrane e-psychiatrie.fr) |
 | [Communication descendante](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/communication-descendante.html) | Modèle de la communication (émetteur, message, canal, bruit, récepteur, rétroaction), à la place d'une pyramide de Maslow |
 | [Définition des risques psychosociaux](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/definition-des-risques-psychosociaux.html) | Cumul des facteurs de risque, à la place d'une pyramide de Maslow ; la capture des six familles, de l'auteur, reste |
-| [Comparatif des cycles FIFO](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/comparatif-des-cycles-fifo-14-14-20-10-21-7.html) | Les cycles 14/14, 20/10 et 21/7 jour par jour, avec la récupération en congé du tableau de la page |
+| [Comparatif des cycles FIFO](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/comparatif-des-cycles-fifo-14-14-20-10-21-7.html) | Les cycles 14/14, 20/10 et 21/7 jour par jour (après relecture, sans les qualificatifs de récupération en congé : leurs sources ne sont pas dans le wiki) |
 | [Démarche de prévention en RPS, étapes](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/demarche-de-prevention-en-rps-etapes.html) | Les six étapes en boucle, posées sur les conditions de réussite |
 | [Harcèlement psychologique au travail](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/harcelement-psychologique-au-travail.html) | Définition de la LNT, art. 81.18 : conduite répétée ou conduite grave unique, et leurs conditions |
+| [Les trois niveaux de prévention](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/les-trois-niveaux-de-prevention.html) | Trois niveaux, trois moments (à la place d'une pyramide de Maslow) ; un exemple minier par niveau, cycles FIFO et quarts de nuit (à la place d'une courbe de Selye) |
+| [Reconnaissance et déséquilibre efforts récompenses](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/reconnaissance-et-desequilibre-efforts-recompenses.html) | Modèle élargi : une demande, trois appuis (latitude, soutien, reconnaissance), à la place d'une pyramide de Maslow |
 
-Les six premières pages ont aussi une copie dans l'espace encadrement, modifiée de la même façon.
+Toutes ces pages, sauf Harcèlement et Reconnaissance, ont aussi une copie dans l'espace encadrement, modifiée de la
+même façon.
 
 ## À faire dans le vault (sinon la prochaine construction efface ces changements)
 
 Sous Windows (PowerShell), depuis le dossier du projet :
 
 ```
-$lots = 'mediation-et-resolution-de-conflits','modele-de-siegrist-desequilibre-efforts-recompenses','communication-descendante','definition-des-risques-psychosociaux','comparatif-des-cycles-fifo-14-14-20-10-21-7','demarche-de-prevention-en-rps-etapes','harcelement-psychologique-au-travail'
+$lots = 'mediation-et-resolution-de-conflits','modele-de-siegrist-desequilibre-efforts-recompenses','communication-descendante','definition-des-risques-psychosociaux','comparatif-des-cycles-fifo-14-14-20-10-21-7','demarche-de-prevention-en-rps-etapes','harcelement-psychologique-au-travail','les-trois-niveaux-de-prevention','reconnaissance-et-desequilibre-efforts-recompenses'
 $lots | ForEach-Object { node tools/appliquer_retouches.mjs --lot "content-updates/2026-09-25-$_-schemas.json" --appliquer }
 node tools/build_site.mjs
 ```
@@ -43,9 +46,8 @@ node tools/build_site.mjs
 - **Cause des captures fausses.** Plusieurs images de cours portent le même nom dans des dossiers différents
   (`img-000.png`, `img-001.png`…). Quand le générateur ne trouve pas le chemin exact, il prend le premier fichier du
   même nom, sans avertir. Les dossiers 05-mesure, 06-prévention, 10-conflits et 11-communication n'ont jamais été
-  publiés. Encore touchées : « Les trois niveaux de prévention » (Maslow et Selye) et « Reconnaissance et déséquilibre
-  efforts récompenses » (Maslow), en cours de dessin. L'« Index des images du cours » décrit encore les anciennes
-  captures.
+  publiés. Corrigées de même dans ce lot : « Les trois niveaux de prévention » (Maslow et Selye) et « Reconnaissance et
+  déséquilibre efforts récompenses » (Maslow). L'« Index des images du cours » décrit encore les anciennes captures.
 - **Comparatif des cycles FIFO.** « Idées suicidaires … en cycles ≥21/7 (Bowers et al. 2018 p. 4) » : l'article ne
   mesure pas les idées suicidaires. Il trouve plus de détresse avec des rotations courtes (1 ou 2 semaines au site
   pour 1 de congé) qu'avec 4 pour 1. Bowers et al. (2018) n'est pas une méta-analyse. « La recherche est claire » est
@@ -61,6 +63,12 @@ node tools/build_site.mjs
   l'art. 81.19. Le schéma des obligations de l'employeur est mis de côté pour cette raison.
 - **Modèle de Siegrist.** L'affirmation « LMRSST : la reconnaissance… » va au-delà de l'art. 144. « Réduit
   significativement les scores ERI » n'a pas de source. La référence Kivimäki (2007) est tronquée.
+- **Reconnaissance.** Le même encadré non sourcé (« réduit significativement les scores ERI ») y figure sous « Action à
+  fort effet ». L'infographie de la section Cadre attribue le modèle élargi à Siegrist et enchaîne demande → latitude →
+  soutien → reconnaissance → santé comme des étapes, alors que sa propre phrase parle d'une demande modulée par les
+  trois autres.
+- **Les trois niveaux.** La légende retirée annonçait une prévention « primordiale », dont la page ne parle pas. « 6 à
+  18 mois » n'a pas de source (comme sur Démarche de prévention).
 - **Démarche de prévention.** Deux coquilles : « plan.p » et « primaire s ». « 6 à 18 mois » n'a pas de source. La
   responsabilité de « l'opérateur principal » envers les sous-traitants n'a pas d'appui dans le recueil.
 - **Définition des RPS.** « Trois sources » : la fiche INSPQ (2018) en nomme quatre. Cette fiche est attribuée à
@@ -73,8 +81,8 @@ node tools/build_site.mjs
 
 ## Vérifications
 
-- Tests : 231 réussis sur 232 ; le seul échec, `textes-loi`, est connu et antérieur.
+- Tests : 233 réussis sur 234 ; le seul échec, `textes-loi`, est connu et antérieur.
 - `verif_site`, `verif_liens` (0 erreur) et `verif_publication --staged`.
-- Chromium, `verif_rendu` : les 7 pages dans les cinq modes, aucun défaut.
-- Hors blocs de schéma, le texte des 13 pages publiées ne diffère que par les trois légendes retirées.
+- Chromium, `verif_rendu` : les 9 pages dans les cinq modes, aucun défaut.
+- Hors blocs de schéma, le texte des 16 pages publiées ne diffère que par les six légendes retirées.
 - Aucune validation spécialisée n'est attestée.

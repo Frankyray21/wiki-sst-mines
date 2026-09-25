@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-reconnaissance-et-desequilibre-efforts-recompenses-schemas",
+ "portee": "Schémas de la page w/psychosocial/reconnaissance-et-desequilibre-efforts-recompenses.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Reconnaissance et déséquilibre efforts récompenses",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/reconnaissance-et-desequilibre-efforts-recompenses.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-reconnaissance-et-desequilibre-efforts-recompenses-modele-elargi-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "img-000.png",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-reconnaissance-et-desequilibre-efforts-recompenses-modele-elargi-v1.svg|Deux lignes comparent la même charge, une dalle marquée « demande psychologique » : sans appuis, le travailleur qui la tient plie sous son poids ; posée sur trois étais, la latitude décisionnelle et le soutien social du modèle de Karasek et la reconnaissance ajoutée par le modèle élargi, elle ne lui laisse qu’une petite part du poids.]]\n\n<p class=\"infographie-legende\">Dans le modèle élargi, la demande psychologique est modulée par la latitude décisionnelle et le soutien social, comme dans le modèle de Karasek, et aussi par la reconnaissance. Une charge élevée n’a pas le même effet selon les appuis disponibles ; c’est un repère d’analyse du travail, pas un diagnostic.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Deux lignes, même charge : une longue dalle marquée « demande psychologique », que le travailleur tient par un bout.</li>\n<li>« Sans appuis » : l’autre bout de la dalle repose au sol ; le travailleur plie sous le poids, et une grosse flèche rouge appuie sur le bout qu’il tient.</li>\n<li>« Avec les trois appuis » : la même dalle repose à l’horizontale sur trois étais, la latitude décisionnelle, le soutien social et la reconnaissance ; le travailleur se tient droit, et la flèche rouge, petite, montre qu’il porte encore une part.</li>\n<li>Sous la latitude décisionnelle et le soutien social, « modèle de Karasek » ; sous la reconnaissance, en bleu plein, « ajoutée » : c’est l’ajout du modèle élargi.</li>\n<li>Mention au bas du schéma : « Un repère d’analyse, pas un diagnostic. »</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après le modèle élargi du cours SST1010 (UQAM), séance 9, {{lien:w/psychosocial/dimensions-psychosociales-du-travail.html|Dimensions psychosociales du travail}} (« Une charge élevée n’a pas le même effet selon la latitude, le soutien et la reconnaissance disponibles ») et {{lien:w/psychosocial/modele-de-karasek.html|Modèle de Karasek}} ; voir aussi {{lien:w/psychosocial/demandes-psychologiques.html|Demandes psychologiques}}, {{lien:w/psychosocial/latitude-decisionnelle.html|Latitude décisionnelle}} et {{lien:w/psychosocial/soutien-social-au-travail.html|Soutien social au travail}}. Schéma conceptuel : aucun score, aucun seuil.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-reconnaissance-et-desequilibre-efforts-recompenses-modele-elargi-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "img-000.png",
+   "marqueur": "Infographies/wiki-reconnaissance-et-desequilibre-efforts-recompenses-modele-elargi-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "Modèle élargi : demande psychologique modulée par latitude décisionnelle, soutien social ET reconnaissance. Source : SST1010 (UQAM), séance 9. Usage personnel.",
+   "marqueur": "Infographies/wiki-reconnaissance-et-desequilibre-efforts-recompenses-modele-elargi-v1.svg"
+  }
+ ]
+}
