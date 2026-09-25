@@ -1,0 +1,31 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-definition-des-risques-psychosociaux-schemas",
+ "portee": "Schémas de la page w/psychosocial/definition-des-risques-psychosociaux.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Définition des risques psychosociaux",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/definition-des-risques-psychosociaux.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-definition-des-risques-psychosociaux-categories-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "img-000.png",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-definition-des-risques-psychosociaux-categories-v1.svg|Deux fois le même travailleur au centre des six familles de facteurs : avec un seul facteur de risque, la surcharge, la jauge de risque est peu remplie ; quand s’y ajoutent le manque de contrôle, le manque de soutien et la reconnaissance absente, elle est presque pleine.]]\n\n<p class=\"infographie-legende\">Les familles de facteurs se combinent : plus les facteurs de risque s’accumulent pour un même travailleur, plus le risque pour sa santé augmente. Les jauges montrent un sens de variation, pas une mesure.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Au centre, un travailleur avec un casque de mineur ; autour de lui, six pastilles pour les six familles de la section « Catégories » : charge de travail (cadran), latitude décisionnelle (embranchement), soutien social (deux personnes), reconnaissance (étoile), communication et information (bulle), relations interpersonnelles (maillons).</li>\n<li>Pastille rouge : facteur de risque ; pastille bleue : facteur favorable. Une flèche mène de l’anneau à une jauge marquée « risque ».</li>\n<li>En haut, « Un seul facteur de risque » : seule la surcharge est en rouge, les autres familles restent favorables ; la jauge est peu remplie, mais pas vide.</li>\n<li>En bas, « Plusieurs facteurs de risque » : la même surcharge, plus le manque de contrôle, le manque de soutien et la reconnaissance absente ; la jauge est presque pleine.</li>\n<li>Les jauges n’ont pas d’échelle : elles montrent seulement que le risque augmente quand les facteurs s’accumulent, pas de combien.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page : section « Catégories » (les six familles et le repère « Plus ils s’accumulent, plus le risque augmente ») et « L’essentiel » (surcharge, manque de contrôle, manque de soutien, reconnaissance absente) ; fiche INSPQ (2018) liée par la page (« la présence d’un ou de plusieurs risques psychosociaux du travail entraîne […] des risques plus élevés d’atteinte à la santé ») ; facteurs favorables et même charge aux effets différents : {{lien:w/psychosocial/dimensions-psychosociales-du-travail.html|Dimensions psychosociales du travail}} ; cumul : {{lien:w/psychosocial/analyse-tissot-et-al-inspq-2022.html|Tissot et al. (2022)}}, p. 9, et {{lien:w/psychosocial/cumul-dexpositions.html|Cumul d’expositions}}. Schéma de principe : aucune échelle, aucun risque chiffré.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-definition-des-risques-psychosociaux-categories-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "img-000.png",
+   "marqueur": "Infographies/wiki-definition-des-risques-psychosociaux-categories-v1.svg"
+  }
+ ]
+}

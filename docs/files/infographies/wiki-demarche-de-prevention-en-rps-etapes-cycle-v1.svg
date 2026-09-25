@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="648" viewBox="0 0 480 648" role="img" aria-labelledby="t d">
+<title id="t">Une démarche en boucle : prévention des risques psychosociaux</title>
+<desc id="d">Schéma en forme de ligne de métro qui fait une boucle, posée sur un socle. En haut, hors de la boucle, la station 1, « Engagement de la direction », est le point de départ : une flèche descend et rejoint la boucle par le haut. La boucle tourne dans le sens des aiguilles d’une montre et dessert les stations 2, « Identification des risques », 3, « Analyse et priorisation », 4, « Plan d’action », 5, « Mise en œuvre », et 6, « Évaluation et suivi » ; après la 6, la ligne remonte et revient à la 2 : l’évaluation ramène à une nouvelle identification. Au centre de la boucle, la mention « cycle continu ». La boucle repose sur un socle en gradins marqué « Conditions de réussite », fait de six pierres : engagement réel de la direction, comité paritaire actif, confidentialité respectée, communication transparente, indicateurs mesurables, patience.</desc>
+<rect width="480" height="648" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Une démarche en boucle</text>
+<text x="24" y="76" font-size="19" fill="#4b535c">Prévention des risques psychosociaux</text>
+
+<!-- Boucle des étapes 2 à 6, sens horaire. Après l’évaluation (6), la ligne remonte et revient
+     à l’identification (2) : « L’évaluation alimente une nouvelle identification, donc un nouveau plan. » -->
+<path d="M240 182A64 64 0 0 1 304 246V356A64 64 0 0 1 176 356V246A64 64 0 0 1 240 182Z" fill="none" stroke="#1565c0" stroke-width="10"/>
+<!-- Embranchement : l’étape 1 lance la démarche ; le retour de la boucle se fait vers l’étape 2 -->
+<!-- (nouvelle identification), comme le dit la page -->
+<path d="M240 142V164" stroke="#1565c0" stroke-width="10" fill="none"/>
+<!-- Pointes de flèche : une par tronçon, dans le sens de parcours -->
+<g fill="#1565c0">
+<path d="M240 184L226 164L254 164Z"/>
+<path d="M271.3 189.3L248 194.7L256.9 170.2Z"/>
+<path d="M304 258L291 238L317 238Z"/>
+<path d="M304 364L291 344L317 344Z"/>
+<path d="M230 420L250 407L250 433Z"/>
+<path d="M176 348L189 368L163 368Z"/>
+<path d="M176 234L189 254L163 254Z"/>
+</g>
+
+<!-- Stations numérotées (la page numérote ses étapes) -->
+<g fill="#fbfaf6" stroke="#1565c0" stroke-width="4">
+<circle cx="240" cy="142" r="17"/>
+<circle cx="289" cy="204.9" r="17"/>
+<circle cx="304" cy="301" r="17"/>
+<circle cx="285.3" cy="401.3" r="17"/>
+<circle cx="194.7" cy="401.3" r="17"/>
+<circle cx="176" cy="301" r="17"/>
+</g>
+<g font-size="20" font-weight="700" fill="#1565c0" text-anchor="middle">
+<text x="240" y="149">1</text>
+<text x="289" y="211.9">2</text>
+<text x="304" y="308">3</text>
+<text x="285.3" y="408.3">4</text>
+<text x="194.7" y="408.3">5</text>
+<text x="176" y="308">6</text>
+</g>
+
+<!-- Noms des étapes (tableau « Les 6 étapes » de la page) -->
+<g font-size="19" font-weight="700" fill="#1f2328">
+<text x="240" y="115" text-anchor="middle">Engagement de la direction</text>
+<text x="313" y="200.9">Identification</text>
+<text x="313" y="222.9">des risques</text>
+<text x="329" y="297">Analyse et</text>
+<text x="329" y="319">priorisation</text>
+<text x="311.3" y="408.3">Plan d’action</text>
+<text x="166" y="397.3" text-anchor="end">Mise en</text>
+<text x="166" y="419.3" text-anchor="end">œuvre</text>
+<text x="151" y="297" text-anchor="end">Évaluation</text>
+<text x="151" y="319" text-anchor="end">et suivi</text>
+</g>
+<text x="240" y="297" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">cycle</text>
+<text x="240" y="319" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">continu</text>
+
+<!-- Socle en gradins : les conditions de réussite (tableau de la page) portent la démarche -->
+<rect x="80" y="438" width="320" height="32" rx="4" fill="#4b535c"/>
+<text x="240" y="461" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">Conditions de réussite</text>
+<g fill="#eceef0" stroke="#6e7781" stroke-width="2.5">
+<rect x="48" y="474" width="196" height="50" rx="4"/>
+<rect x="248" y="474" width="184" height="50" rx="4"/>
+<rect x="36" y="528" width="194" height="50" rx="4"/>
+<rect x="234" y="528" width="210" height="50" rx="4"/>
+<rect x="24" y="582" width="236" height="50" rx="4"/>
+<rect x="264" y="582" width="192" height="50" rx="4"/>
+</g>
+<g font-size="19" fill="#1f2328" text-anchor="middle">
+<text x="146" y="494">Engagement réel</text>
+<text x="146" y="516">de la direction</text>
+<text x="340" y="494">Comité paritaire</text>
+<text x="340" y="516">actif</text>
+<text x="133" y="548">Confidentialité</text>
+<text x="133" y="570">respectée</text>
+<text x="339" y="548">Communication</text>
+<text x="339" y="570">transparente</text>
+<text x="142" y="602">Indicateurs</text>
+<text x="142" y="624">mesurables</text>
+<text x="360" y="614">Patience</text>
+</g>
+</g>
+</svg>

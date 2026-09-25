@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="620" viewBox="0 0 480 620" role="img" aria-labelledby="t d">
+<title id="t">Le message descend, la rétroaction remonte</title>
+<desc id="d">Le modèle général de la communication appliqué à la communication descendante, disposé de haut en bas. En haut, sur une bande « niveaux supérieurs », un cadre en cravate : l’émetteur. En bas, sur une bande « niveaux opérationnels », un travailleur coiffé d’un casque à lampe : le récepteur. Entre les deux, un cadre arrondi figure le canal, ici une réunion de quart. Le message, « ce qui change », descend du cadre vers le travailleur dans une bulle de parole ; une ligne rouge en zigzag, le bruit (ici le jargon), traverse son trajet, et la bulle arrive brouillée, teintée de rouge. Le travailleur lève la main : une flèche bleue portant une bulle « ? » remonte vers le cadre par le même canal ; c’est la rétroaction, les questions.</desc>
+<rect width="480" height="620" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Le message descend,</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">la rétroaction remonte</text>
+<text x="24" y="108" font-size="19" fill="#4b535c">Modèle général de la communication</text>
+
+<!-- Niveaux hiérarchiques (page, Définition) : niveaux supérieurs en haut, niveaux opérationnels en bas -->
+<rect x="24" y="122" width="432" height="130" rx="10" fill="#eceef0"/>
+<rect x="24" y="466" width="432" height="138" rx="10" fill="#eceef0"/>
+
+<!-- Canal : réunion de quart (page, « Canaux efficaces en mine ») -->
+<rect x="170" y="262" width="140" height="194" rx="16" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M310 297H322" stroke="#4b535c" stroke-width="2.5"/>
+<circle cx="310" cy="297" r="4" fill="#4b535c"/>
+
+<!-- Message : descend du cadre au travailleur -->
+<path d="M208 234V460" stroke="#1f2328" stroke-width="5" fill="none"/>
+<path d="M198 458L208 476L218 458Z" fill="#1f2328"/>
+
+<!-- Rétroaction : remonte du travailleur au cadre, par le même canal (page, « Boucle de retour ») -->
+<path d="M272 474V256" stroke="#1565c0" stroke-width="5" fill="none"/>
+<path d="M262 258L272 240L282 258Z" fill="#1565c0"/>
+
+<!-- Bulle du message, telle qu’émise -->
+<path d="M214 280H226Q236 280 236 290V310Q236 320 226 320H190Q180 320 180 310V290Q180 280 190 280H202L208 268Z" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M191 293H225M191 307H213" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+
+<!-- Bruit : ici le jargon (page, « Pièges fréquents ») -->
+<path d="M100 366L108 356L116 376L124 356L132 376L140 356L148 376L156 356L164 376L172 356L180 376L188 356L196 376L204 356L212 376L220 356L228 376L236 356L242 366" stroke="#c62828" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+<!-- Bulle du message, brouillée à l’arrivée -->
+<path d="M214 404H226Q236 404 236 414V434Q236 444 226 444H190Q180 444 180 434V414Q180 404 190 404H202L208 392Z" fill="#fde3e0" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M191 417L196 412L201 422L206 412L211 422L216 412L221 422L225 417M191 431L196 426L201 436L206 426L211 436L215 431" stroke="#c62828" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+<!-- Bulle de la question -->
+<path d="M266 444H258Q250 444 250 436V412Q250 404 258 404H286Q294 404 294 412V436Q294 444 286 444H278L272 456Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="272" y="433" font-size="24" font-weight="700" fill="#1565c0" text-anchor="middle">?</text>
+
+<!-- Cadre (émetteur) -->
+<g transform="translate(240 242)" fill="#4b535c">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -77L-30 -58" stroke="#4b535c" stroke-width="8" stroke-linecap="round"/>
+<path d="M13 -77L22 -50" stroke="#4b535c" stroke-width="8" stroke-linecap="round"/>
+<path d="M-6 -84L0 -77L6 -84" stroke="#fbfaf6" stroke-width="2.5" fill="none"/>
+<path d="M-2.5 -76H2.5L4 -60L0 -55L-4 -60Z" fill="#fbfaf6"/>
+</g>
+
+<!-- Travailleur (récepteur) : casque à lampe, main levée -->
+<g transform="translate(240 592)" fill="#1f2328">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-12 -101Q-12 -114 0 -114Q12 -114 12 -101Z" fill="#6e7781"/>
+<path d="M-17 -101H17" stroke="#6e7781" stroke-width="4" stroke-linecap="round"/>
+<circle cx="0" cy="-107" r="3.5" fill="#fbfaf6"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -77L-22 -50" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+<path d="M13 -77L24 -96L27 -110" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+
+<!-- Étiquettes, colonne de gauche -->
+<text x="40" y="182" font-size="20" font-weight="700" fill="#1f2328">émetteur</text>
+<text x="40" y="206" font-size="19" fill="#1f2328">cadre</text>
+<text x="24" y="298" font-size="20" font-weight="700" fill="#1f2328">message</text>
+<text x="24" y="322" font-size="19" fill="#1f2328">ce qui change</text>
+<text x="24" y="362" font-size="20" font-weight="700" fill="#c62828">bruit</text>
+<text x="24" y="386" font-size="19" fill="#1f2328">jargon</text>
+<text x="40" y="528" font-size="20" font-weight="700" fill="#1f2328">récepteur</text>
+<text x="40" y="552" font-size="19" fill="#1f2328">travailleur</text>
+
+<!-- Étiquettes, colonne de droite -->
+<text x="440" y="182" font-size="19" fill="#4b535c" text-anchor="end">niveaux</text>
+<text x="440" y="206" font-size="19" fill="#4b535c" text-anchor="end">supérieurs</text>
+<text x="328" y="304" font-size="20" font-weight="700" fill="#1f2328">canal</text>
+<text x="328" y="328" font-size="19" fill="#1f2328">réunion</text>
+<text x="328" y="352" font-size="19" fill="#1f2328">de quart</text>
+<text x="328" y="420" font-size="20" font-weight="700" fill="#1565c0">rétroaction</text>
+<text x="328" y="444" font-size="19" fill="#1f2328">questions</text>
+<text x="440" y="528" font-size="19" fill="#4b535c" text-anchor="end">niveaux</text>
+<text x="440" y="552" font-size="19" fill="#4b535c" text-anchor="end">opérationnels</text>
+</g>
+</svg>

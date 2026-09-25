@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="656" viewBox="0 0 480 656" role="img" aria-labelledby="t d">
+<title id="t">Ce que la loi appelle harcèlement psychologique</title>
+<desc id="d">Deux voies faites de pièces de puzzle qui s’emboîtent, de haut en bas, mènent chacune par une flèche au bandeau rouge « harcèlement psychologique ». Voie de gauche : une conduite vexatoire, répétée (plusieurs petites flèches rouges qui frappent un axe du temps), hostile ou non désirée, y compris à caractère sexuel ; puis l’atteinte à la dignité ou à l’intégrité psychologique ou physique (une personne marquée d’une fissure rouge) ; puis un milieu de travail néfaste (la personne dans une galerie teintée de rouge). Voie de droite, séparée de la première par « ou » : une seule conduite grave (une grosse flèche rouge sur l’axe du temps) ; la même pièce d’atteinte, commune aux deux voies ; puis un effet nocif continu (après la flèche, l’axe du temps reste rouge). Dans chaque voie, toutes les pièces sont réunies. D’après la Loi sur les normes du travail, art. 81.18.</desc>
+<rect width="480" height="656" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Ce que la loi appelle</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">harcèlement psychologique</text>
+<text x="24" y="108" font-size="19" fill="#4b535c">Loi sur les normes du travail, art. 81.18</text>
+
+<!-- Pièces de puzzle : dans chaque voie, les pièces s’emboîtent ; toutes sont requises -->
+<path d="M34 124H240A10 10 0 0 1 250 134V296A10 10 0 0 1 240 306H151A14 14 0 0 1 123 306H34A10 10 0 0 1 24 296V134A10 10 0 0 1 34 124Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M280 124H446A10 10 0 0 1 456 134V296A10 10 0 0 1 446 306H377A14 14 0 0 1 349 306H280A10 10 0 0 1 270 296V134A10 10 0 0 1 280 124Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M34 314H116.51A22 22 0 0 0 157.49 314H342.51A22 22 0 0 0 383.49 314H446A10 10 0 0 1 456 324V396A10 10 0 0 1 446 406H377A14 14 0 0 1 349 406H151A14 14 0 0 1 123 406H34A10 10 0 0 1 24 396V324A10 10 0 0 1 34 314Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M34 414H116.51A22 22 0 0 0 157.49 414H240A10 10 0 0 1 250 424V542A10 10 0 0 1 240 552H34A10 10 0 0 1 24 542V424A10 10 0 0 1 34 414Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M280 414H342.51A22 22 0 0 0 383.49 414H446A10 10 0 0 1 456 424V542A10 10 0 0 1 446 552H280A10 10 0 0 1 270 542V424A10 10 0 0 1 280 414Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+
+<!-- 1er alinéa : conduite vexatoire (comportements, paroles, actes ou gestes répétés, hostiles ou non désirés), y compris à caractère sexuel -->
+<text x="137" y="154" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">conduite vexatoire</text>
+<path d="M34 208H124" stroke="#6e7781" stroke-width="3"/>
+<path d="M124 201L137 208L124 215Z" fill="#6e7781"/>
+<path d="M46 178V194" stroke="#c62828" stroke-width="4.5"/>
+<path d="M38.5 192L53.5 192L46 205Z" fill="#c62828"/>
+<path d="M67 178V194" stroke="#c62828" stroke-width="4.5"/>
+<path d="M59.5 192L74.5 192L67 205Z" fill="#c62828"/>
+<path d="M88 178V194" stroke="#c62828" stroke-width="4.5"/>
+<path d="M80.5 192L95.5 192L88 205Z" fill="#c62828"/>
+<path d="M109 178V194" stroke="#c62828" stroke-width="4.5"/>
+<path d="M101.5 192L116.5 192L109 205Z" fill="#c62828"/>
+<text x="148" y="199" font-size="19" font-weight="700" fill="#c62828">répétée</text>
+<text x="137" y="240" font-size="19" fill="#1f2328" text-anchor="middle">hostile ou non désirée</text>
+<text x="137" y="266" font-size="19" fill="#4b535c" text-anchor="middle">y compris à</text>
+<text x="137" y="290" font-size="19" fill="#4b535c" text-anchor="middle">caractère sexuel</text>
+
+<!-- 2e alinéa : une seule conduite grave -->
+<text x="363" y="154" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">conduite grave</text>
+<path d="M282 264H330" stroke="#6e7781" stroke-width="3"/>
+<path d="M330 257L343 264L330 271Z" fill="#6e7781"/>
+<path d="M308 174V229" stroke="#c62828" stroke-width="18"/>
+<path d="M284 227L332 227L308 261Z" fill="#c62828"/>
+<text x="346" y="228" font-size="19" font-weight="700" fill="#c62828">une seule</text>
+<circle cx="260" cy="215" r="18" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<text x="260" y="221" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">ou</text>
+
+<!-- Les deux voies : atteinte à la dignité ou à l’intégrité psychologique ou physique -->
+<g transform="translate(66 398) scale(0.62)">
+<circle cx="0" cy="-97" r="11" fill="#1f2328"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z" fill="#1f2328"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4" fill="#1f2328"/>
+<rect x="2" y="-45" width="10" height="45" rx="4" fill="#1f2328"/>
+<path d="M-13 -77L-22 -50M13 -77L22 -50" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+<path d="M2 -110L-5 -99L4 -91L-4 -81L5 -71L-3 -61L4 -52L-2 -44" stroke="#fbfaf6" stroke-width="10" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M2 -110L-5 -99L4 -91L-4 -81L5 -71L-3 -61L4 -52L-2 -44" stroke="#c62828" stroke-width="5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<text x="108" y="346" font-size="19" font-weight="700" fill="#1f2328">atteinte à la dignité</text>
+<text x="108" y="370" font-size="19" font-weight="700" fill="#1f2328">ou à l’intégrité</text>
+<text x="108" y="394" font-size="19" fill="#4b535c">psychologique ou physique</text>
+
+<!-- 1er alinéa : entraîne, pour la personne, un milieu de travail néfaste -->
+<path d="M97 494V464A40 32 0 0 1 177 464V494Z" fill="#fde3e0" stroke="#c62828" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M79 494H195" stroke="#6e7781" stroke-width="3" stroke-linecap="round"/>
+<g transform="translate(137 494) scale(0.42)">
+<circle cx="0" cy="-97" r="11" fill="#1f2328"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z" fill="#1f2328"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4" fill="#1f2328"/>
+<rect x="2" y="-45" width="10" height="45" rx="4" fill="#1f2328"/>
+<path d="M-13 -77L-22 -50M13 -77L22 -50" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+</g>
+<text x="137" y="520" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">milieu de travail</text>
+<text x="137" y="544" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">néfaste</text>
+
+<!-- 2e alinéa : produit un effet nocif continu -->
+<path d="M282 484H306" stroke="#6e7781" stroke-width="3"/>
+<path d="M306 484H426" stroke="#c62828" stroke-width="10"/>
+<path d="M426 474L442 484L426 494Z" fill="#c62828"/>
+<path d="M306 436V458" stroke="#c62828" stroke-width="13"/>
+<path d="M287 456L325 456L306 481Z" fill="#c62828"/>
+<text x="363" y="520" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">effet nocif</text>
+<text x="363" y="544" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">continu</text>
+
+<!-- Chaque voie, complète, répond à la définition -->
+<path d="M137 558V574" stroke="#1f2328" stroke-width="3"/>
+<path d="M129 572L145 572L137 584Z" fill="#1f2328"/>
+<path d="M363 558V574" stroke="#1f2328" stroke-width="3"/>
+<path d="M355 572L371 572L363 584Z" fill="#1f2328"/>
+<rect x="24" y="588" width="432" height="46" rx="10" fill="#c62828"/>
+<text x="240" y="619" font-size="22" font-weight="700" fill="#fbfaf6" text-anchor="middle">harcèlement psychologique</text>
+</g>
+</svg>
