@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="604" viewBox="0 0 480 604" role="img" aria-labelledby="t d">
 <title id="t">Mesurer l’exposition au carbone total</title>
-<desc id="d">Sous le titre : échantillonnage et analyse selon NIOSH 5040. À gauche, un travailleur vu de face, casque à lampe, porte une pompe à la ceinture ; un tube la relie à une petite tête de prélèvement fixée au col, à l’intérieur d’un disque pointillé bleu centré sur sa tête : sa zone respiratoire. Un trajet pointillé part de la tête de prélèvement vers un flacon de laboratoire, « laboratoire accrédité », puis descend, marqué « résultat », vers une jauge barrée d’un trait rouge : « moins de 0,4 mg/m³ de carbone total » ; la partie au-dessus du trait est teintée de rouge. Le trajet finit au « registre du poste (moteurs diesels) ». En bas, un calendrier, relié au travailleur par une flèche, indique : au moins tous les 6 mois, et après toute modification susceptible d’altérer la qualité de l’air.</desc>
+<desc id="d">Sous le titre : échantillonnage et analyse selon NIOSH 5040. À gauche, un travailleur vu de face, casque à lampe, porte une pompe à la ceinture ; un tube la relie à une petite tête de prélèvement fixée au col, à l’intérieur d’un disque pointillé bleu centré sur sa tête : sa zone respiratoire. Un trajet pointillé part de la tête de prélèvement vers un flacon de laboratoire, « laboratoire accrédité », puis descend, marqué « résultat », vers une jauge barrée d’un trait rouge : « moins de 0,4 mg/m³ de carbone total » ; la partie au-dessus du trait est teintée de rouge. Le trajet finit au « registre du poste de travail (moteurs diesels) ». En bas, un calendrier, relié au travailleur par une flèche, indique : au moins tous les 6 mois, et après toute modification susceptible d’altérer la qualité de l’air.</desc>
 <defs>
 <clipPath id="tube"><rect x="232" y="268" width="24" height="96" rx="12"/></clipPath>
 </defs>
@@ -79,7 +79,8 @@
 <rect x="222" y="402" width="10" height="52" rx="3" fill="#4b535c"/>
 <path d="M240 418H258M240 428H258M240 438H252" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
 <text x="272" y="424" font-size="19" fill="#1f2328">registre du poste</text>
-<text x="272" y="448" font-size="19" fill="#1f2328">(moteurs diesels)</text>
+<text x="272" y="448" font-size="19" fill="#1f2328">de travail</text>
+<text x="272" y="472" font-size="19" fill="#1f2328">(moteurs diesels)</text>
 
 <!-- Calendrier : quand mesurer -->
 <rect x="24" y="484" width="56" height="50" rx="5" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
