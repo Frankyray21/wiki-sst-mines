@@ -921,6 +921,16 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .infographie-compacte .infographie-sources { margin: .35rem 0 0; }
 @media (max-width: 480px) { .infographie { padding: .65rem; } .infographie-texte summary { padding: .75rem; } }
 @media print { .infographie { break-inside: auto; } .infographie .page-img { max-width: 100mm; } .infographie-texte::details-content { content-visibility: visible; } .infographie-texte > :not(summary) { display: block !important; } }
+/* Schémas vectoriels (classe « infographie-schema » posée dans la note) : dessinés sur fond clair,
+   inversés en thème sombre pour ne pas laisser un rectangle éblouissant sous terre. Leur palette
+   (encre, gris, rouge danger, bleu air) est choisie pour survivre à l'inversion ; l'impression
+   et le thème clair gardent le dessin d'origine. */
+@media screen {
+  :root:not([data-theme="light"]):not([data-theme="auto"]) .infographie-schema .page-img img { filter: invert(.9) hue-rotate(180deg) !important; }
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] .infographie-schema .page-img img { filter: invert(.9) hue-rotate(180deg) !important; }
+}
 
 /* En-tête pilote de Cadenassage : aucun autre article n'emploie cette classe. */
 .article-entete { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; margin-bottom: 1.25rem; }
