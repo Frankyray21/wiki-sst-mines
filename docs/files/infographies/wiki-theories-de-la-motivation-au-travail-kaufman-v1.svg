@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="560" viewBox="0 0 480 560" role="img" aria-labelledby="t d">
+<title id="t">Le voilier de Kaufman</title>
+<desc id="d">Un voilier vu de côté, sur la mer, qui fait route vers la droite. C’est la réinterprétation de Maslow par Kaufman, en voilier plutôt qu’en pyramide. La coque, bleue, porte les mots Safety, Connection et Self-esteem : c’est la sécurité. La voile, blanche, porte les mots Exploration, Love et Purpose : c’est la croissance. Devant le bateau, une route en pointillés mène à l’horizon, marqué « transcendance » : l’horizon vers lequel on navigue.</desc>
+<rect width="480" height="560" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Le voilier de Kaufman</text>
+<!-- Page : « une réinterprétation contemporaine de Maslow sous forme de voilier plutôt que de pyramide » -->
+<text x="24" y="78" font-size="19" fill="#4b535c">Maslow en voilier plutôt qu’en pyramide</text>
+
+<!-- Mer et horizon ; page : « la transcendance est l'horizon vers lequel on navigue » -->
+<rect x="0" y="340" width="480" height="220" fill="#e1ecfa"/>
+<path d="M0 340H480" stroke="#4b535c" stroke-width="3"/>
+
+<!-- Voile ; page : « la croissance (Exploration, Love, Purpose) constitue la voile ». Mots dans l’ordre de la page, sans hiérarchie -->
+<path d="M265 112V392H36Q112 236 265 112Z" fill="#fbfaf6" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<g font-size="19" fill="#1f2328" text-anchor="end">
+<text x="255" y="300">Exploration</text>
+<text x="255" y="330">Love</text>
+<text x="255" y="360">Purpose</text>
+</g>
+<!-- Mât et bôme -->
+<path d="M270 104V409" stroke="#4b535c" stroke-width="6" stroke-linecap="round"/>
+<path d="M268 394H36" stroke="#4b535c" stroke-width="5" stroke-linecap="round"/>
+
+<!-- Coque ; page : « La sécurité (Safety, Connection, Self-esteem) constitue la coque ». Mots sur une ligne, dans l’ordre de la page -->
+<path d="M24 408Q220 420 418 398C412 432 398 462 360 472H64Q40 472 34 454Z" fill="#1565c0" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<g font-size="19" fill="#fbfaf6">
+<text x="46" y="446">Safety</text>
+<text x="136" y="446">Connection</text>
+<text x="272" y="446">Self-esteem</text>
+</g>
+
+
+<!-- Route vers l’horizon : « vers lequel on navigue » -->
+<path d="M400 458C440 452 452 410 450 364" stroke="#1565c0" stroke-width="3.5" fill="none" stroke-dasharray="9 7" stroke-linecap="round"/>
+<path d="M440 364L450 343L460 364Z" fill="#1565c0"/>
+
+<!-- Étiquettes : mots de la page (« la voile », « la coque », « l'horizon ») -->
+<text x="24" y="214" font-size="20" font-weight="700" fill="#1f2328">croissance</text>
+<text x="24" y="238" font-size="19" fill="#4b535c">la voile</text>
+<text x="456" y="300" font-size="20" font-weight="700" fill="#1f2328" text-anchor="end">transcendance</text>
+<text x="456" y="324" font-size="19" fill="#4b535c" text-anchor="end">l’horizon</text>
+<text x="24" y="512" font-size="20" font-weight="700" fill="#1f2328">sécurité</text>
+<text x="24" y="536" font-size="19" fill="#4b535c">la coque</text>
+</g>
+</svg>
