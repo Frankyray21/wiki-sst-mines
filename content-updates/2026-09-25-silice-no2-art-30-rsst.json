@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-silice-no2-art-30-rsst",
+ "portee": "Schémas de la page w/hygiene/art-30-rsst-substitution-cancerogenes.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-30-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-30-rsst-substitution-cancerogenes.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "cristalline alpha-quartz",
+   "avant": "(C1, RP)",
+   "apres": "(C2, EM)"
+  }
+ ]
+}

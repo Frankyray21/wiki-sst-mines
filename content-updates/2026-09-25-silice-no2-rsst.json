@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-silice-no2-rsst",
+ "portee": "Schémas de la page w/legislation/20-reglements/rsst/rsst.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "RSST",
+  "wiki": "Recueil législatif SST",
+  "page": "w/legislation/20-reglements/rsst/rsst.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Silice cristalline",
+   "avant": "0,1 mg/m³",
+   "apres": "0,05 mg/m³"
+  }
+ ]
+}

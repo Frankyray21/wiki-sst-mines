@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-silice-no2-melccfp",
+ "portee": "Schémas de la page w/legislation/30-organismes-et-tribunaux/melccfp.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "MELCCFP",
+  "wiki": "Recueil législatif SST",
+  "page": "w/legislation/30-organismes-et-tribunaux/melccfp.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "(atelier)",
+   "avant": "silice 0,1 mg/m³",
+   "apres": "silice 0,05 mg/m³"
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-silice-no2-acgih",
+ "portee": "Schémas de la page w/legislation/30-organismes-et-tribunaux/acgih.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "ACGIH",
+  "wiki": "Recueil législatif SST",
+  "page": "w/legislation/30-organismes-et-tribunaux/acgih.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "plus stricte que le RSST québécois",
+   "avant": "(0,1 mg/m³)",
+   "apres": "(0,05 mg/m³)"
+  }
+ ]
+}

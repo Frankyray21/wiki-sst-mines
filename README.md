@@ -113,6 +113,8 @@ node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-aerosols-sch
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-diesel-sous-terre-schemas.json --appliquer
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-reclamation-cnesst-schemas.json --appliquer
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-irr-indemnites.json --appliquer
+# … silice et NO₂ sur douze pages (même jour), un lot par note — sous Windows (PowerShell) :
+#   Get-ChildItem content-updates\2026-09-25-silice-no2-*.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
 
 # Poser les renvois tranchés dans le vault : essai, puis application avec sauvegarde
 node tools/appliquer_renvois.mjs
@@ -167,6 +169,11 @@ node tools/serve.mjs
   du salaire, délais de réclamation (LATMP) et avis d'événement grave (LSST, art. 62) sur Réclamation CNESST et IRR.
   **À poser dans le vault** (six lots). Détail et points relevés à trancher :
   `content-updates/2026-09-25-une-page-par-wiki-schemas.md`
+- **Silice cristalline et NO₂ sur tout le site (25 septembre 2026)** : douze autres pages (hygiène, ergonomie,
+  toxicologie, recueil) donnaient la silice à 0,1 ou 0,025 mg/m³ (C1) et le NO₂ à 0,2 ppm ; elles suivent l'annexe
+  I du RSST (PDF du recueil à jour au 1er juin 2024) : silice 0,05 mg/m³, Pr, C2, EM ; NO₂ 3 ppm (VEMP) et 5 ppm
+  (VECD) ; CO 35 ppm dans les mêmes tableaux. LégisQuébec non consulté. **À poser dans le vault** (douze lots
+  `2026-09-25-silice-no2-*.json`). Détail : `content-updates/2026-09-25-silice-no2.md`
 - **Application Android (23 septembre 2026)** : `docs/app/wiki-sst-mines.apk` (8 Ko), lien « 📱 Application Android »
   au pied du portail et de l'espace encadrement. L'application ouvre le site publié en plein écran ; le hors-ligne est
   celui du site (service worker) ; les liens externes et les PDF partent au navigateur. Construite par
