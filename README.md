@@ -115,6 +115,9 @@ node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-reclamation-
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-irr-indemnites.json --appliquer
 # … silice et NO₂ sur douze pages (même jour), un lot par note — sous Windows (PowerShell) :
 #   Get-ChildItem content-updates\2026-09-25-silice-no2-*.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
+# … pages art-116 et art-30, DPM, amiante (même jour) : lots « corr- », puis lots de titre « titre-art-116- »
+#   Get-ChildItem content-updates\2026-09-25-corr-*.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
+#   Get-ChildItem content-updates\2026-09-25-titre-art-116-*.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
 
 # Poser les renvois tranchés dans le vault : essai, puis application avec sauvegarde
 node tools/appliquer_renvois.mjs
@@ -174,6 +177,12 @@ node tools/serve.mjs
   I du RSST (PDF du recueil à jour au 1er juin 2024) : silice 0,05 mg/m³, Pr, C2, EM ; NO₂ 3 ppm (VEMP) et 5 ppm
   (VECD) ; CO 35 ppm dans les mêmes tableaux. LégisQuébec non consulté. **À poser dans le vault** (douze lots
   `2026-09-25-silice-no2-*.json`). Détail : `content-updates/2026-09-25-silice-no2.md`
+- **Pages art-116 et art-30, DPM, amiante (25 septembre 2026)** : les pages « art-116-RSST » (hygiène, ergonomie) et
+  « art-30-RSST » s'ouvraient sur un faux texte d'article ; elles citent le vrai (température ; échelles) et
+  rattachent leur sujet aux bons articles (RSST art. 39 à 42, 101, 118 ; RSSM art. 96). DPM : seule valeur
+  québécoise, RSSM art. 102 (moins de 0,4 mg/m³ de carbone total), mesures au moins tous les 6 mois (art. 103.1).
+  Amiante : toutes les formes 0,1 f/cm³, C1, EM (annexe I). **À poser dans le vault** (lots `2026-09-25-corr-*.json`
+  et `2026-09-25-titre-art-116-*.json`). Détail : `content-updates/2026-09-25-art-116-30-dpm-amiante.md`
 - **Application Android (23 septembre 2026)** : `docs/app/wiki-sst-mines.apk` (8 Ko), lien « 📱 Application Android »
   au pied du portail et de l'espace encadrement. L'application ouvre le site publié en plein écran ; le hors-ligne est
   celui du site (service worker) ; les liens externes et les PDF partent au navigateur. Construite par

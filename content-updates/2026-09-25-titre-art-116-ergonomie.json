@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-titre-art-116-ergonomie",
+ "portee": "Schémas de la page w/ergonomie/art-116-rsst-qualite-air-milieu-travail.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-116-RSST, qualité air milieu travail",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/art-116-rsst-qualite-air-milieu-travail.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "# art-116-RSST,",
+   "avant": "qualité air milieu travail",
+   "apres": "température des locaux fermés"
+  }
+ ]
+}

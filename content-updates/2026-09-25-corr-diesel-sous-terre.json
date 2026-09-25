@@ -1,0 +1,34 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-corr-diesel-sous-terre",
+ "portee": "Schémas de la page w/toxicologie/diesel-sous-terre.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Gestion des moteurs diesel sous terre",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/diesel-sous-terre.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "VEMP applicables aux gaz de tir",
+   "avant": ", valeurs en révision pour le DPM (carbone élémentaire).",
+   "apres": ". L'annexe I n'a pas de valeur pour le DPM ; en mine souterraine, le {{lien:w/legislation/20-reglements/rssm/rssm.html|RSSM}} fixe moins de 0,4 mg de carbone total par m³ d'air ({{lien:w/legislation/20-reglements/rssm/art-102-rssm-conditions-utilisation-moteur-diesel-souterrain.html|art. 102}}), mesuré au moins tous les 6 mois (art. 103.1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "NIOSH 5040",
+   "avant": "Campagne annuelle EC (carbone élémentaire,",
+   "apres": "Mesures au moins tous les 6 mois, en carbone total ({{lien:w/legislation/20-reglements/rssm/art-102-rssm-conditions-utilisation-moteur-diesel-souterrain.html|RSSM, art. 102}} et 103.1 ;",
+   "tableau": true
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "comparable site à site",
+   "avant": "Standard moderne,",
+   "apres": "Minimum exigé en mine souterraine, avec une mesure après toute modification susceptible d'altérer la qualité de l'air ;"
+  }
+ ]
+}

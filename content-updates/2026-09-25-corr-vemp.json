@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-corr-vemp",
+ "portee": "Schémas de la page w/legislation/40-concepts-juridiques-transverses/vemp.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "VEMP",
+  "wiki": "Recueil législatif SST",
+  "page": "w/legislation/40-concepts-juridiques-transverses/vemp.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Cancérogène certain (CIRC Groupe 1)",
+   "avant": "0,12 mg/m³",
+   "apres": "Aucune à l'annexe I ; en mine souterraine, moins de 0,4 mg/m³ de carbone total ({{lien:w/legislation/20-reglements/rssm/art-102-rssm-conditions-utilisation-moteur-diesel-souterrain.html|RSSM, art. 102}})",
+   "tableau": true
+  }
+ ]
+}

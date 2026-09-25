@@ -100,12 +100,18 @@ export function repereCapture(nom) {
   return m ? m[1] : path.basename(String(nom));
 }
 
-export function poserDansPage(html, spec, { racine, dimsDe, titreDe, hrefDe }) {
+export function poserDansPage(html, spec, { racine, dimsDe, titreDe, hrefDe = a => racine + a }) {
   let h = html;
   for (const r of spec.remplacementsHtml || []) {
-    const n = h.split(r.avant).length - 1;
-    if (n === 1) h = h.replace(r.avant, () => r.apres);
-    else if (!(n === 0 && h.includes(r.apres))) throw new Error(`correction ${n ? 'ambiguë' : 'introuvable'} : « ${r.avant.slice(0, 60)} »`);
+    // {{lien:<adresse publiée>|<libellé>}} devient un lien vers cette page, avec la racine de la page
+    // posée (la copie encadrement g/ n'a pas la même) et le titre de la cible, comme le fait le générateur
+    const apres = String(r.apres).replace(/\{\{lien:([^|}]+)\|([^}]+)\}\}/g,
+      (m, a, lib) => `<a href="${hrefDe(a.trim())}" title="${esc(titreDe(a.trim()))}">${lib}</a>`);
+    // « motif » (expression régulière) au lieu d'« avant » quand la page et sa copie g/ diffèrent
+    // (un mot lié dans l'une, pas dans l'autre)
+    const n = r.motif ? [...h.matchAll(new RegExp(r.motif, 'g'))].length : h.split(r.avant).length - 1;
+    if (n === 1) h = r.motif ? h.replace(new RegExp(r.motif), () => apres) : h.replace(r.avant, () => apres);
+    else if (!(n === 0 && h.includes(apres))) throw new Error(`correction ${n ? 'ambiguë' : 'introuvable'} : « ${String(r.avant || r.motif).slice(0, 60)} »`);
   }
   for (const s of spec.schemas) {
     const bloc = blocHtml(s, { racine, dims: dimsDe(s.fichier), titreDe, hrefDe });

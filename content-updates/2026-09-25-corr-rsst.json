@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-corr-rsst",
+ "portee": "Schémas de la page w/legislation/20-reglements/rsst/rsst.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "RSST",
+  "wiki": "Recueil législatif SST",
+  "page": "w/legislation/20-reglements/rsst/rsst.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Diesel (DPM)",
+   "avant": "0,1 mg/m³ C élémentaire",
+   "apres": "Aucune à l'annexe I ; en mine souterraine, moins de 0,4 mg/m³ de carbone total ({{lien:w/legislation/20-reglements/rssm/art-102-rssm-conditions-utilisation-moteur-diesel-souterrain.html|RSSM, art. 102}})",
+   "tableau": true
+  }
+ ]
+}

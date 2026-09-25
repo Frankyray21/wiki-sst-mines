@@ -1,0 +1,33 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-corr-vea-et-normes",
+ "portee": "Schémas de la page w/hygiene/vea-et-normes.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "VEA et normes RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/vea-et-normes.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Engins diesel souterrains",
+   "avant": "carbone élémentaire)",
+   "apres": "carbone total)"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Engins diesel souterrains",
+   "avant": "| EM |",
+   "apres": "| — |"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Amiante (chrysotile)",
+   "avant": "1 f/cm³ | C1, EM, RP",
+   "apres": "0,1 f/cm³ | C1, EM"
+  }
+ ]
+}

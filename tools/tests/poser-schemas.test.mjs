@@ -132,3 +132,22 @@ test('sans ancre : le schéma prend la place exacte de la capture, dans la page 
   assert.ok(!r.texte.includes('Pasted image') && r.texte.includes('</div>\n\nSuite.'));
   assert.deepEqual(appliquerRetouches(r.texte, lot.retouches, { resoudreLien: () => 'Cible' }).rapports.map(x => x.statut), ['déjà faite', 'déjà faite']);
 });
+
+test('correction de texte : un {{lien:…}} devient un lien avec la racine de la page, repassage sans effet', () => {
+  const spec = { schemas: [], remplacementsHtml: [{ avant: '<p>Texte avant la capture de cours.</p>', apres: '<p>Voir {{lien:w/cible.html|la cible}}.</p>' }] };
+  const w = poserDansPage(PAGE, spec, OPTS);
+  assert.ok(w.includes('<p>Voir <a href="../../w/cible.html" title="Cible : l’exemple d\'essai">la cible</a>.</p>'));
+  assert.equal(poserDansPage(w, spec, OPTS), w, 'correction déjà faite');
+  const g = poserDansPage(PAGE, spec, { ...OPTS, racine: '../../../', hrefDe: a => '../../../' + a });
+  assert.ok(g.includes('<a href="../../../w/cible.html"'), 'copie encadrement : racine plus profonde');
+});
+
+test('correction par motif : même correction sur une page et sa copie qui diffèrent d’un lien', () => {
+  const spec = { schemas: [], remplacementsHtml: [{ motif: '<li>Première puce\\.(?: <a [^>]*>note</a>)?</li>', apres: '<li>Puce corrigée.</li>' }] };
+  const lie = PAGE.replace('<li>Première puce.</li>', '<li>Première puce. <a href="x.html">note</a></li>');
+  for (const p of [PAGE, lie]) {
+    const r = poserDansPage(p, spec, OPTS);
+    assert.ok(r.includes('<li>Puce corrigée.</li>') && !r.includes('Première puce'));
+    assert.equal(poserDansPage(r, spec, OPTS), r, 'repassage sans effet');
+  }
+});
