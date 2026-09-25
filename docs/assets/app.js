@@ -864,30 +864,76 @@
   })();
 
   // ---------- visionneuse d'image sur place ----------
-  // Cliquer une image l'agrandit par-dessus la page ; clic, ✕ ou Échap referme.
+  // Les images du texte gardent une taille standard (style.css) pour ne pas couper la lecture ;
+  // toucher l'une d'elles l'ouvre agrandie par-dessus la page. Toucher l'image agrandie bascule
+  // entre « ajustée à l'écran » et « taille réelle » (captures denses : on fait défiler) ; ✕,
+  // Échap, un toucher à côté de l'image ou le bouton Retour du téléphone referment, et le focus
+  // revient à l'image d'origine. Un clic modifié (Ctrl, ⌘, Maj) garde l'ouverture native.
   (function visionneuse() {
-    function ouvrir(src, alt) {
+    var IMAGE = /\.(?:png|jpe?g|gif|svg|webp)(?:[?#]|$)/i;
+    var ouverte = null;
+    function surTouche(ev) {
+      if (!ouverte) return;
+      if (ev.key === 'Escape') { ev.preventDefault(); fermer(false); }
+      // seul élément actif de la fenêtre : le focus ne repart pas dans la page cachée derrière
+      else if (ev.key === 'Tab') { ev.preventDefault(); ouverte.bouton.focus(); }
+    }
+    function fermer(parRetour) {
+      if (!ouverte) return;
+      var o = ouverte;
+      ouverte = null;
+      o.v.remove();
+      document.documentElement.classList.remove('visionneuse-ouverte');
+      document.removeEventListener('keydown', surTouche, true);
+      if (o.lien && o.lien.focus) o.lien.focus();
+      // retire l'entrée d'historique posée à l'ouverture, sauf si c'est déjà le bouton Retour
+      if (!parRetour && o.historique && history.state && history.state.visionneuse) history.back();
+    }
+    function ouvrir(lien, source) {
       var v = document.createElement('div');
       v.className = 'visionneuse';
       v.setAttribute('role', 'dialog');
-      v.setAttribute('aria-label', 'Image agrandie');
-      v.innerHTML = '<button class="vis-fermer" aria-label="Fermer">✕</button>';
+      v.setAttribute('aria-modal', 'true');
+      v.setAttribute('aria-label', 'Image agrandie' + (source && source.alt ? ' : ' + source.alt : ''));
+      var bouton = document.createElement('button');
+      bouton.type = 'button';
+      bouton.className = 'vis-fermer';
+      bouton.setAttribute('aria-label', 'Fermer l’image agrandie');
+      bouton.textContent = '✕';
       var img = document.createElement('img');
-      img.src = src;
-      img.alt = alt || '';
+      img.src = lien.getAttribute('href');
+      img.alt = source ? source.alt : '';
+      // un schéma inversé en thème sombre le reste une fois agrandi
+      var filtre = source && window.getComputedStyle ? window.getComputedStyle(source).filter : '';
+      if (filtre && filtre !== 'none') img.style.filter = filtre;
+      var aide = document.createElement('p');
+      aide.className = 'vis-aide';
+      aide.textContent = 'Toucher l’image : taille réelle ou ajustée à l’écran';
+      v.appendChild(bouton);
       v.appendChild(img);
-      function fermer() { v.remove(); document.removeEventListener('keydown', surTouche); }
-      function surTouche(ev) { if (ev.key === 'Escape') fermer(); }
-      v.addEventListener('click', fermer);
-      document.addEventListener('keydown', surTouche);
+      v.appendChild(aide);
+      v.addEventListener('click', function (ev) {
+        if (ev.target !== img) { fermer(false); return; }
+        var reelle = !v.classList.contains('vis-reelle');
+        // « taille réelle » : au moins le double de l'image ajustée, même pour un schéma vectoriel
+        img.style.width = reelle ? Math.max(img.naturalWidth || 0, img.getBoundingClientRect().width * 2) + 'px' : '';
+        v.classList.toggle('vis-reelle', reelle);
+      });
+      document.addEventListener('keydown', surTouche, true);
+      document.documentElement.classList.add('visionneuse-ouverte');
       document.body.appendChild(v);
+      var historique = false;
+      try { history.pushState({ visionneuse: true }, ''); historique = true; } catch (e) { /* navigation sans historique */ }
+      ouverte = { v: v, lien: lien, bouton: bouton, historique: historique };
+      bouton.focus();
     }
+    window.addEventListener('popstate', function () { fermer(true); });
     document.addEventListener('click', function (ev) {
+      if (ouverte || ev.defaultPrevented || ev.button || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
       var a = ev.target.closest ? ev.target.closest('.page-img a') : null;
-      if (!a) return;
+      if (!a || !IMAGE.test(a.getAttribute('href') || '')) return;
       ev.preventDefault();
-      var img = a.querySelector('img');
-      ouvrir(a.getAttribute('href'), img ? img.alt : '');
+      ouvrir(a, a.querySelector('img'));
     });
   })();
 
