@@ -6,7 +6,7 @@
 <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
 <text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Modèle élargi :</text>
 <text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">une demande, trois appuis</text>
-<!-- Ligne 1 : sans appuis, la dalle repose au sol par un bout et le travailleur plie sous le poids -->
+<!-- Ligne 1 : sans appuis, la dalle repose au sol par un bout et le travailleur plie sous le poids -->
 <text x="24" y="118" font-size="20" font-weight="700" fill="#1f2328">Sans appuis</text>
 <path d="M24 270H456" stroke="#6e7781" stroke-width="2.5"/>
 <g transform="rotate(6.82 452 270)">
@@ -24,7 +24,7 @@
 <path d="M63.6 180.3L76.6 194.6L87 206.3" stroke="#1f2328" stroke-width="9.8"/>
 </g>
 <path d="M131 136H147V167.3H158L139 189.3L120 167.3H131Z" fill="#c62828"/>
-<!-- Ligne 2 : la même dalle à l’horizontale sur trois étais ; le travailleur se tient droit -->
+<!-- Ligne 2 : la même dalle à l’horizontale sur trois étais ; le travailleur se tient droit -->
 <text x="24" y="314" font-size="20" font-weight="700" fill="#1f2328">Avec les trois appuis</text>
 <path d="M24 466H456" stroke="#6e7781" stroke-width="2.5"/>
 <rect x="80" y="368" width="376" height="40" rx="4" fill="#4b535c"/>
