@@ -11,26 +11,33 @@
  },
  "medias": [
   {
-   "depuis": "docs/files/infographies/wiki-communication-descendante-modele-v1.svg",
+   "depuis": "docs/files/infographies/wiki-communication-descendante-modele-v2.svg",
    "dossierVault": "Infographies"
   }
  ],
  "retouches": [
   {
-   "type": "insererApres",
+   "type": "remplacerBloc",
    "ligneContenant": "img-000.png",
-   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-communication-descendante-modele-v1.svg|Modèle général de la communication appliqué à la communication descendante : un cadre (émetteur, niveaux supérieurs) en haut, un travailleur casqué (récepteur, niveaux opérationnels) en bas. Le message descend par le canal, une réunion de quart, un zigzag rouge (le bruit, ici le jargon) le brouille, et les questions du travailleur remontent en bleu vers le cadre : la rétroaction.]]\n\n<p class=\"infographie-legende\">Un cadre (émetteur) transmet un message au travailleur (récepteur) par un canal, ici une réunion de quart ; un bruit, comme le jargon, peut le brouiller. En retour, les questions du travailleur remontent vers le cadre (la rétroaction) : encore faut-il y répondre.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Le schéma place les éléments du modèle général de la communication (émetteur, message, canal, bruit, récepteur, rétroaction) dans une communication descendante, des niveaux supérieurs vers les niveaux opérationnels.</li>\n<li>En haut, sur la bande « niveaux supérieurs », un cadre en cravate : l’émetteur. En bas, sur la bande « niveaux opérationnels », un travailleur coiffé d’un casque à lampe : le récepteur.</li>\n<li>Entre les deux, le canal, ici une réunion de quart. Le message, « ce qui change », y descend du cadre vers le travailleur dans une bulle de parole.</li>\n<li>Une ligne rouge en zigzag, le bruit (ici le jargon), traverse le trajet du message : la bulle arrive brouillée, teintée de rouge.</li>\n<li>Le travailleur lève la main : une flèche bleue portant une bulle « ? » remonte vers le cadre par le même canal. C’est la rétroaction, les questions.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page : définition, « Canaux efficaces en mine » (réunions de quart), « Pièges fréquents » (jargon corporatif) et « Pratiques efficaces » (boucle de retour) ; pour l’information qui remonte, {{lien:w/psychosocial/communication-ascendante.html|Communication ascendante}}. Éléments du modèle général de la communication : notes de cours SST1010 (UQAM), séance 11. Le jargon sert ici d’exemple de bruit.</p>\n\n</div>",
-   "marqueur": "Infographies/wiki-communication-descendante-modele-v1.svg"
+   "ancien": "Infographies/wiki-communication-descendante-modele-v1.svg",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-communication-descendante-modele-v2.svg|Modèle général de la communication appliqué à la communication descendante : un cadre (émetteur, niveaux supérieurs) en haut, un travailleur casqué (récepteur, niveaux opérationnels) en bas. Le message descend par le canal, une réunion de quart ; un zigzag rouge (le bruit, ici le jargon) le brouille ; les questions du travailleur remontent en bleu vers le cadre : la rétroaction.]]\n\n<p class=\"infographie-legende\">Un cadre (émetteur) transmet un message au travailleur (récepteur) par un canal, ici une réunion de quart ; un bruit, comme le jargon, peut le brouiller. En retour, les questions du travailleur remontent vers le cadre (la rétroaction) : encore faut-il vraiment y répondre.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Le schéma place les éléments du modèle général de la communication (émetteur, message, canal, bruit, récepteur, rétroaction) dans une communication descendante, des niveaux supérieurs vers les niveaux opérationnels.</li>\n<li>En haut, sur la bande « niveaux supérieurs », un cadre en cravate : l’émetteur. En bas, sur la bande « niveaux opérationnels », un travailleur coiffé d’un casque à lampe : le récepteur.</li>\n<li>Entre les deux, le canal, ici une réunion de quart. Le message, « ce qui change », y descend du cadre vers le travailleur dans une bulle de parole.</li>\n<li>Une ligne rouge en zigzag, le bruit (ici le jargon), traverse le trajet du message : la bulle arrive brouillée, teintée de rouge.</li>\n<li>Le travailleur lève la main : une flèche bleue portant une bulle « ? » remonte vers le cadre par le même canal. C’est la rétroaction, les questions.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page : « Définition », « Canaux efficaces en mine » (réunions de quart), « Pièges fréquents » (jargon corporatif) et « Pratiques efficaces » (boucle de retour, présence terrain) ; pour ce qui remonte par la réunion de quart, {{lien:w/psychosocial/communication-ascendante.html|Communication ascendante}} (« Réunions de quart régulières avec ouverture aux préoccupations »). Éléments du modèle général de la communication : ceux qu’énumérait la légende de l’illustration que ce schéma remplace (SST1010, UQAM, séance 11). Le jargon sert ici d’exemple de bruit.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-communication-descendante-modele-v2.svg"
   },
   {
    "type": "supprimerLigne",
    "ligneContenant": "img-000.png",
-   "marqueur": "Infographies/wiki-communication-descendante-modele-v1.svg"
+   "marqueur": [
+    "Infographies/wiki-communication-descendante-modele-v2.svg",
+    "Infographies/wiki-communication-descendante-modele-v1.svg"
+   ]
   },
   {
    "type": "supprimerLigne",
    "ligneContenant": "Modèle général de la communication : émetteur, canal, message, récepteur, rétroaction, bruit. Source : SST1010 (UQAM), séance 11. Usage personnel.",
-   "marqueur": "Infographies/wiki-communication-descendante-modele-v1.svg"
+   "marqueur": [
+    "Infographies/wiki-communication-descendante-modele-v2.svg",
+    "Infographies/wiki-communication-descendante-modele-v1.svg"
+   ]
   }
  ]
 }

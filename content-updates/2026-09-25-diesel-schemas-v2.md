@@ -11,8 +11,8 @@ Page : [Gestion des moteurs diesel sous terre](https://frankyray21.github.io/wik
 | --- | --- |
 | Options et leviers | `wiki-diesel-sous-terre-leviers-v2.svg` remplace la v1 : une galerie en coupe, une chargeuse diesel dont l'échappement dérive vers un travailleur, un ventilateur qui amène de l'air frais ; les quatre leviers sont posés là où ils agissent (source, échappement, air, travailleur) |
 | Post-traitement et carburant | `wiki-diesel-sous-terre-echappement-v2.svg` remplace la v1 : DOC, SCR et DPF dessinés en coupe, côte à côte, avec ce que chacun réduit (CO et HC ; NOx, avec l'urée ; particules, avec la régénération) et la base requise du DPF (ULSD) |
-| Ventilation souterraine | `wiki-diesel-sous-terre-ventilation-v1.svg`, nouveau : chantier en cul-de-sac vu de haut, air primaire, ventilateur auxiliaire et conduite, échappement dilué dans la zone respiratoire du travailleur, ventilation à la demande |
-| Mesure et surveillance d'exposition | `wiki-diesel-sous-terre-mesure-v1.svg`, nouveau : pompe et tête de prélèvement dans la zone respiratoire, laboratoire accrédité, moins de 0,4 mg/m³ de carbone total, registre du poste, au moins tous les 6 mois et après toute modification |
+| Ventilation souterraine | `wiki-diesel-sous-terre-ventilation-v2.svg`, nouveau : chantier en cul-de-sac vu de haut, air primaire, ventilateur auxiliaire et conduite, échappement dilué dans la zone respiratoire du travailleur, ventilation à la demande |
+| Mesure et surveillance d'exposition | `wiki-diesel-sous-terre-mesure-v2.svg`, nouveau : pompe et tête de prélèvement dans la zone respiratoire, laboratoire accrédité, moins de 0,4 mg/m³ de carbone total, registre du poste, au moins tous les 6 mois et après toute modification |
 
 Le contenu validé des deux schémas de la première version (leviers, dispositifs, précautions : ni rendement
 chiffré, ni ordre de montage) est conservé ; seule la forme change. Les deux nouveaux schémas suivent le RSSM, art.
@@ -32,6 +32,8 @@ node tools/build_site.mjs
   remplacés à leur place (retouche `remplacerBloc`) ; sinon, les blocs v2 sont insérés sous leurs titres. Les deux
   nouveaux blocs sont insérés sous « Ventilation souterraine » et « Mesure et surveillance d'exposition ».
 - Le lot garde la correction du NO₂ (3 ppm) de la première version : déjà faite, elle est reconnue et sautée.
+- Les schémas de ventilation et de mesure, corrigés après relecture, portent aussi le numéro v2 : si la note a déjà reçu
+  leur première version, le lot la remplace.
 - Une fois le lot appliqué, les fichiers `wiki-diesel-sous-terre-leviers-v1.svg` et `…-echappement-v1.svg` peuvent
   être supprimés du dossier Infographies du vault : plus rien ne les cite.
 
