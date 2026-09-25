@@ -10,7 +10,8 @@
 //   page        adresse publiée (w/<wiki>/<page>.html)
 //   note        { titre, wiki, chemin? } — pour retrouver la note du vault (appliquer_retouches.mjs)
 //   schemas[]   { fichier, ancre, remplace?, alt, legende, puces[], sources }
-//     ancre     texte visible d'un <p> ou d'un titre de la page, unique : le schéma se pose juste après
+//     ancre     texte visible d'un paragraphe, d'un titre ou d'une dernière puce, unique : le schéma se pose
+//               juste après ; sans ancre, il prend la place exacte de la capture qu'il remplace
 //     remplace  capture de cours que le schéma remplace (« pasted-image-AAAAMMJJhhmmss » ou nom de fichier)
 //     sources   liens internes {{lien:w/…/page.html|libellé}}, liens externes <a href="https://…">libellé</a>
 //   paragraphesRetires[]  texte visible de <p> à retirer (légende d'une capture retirée, par exemple)
@@ -108,6 +109,13 @@ export function poserDansPage(html, spec, { racine, dimsDe, titreDe, hrefDe }) {
     // schéma déjà posé : on le remplace par sa version à jour (spec corrigée)
     const deja = new RegExp('<div class="infographie[^"]*infographie-schema[^"]*">(?:(?!<div class="infographie)[\\s\\S])*?' + s.fichier.replace(/\./g, '\\.') + '[\\s\\S]*?</div>');
     if (deja.test(h)) { h = h.replace(deja, () => bloc); continue; }
+    // sans ancre : le schéma prend la place exacte de la capture qu'il remplace (sous un tableau, par exemple)
+    if (!s.ancre) {
+      if (!s.remplace) throw new Error('schéma sans ancre ni capture à remplacer : ' + s.fichier);
+      const c = trouverCapture(h, s.remplace);
+      h = h.slice(0, c.index) + bloc + '\n' + h.slice(c.index + c[0].length);
+      continue;
+    }
     if (s.remplace) { const c = trouverCapture(h, s.remplace); h = h.slice(0, c.index) + h.slice(c.index + c[0].length); }
     const a = trouverAncre(h, s.ancre);
     h = h.slice(0, a.fin) + '\n' + bloc + h.slice(a.fin);
@@ -125,7 +133,8 @@ export function lotDepuisSpec(spec, { date, revision, portee, precautions }) {
   const retouches = [];
   for (const s of spec.schemas) {
     const marqueur = 'Infographies/' + s.fichier;
-    retouches.push({ type: 'insererApres', ligneContenant: s.ancre, bloc: blocMd(s), marqueur });
+    // sans ancre, le bloc se pose après la ligne de la capture, puis cette ligne est retirée : il prend sa place
+    retouches.push({ type: 'insererApres', ligneContenant: s.ancre || repereCapture(s.remplace), bloc: blocMd(s), marqueur });
     if (s.remplace) retouches.push({ type: 'supprimerLigne', ligneContenant: repereCapture(s.remplace), marqueur });
   }
   const premier = spec.schemas[0] && 'Infographies/' + spec.schemas[0].fichier;

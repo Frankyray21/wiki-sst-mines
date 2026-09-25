@@ -111,3 +111,19 @@ test('équivalence : Espaces clos reposée par l’outil, à l’octet près', {
   const obtenu = poserDansPage(pageAvant, { page: 'w/securite/espaces-clos.html', schemas }, { racine: '../../', dimsDe, titreDe });
   assert.equal(obtenu, fs.readFileSync(path.join(docs, 'w/securite/espaces-clos.html'), 'utf8'));
 });
+
+test('sans ancre : le schéma prend la place exacte de la capture, dans la page et dans la note', () => {
+  const page = '<h4 id="t">Titre</h4>\n<table><tr><td>x</td></tr></table>\n<span class="page-img"><a class="img-lien" href="../../files/sst-images/pasted-image-20240906205917.png"><img src="x" alt="y" loading="lazy"></a><span class="img-zoom">Toucher</span></span>\n<p>Suite.</p>';
+  const spec = { page: 'w/x/p.html', note: { titre: 'P' }, schemas: [schema('wiki-x-sur-place-v1.svg', null, { remplace: 'pasted-image-20240906205917' })] };
+  const h = poserDansPage(page, spec, OPTS);
+  assert.ok(h.includes('</table>\n<div class="infographie infographie-compacte infographie-schema">'), 'sous le tableau, à la place de la capture');
+  assert.ok(h.includes('</div>\n<p>Suite.</p>') && !h.includes('pasted-image-20240906205917'));
+  assert.equal(poserDansPage(h, spec, OPTS), h);
+  const lot = lotDepuisSpec(spec, { date: 'd', revision: 'r', portee: 'p', precautions: '' });
+  const note = ['#### Titre', '', '| a |', '|---|', '| x |', '', '![[Pasted image 20240906205917.png]]', '', 'Suite.', ''].join('\n');
+  const r = appliquerRetouches(note, lot.retouches, { resoudreLien: () => 'Cible' });
+  assert.ok(r.ok, JSON.stringify(r.rapports));
+  assert.match(r.texte, /\| x \|\n\n<div class="infographie[^\n]*\n\n!\[\[Infographies\/wiki-x-sur-place-v1\.svg\|/, 'bloc à la place de la capture');
+  assert.ok(!r.texte.includes('Pasted image') && r.texte.includes('</div>\n\nSuite.'));
+  assert.deepEqual(appliquerRetouches(r.texte, lot.retouches, { resoudreLien: () => 'Cible' }).rapports.map(x => x.statut), ['déjà faite', 'déjà faite']);
+});
