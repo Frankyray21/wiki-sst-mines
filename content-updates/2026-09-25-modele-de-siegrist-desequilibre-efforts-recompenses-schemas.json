@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-modele-de-siegrist-desequilibre-efforts-recompenses-schemas",
+ "portee": "Schémas de la page w/psychosocial/modele-de-siegrist-desequilibre-efforts-recompenses.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Modèle de Siegrist, déséquilibre efforts récompenses",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/modele-de-siegrist-desequilibre-efforts-recompenses.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-modele-de-siegrist-desequilibre-efforts-recompenses-balance-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "img-002.png",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-modele-de-siegrist-desequilibre-efforts-recompenses-balance-v1.svg|Balance à deux plateaux inclinée du côté des efforts : d’un côté la cadence, les interruptions, la charge physique et les heures supplémentaires, que le surengagement pousse encore vers le bas ; de l’autre le salaire seul, car la reconnaissance et le respect, la sécurité d’emploi et les perspectives manquent. Une flèche rouge mène à l’encadré « déséquilibre, s’il dure : zone à risque ».]]\n\n<p class=\"infographie-legende\">Selon Siegrist, le stress vient quand un travailleur donne plus qu’il ne reçoit en retour. Le salaire n’est qu’une des trois récompenses : sans reconnaissance ni perspectives, la balance penche du côté des efforts, le surengagement en amplifie l’effet, et c’est quand ce déséquilibre dure que la situation devient à risque.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Plateau de gauche, « Efforts » : les demandes du poste, en blocs foncés, avec les exemples du tableau de la page (cadence, interruptions, charge physique, heures supplémentaires).</li>\n<li>Une flèche pousse cette pile vers le bas : le surengagement, tendance personnelle à se donner au-delà du raisonnable (difficulté à décrocher, besoin d’approbation, incapacité à dire non), qui amplifie l’effet du déséquilibre.</li>\n<li>Plateau de droite, « Récompenses » : les trois formes de la page, matérielles (salaire, primes), d’estime (reconnaissance, respect) et de statut (sécurité d’emploi, perspectives). Seul le salaire est là, en bloc bleu plein ; les deux autres, en pointillés, manquent.</li>\n<li>Le fléau penche du côté des efforts ; une flèche rouge mène à l’encadré « déséquilibre, s’il dure : zone à risque ». Note au bas : « Ratio ERI : un ratio &gt; 1 indique un déséquilibre. »</li>\n<li>Exemple en mine, d’après le tableau de la page : chez les travailleurs sous-traitants, le salaire est parfois équivalent, mais les perspectives sont nulles, la sécurité d’emploi faible et la reconnaissance externe absente.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page (Définition, Modèle, Application en mines) et les notes d’analyse {{lien:w/psychosocial/analyse-siegrist-1996.html|Siegrist (1996)}} (trois formes de récompense, efforts extrinsèques et intrinsèques) et {{lien:w/psychosocial/analyse-siegrist-2017.html|Siegrist (2017)}} (surengagement qui amplifie l’effet). Schéma conceptuel : les blocs ne sont pas des mesures ; le seuil du ratio ERI est celui de la page.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-modele-de-siegrist-desequilibre-efforts-recompenses-balance-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "img-002.png",
+   "marqueur": "Infographies/wiki-modele-de-siegrist-desequilibre-efforts-recompenses-balance-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "Balance des efforts-récompenses selon Siegrist. Source : SST1010 (UQAM), séance 4. Usage personnel.",
+   "marqueur": "Infographies/wiki-modele-de-siegrist-desequilibre-efforts-recompenses-balance-v1.svg"
+  }
+ ]
+}

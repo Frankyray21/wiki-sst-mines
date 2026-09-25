@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="649" viewBox="0 0 480 649" role="img" aria-labelledby="t d">
+<title id="t">Quand les facteurs s’accumulent</title>
+<desc id="d">Deux rangées montrent le même travailleur, casque de mineur, au centre d’un anneau de six pastilles : les six familles de facteurs de la section « Catégories » (charge de travail, un cadran ; latitude décisionnelle, un embranchement ; soutien social, deux personnes ; reconnaissance, une étoile ; communication et information, une bulle ; relations interpersonnelles, deux maillons). Une pastille rouge est un facteur de risque, une pastille bleue un facteur favorable. Une flèche mène de l’anneau à une jauge verticale marquée « risque ». En haut, « Un seul facteur de risque » : seule la surcharge est en rouge ; la jauge est peu remplie. En bas, « Plusieurs facteurs de risque » : surcharge, manque de contrôle, manque de soutien et reconnaissance absente sont en rouge ; la jauge est presque pleine. Les jauges n’ont pas d’échelle : elles montrent seulement que le risque augmente quand les facteurs s’accumulent.</desc>
+<rect width="480" height="649" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Quand les facteurs</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">s’accumulent</text>
+<circle cx="34" cy="107" r="9" fill="#c62828"/>
+<text x="51" y="113" font-size="19" fill="#4b535c">facteur de risque</text>
+<circle cx="245" cy="107" r="9" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<text x="262" y="113" font-size="19" fill="#4b535c">facteur favorable</text>
+
+<!-- ===== Un seul facteur de risque : la surcharge ; les cinq autres familles restent favorables ===== -->
+<text x="24" y="154" font-size="20" font-weight="700" fill="#1f2328">Un seul facteur de risque</text>
+<circle cx="150" cy="251" r="64" fill="none" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M224 251H384" stroke="#1f2328" stroke-width="3"/>
+<path d="M396 251L384 244V258Z" fill="#1f2328"/>
+<!-- latitude -->
+<circle cx="150" cy="187" r="21" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<g transform="translate(150 187)"><path d="M0 11V2M0 2L-6 -5M0 2L6 -5" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-9 -8.5L-2.8 -7.7L-9.2 -2.3Z" fill="#1565c0"/><path d="M9 -8.5L9.2 -2.3L2.8 -7.7Z" fill="#1565c0"/></g>
+<!-- charge -->
+<circle cx="205.4" cy="219" r="21" fill="#c62828"/>
+<g transform="translate(205.4 219)"><path d="M-11 5A11 11 0 0 1 11 5" fill="none" stroke="#fbfaf6" stroke-width="3" stroke-linecap="round"/><path d="M0 5L7 -4" stroke="#fbfaf6" stroke-width="3" stroke-linecap="round"/><circle cx="0" cy="5" r="3" fill="#fbfaf6"/></g>
+<!-- soutien -->
+<circle cx="205.4" cy="283" r="21" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<g transform="translate(205.4 283)"><circle cx="-5.5" cy="-5" r="4" fill="#1565c0"/><circle cx="5.5" cy="-5" r="4" fill="#1565c0"/><path d="M-12.5 10V5.5Q-12.5 0.5 -5.5 0.5Q1.5 0.5 1.5 5.5V10Z" fill="#1565c0"/><path d="M-1.5 10V5.5Q-1.5 0.5 5.5 0.5Q12.5 0.5 12.5 5.5V10Z" fill="#1565c0" stroke="#e1ecfa" stroke-width="2.5"/></g>
+<!-- reconnaissance -->
+<circle cx="150" cy="315" r="21" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<g transform="translate(150 315)"><path d="M0 -11L2.9 -3L11.4 -2.7L4.8 2.5L7.1 10.7L0 6L-7.1 10.7L-4.8 2.5L-11.4 -2.7L-2.9 -3Z" fill="#1565c0"/></g>
+<!-- relations -->
+<circle cx="94.6" cy="283" r="21" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<g transform="translate(94.6 283)"><g transform="rotate(-45)" fill="none" stroke="#1565c0" stroke-width="3"><rect x="-12" y="-4.5" width="14" height="9" rx="4.5"/><rect x="-2" y="-4.5" width="14" height="9" rx="4.5"/></g></g>
+<!-- communication -->
+<circle cx="94.6" cy="219" r="21" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<g transform="translate(94.6 219)"><path d="M-10 -9H10Q12 -9 12 -7V3Q12 5 10 5H-1L-7 11V5H-10Q-12 5 -12 3V-7Q-12 -9 -10 -9Z" fill="#1565c0"/><path d="M-7 -4H7M-7 0.5H3" stroke="#e1ecfa" stroke-width="2.5" stroke-linecap="round"/></g>
+<g fill="#1f2328" transform="translate(150 287) scale(0.62)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+</g>
+<rect x="398" y="189" width="34" height="124" rx="8" fill="#fbfaf6"/>
+<path d="M398 282H432V305Q432 313 424 313H406Q398 313 398 305Z" fill="#c62828"/>
+<rect x="398" y="189" width="34" height="124" rx="8" fill="none" stroke="#6e7781" stroke-width="2.5"/>
+<text x="415.0" y="339" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">risque</text>
+<text x="235.4" y="226" font-size="19" font-weight="600" fill="#c62828" text-anchor="start">surcharge</text>
+
+
+<!-- ===== Plusieurs facteurs de risque : surcharge, manque de contrôle, manque de soutien, reconnaissance absente (mots de « L’essentiel ») ===== -->
+<text x="24" y="379" font-size="20" font-weight="700" fill="#1f2328">Plusieurs facteurs de risque</text>
+<circle cx="150" cy="503" r="64" fill="none" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M224 503H384" stroke="#1f2328" stroke-width="3"/>
+<path d="M396 503L384 496V510Z" fill="#1f2328"/>
+<!-- latitude -->
+<circle cx="150" cy="439" r="21" fill="#c62828"/>
+<g transform="translate(150 439)"><path d="M0 11V2M0 2L-6 -5M0 2L6 -5" fill="none" stroke="#fbfaf6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M-9 -8.5L-2.8 -7.7L-9.2 -2.3Z" fill="#fbfaf6"/><path d="M9 -8.5L9.2 -2.3L2.8 -7.7Z" fill="#fbfaf6"/></g>
+<!-- charge -->
+<circle cx="205.4" cy="471" r="21" fill="#c62828"/>
+<g transform="translate(205.4 471)"><path d="M-11 5A11 11 0 0 1 11 5" fill="none" stroke="#fbfaf6" stroke-width="3" stroke-linecap="round"/><path d="M0 5L7 -4" stroke="#fbfaf6" stroke-width="3" stroke-linecap="round"/><circle cx="0" cy="5" r="3" fill="#fbfaf6"/></g>
+<!-- soutien -->
+<circle cx="205.4" cy="535" r="21" fill="#c62828"/>
+<g transform="translate(205.4 535)"><circle cx="-5.5" cy="-5" r="4" fill="#fbfaf6"/><circle cx="5.5" cy="-5" r="4" fill="#fbfaf6"/><path d="M-12.5 10V5.5Q-12.5 0.5 -5.5 0.5Q1.5 0.5 1.5 5.5V10Z" fill="#fbfaf6"/><path d="M-1.5 10V5.5Q-1.5 0.5 5.5 0.5Q12.5 0.5 12.5 5.5V10Z" fill="#fbfaf6" stroke="#c62828" stroke-width="2.5"/></g>
+<!-- reconnaissance -->
+<circle cx="150" cy="567" r="21" fill="#c62828"/>
+<g transform="translate(150 567)"><path d="M0 -11L2.9 -3L11.4 -2.7L4.8 2.5L7.1 10.7L0 6L-7.1 10.7L-4.8 2.5L-11.4 -2.7L-2.9 -3Z" fill="#fbfaf6"/></g>
+<!-- relations -->
+<circle cx="94.6" cy="535" r="21" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<g transform="translate(94.6 535)"><g transform="rotate(-45)" fill="none" stroke="#1565c0" stroke-width="3"><rect x="-12" y="-4.5" width="14" height="9" rx="4.5"/><rect x="-2" y="-4.5" width="14" height="9" rx="4.5"/></g></g>
+<!-- communication -->
+<circle cx="94.6" cy="471" r="21" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<g transform="translate(94.6 471)"><path d="M-10 -9H10Q12 -9 12 -7V3Q12 5 10 5H-1L-7 11V5H-10Q-12 5 -12 3V-7Q-12 -9 -10 -9Z" fill="#1565c0"/><path d="M-7 -4H7M-7 0.5H3" stroke="#e1ecfa" stroke-width="2.5" stroke-linecap="round"/></g>
+<g fill="#1f2328" transform="translate(150 539) scale(0.62)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+</g>
+<rect x="398" y="441" width="34" height="124" rx="8" fill="#fbfaf6"/>
+<path d="M398 465.8H432V557Q432 565 424 565H406Q398 565 398 557Z" fill="#c62828"/>
+<rect x="398" y="441" width="34" height="124" rx="8" fill="none" stroke="#6e7781" stroke-width="2.5"/>
+<text x="415.0" y="591" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">risque</text>
+<text x="150" y="409" font-size="19" font-weight="600" fill="#c62828" text-anchor="middle">manque de contrôle</text>
+<text x="235.4" y="478" font-size="19" font-weight="600" fill="#c62828" text-anchor="start">surcharge</text>
+<text x="235.4" y="542" font-size="19" font-weight="600" fill="#c62828" text-anchor="start">manque de</text>
+<text x="235.4" y="564" font-size="19" font-weight="600" fill="#c62828" text-anchor="start">soutien</text>
+<text x="150" y="609" font-size="19" font-weight="600" fill="#c62828" text-anchor="middle">reconnaissance</text>
+<text x="150" y="631" font-size="19" font-weight="600" fill="#c62828" text-anchor="middle">absente</text>
+
+</g>
+</svg>

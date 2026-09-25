@@ -120,6 +120,7 @@ node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-irr-indemnit
 # … pages art-116 et art-30, DPM, amiante (même jour) : lots « corr- », puis lots de titre « titre-art-116- »
 #   Get-ChildItem content-updates\2026-09-25-corr-*.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
 #   Get-ChildItem content-updates\2026-09-25-titre-art-116-*.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
+# … pages RPS illustrées (même jour) : une commande par page, liste dans content-updates/2026-09-25-rps-schemas.md
 
 # Poser les renvois tranchés dans le vault : essai, puis application avec sauvegarde
 node tools/appliquer_renvois.mjs
@@ -185,6 +186,12 @@ node tools/serve.mjs
   québécoise, RSSM art. 102 (moins de 0,4 mg/m³ de carbone total), mesures au moins tous les 6 mois (art. 103.1).
   Amiante : toutes les formes 0,1 f/cm³, C1, EM (annexe I). **À poser dans le vault** (lots `2026-09-25-corr-*.json`
   et `2026-09-25-titre-art-116-*.json`). Détail : `content-updates/2026-09-25-art-116-30-dpm-amiante.md`
+- **Pages RPS illustrées (25 septembre 2026)** : schémas sur Médiation (Thomas-Kilmann, niveaux d'intervention),
+  Modèle de Siegrist, Communication descendante, Définition des risques psychosociaux, Comparatif des cycles FIFO,
+  Démarche de prévention en RPS et Harcèlement psychologique (LNT, art. 81.18). Quatre captures fausses ou tierces
+  retirées : Selye, Maslow (deux fois) et une diapositive tierce, affichées à cause de noms de fichiers identiques
+  dans le vault. Texte des articles inchangé. **À poser dans le vault** (sept lots `2026-09-25-*-schemas.json`).
+  Détail et erreurs relevées : `content-updates/2026-09-25-rps-schemas.md`
 - **Application Android (23 septembre 2026)** : `docs/app/wiki-sst-mines.apk` (8 Ko), lien « 📱 Application Android »
   au pied du portail et de l'espace encadrement. L'application ouvre le site publié en plein écran ; le hors-ligne est
   celui du site (service worker) ; les liens externes et les PDF partent au navigateur. Construite par

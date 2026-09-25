@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="574" viewBox="0 0 480 574" role="img" aria-labelledby="t d">
+<title id="t">Cinq styles selon deux axes (Thomas-Kilmann)</title>
+<desc id="d">Plan à deux axes du modèle de Thomas-Kilmann. Axe vertical, en bleu : le souci de soi, faible en bas, moyen au milieu, élevé en haut. Axe horizontal, en gris : le souci de l’autre, faible à gauche, moyen au milieu, élevé à droite. Chaque style est représenté par deux silhouettes, soi en bleu à gauche et l’autre en gris à droite, remplies selon le souci accordé à chacun : une mince bande pour faible, à moitié pour moyen, entièrement pour élevé. En haut à gauche, la Compétition : soi rempli, l’autre à peine. En haut à droite, la Collaboration : les deux remplis. Au centre, le Compromis : les deux à moitié. En bas à gauche, l’Évitement : les deux à peine remplis. En bas à droite, l’Accommodation : soi à peine rempli, l’autre rempli.</desc>
+<rect width="480" height="574" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Cinq styles selon deux axes</text>
+<text x="24" y="76" font-size="19" fill="#4b535c">Styles de gestion (Thomas-Kilmann)</text>
+<!-- Axe vertical : souci de soi -->
+<path d="M27.5 124V115Q27.5 109 33.5 109H38.5Q44.5 109 44.5 115V124Z" fill="#1565c0"/>
+<circle cx="36" cy="103.5" r="4.5" fill="#1565c0"/>
+<path d="M27.5 124V115Q27.5 109 33.5 109H38.5Q44.5 109 44.5 115V124Z" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="36" cy="103.5" r="4.5" fill="none" stroke="#1565c0" stroke-width="2.5"/>
+<text x="52" y="124" font-size="19" font-weight="700" fill="#1565c0">Souci de soi</text>
+<path d="M100 490V150" stroke="#1565c0" stroke-width="3" fill="none"/>
+<path d="M100 136L93 151H107Z" fill="#1565c0"/>
+<path d="M94 186H106" stroke="#1565c0" stroke-width="3"/>
+<text x="88" y="193" font-size="19" fill="#1f2328" text-anchor="end">élevé</text>
+<path d="M94 304H106" stroke="#1565c0" stroke-width="3"/>
+<text x="88" y="311" font-size="19" fill="#1f2328" text-anchor="end">moyen</text>
+<path d="M94 422H106" stroke="#1565c0" stroke-width="3"/>
+<text x="88" y="429" font-size="19" fill="#1f2328" text-anchor="end">faible</text>
+<!-- Axe horizontal : souci de l’autre -->
+<path d="M100 490H440" stroke="#4b535c" stroke-width="3" fill="none"/>
+<path d="M454 490L439 483V497Z" fill="#4b535c"/>
+<path d="M178 484V496" stroke="#4b535c" stroke-width="3"/>
+<text x="178" y="518" font-size="19" fill="#1f2328" text-anchor="middle">faible</text>
+<path d="M270 484V496" stroke="#4b535c" stroke-width="3"/>
+<text x="270" y="518" font-size="19" fill="#1f2328" text-anchor="middle">moyen</text>
+<path d="M360 484V496" stroke="#4b535c" stroke-width="3"/>
+<text x="360" y="518" font-size="19" fill="#1f2328" text-anchor="middle">élevé</text>
+<path d="M173.5 552V543Q173.5 537 179.5 537H184.5Q190.5 537 190.5 543V552Z" fill="#4b535c"/>
+<circle cx="182" cy="531.5" r="4.5" fill="#4b535c"/>
+<path d="M173.5 552V543Q173.5 537 179.5 537H184.5Q190.5 537 190.5 543V552Z" fill="none" stroke="#4b535c" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="182" cy="531.5" r="4.5" fill="none" stroke="#4b535c" stroke-width="2.5"/>
+<text x="198" y="552" font-size="19" font-weight="700" fill="#4b535c">Souci de l’autre</text>
+<!-- Compétition : souci de soi eleve, souci de l’autre faible -->
+<path d="M139 211V193Q139 181 151 181H161Q173 181 173 193V211Z" fill="#1565c0"/>
+<circle cx="156" cy="170" r="9" fill="#1565c0"/>
+<path d="M139 211V193Q139 181 151 181H161Q173 181 173 193V211Z" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="156" cy="170" r="9" fill="none" stroke="#1565c0" stroke-width="2.5"/>
+<path d="M183 211V193Q183 181 195 181H205Q217 181 217 193V211Z" fill="#eceef0"/>
+<rect x="183" y="202" width="34" height="9" fill="#4b535c"/>
+<circle cx="200" cy="170" r="9" fill="#eceef0"/>
+<path d="M183 211V193Q183 181 195 181H205Q217 181 217 193V211Z" fill="none" stroke="#4b535c" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="200" cy="170" r="9" fill="none" stroke="#4b535c" stroke-width="2.5"/>
+<text x="178" y="235" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Compétition</text>
+<!-- Collaboration : souci de soi eleve, souci de l’autre eleve -->
+<path d="M321 211V193Q321 181 333 181H343Q355 181 355 193V211Z" fill="#1565c0"/>
+<circle cx="338" cy="170" r="9" fill="#1565c0"/>
+<path d="M321 211V193Q321 181 333 181H343Q355 181 355 193V211Z" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="338" cy="170" r="9" fill="none" stroke="#1565c0" stroke-width="2.5"/>
+<path d="M365 211V193Q365 181 377 181H387Q399 181 399 193V211Z" fill="#4b535c"/>
+<circle cx="382" cy="170" r="9" fill="#4b535c"/>
+<path d="M365 211V193Q365 181 377 181H387Q399 181 399 193V211Z" fill="none" stroke="#4b535c" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="382" cy="170" r="9" fill="none" stroke="#4b535c" stroke-width="2.5"/>
+<text x="360" y="235" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Collaboration</text>
+<!-- Compromis : souci de soi moyen, souci de l’autre moyen -->
+<path d="M231 329V311Q231 299 243 299H253Q265 299 265 311V329Z" fill="#e1ecfa"/>
+<rect x="231" y="311" width="34" height="18" fill="#1565c0"/>
+<circle cx="248" cy="288" r="9" fill="#e1ecfa"/>
+<path d="M231 329V311Q231 299 243 299H253Q265 299 265 311V329Z" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="248" cy="288" r="9" fill="none" stroke="#1565c0" stroke-width="2.5"/>
+<path d="M275 329V311Q275 299 287 299H297Q309 299 309 311V329Z" fill="#eceef0"/>
+<rect x="275" y="311" width="34" height="18" fill="#4b535c"/>
+<circle cx="292" cy="288" r="9" fill="#eceef0"/>
+<path d="M275 329V311Q275 299 287 299H297Q309 299 309 311V329Z" fill="none" stroke="#4b535c" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="292" cy="288" r="9" fill="none" stroke="#4b535c" stroke-width="2.5"/>
+<text x="270" y="353" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Compromis</text>
+<!-- Évitement : souci de soi faible, souci de l’autre faible -->
+<path d="M139 447V429Q139 417 151 417H161Q173 417 173 429V447Z" fill="#e1ecfa"/>
+<rect x="139" y="438" width="34" height="9" fill="#1565c0"/>
+<circle cx="156" cy="406" r="9" fill="#e1ecfa"/>
+<path d="M139 447V429Q139 417 151 417H161Q173 417 173 429V447Z" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="156" cy="406" r="9" fill="none" stroke="#1565c0" stroke-width="2.5"/>
+<path d="M183 447V429Q183 417 195 417H205Q217 417 217 429V447Z" fill="#eceef0"/>
+<rect x="183" y="438" width="34" height="9" fill="#4b535c"/>
+<circle cx="200" cy="406" r="9" fill="#eceef0"/>
+<path d="M183 447V429Q183 417 195 417H205Q217 417 217 429V447Z" fill="none" stroke="#4b535c" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="200" cy="406" r="9" fill="none" stroke="#4b535c" stroke-width="2.5"/>
+<text x="178" y="471" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Évitement</text>
+<!-- Accommodation : souci de soi faible, souci de l’autre eleve -->
+<path d="M321 447V429Q321 417 333 417H343Q355 417 355 429V447Z" fill="#e1ecfa"/>
+<rect x="321" y="438" width="34" height="9" fill="#1565c0"/>
+<circle cx="338" cy="406" r="9" fill="#e1ecfa"/>
+<path d="M321 447V429Q321 417 333 417H343Q355 417 355 429V447Z" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="338" cy="406" r="9" fill="none" stroke="#1565c0" stroke-width="2.5"/>
+<path d="M365 447V429Q365 417 377 417H387Q399 417 399 429V447Z" fill="#4b535c"/>
+<circle cx="382" cy="406" r="9" fill="#4b535c"/>
+<path d="M365 447V429Q365 417 377 417H387Q399 417 399 429V447Z" fill="none" stroke="#4b535c" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="382" cy="406" r="9" fill="none" stroke="#4b535c" stroke-width="2.5"/>
+<text x="360" y="471" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Accommodation</text>
+</g>
+</svg>
