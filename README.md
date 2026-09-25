@@ -83,6 +83,8 @@ adresses n'ont pas changé.
   page publiée et sa copie encadrement, et écrit le lot du vault correspondant ; essai par défaut, `--ecrire` pour
   écrire
 - `tools/dimensions_svg.mjs` — largeur et hauteur d'un schéma SVG, posées par le générateur sur son `<img>`
+- `tools/resoudre_image.mjs` — choisit le fichier d'un renvoi d'image `![[…]]` ; un nom que portent plusieurs
+  fichiers est listé en fin de construction (« ⚠ Images ambiguës »), avec le fichier retenu
 - `tools/avis.mjs` — bloc « Cette page vous a-t-elle été utile ? » (pouce et commentaire) posé sur chaque page
   issue d'une note ; `tools/avis-worker/` — le relais Cloudflare qui écrit dans Airtable, et son mode d'emploi
 - `tools/serve.mjs` — serveur local de prévisualisation (port 8090)

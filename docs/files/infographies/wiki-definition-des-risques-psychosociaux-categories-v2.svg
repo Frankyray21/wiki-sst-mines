@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="649" viewBox="0 0 480 649" role="img" aria-labelledby="t d">
 <title id="t">Quand les facteurs s’accumulent</title>
-<desc id="d">Deux rangées montrent le même travailleur, casque de mineur, au centre d’un anneau de six pastilles : les six familles de facteurs de la section « Catégories » (charge de travail, un cadran ; latitude décisionnelle, un embranchement ; soutien social, deux personnes ; reconnaissance, une étoile ; communication et information, une bulle ; relations interpersonnelles, deux maillons). Une pastille rouge est un facteur de risque, une pastille bleue un facteur favorable. Une flèche mène de l’anneau à une jauge verticale marquée « risque ». En haut, « Un seul facteur de risque » : seule la surcharge est en rouge ; la jauge est peu remplie. En bas, « Plusieurs facteurs de risque » : surcharge, manque de contrôle, manque de soutien et reconnaissance absente sont en rouge ; la jauge est presque pleine. Les jauges n’ont pas d’échelle : elles montrent seulement que le risque augmente quand les facteurs s’accumulent.</desc>
+<desc id="d">Deux rangées montrent le même travailleur, casque de mineur, au centre d’un anneau de six pastilles : les six familles de facteurs de la section « Catégories » (charge de travail, un cadran ; latitude décisionnelle, un embranchement ; soutien social, deux personnes ; reconnaissance, une étoile ; communication et information, une bulle ; relations interpersonnelles, deux maillons). Une pastille rouge est un facteur de risque, une pastille bleue un facteur favorable. Une flèche mène de l’anneau à une jauge verticale marquée « risque ». En haut, « Un seul facteur de risque » : seule la surcharge est en rouge ; la jauge est peu remplie. En bas, « Plusieurs facteurs de risque » : surcharge, manque de contrôle, manque de soutien et reconnaissance absente sont en rouge ; la jauge est nettement plus remplie, un trait pointillé y rappelle le niveau du haut et une flèche montre la hausse. Les jauges n’ont pas d’échelle : elles montrent seulement que le risque augmente quand les facteurs s’accumulent, pas de combien.</desc>
 <rect width="480" height="649" fill="#fbfaf6"/>
 <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
 <text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Quand les facteurs</text>
@@ -85,7 +85,10 @@
 <path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
 </g>
 <rect x="398" y="441" width="34" height="124" rx="8" fill="#fbfaf6"/>
-<path d="M398 465.8H432V557Q432 565 424 565H406Q398 565 398 557Z" fill="#c62828"/>
+<path d="M398 490.6H432V557Q432 565 424 565H406Q398 565 398 557Z" fill="#c62828"/>
+<path d="M401 534H429" stroke="#fbfaf6" stroke-width="3" stroke-dasharray="5 4"/>
+<path d="M437 534H450V501.6" fill="none" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<path d="M450 490.6L443 502.6H457Z" fill="#1f2328"/>
 <rect x="398" y="441" width="34" height="124" rx="8" fill="none" stroke="#6e7781" stroke-width="2.5"/>
 <text x="415.0" y="591" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">risque</text>
 <text x="150" y="409" font-size="19" font-weight="600" fill="#c62828" text-anchor="middle">manque de contrôle</text>

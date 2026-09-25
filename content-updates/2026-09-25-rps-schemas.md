@@ -5,8 +5,9 @@ tokens ». Le texte des articles du wiki SST psychosociale n'est pas modifié (c
 schémas, on retire seulement les captures fausses ou tierces et leur légende.
 
 Chaque schéma a été dessiné d'après la page, ses notes d'analyse et, pour le harcèlement, le texte officiel de la LNT.
-Chaque dessinateur a vérifié ses sources, le rendu en clair et en sombre et la pose. La relecture contradictoire
-était en cours au moment de la publication : ses corrections suivront.
+Chaque dessinateur a vérifié ses sources, le rendu en clair et en sombre et la pose. Un relecteur contradictoire a
+ensuite confronté chaque schéma à ses sources, citation par citation ; ses corrections sont publiées (voir « Après
+relecture »). Seuls Harcèlement et Les trois niveaux n'ont pas eu ce second regard.
 
 ## Pages modifiées
 
@@ -24,6 +25,30 @@ Chaque dessinateur a vérifié ses sources, le rendu en clair et en sombre et la
 
 Toutes ces pages, sauf Harcèlement et Reconnaissance, ont aussi une copie dans l'espace encadrement, modifiée de la
 même façon.
+
+## Après relecture
+
+Les schémas corrigés après leur première publication portent un nouveau numéro de version (`…-v2.svg`) ; le lot du
+vault remplace alors l'ancien bloc s'il est déjà dans la note (retouche `remplacerBloc`), sinon il pose le nouveau.
+Chaque lot a été rejoué sur deux notes simulées, l'une neuve, l'autre ayant reçu la version précédente du lot : les deux
+aboutissent au même texte, et un second passage ne change rien.
+
+- **Médiation.** La flèche d'escalade butait sur le bandeau « Procédure formelle », ce qui se lisait « escalade →
+  plainte » ; elle s'arrête maintenant à l'arbitrage. La plainte n'est plus tendue à l'autre partie : la LNT la fait
+  adresser à la Commission (art. 123.6). Les puces ne reprennent plus les « Quand l'utiliser » du tableau, non dessinés.
+- **Modèle de Siegrist.** Les récompenses manquantes, empilées sur le salaire, semblaient peser ; elles sont hors de
+  la balance. Le surengagement n'est plus un poids ajouté aux efforts : il renforce l'effet du déséquilibre, comme le
+  dit la page (« Le surengagement amplifie l'effet du déséquilibre »). Blocs d'efforts de même taille, dans l'ordre du
+  tableau ; la mention du ratio ERI, qui laissait lire « ratio > 1 = zone à risque », est retirée du dessin.
+- **Communication descendante.** « encore faut-il vraiment y répondre » (mot de la page rétabli). La source ne
+  présente plus comme consultées des notes de cours que personne n'a lues : elle renvoie à la légende de l'illustration
+  remplacée. Ajout d'un appui de la page Communication ascendante (réunions de quart ouvertes aux préoccupations).
+- **Démarche de prévention.** Le texte alternatif ne parle plus d'un « plan de métro » que le dessin ne montre pas ;
+  les puces ne décrivent que le dessin (plus de rythme annuel ni d'échéances).
+- **Définition des RPS.** La jauge du bas, « presque pleine », laissait lire une atteinte quasi certaine ; elle monte
+  maintenant plus haut que celle du haut, sans plus. Une citation attribuée au rapport Tissot et al. (2022), p. 9,
+  est introuvable dans le PDF : remplacée par la vraie phrase, section 4.6, p. 34.
+- **Reconnaissance, Comparatif des cycles FIFO.** Déjà corrigés après relecture ; passés en v2 pour que le vault suive.
 
 ## À faire dans le vault (sinon la prochaine construction efface ces changements)
 
@@ -45,8 +70,10 @@ node tools/build_site.mjs
 
 - **Cause des captures fausses.** Plusieurs images de cours portent le même nom dans des dossiers différents
   (`img-000.png`, `img-001.png`…). Quand le générateur ne trouve pas le chemin exact, il prend le premier fichier du
-  même nom, sans avertir. Les dossiers 05-mesure, 06-prévention, 10-conflits et 11-communication n'ont jamais été
-  publiés. Corrigées de même dans ce lot : « Les trois niveaux de prévention » (Maslow et Selye) et « Reconnaissance et
+  même nom, sans avertir. Depuis ce lot, `tools/build_site.mjs` liste ces renvois en fin de construction
+  (« ⚠ Images ambiguës », avec le fichier retenu) : écrire le dossier dans la note, par exemple
+  `![[06-prévention/img-000.png]]`, les fait disparaître de la liste. Les dossiers 05-mesure, 06-prévention,
+  10-conflits et 11-communication n'ont jamais été publiés. Corrigées de même dans ce lot : « Les trois niveaux de prévention » (Maslow et Selye) et « Reconnaissance et
   déséquilibre efforts récompenses » (Maslow). L'« Index des images du cours » décrit encore les anciennes captures.
 - **Comparatif des cycles FIFO.** « Idées suicidaires … en cycles ≥21/7 (Bowers et al. 2018 p. 4) » : l'article ne
   mesure pas les idées suicidaires. Il trouve plus de détresse avec des rotations courtes (1 ou 2 semaines au site
@@ -62,27 +89,42 @@ node tools/build_site.mjs
   Le recueil local de la LNT est à jour au 26 mars 2024 : vérifier sur LégisQuébec une modification de 2024 de
   l'art. 81.19. Le schéma des obligations de l'employeur est mis de côté pour cette raison.
 - **Modèle de Siegrist.** L'affirmation « LMRSST : la reconnaissance… » va au-delà de l'art. 144. « Réduit
-  significativement les scores ERI » n'a pas de source. La référence Kivimäki (2007) est tronquée.
+  significativement les scores ERI » n'a pas de source. La référence Kivimäki (2007) est tronquée. La page mêle deux
+  conceptions du surengagement (effort intrinsèque, puis amplificateur) ; la source « Siegrist (2009, version
+  révisée) » du tableau Mesure manque dans les références.
 - **Reconnaissance.** Le même encadré non sourcé (« réduit significativement les scores ERI ») y figure sous « Action à
   fort effet ». L'infographie de la section Cadre attribue le modèle élargi à Siegrist et enchaîne demande → latitude →
   soutien → reconnaissance → santé comme des étapes, alors que sa propre phrase parle d'une demande modulée par les
   trois autres.
 - **Les trois niveaux.** La légende retirée annonçait une prévention « primordiale », dont la page ne parle pas. « 6 à
   18 mois » n'a pas de source (comme sur Démarche de prévention).
-- **Démarche de prévention.** Deux coquilles : « plan.p » et « primaire s ». « 6 à 18 mois » n'a pas de source. La
-  responsabilité de « l'opérateur principal » envers les sous-traitants n'a pas d'appui dans le recueil.
+- **Démarche de prévention.** Deux coquilles : « plan.p » et « primaire s ». « 6 à 18 mois » n'a pas de source (repris
+  sur plusieurs pages ; « Démarrage rapide pour direction et RH » dit « 12-18 mois »). La responsabilité de
+  « l'opérateur principal » envers les sous-traitants n'a pas d'appui dans le recueil : la LSST vise l'employeur envers
+  ses travailleurs (art. 51), le maître d'œuvre seulement sur un chantier de construction (art. 196), l'employeur qui a
+  autorité sur l'établissement pour des devoirs précis (RSST, art. 204, cadenassage). « Chaque étape doit être
+  documentée » : obligation sans source.
 - **Définition des RPS.** « Trois sources » : la fiche INSPQ (2018) en nomme quatre. Cette fiche est attribuée à
   « inrs.fr ». « Depuis la LMRSST (2021) » : l'art. 144 entre en vigueur au plus tard le 6 octobre 2025 (art. 313).
+- **Note Tissot et al. (2022) et page Cumul d'expositions.** La « citation 1 » de la note (p. 9) est introuvable dans
+  le PDF ; les proportions de détresse selon le nombre de RPS (environ 10, 20, 35, 50 à 60 %) ne sont pas celles du
+  rapport (« seulement 6 % des travailleurs et 8 % des travailleuses non exposés […] plus de 35 % des hommes et 39 %
+  des femmes […] exposés à trois RPS ou plus », p. 34).
 - **Médiation.** « Les conflits non résolus s'aggravent rarement par eux-mêmes : il faut intervenir » se contredit.
-  Un lien affiche « Camp Comparatif des cycles FIFO (14/14, 20/10, 21/7) ».
+  Un lien affiche « Camp Comparatif des cycles FIFO (14/14, 20/10, 21/7) ». « 5. Procédure formelle », numérotée à la
+  suite des niveaux 1 à 4 et suivie du principe « n'escalader que si nécessaire », peut faire croire qu'une victime de
+  harcèlement doit d'abord passer par les niveaux légers.
 - **Communication descendante.** « Communication doit atteindre les trois quarts » : la page Travail posté donne le
   quart de 12 heures comme standard.
 - **Recueil local.** `tools/textes-loi/LSST.json` donne l'art. 59 sans la modification de la LMRSST (art. 144).
 
 ## Vérifications
 
-- Tests : 233 réussis sur 234 ; le seul échec, `textes-loi`, est connu et antérieur.
+- Tests : 237 réussis sur 238 ; le seul échec, `textes-loi`, est connu et antérieur. Nouveau : `resoudre-image` (choix
+  des images, signalement des noms ambigus).
 - `verif_site`, `verif_liens` (0 erreur) et `verif_publication --staged`.
-- Chromium, `verif_rendu` : les 9 pages dans les cinq modes, aucun défaut.
+- Chromium, `verif_rendu` : les 9 pages dans les cinq modes, aucun défaut (refait sur les 8 pages reposées après
+  relecture).
+- Lots du vault rejoués sur notes simulées, neuves ou ayant reçu la version précédente : même résultat, rejouables.
 - Hors blocs de schéma, le texte des 16 pages publiées ne diffère que par les six légendes retirées.
 - Aucune validation spécialisée n'est attestée.

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="640" viewBox="0 0 480 640" role="img" aria-labelledby="t d">
 <title id="t">Niveaux d’intervention dans un conflit</title>
-<desc id="d">Cinq niveaux d’intervention empilés selon la gravité du conflit, du plus léger en bas au plus formel en haut. Dans chaque scène, les deux mêmes personnes en conflit, en gris. Auto-résolution, en bas (conversation directe) : les deux personnes se parlent, chacune avec sa bulle. Facilitation par superviseur : un superviseur, en noir, se tient entre elles pendant qu’elles se parlent ; il aide la conversation. Médiation formelle : les trois sont assis à une table, le tiers neutre formé au centre ; il ne tranche pas. Arbitrage : une autorité, en noir, surélevée sur une estrade, envoie une flèche vers chacune des deux personnes : décision imposée par autorité. À gauche, une flèche grise part de « commencer ici », sous l’auto-résolution, et monte jusqu’à l’arbitrage. Au-dessus, à part, dans un bandeau rouge pâle bordé de rouge : la procédure formelle, où l’une des deux personnes remet un document écrit, la plainte (harcèlement, normes du travail).</desc>
+<desc id="d">Niveaux d’intervention empilés dans l’ordre du tableau, du plus léger en bas jusqu’à l’arbitrage en haut. Dans chaque scène, les deux mêmes personnes en conflit, en gris. Auto-résolution, en bas (conversation directe) : les deux personnes se parlent, chacune avec sa bulle. Facilitation par superviseur : un superviseur, en noir, se tient entre elles pendant qu’elles se parlent ; il aide la conversation. Médiation formelle : les trois sont assis à une table, le tiers neutre formé au centre ; il ne tranche pas. Arbitrage : une autorité, en noir, surélevée sur une estrade, envoie une flèche vers chacune des deux personnes : décision imposée par autorité. À gauche, une flèche grise part de « commencer ici », sous l’auto-résolution, et s’arrête à l’arbitrage. Au-dessus, à part et hors de la colonne de la flèche, dans un bandeau rouge pâle bordé de rouge : la procédure formelle, où l’une des deux personnes remet un document écrit, la plainte (harcèlement, normes du travail), du côté opposé à l’autre personne.</desc>
 <rect width="480" height="640" fill="#fbfaf6"/>
 <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
 <text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Niveaux d’intervention</text>
 <text x="24" y="76" font-size="19" fill="#4b535c">Selon la gravité du conflit</text>
 <!-- Flèche : du plus léger (en bas) au plus formel (en haut) -->
-<path d="M38 586V242" stroke="#6e7781" stroke-width="3" fill="none"/>
-<path d="M38 224L30 241H46Z" fill="#6e7781"/>
+<path d="M38 586V260" stroke="#6e7781" stroke-width="3" fill="none"/>
+<path d="M38 242L30 259H46Z" fill="#6e7781"/>
 <circle cx="38" cy="556" r="6" fill="#fbfaf6" stroke="#6e7781" stroke-width="3"/>
 <circle cx="38" cy="460" r="6" fill="#fbfaf6" stroke="#6e7781" stroke-width="3"/>
 <circle cx="38" cy="364" r="6" fill="#fbfaf6" stroke="#6e7781" stroke-width="3"/>
@@ -77,18 +77,18 @@
 <text x="240" y="241" font-size="20" font-weight="700" fill="#1f2328">Arbitrage</text>
 <text x="240" y="265" font-size="19" fill="#4b535c">décision imposée</text>
 <text x="240" y="289" font-size="19" fill="#4b535c">par autorité</text>
-<!-- Procédure formelle : à part, si le conflit a dérivé vers du harcèlement -->
-<rect x="16" y="104" width="448" height="108" rx="10" fill="#fde3e0"/>
-<path d="M18.5 110V206" stroke="#c62828" stroke-width="5" stroke-linecap="round"/>
-<path d="M64 196H224" stroke="#6e7781" stroke-width="2.5"/>
-<path d="M70.4 196V181.6Q70.4 172 80 172H88Q97.6 172 97.6 181.6V196Z" fill="#6e7781"/>
-<circle cx="84" cy="163.2" r="7.2" fill="#6e7781"/>
+<!-- Procédure formelle : à part, hors de la colonne de la flèche ; la plainte part à l’écart de l’autre personne -->
+<rect x="62" y="100" width="402" height="112" rx="10" fill="#fde3e0"/>
+<path d="M64.5 106V206" stroke="#c62828" stroke-width="5" stroke-linecap="round"/>
+<path d="M80 196H224" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M136.4 196V181.6Q136.4 172 146 172H154Q163.6 172 163.6 181.6V196Z" fill="#6e7781"/>
+<circle cx="150" cy="163.2" r="7.2" fill="#6e7781"/>
 <path d="M190.4 196V181.6Q190.4 172 200 172H208Q217.6 172 217.6 181.6V196Z" fill="#6e7781"/>
 <circle cx="204" cy="163.2" r="7.2" fill="#6e7781"/>
-<path d="M126 130H152L160 138V170H126Z" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
-<path d="M132 144H152M132 152H152M132 160H146" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
-<path d="M102 166L118 158" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
-<path d="M123 155L111 154L117 164Z" fill="#1f2328"/>
+<path d="M82 118H108L116 126V160H82Z" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M88 132H108M88 140H108M88 148H102" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M136 170L124 162" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<path d="M118 158L130 158L123 168Z" fill="#1f2328"/>
 <text x="240" y="145" font-size="20" font-weight="700" fill="#1f2328">Procédure formelle</text>
 <text x="240" y="169" font-size="19" fill="#4b535c">plainte (harcèlement,</text>
 <text x="240" y="193" font-size="19" fill="#4b535c">normes du travail)</text>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="620" viewBox="0 0 480 620" role="img" aria-labelledby="t d">
+<title id="t">Donner plus qu’on ne reçoit : la balance efforts-récompenses</title>
+<desc id="d">Balance à deux plateaux, modèle de Siegrist, qui penche du côté des efforts. Sur le plateau de gauche, « Efforts », quatre blocs foncés de même taille : cadence, heures supplémentaires, interruptions, charge physique. Sur le plateau de droite, « Récompenses », un seul bloc bleu plein, salaire et primes. Sous ce plateau, hors de la balance, deux blocs en pointillés, reconnaissance et respect, sécurité d’emploi et perspectives, sous le mot « manquent ». Une flèche rouge descend du plateau des efforts vers un encadré rouge : déséquilibre, s’il dure : zone à risque. Une flèche noire, le surengagement, rejoint cette flèche rouge, qui s’épaissit : il amplifie l’effet.</desc>
+<rect width="480" height="620" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Donner plus qu’on ne reçoit</text>
+<text x="24" y="78" font-size="19" fill="#4b535c">Modèle de Siegrist</text>
+
+<!-- Pied et colonne -->
+<path d="M210 408L220 390H260L270 408Z" fill="#eceef0" stroke="#6e7781" stroke-width="3" stroke-linejoin="round"/>
+<rect x="233" y="338" width="14" height="52" fill="#6e7781"/>
+
+<!-- Fléau incliné du côté des efforts (15°) -->
+<rect x="-136" y="-5" width="272" height="10" rx="5" fill="#4b535c" transform="translate(240 338) rotate(-15)"/>
+<path d="M116 371.2V331.2M364 304.8V264.8" stroke="#4b535c" stroke-width="6" stroke-linecap="round"/>
+<circle cx="240" cy="338" r="9" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+
+<!-- Plateaux, avec leur nom -->
+<rect x="24" y="301.2" width="184" height="30" rx="4" fill="#6e7781"/>
+<rect x="272" y="234.8" width="184" height="30" rx="4" fill="#6e7781"/>
+<g font-size="20" font-weight="700" fill="#fbfaf6" text-anchor="middle">
+<text x="116" y="323">Efforts</text>
+<text x="364" y="256.6">Récompenses</text>
+</g>
+
+<!-- Efforts extrinsèques : demandes du poste, dans l’ordre du tableau de la page ; blocs de même taille (pas de mesure ni de classement) -->
+<g font-size="19" fill="#fbfaf6" text-anchor="middle">
+<rect x="28" y="109.2" width="176" height="46" rx="4" fill="#4b535c"/>
+<text x="116" y="139">cadence</text>
+<rect x="28" y="157.2" width="176" height="46" rx="4" fill="#4b535c"/>
+<text x="116" y="176.5">heures</text>
+<text x="116" y="197">supplémentaires</text>
+<rect x="28" y="205.2" width="176" height="46" rx="4" fill="#4b535c"/>
+<text x="116" y="235">interruptions</text>
+<rect x="28" y="253.2" width="176" height="46" rx="4" fill="#4b535c"/>
+<text x="116" y="283">charge physique</text>
+</g>
+
+<!-- Récompenses : seules les matérielles (salaire, primes) sont sur le plateau -->
+<rect x="274" y="178.8" width="180" height="54" rx="4" fill="#1565c0"/>
+<g font-size="19" fill="#fbfaf6" text-anchor="middle">
+<text x="364" y="201" font-weight="700">salaire</text>
+<text x="364" y="223">primes</text>
+</g>
+
+<!-- D’estime (reconnaissance, respect) et de statut (sécurité d’emploi, perspectives) : absentes, posées hors de la balance -->
+<g font-size="19" fill="#1565c0" text-anchor="middle">
+<text x="370" y="352" font-size="20" font-weight="700">manquent</text>
+<rect x="280" y="364" width="180" height="54" rx="4" fill="#fbfaf6" stroke="#1565c0" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="370" y="386">reconnaissance</text>
+<text x="370" y="408">respect</text>
+<rect x="280" y="424" width="180" height="54" rx="4" fill="#fbfaf6" stroke="#1565c0" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="370" y="446">sécurité d’emploi</text>
+<text x="370" y="468">perspectives</text>
+</g>
+
+<!-- Effet du déséquilibre : flèche rouge du plateau des efforts vers l’encadré ; page : « penche durablement du mauvais côté », « Configurations à risque » -->
+<path d="M44 340V434" stroke="#c62828" stroke-width="4" stroke-linecap="round"/>
+<path d="M44 434V488" stroke="#c62828" stroke-width="10"/>
+<path d="M28 486L44 508L60 486Z" fill="#c62828"/>
+<rect x="24" y="514" width="196" height="90" rx="10" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/>
+<g fill="#c62828" text-anchor="middle">
+<text x="122" y="540" font-size="20" font-weight="700">déséquilibre</text>
+<text x="122" y="564" font-size="19">s’il dure :</text>
+<text x="122" y="590" font-size="19" font-weight="700">zone à risque</text>
+</g>
+
+<!-- Surengagement : agit sur l’effet (modérateur), pas sur la pile ; page : « Le surengagement amplifie l'effet du déséquilibre » -->
+<path d="M90 434H64" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M65 424L51 434L65 444Z" fill="#1f2328"/>
+<text x="96" y="440" font-size="19" font-weight="700" fill="#1f2328">surengagement</text>
+<text x="96" y="464" font-size="19" fill="#4b535c">amplifie l’effet</text>
+</g>
+</svg>

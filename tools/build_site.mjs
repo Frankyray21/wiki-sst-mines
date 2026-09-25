@@ -7,6 +7,7 @@ import { marked } from 'marked';
 import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { dimensionsSvg } from './dimensions_svg.mjs';
+import { choisirImage } from './resoudre_image.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
 import { rendrePage404 } from './redirections.mjs';
 import { rendrePortailContenu } from './portail_racine.mjs';
@@ -553,23 +554,13 @@ function resolvePage(target, from, profondeur = 0) {
   return cands.slice().sort((a, b) => a.relPath.length - b.relPath.length)[0];
 }
 
+// essai : relatif au dossier de la page, puis chemin complet, puis nom de fichier (tools/resoudre_image.mjs) ;
+// un nom que portent plusieurs fichiers est signalé en fin de construction (le premier est pris)
+const imagesAmbigues = new Map();
 function resolveAsset(ref, from) {
-  let t = ref.trim();
-  // essai : relatif au dossier de la page, puis suffixe, puis basename
-  const tryPaths = [from.dir + '/' + t, t];
-  for (const tp of tryPaths) {
-    const hit = assetsByPath.get(tp.toLowerCase());
-    if (hit) return hit;
-  }
-  const base = t.split('/').pop().toLowerCase();
-  const cands = assetsByBase.get(base);
-  if (!cands || !cands.length) return null;
-  if (cands.length === 1) return cands[0];
-  const suffix = cands.filter(c => c.toLowerCase().endsWith('/' + t.toLowerCase()));
-  if (suffix.length) return suffix[0];
-  const sameWiki = cands.filter(c => c.split('/')[0] === from.wikiKey);
-  if (sameWiki.length) return sameWiki[0];
-  return cands[0];
+  const r = choisirImage(ref, from, { parChemin: assetsByPath, parNom: assetsByBase });
+  if (r.ambigu) imagesAmbigues.set(from.relPath + '|' + ref.trim(), { note: from.relPath, ref: ref.trim(), choisi: r.rel, n: r.ambigu.length });
+  return r.rel;
 }
 
 // copie paresseuse des assets référencés
@@ -2049,6 +2040,12 @@ if (badFm.length) {
   const reparés = badFm.filter(l => l.endsWith('(réparé)')).length;
   console.warn(`\n⚠ Frontmatter YAML : ${badFm.length} note(s) en erreur — ${reparés} réparée(s), ${badFm.length - reparés} illisible(s)`);
   badFm.filter(l => !l.endsWith('(réparé)')).slice(0, 20).forEach(l => console.warn('   ' + l));
+}
+if (imagesAmbigues.size) {
+  console.warn(`\n⚠ Images ambiguës : ${imagesAmbigues.size} renvoi(s) à un nom que portent plusieurs fichiers ; le premier a été pris, peut-être`
+    + ` le mauvais. Écrire le dossier dans la note, par exemple ![[06-prévention/img-000.png]] :`);
+  [...imagesAmbigues.values()].slice(0, 40).forEach(a => console.warn(`   ${a.note} : « ${a.ref} » → ${a.choisi} (${a.n} fichiers)`));
+  if (imagesAmbigues.size > 40) console.warn(`   … et ${imagesAmbigues.size - 40} autre(s)`);
 }
 if (pngOptim) {
   console.log(`Images PNG : ${pngOptim} recompressées sans perte (${(pngGain / 1048576).toFixed(1)} Mo économisés), ${pngIntacts} laissées telles quelles`);
