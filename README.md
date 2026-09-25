@@ -76,6 +76,7 @@ adresses n'ont pas changé.
   publiée) ; essai par défaut, tout ou rien, rejouable, sauvegarde avant écriture
 - `tools/regenerer_hors_ligne.mjs` — retouche de `docs/` sans reconstruction : recopie `style.css` et `app.js`,
   réécrit le manifeste hors ligne en gardant l'estampille de version (seuls les fichiers modifiés changent de hash)
+  et marque `sw.js` de l'empreinte du manifeste, pour que les navigateurs installent le nouveau service worker
 - `tools/dimensions_svg.mjs` — largeur et hauteur d'un schéma SVG, posées par le générateur sur son `<img>`
 - `tools/avis.mjs` — bloc « Cette page vous a-t-elle été utile ? » (pouce et commentaire) posé sur chaque page
   issue d'une note ; `tools/avis-worker/` — le relais Cloudflare qui écrit dans Airtable, et son mode d'emploi
