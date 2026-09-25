@@ -45,7 +45,9 @@ node tools/build_site.mjs
 
 - **Cause des captures fausses.** Plusieurs images de cours portent le même nom dans des dossiers différents
   (`img-000.png`, `img-001.png`…). Quand le générateur ne trouve pas le chemin exact, il prend le premier fichier du
-  même nom, sans avertir. Les dossiers 05-mesure, 06-prévention, 10-conflits et 11-communication n'ont jamais été
+  même nom, sans avertir. Depuis ce lot, `tools/build_site.mjs` liste ces renvois en fin de construction
+  (« ⚠ Images ambiguës », avec le fichier retenu) : écrire le dossier dans la note, par exemple
+  `![[06-prévention/img-000.png]]`, les fait disparaître de la liste. Les dossiers 05-mesure, 06-prévention, 10-conflits et 11-communication n'ont jamais été
   publiés. Corrigées de même dans ce lot : « Les trois niveaux de prévention » (Maslow et Selye) et « Reconnaissance et
   déséquilibre efforts récompenses » (Maslow). L'« Index des images du cours » décrit encore les anciennes captures.
 - **Comparatif des cycles FIFO.** « Idées suicidaires … en cycles ≥21/7 (Bowers et al. 2018 p. 4) » : l'article ne
