@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="610" viewBox="0 0 480 610" role="img" aria-labelledby="t d">
+<title id="t">Payer plus ne suffit pas : facteurs d’hygiène et motivateurs</title>
+<desc id="d">Coupe d’un sol, selon Herzberg. Au milieu, un plancher de quatre dalles de même taille, les facteurs d’hygiène : salaire, conditions, sécurité d’emploi, politique d’entreprise. À gauche, le plancher manque (trait rouge en pointillés) : un travailleur en rouge, voûté, se tient plus bas que le plancher, avec la mention « leur absence démotive ». Sur le plancher, un travailleur en gris se tient debout, sans monter : « leur présence ne motive pas en soi ». À droite, à côté du plancher et posée sur le sol, une colonne de quatre blocs bleus de même taille, les facteurs motivateurs : reconnaissance, responsabilité, contenu du travail, perspectives. À son sommet, un travailleur en bleu, les bras levés : « leur présence motive activement ».</desc>
+<rect width="480" height="610" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Payer plus ne suffit pas</text>
+<text x="24" y="78" font-size="19" fill="#4b535c">Herzberg : facteurs d’hygiène et motivateurs</text>
+
+<!-- Plancher : facteurs d’hygiène, dans l’ordre du tableau de la page ; dalles de même taille (pas de classement) -->
+<g stroke="#6e7781" stroke-width="2.5" fill="#eceef0">
+<rect x="57" y="444" width="124" height="56"/>
+<rect x="181" y="444" width="124" height="56"/>
+<rect x="57" y="500" width="124" height="56"/>
+<rect x="181" y="500" width="124" height="56"/>
+</g>
+<g font-size="19" fill="#1f2328" text-anchor="middle">
+<text x="119" y="479">salaire</text>
+<text x="243" y="479">conditions</text>
+<text x="119" y="522">sécurité</text>
+<text x="119" y="545">d’emploi</text>
+<text x="243" y="522">politique</text>
+<text x="243" y="545">d’entreprise</text>
+</g>
+<path d="M0 556H480" stroke="#4b535c" stroke-width="3.5"/>
+<text x="181" y="588" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">facteurs d’hygiène</text>
+
+<!-- Page : « Leur absence démotive » — le plancher manque : trait rouge en pointillés, travailleur plus bas -->
+<path d="M0 444H53" stroke="#c62828" stroke-width="3" stroke-dasharray="8 6"/>
+<g transform="translate(18 556)" fill="none" stroke="#c62828" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-4 -4L-1 -42M5 -4L4 -42" stroke-width="10"/>
+<path d="M0 -48Q3 -63 11 -70" stroke-width="20"/>
+<path d="M10 -68Q17 -56 16 -44" stroke-width="8"/>
+<circle cx="22" cy="-70" r="11" fill="#c62828" stroke="none"/>
+</g>
+<text x="24" y="400" font-size="19" fill="#c62828">leur absence</text>
+<text x="24" y="424" font-size="19" font-weight="700" fill="#c62828">démotive</text>
+
+<!-- Page : « leur présence ne motive pas en soi » — debout sur le plancher, sans monter -->
+<g transform="translate(204 444)" fill="none" stroke="#6e7781" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-6 -4L-5 -42M6 -4L5 -42" stroke-width="10"/>
+<path d="M0 -50V-72" stroke-width="22"/>
+<path d="M-12 -74L-16 -46M12 -74L16 -46" stroke-width="8"/>
+<circle cx="0" cy="-96" r="11" fill="#6e7781" stroke="none"/>
+</g>
+<g text-anchor="middle">
+<text x="204" y="264" font-size="19" fill="#4b535c">leur présence</text>
+<text x="204" y="288" font-size="19" font-weight="700" fill="#1f2328">ne motive pas</text>
+<text x="204" y="312" font-size="19" font-weight="700" fill="#1f2328">en soi</text>
+</g>
+
+<!-- Facteurs motivateurs : colonne posée sur le sol, à côté du plancher (pas dessus : la page ne dit pas
+     qu’ils n’agissent qu’une fois l’hygiène assurée) ; ordre du tableau de la page ; blocs de même taille -->
+<g stroke="#1565c0" stroke-width="2.5" fill="#e1ecfa">
+<rect x="312" y="348" width="158" height="52"/>
+<rect x="312" y="400" width="158" height="52"/>
+<rect x="312" y="452" width="158" height="52"/>
+<rect x="312" y="504" width="158" height="52"/>
+</g>
+<g font-size="19" fill="#1f2328" text-anchor="middle">
+<text x="391" y="381">reconnaissance</text>
+<text x="391" y="433">responsabilité</text>
+<text x="391" y="474">contenu</text>
+<text x="391" y="496">du travail</text>
+<text x="391" y="537">perspectives</text>
+</g>
+<!-- Page : « Leur présence motive activement » — au sommet, bras levés -->
+<g transform="translate(391 348)" fill="none" stroke="#1565c0" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-6 -4L-5 -42M6 -4L5 -42" stroke-width="10"/>
+<path d="M0 -50V-72" stroke-width="22"/>
+<path d="M-10 -76L-24 -104M10 -76L24 -104" stroke-width="8"/>
+<circle cx="0" cy="-96" r="11" fill="#1565c0" stroke="none"/>
+</g>
+<g text-anchor="end" fill="#1565c0">
+<text x="456" y="150" font-size="20" font-weight="700">facteurs motivateurs</text>
+<text x="456" y="176" font-size="19">leur présence</text>
+<text x="456" y="200" font-size="19" font-weight="700">motive activement</text>
+</g>
+</g>
+</svg>

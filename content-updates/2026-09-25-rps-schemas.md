@@ -1,4 +1,4 @@
-# Pages RPS illustrées (neuf pages) — 25 septembre 2026
+# Pages RPS illustrées (dix pages) — 25 septembre 2026
 
 Demande de Frank : « continue à bonifier des pages dans la section RPS », puis « déploie avant qu'il ne reste plus de
 tokens ». Le texte des articles du wiki SST psychosociale n'est pas modifié (convention de l'auteur) : on ajoute des
@@ -22,9 +22,10 @@ relecture »). Seuls Harcèlement et Les trois niveaux n'ont pas eu ce second re
 | [Harcèlement psychologique au travail](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/harcelement-psychologique-au-travail.html) | Définition de la LNT, art. 81.18 : conduite répétée ou conduite grave unique, et leurs conditions |
 | [Les trois niveaux de prévention](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/les-trois-niveaux-de-prevention.html) | Trois niveaux, trois moments (à la place d'une pyramide de Maslow) ; un exemple minier par niveau, cycles FIFO et quarts de nuit (à la place d'une courbe de Selye) |
 | [Reconnaissance et déséquilibre efforts récompenses](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/reconnaissance-et-desequilibre-efforts-recompenses.html) | Modèle élargi : une demande, trois appuis (latitude, soutien, reconnaissance), à la place d'une pyramide de Maslow |
+| [Théories de la motivation au travail](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/theories-de-la-motivation-au-travail.html) | Le voilier de Kaufman et les deux catégories de facteurs de Herzberg, à la place de deux captures qui montraient une même figure sans rapport (Dolan et Arsenault, estime de soi et stress) ; la pyramide de Maslow, juste, reste |
 
-Toutes ces pages, sauf Harcèlement et Reconnaissance, ont aussi une copie dans l'espace encadrement, modifiée de la
-même façon.
+Toutes ces pages, sauf Harcèlement, Reconnaissance et Théories de la motivation, ont aussi une copie dans l'espace
+encadrement, modifiée de la même façon.
 
 ## Après relecture
 
@@ -49,13 +50,17 @@ aboutissent au même texte, et un second passage ne change rien.
   maintenant plus haut que celle du haut, sans plus. Une citation attribuée au rapport Tissot et al. (2022), p. 9,
   est introuvable dans le PDF : remplacée par la vraie phrase, section 4.6, p. 34.
 - **Reconnaissance, Comparatif des cycles FIFO.** Déjà corrigés après relecture ; passés en v2 pour que le vault suive.
+- **Théories de la motivation** (relue avant publication). La colonne des motivateurs de Herzberg était posée sur le
+  plancher d'hygiène, ce qui affirmait que les motivateurs n'agissent qu'une fois l'hygiène assurée : la page ne le dit
+  pas (cette condition est celle qu'elle prête à Maslow). Elle est maintenant à côté. Les vagues du voilier, qui
+  n'ajoutaient rien de la page, sont retirées.
 
 ## À faire dans le vault (sinon la prochaine construction efface ces changements)
 
 Sous Windows (PowerShell), depuis le dossier du projet :
 
 ```
-$lots = 'mediation-et-resolution-de-conflits','modele-de-siegrist-desequilibre-efforts-recompenses','communication-descendante','definition-des-risques-psychosociaux','comparatif-des-cycles-fifo-14-14-20-10-21-7','demarche-de-prevention-en-rps-etapes','harcelement-psychologique-au-travail','les-trois-niveaux-de-prevention','reconnaissance-et-desequilibre-efforts-recompenses'
+$lots = 'mediation-et-resolution-de-conflits','modele-de-siegrist-desequilibre-efforts-recompenses','communication-descendante','definition-des-risques-psychosociaux','comparatif-des-cycles-fifo-14-14-20-10-21-7','demarche-de-prevention-en-rps-etapes','harcelement-psychologique-au-travail','les-trois-niveaux-de-prevention','reconnaissance-et-desequilibre-efforts-recompenses','theories-de-la-motivation-au-travail'
 $lots | ForEach-Object { node tools/appliquer_retouches.mjs --lot "content-updates/2026-09-25-$_-schemas.json" --appliquer }
 node tools/build_site.mjs
 ```
@@ -116,15 +121,20 @@ node tools/build_site.mjs
   harcèlement doit d'abord passer par les niveaux légers.
 - **Communication descendante.** « Communication doit atteindre les trois quarts » : la page Travail posté donne le
   quart de 12 heures comme standard.
+- **Théories de la motivation.** La légende retirée confondait les facteurs d'hygiène de Herzberg avec l'« hygiène de
+  vie ». La section « Documents et outils » se réduit à « | Document | », reste d'un tableau non rendu.
+- **Index des images du cours.** Il décrit encore les captures retirées aujourd'hui et donne pour Maslow
+  `13-retour-travail/img-000.png`, alors que la page affiche `01-fondamentaux/img-000.png` (bonne figure). « Définition du
+  stress professionnel » n'affiche pas la figure que l'index lui attribue (`04-stress-modèles/img-000.png`, jamais publiée).
 - **Recueil local.** `tools/textes-loi/LSST.json` donne l'art. 59 sans la modification de la LMRSST (art. 144).
 
 ## Vérifications
 
-- Tests : 237 réussis sur 238 ; le seul échec, `textes-loi`, est connu et antérieur. Nouveau : `resoudre-image` (choix
+- Tests : 238 réussis sur 239 ; le seul échec, `textes-loi`, est connu et antérieur. Nouveau : `resoudre-image` (choix
   des images, signalement des noms ambigus).
 - `verif_site`, `verif_liens` (0 erreur) et `verif_publication --staged`.
-- Chromium, `verif_rendu` : les 9 pages dans les cinq modes, aucun défaut (refait sur les 8 pages reposées après
-  relecture).
+- Chromium, `verif_rendu` : les 10 pages dans les cinq modes, aucun défaut (refait sur les 8 pages reposées après
+  relecture et sur Théories de la motivation).
 - Lots du vault rejoués sur notes simulées, neuves ou ayant reçu la version précédente : même résultat, rejouables.
 - Hors blocs de schéma, le texte des 16 pages publiées ne diffère que par les six légendes retirées.
 - Aucune validation spécialisée n'est attestée.

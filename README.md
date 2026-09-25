@@ -195,10 +195,11 @@ node tools/serve.mjs
   qu'elle ait été appliquée ou non). Détail : `content-updates/2026-09-25-diesel-schemas-v2.md`
 - **Pages RPS illustrées (25 septembre 2026)** : schémas sur Médiation (Thomas-Kilmann, niveaux d'intervention),
   Modèle de Siegrist, Communication descendante, Définition des risques psychosociaux, Comparatif des cycles FIFO,
-  Démarche de prévention en RPS, Harcèlement psychologique (LNT, art. 81.18), Les trois niveaux de prévention et
-  Reconnaissance. Six captures fausses ou tierces retirées : Selye (deux fois), Maslow (trois fois) et une diapositive
-  tierce, affichées à cause de noms de fichiers identiques dans le vault. Texte des articles inchangé. **À poser dans
-  le vault** (neuf lots `2026-09-25-*-schemas.json`). Détail et erreurs relevées : `content-updates/2026-09-25-rps-schemas.md`
+  Démarche de prévention en RPS, Harcèlement psychologique (LNT, art. 81.18), Les trois niveaux de prévention,
+  Reconnaissance et Théories de la motivation (Kaufman, Herzberg). Huit captures fausses ou tierces retirées : Selye
+  (deux fois), Maslow (trois fois), Dolan et Arsenault (deux fois) et une diapositive tierce, affichées à cause de noms
+  de fichiers identiques dans le vault. Relecture contradictoire ; schémas corrigés en v2. Texte des articles inchangé.
+  **À poser dans le vault** (dix lots `2026-09-25-*-schemas.json`). Détail et erreurs relevées : `content-updates/2026-09-25-rps-schemas.md`
 - **Application Android (23 septembre 2026)** : `docs/app/wiki-sst-mines.apk` (8 Ko), lien « 📱 Application Android »
   au pied du portail et de l'espace encadrement. L'application ouvre le site publié en plein écran ; le hors-ligne est
   celui du site (service worker) ; les liens externes et les PDF partent au navigateur. Construite par
