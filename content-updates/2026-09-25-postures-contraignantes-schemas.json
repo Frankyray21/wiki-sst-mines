@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-postures-contraignantes-schemas",
+ "portee": "Schémas de la page w/ergonomie/postures-contraignantes.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Postures contraignantes",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/postures-contraignantes.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-postures-contraignantes-amplitude-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-postures-contraignantes-mine-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Amplitudes de confort : positions au-delà desquelles le risque de TMS augmente considérablement.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-postures-contraignantes-amplitude-v1.svg|Silhouette qui lève un bras sur le côté, avec un arc autour de l’épaule : depuis la posture neutre, bras le long du corps (contraintes minimales), l’arc traverse la zone de confort en bleu, qui passe peu à peu au rouge de la zone contraignante, jusqu’à la limite d’amplitude, bras au-dessus de la tête, au-delà de laquelle le mouvement n’est plus possible. En bas, trois encadrés : intensité, fréquence et durée, les modulateurs du risque.]]\n\n<p class=\"infographie-legende\">Plus une posture s’approche de la limite d’amplitude de l’articulation, plus elle est contraignante ; au-delà des amplitudes de confort, le risque de TMS augmente considérablement. Schéma de principe : les zones n’ont ni angle ni frontière nette, et les amplitudes sont propres à chaque articulation.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Exemple choisi : l’épaule. Le bras part le long du corps et se lève sur le côté jusqu’au-dessus de la tête ; un arc autour de l’épaule suit ce mouvement.</li>\n<li>Bras le long du corps : c’est la posture neutre, où les contraintes sur les structures de l’articulation sont minimales.</li>\n<li>L’arc traverse d’abord la zone de confort (en bleu), où la posture n’est pas considérée comme un facteur de risque de TMS. Le bleu passe peu à peu au rouge : au-delà de la zone de confort, dans la zone contraignante, le risque augmente, et le rouge fonce à mesure que le bras s’approche de la limite.</li>\n<li>Au bout de l’arc, une butée marque la limite d’amplitude : au-delà, le mouvement n’est plus possible. Aucun angle n’est donné : le passage d’une zone à l’autre est progressif et sa place est indicative.</li>\n<li>En bas, les trois modulateurs du risque : l’intensité (proche de la limite ?), que montre l’arc ; la fréquence (combien de fois dans un intervalle de temps ?) ; la durée (combien de temps, dans le cycle de travail et dans le quart ?).</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après les sections « Définition » et « Modulateurs du risque » de cette page, et {{lien:w/ergonomie/articulations.html|Articulations}} (posture neutre, amplitude de confort, amplitude maximale). Schéma de principe : aucun angle, aucune durée de maintien.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-postures-contraignantes-amplitude-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Postures contraignantes communes en mine",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-postures-contraignantes-mine-v1.svg|Six silhouettes en deux colonnes, une par posture contraignante courante en mine, avec la région touchée en rouge : accroupie (pose de tirants), à genoux sous un toit bas (boulonnage en chantier bas), bras au-dessus de la tête avec un outil tenu contre le toit (forage de toit), tronc en flexion vers une charge au sol (manutention au sol), tronc en torsion avec une charge tenue sur le côté (manutention asymétrique) et cou en hyperextension, regard vers le haut (surveillance en hauteur).]]\n\n<p class=\"infographie-legende\">Six postures du tableau ci-dessous, chacune avec l’un de ses exemples miniers ; la région touchée est en rouge. Les postures du poignet et des doigts, dernières lignes du tableau, ne sont pas dessinées.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Colonne de gauche, en haut : accroupie ; genoux, hanches et dos en rouge. Exemple : pose de tirants.</li>\n<li>Au milieu : à genoux, sous un toit bas ; genoux en rouge. Exemple : boulonnage en chantier bas.</li>\n<li>En bas : bras au-dessus de la tête, un outil tenu contre le toit ; épaule et cou (région cervicale) en rouge. Exemple : forage de toit.</li>\n<li>Colonne de droite, en haut : tronc en flexion vers une charge posée au sol ; au milieu : tronc en torsion, pieds de face et charge tenue sur le côté. Dans les deux cas, le bas du dos (région lombaire) est en rouge ; pour la torsion, le tableau cite aussi les articulations facettaires. Exemples : manutention au sol, manutention asymétrique.</li>\n<li>En bas : cou en hyperextension, regard vers le haut ; cou (région cervicale) en rouge. Exemple : surveillance en hauteur.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après le tableau « Postures contraignantes communes en mine » de cette page (posture, région touchée, exemple minier) et le tableau « Postes typiquement contraignants » (chantier bas, boulonneur de toit). Silhouettes schématiques : ni angle ni durée de maintien.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-postures-contraignantes-mine-v1.svg"
+  }
+ ]
+}

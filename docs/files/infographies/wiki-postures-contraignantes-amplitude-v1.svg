@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="646" viewBox="0 0 480 646" role="img" aria-labelledby="t d">
+<title id="t">Du neutre à la limite</title>
+<desc id="d">Silhouette vue de face qui lève un bras sur le côté, du bras le long du corps jusqu’au bras dressé au-dessus de la tête. Un arc entoure l’épaule. Il part de la posture neutre, bras le long du corps, où les contraintes sont minimales, et traverse d’abord la zone de confort, en bleu. Le bleu passe peu à peu au rouge de la zone contraignante, qui fonce à mesure que le bras s’approche de la limite d’amplitude, marquée par une butée : au-delà, le mouvement n’est plus possible. Le bras est redessiné en contour à la limite. Ni frontière nette ni valeur d’angle : schéma de principe. En bas, les trois modulateurs du risque : intensité (proche de la limite ?), fréquence (combien de fois ?) et durée (combien de temps ?).</desc>
+<defs>
+<linearGradient id="risque" gradientUnits="userSpaceOnUse" x1="0" y1="351.1" x2="0" y2="166"><stop offset="0" stop-color="#fde3e0"/><stop offset="0.9" stop-color="#c62828"/></linearGradient>
+<linearGradient id="confort" gradientUnits="userSpaceOnUse" x1="170.2" y1="395.3" x2="203.3" y2="362.2"><stop offset="0" stop-color="#e1ecfa"/><stop offset="1" stop-color="#e1ecfa" stop-opacity="0"/></linearGradient>
+<linearGradient id="confort-trait" gradientUnits="userSpaceOnUse" x1="170.2" y1="395.3" x2="203.3" y2="362.2"><stop offset="0" stop-color="#1565c0"/><stop offset="1" stop-color="#1565c0" stop-opacity="0"/></linearGradient>
+<linearGradient id="entree" gradientUnits="userSpaceOnUse" x1="170.2" y1="395.3" x2="203.3" y2="362.2"><stop offset="0" stop-color="#fde3e0" stop-opacity="0"/><stop offset="1" stop-color="#fde3e0"/></linearGradient>
+<linearGradient id="risque-trait" gradientUnits="userSpaceOnUse" x1="170.2" y1="395.3" x2="203.3" y2="362.2"><stop offset="0" stop-color="#c62828" stop-opacity="0"/><stop offset="1" stop-color="#c62828"/></linearGradient>
+</defs>
+<rect width="480" height="646" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Du neutre à la limite</text>
+<text x="24" y="78" font-size="19" fill="#4b535c">Exemple : l’épaule, bras levé sur le côté</text>
+
+<!-- Arc de mouvement autour de l’épaule : zone de confort (bleu), puis, sans frontière nette, zone contraignante (rouge qui fonce) -->
+<path d="M119.8 425A130 130 0 0 0 214.2 364.9L192.2 351.1A104 104 0 0 1 116.7 399.2Z" fill="url(#confort)"/>
+<path d="M172.9 406.2A130 130 0 0 0 214.2 364.9L192.2 351.1A104 104 0 0 1 159.1 384.2Z" fill="url(#entree)"/>
+<path d="M211.8 368.7A130 130 0 0 0 104 166L104 192A104 104 0 0 1 190.2 354.2Z" fill="url(#risque)"/>
+<path d="M192.2 351.1A104 104 0 0 1 116.7 399.2L119.8 425A130 130 0 0 0 214.2 364.9" fill="none" stroke="url(#confort-trait)" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M172.9 406.2A130 130 0 0 0 104 166L104 192A104 104 0 0 1 159.1 384.2" fill="none" stroke="url(#risque-trait)" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M104 199L104 159" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<path d="M246.8 270.8A145 145 0 0 0 153.6 159.7" stroke="#c62828" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M142.3 155.6L155.8 153.6L151.4 165.9Z" fill="#c62828"/>
+
+<!-- Silhouette (vue de face) -->
+<g fill="#6e7781">
+<circle cx="75" cy="258" r="16"/>
+<path d="M58 284Q50 284 50 292L56 368H94L100 292Q100 284 92 284Z"/>
+<rect x="57" y="360" width="15" height="100" rx="5"/>
+<rect x="78" y="360" width="15" height="100" rx="5"/>
+</g>
+<path d="M46 296L36 379" stroke="#6e7781" stroke-width="11" stroke-linecap="round"/>
+<!-- bras : posture neutre (plein) et limite d’amplitude (contour) -->
+<path d="M104 296L114.2 379.4" stroke="#6e7781" stroke-width="11" stroke-linecap="round"/>
+<path d="M104 296L104 212" stroke="#6e7781" stroke-width="11" stroke-linecap="round"/>
+<path d="M104 296L104 212" stroke="#fbfaf6" stroke-width="6" stroke-linecap="round"/>
+<circle cx="104" cy="296" r="6.5" fill="#6e7781"/>
+
+<!-- Étiquettes -->
+<text x="24" y="118" font-size="20" font-weight="700" fill="#1f2328">limite d’amplitude</text>
+<text x="24" y="142" font-size="19" fill="#4b535c">au-delà, le mouvement n’est plus possible</text>
+<text x="228" y="196" font-size="19" fill="#c62828">le risque augmente</text>
+<text x="250" y="286" font-size="20" font-weight="700" fill="#c62828">zone</text>
+<text x="250" y="310" font-size="20" font-weight="700" fill="#c62828">contraignante</text>
+<path d="M153.6 417.4H196" stroke="#1565c0" stroke-width="2.5"/>
+<text x="200" y="424.4" font-size="20" font-weight="700" fill="#1565c0">zone de confort</text>
+<text x="116" y="456" font-size="20" font-weight="700" fill="#1f2328">posture neutre</text>
+<text x="116" y="480" font-size="19" fill="#4b535c">contraintes minimales</text>
+
+<!-- Modulateurs du risque -->
+<text x="24" y="530" font-size="19" font-weight="700" fill="#1f2328">Trois modulateurs du risque</text>
+<rect x="24" y="544" width="136" height="84" rx="10" fill="#eceef0"/>
+<text x="92" y="572" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">intensité</text>
+<text x="92" y="596" font-size="19" fill="#4b535c" text-anchor="middle">proche de</text>
+<text x="92" y="618" font-size="19" fill="#4b535c" text-anchor="middle">la limite ?</text>
+<rect x="172" y="544" width="136" height="84" rx="10" fill="#eceef0"/>
+<text x="240" y="572" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">fréquence</text>
+<text x="240" y="596" font-size="19" fill="#4b535c" text-anchor="middle">combien</text>
+<text x="240" y="618" font-size="19" fill="#4b535c" text-anchor="middle">de fois ?</text>
+<rect x="320" y="544" width="136" height="84" rx="10" fill="#eceef0"/>
+<text x="388" y="572" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">durée</text>
+<text x="388" y="596" font-size="19" fill="#4b535c" text-anchor="middle">combien</text>
+<text x="388" y="618" font-size="19" fill="#4b535c" text-anchor="middle">de temps ?</text>
+</g>
+</svg>
