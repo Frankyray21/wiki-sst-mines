@@ -11,13 +11,15 @@ Page : [Gestion des moteurs diesel sous terre](https://frankyray21.github.io/wik
 | --- | --- |
 | Options et leviers | `wiki-diesel-sous-terre-leviers-v2.svg` remplace la v1 : une galerie en coupe, une chargeuse diesel dont l'échappement dérive vers un travailleur, un ventilateur qui amène de l'air frais ; les quatre leviers sont posés là où ils agissent (source, échappement, air, travailleur) |
 | Post-traitement et carburant | `wiki-diesel-sous-terre-echappement-v2.svg` remplace la v1 : DOC, SCR et DPF dessinés en coupe, côte à côte, avec ce que chacun réduit (CO et HC ; NOx, avec l'urée ; particules, avec la régénération) et la base requise du DPF (ULSD) |
-| Ventilation souterraine | `wiki-diesel-sous-terre-ventilation-v1.svg`, nouveau : chantier en cul-de-sac vu de haut, air primaire, ventilateur auxiliaire et conduite, échappement dilué dans la zone respiratoire du travailleur, réglage à la demande |
+| Ventilation souterraine | `wiki-diesel-sous-terre-ventilation-v1.svg`, nouveau : chantier en cul-de-sac vu de haut, air primaire, ventilateur auxiliaire et conduite, échappement dilué dans la zone respiratoire du travailleur, ventilation à la demande |
 | Mesure et surveillance d'exposition | `wiki-diesel-sous-terre-mesure-v1.svg`, nouveau : pompe et tête de prélèvement dans la zone respiratoire, laboratoire accrédité, moins de 0,4 mg/m³ de carbone total, registre du poste, au moins tous les 6 mois et après toute modification |
 
 Le contenu validé des deux schémas de la première version (leviers, dispositifs, précautions : ni rendement
 chiffré, ni ordre de montage) est conservé ; seule la forme change. Les deux nouveaux schémas suivent le RSSM, art.
-102 (1°, 1.1°, 2°), 103.1 et 105, et la définition de la zone respiratoire du RSST, art. 1. Les fichiers v1 ne sont
-plus cités par aucune page : ils sont retirés du site.
+90, 102 (1°, 1.1°) et 103.1, et la définition de la zone respiratoire du RSST, art. 1 ; un relecteur contradictoire les
+a confrontés mot à mot au texte officiel (étiquette « ventilation à la demande », terme de la page ; art. 105 et
+art. 102, 2° retirés des textes, faute d'être dessinés). Les fichiers v1 ne sont plus cités par aucune page : ils sont
+retirés du site.
 
 ## À faire dans le vault (sinon la prochaine construction efface ces changements)
 
@@ -32,8 +34,6 @@ node tools/build_site.mjs
 - Le lot garde la correction du NO₂ (3 ppm) de la première version : déjà faite, elle est reconnue et sautée.
 - Une fois le lot appliqué, les fichiers `wiki-diesel-sous-terre-leviers-v1.svg` et `…-echappement-v1.svg` peuvent
   être supprimés du dossier Infographies du vault : plus rien ne les cite.
-- Le relecteur des deux nouveaux schémas travaillait encore au moment de la publication : ses corrections, s'il y en
-  a, suivront.
 
 ## Relevé en chemin, non modifié (à trancher)
 
@@ -49,7 +49,9 @@ node tools/build_site.mjs
 - Vocabulaire : la page dit « ventilateur auxiliaire » ; le RSSM dit « ventilateur secondaire » (art. 1). Le schéma
   garde le mot de la page.
 - La page ne rappelle pas que la ventilation à la demande reste soumise aux débits minimaux du RSSM (art. 100.1, 101,
-  102, 104) ni qu'un ventilateur fonctionne continuellement quand une personne se trouve dans son circuit (art. 94).
+  102, 104), qu'un ventilateur fonctionne continuellement quand une personne se trouve dans son circuit (art. 94), ni
+  que tout moteur diesel dans la zone affectée par l'arrêt d'un ventilateur doit être arrêté dans un délai de
+  15 minutes (art. 105) : à ajouter au « Cadre légal » ou au tableau « Ventilation souterraine ».
 - L'art. 103.1 du RSSM n'a pas de page dans le recueil du wiki (les pages vont de l'art. 103 à l'art. 104) : les
   sources le citent sans lien.
 

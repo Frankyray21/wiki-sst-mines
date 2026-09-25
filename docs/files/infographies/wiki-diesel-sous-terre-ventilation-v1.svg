@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="540" viewBox="0 0 480 540" role="img" aria-labelledby="t d">
 <title id="t">Diluer l’échappement là où l’on respire</title>
-<desc id="d">Vue de haut d’un chantier en cul-de-sac branché sur une galerie. Dans la galerie, à gauche, descend l’air primaire, de l’air frais venu de la surface (flèches bleues). À l’entrée du chantier, un ventilateur auxiliaire prend cet air et le pousse dans une conduite jusqu’au front, au fond du chantier. Près du front travaille un engin diesel, une chargeuse vue de haut. Ses gaz d’échappement, des points rouges serrés à la sortie, s’espacent en repartant avec l’air vers la galerie (flèche grise) : ils se diluent. Un travailleur se tient sur ce trajet ; un demi-disque pointillé devant son visage marque sa zone respiratoire, où il ne reste que peu de points. Un capteur fixé près du front est relié au ventilateur auxiliaire par un câble pointillé marqué « réglage à la demande ». En bas, l’air chargé d’échappement rejoint la galerie en aval de la prise du ventilateur et s’en va.</desc>
+<desc id="d">Vue de haut d’un chantier en cul-de-sac branché sur une galerie. Dans la galerie, à gauche, descend l’air primaire, de l’air frais venu de la surface (flèches bleues). À l’entrée du chantier, un ventilateur auxiliaire prend cet air et le pousse dans une conduite jusqu’au front, au fond du chantier. Près du front travaille un engin diesel, une chargeuse vue de haut. Ses gaz d’échappement, des points rouges serrés à la sortie, s’espacent en repartant avec l’air vers la galerie (flèche grise) : ils se diluent. Un travailleur se tient sur ce trajet ; un demi-disque pointillé devant son visage marque sa zone respiratoire, où il ne reste que peu de points. Un capteur dans le chantier est relié au ventilateur auxiliaire par un câble pointillé marqué « ventilation à la demande ». En bas, l’air chargé d’échappement rejoint la galerie en aval de la prise du ventilateur et s’en va.</desc>
 <defs>
 <linearGradient id="panache" gradientUnits="userSpaceOnUse" x1="294" y1="0" x2="100" y2="0"><stop offset="0" stop-color="#fde3e0"/><stop offset="1" stop-color="#fde3e0" stop-opacity="0.15"/></linearGradient>
 </defs>
@@ -20,9 +20,8 @@
 <path d="M40 126V516M100 126V262H436L446 280L438 300L450 322L440 344L452 366L442 386L448 408H100V516" stroke="#6e7781" stroke-width="3.5" stroke-linejoin="round" fill="none"/>
 
 <!-- Ventilation à la demande : capteur relié au ventilateur -->
-<path d="M124 267V186H368V262" stroke="#4b535c" stroke-width="2.5" stroke-dasharray="7 5" fill="none"/>
-<rect x="137" y="174" width="218" height="24" fill="#eceef0"/>
-<text x="246" y="192" font-size="19" fill="#1f2328" text-anchor="middle">réglage à la demande</text>
+<path d="M124 267V196H368V262" stroke="#4b535c" stroke-width="2.5" stroke-dasharray="7 5" fill="none"/>
+<text x="246" y="186" font-size="19" fill="#1f2328" text-anchor="middle">ventilation à la demande</text>
 <rect x="360" y="262" width="16" height="13" rx="2" fill="#1f2328"/>
 
 <!-- Conduite -->
