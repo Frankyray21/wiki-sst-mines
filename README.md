@@ -73,13 +73,15 @@ adresses n'ont pas changé.
   essai par défaut, sauvegarde avant écriture
 - `tools/retouches.mjs` + `tools/appliquer_retouches.mjs` — pose dans le vault un lot de retouches préparé
   sans accès au vault (médias à copier, lignes désignées par leur texte visible, liens vers une adresse
-  publiée) ; essai par défaut, tout ou rien, rejouable, sauvegarde avant écriture
+  publiée ; nouvelle version d'un schéma à la place de l'ancienne) ; essai par défaut, tout ou rien, rejouable,
+  sauvegarde avant écriture
 - `tools/regenerer_hors_ligne.mjs` — retouche de `docs/` sans reconstruction : recopie `style.css` et `app.js`,
   réécrit le manifeste hors ligne en gardant l'estampille de version (seuls les fichiers modifiés changent de hash)
   et marque `sw.js` de l'empreinte du manifeste, pour que les navigateurs installent le nouveau service worker
 - `tools/poser_schemas.mjs` — pose les schémas SVG d'une page, décrits dans une spec JSON (ancre, capture remplacée,
-  texte alternatif, légende, version texte, sources, corrections du texte), dans la page publiée et sa copie
-  encadrement, et écrit le lot du vault correspondant ; essai par défaut, `--ecrire` pour écrire
+  version antérieure remplacée, texte alternatif, légende, version texte, sources, corrections du texte), dans la
+  page publiée et sa copie encadrement, et écrit le lot du vault correspondant ; essai par défaut, `--ecrire` pour
+  écrire
 - `tools/dimensions_svg.mjs` — largeur et hauteur d'un schéma SVG, posées par le générateur sur son `<img>`
 - `tools/avis.mjs` — bloc « Cette page vous a-t-elle été utile ? » (pouce et commentaire) posé sur chaque page
   issue d'une note ; `tools/avis-worker/` — le relais Cloudflare qui écrit dans Airtable, et son mode d'emploi

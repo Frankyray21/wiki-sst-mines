@@ -151,3 +151,44 @@ test('correction par motif : même correction sur une page et sa copie qui diff�
     assert.equal(poserDansPage(r, spec, OPTS), r, 'repassage sans effet');
   }
 });
+
+test('nouvelle version d’un schéma publié : elle prend la place de l’ancienne, dans la page et dans la note', () => {
+  const v1 = { page: 'w/x/page.html', note: { titre: 'Page', wiki: 'Wiki X' }, schemas: [schema('wiki-x-a-v1.svg', 'Une section')] };
+  const avecV1 = poserDansPage(PAGE, v1, OPTS);
+  const v2 = { ...v1, schemas: [schema('wiki-x-a-v2.svg', 'Une section', { remplaceSchema: 'wiki-x-a-v1.svg', legende: 'Nouvelle légende.' })] };
+  const h = poserDansPage(avecV1, v2, OPTS);
+  assert.ok(!h.includes('wiki-x-a-v1.svg') && h.includes('<h3 id="section">Une section</h3>\n<div class="infographie infographie-compacte infographie-schema"><span class="page-img"><a class="img-lien" href="../../files/infographies/wiki-x-a-v2.svg">'));
+  assert.equal(h.split('infographie-schema').length - 1, 1, 'un seul bloc');
+  assert.equal(poserDansPage(h, v2, OPTS), h, 'second passage : même page');
+  assert.throws(() => poserDansPage(PAGE, v2, OPTS), /schéma à remplacer absent/);
+  // la note : bloc v1 remplacé ; note neuve : bloc inséré sous l'ancre
+  const lot1 = lotDepuisSpec(v1, { date: 'd', revision: 'r', portee: 'p', precautions: '' });
+  const lot2 = lotDepuisSpec(v2, { date: 'd', revision: 'r', portee: 'p', precautions: '' });
+  assert.deepEqual(lot2.retouches.map(r => [r.type, r.ancien]), [['remplacerBloc', 'Infographies/wiki-x-a-v1.svg']]);
+  assert.deepEqual(lot2.medias, [{ depuis: 'docs/files/infographies/wiki-x-a-v2.svg', dossierVault: 'Infographies' }]);
+  const note = ['# Page', '', '### Une section', '', 'Texte avant la capture de cours.', ''].join('\n');
+  const opts = { resoudreLien: () => 'Cible' };
+  const noteV1 = appliquerRetouches(note, lot1.retouches, opts).texte;
+  const depuisV1 = appliquerRetouches(noteV1, lot2.retouches, opts);
+  const depuisRien = appliquerRetouches(note, lot2.retouches, opts);
+  assert.ok(depuisV1.ok && depuisRien.ok);
+  assert.equal(depuisV1.texte, depuisRien.texte, 'même note, qu’elle ait reçu la v1 ou non');
+  assert.ok(depuisV1.texte.includes('Nouvelle légende.') && !depuisV1.texte.includes('wiki-x-a-v1.svg'));
+});
+
+test('nouvelle version d’un schéma qui avait remplacé une capture : capture et légende retirées une seule fois', () => {
+  const v1 = { page: 'w/x/page.html', note: { titre: 'Page' }, schemas: [schema('wiki-x-a-v1.svg', null, { remplace: 'pasted-image-20240101000000' })], paragraphesRetires: ['Légende de la capture. Usage personnel.'] };
+  const v2 = { ...v1, schemas: [schema('wiki-x-a-v2.svg', null, { remplace: 'pasted-image-20240101000000', remplaceSchema: 'wiki-x-a-v1.svg' })] };
+  const h = poserDansPage(poserDansPage(PAGE, v1, OPTS), v2, OPTS);
+  assert.ok(h.includes('wiki-x-a-v2.svg') && !h.includes('wiki-x-a-v1.svg') && !h.includes('pasted-image-20240101000000'));
+  const lot = s => lotDepuisSpec(s, { date: 'd', revision: 'r', portee: 'p', precautions: '' });
+  const note = ['### Une section', '', 'Texte avant la capture de cours.', '', '![[Pasted image 20240101000000.png]]', '', 'Légende de la capture. Usage personnel.', '', 'Fin.', ''].join('\n');
+  const opts = { resoudreLien: () => 'Cible' };
+  const noteV1 = appliquerRetouches(note, lot(v1).retouches, opts).texte;
+  const depuisV1 = appliquerRetouches(noteV1, lot(v2).retouches, opts);
+  const depuisRien = appliquerRetouches(note, lot(v2).retouches, opts);
+  assert.ok(depuisV1.ok, JSON.stringify(depuisV1.rapports));
+  assert.ok(depuisRien.ok, JSON.stringify(depuisRien.rapports));
+  assert.equal(depuisV1.texte, depuisRien.texte);
+  assert.deepEqual(appliquerRetouches(depuisV1.texte, lot(v2).retouches, opts).rapports.map(x => x.statut), ['déjà faite', 'déjà faite', 'déjà faite']);
+});

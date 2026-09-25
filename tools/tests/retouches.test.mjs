@@ -78,3 +78,32 @@ test('lien dans une cellule de tableau : barre du libellé échappée', () => {
   assert.ok(r.texte.endsWith('| x | [[art-308-RSST surveillant\\|art. 308]] |'));
   assert.equal(appliquerRetouches(r.texte, [{ type: 'remplacerLigne', ligneContenant: 'vieux', tableau: true, par: '| x | {{lien:w/legislation/x/art-308-rsst-surveillant.html|art. 308}} |' }], { resoudreLien }).rapports[0].statut, 'déjà faite');
 });
+
+test('remplacerBloc : la nouvelle version d’un schéma prend la place de l’ancienne, ou s’insère si la note ne l’a jamais reçue', () => {
+  const bloc = v => `<div class="infographie infographie-compacte infographie-schema">\n\n![[Infographies/wiki-x-${v}.svg|alt ${v}]]\n\n<p class="infographie-legende">Légende ${v}.</p>\n\n<details class="infographie-texte">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Puce ${v}.</li>\n</ul>\n</details>\n<p class="infographie-sources">Sources ${v}.</p>\n\n</div>`;
+  const r = { type: 'remplacerBloc', ligneContenant: 'Options et leviers', ancien: 'Infographies/wiki-x-v1.svg', bloc: bloc('v2'), marqueur: 'Infographies/wiki-x-v2.svg' };
+  const crlf = s => s.replace(/\r?\n/g, '\r\n');
+  const avecV1 = crlf(['### Options et leviers', '', bloc('v1'), '', '#### Suite', ''].join('\n'));
+  const une = appliquerRetouches(avecV1, [r]);
+  assert.ok(une.ok, JSON.stringify(une.rapports));
+  assert.equal(une.texte, crlf(['### Options et leviers', '', bloc('v2'), '', '#### Suite', ''].join('\n')), 'même place, CRLF conservés, rien de la v1');
+  assert.equal(appliquerRetouches(une.texte, [r]).rapports[0].statut, 'déjà faite');
+  // note qui n'a jamais reçu la v1 : insertion après la ligne désignée
+  const neuve = appliquerRetouches('### Options et leviers\n\n#### Suite\n', [r]);
+  assert.ok(neuve.ok);
+  assert.equal(neuve.texte, '### Options et leviers\n\n' + bloc('v2') + '\n\n#### Suite\n');
+  assert.equal(appliquerRetouches(neuve.texte, [r]).texte, neuve.texte, 'rejoué : sans effet');
+  // les deux versions dans la note, ou l'ancienne hors d'un bloc : rien n'est touché
+  assert.equal(appliquerRetouches(avecV1 + '\r\n' + bloc('v2'), [r]).ok, false);
+  const nue = appliquerRetouches('### Options et leviers\n\n![[Infographies/wiki-x-v1.svg]]\n\nTexte.\n', [r]);
+  assert.equal(nue.ok, false);
+  assert.match(nue.rapports[0].statut, /hors d’un bloc/);
+});
+
+test('supprimerLigne : plusieurs marqueurs possibles (schéma ou sa version antérieure)', () => {
+  const r = { type: 'supprimerLigne', ligneContenant: 'img-001.png', marqueur: ['Infographies/x-v2.svg', 'Infographies/x-v1.svg'] };
+  assert.equal(appliquerRetouches('![[Infographies/x-v1.svg]]\nSuite.', [r]).rapports[0].statut, 'déjà faite', 'capture retirée par la v1');
+  assert.equal(appliquerRetouches('![[Infographies/x-v2.svg]]\nSuite.', [r]).rapports[0].statut, 'déjà faite', 'capture retirée par la v2');
+  assert.equal(appliquerRetouches('Suite.', [r]).rapports[0].statut, 'introuvable');
+  assert.equal(appliquerRetouches('![[img-001.png]]\n\nSuite.', [r]).texte, '\nSuite.');
+});

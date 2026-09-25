@@ -15,6 +15,12 @@
 //   insererApres   { ligneContenant, bloc, marqueur, colle } insère un bloc après la ligne ; « marqueur »
 //                                                      (souvent le nom du fichier image) dit si c'est fait ;
 //                                                      « colle » : sans ligne vide (rangée de tableau, puce)
+//   remplacerBloc  { ligneContenant, ancien, bloc, marqueur } nouvelle version d'un schéma : remplace le bloc
+//                                                      <div class="infographie…"> qui intègre « ancien » (fichier
+//                                                      de la version publiée avant) ; si la note ne l'a jamais
+//                                                      reçu, insère le bloc après la ligne, comme insererApres
+// Le « marqueur » de supprimerLigne peut être une liste : la ligne a été retirée par l'un ou l'autre
+// (le schéma et sa version antérieure, par exemple).
 // Dans « apres », « par » et « bloc », {{lien:<adresse publiée>|<libellé>}} devient un wikilink vers
 // la note qui produit cette adresse (résolu par l'appelant, qui connaît le vault) ; « tableau: true »
 // sur la retouche écrit le lien avec « \| », comme l'exige une cellule de tableau.
@@ -48,6 +54,22 @@ export function resoudreLiens(texte, resoudreLien, { tableau = false } = {}) {
   });
 }
 
+// Bloc <div class="infographie…"> … </div> qui contient la ligne i (un schéma : image, légende, version
+// texte, sources, sans <div> imbriqué) ; null si la ligne n'est pas dans un tel bloc.
+function blocAutour(lignes, i) {
+  let debut = i;
+  while (debut >= 0 && !/^\s*<div class="infographie\b/.test(lignes[debut])) {
+    if (debut < i && /<\/?div\b/.test(lignes[debut])) return null;
+    debut--;
+  }
+  let fin = i;
+  while (fin < lignes.length && !/^\s*<\/div>\s*$/.test(lignes[fin])) {
+    if (fin > i && /<div\b/.test(lignes[fin])) return null;
+    fin++;
+  }
+  return debut >= 0 && fin < lignes.length ? { debut, fin } : null;
+}
+
 export function appliquerRetouches(texte, retouches, { resoudreLien = () => null } = {}) {
   const nl = texte.includes('\r\n') ? '\r\n' : '\n';
   let lignes = texte.split(/\r?\n/);
@@ -59,8 +81,23 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
     lignes.forEach((l, i) => { if (normaliser(l).includes(voulu)) trouvees.push(i); });
     const rapport = { type: r.type, ligneContenant: r.ligneContenant };
     rapports.push(rapport);
+    if (r.type === 'remplacerBloc') {
+      // l'ancienne version est dans la note : son bloc est remplacé là où il est, sans égard à la ligne désignée
+      const anciens = lignes.flatMap((l, i) => l.includes(r.ancien) ? [i] : []);
+      const nouveau = lignes.some(l => l.includes(r.marqueur));
+      if (nouveau && anciens.length) { rapport.statut = 'ancienne et nouvelle versions du schéma toutes deux présentes'; ok = false; continue; }
+      if (anciens.length > 1) { rapport.statut = `ancienne version ambiguë (${anciens.length} lignes)`; ok = false; continue; }
+      if (anciens.length === 1) {
+        const b = blocAutour(lignes, anciens[0]);
+        if (!b) { rapport.statut = 'ancienne version hors d’un bloc de schéma'; ok = false; continue; }
+        lignes.splice(b.debut, b.fin - b.debut + 1, ...resoudreLiens(r.bloc, resoudreLien, r).split(/\r?\n/));
+        rapport.ligne = b.debut + 1;
+        rapport.statut = 'appliquée';
+        continue;
+      }
+    }
     const dejaFait = () => {
-      if (r.type === 'insererApres') return lignes.some(l => l.includes(r.marqueur));
+      if (r.type === 'insererApres' || r.type === 'remplacerBloc') return lignes.some(l => l.includes(r.marqueur));
       // comparaison sur le texte brut : « avant » et « apres » peuvent ne différer que par la cible d'un lien
       // (si la ligne n'est plus désignable — le fragment faisait partie du texte remplacé —, le
       // remplacement est fait quand « apres » figure sur une seule ligne et « avant » sur aucune)
@@ -72,7 +109,7 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
       if (r.type === 'remplacerLigne') return lignes.some(l => normaliser(l) === normaliser(resoudreLiens(r.par, resoudreLien, r)));
       // l'image est retirée pour être remplacée : sans ligne à retirer, la retouche n'est faite que si
       // la note portait déjà son remplaçant AVANT ce passage (lot rejoué), sinon elle est introuvable
-      if (r.type === 'supprimerLigne') return trouvees.length === 0 && !!r.marqueur && texte.includes(r.marqueur);
+      if (r.type === 'supprimerLigne') return trouvees.length === 0 && [].concat(r.marqueur || []).some(m => texte.includes(m));
       return false;
     };
     if (dejaFait()) { rapport.statut = 'déjà faite'; continue; }
@@ -92,7 +129,7 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
       lignes.splice(i, 1);
       // ne pas laisser deux lignes vides à la place de l'image retirée
       if (i < lignes.length && lignes[i].trim() === '' && i > 0 && lignes[i - 1].trim() === '') lignes.splice(i, 1);
-    } else if (r.type === 'insererApres') {
+    } else if (r.type === 'insererApres' || r.type === 'remplacerBloc') {
       const bloc = resoudreLiens(r.bloc, resoudreLien, r).split(/\r?\n/);
       if (r.colle) {
         // lignes ajoutées à un tableau ou à une liste : aucune ligne vide, qui les en détacherait
