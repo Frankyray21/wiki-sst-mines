@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-25",
+ "revision": "gaz-et-vapeurs-art-302",
+ "portee": "Page « Gaz et vapeurs » : « sous 5 % de la LIE » devient « à 5 % de la LIE au plus », comme l’art. 302 du RSST (« inférieure ou égale à 5 % »).",
+ "precautions": "Formulation seulement ; aucune valeur changée.",
+ "application": "node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-gaz-et-vapeurs.json (essai), puis --appliquer",
+ "note": {
+  "titre": "Gaz et vapeurs",
+  "page": "w/hygiene/gaz-et-vapeurs.html",
+  "wiki": "Wiki Hygiène industrielle"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "En espace clos : maintenir les concentrations",
+   "avant": "sous 5 % de la LIE",
+   "apres": "à 5 % de la LIE au plus"
+  }
+ ]
+}

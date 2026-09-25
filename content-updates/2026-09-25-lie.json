@@ -1,0 +1,57 @@
+{
+ "date": "2026-09-25",
+ "revision": "lie-seuils-rsst",
+ "portee": "Page « LIE » du recueil : le tableau « Seuils opérationnels en espace clos » attribuait au RSST une sortie immédiate à 10 % de la LIE, plaçait la zone explosive entre 10 et 100 % de la LIE et disait l’atmosphère « sécuritaire » à 0 % ; la démarche citait des alarmes à 10 % et 20 % de la LIE et une ventilation forcée « si LIE > 0 % ». Remplacés par ce que disent les art. 302, 303 (par. 3), 304 et 306 du RSST ; réglages d’alarme présentés comme ceux de l’appareil et du site, que le RSST ne fixe pas. Titre de section et ancre conservés.",
+ "precautions": "Aucune valeur ajoutée hors du texte officiel du recueil (tools/textes-loi/RSST.json). Pas de validation spécialisée.",
+ "application": "node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-lie.json (essai), puis --appliquer",
+ "note": {
+  "titre": "LIE",
+  "page": "w/legislation/40-concepts-juridiques-transverses/lie.html",
+  "wiki": "Recueil législatif SST",
+  "chemin": "Recueil législatif SST/40 - Concepts juridiques transverses/LIE.md"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "Atmosphère sécuritaire",
+   "tableau": true,
+   "par": "| Au plus 5 % de la LIE | **Limite** de l'{{lien:w/legislation/20-reglements/rsst/art-302-rsst-ventilation-espace-clos.html|art. 302}} du [[RSST]] pour les gaz et vapeurs inflammables en espace clos | Condition nécessaire, pas suffisante : les autres conditions de l'art. 302 (oxygène, contaminants de l'annexe I) et les autres exigences de la section sur les espaces clos s'appliquent aussi |"
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "Seuil d'alarme typique",
+   "tableau": true,
+   "par": "| Plus de 5 % de la LIE, sous la LIE | Mélange encore **trop pauvre** pour brûler, mais au-delà de la limite de l'art. 302 | Aucun travailleur ne peut pénétrer ni être présent dans l'espace clos (art. 302), sauf atmosphère rendue inerte ({{lien:w/legislation/20-reglements/rsst/art-303-rsst-poussieres-combustibles.html|art. 303}}, par. 3) |"
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "Sortie immédiate requise",
+   "tableau": true,
+   "par": "| De la LIE à la LSE | Plage d'explosivité : mélange **explosif** | Aucune entrée, élimination de toute source d'ignition |"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "10-100 % LIE",
+   "marqueur": "Plage d'explosivité : mélange"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Trop riche pour brûler",
+   "marqueur": "le RSST ne les fixe pas",
+   "bloc": "Les seuils d'alarme d'un détecteur, souvent exprimés en % de la LIE, sont des réglages de l'appareil et de la procédure du site : le RSST ne les fixe pas. Il fixe la limite de l'art. 302 et, pour le travail à chaud, exige un relevé continu avec un instrument à lecture directe muni d'une alarme ({{lien:w/legislation/20-reglements/rsst/art-304-rsst-travail-a-chaud.html|art. 304}})."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Ventilation forcée",
+   "avant": "**Ventilation forcée** si LIE > 0 %",
+   "apres": "**Ventilation** naturelle ou mécanique, de manière à maintenir les conditions de l'{{lien:w/legislation/20-reglements/rsst/art-302-rsst-ventilation-espace-clos.html|art. 302}}"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Surveillance continue",
+   "avant": "**Surveillance continue** pendant le travail (alarmes audibles à seuils 10 % et 20 % LIE)",
+   "apres": "**Surveillance** pendant le travail, continue ou périodique selon l'évaluation d'une personne qualifiée ({{lien:w/legislation/20-reglements/rsst/art-306-rsst-methode-et-frequence-des-releves-atmospheriques.html|art. 306}}) ; continue avec alarme pour le travail à chaud (art. 304)"
+  }
+ ]
+}

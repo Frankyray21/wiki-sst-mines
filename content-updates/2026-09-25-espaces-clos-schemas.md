@@ -64,8 +64,12 @@ Texte de la page :
 ```
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-espaces-clos-schemas.json
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-espaces-clos-schemas.json --appliquer
+node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-lie.json --appliquer
+node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-gaz-et-vapeurs.json --appliquer
 node tools/build_site.mjs
 ```
+
+(Sans `--appliquer`, chaque commande fait d'abord un essai.)
 
 L'essai affiche chaque retouche avec sa ligne ; si une seule ne trouve pas sa ligne, rien n'est
 écrit. Les cinq SVG sont copiés dans `Infographies/` du vault. Les anciennes captures restent
@@ -84,11 +88,12 @@ Légendes à écrire avec les mots de l'art. 1 (« puits d'accès », non « pui
 
 ## Relevé en chemin, non modifié (à trancher)
 
-- **Page LIE du recueil** (`w/legislation/40-concepts-juridiques-transverses/lie.html`), liée
-  juste au-dessus du premier schéma : son tableau « Seuils opérationnels en espace clos » donne
-  « 10 % — Sortie immédiate requise (RSST espaces clos) » et une zone explosive de « 10-100 % LIE ».
-  C'est la même erreur que la capture retirée : le RSST fixe au plus 5 %, la zone explosive commence
-  à la LIE.
+- **Page LIE du recueil — corrigée le même jour** (lot `2026-09-25-lie.json`) : son tableau « Seuils
+  opérationnels en espace clos » donnait « 10 % — Sortie immédiate requise (RSST espaces clos) », une zone
+  explosive de « 10-100 % LIE » et une atmosphère « sécuritaire » à 0 % ; la démarche citait des alarmes à
+  10 % et 20 % de la LIE et une ventilation forcée « si LIE > 0 % ». Remplacés par ce que disent les
+  art. 302, 303 (par. 3), 304 et 306 ; les réglages d'alarme sont présentés comme ceux de l'appareil et du
+  site, que le RSST ne fixe pas. Titre de section et ancre conservés.
 - Espaces clos : « Près de 40 Québécois… » ; tableaux « Effets de la déficience en O2 » et
   « Exemple H2S » ; « NIOSH > 20 changements d'air/h » et « APSAM 7,5 CA/H » — non sourcés. Le mot
   « permis » n'apparaît dans aucun des art. 296.1 à 312 ; l'art. 304 (travail à chaud) exige un
@@ -98,7 +103,8 @@ Légendes à écrire avec les mots de l'art. 1 (« puits d'accès », non « pui
   ventilateur. Tétraèdre du feu : quatrième sommet « Auto-combustion » à vérifier.
 - Voir aussi et fil d'Ariane : art-256-RSST (chariots élévateurs) présenté comme espaces clos,
   fiches casque et EPI ; thème « programme d'hygiène industrielle » dans le wiki Sécurité.
-- Gaz et vapeurs : « sous 5 % de la LIE » (l'art. 302 dit « inférieure ou égale »).
+- Gaz et vapeurs — corrigée le même jour (lot `2026-09-25-gaz-et-vapeurs.json`) : « sous 5 % de la LIE »
+  devient « à 5 % de la LIE au plus » (l'art. 302 dit « inférieure ou égale »).
 - Bruit : son infographie PNG n'a pas de dimensions sur l'`<img>` (place non réservée avant
   chargement) — existait avant ce lot.
 

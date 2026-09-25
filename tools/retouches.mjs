@@ -16,7 +16,8 @@
 //                                                      (souvent le nom du fichier image) dit si c'est fait ;
 //                                                      « colle » : sans ligne vide (rangée de tableau, puce)
 // Dans « apres », « par » et « bloc », {{lien:<adresse publiée>|<libellé>}} devient un wikilink vers
-// la note qui produit cette adresse (résolu par l'appelant, qui connaît le vault).
+// la note qui produit cette adresse (résolu par l'appelant, qui connaît le vault) ; « tableau: true »
+// sur la retouche écrit le lien avec « \| », comme l'exige une cellule de tableau.
 
 export function normaliser(s) {
   return String(s)
@@ -38,11 +39,12 @@ function motifSouple(avant) {
   }).join('').replace(/(\[\\s\\u00a0\\u202f\]\+)+/g, '[\\s\\u00a0\\u202f]+'));
 }
 
-export function resoudreLiens(texte, resoudreLien) {
+// Dans une cellule de tableau, la barre du libellé s'écrit « \| » (sinon elle coupe la cellule).
+export function resoudreLiens(texte, resoudreLien, { tableau = false } = {}) {
   return String(texte).replace(/\{\{lien:([^|}]+)\|([^}]+)\}\}/g, (m, adresse, libelle) => {
     const cible = resoudreLien(adresse.trim());
     if (!cible) throw new Error('lien sans note : ' + adresse);
-    return `[[${cible}|${libelle}]]`;
+    return `[[${cible}${tableau ? '\\|' : '|'}${libelle}]]`;
   });
 }
 
@@ -63,11 +65,11 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
       // (si la ligne n'est plus désignable — le fragment faisait partie du texte remplacé —, le
       // remplacement est fait quand « apres » figure sur une seule ligne et « avant » sur aucune)
       if (r.type === 'remplacer') {
-        const avantL = motifSouple(r.avant), apresL = motifSouple(resoudreLiens(r.apres, resoudreLien));
+        const avantL = motifSouple(r.avant), apresL = motifSouple(resoudreLiens(r.apres, resoudreLien, r));
         if (trouvees.length === 1) return !avantL.test(lignes[trouvees[0]]) && apresL.test(lignes[trouvees[0]]);
         return trouvees.length === 0 && lignes.filter(l => apresL.test(l)).length === 1 && !lignes.some(l => avantL.test(l));
       }
-      if (r.type === 'remplacerLigne') return lignes.some(l => normaliser(l) === normaliser(resoudreLiens(r.par, resoudreLien)));
+      if (r.type === 'remplacerLigne') return lignes.some(l => normaliser(l) === normaliser(resoudreLiens(r.par, resoudreLien, r)));
       // l'image est retirée pour être remplacée : sans ligne à retirer, la retouche n'est faite que si
       // la note portait déjà son remplaçant AVANT ce passage (lot rejoué), sinon elle est introuvable
       if (r.type === 'supprimerLigne') return trouvees.length === 0 && !!r.marqueur && texte.includes(r.marqueur);
@@ -83,15 +85,15 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
     if (r.type === 'remplacer') {
       const motif = motifSouple(r.avant);
       if (!motif.test(lignes[i])) { rapport.statut = 'fragment « avant » absent de la ligne'; ok = false; continue; }
-      lignes[i] = lignes[i].replace(motif, () => resoudreLiens(r.apres, resoudreLien));
+      lignes[i] = lignes[i].replace(motif, () => resoudreLiens(r.apres, resoudreLien, r));
     } else if (r.type === 'remplacerLigne') {
-      lignes[i] = resoudreLiens(r.par, resoudreLien);
+      lignes[i] = resoudreLiens(r.par, resoudreLien, r);
     } else if (r.type === 'supprimerLigne') {
       lignes.splice(i, 1);
       // ne pas laisser deux lignes vides à la place de l'image retirée
       if (i < lignes.length && lignes[i].trim() === '' && i > 0 && lignes[i - 1].trim() === '') lignes.splice(i, 1);
     } else if (r.type === 'insererApres') {
-      const bloc = resoudreLiens(r.bloc, resoudreLien).split(/\r?\n/);
+      const bloc = resoudreLiens(r.bloc, resoudreLien, r).split(/\r?\n/);
       if (r.colle) {
         // lignes ajoutées à un tableau ou à une liste : aucune ligne vide, qui les en détacherait
         lignes.splice(i + 1, 0, ...bloc);

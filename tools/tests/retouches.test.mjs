@@ -72,3 +72,9 @@ test('insertion collée dans un tableau, sans ligne vide', () => {
 test('lien sans note : erreur plutôt qu’un lien rouge', () => {
   assert.throws(() => resoudreLiens('{{lien:w/x.html|x}}', () => null), /lien sans note/);
 });
+
+test('lien dans une cellule de tableau : barre du libellé échappée', () => {
+  const r = appliquerRetouches('| a | b |\n|---|---|\n| x | vieux |', [{ type: 'remplacerLigne', ligneContenant: 'vieux', tableau: true, par: '| x | {{lien:w/legislation/x/art-308-rsst-surveillant.html|art. 308}} |' }], { resoudreLien });
+  assert.ok(r.texte.endsWith('| x | [[art-308-RSST surveillant\\|art. 308]] |'));
+  assert.equal(appliquerRetouches(r.texte, [{ type: 'remplacerLigne', ligneContenant: 'vieux', tableau: true, par: '| x | {{lien:w/legislation/x/art-308-rsst-surveillant.html|art. 308}} |' }], { resoudreLien }).rapports[0].statut, 'déjà faite');
+});

@@ -100,6 +100,8 @@ node tools/extraire_textes_loi.mjs  # → tools/textes-loi/*.json, puis reconstr
 # Poser un lot de retouches préparé hors du vault (schémas d'Espaces clos, 25 septembre 2026)
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-espaces-clos-schemas.json
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-espaces-clos-schemas.json --appliquer
+node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-lie.json --appliquer          # page LIE du recueil
+node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-gaz-et-vapeurs.json --appliquer
 
 # Poser les renvois tranchés dans le vault : essai, puis application avec sauvegarde
 node tools/appliquer_renvois.mjs
@@ -143,6 +145,10 @@ node tools/serve.mjs
   l'art. 308 aligné sur le texte en vigueur. **À poser dans le vault** avec `tools/appliquer_retouches.mjs`,
   sinon la prochaine construction les efface. Photos à venir (aucune banque d'images joignable depuis
   l'environnement de travail). Détail et points relevés à trancher : `content-updates/2026-09-25-espaces-clos-schemas.md`
+- **Page LIE du recueil (25 septembre 2026)** : le tableau des seuils en espace clos attribuait au RSST une
+  sortie immédiate à 10 % de la LIE et plaçait la zone explosive entre 10 et 100 % de la LIE ; il suit désormais
+  les art. 302, 303, 304 et 306 (au plus 5 % de la LIE ; la plage explosive va de la LIE à la LSE ; les seuils
+  d'alarme sont des réglages d'appareil, que le RSST ne fixe pas). Lot du vault : `content-updates/2026-09-25-lie.json`
 - **Application Android (23 septembre 2026)** : `docs/app/wiki-sst-mines.apk` (8 Ko), lien « 📱 Application Android »
   au pied du portail et de l'espace encadrement. L'application ouvre le site publié en plein écran ; le hors-ligne est
   celui du site (service worker) ; les liens externes et les PDF partent au navigateur. Construite par
