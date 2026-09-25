@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="610" viewBox="0 0 480 610" role="img" aria-labelledby="t d">
+<title id="t">La zone atteinte par chaque fraction</title>
+<desc id="d">Silhouette de profil, tête et thorax, avec les voies respiratoires simplifiées : fosses nasales et bouche, pharynx, larynx, trachée, bronches, puis grappes d’alvéoles. Deux lignes pointillées découpent trois zones, de haut en bas : voies aériennes supérieures (nez, bouche, larynx), région trachéo-bronchique, région alvéolaire. Devant le visage, trois particules partent à la hauteur du nez et de la bouche ; chaque flèche descend jusqu’à la zone qu’atteint sa fraction. Fraction inhalable (Pi) : entre par le nez et la bouche ; sa flèche, la plus courte, reste dans la première zone. Fraction thoracique (Pthor) : pénètre au-delà du larynx ; sa flèche franchit la première ligne pointillée et arrive dans la région trachéo-bronchique. Fraction respirable (Pr) : atteint les alvéoles ; sa flèche, la plus longue, arrive dans la région alvéolaire. Aucune taille n’est indiquée.</desc>
+<rect width="480" height="610" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">La zone atteinte</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">par chaque fraction</text>
+
+<!-- Silhouette de profil (tête et thorax), tournée vers la droite -->
+<path d="M100 104C140 104 164 124 168 152L166 172L186 202C185 207 179 212 170 212L174 224L168 229L173 236L168 244C170 256 166 266 156 270C140 274 128 276 124 284V312C150 318 168 334 174 364C178 392 178 440 175 490L170 586H46L42 500C38 440 38 380 48 346C54 330 62 318 66 306C68 294 62 280 54 266C40 244 34 200 40 160C48 124 70 104 100 104Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+
+<!-- Voies respiratoires simplifiées : fosses nasales, bouche, pharynx, larynx, trachée -->
+<path d="M174 208C156 194 124 188 102 192C94 194 90 200 90 210V284L96 300V392H114V300L116 290L112 250C128 252 150 246 166 234V228C150 222 128 222 112 226V216C128 212 152 212 170 214Z" fill="#e1ecfa" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+
+<!-- Arbre bronchique -->
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M105 390L78 426L64 470M78 426L92 470M105 390L132 426L118 470M132 426L146 470" stroke="#6e7781" stroke-width="11"/>
+<path d="M105 390L78 426L64 470M78 426L92 470M105 390L132 426L118 470M132 426L146 470" stroke="#e1ecfa" stroke-width="5"/>
+</g>
+<!-- Alvéoles -->
+<g fill="#e1ecfa" stroke="#6e7781" stroke-width="2.5">
+<circle cx="56" cy="484" r="9"/><circle cx="72" cy="490" r="9"/><circle cx="62" cy="502" r="9"/>
+<circle cx="88" cy="486" r="9"/><circle cx="102" cy="494" r="9"/><circle cx="88" cy="504" r="9"/>
+<circle cx="116" cy="486" r="9"/><circle cx="130" cy="494" r="9"/><circle cx="116" cy="504" r="9"/>
+<circle cx="148" cy="484" r="9"/><circle cx="156" cy="498" r="9"/><circle cx="142" cy="506" r="9"/>
+</g>
+
+<!-- Limites des zones -->
+<path d="M24 306H456M24 462H456" stroke="#6e7781" stroke-width="2.5" stroke-dasharray="8 6"/>
+
+<!-- Fractions : départ devant le nez et la bouche, flèche jusqu’à la zone atteinte -->
+<g fill="#1f2328">
+<circle cx="204" cy="218" r="6"/>
+<circle cx="222" cy="218" r="6"/>
+<circle cx="240" cy="218" r="6"/>
+</g>
+<g stroke="#1f2328" stroke-width="4" fill="none" stroke-linecap="round">
+<path d="M204 228V520"/>
+<path d="M222 228V376"/>
+<path d="M240 228V250"/>
+</g>
+<g fill="#1f2328">
+<path d="M195 516L204 532L213 516Z"/>
+<path d="M213 372L222 388L231 372Z"/>
+<path d="M231 246L240 262L249 246Z"/>
+</g>
+
+<!-- Zone 1 -->
+<text x="256" y="128" font-size="19" fill="#4b535c">voies aériennes</text>
+<text x="256" y="152" font-size="19" fill="#4b535c">supérieures</text>
+<text x="256" y="176" font-size="19" fill="#4b535c">nez, bouche, larynx</text>
+<text x="256" y="240" font-size="20" font-weight="700" fill="#1f2328">inhalable <tspan font-weight="400" fill="#4b535c">(Pi)</tspan></text>
+<text x="256" y="264" font-size="19" fill="#1f2328">entre par le nez</text>
+<text x="256" y="288" font-size="19" fill="#1f2328">et la bouche</text>
+
+<!-- Zone 2 -->
+<text x="238" y="334" font-size="19" fill="#4b535c">région trachéo-</text>
+<text x="238" y="358" font-size="19" fill="#4b535c">bronchique</text>
+<text x="238" y="396" font-size="20" font-weight="700" fill="#1f2328">thoracique <tspan font-weight="400" fill="#4b535c">(Pthor)</tspan></text>
+<text x="238" y="420" font-size="19" fill="#1f2328">pénètre au-delà</text>
+<text x="238" y="444" font-size="19" fill="#1f2328">du larynx</text>
+
+<!-- Zone 3 -->
+<text x="220" y="490" font-size="19" fill="#4b535c">région alvéolaire</text>
+<text x="220" y="530" font-size="20" font-weight="700" fill="#1f2328">respirable <tspan font-weight="400" fill="#4b535c">(Pr)</tspan></text>
+<text x="220" y="554" font-size="19" fill="#1f2328">atteint les alvéoles</text>
+</g>
+</svg>
