@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-silice-no2-toxicite-respiratoire",
+ "portee": "Schémas de la page w/toxicologie/toxicite-respiratoire.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Toxicité du système respiratoire",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/toxicite-respiratoire.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Quartz (silice cristalline)",
+   "avant": "Qc 0,025 mg/m³",
+   "apres": "Qc 0,05 mg/m³"
+  }
+ ]
+}

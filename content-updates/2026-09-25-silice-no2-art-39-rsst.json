@@ -1,0 +1,27 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-silice-no2-art-39-rsst",
+ "portee": "Schémas de la page w/hygiene/art-39-rsst-vea-admissibles.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-39-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-39-rsst-vea-admissibles.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "En mine, les VEMP critiques incluent",
+   "avant": "(0,025 mg/m³ fraction respirable, C1, RP)",
+   "apres": "(0,05 mg/m³ fraction respirable, C2, EM)"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "En mine, les VEMP critiques incluent",
+   "avant": "(25 ppm VEMP)",
+   "apres": "(35 ppm VEMP)"
+  }
+ ]
+}

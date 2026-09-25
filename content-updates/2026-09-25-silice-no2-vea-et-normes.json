@@ -1,0 +1,27 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-silice-no2-vea-et-normes",
+ "portee": "Schémas de la page w/hygiene/vea-et-normes.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "VEA et normes RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/vea-et-normes.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "(quartz, respirable)",
+   "avant": "0,1 mg/m³",
+   "apres": "0,05 mg/m³"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "(quartz, respirable)",
+   "avant": "C1, EM",
+   "apres": "C2, EM"
+  }
+ ]
+}

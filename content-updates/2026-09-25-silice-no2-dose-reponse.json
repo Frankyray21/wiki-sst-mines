@@ -1,0 +1,27 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-silice-no2-dose-reponse",
+ "portee": "Schémas de la page w/toxicologie/dose-reponse-et-dl50.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Toxicité, dose-réponse et DL50",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/dose-reponse-et-dl50.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "NOx post-sautage",
+   "avant": "VEMP NO2 0,2 ppm",
+   "apres": "VEMP NO2 3 ppm"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Silicose chez foreurs et concassage",
+   "avant": "respirable 0,025 mg/m³",
+   "apres": "respirable 0,05 mg/m³"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-silice-no2-art-116-rsst-ergonomie",
+ "portee": "Schémas de la page w/ergonomie/art-116-rsst-qualite-air-milieu-travail.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-116-RSST, qualité air milieu travail",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/art-116-rsst-qualite-air-milieu-travail.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Dioxyde d'azote (NO₂)",
+   "avant": "VEMP 0,2 ppm / VECD 1 ppm",
+   "apres": "VEMP 3 ppm / VECD 5 ppm"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Monoxyde de carbone (CO)",
+   "avant": "VEMP 20 ppm",
+   "apres": "VEMP 35 ppm"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Poussières de silice libre",
+   "avant": "VEMP 0,1 mg/m³",
+   "apres": "VEMP 0,05 mg/m³"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "mesure du NO₂ à 0,8 ppm",
+   "avant": "0,8 ppm (VECD dépassée)",
+   "apres": "0,8 ppm"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "silice libre à 0,18 mg/m³",
+   "avant": "VEMP dépassée de 80 %",
+   "apres": "VEMP dépassée de 260 %"
+  }
+ ]
+}
