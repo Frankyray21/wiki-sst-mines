@@ -1,0 +1,42 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-diesel-sous-terre-schemas",
+ "portee": "Schémas de la page w/toxicologie/diesel-sous-terre.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Gestion des moteurs diesel sous terre",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/diesel-sous-terre.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-diesel-sous-terre-echappement-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-diesel-sous-terre-leviers-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Post-traitement et carburant",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-diesel-sous-terre-echappement-v1.svg|Ligne d’échappement d’un engin diesel : le moteur, une zone de post-traitement en pointillé, puis la sortie des gaz. Trois fiches disent ce que chaque dispositif réduit et ce qu’il demande : DOC (CO et hydrocarbures, modérément les particules), SCR (NOx, demande de l’urée), DPF (particules, entretien régulier avec régénération), avec au bas de la fiche du DPF sa base requise, un carburant à très faible teneur en soufre (ULSD).]]\n\n<p class=\"infographie-legende\">Les dispositifs de post-traitement ne réduisent pas tous les mêmes contaminants ; selon l’engin, on en pose un ou plusieurs. Le RSSM exige par ailleurs que chaque moteur diesel utilisé dans une mine souterraine soit muni d’un dispositif d’épuration ou de dilution des gaz d’échappement, et il plafonne la teneur en soufre du carburant diesel.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Une ligne d’échappement part du moteur diesel et traverse une zone de post-traitement, en pointillé, avant la sortie des gaz. Cette zone reçoit un ou plusieurs dispositifs, selon l’engin ; les fiches ne suivent pas un ordre de montage.</li>\n<li>Catalyseur d’oxydation (DOC) : il réduit le CO et les hydrocarbures, et modérément les particules (étiquette en pointillé).</li>\n<li>SCR : il réduit les NOx et demande de l’urée.</li>\n<li>Filtre à particules (DPF) : il réduit les particules et demande un entretien régulier (régénération).</li>\n<li>Au bas de la fiche du DPF, un socle grisé indique sa base requise : un carburant à très faible teneur en soufre (ULSD).</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après le tableau « Post-traitement et carburant » de cette page. Obligations rappelées dans la légende : {{lien:w/legislation/20-reglements/rssm/art-102-rssm-conditions-utilisation-moteur-diesel-souterrain.html|RSSM, art. 102}}, 4° et 6° (teneur en soufre du carburant diesel, dispositif d’épuration ou de dilution). Schéma de principe : ni ordre de montage ni rendement chiffré.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-diesel-sous-terre-echappement-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Options et leviers",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-diesel-sous-terre-leviers-v1.svg|Quatre niveaux d’action le long d’une flèche rouge qui suit les émissions, du moteur jusqu’à la tête d’un travailleur : à la source (renouvellement vers Tier 4 Final, engins électriques à batterie, carburant), sur l’échappement (DPF, DOC, SCR), dans l’air du chantier (ventilation primaire, auxiliaire, à la demande) et autour du travailleur (cabine pressurisée avec filtration HEPA, protection respiratoire).]]\n\n<p class=\"infographie-legende\">Les leviers se situent à quatre niveaux, du moteur jusqu’au travailleur, et la maîtrise des émissions demande de les combiner. Plusieurs configurations sont possibles selon l’âge du parc, la profondeur et le calendrier d’électrification.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Une flèche rouge, « émissions jusqu’au travailleur », descend du moteur jusqu’à la tête d’un travailleur. Quatre niveaux d’action se succèdent le long de ce trajet, du moteur vers le travailleur.</li>\n<li>À la source : renouvellement vers des moteurs Tier 4 Final, engins électriques à batterie, carburant (ULSD ou carburants alternatifs).</li>\n<li>Sur l’échappement, où la flèche traverse un dispositif : filtre à particules (DPF), catalyseur d’oxydation (DOC), SCR pour les NOx.</li>\n<li>Dans l’air du chantier, où un ventilateur pousse de l’air à travers la flèche : ventilation primaire, ventilation auxiliaire, ventilation à la demande.</li>\n<li>Autour du travailleur, là où arrive la flèche : cabine pressurisée avec filtration HEPA ; protection respiratoire pour l’entretien ou les tâches près d’un échappement. Mention en bas : « La maîtrise demande une combinaison de ces leviers. »</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après l’introduction de la page et quatre tableaux de cette section (flotte et motorisation ; post-traitement et carburant ; ventilation souterraine ; EPI et procédures). Ventilation qui dilue les contaminants des gaz d’échappement, exposition mesurée au niveau de la zone respiratoire du travailleur : {{lien:w/legislation/20-reglements/rssm/art-102-rssm-conditions-utilisation-moteur-diesel-souterrain.html|RSSM, art. 102}}, 1°. Schéma de principe : l’ordre suit le trajet des émissions ; ni efficacité comparée ni seuil.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-diesel-sous-terre-leviers-v1.svg"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "NO2 0,2 ppm",
+   "avant": "NO2 0,2 ppm",
+   "apres": "NO2 3 ppm"
+  }
+ ]
+}
