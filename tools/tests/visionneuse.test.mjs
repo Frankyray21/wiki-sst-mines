@@ -121,7 +121,8 @@ test('un schéma inversé en thème sombre le reste une fois agrandi', () => {
 
 test('taille standard : captures plafonnées en hauteur, infographies plus hautes, proportions gardées', () => {
   assert.match(css, /\.page-img img \{ width: auto; max-height: min\(24rem, 60vh\); object-fit: contain; \}/);
-  assert.match(css, /\.infographie \.page-img img \{[^}]*width: auto; max-width: 100%; height: auto; max-height: min\(34rem, 75vh\)/);
+  assert.match(css, /\.infographie \.page-img img \{[^}]*width: 100%; height: auto; max-height: min\(34rem, 75vh\); object-fit: contain/, 'infographie : place réservée, proportions gardées');
+  assert.match(css, /\.infographie \.page-img \{[^}]*max-width: 30rem/, 'infographie : largeur de lecture des schémas');
   assert.match(css, /\.page-img a \{[^}]*cursor: zoom-in/);
   assert.match(css, /\.visionneuse\.vis-reelle \{[^}]*overflow: auto/);
 });

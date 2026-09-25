@@ -71,6 +71,12 @@ adresses n'ont pas changé.
   écrit le manifeste compilé, la table de ressources et l'archive alignée
 - `tools/appliquer_intros.mjs` — pose dans les notes du vault les phrases d'ouverture d'un lot (`tools/intros.mjs`) ;
   essai par défaut, sauvegarde avant écriture
+- `tools/retouches.mjs` + `tools/appliquer_retouches.mjs` — pose dans le vault un lot de retouches préparé
+  sans accès au vault (médias à copier, lignes désignées par leur texte visible, liens vers une adresse
+  publiée) ; essai par défaut, tout ou rien, rejouable, sauvegarde avant écriture
+- `tools/regenerer_hors_ligne.mjs` — retouche de `docs/` sans reconstruction : recopie `style.css` et `app.js`,
+  réécrit le manifeste hors ligne en gardant l'estampille de version (seuls les fichiers modifiés changent de hash)
+- `tools/dimensions_svg.mjs` — largeur et hauteur d'un schéma SVG, posées par le générateur sur son `<img>`
 - `tools/avis.mjs` — bloc « Cette page vous a-t-elle été utile ? » (pouce et commentaire) posé sur chaque page
   issue d'une note ; `tools/avis-worker/` — le relais Cloudflare qui écrit dans Airtable, et son mode d'emploi
 - `tools/serve.mjs` — serveur local de prévisualisation (port 8090)
@@ -90,6 +96,10 @@ npm --prefix tools test
 # Ré-extraire le texte des lois depuis les PDF du recueil (après une mise à jour des PDF)
 npm --prefix tools install          # installe pdfjs-dist (dépendance de développement)
 node tools/extraire_textes_loi.mjs  # → tools/textes-loi/*.json, puis reconstruire le site
+
+# Poser un lot de retouches préparé hors du vault (schémas d'Espaces clos, 25 septembre 2026)
+node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-espaces-clos-schemas.json
+node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-espaces-clos-schemas.json --appliquer
 
 # Poser les renvois tranchés dans le vault : essai, puis application avec sauvegarde
 node tools/appliquer_renvois.mjs
@@ -121,6 +131,18 @@ node tools/serve.mjs
   maillons (Portail › Wiki › Thème) et un bloc « Voir aussi » (version jumelle publiée, notions du même thème).
   Sur l'accueil du wiki, le titre de chaque volet mène à la page de son thème ; la flèche et le reste de la ligne
   replient le volet
+- **Images à taille standard (25 septembre 2026)** : une capture ou une planche ne coupe plus la lecture —
+  hauteur plafonnée à min(24rem, 60vh), proportions gardées ; infographies et schémas dans une colonne de
+  30rem, à min(34rem, 75vh). Toucher une image l'ouvre agrandie par-dessus la page ; toucher l'image agrandie
+  passe en taille réelle ; ✕, Échap, un toucher à côté ou le bouton Retour du téléphone referment sans quitter
+  la page. Détail : `content-updates/2026-09-25-espaces-clos-schemas.md`
+- **Schémas d'Espaces clos (25 septembre 2026)** : cinq schémas vectoriels sur `w/securite/espaces-clos.html`
+  (limites d'explosion, densité de vapeur, purge court-circuitée, surveillant, chantier en cul-de-sac), dessinés
+  depuis la page et les art. 302, 308, 308.1 et 309 du RSST ; trois remplacent des captures de cours, dont une
+  qui affichait une alarme à 10 % de la LIE. Inversés en thème sombre (classe `infographie-schema`). Résumé de
+  l'art. 308 aligné sur le texte en vigueur. **À poser dans le vault** avec `tools/appliquer_retouches.mjs`,
+  sinon la prochaine construction les efface. Photos à venir (aucune banque d'images joignable depuis
+  l'environnement de travail). Détail et points relevés à trancher : `content-updates/2026-09-25-espaces-clos-schemas.md`
 - **Application Android (23 septembre 2026)** : `docs/app/wiki-sst-mines.apk` (8 Ko), lien « 📱 Application Android »
   au pied du portail et de l'espace encadrement. L'application ouvre le site publié en plein écran ; le hors-ligne est
   celui du site (service worker) ; les liens externes et les PDF partent au navigateur. Construite par

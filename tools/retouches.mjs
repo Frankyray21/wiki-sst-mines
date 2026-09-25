@@ -60,7 +60,13 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
     const dejaFait = () => {
       if (r.type === 'insererApres') return lignes.some(l => l.includes(r.marqueur));
       // comparaison sur le texte brut : « avant » et « apres » peuvent ne différer que par la cible d'un lien
-      if (r.type === 'remplacer') return trouvees.length === 1 && !motifSouple(r.avant).test(lignes[trouvees[0]]) && motifSouple(resoudreLiens(r.apres, resoudreLien)).test(lignes[trouvees[0]]);
+      // (si la ligne n'est plus désignable — le fragment faisait partie du texte remplacé —, le
+      // remplacement est fait quand « apres » figure sur une seule ligne et « avant » sur aucune)
+      if (r.type === 'remplacer') {
+        const avantL = motifSouple(r.avant), apresL = motifSouple(resoudreLiens(r.apres, resoudreLien));
+        if (trouvees.length === 1) return !avantL.test(lignes[trouvees[0]]) && apresL.test(lignes[trouvees[0]]);
+        return trouvees.length === 0 && lignes.filter(l => apresL.test(l)).length === 1 && !lignes.some(l => avantL.test(l));
+      }
       if (r.type === 'remplacerLigne') return lignes.some(l => normaliser(l) === normaliser(resoudreLiens(r.par, resoudreLien)));
       // l'image est retirée pour être remplacée : sans ligne à retirer, la retouche n'est faite que si
       // la note portait déjà son remplaçant AVANT ce passage (lot rejoué), sinon elle est introuvable

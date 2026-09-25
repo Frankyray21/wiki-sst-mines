@@ -46,6 +46,15 @@ test('lot rejoué : tout est reconnu comme déjà fait, texte inchangé', () => 
   assert.equal(deux.texte, une.texte);
 });
 
+test('remplacement dont le fragment de repérage était dans le texte remplacé : reconnu au second passage', () => {
+  const r = { type: 'remplacer', ligneContenant: 'Contact visuel', avant: 'Contact visuel, auditif.', apres: 'Communication bidirectionnelle.' };
+  const une = appliquerRetouches('- Contact visuel, auditif.\n- Autre.', [r]);
+  assert.equal(une.texte, '- Communication bidirectionnelle.\n- Autre.');
+  const deux = appliquerRetouches(une.texte, [r]);
+  assert.equal(deux.rapports[0].statut, 'déjà faite');
+  assert.equal(appliquerRetouches('- Autre.', [r]).rapports[0].statut, 'introuvable', 'ni avant ni après : introuvable');
+});
+
 test('ligne introuvable ou ambiguë : ok faux, rapport explicite', () => {
   const r = appliquerRetouches(NOTE + '\r\nGaz inflammables ailleurs', [LOT[2]], { resoudreLien });
   assert.equal(r.ok, false);

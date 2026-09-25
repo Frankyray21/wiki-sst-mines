@@ -907,10 +907,12 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 
 /* Infographies éditoriales : image agrandissable, équivalent textuel natif. */
 .infographie { margin: 1.25rem 0 1.75rem; padding: 1rem; border: 1px solid var(--border-light); border-inline-start: 4px solid var(--accent); border-radius: .75rem; background: var(--content-bg); }
-.infographie .page-img { margin: 0 auto 1rem; max-width: 34rem; }
+.infographie .page-img { margin: 0 auto 1rem; max-width: 30rem; }
 .infographie .page-img a { display: block; }
-/* infographies et schémas : lus sur place, donc un plafond plus haut que les captures */
-.infographie .page-img img { display: block; width: auto; max-width: 100%; height: auto; max-height: min(34rem, 75vh); margin: 0 auto; padding: 0; border-radius: .5rem; filter: none !important; }
+/* infographies et schémas : lus sur place, donc un plafond plus haut que les captures. Largeur
+   définie (et non auto) : avec les dimensions posées sur l'<img>, la place est réservée avant le
+   chargement différé ; object-fit garde les proportions quand la hauteur est plafonnée. */
+.infographie .page-img img { display: block; width: 100%; height: auto; max-height: min(34rem, 75vh); object-fit: contain; background: none; border: 0; margin: 0 auto; padding: 0; border-radius: .5rem; filter: none !important; }
 .infographie .img-zoom { display: block; padding: .5rem; font-size: .875rem; }
 .infographie-legende { font-size: 1rem; line-height: 1.6; }
 .infographie-texte { margin: 1rem 0; border: 1px solid var(--border-light); border-radius: .5rem; }

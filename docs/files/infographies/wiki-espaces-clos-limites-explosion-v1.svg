@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="480" height="630" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 630" role="img" aria-labelledby="t d">
+  <title id="t">Gaz inflammable : où se situe 5 % de la LIE</title>
+  <desc id="d">Bande horizontale de la concentration d’un gaz inflammable dans l’air, de 0 % de gaz à 100 % de gaz, découpée en trois zones : mélange trop pauvre sous la LIE, mélange explosif entre la LIE et la LSE, mélange trop riche au-dessus de la LSE (échelle non proportionnelle). Un encadré agrandit, à l’échelle, la zone trop pauvre, de 0 % de gaz à la LIE : la plage « au plus 5 % de la LIE » n’en occupe que le tout début. C’est la limite du RSST pour les gaz et vapeurs inflammables en espace clos, bien avant la LIE elle-même ; au-delà, la limite est dépassée même si le mélange est encore trop pauvre pour exploser.</desc>
+
+  <rect width="480" height="630" fill="#fbfaf6"/>
+
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+
+    <!-- Titre -->
+    <text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Gaz inflammable :</text>
+    <text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">où se situe 5 % de la LIE</text>
+
+    <!-- Axe de la bande -->
+    <text x="24" y="114" font-size="19" fill="#4b535c">Concentration du gaz dans l’air</text>
+    <text x="24" y="146" font-size="19" fill="#4b535c">0 % de gaz</text>
+    <text x="456" y="146" font-size="19" fill="#4b535c" text-anchor="end">100 % de gaz</text>
+    <path d="M140 140 H302" stroke="#6e7781" stroke-width="2.5" fill="none"/>
+    <path d="M316 140 L302 133 L302 147 Z" fill="#6e7781"/>
+
+    <!-- Limites d’explosion -->
+    <text x="176" y="178" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">LIE</text>
+    <text x="296" y="178" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">LSE</text>
+    <path d="M176 183 V190 M296 183 V190" stroke="#1f2328" stroke-width="2.5" fill="none"/>
+
+    <!-- Bande principale (échelle non proportionnelle) -->
+    <rect x="24" y="190" width="152" height="66" fill="#eceef0"/>
+    <rect x="176" y="190" width="120" height="66" fill="#c62828"/>
+    <rect x="296" y="190" width="160" height="66" fill="#eceef0"/>
+    <rect x="24" y="190" width="8" height="66" fill="#1f2328"/>
+    <rect x="24" y="190" width="432" height="66" fill="none" stroke="#6e7781" stroke-width="2.5"/>
+    <rect x="24" y="190" width="152" height="66" fill="none" stroke="#1f2328" stroke-width="3"/>
+
+    <g font-size="20" font-weight="700" text-anchor="middle">
+      <text x="104" y="218" fill="#1f2328">trop</text>
+      <text x="104" y="242" fill="#1f2328">pauvre</text>
+      <text x="236" y="218" fill="#fbfaf6">mélange</text>
+      <text x="236" y="242" fill="#fbfaf6">explosif</text>
+      <text x="376" y="218" fill="#1f2328">trop</text>
+      <text x="376" y="242" fill="#1f2328">riche</text>
+    </g>
+
+    <!-- Cône d’agrandissement de la zone « trop pauvre » -->
+    <path d="M24 256 H176 L456 322 H24 Z" fill="#eceef0" fill-opacity="0.6"/>
+    <path d="M176 256 L456 322 M24 256 V322" stroke="#6e7781" stroke-width="2.5" stroke-dasharray="7 5" fill="none"/>
+
+    <!-- Encadré agrandi, à l’échelle : de 0 % de gaz à la LIE -->
+    <rect x="24" y="322" width="432" height="228" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+    <text x="44" y="352" font-size="20" font-weight="700" fill="#1f2328">Zone « trop pauvre » agrandie</text>
+
+    <text x="44" y="384" font-size="19" fill="#4b535c">0 % de gaz</text>
+    <text x="424" y="384" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">LIE</text>
+    <path d="M424 389 V396" stroke="#1f2328" stroke-width="2.5" fill="none"/>
+
+    <rect x="44" y="396" width="380" height="50" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+    <rect x="44" y="396" width="19" height="50" fill="#1f2328"/>
+    <text x="244" y="428" font-size="19" fill="#4b535c" text-anchor="middle">au-delà : limite du RSST dépassée</text>
+
+    <path d="M53.5 446 V462" stroke="#1f2328" stroke-width="2.5" fill="none"/>
+    <text x="44" y="486" font-size="22" font-weight="700" fill="#1f2328">au plus 5 % de la LIE</text>
+    <text x="44" y="510" font-size="19" fill="#4b535c">limite fixée par le RSST</text>
+    <text x="44" y="533" font-size="19" fill="#4b535c">en espace clos</text>
+
+    <!-- Mentions -->
+    <text x="24" y="582" font-size="19" fill="#4b535c">Bande du haut : échelle non proportionnelle.</text>
+    <text x="24" y="606" font-size="19" fill="#4b535c">Bande de l’encadré : à l’échelle.</text>
+  </g>
+</svg>
