@@ -71,7 +71,10 @@ function sourcesHtml(src, { titreDe, hrefDe }) {
 // liste, là où la note, qui l'insère après la ligne de la puce, termine aussi la liste.
 export function trouverAncre(html, ancre) {
   const voulu = visible(ancre);
-  const blocs = [...html.matchAll(/<(p|h[1-6]|li)\b[^>]*>([\s\S]*?)<\/\1>/g)];
+  // le sommaire, la navigation et « Voir aussi » répètent les titres de la page : on n'y pose rien
+  const navs = [...html.matchAll(/<nav\b[\s\S]*?<\/nav>/g)].map(m => [m.index, m.index + m[0].length]);
+  const blocs = [...html.matchAll(/<(p|h[1-6]|li)\b[^>]*>([\s\S]*?)<\/\1>/g)]
+    .filter(m => !navs.some(([debut, fin]) => m.index >= debut && m.index < fin));
   let r = blocs.filter(m => visible(m[2]) === voulu);
   if (r.length === 0 && voulu.length >= 25) r = blocs.filter(m => visible(m[2]).startsWith(voulu));
   if (r.length === 0 && voulu.length >= 20) r = blocs.filter(m => visible(m[2]).includes(voulu));

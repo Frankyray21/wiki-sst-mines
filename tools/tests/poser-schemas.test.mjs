@@ -39,6 +39,11 @@ test('ancres : paragraphe, titre, début ou fragment de paragraphe, dernière pu
   assert.throws(() => trouverAncre(PAGE, 'Première puce.'), /introuvable|pas la dernière/);
   assert.throws(() => trouverAncre(PAGE + '\n<p>Une section</p>', 'Une section'), /ambiguë/);
   assert.throws(() => trouverAncre(PAGE, 'Absent de la page, vraiment absent.'), /introuvable/);
+  // le sommaire répète les titres : l'ancre reste le titre de la section
+  const sommaire = '<nav class="toc" aria-label="Sommaire de la page"><ul><li class="toc-l3"><a href="#section">Une section</a></li></ul></nav>\n';
+  const avecSommaire = sommaire + PAGE;
+  const titre = trouverAncre(avecSommaire, 'Une section');
+  assert.equal(avecSommaire.slice(titre.debut, titre.fin), '<h3 id="section">Une section</h3>');
 });
 
 test('pose : blocs après leur ancre, capture et légende retirées, liens résolus, repassage sans effet', () => {
