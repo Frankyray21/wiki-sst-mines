@@ -1,0 +1,39 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-irr-indemnites",
+ "portee": "Schémas de la page w/droit-travail/irr-indemnites.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Indemnités de remplacement du revenu (IRR)",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/irr-indemnites.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "portion travaillée",
+   "avant": "Premier jour de l'accident : l'employeur verse le salaire net pour la portion travaillée",
+   "apres": "Jour où débute l'incapacité : l'employeur verse le salaire net pour le reste de la journée de travail prévue"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Jours 2 à 14",
+   "avant": "Jours 2 à 14 :",
+   "apres": "Pendant les 14 jours complets suivant le début de l'incapacité :"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "À partir du 15e jour : la",
+   "avant": "À partir du 15e jour :",
+   "apres": "À compter du 15e jour complet suivant le début de l'incapacité :"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "15e jour d'incapacité",
+   "avant": "À partir du 15e jour d'incapacité",
+   "apres": "Dès le 15e jour complet suivant le début de l'incapacité"
+  }
+ ]
+}
