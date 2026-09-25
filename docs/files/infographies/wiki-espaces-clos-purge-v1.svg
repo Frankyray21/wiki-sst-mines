@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="480" height="456" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 456" role="img" aria-labelledby="t d">
+<title id="t">Purge : l’air qui fait un court-circuit</title>
+<desc id="d">Coupe d’un réservoir horizontal. L’air frais, en bleu, entre par une ouverture à l’extrémité gauche et ressort aussitôt par une ouverture du dessus, voisine, à la même extrémité : il fait un court-circuit. Le reste du volume, surtout l’extrémité droite où se tient un travailleur, est une zone mal renouvelée, teintée de rouge, plus foncé vers l’extrémité droite. Situation à éviter.</desc>
+<defs>
+<linearGradient id="zone" gradientUnits="userSpaceOnUse" x1="110" y1="0" x2="330" y2="0"><stop offset="0" stop-color="#fcedea"/><stop offset="1" stop-color="#fde3e0"/></linearGradient>
+<clipPath id="interieur"><path d="M140 200H416A40 80 0 0 1 416 360H140A40 80 0 0 1 140 200Z"/></clipPath>
+</defs>
+<rect width="480" height="456" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Purge : l’air qui fait</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">un court-circuit</text>
+
+<!-- Intérieur : tout le reste du volume est mal renouvelé (teinte rouge, plus marquée vers l’extrémité opposée) -->
+<rect x="96" y="196" width="364" height="168" fill="url(#zone)" clip-path="url(#interieur)"/>
+
+<!-- Paroi du réservoir, avec deux ouvertures (bout gauche et dessus, côté gauche) -->
+<path d="M100.6 266A40 80 0 0 1 140 200H176M204 200H416A40 80 0 0 1 416 360H140A40 80 0 0 1 100.6 294" stroke="#4b535c" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+<!-- Piquage d’entrée (bout gauche) -->
+<path d="M100.6 266H78M100.6 294H78M78 257V303" stroke="#4b535c" stroke-width="4" stroke-linecap="round" fill="none"/>
+<!-- Piquage de sortie (dessus) -->
+<path d="M176 200V180M204 200V180M168 180H212" stroke="#4b535c" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+<!-- Berceaux et sol -->
+<path d="M166 362L158 384H206L198 362ZM362 362L354 384H402L394 362Z" fill="#eceef0" stroke="#6e7781" stroke-width="3" stroke-linejoin="round"/>
+<path d="M24 385H456" stroke="#6e7781" stroke-width="3" stroke-linecap="round"/>
+
+<!-- Travailleur, à l’extrémité opposée -->
+<g fill="#4b535c" transform="translate(6 0)">
+<circle cx="392" cy="258" r="11"/>
+<path d="M379 276Q379 271 384 271H400Q405 271 405 276V314H379Z"/>
+<rect x="380" y="310" width="10" height="45" rx="4"/>
+<rect x="394" y="310" width="10" height="45" rx="4"/>
+<path d="M379 278L366 300" stroke="#4b535c" stroke-width="8" stroke-linecap="round"/>
+<path d="M405 278L412 306" stroke="#4b535c" stroke-width="8" stroke-linecap="round"/>
+</g>
+
+<!-- Air frais : entre et ressort aussitôt (court-circuit) -->
+<path d="M24 280H112C158 280 190 264 190 226V132" stroke="#1565c0" stroke-width="16" stroke-linejoin="round" fill="none"/>
+<path d="M170 134L190 104L210 134Z" fill="#1565c0"/>
+
+<!-- Étiquettes -->
+<text x="24" y="322" font-size="19" fill="#1f2328">entrée</text>
+<text x="24" y="346" font-size="19" fill="#1f2328">d’air</text>
+<text x="216" y="140" font-size="19" fill="#1f2328">sortie d’air</text>
+<text x="214" y="246" font-size="20" font-weight="700" fill="#1565c0">court-circuit</text>
+<text x="288" y="306" font-size="20" font-weight="700" fill="#c62828" text-anchor="middle">zone mal</text>
+<text x="288" y="330" font-size="20" font-weight="700" fill="#c62828" text-anchor="middle">renouvelée</text>
+
+<text x="24" y="428" font-size="19" fill="#4b535c">Situation à éviter</text>
+</g>
+</svg>

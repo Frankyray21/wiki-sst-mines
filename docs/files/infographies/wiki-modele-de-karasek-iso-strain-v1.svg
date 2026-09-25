@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="650" viewBox="0 0 480 650" role="img" aria-labelledby="t d">
+<title id="t">Quand le soutien manque : l’iso-strain</title>
+<desc id="d">Le soutien social comme troisième dimension : deux lignes comparent le même job strain avec un soutien au travail fort, puis faible. En haut, « Job strain + fort soutien » (collègues, supérieur : aide, écoute) : deux personnes posent la main sur l’épaule du travailleur ; flèche vers un encadré rose : c’est encore du job strain, qui reste à risque. En bas, « Job strain + faible soutien » (aide limitée, manque d’écoute) : les mêmes personnes, un peu à l’écart, sans geste d’aide ; flèche vers un encadré rouge : l’iso-strain, la configuration la plus à risque. Encadré « En contexte FIFO ou camp éloigné » : le soutien externe (famille, communauté) est temporairement coupé ; si le soutien au travail manque aussi, un job strain peut basculer en iso-strain. Mention : un risque statistique, pas un diagnostic.</desc>
+<rect width="480" height="650" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Quand le soutien manque :</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">l’iso-strain</text>
+<!-- A : job strain + soutien fort (collègues, supérieur) : c’est encore du job strain, zone à risque (page : « la zone la plus à risque ») -->
+<text x="24" y="116" font-size="20" font-weight="700" fill="#1f2328">Job strain + fort soutien</text>
+<text x="24" y="140" font-size="19" fill="#4b535c">collègues, supérieur : aide, écoute</text>
+<g fill="#6e7781" transform="translate(46 228) scale(0.7)">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -77L-22 -50" stroke="#6e7781" stroke-width="8" stroke-linecap="round"/>
+<path d="M13 -77Q40 -97 67 -87" stroke="#1565c0" stroke-width="8" stroke-linecap="round" fill="none"/>
+</g>
+<g fill="#6e7781" transform="translate(162 228) scale(0.7)">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -77Q-40 -97 -67 -87" stroke="#1565c0" stroke-width="8" stroke-linecap="round" fill="none"/>
+<path d="M13 -77L22 -50" stroke="#6e7781" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g fill="#1f2328" transform="translate(104 228) scale(0.7)">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -77L-22 -50" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+<path d="M13 -77L22 -50" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+</g>
+<path d="M196 192H208" stroke="#1f2328" stroke-width="3" fill="none"/>
+<path d="M220 192L207 185V199Z" fill="#1f2328"/>
+<rect x="226" y="154" width="230" height="76" rx="10" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/>
+<text x="341" y="186" font-size="20" font-weight="700" fill="#c62828" text-anchor="middle">Job strain</text>
+<text x="341" y="214" font-size="19" fill="#1f2328" text-anchor="middle">reste à risque</text>
+<!-- B : job strain + soutien faible = iso-strain ; « la plus à risque » plutôt que « la plus dommageable » : des associations, pas une causalité démontrée -->
+<text x="24" y="268" font-size="20" font-weight="700" fill="#1f2328">Job strain + faible soutien</text>
+<text x="24" y="292" font-size="19" fill="#4b535c">aide limitée, manque d’écoute</text>
+<g fill="#6e7781" transform="translate(38 388) scale(0.7)">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -77L-22 -50" stroke="#6e7781" stroke-width="8" stroke-linecap="round"/>
+<path d="M13 -77L22 -50" stroke="#6e7781" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g fill="#6e7781" transform="translate(170 388) scale(0.7)">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -77L-22 -50" stroke="#6e7781" stroke-width="8" stroke-linecap="round"/>
+<path d="M13 -77L22 -50" stroke="#6e7781" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g fill="#1f2328" transform="translate(104 388) scale(0.7)">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -77L-22 -50" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+<path d="M13 -77L22 -50" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+</g>
+<path d="M196 352H208" stroke="#1f2328" stroke-width="3" fill="none"/>
+<path d="M220 352L207 345V359Z" fill="#1f2328"/>
+<rect x="226" y="302" width="230" height="100" rx="10" fill="#c62828"/>
+<text x="341" y="333" font-size="20" font-weight="700" fill="#fbfaf6" text-anchor="middle">Iso-strain</text>
+<text x="341" y="359" font-size="19" fill="#fbfaf6" text-anchor="middle">configuration</text>
+<text x="341" y="383" font-size="19" fill="#fbfaf6" text-anchor="middle">la plus à risque</text>
+<!-- Exemple minier : camp FIFO ou éloigné (suit la page sourcée « Iso-strain - Ce que ça signifie ») -->
+<rect x="24" y="424" width="432" height="146" rx="10" fill="none" stroke="#6e7781" stroke-width="2.5"/>
+<text x="40" y="452" font-size="20" font-weight="700" fill="#1f2328">En contexte FIFO ou camp éloigné</text>
+<text x="40" y="480" font-size="19" fill="#1f2328">Le soutien externe (famille, communauté)</text>
+<text x="40" y="504" font-size="19" fill="#1f2328">est temporairement coupé.</text>
+<text x="40" y="534" font-size="19" fill="#1f2328">Si le <tspan font-weight="700">soutien au travail</tspan> manque aussi,</text>
+<text x="40" y="558" font-size="19" fill="#1f2328">un job strain peut basculer en iso-strain.</text>
+<text x="24" y="602" font-size="19" fill="#4b535c">Un risque statistique,</text>
+<text x="24" y="626" font-size="19" fill="#4b535c">pas un diagnostic.</text>
+</g>
+</svg>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="624" viewBox="0 0 480 624" role="img" aria-labelledby="t d">
+<title id="t">Cinq façons de se déposer</title>
+<desc id="d">Coupe d’une bronche qui se divise en deux branches. Des flèches bleues montrent le flux d’air : il entre par la gauche, puis se partage entre la branche du haut et celle du bas. Cinq trajectoires de particules finissent contre la paroi. Sédimentation : une particule descend peu à peu jusqu’à la paroi du bas (chute par gravité). Impaction : une particule file tout droit et frappe la pointe de la bifurcation au lieu de tourner avec l’air (inertie au changement de direction). Interception : une particule longe la paroi du haut et la touche en passant. Diffusion : une très fine particule, moins de 1 µm, avance en zigzag jusqu’à la paroi de la branche du bas. Interactions électrostatiques : dans la branche du haut, une particule chargée, marquée d’un signe plus, est déviée vers la paroi.</desc>
+<defs>
+<clipPath id="cadre"><rect x="24" y="100" width="432" height="500"/></clipPath>
+</defs>
+<rect width="480" height="624" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Cinq façons de se déposer</text>
+<text x="24" y="78" font-size="19" fill="#4b535c">Coupe d’une bifurcation des bronches</text>
+
+<!-- Bifurcation : paroi puis lumière (air) -->
+<g clip-path="url(#cadre)">
+<path d="M10 284H220Q234 284 237 276.5L308.5 80H410.6L316 340Q310 350 316 360L410.6 620H308.5L237 423.5Q234 416 220 416H10Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M10 300H220Q246 300 252 282L325.5 80H393.6L299 340Q293 350 299 360L393.6 620H325.5L252 418Q246 400 220 400H10Z" fill="#e1ecfa" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+</g>
+
+<!-- Flux d’air -->
+<g stroke="#1565c0" stroke-width="5" fill="none" stroke-linecap="round">
+<path d="M36 350H96"/>
+<path d="M200 336Q270 336 279.5 300L290 271"/>
+<path d="M200 364Q270 364 279.5 400L290 429"/>
+</g>
+<g fill="#1565c0">
+<path d="M94 341L110 350L94 359Z"/>
+<path d="M283.6 271.8L294.8 257.3L296.7 275.5Z"/>
+<path d="M283.6 428.2L294.8 442.7L296.7 424.5Z"/>
+</g>
+<text x="36" y="334" font-size="19" font-weight="600" fill="#1565c0">flux d’air</text>
+
+<!-- Trajectoires de particules -->
+<g stroke="#1f2328" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<!-- interception : suit l’air le long de la paroi et la touche -->
+<path d="M120 311H173"/>
+<!-- sédimentation : chute par gravité -->
+<path d="M126 352Q176 352 192 386"/>
+<!-- impaction : tout droit sur la pointe de la bifurcation -->
+<path d="M214 350H280"/>
+<!-- électrostatique : portée par l’air, puis déviée vers la paroi la plus proche -->
+<path d="M305.6 231.3Q320.6 189.9 309.9 154.1"/>
+<!-- diffusion : zigzag vers la paroi la plus proche -->
+<path d="M302.3 465.7L289.1 479.0L308.7 480.4L293.6 494.4L310.5 496.8L296.3 510.4L310.3 513.8L297.1 527.2"/>
+</g>
+<g fill="#1f2328">
+<circle cx="184" cy="311" r="11"/>
+<circle cx="198" cy="392" r="8"/>
+<circle cx="288" cy="350" r="8"/>
+<circle cx="309.9" cy="154.1" r="10"/>
+<circle cx="297.1" cy="527.2" r="5"/>
+</g>
+<path d="M303.9 154.1H315.9M309.9 148.1V160.1" stroke="#fbfaf6" stroke-width="2.5" stroke-linecap="round"/>
+
+<!-- Étiquettes -->
+<text x="262" y="150" font-size="20" font-weight="700" fill="#1f2328" text-anchor="end">interactions</text>
+<text x="262" y="174" font-size="20" font-weight="700" fill="#1f2328" text-anchor="end">électrostatiques</text>
+
+<text x="24" y="222" font-size="20" font-weight="700" fill="#1f2328">interception</text>
+<text x="24" y="246" font-size="19" fill="#1f2328">touche la paroi</text>
+<text x="24" y="270" font-size="19" fill="#1f2328">en passant</text>
+
+<text x="456" y="314" font-size="20" font-weight="700" fill="#1f2328" text-anchor="end">impaction</text>
+<text x="456" y="338" font-size="19" fill="#1f2328" text-anchor="end">inertie au</text>
+<text x="456" y="362" font-size="19" fill="#1f2328" text-anchor="end">changement</text>
+<text x="456" y="386" font-size="19" fill="#1f2328" text-anchor="end">de direction</text>
+
+<text x="24" y="442" font-size="20" font-weight="700" fill="#1f2328">sédimentation</text>
+<text x="24" y="466" font-size="19" fill="#1f2328">chute par gravité</text>
+
+<text x="262" y="522" font-size="20" font-weight="700" fill="#1f2328" text-anchor="end">diffusion</text>
+<text x="262" y="546" font-size="19" fill="#1f2328" text-anchor="end">très fines particules</text>
+<text x="262" y="570" font-size="19" fill="#1f2328" text-anchor="end">&lt; 1 µm</text>
+</g>
+</svg>

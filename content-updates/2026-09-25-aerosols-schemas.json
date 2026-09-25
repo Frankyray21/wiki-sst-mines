@@ -1,0 +1,64 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-aerosols-schemas",
+ "portee": "Schémas de la page w/hygiene/aerosols.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Aérosols",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/aerosols.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-aerosols-fractions-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-aerosols-deposition-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Le système respiratoire se divise en trois zones et chaque fraction atteint une zone caractéristique.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-aerosols-fractions-v1.svg|Silhouette de profil dont les voies respiratoires sont découpées en trois zones : voies aériennes supérieures, région trachéo-bronchique, région alvéolaire. Trois flèches partent devant le nez et la bouche : celle de la fraction inhalable reste dans la première zone, celle de la thoracique franchit le larynx et arrive dans la région trachéo-bronchique, celle de la respirable descend jusqu’aux alvéoles.]]\n\n<p class=\"infographie-legende\">Chaque fraction se définit par l’endroit qu’elle atteint : l’inhalable entre par le nez et la bouche, la thoracique pénètre au-delà du larynx, la respirable atteint les alvéoles. Le schéma ne donne aucune taille : celles du texte sont approximatives, et l’on passe d’une fraction à l’autre sans coupure nette.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Silhouette de profil, tête et thorax, avec les voies respiratoires simplifiées : fosses nasales et bouche, pharynx, larynx, trachée, bronches, puis grappes d’alvéoles.</li>\n<li>Deux lignes pointillées découpent trois zones, de haut en bas : les voies aériennes supérieures (nez, bouche, larynx), la région trachéo-bronchique et la région alvéolaire. Les zones sont empilées dans l’ordre où l’air les traverse, pas selon leur place exacte dans le thorax.</li>\n<li>Devant le visage, trois particules de même grosseur partent à la hauteur du nez et de la bouche ; chaque flèche descend jusqu’à la zone qu’atteint sa fraction. Aucune taille n’est indiquée.</li>\n<li>Fraction inhalable (Pi) : entre par le nez et la bouche ; sa flèche, la plus courte, reste dans les voies aériennes supérieures. Fraction thoracique (Pthor) : pénètre au-delà du larynx ; sa flèche franchit la première ligne pointillée et arrive dans la région trachéo-bronchique. Fraction respirable (Pr) : atteint les alvéoles ; sa flèche, la plus longue, arrive dans la région alvéolaire.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page (fractions normalisées ISO 7708 et ACGIH, trois zones du système respiratoire) et la page {{lien:w/toxicologie/toxicite-respiratoire.html|Toxicité du système respiratoire}} (voies aériennes supérieures, trachée et bronches, alvéoles). Notations Pi, Pthor et Pr : {{lien:w/legislation/20-reglements/rsst/rsst.html|RSST}}, annexe I, notes et définitions. Schéma simplifié, sans tailles ni échelle.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-aerosols-fractions-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "20241009034955",
+   "marqueur": "Infographies/wiki-aerosols-fractions-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "20241009033739",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-aerosols-deposition-v1.svg|Coupe d’une bronche qui se divise en deux, avec le flux d’air en bleu. Cinq particules finissent contre la paroi : sédimentation (chute par gravité), impaction sur la pointe de la bifurcation (inertie), interception (touche la paroi en passant), diffusion en zigzag d’une très fine particule, et interactions électrostatiques (particule chargée déviée vers la paroi).]]\n\n<p class=\"infographie-legende\">Les cinq mécanismes de la liste qui suit, réunis sur une même bifurcation. Leurs positions sont schématiques : elles ne disent pas où chaque mécanisme domine.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Coupe d’une bronche qui se divise en deux branches. Des flèches bleues montrent le flux d’air : il entre par la gauche et se partage entre la branche du haut et celle du bas.</li>\n<li>Sédimentation (chute par gravité) : une particule descend peu à peu jusqu’à la paroi du bas. Impaction (inertie au changement de direction) : une particule file tout droit et frappe la pointe de la bifurcation au lieu de tourner avec l’air.</li>\n<li>Interception (touche la paroi en passant) : une particule suit l’air le long de la paroi du haut et la touche au passage.</li>\n<li>Diffusion (très fines particules, moins de 1 µm) : la plus petite particule avance en zigzag jusqu’à la paroi de la branche du bas.</li>\n<li>Interactions électrostatiques : dans la branche du haut, une particule chargée, marquée d’un signe plus, est déviée vers la paroi.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après la liste des cinq mécanismes de cette page (section « Mécanismes de déposition ») et la page {{lien:w/toxicologie/toxicite-respiratoire.html|Toxicité du système respiratoire}} (« Diffusion brownienne », « Particules chargées »). Positions, trajectoires et grosseurs des particules sont schématiques, pas à l’échelle ; le seul chiffre est celui de la page pour la diffusion.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-aerosols-deposition-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "20241009033739",
+   "marqueur": "Infographies/wiki-aerosols-deposition-v1.svg"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "0,1 mg/m³",
+   "avant": "C1, EM ;",
+   "apres": "C2, EM ;"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "0,1 mg/m³",
+   "avant": "0,1 mg/m³",
+   "apres": "0,05 mg/m³"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "3x diamètre",
+   "avant": ">= 3x diamètre",
+   "apres": "> 3x diamètre"
+  }
+ ]
+}

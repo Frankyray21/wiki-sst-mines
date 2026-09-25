@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="652" viewBox="0 0 480 652" role="img" aria-labelledby="t d">
+<title id="t">Réclamation à la CNESST : six mois à compter de quoi ?</title>
+<desc id="d">Trois situations empilées. Pour chacune, une même barre « six mois » part d’un point bleu, le point de départ du délai pour produire sa réclamation à la CNESST. Incapacité de plus de 14 jours complets, atteinte permanente ou décès : six mois à compter de la lésion ou du décès (art. 270). Pas d’incapacité au-delà de la journée de la lésion, ou aucun employeur tenu de verser le salaire de l’art. 60 : six mois à compter de la lésion (art. 271). Maladie professionnelle : six mois à compter de la date où il est porté à la connaissance du travailleur qu’il en est atteint ou, pour le bénéficiaire, qu’il en est décédé (art. 272). En bas : en cas de retard, si la personne démontre un motif raisonnable, la CNESST prolonge le délai ou la relève des conséquences de son défaut (art. 352).</desc>
+<rect width="480" height="652" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Réclamation à la CNESST :</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">six mois à compter de quoi ?</text>
+
+<!-- Situation 1 : art. 270 -->
+<text x="24" y="120" font-size="19" fill="#1f2328">Incapacité de plus de 14 jours complets,</text>
+<text x="24" y="144" font-size="19" fill="#1f2328">atteinte permanente ou décès</text>
+<text x="456" y="144" font-size="19" fill="#4b535c" text-anchor="end">art. 270</text>
+<rect x="34" y="156" width="422" height="26" rx="6" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<text x="245" y="176" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">six mois</text>
+<circle cx="34" cy="169" r="11" fill="#1565c0" stroke="#fbfaf6" stroke-width="3"/>
+<text x="24" y="206" font-size="19" font-weight="700" fill="#1565c0">à compter de la lésion ou du décès</text>
+
+<path d="M24 224H456" stroke="#eceef0" stroke-width="2.5"/>
+
+<!-- Situation 2 : art. 271 -->
+<text x="24" y="250" font-size="19" fill="#1f2328">Pas d’incapacité au-delà de la journée</text>
+<text x="24" y="274" font-size="19" fill="#1f2328">de la lésion, ou aucun employeur tenu</text>
+<text x="24" y="298" font-size="19" fill="#1f2328">de verser le salaire de l’art. 60</text>
+<text x="456" y="298" font-size="19" fill="#4b535c" text-anchor="end">art. 271</text>
+<rect x="34" y="310" width="422" height="26" rx="6" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<text x="245" y="330" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">six mois</text>
+<circle cx="34" cy="323" r="11" fill="#1565c0" stroke="#fbfaf6" stroke-width="3"/>
+<text x="24" y="360" font-size="19" font-weight="700" fill="#1565c0">à compter de la lésion</text>
+
+<path d="M24 378H456" stroke="#eceef0" stroke-width="2.5"/>
+
+<!-- Situation 3 : art. 272 -->
+<text x="24" y="404" font-size="19" fill="#1f2328">Maladie professionnelle</text>
+<text x="456" y="404" font-size="19" fill="#4b535c" text-anchor="end">art. 272</text>
+<rect x="34" y="416" width="422" height="26" rx="6" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<text x="245" y="436" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">six mois</text>
+<circle cx="34" cy="429" r="11" fill="#1565c0" stroke="#fbfaf6" stroke-width="3"/>
+<text x="24" y="466" font-size="19" font-weight="700" fill="#1565c0">à compter de la date où il est porté</text>
+<text x="24" y="490" font-size="19" font-weight="700" fill="#1565c0">à sa connaissance qu’il en est atteint</text>
+<text x="24" y="514" font-size="19" fill="#1565c0">ou, pour le bénéficiaire, qu’il en est décédé</text>
+
+<path d="M24 532H456" stroke="#eceef0" stroke-width="2.5"/>
+
+<!-- Retard -->
+<g font-size="19" fill="#4b535c">
+<text x="24" y="558">Retard : si la personne démontre un motif</text>
+<text x="24" y="582">raisonnable, la CNESST prolonge le délai ou</text>
+<text x="24" y="606">la relève des conséquences de son défaut</text>
+<text x="24" y="630">(art. 352).</text>
+</g>
+</g>
+</svg>

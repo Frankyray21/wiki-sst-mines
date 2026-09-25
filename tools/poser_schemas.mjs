@@ -1,0 +1,204 @@
+// Pose les schémas d'une page d'après une « spec » (texte alternatif, légende, version texte, sources,
+// ancre), dans la page publiée ET dans un lot pour le vault, pour que les deux disent la même chose.
+// Généralise ce qui a été fait à la main pour « Espaces clos » (25 septembre 2026).
+//
+//   node tools/poser_schemas.mjs --spec <spec.json> --medias <dossier des SVG> --lot content-updates/<lot>.json [--ecrire]
+//
+// Sans --ecrire : essai, rien n'est écrit (ancres, captures et liens sont tout de même vérifiés).
+//
+// spec.json :
+//   page        adresse publiée (w/<wiki>/<page>.html)
+//   note        { titre, wiki, chemin? } — pour retrouver la note du vault (appliquer_retouches.mjs)
+//   schemas[]   { fichier, ancre, remplace?, alt, legende, puces[], sources }
+//     ancre     texte visible d'un paragraphe, d'un titre ou d'une dernière puce, unique : le schéma se pose
+//               juste après ; sans ancre, il prend la place exacte de la capture qu'il remplace
+//     remplace  capture de cours que le schéma remplace (« pasted-image-AAAAMMJJhhmmss » ou nom de fichier)
+//     sources   liens internes {{lien:w/…/page.html|libellé}}, liens externes <a href="https://…">libellé</a>
+//   paragraphesRetires[]  texte visible de <p> à retirer (légende d'une capture retirée, par exemple)
+//   remplacementsHtml[]   { avant, apres } : correction exacte dans la page publiée (une seule occurrence)
+//   retouchesVault[]      retouches du même changement dans la note (format de retouches.mjs)
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { dimensionsSvg } from './dimensions_svg.mjs';
+
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const texte = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const entites = s => String(s).replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ')
+  .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+// texte visible d'un fragment HTML, comparé sans égard aux apostrophes, espaces insécables et blancs
+export const visible = h => entites(String(h).replace(/<[^>]+>/g, ''))
+  .replace(/[’‘]/g, "'").replace(/[  ]/g, ' ').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
+
+// Bloc de la page publiée, tel que le générateur le rend depuis le bloc de la note (bloc Markdown ci-dessous).
+export function blocHtml(s, { racine, dims, titreDe, hrefDe = a => racine + a }) {
+  const u = racine + 'files/infographies/' + s.fichier;
+  const dim = dims ? ` width="${dims.largeur}" height="${dims.hauteur}"` : '';
+  return `<div class="infographie infographie-compacte infographie-schema"><span class="page-img"><a class="img-lien" href="${u}"><img src="${u}" alt="${esc(s.alt)}"${dim} loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>\n`
+    + `<p class="infographie-legende">${texte(s.legende)}</p><details class="infographie-texte">\n<summary>Lire le schéma en texte</summary>\n<ul>\n`
+    + s.puces.map(p => `<li>${texte(p)}</li>\n`).join('')
+    + `</ul>\n</details>\n<p class="infographie-sources">${sourcesHtml(s.sources, { titreDe, hrefDe })}</p></div>`;
+}
+
+export function blocMd(s) {
+  const alt = String(s.alt).replace(/\|/g, '/').replace(/\]\]/g, '] ]');
+  return `<div class="infographie infographie-compacte infographie-schema">\n\n![[Infographies/${s.fichier}|${alt}]]\n\n`
+    + `<p class="infographie-legende">${texte(s.legende)}</p>\n\n<details class="infographie-texte">\n<summary>Lire le schéma en texte</summary>\n<ul>\n`
+    + s.puces.map(p => `<li>${texte(p)}</li>\n`).join('')
+    + `</ul>\n</details>\n<p class="infographie-sources">${sourcesMd(s.sources)}</p>\n\n</div>`;
+}
+
+// Sources : le texte est échappé, les balises <a href> et les {{lien:…}} gardées telles quelles.
+function morceaux(src) {
+  return String(src).split(/(<a href="[^"]+">[^<]*<\/a>|\{\{lien:[^|}]+\|[^}]+\}\})/);
+}
+function sourcesMd(src) {
+  return morceaux(src).map(m => (m.startsWith('<a ') || m.startsWith('{{lien:')) ? m : texte(entites(m))).join('');
+}
+function sourcesHtml(src, { titreDe, hrefDe }) {
+  return morceaux(src).map(m => {
+    const lien = m.match(/^\{\{lien:([^|}]+)\|([^}]+)\}\}$/);
+    if (lien) return `<a href="${hrefDe(lien[1].trim())}" title="${esc(titreDe(lien[1].trim()))}">${texte(entites(lien[2]))}</a>`;
+    if (m.startsWith('<a href="https://') || m.startsWith('<a href="http://')) return m.replace(/^<a href=/, '<a class="external" target="_blank" rel="noopener" href=');
+    if (m.startsWith('<a ')) throw new Error('lien de source non pris en charge : ' + m);
+    return texte(entites(m));
+  }).join('');
+}
+
+// Élément (paragraphe, titre ou puce) dont le texte visible est l'ancre — le texte entier, sinon son
+// début, sinon un fragment d'au moins 20 caractères, comme « ligneContenant » côté note ; un seul doit
+// répondre. Une puce n'est admise que si elle est la dernière de sa liste : le schéma se pose après la
+// liste, là où la note, qui l'insère après la ligne de la puce, termine aussi la liste.
+export function trouverAncre(html, ancre) {
+  const voulu = visible(ancre);
+  // le sommaire, la navigation et « Voir aussi » répètent les titres de la page : on n'y pose rien
+  const navs = [...html.matchAll(/<nav\b[\s\S]*?<\/nav>/g)].map(m => [m.index, m.index + m[0].length]);
+  const blocs = [...html.matchAll(/<(p|h[1-6]|li)\b[^>]*>([\s\S]*?)<\/\1>/g)]
+    .filter(m => !navs.some(([debut, fin]) => m.index >= debut && m.index < fin));
+  let r = blocs.filter(m => visible(m[2]) === voulu);
+  if (r.length === 0 && voulu.length >= 25) r = blocs.filter(m => visible(m[2]).startsWith(voulu));
+  if (r.length === 0 && voulu.length >= 20) r = blocs.filter(m => visible(m[2]).includes(voulu));
+  if (r.length !== 1) throw new Error(`ancre ${r.length ? 'ambiguë (' + r.length + ')' : 'introuvable'} : « ${ancre} »`);
+  const fin = r[0].index + r[0][0].length;
+  if (r[0][1] !== 'li') return { debut: r[0].index, fin };
+  const suite = html.slice(fin).match(/^\s*<\/(ul|ol)>/);
+  if (!suite) throw new Error(`ancre sur une puce qui n'est pas la dernière de sa liste : « ${ancre} »`);
+  return { debut: r[0].index, fin: fin + suite[0].length };
+}
+
+// Capture de cours insérée par le générateur (<span class="page-img">…</span></span>).
+function trouverCapture(html, nom) {
+  const motif = new RegExp('<span class="page-img"><a class="img-lien" href="[^"]*' + nom.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[^"]*">[\\s\\S]*?</span></span>\\n?', 'g');
+  const r = [...html.matchAll(motif)];
+  if (r.length !== 1) throw new Error(`capture ${r.length ? 'ambiguë' : 'introuvable'} : ${nom}`);
+  return r[0];
+}
+
+// Ligne de la note qui intègre la capture : les images collées s'appellent « Pasted image AAAAMMJJhhmmss ».
+export function repereCapture(nom) {
+  const m = String(nom).match(/pasted-image-(\d{14})/i);
+  return m ? m[1] : path.basename(String(nom));
+}
+
+export function poserDansPage(html, spec, { racine, dimsDe, titreDe, hrefDe }) {
+  let h = html;
+  for (const r of spec.remplacementsHtml || []) {
+    const n = h.split(r.avant).length - 1;
+    if (n === 1) h = h.replace(r.avant, () => r.apres);
+    else if (!(n === 0 && h.includes(r.apres))) throw new Error(`correction ${n ? 'ambiguë' : 'introuvable'} : « ${r.avant.slice(0, 60)} »`);
+  }
+  for (const s of spec.schemas) {
+    const bloc = blocHtml(s, { racine, dims: dimsDe(s.fichier), titreDe, hrefDe });
+    // schéma déjà posé : on le remplace par sa version à jour (spec corrigée)
+    const deja = new RegExp('<div class="infographie[^"]*infographie-schema[^"]*">(?:(?!<div class="infographie)[\\s\\S])*?' + s.fichier.replace(/\./g, '\\.') + '[\\s\\S]*?</div>');
+    if (deja.test(h)) { h = h.replace(deja, () => bloc); continue; }
+    // sans ancre : le schéma prend la place exacte de la capture qu'il remplace (sous un tableau, par exemple)
+    if (!s.ancre) {
+      if (!s.remplace) throw new Error('schéma sans ancre ni capture à remplacer : ' + s.fichier);
+      const c = trouverCapture(h, s.remplace);
+      h = h.slice(0, c.index) + bloc + '\n' + h.slice(c.index + c[0].length);
+      continue;
+    }
+    if (s.remplace) { const c = trouverCapture(h, s.remplace); h = h.slice(0, c.index) + h.slice(c.index + c[0].length); }
+    const a = trouverAncre(h, s.ancre);
+    h = h.slice(0, a.fin) + '\n' + bloc + h.slice(a.fin);
+  }
+  for (const p of spec.paragraphesRetires || []) {
+    const voulu = visible(p);
+    const r = [...h.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>\n?/g)].filter(m => visible(m[1]) === voulu);
+    if (r.length > 1) throw new Error('paragraphe à retirer ambigu : ' + p);
+    if (r.length === 1) h = h.slice(0, r[0].index) + h.slice(r[0].index + r[0][0].length);
+  }
+  return h;
+}
+
+export function lotDepuisSpec(spec, { date, revision, portee, precautions }) {
+  const retouches = [];
+  for (const s of spec.schemas) {
+    const marqueur = 'Infographies/' + s.fichier;
+    // sans ancre, le bloc se pose après la ligne de la capture, puis cette ligne est retirée : il prend sa place
+    retouches.push({ type: 'insererApres', ligneContenant: s.ancre || repereCapture(s.remplace), bloc: blocMd(s), marqueur });
+    if (s.remplace) retouches.push({ type: 'supprimerLigne', ligneContenant: repereCapture(s.remplace), marqueur });
+  }
+  const premier = spec.schemas[0] && 'Infographies/' + spec.schemas[0].fichier;
+  for (const p of spec.paragraphesRetires || []) retouches.push({ type: 'supprimerLigne', ligneContenant: p, marqueur: premier });
+  retouches.push(...(spec.retouchesVault || []));
+  const lot = spec.lot || {};
+  return {
+    date: lot.date || date, revision: lot.revision || revision, portee: lot.portee || portee, precautions: lot.precautions || precautions,
+    application: 'node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs',
+    note: { ...spec.note, page: spec.page },
+    medias: spec.schemas.map(s => ({ depuis: 'docs/files/infographies/' + s.fichier, dossierVault: 'Infographies' })),
+    retouches,
+  };
+}
+
+export function verifierSvg(texteSvg, nom) {
+  const d = dimensionsSvg(texteSvg);
+  if (!d || d.largeur !== 480) throw new Error('schéma : largeur de dessin 480 attendue : ' + nom);
+  const racineSvg = texteSvg.match(/<svg\b[^>]*>/)[0];
+  const vb = racineSvg.match(/\sviewBox="0 0 480 (\d+)"/);
+  if (!vb || !racineSvg.includes(' width="480"') || !racineSvg.includes(` height="${vb[1]}"`)) throw new Error('schéma : width/height identiques au viewBox « 0 0 480 H » : ' + nom);
+  if (!/<title[^>]*>[^<]{10,}<\/title>/.test(texteSvg) || !/<desc[^>]*>[^<]{40,}<\/desc>/.test(texteSvg)) throw new Error('schéma : titre et description accessibles : ' + nom);
+  if (/<script|<image|<foreignObject|href="http|@import|url\(http/i.test(texteSvg)) throw new Error('schéma : ressource externe ou script : ' + nom);
+  return d;
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const outils = path.dirname(fileURLToPath(import.meta.url));
+  const docs = path.resolve(outils, '../docs');
+  const args = process.argv.slice(2);
+  const opt = n => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : null; };
+  const ECRIRE = args.includes('--ecrire');
+  const spec = JSON.parse(fs.readFileSync(opt('--spec'), 'utf8'));
+  const medias = opt('--medias') || path.dirname(opt('--spec'));
+  const lotChemin = opt('--lot');
+  if (!lotChemin) { console.error('Indiquer --lot content-updates/<lot>.json'); process.exit(1); }
+  const dims = {};
+  for (const s of spec.schemas) dims[s.fichier] = verifierSvg(fs.readFileSync(path.join(medias, s.fichier), 'utf8'), s.fichier);
+  const titreDe = adresse => {
+    const f = path.join(docs, adresse);
+    if (!fs.existsSync(f)) throw new Error('lien vers une page absente : ' + adresse);
+    const h1 = fs.readFileSync(f, 'utf8').match(/<h1 class="page-title">([\s\S]*?)<\/h1>/);
+    return h1 ? entites(h1[1].replace(/<[^>]+>/g, '')).trim() : adresse;
+  };
+  // La note produit aussi une copie dans l'espace encadrement (g/) quand elle y est publiée : même
+  // pose, racine plus profonde, et les liens vont à la copie g/ de la cible quand elle existe (le
+  // recueil n'est jamais dupliqué), comme le fait le générateur.
+  const pages = [spec.page, 'g/' + spec.page].filter(p => fs.existsSync(path.join(docs, p)));
+  const poses = pages.map(p => {
+    const racine = '../'.repeat(p.split('/').length - 1);
+    const dansG = p.startsWith('g/');
+    const hrefDe = a => racine + (dansG && fs.existsSync(path.join(docs, 'g', a)) ? 'g/' + a : a);
+    const avant = fs.readFileSync(path.join(docs, p), 'utf8');
+    return { p, apres: poserDansPage(avant, spec, { racine, hrefDe, dimsDe: f => dims[f], titreDe }) };
+  });
+  const lot = lotDepuisSpec(spec, { date: new Date().toISOString().slice(0, 10), revision: path.basename(lotChemin, '.json'), portee: 'Schémas de la page ' + spec.page, precautions: '' });
+  console.log(`${pages.join(' + ')} : ${spec.schemas.length} schéma(s), ${(spec.remplacementsHtml || []).length} correction(s), ${lot.retouches.length} retouche(s) pour le vault`);
+  if (ECRIRE) {
+    for (const s of spec.schemas) fs.copyFileSync(path.join(medias, s.fichier), path.join(docs, 'files', 'infographies', s.fichier));
+    for (const { p, apres } of poses) fs.writeFileSync(path.join(docs, p), apres);
+    fs.writeFileSync(lotChemin, JSON.stringify(lot, null, 1) + '\n');
+    console.log('Écrit : page(s), schémas, ' + lotChemin + ' — puis node tools/regenerer_hors_ligne.mjs');
+  } else console.log('Essai : rien n’est écrit sans --ecrire.');
+}

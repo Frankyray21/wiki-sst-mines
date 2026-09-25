@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="480" height="608" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 608" role="img" aria-labelledby="t d">
+<title id="t">Le surveillant reste dehors</title>
+<desc id="d">Coupe d’une cuve fermée dont le toit est au niveau du sol, avec un trou d’homme au toit. Un travailleur se tient à l’intérieur, sous l’ouverture. Le surveillant se tient dehors, près du trou d’homme ; une double flèche qui passe par l’ouverture les relie : communication dans les deux sens. Deux étiquettes partent du surveillant : il peut ordonner l’évacuation et il déclenche le plan de sauvetage. De l’autre côté de l’ouverture, un collègue qui s’avance pour entrer secourir est barré d’une croix rouge : ne pas entrer pour secourir. En bas : le sauvetage relève de l’équipe désignée par le plan (art. 309).</desc>
+<rect width="480" height="608" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Le surveillant reste dehors</text>
+<text x="24" y="78" font-size="19" fill="#4b535c">Rôle du surveillant : art. 308</text>
+
+<!-- Étiquettes d’action du surveillant -->
+<path d="M300 230L171 162M300 230L360 162" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+<rect x="91" y="98" width="160" height="62" rx="10" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<text x="171" y="124" font-size="19" fill="#1f2328" text-anchor="middle">peut ordonner</text>
+<text x="171" y="148" font-size="19" fill="#1f2328" text-anchor="middle">l’évacuation</text>
+<rect x="265" y="98" width="191" height="62" rx="10" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<text x="360.5" y="124" font-size="19" fill="#1f2328" text-anchor="middle">déclenche le plan</text>
+<text x="360.5" y="148" font-size="19" fill="#1f2328" text-anchor="middle">de sauvetage</text>
+
+<!-- Cuve (coupe), toit au niveau du sol -->
+<path d="M44 346V496Q44 516 64 516H416Q436 516 436 496V346Z" fill="#eceef0"/>
+<path d="M24 346H152M200 346H456" stroke="#6e7781" stroke-width="4" stroke-linecap="round" fill="none"/>
+<path d="M152 346H44V496Q44 516 64 516H416Q436 516 436 496V346H200" stroke="#4b535c" stroke-width="5" stroke-linejoin="round" fill="none"/>
+<!-- Trou d’homme -->
+<path d="M152 346V330H142M200 346V330H210" stroke="#4b535c" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+
+<!-- Travailleur, dans la cuve, sous l’ouverture -->
+<g fill="#6e7781" transform="translate(176 513)">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -77L-22 -50M13 -77L22 -50" stroke="#6e7781" stroke-width="8" stroke-linecap="round"/>
+</g>
+<text x="156" y="500" font-size="19" fill="#1f2328" text-anchor="end">travailleur</text>
+
+<!-- Communication dans les deux sens -->
+<path d="M176 388V334Q176 298 212 298H262" stroke="#1f2328" stroke-width="4" stroke-linejoin="round" fill="none"/>
+<path d="M166 386L176 402L186 386Z" fill="#1f2328"/>
+<path d="M260 288L276 298L260 308Z" fill="#1f2328"/>
+<text x="198" y="382" font-size="19" fill="#1f2328">communication</text>
+<text x="198" y="406" font-size="19" fill="#1f2328">dans les deux sens</text>
+
+<!-- Surveillant, dehors, près de l’entrée (tourné vers l’ouverture) -->
+<g fill="#1f2328" transform="translate(300 346)">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<path d="M-13 -77L-28 -56M13 -77L20 -49" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+</g>
+<text x="326" y="262" font-size="20" font-weight="700" fill="#1f2328">surveillant</text>
+
+<!-- Collègue penché vers l’ouverture pour entrer secourir : barré -->
+<g fill="#6e7781" transform="translate(92 346)">
+<rect x="-12" y="-45" width="10" height="45" rx="4" transform="rotate(12 -7 -41)"/>
+<rect x="2" y="-45" width="10" height="45" rx="4" transform="rotate(-16 7 -41)"/>
+<g transform="rotate(38 0 -41)">
+<circle cx="0" cy="-97" r="11"/>
+<path d="M-13 -79Q-13 -84 -8 -84H8Q13 -84 13 -79V-41H-13Z"/>
+<path d="M9 -76L34 -62M-4 -76L22 -56" stroke="#6e7781" stroke-width="8" stroke-linecap="round"/>
+</g>
+</g>
+<path d="M73 278L127 332M127 278L73 332" stroke="#fbfaf6" stroke-width="11" stroke-linecap="round"/>
+<path d="M73 278L127 332M127 278L73 332" stroke="#c62828" stroke-width="7" stroke-linecap="round"/>
+<text x="24" y="196" font-size="20" font-weight="700" fill="#c62828">ne pas entrer</text>
+<text x="24" y="220" font-size="20" font-weight="700" fill="#c62828">pour secourir</text>
+
+<text x="398" y="500" font-size="19" fill="#4b535c" text-anchor="end">espace clos</text>
+
+<text x="24" y="556" font-size="19" fill="#4b535c">Le sauvetage relève de l’équipe</text>
+<text x="24" y="582" font-size="19" fill="#4b535c">désignée par le plan (art. 309).</text>
+</g>
+</svg>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="614" viewBox="0 0 480 614" role="img" aria-labelledby="t d">
+<title id="t">Demande et contrôle : quatre situations</title>
+<desc id="d">Matrice à quatre cases du modèle de Karasek (1979). Axe vertical : la demande psychologique, faible en bas, forte en haut. Axe horizontal : le contrôle (latitude décisionnelle), faible à gauche, fort à droite. En haut à gauche, forte demande et faible contrôle : le job strain (forte tension), case rouge, la zone la plus à risque. En haut à droite, forte demande et fort contrôle : le travail actif, stimulant, associé à l’apprentissage actif. En bas à gauche, faible demande et faible contrôle : le travail passif. En bas à droite, faible demande et fort contrôle : le travail détendu. Mention : des situations de travail, pas des diagnostics.</desc>
+<rect width="480" height="614" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Demande et contrôle :</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">quatre situations</text>
+<text x="24" y="110" font-size="19" fill="#4b535c">Modèle de Karasek (1979)</text>
+<!-- Axe vertical : demande psychologique -->
+<text x="24" y="150" font-size="19" fill="#4b535c">Demande psychologique</text>
+<text x="58" y="246" font-size="19" fill="#1f2328" text-anchor="middle">forte</text>
+<text x="58" y="400" font-size="19" fill="#1f2328" text-anchor="middle">faible</text>
+<path d="M58 372V274" stroke="#6e7781" stroke-width="2.5" fill="none"/>
+<path d="M58 260L51 275H65Z" fill="#6e7781"/>
+<!-- Quatre cases -->
+<rect x="92" y="166" width="178" height="146" rx="10" fill="#c62828"/>
+<rect x="278" y="166" width="178" height="146" rx="10" fill="#eceef0"/>
+<rect x="92" y="320" width="178" height="146" rx="10" fill="#eceef0"/>
+<rect x="278" y="320" width="178" height="146" rx="10" fill="#eceef0"/>
+<text x="181" y="206" font-size="22" font-weight="700" fill="#fbfaf6" text-anchor="middle">Job strain</text>
+<text x="181" y="232" font-size="19" fill="#fbfaf6" text-anchor="middle">(forte tension)</text>
+<text x="181" y="268" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">zone la plus</text>
+<text x="181" y="292" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">à risque</text>
+<text x="367" y="206" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Travail actif</text>
+<text x="367" y="244" font-size="19" fill="#4b535c" text-anchor="middle">stimulant,</text>
+<text x="367" y="268" font-size="19" fill="#4b535c" text-anchor="middle">apprentissage</text>
+<text x="367" y="292" font-size="19" fill="#4b535c" text-anchor="middle">actif</text>
+<text x="181" y="388" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Travail</text>
+<text x="181" y="412" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">passif</text>
+<text x="367" y="388" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Travail</text>
+<text x="367" y="412" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">détendu</text>
+<!-- Axe horizontal : contrôle (latitude décisionnelle), accordé comme les en-têtes du tableau de la page (« Faible contrôle », « Fort contrôle ») -->
+<text x="181" y="494" font-size="19" fill="#1f2328" text-anchor="middle">faible</text>
+<text x="367" y="494" font-size="19" fill="#1f2328" text-anchor="middle">fort</text>
+<path d="M218 488H326" stroke="#6e7781" stroke-width="2.5" fill="none"/>
+<path d="M340 488L325 481V495Z" fill="#6e7781"/>
+<text x="274" y="524" font-size="19" fill="#4b535c" text-anchor="middle">Contrôle (latitude décisionnelle)</text>
+<text x="24" y="566" font-size="19" fill="#4b535c">Des situations de travail,</text>
+<text x="24" y="590" font-size="19" fill="#4b535c">pas des diagnostics.</text>
+</g>
+</svg>

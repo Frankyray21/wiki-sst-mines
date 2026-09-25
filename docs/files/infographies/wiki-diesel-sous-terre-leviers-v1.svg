@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="656" viewBox="0 0 480 656" role="img" aria-labelledby="t d">
+<title id="t">Où agir contre les émissions diesel</title>
+<desc id="d">Quatre niveaux d’action empilés le long du trajet des émissions, du moteur jusqu’au travailleur. En haut à gauche, le moteur ; une flèche rouge, marquée « émissions jusqu’au travailleur », descend du moteur jusqu’à la tête d’un travailleur. À la source : renouvellement vers des moteurs Tier 4 Final, engins électriques à batterie, carburant (ULSD ou carburants alternatifs). Sur l’échappement, où la flèche traverse un dispositif : filtre à particules (DPF), catalyseur d’oxydation (DOC), SCR pour les NOx. Dans l’air du chantier, où un ventilateur pousse de l’air à travers la flèche : ventilation primaire, auxiliaire, à la demande. Autour du travailleur, là où arrive la flèche : cabine pressurisée avec filtration HEPA ; protection respiratoire pour l’entretien ou les tâches près d’un échappement. En bas : la maîtrise demande une combinaison de ces leviers.</desc>
+<rect width="480" height="656" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Où agir contre</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">les émissions diesel</text>
+
+<!-- Séparateurs des niveaux (colonne de texte seulement) -->
+<path d="M108 245H456M108 359H456M108 473H456" stroke="#6e7781" stroke-width="2.5"/>
+
+<!-- Trajet des émissions : du moteur jusqu’à la tête du travailleur (aucune barrière ne l’arrête) -->
+<path d="M66 134V497" stroke="#c62828" stroke-width="4" fill="none"/>
+<path d="M56 495L66 511L76 495Z" fill="#c62828"/>
+
+<!-- Moteur et légende du trajet -->
+<rect x="24" y="96" width="84" height="38" rx="8" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<text x="66" y="121" font-size="19" fill="#1f2328" text-anchor="middle">moteur</text>
+<text x="122" y="121" font-size="19" fill="#c62828">émissions jusqu’au travailleur</text>
+
+<!-- Niveau : à la source -->
+<text x="108" y="158" font-size="20" font-weight="700" fill="#1f2328">À la source</text>
+<text x="124" y="184" font-size="19" fill="#1f2328">renouvellement vers Tier 4 Final</text>
+<text x="124" y="208" font-size="19" fill="#1f2328">engins électriques à batterie</text>
+<text x="124" y="232" font-size="19" fill="#1f2328">carburant (ULSD, alternatifs)</text>
+
+<!-- Niveau : sur l’échappement (dispositif traversé par les gaz) -->
+<rect x="46" y="278" width="40" height="48" rx="10" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<text x="108" y="272" font-size="20" font-weight="700" fill="#1f2328">Sur l’échappement</text>
+<text x="124" y="298" font-size="19" fill="#1f2328">filtre à particules (DPF)</text>
+<text x="124" y="322" font-size="19" fill="#1f2328">catalyseur d’oxydation (DOC)</text>
+<text x="124" y="346" font-size="19" fill="#1f2328">SCR pour les NOx</text>
+
+<!-- Niveau : dans l’air du chantier (ventilateur, air qui traverse le trajet sans viser une puce) -->
+<circle cx="39" cy="429" r="13" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="#1f2328" transform="translate(39 429)">
+<ellipse cx="0" cy="-5.5" rx="3" ry="5.2"/>
+<ellipse cx="0" cy="-5.5" rx="3" ry="5.2" transform="rotate(120)"/>
+<ellipse cx="0" cy="-5.5" rx="3" ry="5.2" transform="rotate(240)"/>
+</g>
+<g stroke="#1565c0" stroke-width="4" fill="none" stroke-linecap="round">
+<path d="M57 419H84"/>
+<path d="M57 439H84"/>
+</g>
+<g fill="#1565c0">
+<path d="M84 412L96 419L84 426Z"/>
+<path d="M84 432L96 439L84 446Z"/>
+</g>
+<text x="108" y="386" font-size="20" font-weight="700" fill="#1f2328">Dans l’air du chantier</text>
+<text x="124" y="412" font-size="19" fill="#1f2328">ventilation primaire</text>
+<text x="124" y="436" font-size="19" fill="#1f2328">ventilation auxiliaire</text>
+<text x="124" y="460" font-size="19" fill="#1f2328">ventilation à la demande</text>
+
+<!-- Niveau : autour du travailleur (la flèche arrive à sa tête ; pas de cabine dessinée) -->
+<g fill="#4b535c">
+<circle cx="66" cy="525" r="11"/>
+<path d="M53 584V550Q53 541 62 541H70Q79 541 79 550V584Z"/>
+</g>
+<text x="108" y="500" font-size="20" font-weight="700" fill="#1f2328">Autour du travailleur</text>
+<text x="124" y="526" font-size="19" fill="#1f2328">cabine pressurisée, filtration HEPA</text>
+<text x="124" y="550" font-size="19" fill="#1f2328">protection respiratoire : entretien</text>
+<text x="124" y="574" font-size="19" fill="#1f2328">ou tâches près d’un échappement</text>
+
+<!-- Puces : une par levier (la dernière ligne prolonge la protection respiratoire) -->
+<g fill="#6e7781">
+<circle cx="114" cy="178" r="3.5"/><circle cx="114" cy="202" r="3.5"/><circle cx="114" cy="226" r="3.5"/>
+<circle cx="114" cy="292" r="3.5"/><circle cx="114" cy="316" r="3.5"/><circle cx="114" cy="340" r="3.5"/>
+<circle cx="114" cy="406" r="3.5"/><circle cx="114" cy="430" r="3.5"/><circle cx="114" cy="454" r="3.5"/>
+<circle cx="114" cy="520" r="3.5"/><circle cx="114" cy="544" r="3.5"/>
+</g>
+
+<text x="24" y="614" font-size="19" fill="#4b535c">La maîtrise demande une combinaison</text>
+<text x="24" y="638" font-size="19" fill="#4b535c">de ces leviers.</text>
+</g>
+</svg>

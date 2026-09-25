@@ -231,4 +231,37 @@ assert.ok(qualite.includes('Contrôles automatiques de forme'));
 assert.ok(qualite.includes('ni une note de fiabilité ni une validation SST'));
 assert.ok(qualite.includes('Résultats par type de contenu'));
 assert.ok(qualite.includes('Validation spécialisée datée et validateur déclaré'));
-console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, entetesArticles, titresGroupes, bibliographiesCompactes, appelsReference, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, redirections: nbRedirections, pagesRpsReferencees, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));
+
+// Schémas vectoriels d'« Espaces clos » (25 septembre 2026) : dessinés depuis la page et les
+// art. 302, 308, 308.1 et 309 du RSST ; ils remplacent trois captures de cours, dont celle qui
+// affichait une alarme à 10 % de la LIE, contraire à l'art. 302. Lot du vault :
+// content-updates/2026-09-25-espaces-clos-schemas.json.
+const espacesClos = lire('w/securite/espaces-clos.html');
+const schemasEspacesClos = ['limites-explosion', 'densite', 'purge', 'surveillant', 'cul-de-sac'].map(n => 'wiki-espaces-clos-' + n + '-v1.svg');
+for (const fichier of schemasEspacesClos) {
+  const asset = 'files/infographies/' + fichier;
+  assert.ok(manifeste.medias.some(m => m[0] === asset), 'schéma disponible hors ligne : ' + asset);
+  const svg = lire(asset);
+  assert.match(svg, /<svg[^>]+viewBox="0 0 480 \d+"/, 'schéma : largeur de dessin commune ' + fichier);
+  assert.match(svg, /<title[^>]*>[^<]{10,}<\/title>/, 'schéma : titre accessible ' + fichier);
+  assert.doesNotMatch(svg, /<script|<image|<foreignObject|href="http|@import|url\(http/i, 'schéma autonome, sans ressource externe : ' + fichier);
+  assert.doesNotMatch(svg, /10\s*%\s*de la LIE|(?:<|&lt;)\s?5\s*%/, 'schéma : aucune alarme à 10 %, « au plus 5 % » et non « < 5 % » : ' + fichier);
+  const bloc = espacesClos.match(new RegExp('<div class="infographie[^"]*infographie-schema[^"]*">(?:(?!<div class="infographie)[\\s\\S])*?' + fichier.replace(/\./g, '\\.') + '[\\s\\S]*?<\\/div>'))?.[0];
+  assert.ok(bloc, 'espaces clos : schéma posé dans un bloc inversible en thème sombre : ' + fichier);
+  assert.match(bloc, /<img[^>]+alt="[^"]{40,}"/, 'espaces clos : description accessible ' + fichier);
+  assert.match(bloc, /<details class="infographie-texte">[\s\S]*?<summary>[\s\S]*?<\/details>/, 'espaces clos : version texte ' + fichier);
+  assert.ok(bloc.includes('infographie-sources'), 'espaces clos : sources ' + fichier);
+}
+assert.ok(!espacesClos.includes('pasted-image-20241214152919'), 'espaces clos : capture « alarme à 10 % de la LIE » retirée');
+assert.ok(espacesClos.includes('moyen de communication bidirectionnel'), 'espaces clos : art. 308 en vigueur');
+assert.ok(!espacesClos.includes('Contact visuel, auditif'), 'espaces clos : ancien résumé de l’art. 308 retiré');
+// (le corps seulement : la fiche « électricité » mal intitulée pointe vers la page, et figure donc dans ses rétroliens)
+assert.ok(!espacesClos.split('<nav class="voir-aussi"')[0].includes('art-309-rsst-electricite'), 'espaces clos : plan de sauvetage relié au bon article');
+assert.ok(espacesClos.includes('Relecture éditoriale : non attestée'), 'espaces clos : aucune relecture inventée');
+assert.ok(tokensThemeSombre(lire('assets/style.css')), 'schémas inversés en thème sombre, pas à l’impression');
+function tokensThemeSombre(css) {
+  return /@media screen \{\s*:root:not\(\[data-theme="light"\]\):not\(\[data-theme="auto"\]\) \.infographie-schema \.page-img img \{ filter: invert/.test(css)
+    && /@media screen and \(prefers-color-scheme: dark\) \{\s*:root\[data-theme="auto"\] \.infographie-schema \.page-img img \{ filter: invert/.test(css);
+}
+
+console.log(JSON.stringify({ version: manifeste.version, fichiersHaches: manifeste.pages.length, mediasPresents: manifeste.medias.length, entetesArticles, titresGroupes, bibliographiesCompactes, appelsReference, infographies: new Set(visuels.map(v => v.fichier)).size, articlesIllustres: visuels.length, pagesVisuelles, schemasEspacesClos: schemasEspacesClos.length, redirections: nbRedirections, pagesRpsReferencees, octetsPages, octetsMedias, resultat: 'OK — vérifications statiques, pas une validation médicale ni un test navigateur' }, null, 2));

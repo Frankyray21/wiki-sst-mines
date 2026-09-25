@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="652" viewBox="0 0 480 652" role="img" aria-labelledby="t d">
+<title id="t">Postures à risque en mine</title>
+<desc id="d">Planche de six silhouettes simples, en deux colonnes de trois, une par posture contraignante courante en mine ; la région touchée est en rouge. Colonne de gauche : accroupie (genoux, hanches et dos en rouge), pour la pose de tirants ; à genoux sous un toit bas (genoux en rouge), pour le boulonnage en chantier bas ; bras au-dessus de la tête, un outil tenu contre le toit (épaule et cou en rouge), pour le forage de toit. Colonne de droite : tronc en flexion vers une charge posée au sol (bas du dos en rouge), pour la manutention au sol ; tronc en torsion, pieds de face et charge tenue sur le côté (bas du dos en rouge), pour la manutention asymétrique ; cou en hyperextension, regard vers le haut (cou en rouge), pour la surveillance en hauteur.</desc>
+<rect width="480" height="652" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Postures à risque en mine</text>
+<rect x="24" y="63" width="18" height="18" rx="3" fill="#c62828"/>
+<text x="50" y="78" font-size="19" fill="#4b535c">en rouge : la région touchée</text>
+
+<!-- Accroupie : pose de tirants -->
+<path d="M48 177H208" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="translate(119.9 177) scale(1.15)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-4 -3L11 -3" stroke="#6e7781" stroke-width="6"/>
+<path d="M0 -4.5L9.9 -23" stroke="#6e7781" stroke-width="9"/>
+<path d="M9.9 -23L-14 -20.5" stroke="#6e7781" stroke-width="10"/>
+<path d="M-14 -20.5L-1.3 -44.4" stroke="#6e7781" stroke-width="15"/>
+<path d="M-1.3 -44.4L12.1 -57.8" stroke="#6e7781" stroke-width="7"/>
+<circle cx="12.1" cy="-57.8" r="9" fill="#6e7781"/>
+<path d="M-1.3 -44.4L14.1 -37.2L29.8 -34.4" stroke="#fbfaf6" stroke-width="11.5"/>
+<path d="M-1.3 -44.4L14.1 -37.2L29.8 -34.4" stroke="#6e7781" stroke-width="7.5"/>
+<path d="M-14 -20.5L-1.3 -44.4" stroke="#c62828" stroke-width="12"/>
+<circle cx="-14" cy="-20.5" r="6.5" fill="#c62828" stroke="#fbfaf6" stroke-width="2.5"/>
+<circle cx="9.9" cy="-23" r="6.5" fill="#c62828" stroke="#fbfaf6" stroke-width="2.5"/>
+</g>
+<text x="128" y="203" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">Accroupie</text>
+<text x="128" y="225" font-size="19" fill="#4b535c" text-anchor="middle">pose de tirants</text>
+
+<!-- Tronc en flexion : manutention au sol -->
+<path d="M272 177H432" stroke="#6e7781" stroke-width="2.5"/>
+<rect x="341.5" y="159.8" width="25.3" height="17.2" rx="2" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="translate(322.8 177) scale(1.15)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-3 -3L11 -3" stroke="#6e7781" stroke-width="6"/>
+<path d="M0 -4.5L3.6 -25.2" stroke="#6e7781" stroke-width="9"/>
+<path d="M3.6 -25.2L-2.4 -46.3" stroke="#6e7781" stroke-width="10"/>
+<path d="M-2.4 -46.3L24.3 -50.1" stroke="#6e7781" stroke-width="15"/>
+<path d="M24.3 -50.1L44.7 -45" stroke="#6e7781" stroke-width="7"/>
+<circle cx="44.7" cy="-45" r="9" fill="#6e7781"/>
+<path d="M24.3 -50.1L26.7 -33.3L27.2 -17.3" stroke="#fbfaf6" stroke-width="11.5"/>
+<path d="M24.3 -50.1L26.7 -33.3L27.2 -17.3" stroke="#6e7781" stroke-width="7.5"/>
+<path d="M-2.4 -46.3L11 -48.2" stroke="#c62828" stroke-width="12"/>
+</g>
+<text x="352" y="203" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">Tronc en flexion</text>
+<text x="352" y="225" font-size="19" fill="#4b535c" text-anchor="middle">manutention au sol</text>
+
+<!-- À genoux : boulonnage en chantier bas -->
+<path d="M48 349H208" stroke="#6e7781" stroke-width="2.5"/>
+<rect x="48" y="252.2" width="160" height="7" fill="#eceef0"/>
+<path d="M48 259.2H208" stroke="#6e7781" stroke-width="3"/>
+<g transform="translate(127.2 349)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-21 -3.5L-30 -3.5" stroke="#6e7781" stroke-width="6"/>
+<path d="M-21 -4.5L0 -4.5" stroke="#6e7781" stroke-width="9"/>
+<path d="M0 -4.5L-1.5 -26.4" stroke="#6e7781" stroke-width="10"/>
+<path d="M-1.5 -26.4L1.3 -53.3" stroke="#6e7781" stroke-width="15"/>
+<path d="M1.3 -53.3L5.7 -73.8" stroke="#6e7781" stroke-width="7"/>
+<circle cx="5.7" cy="-73.8" r="9" fill="#6e7781"/>
+<path d="M1.3 -53.3L14.7 -42.8L28.8 -50.3" stroke="#fbfaf6" stroke-width="11.5"/>
+<path d="M1.3 -53.3L14.7 -42.8L28.8 -50.3" stroke="#6e7781" stroke-width="7.5"/>
+<circle cx="0" cy="-4.5" r="6.5" fill="#c62828" stroke="#fbfaf6" stroke-width="2.5"/>
+</g>
+<text x="128" y="375" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">À genoux</text>
+<text x="128" y="397" font-size="19" fill="#4b535c" text-anchor="middle">boulonnage en</text>
+<text x="128" y="419" font-size="19" fill="#4b535c" text-anchor="middle">chantier bas</text>
+
+<!-- Tronc en torsion : manutention asymétrique -->
+<path d="M272 349H432" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="translate(333.5 349)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-6 -47.5L-8 -4.5" stroke="#6e7781" stroke-width="10"/>
+<path d="M-8 -3L-13 -3" stroke="#6e7781" stroke-width="6"/>
+<path d="M6 -47.5L8 -4.5" stroke="#6e7781" stroke-width="10"/>
+<path d="M8 -3L13 -3" stroke="#6e7781" stroke-width="6"/>
+<path d="M0 -47.5L0 -53.5" stroke="#6e7781" stroke-width="21"/>
+<path d="M0 -55.5L2 -74.5" stroke="#6e7781" stroke-width="15"/>
+<path d="M2 -74.5L3.5 -95.4" stroke="#6e7781" stroke-width="7"/>
+<circle cx="3.5" cy="-95.4" r="9" fill="#6e7781"/>
+<rect x="33" y="-72" width="20" height="15" rx="2" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M1 -70.5L13 -59.5L31 -61.5" stroke="#fbfaf6" stroke-width="11.5"/>
+<path d="M1 -70.5L13 -59.5L31 -61.5" stroke="#6e7781" stroke-width="7.5"/>
+<path d="M4 -72.5L18 -63.5L34 -67.5" stroke="#fbfaf6" stroke-width="11.5"/>
+<path d="M4 -72.5L18 -63.5L34 -67.5" stroke="#6e7781" stroke-width="7.5"/>
+<path d="M0 -54.5L0.5 -62.5" stroke="#c62828" stroke-width="13"/>
+<path d="M-21 -56.5Q-19 -43.5 0 -43.5Q17 -43.5 21 -52.5" stroke="#1f2328" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+<path d="M25 -59.5L16 -55.5L24 -48.5Z" fill="#1f2328"/>
+</g>
+<text x="352" y="375" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">Tronc en torsion</text>
+<text x="352" y="397" font-size="19" fill="#4b535c" text-anchor="middle">manutention</text>
+<text x="352" y="419" font-size="19" fill="#4b535c" text-anchor="middle">asymétrique</text>
+
+<!-- Bras au-dessus de la tête : forage de toit -->
+<path d="M48 564H208" stroke="#6e7781" stroke-width="2.5"/>
+<rect x="48" y="439.4" width="160" height="7" fill="#eceef0"/>
+<path d="M48 446.4H208" stroke="#6e7781" stroke-width="3"/>
+<g transform="translate(128.4 564)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-3 -3L11 -3" stroke="#6e7781" stroke-width="6"/>
+<path d="M0 -4.5L0.7 -25.5" stroke="#6e7781" stroke-width="9"/>
+<path d="M0.7 -25.5L0 -47.5" stroke="#6e7781" stroke-width="10"/>
+<path d="M0 -47.5L1.4 -74.4" stroke="#6e7781" stroke-width="15"/>
+<path d="M1.4 -74.4L-7.2 -93.6" stroke="#6e7781" stroke-width="7"/>
+<circle cx="-7.2" cy="-93.6" r="9" fill="#6e7781"/>
+<path d="M1.4 -74.4L2.9 -91.4L9.6 -105.9" stroke="#fbfaf6" stroke-width="11.5"/>
+<path d="M1.4 -74.4L2.9 -91.4L9.6 -105.9" stroke="#6e7781" stroke-width="7.5"/>
+<path d="M0.2 -77.2L-4.1 -86.8" stroke="#c62828" stroke-width="7"/>
+<circle cx="1.4" cy="-74.4" r="6.5" fill="#c62828" stroke="#fbfaf6" stroke-width="2.5"/>
+<path d="M9.6 -92.9L9.6 -115.9" stroke="#1f2328" stroke-width="3.5"/>
+</g>
+<text x="128" y="590" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">Bras au-dessus</text>
+<text x="128" y="612" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">de la tête</text>
+<text x="128" y="634" font-size="19" fill="#4b535c" text-anchor="middle">forage de toit</text>
+
+<!-- Cou en hyperextension : surveillance en hauteur -->
+<path d="M272 564H432" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="translate(356.4 564)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M-3 -3L11 -3" stroke="#6e7781" stroke-width="6"/>
+<path d="M0 -4.5L0.7 -25.5" stroke="#6e7781" stroke-width="9"/>
+<path d="M0.7 -25.5L0 -47.5" stroke="#6e7781" stroke-width="10"/>
+<path d="M0 -47.5L1.4 -74.4" stroke="#6e7781" stroke-width="15"/>
+<path d="M1.4 -74.4L-13.7 -89" stroke="#6e7781" stroke-width="7"/>
+<circle cx="-13.7" cy="-89" r="9" fill="#6e7781"/>
+<path d="M1.4 -74.4L2.6 -57.5L4.8 -41.6" stroke="#fbfaf6" stroke-width="11.5"/>
+<path d="M1.4 -74.4L2.6 -57.5L4.8 -41.6" stroke="#6e7781" stroke-width="7.5"/>
+<path d="M-0.8 -76.5L-8.3 -83.8" stroke="#c62828" stroke-width="7"/>
+<path d="M-5.7 -99.3L4.7 -112.7" stroke="#1f2328" stroke-width="2.5" stroke-dasharray="4 4"/>
+<path d="M9.7 -119L0.8 -115.7L8.7 -109.6Z" fill="#1f2328"/>
+</g>
+<text x="352" y="590" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">Cou en</text>
+<text x="352" y="612" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">hyperextension</text>
+<text x="352" y="634" font-size="19" fill="#4b535c" text-anchor="middle">surveillance en hauteur</text>
+</g>
+</svg>
