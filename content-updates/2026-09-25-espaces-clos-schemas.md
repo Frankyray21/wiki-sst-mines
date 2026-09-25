@@ -4,6 +4,17 @@ Demandes de Frank : « sélectionne une page qu'on va améliorer avec entre autr
 schémas », puis « go » ; en cours de route : « les images dans le texte doivent avoir une grosseur
 standard qui ne nuit pas à la lecture ; au besoin on clique dessus et elle grossit en pop-up ».
 
+## Pages modifiées
+
+Adresses du site publié : elles montrent ces changements une fois la branche fusionnée dans `main`.
+
+| Page | Ce qui change |
+| --- | --- |
+| [Espaces clos](https://frankyray21.github.io/wiki-sst-mines/w/securite/espaces-clos.html) | Cinq schémas, art. 308 en vigueur, « ≤ 5 % de la LIE », lien de l'art. 309, sources |
+| [LIE](https://frankyray21.github.io/wiki-sst-mines/w/legislation/40-concepts-juridiques-transverses/lie.html) (recueil) | Seuils en espace clos conformes aux art. 302 à 306 |
+| [Gaz et vapeurs](https://frankyray21.github.io/wiki-sst-mines/w/hygiene/gaz-et-vapeurs.html) | « à 5 % de la LIE au plus » |
+| Toutes les pages, p. ex. [Anatomie et biomécanique du dos](https://frankyray21.github.io/wiki-sst-mines/w/ergonomie/anatomie-et-biomecanique-du-dos.html) | Images à taille standard, agrandissement au toucher |
+
 ## Le choix de la page
 
 35 pages des six wikis (psychosocial et textes de loi exclus) notées sur une grille commune :
