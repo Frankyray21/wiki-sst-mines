@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="648" viewBox="0 0 480 648" role="img" aria-labelledby="t d">
+<title id="t">Ce que chaque dispositif réduit dans l’échappement</title>
+<desc id="d">Trois dispositifs de post-traitement dessinés en coupe, côte à côte, chacun traversé de bas en haut par les gaz d’échappement : le catalyseur d’oxydation (DOC) réduit le CO et les hydrocarbures, et modérément les particules ; le SCR réduit les NOx et reçoit de l’urée d’un petit réservoir ; le filtre à particules (DPF) retient les particules dans ses parois et demande un entretien par régénération. Sous le DPF, sa base requise : un carburant à très faible teneur en soufre (ULSD). Un ou plusieurs dispositifs, selon l’engin.</desc>
+<defs>
+<!-- Symbole « particules » : la même grappe de trois points partout (un symbole, pas un comptage) -->
+<g id="p"><circle cx="0" cy="-6" r="4.5"/><circle cx="-6" cy="4" r="4.5"/><circle cx="6" cy="4" r="4.5"/></g>
+</defs>
+<rect width="480" height="648" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Ce que chaque dispositif</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">réduit dans l’échappement</text>
+<text x="24" y="106" font-size="19" fill="#4b535c">Un ou plusieurs dispositifs, selon l’engin</text>
+
+<!-- Légende des flèches -->
+<path d="M31 142V128" stroke="#6e7781" stroke-width="5"/>
+<path d="M24 130L31 118L38 130Z" fill="#6e7781"/>
+<text x="46" y="140" font-size="19" fill="#1f2328">gaz d’échappement</text>
+<path d="M276 120V132" stroke="#1565c0" stroke-width="4" stroke-linecap="round"/>
+<path d="M269 130L276 144L283 130Z" fill="#1565c0"/>
+<text x="292" y="140" font-size="19" font-weight="600" fill="#1565c0">réduit</text>
+
+<!-- Noms -->
+<g font-size="22" font-weight="700" fill="#1f2328" text-anchor="middle">
+<text x="109" y="182">DOC</text>
+<text x="236" y="182">SCR</text>
+<text x="390" y="182">DPF</text>
+</g>
+<g font-size="19" fill="#1f2328" text-anchor="middle">
+<text x="109" y="206">catalyseur</text>
+<text x="109" y="228">d’oxydation</text>
+<text x="390" y="206">filtre à</text>
+<text x="390" y="228">particules</text>
+</g>
+
+<!-- Flux de gaz : entre par le bas, sort par le haut -->
+<g stroke="#6e7781" stroke-width="6" fill="none">
+<path d="M109 518V428M109 328V312"/>
+<path d="M236 518V428M236 328V282"/>
+<path d="M390 518V428M390 328V282"/>
+</g>
+<g fill="#6e7781">
+<path d="M100 314L109 300L118 314Z"/>
+<path d="M227 284L236 270L245 284Z"/>
+<path d="M381 284L390 270L399 284Z"/>
+</g>
+
+<!-- DOC : carter et monolithe à canaux droits -->
+<rect x="73" y="328" width="72" height="100" rx="10" fill="#fbfaf6" stroke="#4b535c" stroke-width="3"/>
+<path d="M88 338V418M102 338V418M116 338V418M130 338V418" stroke="#6e7781" stroke-width="2.5"/>
+<g fill="#c62828"><circle cx="95" cy="404" r="3.5"/><circle cx="123" cy="372" r="3.5"/><circle cx="109" cy="350" r="3.5"/></g>
+
+<!-- SCR : carter et monolithe à canaux droits ; réservoir d’urée relié à l’entrée -->
+<rect x="206" y="328" width="60" height="100" rx="10" fill="#fbfaf6" stroke="#4b535c" stroke-width="3"/>
+<path d="M221 338V418M236 338V418M251 338V418" stroke="#6e7781" stroke-width="2.5"/>
+<text x="294" y="452" font-size="19" fill="#1f2328" text-anchor="middle">urée</text>
+<rect x="288" y="460" width="12" height="6" rx="2" fill="#4b535c"/>
+<rect x="282" y="465" width="24" height="40" rx="5" fill="#eceef0" stroke="#4b535c" stroke-width="2.5"/>
+<path d="M282 476H246" stroke="#4b535c" stroke-width="3"/>
+<path d="M247 470L240 476L247 482Z" fill="#4b535c"/>
+
+<!-- DPF : canaux bouchés en alternance ; les particules restent dans les canaux ouverts en bas -->
+<rect x="354" y="328" width="72" height="100" rx="10" fill="#fbfaf6" stroke="#4b535c" stroke-width="3"/>
+<path d="M368 336V420M382 336V420M396 336V420M410 336V420" stroke="#6e7781" stroke-width="2.5"/>
+<g fill="#4b535c">
+<rect x="356" y="336" width="12" height="8"/><rect x="382" y="336" width="14" height="8"/><rect x="410" y="336" width="14" height="8"/>
+<rect x="368" y="412" width="14" height="8"/><rect x="396" y="412" width="14" height="8"/>
+</g>
+<g fill="#c62828">
+<circle cx="362" cy="350" r="3.5"/><circle cx="362" cy="362" r="3.5"/><circle cx="362" cy="374" r="3.5"/><circle cx="362" cy="388" r="3.5"/>
+<circle cx="389" cy="350" r="3.5"/><circle cx="389" cy="362" r="3.5"/><circle cx="389" cy="376" r="3.5"/><circle cx="389" cy="390" r="3.5"/>
+<circle cx="417" cy="350" r="3.5"/><circle cx="417" cy="362" r="3.5"/><circle cx="417" cy="374" r="3.5"/><circle cx="417" cy="388" r="3.5"/>
+</g>
+
+<!-- Entrée (en bas) : ce qui arrive dans chaque dispositif -->
+<g stroke="#c62828" stroke-width="2.5" fill="#fde3e0">
+<rect x="86" y="444" width="46" height="28" rx="8"/>
+<rect x="86" y="480" width="46" height="28" rx="8"/>
+<rect x="207" y="488" width="58" height="28" rx="8"/>
+</g>
+<g font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">
+<text x="109" y="465">CO</text>
+<text x="109" y="501">HC</text>
+<text x="236" y="509">NOx</text>
+</g>
+<g fill="#c62828">
+<use href="#p" x="62" y="476"/>
+<use href="#p" x="368" y="476"/>
+</g>
+
+<!-- Sortie (en haut) : ce qui est réduit -->
+<g stroke="#c62828" stroke-width="2.5" fill="#fde3e0">
+<rect x="50" y="236" width="46" height="28" rx="8"/>
+<rect x="118" y="236" width="46" height="28" rx="8"/>
+<rect x="200" y="236" width="58" height="28" rx="8"/>
+</g>
+<g font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">
+<text x="73" y="257">CO</text>
+<text x="141" y="257">HC</text>
+<text x="229" y="257">NOx</text>
+</g>
+<g fill="#c62828">
+<use href="#p" x="38" y="288"/>
+<use href="#p" x="376" y="252"/>
+</g>
+<g stroke="#1565c0" stroke-width="4" stroke-linecap="round">
+<path d="M104 238V250"/><path d="M172 238V250"/><path d="M268 238V250"/><path d="M60 278V290"/><path d="M398 238V250"/>
+</g>
+<g fill="#1565c0">
+<path d="M97 248L104 262L111 248Z"/><path d="M165 248L172 262L179 248Z"/><path d="M261 248L268 262L275 248Z"/><path d="M53 288L60 302L67 288Z"/><path d="M391 248L398 262L405 248Z"/>
+</g>
+<text x="74" y="296" font-size="19" font-weight="600" fill="#1565c0">modérément</text>
+
+<!-- DPF : entretien -->
+<path d="M353 537A9 9 0 1 1 346 530" stroke="#1565c0" stroke-width="3" fill="none"/>
+<path d="M341 526L348 530L341 535Z" fill="#1565c0"/>
+<text x="362" y="544" font-size="19" fill="#1f2328">entretien :</text>
+<text x="390" y="568" font-size="19" fill="#1f2328" text-anchor="middle">régénération</text>
+
+<!-- Socle du DPF : le carburant -->
+<rect x="328" y="582" width="124" height="34" rx="6" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<text x="390" y="606" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">ULSD</text>
+<g font-size="19" fill="#1f2328" text-anchor="end">
+<text x="316" y="580" font-weight="700">Base requise pour le DPF :</text>
+<text x="316" y="604">carburant à très faible</text>
+<text x="316" y="628">teneur en soufre</text>
+</g>
+<path d="M320 599H327" stroke="#4b535c" stroke-width="2.5"/>
+</g>
+</svg>

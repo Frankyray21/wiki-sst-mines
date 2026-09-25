@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="608" viewBox="0 0 480 608" role="img" aria-labelledby="t d">
+<title id="t">Modèle élargi : une demande, trois appuis</title>
+<desc id="d">Deux lignes montrent la même charge : une longue dalle sombre marquée « demande psychologique », qu’un travailleur tient par un bout. En haut, « Sans appuis » : l’autre bout de la dalle repose au sol, le travailleur plie sous le poids et une grosse flèche rouge appuie sur le bout qu’il tient. En bas, « Avec les trois appuis » : la même dalle repose à l’horizontale sur trois étais bleus, « latitude décisionnelle », « soutien social » et « reconnaissance », ce dernier en bleu plein ; le travailleur se tient droit et la flèche rouge est petite : il porte encore une part. Sous les deux premiers étais, un crochet gris : « modèle de Karasek ». Sous l’étai de la reconnaissance, un crochet bleu : « ajoutée ». Mention : un repère d’analyse, pas un diagnostic.</desc>
+<rect width="480" height="608" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Modèle élargi :</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">une demande, trois appuis</text>
+<!-- Ligne 1 : sans appuis, la dalle repose au sol par un bout et le travailleur plie sous le poids -->
+<text x="24" y="118" font-size="20" font-weight="700" fill="#1f2328">Sans appuis</text>
+<path d="M24 270H456" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="rotate(6.82 452 270)">
+<rect x="76" y="230" width="376" height="40" rx="4" fill="#4b535c"/>
+<text x="274" y="257" font-size="20" font-weight="700" fill="#fbfaf6" text-anchor="middle">demande psychologique</text>
+</g>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M41.5 266.1L59.7 266.1" stroke="#1f2328" stroke-width="7.8"/>
+<path d="M45.4 264.1L59.7 237.5" stroke="#1f2328" stroke-width="11.7"/>
+<path d="M59.7 237.5L41.5 212.8" stroke="#1f2328" stroke-width="13"/>
+<path d="M41.5 212.8L63.6 180.3" stroke="#1f2328" stroke-width="19.5"/>
+<path d="M63.6 180.3L77.9 160.8" stroke="#1f2328" stroke-width="9.1"/>
+<circle cx="77.9" cy="160.8" r="11.7" fill="#1f2328"/>
+<path d="M63.6 180.3L76.6 194.6L87 206.3" stroke="#fbfaf6" stroke-width="15"/>
+<path d="M63.6 180.3L76.6 194.6L87 206.3" stroke="#1f2328" stroke-width="9.8"/>
+</g>
+<path d="M131 136H147V167.3H158L139 189.3L120 167.3H131Z" fill="#c62828"/>
+<!-- Ligne 2 : la même dalle à l’horizontale sur trois étais ; le travailleur se tient droit -->
+<text x="24" y="314" font-size="20" font-weight="700" fill="#1f2328">Avec les trois appuis</text>
+<path d="M24 466H456" stroke="#6e7781" stroke-width="2.5"/>
+<rect x="80" y="368" width="376" height="40" rx="4" fill="#4b535c"/>
+<text x="278" y="395" font-size="20" font-weight="700" fill="#fbfaf6" text-anchor="middle">demande psychologique</text>
+<rect x="127" y="415" width="18" height="44" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<rect x="117" y="408" width="38" height="7" rx="2" fill="#1565c0"/>
+<rect x="117" y="459" width="38" height="7" rx="2" fill="#1565c0"/>
+<rect x="244" y="415" width="18" height="44" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<rect x="234" y="408" width="38" height="7" rx="2" fill="#1565c0"/>
+<rect x="234" y="459" width="38" height="7" rx="2" fill="#1565c0"/>
+<rect x="373" y="415" width="18" height="44" fill="#1565c0" stroke="#1565c0" stroke-width="2.5"/>
+<rect x="363" y="408" width="38" height="7" rx="2" fill="#1565c0"/>
+<rect x="363" y="459" width="38" height="7" rx="2" fill="#1565c0"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M48.3 462.1L66.5 462.1" stroke="#1f2328" stroke-width="7.8"/>
+<path d="M52.2 460.1L53.1 432.9" stroke="#1f2328" stroke-width="11.7"/>
+<path d="M53.1 432.9L52.2 404.2" stroke="#1f2328" stroke-width="13"/>
+<path d="M52.2 404.2L54 369.3" stroke="#1f2328" stroke-width="19.5"/>
+<path d="M54 369.3L56.4 344.6" stroke="#1f2328" stroke-width="9.1"/>
+<circle cx="56.4" cy="344.6" r="11.7" fill="#1f2328"/>
+<path d="M54 369.3L65.2 391.9L86 388" stroke="#fbfaf6" stroke-width="15"/>
+<path d="M54 369.3L65.2 391.9L86 388" stroke="#1f2328" stroke-width="9.8"/>
+</g>
+<path d="M136 338H142V354H148L139 365L130 354H136Z" fill="#c62828"/>
+<text x="136" y="494" font-size="19" fill="#1f2328" text-anchor="middle">latitude</text>
+<text x="136" y="516" font-size="19" fill="#1f2328" text-anchor="middle">décisionnelle</text>
+<text x="253" y="494" font-size="19" fill="#1f2328" text-anchor="middle">soutien</text>
+<text x="253" y="516" font-size="19" fill="#1f2328" text-anchor="middle">social</text>
+<text x="382" y="494" font-size="19" fill="#1f2328" text-anchor="middle">reconnaissance</text>
+<path d="M74 532V540H84M278 540H288V532" stroke="#6e7781" stroke-width="2.5" fill="none"/>
+<text x="181" y="546" font-size="19" fill="#4b535c" text-anchor="middle">modèle de Karasek</text>
+<path d="M310 532V540H336M428 540H454V532" stroke="#1565c0" stroke-width="2.5" fill="none"/>
+<text x="382" y="546" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">ajoutée</text>
+<text x="24" y="586" font-size="19" fill="#4b535c">Un repère d’analyse, pas un diagnostic.</text>
+</g>
+</svg>
