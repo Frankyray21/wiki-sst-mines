@@ -1,0 +1,46 @@
+{
+ "date": "2026-09-25",
+ "revision": "2026-09-25-modele-de-karasek-schemas",
+ "portee": "Schémas de la page w/psychosocial/modele-de-karasek.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Modèle de Karasek",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/modele-de-karasek.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-modele-de-karasek-quadrants-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-modele-de-karasek-iso-strain-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Karasek 1979 p. 288 propose une matrice à quatre quadrants selon que la demande et le contrôle sont élevés ou faibles",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-modele-de-karasek-quadrants-v1.svg|Matrice à quatre cases du modèle de Karasek : la demande psychologique va de faible (en bas) à forte (en haut), le contrôle (latitude décisionnelle) de faible (à gauche) à fort (à droite). La case forte demande et faible contrôle, en rouge, est le job strain (forte tension), la zone la plus à risque ; les trois autres sont le travail actif, le travail passif et le travail détendu.]]\n\n<p class=\"infographie-legende\">Selon Karasek (1979), c’est la combinaison d’une forte demande et d’un faible contrôle, le job strain, qui forme la zone la plus à risque. Chaque case décrit une situation de travail, pas un diagnostic.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Axe vertical : la demande psychologique, faible en bas, forte en haut. Axe horizontal : le contrôle (latitude décisionnelle), faible à gauche, fort à droite.</li>\n<li>En haut à gauche, forte demande et faible contrôle : le job strain (forte tension), en rouge, la zone la plus à risque.</li>\n<li>En haut à droite, forte demande et fort contrôle : le travail actif, stimulant et associé à l’apprentissage actif.</li>\n<li>En bas, faible demande : le travail passif quand le contrôle est faible (à gauche), le travail détendu quand il est fort (à droite).</li>\n<li>Mention au bas du schéma : « Des situations de travail, pas des diagnostics. »</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après le tableau des quadrants de cette page et {{lien:w/psychosocial/analyse-karasek-1979.html|Karasek (1979)}}, p. 288. Schéma conceptuel : aucune médiane, aucun score.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-modele-de-karasek-quadrants-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "img-001.png",
+   "marqueur": "Infographies/wiki-modele-de-karasek-quadrants-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Iso-strain : ajout du soutien social comme troisième dimension. Job strain + faible soutien = configuration la plus dommageable documentée.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-modele-de-karasek-iso-strain-v1.svg|Deux lignes comparent le même job strain avec un fort puis un faible soutien au travail : aidé par un collègue et un supérieur, le travailleur reste en job strain, une zone à risque ; quand l’aide est limitée et l’écoute manque, c’est l’iso-strain, en rouge, la configuration la plus à risque. Un encadré ajoute le camp FIFO ou éloigné : le soutien externe y est coupé, et si le soutien au travail manque aussi, un job strain peut basculer en iso-strain.]]\n\n<p class=\"infographie-legende\">Le soutien social (collègues, supérieur) est la troisième dimension du modèle : avec un faible soutien au travail, le job strain devient de l’iso-strain, la configuration la plus à risque. En camp éloigné, la coupure du soutien externe (famille, communauté) ne fait pas, à elle seule, de l’iso-strain : c’est le soutien au travail qu’il faut examiner.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Le soutien social s’ajoute à la demande et au contrôle comme troisième dimension ; les deux lignes montrent le même job strain (forte demande, faible contrôle).</li>\n<li>« Job strain + fort soutien » : un collègue et un supérieur posent la main sur l’épaule du travailleur (aide, écoute). Résultat, en rose : c’est encore du job strain, qui reste à risque.</li>\n<li>« Job strain + faible soutien » : les mêmes personnes, un peu à l’écart, sans geste d’aide (aide limitée, manque d’écoute). Résultat, en rouge : l’iso-strain, la configuration la plus à risque.</li>\n<li>Encadré « En contexte FIFO ou camp éloigné » : le soutien externe (famille, communauté) est temporairement coupé ; si le soutien au travail manque aussi, un job strain peut basculer en iso-strain.</li>\n<li>Mention au bas du schéma : « Un risque statistique, pas un diagnostic. »</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page et {{lien:w/psychosocial/analyse-karasek-et-theorell-1990.html|Karasek et Theorell (1990)}} ; « la plus à risque » et l’exemple du camp nuancés d’après {{lien:w/psychosocial/iso-strain-ce-que-ca-signifie.html|Iso-strain : ce que ça signifie}} (sources vérifiées : des associations observées, pas une causalité démontrée ; le FIFO n’est pas, à lui seul, de l’iso-strain) et {{lien:w/psychosocial/iso-strain.html|Iso-strain}}. Schéma conceptuel : aucun score, aucun risque chiffré.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-modele-de-karasek-iso-strain-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "Modèle de Karasek, 4 quadrants. Source : SST1010 (UQAM), notes de cours, séance 4. Usage personnel.",
+   "marqueur": "Infographies/wiki-modele-de-karasek-quadrants-v1.svg"
+  }
+ ]
+}
