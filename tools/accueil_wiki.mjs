@@ -149,6 +149,49 @@ function finDeListe(html, debut) {
   return html.length;
 }
 
+// Adresses distinctes des liens d'un fragment.
+export function liensDe(html) {
+  return new Set([...String(html).matchAll(/<a href="([^"]+)"/g)].map(m => m[1]));
+}
+// Les deux premiers mots d'un titre ou d'une description, sans balise, emoji ni ponctuation.
+const motsDeTete = (t) => String(t).replace(/<[^>]+>/g, '').replace(EMOJIS_DE_TETE, '').toLowerCase()
+  .replace(/[^\p{L}\p{N}\s]/gu, ' ').trim().split(/\s+/).slice(0, 2).join(' ');
+const nbLiensTexte = (n) => `${n} page${n > 1 ? 's' : ''}`;
+
+// Allège l'accueil après le découpage (Frank, 26 sept. 2026 : « améliore la page d'accueil »). Même
+// règle dans le générateur et sur le site publié, appliquée au rendu des boîtes :
+//   - la description d'une tuile qui répète le titre de sa boîte est retirée (« Démarrage rapide -
+//     Travailleur » sous « Travailleur, opérateur », dans « Démarrage rapide par rôle ») ;
+//   - une boîte faite de tuiles occupe toute la largeur : une rangée de rôles ;
+//   - une boîte dont la moitié des liens ou plus est déjà offerte plus haut (volets de thèmes, barre
+//     d'index) est repliée, titre et nombre de pages sur une ligne ; ouverte, elle reste entière.
+// Le contenu de la note n'est jamais modifié, seulement replié ou allégé de ce qui se répète.
+export function epurerAccueil(sections, { liensOfferts = new Set() } = {}) {
+  const journal = [];
+  const resultat = sections.map(s => {
+    let html = s.html;
+    let sansDescription = 0;
+    const tete = motsDeTete(s.titre);
+    if (tete) html = html.replace(/<small class="accueil-tuile-desc">([^<]*)<\/small>/g, (m, d) => { if (motsDeTete(d) !== tete) return m; sansDescription++; return ''; });
+    const net = html.trim();
+    const tuiles = net.startsWith('<ul class="accueil-tuiles">') && net.endsWith('</ul>') && (net.match(/<ul\b/g) || []).length === 1;
+    const liens = liensDe(html);
+    const repris = [...liens].filter(l => liensOfferts.has(l)).length;
+    const replie = s.id !== 'themes-du-wiki' && liens.size > 0 && repris * 2 >= liens.size;
+    if (sansDescription || replie) journal.push({ boite: s.titre.replace(/<[^>]+>/g, ''), sansDescription, replie, liens: liens.size, repris });
+    return { ...s, html, grand: s.grand || replie || tuiles, replie, nbLiens: liens.size };
+  });
+  return { sections: resultat, journal };
+}
+
+// Une boîte : section ouverte, ou volet replié (titre et nombre de pages dans le résumé).
+export function rendreBoite(s) {
+  const classes = 'accueil-boite' + (s.grand ? ' accueil-large' : '') + (s.replie ? ' accueil-repli' : '');
+  const titre = `<h2 class="accueil-titre" id="${s.id}">${s.titre}${s.replie ? ` <small class="accueil-compte">${nbLiensTexte(s.nbLiens)}</small>` : ''}</h2>`;
+  if (s.replie) return `<details class="${classes}"><summary>${titre}</summary><div class="accueil-corps">\n${s.html}\n</div></details>`;
+  return `<section class="${classes}" aria-labelledby="${s.id}">${titre}<div class="accueil-corps">\n${s.html}\n</div></section>`;
+}
+
 // Pied d'une page d'accueil : la date de génération seule — les indicateurs éditoriaux (relecture,
 // vérification des sources) et les outils qualifient des articles, pas une page de navigation.
 export function piedAccueil(date, complement = '') {
@@ -157,8 +200,7 @@ export function piedAccueil(date, complement = '') {
 
 // HTML de la page (sans fil d'Ariane ni pied de page, fournis par l'habillage commun).
 export function rendreAccueil({ titre, icone, sousTitre, chapeau, sections, index = [] }) {
-  const boites = sections.map(s =>
-    `<section class="accueil-boite${s.grand ? ' accueil-large' : ''}" aria-labelledby="${s.id}"><h2 class="accueil-titre" id="${s.id}">${s.titre}</h2><div class="accueil-corps">\n${s.html}\n</div></section>`).join('\n');
+  const boites = sections.map(rendreBoite).join('\n');
   // <header class="article-titre"> reste tel quel : la barre de lecture s'insère après .page-sub
   // et verif_site exige ce groupe titre + domaine sur toute page à corps.
   return `<div class="accueil-banniere">

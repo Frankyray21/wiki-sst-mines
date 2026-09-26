@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, extraireCorps, rendreAccueil, piedAccueil, tuile } from '../accueil_wiki.mjs';
+import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, extraireCorps, rendreAccueil, piedAccueil, tuile, epurerAccueil, rendreBoite, liensDe } from '../accueil_wiki.mjs';
 
 // Pages d'accueil des wikis et des sections : découpage du corps en boîtes, nettoyage des artefacts,
 // rendu façon page d'accueil de wiki, et état du site publié (docs/).
@@ -110,6 +110,33 @@ test('rendu : bandeau avec titre et domaine, chapeau, index, boîtes', () => {
   assert.ok(!html.includes('infobox') && !html.includes('class="toc'));
 });
 
+// Accueil allégé (26 septembre 2026) : ce qui est déjà offert par les volets de thèmes n'est pas répété
+// en clair plus bas ; les tuiles par rôle ne répètent pas le titre de leur boîte.
+test('epurerAccueil : tuiles sans description répétée, rangée de rôles, boîtes repliées quand la moitié des liens est déjà offerte', () => {
+  const themes = { id: 'themes-du-wiki', titre: 'Thèmes', grand: true, html: '<div class="accueil-groupes accueil-themes"><details class="accueil-theme" id="theme-a" open><summary><span class="accueil-theme-titre"><a href="t/a.html">A</a></span></summary><ul><li><a href="p1.html">P1</a></li><li><a href="p2.html">P2</a></li><li><a href="p3.html">P3</a></li></ul></details></div>' };
+  const roles = { id: 'roles', titre: 'Démarrage rapide par rôle', grand: false, html: '<ul class="accueil-tuiles">\n<li>👷 <a href="r1.html" title="🚀 Démarrage rapide - Travailleur"><span class="accueil-tuile-libelle">Travailleur</span><small class="accueil-tuile-desc">Démarrage rapide - Travailleur</small></a></li>\n<li>🏢 <a href="r2.html" title="x"><span class="accueil-tuile-libelle">Direction</span><small class="accueil-tuile-desc">obligations et prévention</small></a></li>\n</ul>' };
+  const internes = { id: 'internes', titre: '<a href="i.html" title="Articles internes">Articles internes (conseiller)</a>', grand: true, html: '<div class="accueil-groupes"><div class="accueil-groupe"><h3 id="g"><a href="t/a.html">A</a></h3>\n<ul>\n<li><a href="p1.html">P1</a></li>\n<li><a href="p2.html">P2</a></li>\n</ul>\n</div></div>' };
+  const navigation = { id: 'nav', titre: 'Navigation', grand: false, html: '<ul>\n<li><a href="faq.html">FAQ</a></li>\n<li><a href="p3.html">P3</a></li>\n<li><a href="mode.html">Mode d’emploi</a></li>\n</ul>' };
+  const offerts = liensDe(themes.html);
+  offerts.add('index.html');
+  const { sections, journal } = epurerAccueil([themes, roles, internes, navigation], { liensOfferts: offerts });
+  assert.deepEqual(sections.map(s => [s.replie, s.grand, s.nbLiens]), [[false, true, 4], [false, true, 2], [true, true, 3], [false, false, 3]]);
+  assert.ok(sections[1].html.includes('<span class="accueil-tuile-libelle">Travailleur</span></a>') && !sections[1].html.includes('<small class="accueil-tuile-desc">Démarrage rapide'), 'description qui répète le titre de la boîte retirée (le title du lien reste)');
+  assert.ok(sections[1].html.includes('<small class="accueil-tuile-desc">obligations et prévention</small>'), 'une vraie description reste');
+  assert.equal(sections[2].html, internes.html, 'une boîte repliée reste entière');
+  assert.deepEqual(journal, [{ boite: 'Démarrage rapide par rôle', sansDescription: 1, replie: false, liens: 2, repris: 0 }, { boite: 'Articles internes (conseiller)', sansDescription: 0, replie: true, liens: 3, repris: 3 }]);
+  // la boîte des thèmes n'est jamais repliée, même si tous ses liens sont « offerts » (c'est elle qui les offre)
+  assert.equal(sections[0].replie, false);
+  // rendu : section ouverte, ou volet replié avec le nombre de pages dans le résumé
+  assert.equal(rendreBoite(sections[3]), '<section class="accueil-boite" aria-labelledby="nav"><h2 class="accueil-titre" id="nav">Navigation</h2><div class="accueil-corps">\n' + navigation.html + '\n</div></section>');
+  assert.equal(rendreBoite(sections[2]), '<details class="accueil-boite accueil-large accueil-repli"><summary><h2 class="accueil-titre" id="internes">' + internes.titre + ' <small class="accueil-compte">3 pages</small></h2></summary><div class="accueil-corps">\n' + internes.html + '\n</div></details>');
+  assert.ok(rendreBoite({ ...sections[2], nbLiens: 1 }).includes('<small class="accueil-compte">1 page</small>'));
+  assert.ok(rendreAccueil({ titre: 'T', icone: 'x', sousTitre: 's', chapeau: '', sections }).includes('<details class="accueil-boite accueil-large accueil-repli">'), 'rendreAccueil passe par rendreBoite');
+  // sans lien offert (accueil de section) : rien ne change
+  const seul = epurerAccueil([navigation], {});
+  assert.deepEqual([seul.sections[0].replie, seul.sections[0].grand, seul.journal], [false, false, []]);
+});
+
 test('feuille de style : les règles que seul un rendu réel révèle', () => {
   const css = fs.readFileSync(path.join(R, 'tools/style.css'), 'utf8');
   // un en-tête de boîte qui est un lien garde la couleur de titre : en bleu de lien, 4,27:1 sur le
@@ -123,6 +150,12 @@ test('feuille de style : les règles que seul un rendu réel révèle', () => {
   assert.match(bloc900, /\.accueil-corps pre \{ border-color: var\(--border\); \}/, 'cadre défilant visible');
   // la section de base précède le bloc mobile, sinon ses règles l'emportent à spécificité égale
   assert.ok(css.indexOf('.accueil-grille { display: grid') < css.lastIndexOf('@media (max-width: 900px)'), 'section accueil avant le bloc mobile');
+  // accueil allégé (26 septembre 2026)
+  assert.match(css, /\.accueil-groupes\.accueil-themes \{ display: block; columns: 230px 3;/, 'volets en colonnes, sans le vide de la grille');
+  assert.match(css, /\.accueil-theme:not\(\[open\]\) > summary \.accueil-theme-desc \{ display: none; \}/, 'volet fermé : une ligne');
+  assert.match(bloc900, /\.accueil-themes-nav \{ display: none; \}/, 'téléphone : pas de raccourcis au-dessus des volets fermés');
+  assert.match(css, /details\.accueil-boite > summary \{ list-style: none; cursor: pointer; \}/);
+  assert.match(css, /\.accueil-grille \{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; grid-auto-flow: dense; \}/, 'les petites boîtes comblent les trous');
 });
 
 test('site publié : les dix-sept accueils et leurs cinq copies encadrement sont rendus en bandeau et boîtes, sans artefact', () => {
@@ -135,7 +168,7 @@ test('site publié : les dix-sept accueils et leurs cinq copies encadrement sont
     // Les cinq accueils de l'encadrement perdent une boîte entière (« Section travailleurs »
     // n'avait plus aucun lien réel après l'archivage) : le seuil est plus bas pour eux.
     const seuilBoites = ACCUEILS_G.includes(rel.replace(/^(?:g\/)?w\//, '')) ? 2 : 3;
-    assert.ok((html.match(/<section class="accueil-boite/g) || []).length >= seuilBoites, rel + ' : au moins ' + seuilBoites + ' boîte(s)');
+    assert.ok((html.match(/<(?:section|details) class="accueil-boite/g) || []).length >= seuilBoites, rel + ' : au moins ' + seuilBoites + ' boîte(s)');
     const corps = html.slice(html.indexOf('<div class="page-body accueil-grille">'), html.indexOf('<div class="page-meta">'));
     // un item réduit à une mention « (source interne) » ou « (abrogé) » est retiré ; un item qui l'accompagne d'une explication reste
     assert.ok(!/<li>\s*[^<\n]*<span class="(?:interne-inline|abroge-inline|missing-file)"[^>]*>[\s\S]*?<\/span>\s*<\/li>/.test(corps), rel + ' : aucun item réduit à une source non publiée');
@@ -151,8 +184,16 @@ test('site publié : les dix-sept accueils et leurs cinq copies encadrement sont
   assert.match(psy, /<div class="breadcrumbs"><a href="[^"]*index\.html">Portail<\/a> <span class="crumb-sep">›<\/span> <a href="[^"]*w\/psychosocial\/index\.html">SST psychosociale<\/a><\/div>/);
   assert.ok(psy.includes('<span class="new" title="Page introuvable : Gestion">Gestion</span>'), 'wikilink brut « [[Gestion » rendu en lien rouge');
   assert.ok(!psy.includes('Virage_strat'), 'nom de la vidéo non publiée retiré');
-  assert.ok(psy.includes('<ul class="accueil-tuiles">'), 'démarrage rapide par rôle en tuiles');
-  assert.ok(psy.includes('<small class="accueil-tuile-desc">'), 'tuiles décrites par le titre de la page cible');
+  assert.ok(psy.includes('<section class="accueil-boite accueil-large" aria-labelledby="demarrage-rapide-par-role">'), 'démarrage rapide par rôle : une rangée de tuiles sur toute la largeur');
+  assert.ok(psy.includes('<ul class="accueil-tuiles">') && !psy.includes('accueil-tuile-desc'), 'tuiles sans la description qui répétait « Démarrage rapide »');
+  assert.ok(fs.readFileSync(path.join(DOCS, 'w/legislation/00-accueil/00-accueil.html'), 'utf8').includes('<small class="accueil-tuile-desc">tes droits, tes obligations, tes recours en SST</small>'), 'une vraie description de tuile reste');
+  // les six accueils de wiki : les boîtes par public, qui répètent les thèmes, sont repliées ; les thèmes et le démarrage rapide restent ouverts
+  for (const w of ['droit-travail', 'ergonomie', 'hygiene', 'psychosocial', 'securite', 'toxicologie']) {
+    const h = fs.readFileSync(path.join(DOCS, `w/${w}/index.html`), 'utf8');
+    assert.ok(h.includes('<section class="accueil-boite accueil-large" aria-labelledby="themes-du-wiki">'), w + ' : thèmes ouverts');
+    assert.match(h, /<details class="accueil-boite accueil-large accueil-repli"><summary><h2 class="accueil-titre" id="[^"]*">[\s\S]*?<small class="accueil-compte">\d+ pages?<\/small><\/h2><\/summary>/, w + ' : au moins une boîte repliée');
+    assert.ok(!/<details class="accueil-boite[^"]*" aria-labelledby/.test(h), w + ' : un volet replié ne porte pas aria-labelledby');
+  }
   // grille des thèmes : première boîte de l'accueil de chaque wiki
   assert.ok(psy.includes('id="themes-du-wiki"') && psy.includes('w/psychosocial/theme/'), 'grille des thèmes en tête de l’accueil');
 });
