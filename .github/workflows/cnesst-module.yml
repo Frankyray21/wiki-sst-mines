@@ -1,0 +1,53 @@
+name: Module CNESST
+on:
+  push:
+    branches: [feat/cnesst-interactif]
+    paths: [tools/modules/cnesst/READY]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: cnesst-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Installer les dépendances de développement du wiki
+        run: npm --prefix tools ci
+      - name: Tests du module
+        run: node --test tools/modules/cnesst/*.test.mjs
+      - name: Installer le point de génération et produire les pages
+        run: node tools/modules/cnesst/installer.mjs --appliquer
+      - name: Tests existants du wiki
+        run: npm --prefix tools test
+      - name: Vérifier les ressources publiées
+        run: npm --prefix tools run check:site
+      - name: Conserver les pages et les sources pour validation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cnesst-validation
+          retention-days: 7
+          path: |
+            tools/
+            docs/assets/
+            docs/modules/cnesst/
+            docs/w/psychosocial/cnesst-roles-et-pouvoirs.html
+            docs/g/psychosocial/cnesst-roles-et-pouvoirs.html
+            docs/sw.js
+            docs/manifest.webmanifest
+      - name: Enregistrer les fichiers générés sur la branche de travail seulement
+        if: success() && github.ref == 'refs/heads/feat/cnesst-interactif'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tools/build_site.mjs docs/
+          if ! git diff --cached --quiet; then
+            git commit -m 'build: intégrer le module CNESST et actualiser les ressources hors ligne'
+            git push origin HEAD:feat/cnesst-interactif
+          fi
