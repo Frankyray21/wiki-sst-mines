@@ -216,6 +216,13 @@ node tools/serve.mjs
   toxicologie et de sécurité, à la note psychosociale sur la charge mentale : `tools/raccourcir_liens.mjs` les corrige
   d'après une table à valider. **À faire là où est le vault** : l'outil, puis la reconstruction. Détail :
   `content-updates/2026-09-26-libelles-liens.md`
+- **L'article en PDF (26 septembre 2026)** : un bouton « 📄 PDF » dans la barre de lecture de chaque article
+  (à côté de A−, A+ et Lecture). Il ouvre l'impression du navigateur, où « Enregistrer au format PDF » produit le
+  fichier : texte net et copiable, liens actifs, en noir sur blanc, sans menus. En tête du PDF figurent l'adresse de la
+  page et la date du téléchargement. Les images sont chargées avant l'impression ; le texte reste à sa taille normale
+  même si A+ est réglé. Dans l'application Android, la version 1.0 ouvre la page dans le navigateur (réseau requis).
+  La version 1.1 imprime elle-même, sans réseau, mais elle reste à construire avec la clé de signature :
+  `node tools/android/construire_apk.mjs --version 1.1 --code 2` (voir `tools/android/README.md`).
 - **L'illustration de Frank sur le lieu de contrôle (26 septembre 2026)** : sur Types de personnalité et lieu de
   contrôle, l'image refaite par Frank remplace telle quelle le schéma « interne ou externe ». La légende reste celle
   de la page. L'outil de pose accepte désormais une image PNG ou JPEG : signature vérifiée, 480 px de large au moins,

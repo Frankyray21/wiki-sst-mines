@@ -804,7 +804,7 @@
     if (document.querySelector('.page-body')) {
       return ['tour-article', [
         { titre: 'Lire un article', texte: 'Voici les repères d’une page du wiki. Quelques repères, et vous êtes autonome.' },
-        { titre: 'Lire à votre aise', texte: 'A− et A+ règlent la taille du texte, et « Lecture » ne garde que l’article : pratique sur un téléphone, sous terre. Le réglage vous suit d’une page à l’autre.', cible: '.lecture-outils' },
+        { titre: 'Lire à votre aise', texte: 'A− et A+ règlent la taille du texte, et « Lecture » ne garde que l’article : pratique sur un téléphone, sous terre. Le réglage vous suit d’une page à l’autre. « PDF » enregistre l’article, pour le garder ou le partager.', cible: '.lecture-outils' },
         { titre: 'L’essentiel, tout de suite', texte: 'Le résumé en tête donne la substance de l’article avant d’entrer dans le détail.', cible: '.chapo' },
         { titre: 'La fiche signalétique', texte: 'Loi, article, statut, date de révision : les repères de la page. Les mots-clés en bas sont cliquables et mènent à toutes les pages du même sujet.', cible: '.infobox' },
         { titre: 'Passer à la page voisine', texte: 'En bas de l’article, « Précédent » et « Suivant » enchaînent les pages du même dossier : les articles de loi se lisent ainsi dans l’ordre.', cible: '.voisins' },
@@ -1502,6 +1502,73 @@
   }
   window.addEventListener('hashchange', ancreRepli);
 
+  // ---------- l'article en PDF ----------
+  // « PDF » ouvre l'impression du navigateur, où « Enregistrer au format PDF » produit le fichier :
+  // texte net et copiable, liens actifs, sans menus (feuille d'impression de style.css), avec la
+  // source et la date en tête. Les images en chargement différé sont chargées d'abord : sinon,
+  // elles manqueraient au PDF. L'application Android (vue intégrée) n'imprime pas d'elle-même :
+  // une version qui le sait l'annonce par window.WikiSSTMinesApp.imprimer ; sinon, la page s'ouvre
+  // dans le navigateur de l'appareil (en http, adresse que l'application confie au navigateur,
+  // lequel passe aussitôt en https), où l'impression se lance à l'arrivée (?pdf=1).
+  var PDF = (function () {
+    if (!document.querySelector('.page-body') || !document.querySelector('.page-title')) return null;
+    var dansApk = /WikiSSTMinesApp\//.test(navigator.userAgent);
+    function pont() { var a = window.WikiSSTMinesApp; return a && typeof a.imprimer === 'function' ? a : null; }
+    function adressePropre() {
+      return location.href.split('#')[0].replace(/([?&])pdf=1(&|$)/, function (m, avant, apres) { return apres ? avant : ''; });
+    }
+    function dateDuJour() {
+      try { return new Date().toLocaleDateString('fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }); }
+      catch (e) { return new Date().toISOString().slice(0, 10); }
+    }
+    var source = null;
+    function poserSource() {
+      var cadre = document.querySelector('main.content') || document.querySelector('.page-body').parentNode;
+      if (!source) {
+        source = document.createElement('p');
+        source.className = 'impression-source';
+        cadre.insertBefore(source, cadre.firstChild);
+      }
+      source.textContent = 'WIKI SST Mines · ' + adressePropre() + ' · téléchargé le ' + dateDuJour();
+    }
+    function chargerImages(delai) {
+      var attentes = [];
+      var imgs = document.querySelectorAll('main img');
+      for (var i = 0; i < imgs.length; i++) {
+        var img = imgs[i];
+        if (img.getAttribute('loading') === 'lazy') img.setAttribute('loading', 'eager');
+        if (!img.complete) attentes.push(new Promise(function (ok) { img.addEventListener('load', ok); img.addEventListener('error', ok); }));
+      }
+      return Promise.race([Promise.all(attentes), new Promise(function (ok) { setTimeout(ok, delai); })]);
+    }
+    function ouvrirDansNavigateur() {
+      if (navigator.onLine === false) { alert('Le PDF se fait dans le navigateur de l’appareil : il faut du réseau.'); return; }
+      var u = adressePropre().replace(/^https:/, 'http:');
+      location.href = u + (u.indexOf('?') >= 0 ? '&' : '?') + 'pdf=1';
+    }
+    function imprimer() {
+      if (dansApk && !pont()) { ouvrirDansNavigateur(); return; }
+      poserSource();
+      chargerImages(5000).then(function () {
+        var a = pont();
+        if (a) a.imprimer(document.title); else window.print();
+      });
+    }
+    // impression lancée par le menu du navigateur : la source et la date y sont aussi
+    window.addEventListener('beforeprint', poserSource);
+    if (/[?&]pdf=1(&|$)/.test(location.search)) {
+      // arrivée depuis l'application : l'adresse perd ?pdf=1 (recharger ne relance pas l'impression)
+      try { history.replaceState(history.state, '', adressePropre()); } catch (e) {}
+      if (dansApk && !pont()) {
+        alert('Pour le PDF, ouvrez cette page dans le navigateur de l’appareil (Chrome), puis touchez « PDF ».');
+      } else {
+        var lancer = function () { setTimeout(imprimer, 300); };
+        if (document.readyState === 'complete') lancer(); else window.addEventListener('load', lancer);
+      }
+    }
+    return { imprimer: imprimer };
+  })();
+
   // ---------- confort de lecture : taille du texte, mode lecture ----------
   // Les réglages sont relus dans le <head> (SCRIPT_THEME) pour éviter tout saut de mise en page.
   (function outilsLecture() {
@@ -1523,7 +1590,8 @@
     barre.setAttribute('aria-label', 'Confort de lecture');
     barre.innerHTML = '<button type="button" data-moins title="Texte plus petit" aria-label="Texte plus petit">A−</button>' +
       '<button type="button" data-plus title="Texte plus grand" aria-label="Texte plus grand">A+</button>' +
-      '<button type="button" data-lecture title="Mode lecture : masque les menus" aria-pressed="false">📖 Lecture</button>';
+      '<button type="button" data-lecture title="Mode lecture : masque les menus" aria-pressed="false">📖 Lecture</button>' +
+      (PDF ? '<button type="button" data-pdf title="Enregistrer l’article en PDF" aria-label="Télécharger l’article en PDF">📄 PDF</button>' : '');
     var ancre = document.querySelector('.page-sub') || titre;
     ancre.parentNode.insertBefore(barre, ancre.nextSibling);
     var bMoins = barre.querySelector('[data-moins]');
@@ -1539,6 +1607,8 @@
     }
     bMoins.addEventListener('click', function () { var i = PALIERS.indexOf(lireEchelle()); if (i > 0) poserEchelle(PALIERS[i - 1]); });
     bPlus.addEventListener('click', function () { var i = PALIERS.indexOf(lireEchelle()); if (i < PALIERS.length - 1) poserEchelle(PALIERS[i + 1]); });
+    var bPdf = barre.querySelector('[data-pdf]');
+    if (bPdf) bPdf.addEventListener('click', function () { PDF.imprimer(); });
     bLect.addEventListener('click', function () {
       var on = document.documentElement.getAttribute('data-lecture') !== '1';
       if (on) document.documentElement.setAttribute('data-lecture', '1');

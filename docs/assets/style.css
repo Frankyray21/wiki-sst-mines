@@ -1039,3 +1039,21 @@ html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
   .accueil-colonnes, .accueil-large .accueil-colonnes { columns: 2; }
   .accueil-colonnes-courtes, .accueil-large .accueil-colonnes-courtes { columns: 3; }
 }
+
+/* ---------- l'article en PDF (bouton « PDF » de la barre de lecture, ou impression du navigateur) ----------
+   Un document autonome : la source et la date en tête (posées par app.js), le texte à sa taille
+   normale (sans le réglage A+), sans les aides d'écran ; les titres restent avec leur texte, les
+   lignes de tableau et les images ne se coupent pas, l'en-tête d'un long tableau se répète. */
+.impression-source { display: none; }
+@media print {
+  @page { margin: 14mm 12mm; }
+  :root { --echelle: 1 !important; }
+  .impression-source { display: block; margin: 0 0 .75rem; padding-bottom: .35rem; border-bottom: 1px solid #999; color: #333; font-size: 9pt; line-height: 1.4; overflow-wrap: anywhere; }
+  .img-zoom, .infographie .img-zoom { display: none !important; }
+  .toc > ul { max-height: none; overflow: visible; columns: 2; column-gap: 1.5rem; }
+  .toc li { break-inside: avoid; }
+  .toc a { display: inline; padding: 0; min-height: 0; }
+  .page-body h2, .page-body h3, .page-body h4 { break-after: avoid; }
+  .page-body tr, .page-body img, .page-body pre, .page-body blockquote { break-inside: avoid; }
+  .page-body thead { display: table-header-group; }
+}

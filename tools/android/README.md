@@ -17,6 +17,11 @@ plus (API 24), cible API 34. Environ 8 Ko.
   dans le navigateur de l'appareil — la vue intégrée d'Android n'affiche pas les PDF. Hors réseau,
   un PDF qui n'a jamais été ouvert dans le navigateur ne s'affiche donc pas.
 - Le bouton Retour remonte l'historique du wiki ; la rotation ne recharge pas la page.
+- Le bouton **📄 PDF** des articles passe, à partir de la version 1.1, par le service d'impression
+  d'Android : « Enregistrer au format PDF », même sans réseau. La page l'appelle par
+  `window.WikiSSTMinesApp.imprimer(titre)`, seule méthode que l'application expose à la page. La
+  version 1.0, qui ne sait pas imprimer, ouvre la page dans le navigateur de l'appareil, où
+  l'impression se lance à l'arrivée ; il faut alors du réseau.
 - L'application se signale au site (`WikiSSTMinesApp/<version>` dans l'agent utilisateur) : le
   lien « 📱 Application Android » des portails s'y masque.
 
