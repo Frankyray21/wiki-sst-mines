@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { poserDansPage, lotDepuisSpec, trouverAncre, repereCapture, verifierSvg, blocMd } from '../poser_schemas.mjs';
+import { poserDansPage, lotDepuisSpec, trouverAncre, repereCapture, verifierSvg, verifierImage, blocMd } from '../poser_schemas.mjs';
 import { appliquerRetouches } from '../retouches.mjs';
 
 const outils = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -100,6 +100,26 @@ test('repère de capture et contrôle des SVG', () => {
   assert.deepEqual(verifierSvg(ok, 'ok'), { largeur: 480, hauteur: 500 });
   assert.throws(() => verifierSvg(ok.replace('height="500"', 'height="400"'), 'x'), /width\/height/);
   assert.throws(() => verifierSvg(ok.replace('</svg>', '<image href="http://x/y.png"/></svg>'), 'x'), /ressource externe/);
+});
+
+// Une illustration fournie par l'auteur (PNG ou JPEG) se pose comme un schéma : même bloc, même lot ; seul
+// le contrôle du fichier change, et ses dimensions, lues dans son en-tête, réservent sa place comme pour un SVG.
+test('image PNG ou JPEG : signature, largeur et poids contrôlés, place réservée', () => {
+  const u32 = n => { const b = Buffer.alloc(4); b.writeUInt32BE(n); return b; };
+  const png = l => Buffer.concat([Buffer.from('89504e470d0a1a0a', 'hex'), u32(13), Buffer.from('IHDR'), u32(l), u32(700), Buffer.from([8, 2, 0, 0, 0]), Buffer.alloc(4)]);
+  const jpeg = l => Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, ...Buffer.from('JFIF\0'), 1, 1, 0, 0, 1, 0, 1, 0, 0,
+    0xff, 0xc0, 0x00, 0x11, 0x08, 0x05, 0xb2, l >> 8, l & 255, 0x03, 1, 0x22, 0, 2, 0x11, 1, 3, 0x11, 1, 0xff, 0xd9]);
+  assert.deepEqual(verifierImage(png(600), 'a.png'), { largeur: 600, hauteur: 700 });
+  assert.deepEqual(verifierImage(jpeg(1080), 'a.jpg'), { largeur: 1080, hauteur: 1458 }, 'dimensions lues dans l’en-tête de trame, après le segment JFIF');
+  assert.deepEqual(verifierImage(jpeg(1080), 'a.JPEG'), { largeur: 1080, hauteur: 1458 });
+  assert.throws(() => verifierImage(jpeg(400), 'a.jpg'), /480 au moins/);
+  assert.throws(() => verifierImage(png(600), 'a.jpg'), /extension trompeuse/);
+  assert.throws(() => verifierImage(png(600), 'a.gif'), /format non pris en charge/);
+  assert.throws(() => verifierImage(Buffer.concat([jpeg(1080), Buffer.alloc(1.6e6)]), 'a.jpg'), /1,5 Mo/);
+  const spec = { page: 'w/x.html', schemas: [schema('wiki-x-a-v2.jpg', 'Une section')] };
+  const h = poserDansPage(PAGE, spec, { ...OPTS, dimsDe: () => verifierImage(jpeg(1080), 'wiki-x-a-v2.jpg') });
+  assert.ok(h.includes('<h3 id="section">Une section</h3>\n<div class="infographie infographie-compacte infographie-schema"><span class="page-img"><a class="img-lien" href="../../files/infographies/wiki-x-a-v2.jpg"><img src="../../files/infographies/wiki-x-a-v2.jpg" alt="Un schéma de démonstration qui montre un mécanisme simple, en deux parties." width="1080" height="1458" loading="lazy"></a>'));
+  assert.ok(blocMd(spec.schemas[0]).includes('![[Infographies/wiki-x-a-v2.jpg|Un schéma de démonstration'));
 });
 
 // Rejoue la pose d'Espaces clos (faite à la main le 25 septembre 2026) : l'outil doit rendre la page

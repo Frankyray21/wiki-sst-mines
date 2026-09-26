@@ -216,6 +216,12 @@ node tools/serve.mjs
   toxicologie et de sécurité, à la note psychosociale sur la charge mentale : `tools/raccourcir_liens.mjs` les corrige
   d'après une table à valider. **À faire là où est le vault** : l'outil, puis la reconstruction. Détail :
   `content-updates/2026-09-26-libelles-liens.md`
+- **L'illustration de Frank sur le lieu de contrôle (26 septembre 2026)** : sur Types de personnalité et lieu de
+  contrôle, l'image refaite par Frank remplace telle quelle le schéma « interne ou externe ». La légende reste celle
+  de la page. L'outil de pose accepte désormais une image PNG ou JPEG : signature vérifiée, 480 px de large au moins,
+  1,5 Mo au plus. L'outil et le générateur posent ses dimensions, pour que la page ne saute pas au chargement. Le
+  style de cette image devient le modèle des nouveaux schémas, sans ✓ ni ✗ et avec les mots de la page. **À poser dans le vault**. Détail et écarts avec la page :
+  `content-updates/2026-09-26-image-lieu-de-controle.md`
 - **Pages RPS illustrées (suite) et deux refontes pour le thème sombre (26 septembre 2026)** : schémas sur
   Conséquences du stress, Communication souterraine (téléphone relié à la surface, RSSM art. 283), Grille INSPQ
   (démarche), Culture minière, CNESST (les trois rôles ; ce que l'inspecteur peut demander à voir sur les RPS) et

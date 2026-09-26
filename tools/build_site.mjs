@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { marked } from 'marked';
 import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
-import { dimensionsSvg } from './dimensions_svg.mjs';
+import { dimensionsSvg, dimensionsImage } from './dimensions_svg.mjs';
 import { choisirImage } from './resoudre_image.mjs';
 import { libelleLien, contexteDuLien } from './libelle_lien.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
@@ -656,11 +656,15 @@ function renderWikilinks(md) {
             : /^art[-.]/i.test(target.split('/').pop()) ? `Texte officiel de l'article — ${CUR.title}`
             : `Illustration — ${CUR.title}`;
           const classeDoc = docsTexte.has(url) ? ' class="img-doc"' : '';
-          // schéma vectoriel : ses dimensions réservent sa place avant le chargement différé
+          // schéma vectoriel, ou image PNG/JPEG des infographies : ses dimensions réservent sa place avant le
+          // chargement différé (sans elles, l'image n'a aucune hauteur tant qu'elle n'est pas chargée)
           let dim = '';
           if (ext === 'svg') {
             try { const d = dimensionsSvg(fs.readFileSync(assetAbs.get(rel) || path.join(VAULT, rel), 'utf8')); if (d) dim = ` width="${d.largeur}" height="${d.hauteur}"`; }
             catch { /* dimensions illisibles : le schéma se charge sans place réservée */ }
+          } else if (url.startsWith('files/infographies/')) {
+            try { const d = dimensionsImage(fs.readFileSync(assetAbs.get(rel) || path.join(VAULT, rel))); if (d) dim = ` width="${d.largeur}" height="${d.hauteur}"`; }
+            catch { /* dimensions illisibles : l'image se charge sans place réservée */ }
           }
           return protect(`<span class="page-img"><a class="img-lien" href="{{ROOT}}${url}"><img${classeDoc} src="{{ROOT}}${url}" alt="${esc(legende)}"${dim} loading="lazy"${w}></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>`);
         }

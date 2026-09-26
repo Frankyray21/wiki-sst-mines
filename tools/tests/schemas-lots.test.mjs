@@ -1,11 +1,13 @@
-// Tous les lots de schémas (content-updates/*-schemas.json) : chaque schéma est publié, autonome,
-// accessible, et la page publiée dit la même chose que le bloc destiné à la note du vault.
+// Tous les lots de schémas (content-updates/*-schemas.json) : chaque schéma (ou image PNG/JPEG fournie par
+// l'auteur) est publié, autonome, accessible, et la page publiée dit la même chose que le bloc destiné à la
+// note du vault.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { verifierSvg } from '../poser_schemas.mjs';
+import { verifierSvg, verifierImage } from '../poser_schemas.mjs';
+import { dimensionsImage } from '../dimensions_svg.mjs';
 
 const racine = path.dirname(path.dirname(path.dirname(fileURLToPath(import.meta.url))));
 const dossier = path.join(racine, 'content-updates');
@@ -32,6 +34,7 @@ function verifierPage(lot, adresse, page) {
   }
   assert.equal(blocs.length, lot.medias.length, 'un bloc par schéma');
   for (const m of lot.medias) {
+    if (!/\.svg$/i.test(m.depuis)) { verifierImage(fs.readFileSync(path.join(racine, m.depuis)), m.depuis); continue; }
     const svg = fs.readFileSync(path.join(racine, m.depuis), 'utf8');
     verifierSvg(svg, m.depuis);
     assert.doesNotMatch(svg, /(?:<|&lt;)\s?5\s*%\s*(?:de la )?LIE|10\s*%\s*de la LIE/, 'aucune limite de la LIE mal écrite : ' + m.depuis);
@@ -45,7 +48,11 @@ function verifierPage(lot, adresse, page) {
     const alt = r.bloc.match(/!\[\[Infographies\/[^|]+\|([^\]]+)\]\]/)[1];
     assert.equal(dec(html.match(/alt="([^"]*)"/)[1]), alt, 'même texte alternatif : ' + fichier);
     assert.ok(alt.length >= 40, 'texte alternatif utile : ' + fichier);
-    assert.match(html, /width="480" height="\d+" loading="lazy"/, 'place réservée : ' + fichier);
+    if (/\.svg$/i.test(fichier)) assert.match(html, /width="480" height="\d+" loading="lazy"/, 'place réservée : ' + fichier);
+    else {
+      const d = dimensionsImage(fs.readFileSync(path.join(racine, 'docs/files/infographies', fichier)));
+      assert.ok(html.includes(` width="${d.largeur}" height="${d.hauteur}" loading="lazy"`), 'place réservée, comme le fait le générateur : ' + fichier);
+    }
     assert.ok(html.includes('infographie-sources'), 'sources : ' + fichier);
   }
   for (const r of lot.retouches.filter(x => x.type === 'supprimerLigne')) {
