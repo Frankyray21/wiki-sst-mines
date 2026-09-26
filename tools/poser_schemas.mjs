@@ -10,6 +10,8 @@
 //   page        adresse publiée (w/<wiki>/<page>.html)
 //   note        { titre, wiki, chemin? } — pour retrouver la note du vault (appliquer_retouches.mjs)
 //   schemas[]   { fichier, ancre, remplace?, alt, legende, puces[], sources }
+//     fichier   schéma SVG (480 de large), ou image PNG / JPEG (une illustration fournie par l'auteur,
+//               par exemple : au moins 480 px de large, 1,5 Mo au plus)
 //     ancre     texte visible d'un paragraphe, d'un titre ou d'une dernière puce, unique : le schéma se pose
 //               juste après ; sans ancre, il prend la place exacte de la capture qu'il remplace
 //     remplace  capture de cours que le schéma remplace (« pasted-image-AAAAMMJJhhmmss » ou nom de fichier)
@@ -23,7 +25,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { dimensionsSvg } from './dimensions_svg.mjs';
+import { dimensionsSvg, dimensionsImage } from './dimensions_svg.mjs';
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const texte = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -187,6 +189,27 @@ export function verifierSvg(texteSvg, nom) {
   return d;
 }
 
+// Image matricielle : signature vérifiée (une extension trompeuse est refusée), assez large pour rester
+// nette à l'agrandissement, assez légère pour la lecture hors ligne. Ses dimensions, lues dans son en-tête,
+// réservent sa place comme celles d'un SVG ; le générateur fait de même pour les images des infographies.
+export function verifierImage(octets, nom) {
+  const ext = path.extname(nom).toLowerCase();
+  const b = Buffer.from(octets);
+  const png = b.subarray(0, 8).toString('hex') === '89504e470d0a1a0a';
+  const jpeg = b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff;
+  if (!['.png', '.jpg', '.jpeg'].includes(ext)) throw new Error('schéma : format non pris en charge (SVG, PNG ou JPEG) : ' + nom);
+  if (ext === '.png' ? !png : !jpeg) throw new Error('image : contenu illisible ou extension trompeuse : ' + nom);
+  const d = dimensionsImage(b);
+  if (!d || !d.largeur || !d.hauteur) throw new Error('image : dimensions illisibles : ' + nom);
+  if (d.largeur < 480) throw new Error(`image : ${d.largeur} px de large, 480 au moins : ` + nom);
+  if (b.length > 1.5e6) throw new Error('image : 1,5 Mo au plus : ' + nom);
+  return d;
+}
+
+export function verifierMedia(chemin, nom) {
+  return /\.svg$/i.test(nom) ? verifierSvg(fs.readFileSync(chemin, 'utf8'), nom) : verifierImage(fs.readFileSync(chemin), nom);
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const outils = path.dirname(fileURLToPath(import.meta.url));
   const docs = path.resolve(outils, '../docs');
@@ -198,7 +221,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const lotChemin = opt('--lot');
   if (!lotChemin) { console.error('Indiquer --lot content-updates/<lot>.json'); process.exit(1); }
   const dims = {};
-  for (const s of spec.schemas) dims[s.fichier] = verifierSvg(fs.readFileSync(path.join(medias, s.fichier), 'utf8'), s.fichier);
+  for (const s of spec.schemas) dims[s.fichier] = verifierMedia(path.join(medias, s.fichier), s.fichier);
   const titreDe = adresse => {
     const f = path.join(docs, adresse);
     if (!fs.existsSync(f)) throw new Error('lien vers une page absente : ' + adresse);

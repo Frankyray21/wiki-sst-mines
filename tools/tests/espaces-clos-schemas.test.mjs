@@ -154,5 +154,19 @@ test('dimensions des schémas : lues sur le SVG, posées sur l’<img> pour rés
     assert.ok(page.includes(`src="../../${m.depuis.replace(/^docs\//, '')}"`) && new RegExp(`src="\\.\\./\\.\\./${m.depuis.replace(/^docs\//, '').replace(/\./g, '\\.')}" alt="[^"]+" width="${d.largeur}" height="${d.hauteur}" loading="lazy"`).test(page), 'place réservée : ' + m.depuis);
   }
   const build = fs.readFileSync(path.join(outils, 'build_site.mjs'), 'utf8');
-  assert.match(build, /import \{ dimensionsSvg \} from '\.\/dimensions_svg\.mjs'/, 'le générateur pose aussi ces dimensions');
+  assert.match(build, /import \{ dimensionsSvg, dimensionsImage \} from '\.\/dimensions_svg\.mjs'/, 'le générateur pose aussi ces dimensions');
+  assert.match(build, /else if \(url\.startsWith\('files\/infographies\/'\)\) \{\s*try \{ const d = dimensionsImage\(/, 'et celles des images PNG/JPEG des infographies');
+});
+
+test('dimensions d’une image PNG ou JPEG des infographies : lues dans son en-tête', async () => {
+  const { dimensionsImage } = await import('../dimensions_svg.mjs');
+  const u32 = n => { const b = Buffer.alloc(4); b.writeUInt32BE(n); return b; };
+  const png = Buffer.concat([Buffer.from('89504e470d0a1a0a', 'hex'), u32(13), Buffer.from('IHDR'), u32(1200), u32(800), Buffer.from([8, 2, 0, 0, 0]), Buffer.alloc(4)]);
+  assert.deepEqual(dimensionsImage(png), { largeur: 1200, hauteur: 800 });
+  // un segment EXIF (APP1) avant l'en-tête de trame : il est sauté
+  const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xe1, 0x00, 0x08, 0x45, 0x78, 0x69, 0x66, 0, 0,
+    0xff, 0xc2, 0x00, 0x11, 0x08, 0x05, 0xb2, 0x04, 0x38, 0x03, 1, 0x22, 0, 2, 0x11, 1, 3, 0x11, 1, 0xff, 0xd9]);
+  assert.deepEqual(dimensionsImage(jpeg), { largeur: 1080, hauteur: 1458 }, 'trame progressive (SOF2)');
+  assert.equal(dimensionsImage(Buffer.from('GIF89a')), null);
+  assert.equal(dimensionsImage(Buffer.from([0xff, 0xd8, 0x00])), null, 'JPEG tronqué : rien');
 });
