@@ -5,9 +5,12 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.print.PrintAttributes;
+import android.print.PrintManager;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.webkit.DownloadListener;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -21,6 +24,8 @@ import android.widget.Toast;
  * consultation sans réseau (« Télécharger hors ligne »). L'application n'a donc pas à être
  * republiée quand le wiki change. Les liens vers d'autres sites, les PDF et les téléchargements
  * s'ouvrent dans le navigateur de l'appareil ; le bouton Retour remonte l'historique du wiki.
+ * Le bouton « PDF » des articles passe par le service d'impression d'Android (« Enregistrer au
+ * format PDF »), sans réseau : la page l'appelle par window.WikiSSTMinesApp.imprimer(titre).
  */
 public class MainActivity extends Activity {
     static final String ACCUEIL = "https://frankyray21.github.io/wiki-sst-mines/";
@@ -43,6 +48,7 @@ public class MainActivity extends Activity {
         reglages.setDomStorageEnabled(true);       // favoris, thème, file d'attente des avis
         reglages.setAllowFileAccess(false);        // seule la page locale « hors ligne » est lue
         reglages.setUserAgentString(reglages.getUserAgentString() + " WikiSSTMinesApp/" + BuildConfig.VERSION);
+        vue.addJavascriptInterface(new Pont(), "WikiSSTMinesApp");
         vue.setWebViewClient(new Client());
         vue.setWebChromeClient(new WebChromeClient());
         vue.setDownloadListener(new DownloadListener() {
@@ -68,6 +74,25 @@ public class MainActivity extends Activity {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, "Aucune application pour ouvrir ce lien.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /** Ce que la page peut demander à l'application : seulement imprimer la page affichée. */
+    private class Pont {
+        @JavascriptInterface
+        public void imprimer(final String titre) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    String nom = titre == null || titre.trim().isEmpty() ? "Wiki SST" : titre.trim();
+                    PrintManager impression = (PrintManager) getSystemService(PRINT_SERVICE);
+                    if (impression == null) {
+                        Toast.makeText(MainActivity.this, "Impression indisponible sur cet appareil.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    impression.print(nom, vue.createPrintDocumentAdapter(nom), new PrintAttributes.Builder().build());
+                }
+            });
         }
     }
 
