@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="632" viewBox="0 0 480 632" role="img" aria-labelledby="t d">
+<title id="t">Faire évoluer la culture : les leviers</title>
+<desc id="d">La même équipe minière. Un pair respecté témoigne avec les termes du métier (bulle bleue « gérer la pression ») ; un cadre, planchette en main, parle lui-même de santé mentale et montre l’exemple ; un mineur lève la main : demander de l’aide, signe de force. Dessous, un tableau « discours sécurité » : « Travailler en sécurité, c’est aussi être bien dans sa tête » ; une affiche « ressources » : PAE, lignes d’aide, intervenant ponctuel sur site. En bas, une longue flèche bleue : un effort continu, pas de campagne unique. Aucun chiffre ni durée.</desc>
+<rect width="480" height="632" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Faire évoluer la culture :</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">les leviers</text>
+<rect x="16" y="94" width="448" height="282" rx="12" fill="#eceef0"/>
+<!-- Témoignages de pairs : « Travailleurs respectés qui parlent ouvertement de leur expérience » ; vocabulaire métier : « Utiliser des termes du métier plutôt que jargon clinique (« gérer la pression », « endurance mentale ») » -->
+<text x="28" y="122" font-size="19" fill="#1565c0">termes du métier</text>
+<path d="M40 132H160Q172 132 172 144V176Q172 188 160 188H80L66 206L68 188H40Q28 188 28 176V144Q28 132 40 132Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="100" y="155" font-size="19" fill="#1565c0" text-anchor="middle">gérer la</text>
+<text x="100" y="179" font-size="19" fill="#1565c0" text-anchor="middle">pression</text>
+<g transform="translate(64 314) scale(1.4)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#eceef0" stroke-width="2.5"/></g></g>
+<g transform="translate(126 314) scale(1.4)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#eceef0" stroke-width="2.5"/></g></g>
+<!-- Direction visible : « Cadres qui parlent eux-mêmes de santé mentale, montrent l’exemple » -->
+<path d="M202 132H282Q294 132 294 144V176Q294 188 282 188H244L242 206L232 188H202Q190 188 190 176V144Q190 132 202 132Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="242" y="155" font-size="19" fill="#1565c0" text-anchor="middle">santé</text>
+<text x="242" y="179" font-size="19" fill="#1565c0" text-anchor="middle">mentale</text>
+<g transform="translate(242 314) scale(1.4)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#eceef0" stroke-width="2.5"/></g></g>
+<g transform="translate(277 252) scale(1.3)"><rect x="-10" y="-13" width="21" height="27" rx="2.5" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/><path d="M-5 -4H6M-5 2H6M-5 8H2" stroke="#1f2328" stroke-width="2.5"/></g>
+<!-- Reconnaissance de la résilience : « Valoriser le fait de demander de l’aide comme un signe de force » -->
+<g transform="translate(334 314) scale(1.4)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#eceef0" stroke-width="2.5"/></g></g>
+<g transform="translate(412 314) scale(1.4)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#eceef0" stroke-width="2.5"/></g><path d="M9 -37L17 -52L19 -66" fill="none" stroke="#1f2328" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="452" y="122" font-size="19" fill="#1f2328" text-anchor="end">demander</text>
+<text x="452" y="146" font-size="19" fill="#1f2328" text-anchor="end">de l’aide :</text>
+<text x="452" y="170" font-size="19" font-weight="700" fill="#1565c0" text-anchor="end">signe de force</text>
+<text x="28" y="340" font-size="19" font-weight="700" fill="#1f2328">pair respecté</text>
+<text x="28" y="364" font-size="19" fill="#1565c0">témoigne</text>
+<text x="196" y="340" font-size="19" font-weight="700" fill="#1f2328">cadre</text>
+<text x="196" y="364" font-size="19" fill="#1565c0">montre l’exemple</text>
+<!-- Intégration au discours sécurité : « Travailler en sécurité, c’est aussi être bien dans sa tête » -->
+<rect x="16" y="386" width="230" height="156" rx="6" fill="#fbfaf6" stroke="#1565c0" stroke-width="2.5"/>
+<path d="M16 392Q16 386 22 386H240Q246 386 246 392V416H16Z" fill="#1565c0"/>
+<text x="131" y="408" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">discours sécurité</text>
+<text x="131" y="444" font-size="19" fill="#1f2328" text-anchor="middle">« Travailler</text>
+<text x="131" y="468" font-size="19" fill="#1f2328" text-anchor="middle">en sécurité, c’est</text>
+<text x="131" y="492" font-size="19" fill="#1f2328" text-anchor="middle">aussi être bien</text>
+<text x="131" y="516" font-size="19" fill="#1f2328" text-anchor="middle">dans sa tête »</text>
+<!-- Ressources accessibles : « PAE bien diffusé, intervenant ponctuel sur site, lignes d’aide visibles » -->
+<rect x="254" y="386" width="210" height="156" rx="6" fill="#fbfaf6" stroke="#1565c0" stroke-width="2.5"/>
+<path d="M254 392Q254 386 260 386H458Q464 386 464 392V416H254Z" fill="#1565c0"/>
+<text x="359" y="408" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">ressources</text>
+<text x="359" y="448" font-size="24" font-weight="700" fill="#1565c0" text-anchor="middle">PAE</text>
+<g transform="translate(290 474) scale(1.3)"><rect x="-8" y="-13" width="16" height="26" rx="3" fill="#1565c0"/><rect x="-5" y="-9" width="10" height="15" rx="1" fill="#fbfaf6"/><circle cx="0" cy="9.5" r="1.6" fill="#fbfaf6"/></g>
+<text x="310" y="481" font-size="19" fill="#1f2328">lignes d’aide</text>
+<text x="359" y="510" font-size="19" fill="#1f2328" text-anchor="middle">intervenant</text>
+<text x="359" y="532" font-size="19" fill="#1f2328" text-anchor="middle">ponctuel sur site</text>
+<!-- Continuité : « Pas de campagne unique. Effort continu [...] pour modifier la culture. » (la durée donnée par la page n’est pas dessinée) -->
+<text x="24" y="578" font-size="19" font-weight="700" fill="#1565c0">effort continu</text>
+<text x="456" y="578" font-size="19" fill="#1f2328" text-anchor="end">pas de campagne unique</text>
+<path d="M24 606H440" stroke="#1565c0" stroke-width="8" stroke-linecap="round"/>
+<path d="M458 606L440 596V616Z" fill="#1565c0"/>
+</g>
+</svg>
