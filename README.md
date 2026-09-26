@@ -216,6 +216,12 @@ node tools/serve.mjs
   toxicologie et de sécurité, à la note psychosociale sur la charge mentale : `tools/raccourcir_liens.mjs` les corrige
   d'après une table à valider. **À faire là où est le vault** : l'outil, puis la reconstruction. Détail :
   `content-updates/2026-09-26-libelles-liens.md`
+- **Six pages RPS dans le style de Frank (26 septembre 2026)** : deux schémas chacune sur Foreur, Aide-foreur,
+  Contremaître (une série de profils), MBI, Coût économique des RPS et Confinement. Ils suivent le style de
+  l'image de Frank : grand titre, panneaux à pastille et bandeau, gros personnages, message clé en bleu. Ils
+  gardent les règles du wiki : ni ✓ ni ✗, les mots de la page, rouge pour ce qui pèse et bleu pour les leviers.
+  **À poser dans le vault**. En priorité : le PDF lié à la page MBI reproduit les énoncés d'un questionnaire sous
+  licence. Détail et erreurs relevées : `content-updates/2026-09-26-rps-schemas-lot10.md`
 - **L'article en PDF (26 septembre 2026)** : un bouton « 📄 PDF » dans la barre de lecture de chaque article
   (à côté de A−, A+ et Lecture). Il ouvre l'impression du navigateur, où « Enregistrer au format PDF » produit le
   fichier : texte net et copiable, liens actifs, en noir sur blanc, sans menus. En tête du PDF figurent l'adresse de la

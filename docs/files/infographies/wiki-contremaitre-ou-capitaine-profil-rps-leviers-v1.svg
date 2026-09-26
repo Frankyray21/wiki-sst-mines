@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="660" viewBox="0 0 480 660" role="img" aria-labelledby="t d">
+<title id="t">Soutenir le contremaître : leviers de l’organisation</title>
+<desc id="d">Grand titre « Soutenir le contremaître », sous-titre « Leviers de l’organisation ». Premier panneau, bleu : pastille « Direction », bandeau « Reconnaître la charge, ne pas surcharger » ; à gauche : soutien à la décision (back-up, conseiller SST) et ratios cadres-travailleurs raisonnables ; à droite, le contremaître, casqué, planchette en main, et un second travailleur casqué qui désigne la planchette de la main (étiquette BACK-UP). Second panneau, bleu : pastille « Soutien », bandeau « Formation, pairs, soutien clinique » ; à gauche : leadership, conflits, communication ; communauté de contremaîtres ; PAE, débriefing post-incident ; à droite, deux contremaîtres, planchette en main, avec une bulle de parole bleue entre eux (étiquette PAIRS). En bas, sous un crochet bleu, le message : « Reconnaître le rôle de contremaître ». Aucun chiffre, aucun effet annoncé.</desc>
+<rect width="480" height="660" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="44" font-size="32" font-weight="800" fill="#0b2545">Soutenir le</text>
+<text x="24" y="80" font-size="32" font-weight="800" fill="#0b2545">contremaître</text>
+<text x="300" y="30" font-size="18" fill="#4b535c">Leviers de</text>
+<text x="300" y="52" font-size="18" fill="#4b535c">l’organisation</text>
+<!-- Page, Soutenir le contremaître : « Direction | Reconnaître la charge, ne pas surcharger » ; « Direction | Soutien à la décision (back-up, conseiller SST disponible) » ; « Direction | Ratios cadres-travailleurs raisonnables (un contremaître pour trop de monde ne peut pas soutenir) » -->
+<g transform="translate(0 -4)">
+<rect x="14" y="98" width="452" height="234" rx="14" fill="#f1f6fd" stroke="#e1ecfa" stroke-width="2.5"/>
+<rect x="22" y="106" width="140" height="60" rx="10" fill="#1565c0"/>
+<text x="92" y="145" font-size="24" font-weight="800" fill="#fbfaf6" text-anchor="middle">Direction</text>
+<rect x="170" y="106" width="288" height="60" rx="10" fill="#e1ecfa"/>
+<text x="184" y="131" font-size="19" font-weight="700" fill="#1f2328">« Reconnaître la charge,</text>
+<text x="184" y="154" font-size="19" font-weight="700" fill="#1f2328">ne pas surcharger »</text>
+<circle cx="36" cy="192" r="11" fill="#1565c0"/>
+<rect x="31" y="187" width="10" height="12" rx="1.5" fill="#fbfaf6"/><rect x="33" y="184.5" width="6" height="4" rx="1" fill="#fbfaf6"/>
+<text x="56" y="198" font-size="18" fill="#1f2328">Soutien à la décision :</text>
+<text x="56" y="219" font-size="18" fill="#1f2328">back-up, conseiller SST</text>
+<circle cx="36" cy="254" r="11" fill="#1565c0"/>
+<circle cx="30" cy="252" r="2.6" fill="#fbfaf6"/><path d="M26.6 260V257.5Q26.6 255 30 255Q33.4 255 33.4 257.5V260Z" fill="#fbfaf6"/><circle cx="36" cy="252" r="2.6" fill="#fbfaf6"/><path d="M32.6 260V257.5Q32.6 255 36 255Q39.4 255 39.4 257.5V260Z" fill="#fbfaf6"/><circle cx="42" cy="252" r="2.6" fill="#fbfaf6"/><path d="M38.6 260V257.5Q38.6 255 42 255Q45.4 255 45.4 257.5V260Z" fill="#fbfaf6"/>
+<text x="56" y="260" font-size="18" fill="#1f2328">Ratios cadres-</text>
+<text x="56" y="281" font-size="18" fill="#1f2328">travailleurs</text>
+<text x="56" y="302" font-size="18" fill="#1f2328">raisonnables</text>
+<ellipse cx="306" cy="295" rx="36" ry="6" fill="#eceef0"/>
+<g fill="#1f2328">
+<rect x="292.2" y="246.8" width="11.3" height="47.2" rx="4.9"/>
+<rect x="308.5" y="246.8" width="11.3" height="47.2" rx="4.9"/>
+<path d="M288.3 250.7V220.2Q288.3 210.4 297.1 210.4H314.9Q323.7 210.4 323.7 220.2V250.7Z"/>
+<circle cx="306" cy="198.6" r="12.3"/>
+</g>
+<path d="M291.2 194.7Q291.2 174 306 174Q320.8 174 320.8 194.7Z" fill="#1f2328"/>
+<path d="M286.3 194.7H325.7" stroke="#1f2328" stroke-width="4.9" stroke-linecap="round"/>
+<rect x="301.1" y="178.9" width="9.8" height="7.9" rx="2" fill="#fbfaf6"/>
+<path d="M291.7 215.3L283.4 245.8" stroke="#1f2328" stroke-width="9.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M320.3 215.3L328.6 245.8" stroke="#1f2328" stroke-width="9.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<rect x="322.7" y="211.4" width="26.6" height="34.4" rx="3" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<rect x="330.1" y="207.4" width="11.8" height="6.9" rx="2" fill="#1f2328"/>
+<path d="M327.6 222.2H344" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M327.6 230.1H344" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M327.6 237.9H337.3" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<ellipse cx="404" cy="295" rx="34.8" ry="5.8" fill="#eceef0"/>
+<g fill="#1f2328">
+<rect x="390.7" y="248.4" width="10.9" height="45.6" rx="4.8"/>
+<rect x="406.4" y="248.4" width="10.9" height="45.6" rx="4.8"/>
+<path d="M386.9 252.2V222.7Q386.9 213.2 395.4 213.2H412.6Q421.1 213.2 421.1 222.7V252.2Z"/>
+<circle cx="404" cy="201.8" r="11.9"/>
+</g>
+<path d="M389.7 198Q389.7 178 404 178Q418.3 178 418.3 198Z" fill="#1f2328"/>
+<path d="M385 198H423" stroke="#1f2328" stroke-width="4.8" stroke-linecap="round"/>
+<rect x="399.2" y="182.8" width="9.5" height="7.6" rx="1.9" fill="#fbfaf6"/>
+<path d="M390.2 217.9L371.7 227.4L360.3 223.6" stroke="#1f2328" stroke-width="9.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M417.8 217.9L425.9 247.4" stroke="#1f2328" stroke-width="9.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<rect x="352" y="302" width="104" height="26" rx="8" fill="#eceef0"/>
+<text x="404" y="321" font-size="18" font-weight="700" fill="#1f2328" text-anchor="middle">BACK-UP</text>
+</g>
+<!-- Page, Soutenir le contremaître : « Formation | Au leadership, à la gestion de conflits, à la communication » ; « Pairs | Communauté de contremaîtres pour échange » ; « Soutien clinique | PAE accessible, débriefing post-incident » -->
+<g transform="translate(0 -4)">
+<rect x="14" y="342" width="452" height="230" rx="14" fill="#f1f6fd" stroke="#e1ecfa" stroke-width="2.5"/>
+<rect x="22" y="350" width="132" height="60" rx="10" fill="#1565c0"/>
+<text x="88" y="389" font-size="25" font-weight="800" fill="#fbfaf6" text-anchor="middle">Soutien</text>
+<rect x="162" y="350" width="296" height="60" rx="10" fill="#e1ecfa"/>
+<text x="176" y="375" font-size="19" font-weight="700" fill="#1f2328">Formation, pairs,</text>
+<text x="176" y="398" font-size="19" font-weight="700" fill="#1f2328">soutien clinique</text>
+<circle cx="36" cy="436" r="11" fill="#1565c0"/>
+<path d="M36 433Q32.5 430 28.5 431V441Q32.5 440 36 442Z" fill="#fbfaf6"/><path d="M36 433Q39.5 430 43.5 431V441Q39.5 440 36 442Z" fill="#fbfaf6"/>
+<text x="56" y="442" font-size="18" fill="#1f2328">Leadership, conflits,</text>
+<text x="56" y="463" font-size="18" fill="#1f2328">communication</text>
+<circle cx="36" cy="484" r="11" fill="#1565c0"/>
+<circle cx="31.5" cy="481" r="3" fill="#fbfaf6"/><path d="M27.5 490.5V487.5Q27.5 484.5 31.5 484.5Q35.5 484.5 35.5 487.5V490.5Z" fill="#fbfaf6"/><circle cx="40.5" cy="481" r="3" fill="#fbfaf6"/><path d="M36.5 490.5V487.5Q36.5 484.5 40.5 484.5Q44.5 484.5 44.5 487.5V490.5Z" fill="#fbfaf6"/>
+<text x="56" y="490" font-size="18" fill="#1f2328">Communauté de</text>
+<text x="56" y="511" font-size="18" fill="#1f2328">contremaîtres</text>
+<circle cx="36" cy="532" r="11" fill="#1565c0"/>
+<path d="M29.5 526.5H42.5Q44 526.5 44 528V534Q44 535.5 42.5 535.5H35L31.5 539V535.5H29.5Q28 535.5 28 534V528Q28 526.5 29.5 526.5Z" fill="#fbfaf6"/>
+<text x="56" y="538" font-size="18" fill="#1f2328">PAE, débriefing</text>
+<text x="56" y="559" font-size="18" fill="#1f2328">post-incident</text>
+<ellipse cx="318" cy="523" rx="31.2" ry="5.2" fill="#eceef0"/>
+<g fill="#1f2328">
+<rect x="306.1" y="481.1" width="9.8" height="40.9" rx="4.3"/>
+<rect x="320.1" y="481.1" width="9.8" height="40.9" rx="4.3"/>
+<path d="M302.7 484.5V458.1Q302.7 449.5 310.3 449.5H325.7Q333.3 449.5 333.3 458.1V484.5Z"/>
+<circle cx="318" cy="439.3" r="10.7"/>
+</g>
+<path d="M305.2 435.9Q305.2 418 318 418Q330.8 418 330.8 435.9Z" fill="#1f2328"/>
+<path d="M301 435.9H335" stroke="#1f2328" stroke-width="4.3" stroke-linecap="round"/>
+<rect x="313.7" y="422.3" width="8.5" height="6.8" rx="1.7" fill="#fbfaf6"/>
+<path d="M305.6 453.8L298.4 480.2" stroke="#1f2328" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M330.4 453.8L337.6 480.2" stroke="#1f2328" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<rect x="332.5" y="450.4" width="23" height="29.8" rx="2.6" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<rect x="338.9" y="447" width="10.2" height="6" rx="1.7" fill="#1f2328"/>
+<path d="M336.8 459.8H350.9" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M336.8 466.6H350.9" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M336.8 473.4H345.2" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<ellipse cx="422" cy="523" rx="31.2" ry="5.2" fill="#eceef0"/>
+<g fill="#1f2328">
+<rect x="410.1" y="481.1" width="9.8" height="40.9" rx="4.3"/>
+<rect x="424.1" y="481.1" width="9.8" height="40.9" rx="4.3"/>
+<path d="M406.7 484.5V458.1Q406.7 449.5 414.3 449.5H429.7Q437.3 449.5 437.3 458.1V484.5Z"/>
+<circle cx="422" cy="439.3" r="10.7"/>
+</g>
+<path d="M409.2 435.9Q409.2 418 422 418Q434.8 418 434.8 435.9Z" fill="#1f2328"/>
+<path d="M405 435.9H439" stroke="#1f2328" stroke-width="4.3" stroke-linecap="round"/>
+<rect x="417.7" y="422.3" width="8.5" height="6.8" rx="1.7" fill="#fbfaf6"/>
+<path d="M409.6 453.8L402.4 480.2" stroke="#1f2328" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M434.4 453.8L441.6 480.2" stroke="#1f2328" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<rect x="384.5" y="450.4" width="23" height="29.8" rx="2.6" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<rect x="390.9" y="447" width="10.2" height="6" rx="1.7" fill="#1f2328"/>
+<path d="M388.8 459.8H402.9" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M388.8 466.6H402.9" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M388.8 473.4H397.2" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M351 414H389Q398 414 398 423V432Q398 441 389 441H362L332 447L352 441H351Q342 441 342 432V423Q342 414 351 414Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="359" cy="427.5" r="3.3" fill="#1565c0"/>
+<circle cx="370" cy="427.5" r="3.3" fill="#1565c0"/>
+<circle cx="381" cy="427.5" r="3.3" fill="#1565c0"/>
+<rect x="328" y="530" width="84" height="26" rx="8" fill="#eceef0"/>
+<text x="370" y="549" font-size="18" font-weight="700" fill="#1f2328" text-anchor="middle">PAIRS</text>
+</g>
+<!-- Page, Soutenir le contremaître : « Reconnaissance | Du rôle de contremaître spécifiquement » -->
+<path d="M26 577V588H454V577" fill="none" stroke="#1565c0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="240" y="620" font-size="27" font-weight="800" fill="#1565c0" text-anchor="middle">Reconnaître le rôle</text>
+<text x="240" y="650" font-size="27" font-weight="800" fill="#1565c0" text-anchor="middle">de contremaître</text>
+</g>
+</svg>

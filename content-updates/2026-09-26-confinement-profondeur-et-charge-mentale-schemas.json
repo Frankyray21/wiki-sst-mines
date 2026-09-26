@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-26",
+ "revision": "2026-09-26-confinement-profondeur-et-charge-mentale-schemas",
+ "portee": "Schémas de la page w/psychosocial/confinement-profondeur-et-charge-mentale.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Confinement, profondeur et charge mentale",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/confinement-profondeur-et-charge-mentale.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-confinement-profondeur-et-charge-mentale-vigilance-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-confinement-profondeur-et-charge-mentale-leviers-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Cette charge mentale s'ajoute à la charge cognitive de la tâche elle-même.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-confinement-profondeur-et-charge-mentale-vigilance-v1.svg|Charge mentale sous terre, panneau rouge « Vigilance » : dans une galerie vue dans l’axe, un mineur tient le volant d’une vanne (la tâche) et de sa tête partent trois flèches rouges vers des exemples de ce qu’il surveille : une fissure de la voûte (terrain), un détecteur fixé à la paroi (gaz), une chargeuse qui arrive (équipement). En bas : cette charge s’ajoute à celle de la tâche.]]\n\n<p class=\"infographie-legende\">Même quand les tâches sont routinières, le contexte souterrain ajoute une vigilance permanente (terrain, gaz, équipement) et le maintien de l’orientation sans repères naturels. Schéma de principe : la vanne, la fissure, le détecteur fixé à la paroi et la chargeuse sont des exemples, que la page ne nomme pas ; aucune durée ni aucun niveau n’est indiqué.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>En haut, le titre « Charge mentale sous terre » et, à côté, « En confinement, à grande profondeur ». Le panneau rouge « Vigilance » porte le bandeau « Elle consomme des ressources cognitives » (L’essentiel : « La vigilance permanente […] consomme des ressources cognitives »).</li>\n<li>À gauche, trois phrases d’après la page : même quand les tâches sont routinières ; orientation sans repères naturels ; évaluation continue des dangers.</li>\n<li>À droite, une galerie vue dans l’axe, qui se divise au fond en deux ouvertures identiques. Au premier plan, un mineur casqué, de face, tient le volant d’une vanne (étiquette « TÂCHE ») : un exemple de tâche, la page n’en nomme aucune.</li>\n<li>De sa tête partent trois flèches rouges en pointillé vers les trois conditions que le tableau dit sous surveillance permanente (terrain, gaz, équipement), dessinées par des exemples : une fissure qui détache un bloc de la voûte (étiquette « TERRAIN »), un détecteur fixé à la paroi (« GAZ ») et une chargeuse qui arrive (« ÉQUIPEMENT »).</li>\n<li>En bas, sous l’accolade bleue : « Cette charge s’ajoute à celle de la tâche » (page : « Cette charge mentale s’ajoute à la charge cognitive de la tâche elle-même. »), puis la note : « L’adaptation a un coût qui s’accumule sur la rotation, la carrière. » (L’essentiel : « cette adaptation a un coût qui s’accumule sur la rotation, la carrière »).</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après « L’essentiel » et les sections « Charge mentale spécifique » et « Mécanismes » de cette page. Schéma de principe, sans durée ni niveau ; les procédures, la communication par radio et la gestion de la fatigue, que le tableau nomme aussi, ne sont pas dessinées ; la radio, le bruit et l’éloignement de la surface le sont dans {{lien:w/psychosocial/communication-souterraine-et-isolement-de-lequipe.html|Communication souterraine et isolement de l’équipe}}.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-confinement-profondeur-et-charge-mentale-vigilance-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Leviers",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-confinement-profondeur-et-charge-mentale-leviers-v1.svg|Charge mentale sous terre, panneau bleu « Leviers » : dans une galerie vue dans l’axe, des luminaires (éclairage), des panneaux fléchés au-dessus de la fourche (repères) et un mineur qui tient une liste de vérification ; à gauche, listes de vérification, pauses régulières en zone décompressante, rotation entre tâches à charge cognitive variée. En bas : agir avant l’épuisement.]]\n\n<p class=\"infographie-legende\">Leviers du tableau de la page, en bleu : l’éclairage, les repères et la liste de vérification sont dessinés par des exemples, les pauses et la rotation sont seulement nommées. Des leviers, pas des garanties ; la page cite aussi la communication régulière pour rompre l’isolement cognitif et la détection précoce des signes de surcharge, et aucune durée ni fréquence n’est dessinée.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>En haut, le même titre que le schéma de la vigilance, « Charge mentale sous terre », et « En confinement, à grande profondeur ». Le panneau bleu « Leviers » porte le bandeau « Conception, procédures, équipe », trois niveaux du tableau « Leviers » de la page.</li>\n<li>À gauche, trois leviers d’après la page : listes de vérification ; pauses régulières en zone décompressante ; rotation entre tâches à charge cognitive variée.</li>\n<li>À droite, la galerie vue dans l’axe : un grand luminaire bleu sous la clé de voûte et un plus petit à droite (étiquette « ÉCLAIRAGE ») ; au fond, au-dessus des deux ouvertures, des panneaux fléchés bleus, avec l’étiquette « REPÈRES » sous la fourche. Ce sont des exemples ; la page dit : « Éclairage adéquat, repères visuels, signalisation claire ».</li>\n<li>Au premier plan, le mineur tient d’une main le volant de la vanne et, de l’autre, contre sa poitrine, une liste de vérification bleue cochée (page : « Listes de vérification pour décharger la mémoire de travail »).</li>\n<li>En bas, sous l’accolade bleue : « Agir avant l’épuisement », fin de la phrase de L’essentiel qui suit le coût de l’adaptation : « Le reconnaître permet d’agir avant l’épuisement. »</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après le tableau « Leviers » de la section « Application en mines » et « L’essentiel » de cette page. Schéma de principe, sans durée, fréquence ni effet ; la communication pendant le quart est dessinée dans {{lien:w/psychosocial/communication-souterraine-et-isolement-de-lequipe.html|Communication souterraine et isolement de l’équipe}}, les signes à repérer dans {{lien:w/psychosocial/premiers-signes-en-mine-ce-que-les-superviseurs-voient.html|Premiers signes en mine, ce que les superviseurs voient}}.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-confinement-profondeur-et-charge-mentale-leviers-v1.svg"
+  }
+ ]
+}

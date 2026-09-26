@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="568" viewBox="0 0 480 568" role="img" aria-labelledby="t d">
+<title id="t">Charge mentale sous terre : les leviers</title>
+<desc id="d">Grand titre : Charge mentale sous terre, en confinement, à grande profondeur. Un panneau bleu, « Leviers », avec le bandeau : conception, procédures, équipe. À gauche, trois phrases : listes de vérification ; pauses régulières en zone décompressante ; rotation entre tâches à charge cognitive variée. À droite, une galerie vue dans l’axe, qui se divise au fond en deux ouvertures identiques : des luminaires bleus sous la voûte (éclairage) et, au-dessus des deux ouvertures, des panneaux fléchés bleus (repères). Au premier plan, un mineur casqué, de face, tient d’une main le volant d’une vanne et de l’autre une liste de vérification bleue, cochée. En bas, le message : agir avant l’épuisement. Ni durée, ni fréquence, ni effet.</desc>
+<rect width="480" height="568" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="48" font-size="32" fill="#0b2545" font-weight="800">Charge mentale</text>
+<text x="24" y="86" font-size="32" fill="#0b2545" font-weight="800">sous terre</text>
+<text x="236" y="76" font-size="18" fill="#4b535c">En confinement,</text>
+<text x="236" y="99" font-size="18" fill="#4b535c">à grande profondeur</text>
+<!-- Page, tableau « Leviers », colonne « Niveau » : « Conception », « Procédures », « Équipe » -->
+<rect x="16" y="112" width="448" height="372" rx="14" fill="#f1f6fd" stroke="#e1ecfa" stroke-width="2.5"/>
+<rect x="28" y="124" width="128" height="60" rx="10" fill="#1565c0"/>
+<text x="92" y="163" font-size="25" fill="#fbfaf6" font-weight="800" text-anchor="middle">Leviers</text>
+<rect x="166" y="124" width="286" height="60" rx="10" fill="#e1ecfa"/>
+<text x="180" y="149.3" font-size="19" fill="#1f2328" font-weight="700">Conception,</text>
+<text x="180" y="172.3" font-size="19" fill="#1f2328" font-weight="700">procédures, équipe</text>
+<!-- Procédures : « Listes de vérification pour décharger la mémoire de travail » ; Conception : « Pauses régulières dans des zones décompressantes (refuges, salles d’équipement) » ; Équipe : « Rotation entre tâches à charge cognitive variée » -->
+<circle cx="35" cy="219.7" r="10" fill="#1565c0"/>
+<circle cx="35" cy="219.7" r="3.5" fill="#fbfaf6"/>
+<text x="54" y="226" font-size="18" fill="#1f2328">Listes de</text>
+<text x="54" y="248" font-size="18" fill="#1f2328">vérification</text>
+<circle cx="35" cy="285.7" r="10" fill="#1565c0"/>
+<circle cx="35" cy="285.7" r="3.5" fill="#fbfaf6"/>
+<text x="54" y="292" font-size="18" fill="#1f2328">Pauses</text>
+<text x="54" y="314" font-size="18" fill="#1f2328">régulières</text>
+<text x="54" y="336" font-size="18" fill="#1f2328">en zone</text>
+<text x="54" y="358" font-size="18" fill="#1f2328">décompressante</text>
+<circle cx="35" cy="397.7" r="10" fill="#1565c0"/>
+<circle cx="35" cy="397.7" r="3.5" fill="#fbfaf6"/>
+<text x="54" y="404" font-size="18" fill="#1f2328">Rotation entre</text>
+<text x="54" y="426" font-size="18" fill="#1f2328">tâches à charge</text>
+<text x="54" y="448" font-size="18" fill="#1f2328">cognitive variée</text>
+<path d="M212 470L212 246L212.4 242.4L213.5 238.8L215.3 235.3L217.9 231.8L221.2 228.4L225.2 225.1L229.8 222L235.1 219L241 216.1L247.4 213.5L254.4 211L261.9 208.8L269.8 206.8L278.1 205L286.7 203.5L295.6 202.3L304.8 201.3L314.1 200.6L323.5 200.1L333 200L342.5 200.1L351.9 200.6L361.2 201.3L370.4 202.3L379.3 203.5L387.9 205L396.2 206.8L404.1 208.8L411.6 211L418.6 213.5L425 216.1L430.9 219L436.2 222L440.8 225.1L444.8 228.4L448.1 231.8L450.7 235.3L452.5 238.8L453.6 242.4L454 246L454 470Z" fill="#fbfaf6"/>
+<g fill="none" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round">
+<path d="M296.7 377.6L296.7 310.4L296.8 309.3L297.1 308.2L297.7 307.2L298.5 306.1L299.5 305.1L300.7 304.1L302 303.2L303.6 302.3L305.4 301.4L307.3 300.6L309.4 299.9L311.7 299.2L314 298.6L316.5 298.1L319.1 297.7L321.8 297.3L324.5 297L327.3 296.8L330.2 296.6L333 296.6L335.8 296.6L338.7 296.8L341.5 297L344.2 297.3L346.9 297.7L349.5 298.1L352 298.6L354.3 299.2L356.6 299.9L358.7 300.6L360.6 301.4L362.4 302.3L364 303.2L365.3 304.1L366.5 305.1L367.5 306.1L368.3 307.2L368.9 308.2L369.2 309.3L369.3 310.4L369.3 377.6Z"/>
+<path d="M212 246L296.7 310.4"/>
+<path d="M454 246L369.3 310.4"/>
+<path d="M212 470L296.7 377.6"/>
+<path d="M454 470L369.3 377.6"/>
+<path d="M212 470L212 246L212.4 242.4L213.5 238.8L215.3 235.3L217.9 231.8L221.2 228.4L225.2 225.1L229.8 222L235.1 219L241 216.1L247.4 213.5L254.4 211L261.9 208.8L269.8 206.8L278.1 205L286.7 203.5L295.6 202.3L304.8 201.3L314.1 200.6L323.5 200.1L333 200L342.5 200.1L351.9 200.6L361.2 201.3L370.4 202.3L379.3 203.5L387.9 205L396.2 206.8L404.1 208.8L411.6 211L418.6 213.5L425 216.1L430.9 219L436.2 222L440.8 225.1L444.8 228.4L448.1 231.8L450.7 235.3L452.5 238.8L453.6 242.4L454 246L454 470Z"/>
+</g>
+<path d="M300.7 377.6V315.7Q300.7 303.7 312.7 303.7H318Q330 303.7 330 315.7V377.6Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M336 377.6V315.7Q336 303.7 348 303.7H353.3Q365.3 303.7 365.3 315.7V377.6Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<!-- Conception : « Éclairage adéquat, repères visuels, signalisation claire » -->
+<rect x="305" y="208" width="56" height="14" rx="4" fill="#1565c0"/>
+<path d="M315.1 227l-9 13" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M333 227l0 13" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M350.9 227l9 13" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+<rect x="384.4" y="218.8" width="39.2" height="9.8" rx="2.8" fill="#1565c0"/>
+<path d="M391.5 232.1l-6.3 9.1" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M404 232.1l0 9.1" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M416.5 232.1l6.3 9.1" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="302.7" y="279.7" width="25.3" height="20" rx="3" fill="#1565c0"/>
+<path d="M326.4 289.7H304.4" stroke="#fbfaf6" stroke-width="3" stroke-linecap="round"/>
+<path d="M310.4 283.7L304.4 289.7L310.4 295.7" fill="none" stroke="#fbfaf6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="338" y="279.7" width="25.3" height="20" rx="3" fill="#1565c0"/>
+<path d="M339.6 289.7H361.6" stroke="#fbfaf6" stroke-width="3" stroke-linecap="round"/>
+<path d="M355.6 283.7L361.6 289.7L355.6 295.7" fill="none" stroke="#fbfaf6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M232 464V413" stroke="#1f2328" stroke-width="9.3"/>
+<rect x="221.8" y="414.7" width="20.4" height="14.4" rx="2.5" fill="#1f2328"/>
+<path d="M220.9 464H243.1" stroke="#1f2328" stroke-width="4.2" stroke-linecap="round"/>
+<circle cx="232" cy="396" r="17" fill="none" stroke="#fbfaf6" stroke-width="7.6"/>
+<circle cx="232" cy="396" r="17" fill="none" stroke="#1f2328" stroke-width="4.7"/>
+<path d="M232 396L244 408M232 396L220 408M232 396L220 384M232 396L244 384" stroke="#1f2328" stroke-width="3.4" stroke-linecap="round"/>
+<circle cx="232" cy="396" r="4.2" fill="#1f2328"/>
+<ellipse cx="280" cy="464" rx="54.4" ry="7.2" fill="#eceef0"/>
+<rect x="258.4" y="392" width="18.1" height="71" rx="7.2" fill="#1f2328"/>
+<rect x="283.5" y="392" width="18.1" height="71" rx="7.2" fill="#1f2328"/>
+<path d="M299.2 352L294 384" stroke="#1f2328" stroke-width="13.6" stroke-linecap="round"/>
+<path d="M260.8 352L247 398" stroke="#1f2328" stroke-width="13.6" stroke-linecap="round"/>
+<rect x="256" y="344" width="48" height="54.4" rx="12.8" fill="#1f2328"/>
+<circle cx="280" cy="329.6" r="13.8" fill="#1f2328"/>
+<path d="M261.6 324Q261.6 302.4 280 302.4Q298.4 302.4 298.4 324Z" fill="#1f2328"/>
+<path d="M255.2 324H304.8" stroke="#1f2328" stroke-width="6.7" stroke-linecap="round"/>
+<rect x="274.2" y="308.8" width="11.5" height="8.6" rx="2.4" fill="#fbfaf6"/>
+<!-- Procédures : liste de vérification -->
+<rect x="276" y="352" width="34" height="44" rx="4" fill="#e1ecfa" stroke="#1565c0" stroke-width="3.5"/>
+<rect x="286" y="347" width="14" height="8" rx="2" fill="#1565c0"/>
+<path d="M282 364l3 3.5l5.5 -6.5" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M295 364H304" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M282 375l3 3.5l5.5 -6.5" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M295 375H304" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M282 386l3 3.5l5.5 -6.5" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M295 386H304" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="263.1" y="236" width="139.9" height="31.8" rx="8" fill="#eceef0"/>
+<text x="333" y="259.1" font-size="18" fill="#1f2328" font-weight="700" text-anchor="middle">ÉCLAIRAGE</text>
+<rect x="319.4" y="383.6" width="113.2" height="31.8" rx="8" fill="#eceef0"/>
+<text x="376" y="406.7" font-size="18" fill="#1f2328" font-weight="700" text-anchor="middle">REPÈRES</text>
+<!-- Page, L’essentiel : « Le reconnaître permet d’agir avant l’épuisement. » -->
+<path d="M28 496V508H452V496" fill="none" stroke="#1565c0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="240" y="540" font-size="28" fill="#1565c0" font-weight="800" text-anchor="middle">Agir avant l’épuisement</text>
+</g>
+</svg>

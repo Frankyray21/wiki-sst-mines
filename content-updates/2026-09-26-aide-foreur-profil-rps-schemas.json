@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-26",
+ "revision": "2026-09-26-aide-foreur-profil-rps-schemas",
+ "portee": "Schémas de la page w/psychosocial/aide-foreur-profil-rps.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Aide-foreur, profil RPS",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/aide-foreur-profil-rps.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-aide-foreur-profil-rps-poste-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-aide-foreur-profil-rps-leviers-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Profil RPS structurel",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-aide-foreur-profil-rps-poste-v1.svg|Deux panneaux rouges, ce qui pèse sur l’aide-foreur : le poste (cadence imposée, équipement lourd, postures contraignantes, poste d’entrée parfois précaire), où il tient une tige lourde près de la foreuse ; et la relation avec le foreur (dépendance forte, tâches dictées par le foreur ou par procédures, soutien qui dépend de la relation, mérite attribué au foreur), où une flèche rouge va du foreur vers lui. En bas, le message clé : « Vulnérabilité particulière : la dépendance à la relation ».]]\n\n<p class=\"infographie-legende\">Selon la page, le profil RPS typique du métier combine charge physique élevée, cadence imposée par l’équipement, faible latitude décisionnelle et dépendance forte au foreur. La page y rattache le job strain, l’iso-strain quand le soutien est limité et le déséquilibre efforts-récompenses.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Panneau rouge « Poste », bandeau « Cadence imposée » (par l’équipement, dit la page) : à gauche, trois phrases de la page, chacune avec sa pastille : équipement lourd ; postures contraignantes ; poste d’entrée, parfois précaire.</li>\n<li>À droite, l’aide-foreur, debout, de face, tient à deux mains une tige de forage ; deux flèches rouges appuient sur la tige. À côté, la foreuse sur chenilles, avec une flèche circulaire rouge près de la tête de rotation : la cadence imposée par l’équipement. Le schéma ne donne ni rythme ni durée.</li>\n<li>Panneau rouge « Relation », bandeau « Dépendance forte » (au foreur) : tâches dictées par le foreur ou par procédures ; soutien qui dépend fortement de la relation avec le foreur ; mérite attribué au foreur.</li>\n<li>À droite, le foreur tend le bras et une flèche rouge va de lui vers l’aide-foreur : les tâches dictées. Une étoile pleine près de la tête du foreur, une étoile vide en pointillé rouge près de celle de l’aide-foreur : reconnaissance souvent limitée, poste « invisible », mérite attribué au foreur. Des étiquettes nomment le foreur et l’aide-foreur.</li>\n<li>Sous l’accolade bleue, le message : « Vulnérabilité particulière : la dépendance à la relation ». C’est la vulnérabilité que relève la page, en raccourci ; la page écrit : « la dépendance forte à la qualité de la relation avec le foreur ».</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page (L’essentiel ; tableau « Profil RPS structurel » ; « Vulnérabilité particulière »). Voir aussi {{lien:w/psychosocial/foreur-profil-rps-et-leadership-de-chantier.html|Foreur, profil RPS et leadership de chantier}}. Schéma de principe : aucun chiffre ni durée.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-aide-foreur-profil-rps-poste-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Leviers de prévention",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-aide-foreur-profil-rps-leviers-v1.svg|Deux panneaux bleus, les leviers de l’organisation : le poste (marge de manœuvre, progression vers foreur, reconnaissance institutionnelle, superviseurs sensibilisés), où l’aide-foreur change l’ordre d’un tableau de tâches ; et la relation (formation des foreurs au leadership et à la communication, rotation des paires, signalement accessible), où le foreur parle à l’aide-foreur. En bas, le message clé : « Comprendre ce profil permet de cibler les leviers ».]]\n\n<p class=\"infographie-legende\">Les sept leviers de prévention du tableau de la page, regroupés par le schéma autour du poste et de la relation avec le foreur ; la page les classe en primaire, secondaire et tertiaire. Un levier n’est pas une promesse d’effet.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Panneau bleu « Poste », bandeau « Marge de manœuvre » : concevoir le poste avec une marge de manœuvre minimale (séquençage, méthodes). À gauche, trois phrases de la page, chacune avec sa pastille : un plan de progression clair vers foreur, pour donner perspective ; la reconnaissance institutionnelle du poste (salaires, statut, programmes) ; la sensibilisation des superviseurs au profil RPS du poste.</li>\n<li>À droite, l’aide-foreur tend le bras ; une flèche bleue va vers un tableau de tâches, symbole de leur ordre, où une flèche change cet ordre ; étiquette « séquençage, méthodes ». Une étoile bleue pleine près de sa tête : la reconnaissance du poste, en écho à l’étoile vide du premier schéma.</li>\n<li>Panneau bleu « Relation », bandeau « Formation des foreurs » : au leadership et à la communication ; la rotation des paires foreur-aide-foreur, si applicable ; des mécanismes de signalement accessibles, en cas de conflit avec le foreur.</li>\n<li>À droite, le foreur parle à l’aide-foreur (bulle bleue) ; des étiquettes les nomment. La page ne dit pas à qui s’adresse le signalement ; le schéma ne dessine donc aucun destinataire.</li>\n<li>Sous l’accolade bleue, la phrase de la page, en raccourci : comprendre ce profil structurel permet de cibler les leviers de prévention. Le regroupement en deux panneaux est celui du schéma ; il ne reprend ni les niveaux de la page (primaire, secondaire, tertiaire) ni un ordre de priorité.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page (L’essentiel ; tableau « Leviers de prévention »). Pour le leadership de chantier, voir {{lien:w/psychosocial/foreur-profil-rps-et-leadership-de-chantier.html|Foreur, profil RPS et leadership de chantier}}. Schéma de principe : aucun chiffre, aucun ordre de priorité entre les leviers.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-aide-foreur-profil-rps-leviers-v1.svg"
+  }
+ ]
+}
