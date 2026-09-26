@@ -249,9 +249,12 @@ for (const fichier of schemasEspacesClos) {
   const bloc = espacesClos.match(new RegExp('<div class="infographie[^"]*infographie-schema[^"]*">(?:(?!<div class="infographie)[\\s\\S])*?' + fichier.replace(/\./g, '\\.') + '[\\s\\S]*?<\\/div>'))?.[0];
   assert.ok(bloc, 'espaces clos : schéma posé dans un bloc inversible en thème sombre : ' + fichier);
   assert.match(bloc, /<img[^>]+alt="[^"]{40,}"/, 'espaces clos : description accessible ' + fichier);
-  assert.match(bloc, /<details class="infographie-texte">[\s\S]*?<summary>[\s\S]*?<\/details>/, 'espaces clos : version texte ' + fichier);
+  assert.ok(!bloc.includes('infographie-texte'), 'espaces clos : pas de « Lire le schéma en texte » ' + fichier);
   assert.ok(bloc.includes('infographie-sources'), 'espaces clos : sources ' + fichier);
 }
+// « Lire le schéma en texte » retiré de tous les schémas (demande de Frank, 26 septembre 2026)
+const avecVersionTexteSchema = fs.readdirSync(out, { recursive: true }).filter(f => String(f).endsWith('.html') && lire(String(f)).includes('<summary>Lire le schéma en texte</summary>'));
+assert.equal(avecVersionTexteSchema.length, 0, 'aucun schéma avec « Lire le schéma en texte » : ' + avecVersionTexteSchema.slice(0, 3).join(', '));
 assert.ok(!espacesClos.includes('pasted-image-20241214152919'), 'espaces clos : capture « alarme à 10 % de la LIE » retirée');
 assert.ok(espacesClos.includes('moyen de communication bidirectionnel'), 'espaces clos : art. 308 en vigueur');
 assert.ok(!espacesClos.includes('Contact visuel, auditif'), 'espaces clos : ancien résumé de l’art. 308 retiré');

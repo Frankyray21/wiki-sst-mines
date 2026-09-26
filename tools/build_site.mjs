@@ -8,6 +8,7 @@ import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { dimensionsSvg, dimensionsImage } from './dimensions_svg.mjs';
 import { choisirImage } from './resoudre_image.mjs';
+import { sansVersionTexteSchema } from './version_texte_schema.mjs';
 import { libelleLien, contexteDuLien } from './libelle_lien.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
 import { rendrePage404 } from './redirections.mjs';
@@ -755,7 +756,8 @@ function renderBody(md, nested = false) {
   s = renderCallouts(s);
   s = renderWikilinks(s);
   s = s.replace(/==([^=\n][^=]*?)==/g, '<mark>$1</mark>');
-  let html = marked.parse(s);
+  // « Lire le schéma en texte » n'est plus publié, même si la note garde encore ce bloc
+  let html = sansVersionTexteSchema(marked.parse(s));
   if (!nested) {
     // ids de titres + collecte du sommaire
     html = html.replace(/<h([1-4])>([\s\S]*?)<\/h\1>/g, (m, lv, inner) => {

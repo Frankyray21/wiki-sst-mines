@@ -1,5 +1,6 @@
-// Pose les schémas d'une page d'après une « spec » (texte alternatif, légende, version texte, sources,
-// ancre), dans la page publiée ET dans un lot pour le vault, pour que les deux disent la même chose.
+// Pose les schémas d'une page d'après une « spec » (texte alternatif, légende, sources, ancre), dans la page
+// publiée ET dans un lot pour le vault, pour que les deux disent la même chose. Pas de version texte dépliable
+// sous le schéma (« Lire le schéma en texte », retirée le 26 septembre 2026) : un champ « puces » est ignoré.
 // Généralise ce qui a été fait à la main pour « Espaces clos » (25 septembre 2026).
 //
 //   node tools/poser_schemas.mjs --spec <spec.json> --medias <dossier des SVG> --lot content-updates/<lot>.json [--ecrire]
@@ -9,7 +10,7 @@
 // spec.json :
 //   page        adresse publiée (w/<wiki>/<page>.html)
 //   note        { titre, wiki, chemin? } — pour retrouver la note du vault (appliquer_retouches.mjs)
-//   schemas[]   { fichier, ancre, remplace?, alt, legende, puces[], sources }
+//   schemas[]   { fichier, ancre, remplace?, alt, legende, sources }
 //     fichier   schéma SVG (480 de large), ou image PNG / JPEG (une illustration fournie par l'auteur,
 //               par exemple : au moins 480 px de large, 1,5 Mo au plus)
 //     sombre    true : dessin conçu sur fond sombre (style retenu par Frank le 26 septembre 2026) ; le
@@ -49,17 +50,13 @@ export function blocHtml(s, { racine, dims, titreDe, hrefDe = a => racine + a })
   const u = racine + 'files/infographies/' + s.fichier;
   const dim = dims ? ` width="${dims.largeur}" height="${dims.hauteur}"` : '';
   return `<div class="${classesBloc(s)}"><span class="page-img"><a class="img-lien" href="${u}"><img src="${u}" alt="${esc(s.alt)}"${dim} loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>\n`
-    + `<p class="infographie-legende">${texte(s.legende)}</p><details class="infographie-texte">\n<summary>Lire le schéma en texte</summary>\n<ul>\n`
-    + s.puces.map(p => `<li>${texte(p)}</li>\n`).join('')
-    + `</ul>\n</details>\n<p class="infographie-sources">${sourcesHtml(s.sources, { titreDe, hrefDe })}</p></div>`;
+    + `<p class="infographie-legende">${texte(s.legende)}</p><p class="infographie-sources">${sourcesHtml(s.sources, { titreDe, hrefDe })}</p></div>`;
 }
 
 export function blocMd(s) {
   const alt = String(s.alt).replace(/\|/g, '/').replace(/\]\]/g, '] ]');
   return `<div class="${classesBloc(s)}">\n\n![[Infographies/${s.fichier}|${alt}]]\n\n`
-    + `<p class="infographie-legende">${texte(s.legende)}</p>\n\n<details class="infographie-texte">\n<summary>Lire le schéma en texte</summary>\n<ul>\n`
-    + s.puces.map(p => `<li>${texte(p)}</li>\n`).join('')
-    + `</ul>\n</details>\n<p class="infographie-sources">${sourcesMd(s.sources)}</p>\n\n</div>`;
+    + `<p class="infographie-legende">${texte(s.legende)}</p>\n\n<p class="infographie-sources">${sourcesMd(s.sources)}</p>\n\n</div>`;
 }
 
 // Sources : le texte est échappé, les balises <a href> et les {{lien:…}} gardées telles quelles.
@@ -181,6 +178,9 @@ export function lotDepuisSpec(spec, { date, revision, portee, precautions }) {
   const premier = spec.schemas[0] && retireePar(spec.schemas[0]);
   for (const p of spec.paragraphesRetires || []) retouches.push({ type: 'supprimerLigne', ligneContenant: p, marqueur: premier });
   retouches.push(...(spec.retouchesVault || []));
+  // en dernier : sans effet sur un bloc neuf ; retire la version texte d'un bloc de ce schéma que la note
+  // aurait reçu avant (« Lire le schéma en texte », retirée le 26 septembre 2026)
+  for (const s of spec.schemas) retouches.push({ type: 'retirerVersionTexte', ligneContenant: s.fichier, marqueur: 'Infographies/' + s.fichier });
   const lot = spec.lot || {};
   return {
     date: lot.date || date, revision: lot.revision || revision, portee: lot.portee || portee, precautions: lot.precautions || precautions,

@@ -20,6 +20,11 @@
 //                                                      de la version publiée avant, ou liste des versions
 //                                                      antérieures) ; si la note n'en a reçu aucune, insère le
 //                                                      bloc après la ligne, comme insererApres
+//   retirerVersionTexte { ligneContenant, marqueur }  retire, du bloc <div class="infographie…"> qui intègre
+//                                                      « marqueur » (le fichier du schéma), la version texte
+//                                                      <details> « Lire le schéma en texte » (retirée le
+//                                                      26 septembre 2026) ; « ligneContenant » ne sert qu'au
+//                                                      rapport. Sans cette version texte : déjà faite
 // Le « marqueur » de supprimerLigne peut être une liste : la ligne a été retirée par l'un ou l'autre
 // (le schéma et sa version antérieure, par exemple).
 // Dans « apres », « par » et « bloc », {{lien:<adresse publiée>|<libellé>}} devient un wikilink vers
@@ -97,6 +102,23 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
         rapport.statut = 'appliquée';
         continue;
       }
+    }
+    if (r.type === 'retirerVersionTexte') {
+      const lignesSchema = lignes.flatMap((l, i) => l.includes(r.marqueur) ? [i] : []);
+      if (lignesSchema.length !== 1) { rapport.statut = lignesSchema.length ? `schéma ambigu (${lignesSchema.length} lignes)` : 'schéma absent de la note'; ok = false; continue; }
+      const b = blocAutour(lignes, lignesSchema[0]);
+      if (!b) { rapport.statut = 'schéma hors d’un bloc de schéma'; ok = false; continue; }
+      const debut = lignes.findIndex((l, i) => i > b.debut && i < b.fin && /^\s*<details class="infographie-texte">\s*$/.test(l)
+        && /^\s*<summary>Lire le schéma en texte<\/summary>\s*$/.test(lignes[i + 1] || ''));
+      if (debut < 0) { rapport.statut = 'déjà faite'; continue; }
+      const fin = lignes.findIndex((l, i) => i > debut && i < b.fin && /^\s*<\/details>\s*$/.test(l));
+      if (fin < 0) { rapport.statut = 'version texte sans fin dans le bloc'; ok = false; continue; }
+      lignes.splice(debut, fin - debut + 1);
+      // pas deux lignes vides de suite là où était la version texte
+      if (lignes[debut]?.trim() === '' && lignes[debut - 1]?.trim() === '') lignes.splice(debut, 1);
+      rapport.ligne = debut + 1;
+      rapport.statut = 'appliquée';
+      continue;
     }
     const dejaFait = () => {
       if (r.type === 'insererApres' || r.type === 'remplacerBloc') return lignes.some(l => l.includes(r.marqueur));
