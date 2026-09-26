@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-26",
+  "objet": "Liens du vault dont le texte est devenu le nom long d'une note renommée : texte court à rétablir dans les phrases (tools/raccourcir_liens.mjs). À valider par Frank sur l'essai avant --appliquer.",
+  "raccourcir": [
+    { "nom": "CNESST, rôles et pouvoirs", "court": "CNESST", "liensSurLeSite": 118, "exemple": "Aviser la CNESST, rôles et pouvoirs que le travailleur… ; Guide CNESST, rôles et pouvoirs sur le retour au travail" },
+    { "nom": "LMRSST, vue d'ensemble pour les RPS", "court": "LMRSST", "liensSurLeSite": 27, "exemple": "psychosociaux (LMRSST, vue d'ensemble pour les RPS) ; Conformité LMRSST, vue d'ensemble pour les RPS" },
+    { "nom": "Foreur, profil RPS et leadership de chantier", "court": "Foreur", "liensSurLeSite": 12, "exemple": "Foreur, profil RPS et leadership de chantier jumbo | REBA + RULA" },
+    { "nom": "Aide-foreur, profil RPS", "court": "Aide-foreur", "liensSurLeSite": 5, "exemple": "Aide-foreur, profil RPS en chargement" },
+    { "nom": "Opérateur d'équipement lourd, profil RPS", "court": "Opérateur d'équipement lourd", "liensSurLeSite": 5, "exemple": "et dans Opérateur d'équipement lourd, profil RPS" },
+    { "nom": "Manutention (hub)", "court": "Manutention", "liensSurLeSite": 3, "exemple": "Forage, sautage, concassage, Manutention (hub)" },
+    { "nom": "Bruit (hub)", "court": "Bruit", "liensSurLeSite": 2, "exemple": "Programme de prévention silice cristalline respirable, DPM, Bruit (hub), vibrations" },
+    { "nom": "Solvants (hub)", "court": "Solvants", "liensSurLeSite": 2, "exemple": "Cutanée : Importante (Solvants (hub), …" },
+    { "nom": "Amiante (hub)", "court": "Amiante", "liensSurLeSite": 1, "exemple": "Travaux sur Amiante (hub) (risque modéré)" },
+    { "nom": "Espaces clos (hub)", "court": "Espaces clos", "liensSurLeSite": 1, "exemple": "Espaces clos (hub) (souvent associé aux travaux en hauteur en mine), note du Recueil : touchée seulement avec --recueil" },
+    { "nom": "Silice cristalline (hub)", "court": "Silice cristalline", "liensSurLeSite": 0 },
+    { "nom": "Cadenassage (hub)", "court": "Cadenassage", "liensSurLeSite": 0 }
+  ],
+  "delier": [
+    { "nom": "Confinement, profondeur et charge mentale", "wiki": "Wiki SST psychosociale", "court": "Confinement", "liensSurLeSite": 8, "motif": "Hors du wiki psychosocial, « confinement » désigne le confinement d'une source (amiante, contrôle des risques chimiques, espaces clos) : le lien vers la charge mentale sous terre est faux. Le mot reste, le lien disparaît." },
+    { "nom": "Confinement", "wiki": "Wiki SST psychosociale", "court": "Confinement", "motif": "Même cas si le lien est écrit [[Confinement]] et que la note psychosociale porte l'alias « Confinement »." }
+  ],
+  "aTrancher": [
+    { "nom": "MBI, épuisement professionnel", "liensSurLeSite": 27, "pourquoi": "deux mots d'origine au moins : « Copenhagen MBI, épuisement professionnel Inventory » était « Copenhagen Burnout Inventory », ailleurs « MBI »" },
+    { "nom": "Démarche de prévention en RPS, étapes", "liensSurLeSite": 41, "pourquoi": "mot d'origine inconnu (« Module 6 - Démarche de prévention en RPS, étapes »)" },
+    { "nom": "Modèle de Sélye, syndrome général d'adaptation", "liensSurLeSite": 19, "pourquoi": "« (Sélye, Modèle de Sélye, syndrome général d'adaptation) » : le mot d'origine n'était pas « Modèle de Sélye »" },
+    { "nom": "✅ Santé mentale au travail, concepts de base", "liensSurLeSite": 12, "pourquoi": "renvois en fin de phrase, mot d'origine inconnu" },
+    { "nom": "Travail en mine souterraine, facteurs psychosociaux spécifiques", "liensSurLeSite": 11, "pourquoi": "renvois en fin de phrase, mot d'origine inconnu" },
+    { "nom": "Modèle de Siegrist, déséquilibre efforts récompenses", "liensSurLeSite": 10, "pourquoi": "une autre page s'appelle déjà « Modèle de Siegrist » : le texte court prêterait à confusion" },
+    { "nom": "Confinement, profondeur et charge mentale", "liensSurLeSite": 3, "pourquoi": "dans le wiki psychosocial, le mot d'origine était parfois « charge mentale » (« Outils d'évaluation de la Confinement, profondeur et charge mentale (NASA-TLX) »)" },
+    { "nom": "Comparatif des cycles FIFO (14-14, 20-10, 21-7)", "liensSurLeSite": 66, "pourquoi": "« quart 12 h, Comparatif des cycles FIFO (14/14, 20/10, 21/7) fréquent » : mot d'origine inconnu" },
+    { "nom": "Harcèlement psychologique, recours", "liensSurLeSite": 2, "pourquoi": "« Harcèlement psychologique, recours et sexuel » ; une note du Recueil s'appelle « Harcèlement psychologique »" },
+    { "nom": "Vie en camp minier, santé mentale et habitudes", "liensSurLeSite": 1, "pourquoi": "un seul lien, « Lien avec Vie en camp minier, santé mentale et habitudes (wiki frère) »" },
+    { "nom": "LSST, droits et obligations", "liensSurLeSite": 6, "pourquoi": "renvois « Voir … » où le nom complet est à sa place : sans doute rien à faire" },
+    { "nom": "Résumé Theorell, T. A systematic review including meta-analysis of work environment and depressive symptoms", "liensSurLeSite": 17, "pourquoi": "nom de fichier d'un résumé, cité en fin de phrase" }
+  ]
+}

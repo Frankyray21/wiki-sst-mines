@@ -85,6 +85,14 @@ adresses n'ont pas changé.
 - `tools/dimensions_svg.mjs` — largeur et hauteur d'un schéma SVG, posées par le générateur sur son `<img>`
 - `tools/resoudre_image.mjs` — choisit le fichier d'un renvoi d'image `![[…]]` ; un nom que portent plusieurs
   fichiers est listé en fin de construction (« ⚠ Images ambiguës »), avec le fichier retenu
+- `tools/libelle_lien.mjs` — texte affiché d'un lien `[[Cible]]` : le mot saisi dans une phrase ; le titre de la page
+  pour un nom de code (`art-59-LATMP`), une note d'analyse d'étude, une ligne ou une cellule de tableau faite de liens
+  seulement. Les liens qui mènent à un autre wiki par un alias sont listés en fin de construction (« ⚠ Liens vers un
+  autre wiki par un alias »)
+- `tools/raccourcir_liens.mjs` — rend aux phrases du vault le mot court qu'un renommage de note avait remplacé par le
+  nom long (`[[CNESST, rôles et pouvoirs]]` → `[[CNESST, rôles et pouvoirs|CNESST]]`) et retire les liens qu'un
+  renommage a envoyés vers une note d'un autre wiki et d'un autre sens ; table à valider,
+  `content-updates/2026-09-26-libelles-courts.json` ; essai par défaut, sauvegarde avant écriture
 - `tools/avis.mjs` — bloc « Cette page vous a-t-elle été utile ? » (pouce et commentaire) posé sur chaque page
   issue d'une note ; `tools/avis-worker/` — le relais Cloudflare qui écrit dans Airtable, et son mode d'emploi
 - `tools/serve.mjs` — serveur local de prévisualisation (port 8090)
@@ -123,6 +131,10 @@ node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-irr-indemnit
 #   Get-ChildItem content-updates\2026-09-25-corr-*.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
 #   Get-ChildItem content-updates\2026-09-25-titre-art-116-*.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
 # … pages RPS illustrées (même jour) : une commande par page, liste dans content-updates/2026-09-25-rps-schemas.md
+
+# Rendre aux phrases du vault le mot que l'auteur avait écrit (26 septembre 2026) : essai, relecture, application
+node tools/raccourcir_liens.mjs
+node tools/raccourcir_liens.mjs --appliquer
 
 # Poser les renvois tranchés dans le vault : essai, puis application avec sauvegarde
 node tools/appliquer_renvois.mjs
@@ -193,6 +205,16 @@ node tools/serve.mjs
   s'ajoutent : la ventilation d'un chantier en cul-de-sac et la mesure du carbone total selon le RSSM (art. 102 et
   103.1). Les fichiers v1 quittent le site. **À poser dans le vault** (le lot Diesel remplace la version précédente,
   qu'elle ait été appliquée ou non). Détail : `content-updates/2026-09-25-diesel-schemas-v2.md`
+- **Liens lisibles dans les phrases (26 septembre 2026)** : un lien écrit dans une phrase affichait le titre de la
+  page visée au lieu du mot écrit (« [[Silice cristalline]] respirable » devenait « Programme de prévention silice
+  cristalline respirable »). Le générateur garde désormais le mot saisi dans les phrases (485 liens sur 198 pages à la
+  prochaine construction) et le titre pour les articles de loi (`art-59-LATMP`), les notes d'analyse et les listes de
+  liens. Hors du wiki de la page, un nom de fichier l'emporte sur l'alias d'une autre page, comme dans Obsidian. Deux
+  défauts sont dans le texte du vault lui-même, traces de renommages : 553 liens portent le nom
+  long (« Aviser la [[CNESST, rôles et pouvoirs]] que… ») et « Confinement » mène, dans huit pages d'hygiène, de
+  toxicologie et de sécurité, à la note psychosociale sur la charge mentale : `tools/raccourcir_liens.mjs` les corrige
+  d'après une table à valider. **À faire là où est le vault** : l'outil, puis la reconstruction. Détail :
+  `content-updates/2026-09-26-libelles-liens.md`
 - **Pages RPS illustrées (25 septembre 2026)** : schémas sur Médiation (Thomas-Kilmann, niveaux d'intervention),
   Modèle de Siegrist, Communication descendante, Définition des risques psychosociaux, Comparatif des cycles FIFO,
   Démarche de prévention en RPS, Harcèlement psychologique (LNT, art. 81.18), Les trois niveaux de prévention,
