@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-26",
+ "revision": "2026-09-26-cnesst-roles-et-pouvoirs-schemas",
+ "portee": "Schémas de la page w/psychosocial/cnesst-roles-et-pouvoirs.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "CNESST, rôles et pouvoirs",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/cnesst-roles-et-pouvoirs.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-cnesst-roles-et-pouvoirs-trois-roles-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-cnesst-roles-et-pouvoirs-inspection-rps-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "L'essentiel : La CNESST (Commission des normes, de l'équité, de la santé et de la sécurité du travail) est l'organisme québécois qui applique les lois du travail, incluant la LMRSST. Trois grands rôles : prévention (inspection, conformité), indemnisation (lésions professionnelles, LATMP), normes (LNT). Pour les RPS, ses pouvoirs ont été élargis depuis 2021.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-cnesst-roles-et-pouvoirs-trois-roles-v1.svg|Schéma : la CNESST au centre, entre l’employeur minier (un chevalement) et le travailleur ; ses flèches montrent la prévention tournée vers l’employeur (inspection, avis de correction, outils et formations), l’indemnisation (réclamation du travailleur, décision adressée aux deux, réparation) et les normes du travail (plainte de harcèlement, enquête, médiation avec l’accord des parties).]]\n\n<p class=\"infographie-legende\">Les trois rôles de la CNESST décrits dans cette page, entre l’employeur et le travailleur d’un site minier. Schéma de principe : les tirets marquent ce qui dépend d’une condition ; aucun délai, montant ni fréquence.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>En haut, trois acteurs : à gauche, l’employeur minier (un chevalement et son bâtiment) ; au centre, la CNESST ; à droite, le travailleur. Flèches bleues : ce que fait la CNESST ; flèches noires : ce que le travailleur lui adresse ; en tirets : ce qui dépend d’une condition.</li>\n<li>Prévention (LSST) : la CNESST agit auprès de l’employeur par l’inspection et par le soutien (outils, formations) ; l’inspecteur peut, s’il l’estime opportun, émettre un avis de correction (art. 182).</li>\n<li>Indemnisation (LATMP) : le travailleur produit sa réclamation à la CNESST, qui rend une décision notifiée aux intéressés, dont l’employeur (art. 354) ; selon la décision, la réparation comprend les soins, la réadaptation et les indemnités (art. 1).</li>\n<li>Normes du travail (LNT) : le travailleur peut adresser une plainte de harcèlement psychologique, et la CNESST fait enquête (art. 123.6 et 123.8). Au cours de l’enquête et avec l’accord des parties, la CNESST peut demander au ministre de nommer une personne pour entreprendre avec elles une médiation (art. 123.10).</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après L’essentiel et les tableaux « Rôle 1 : prévention », « Rôle 2 : indemnisation » et « Rôle 3 : normes du travail » de cette page. Textes officiels (recueil du wiki) : {{lien:w/legislation/10-lois-principales/lsst/art-167-lsst-reglementation.html|LSST, art. 167}}, {{lien:w/legislation/10-lois-principales/lsst/art-179-lsst-decision-cnesst.html|179}} et {{lien:w/legislation/10-lois-principales/lsst/art-182-lsst-contestation.html|182}} ; {{lien:w/legislation/10-lois-principales/latmp/art-1-latmp-definitions-generales.html|LATMP, art. 1}}, {{lien:w/legislation/10-lois-principales/latmp/art-349-latmp-tribunal-administratif.html|349}} et {{lien:w/legislation/10-lois-principales/latmp/art-354-latmp-appel-tat.html|354}} ; {{lien:w/legislation/10-lois-principales/lnt/art-123-6-lnt-plainte-harcelement-psychologique.html|LNT, art. 123.6}}, 123.8 et 123.10. Schéma de principe.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-cnesst-roles-et-pouvoirs-trois-roles-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "L'inspecteur CNESST peut désormais demander à voir comment l'employeur a identifié les RPS, quel plan d'action est en place, et comment le comité SST est impliqué. Voir Inspecteur CNESST et RPS.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-cnesst-roles-et-pouvoirs-inspection-rps-v1.svg|Un inspecteur de la CNESST tend une loupe vers le programme de prévention de l’employeur, ouvert à l’onglet RPS : risques psychosociaux (identification, analyse), mesures et priorités d’action, implication du comité SST. S’il l’estime opportun, il émet un avis de correction auquel l’employeur doit donner suite ; ne pas y donner suite est une infraction : poursuite pénale possible, amende.]]\n\n<p class=\"infographie-legende\">Ce que l’inspecteur peut demander à voir sur les risques psychosociaux, et la suite que prévoit la LSST. Schéma de principe : ni délai, ni montant.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>L’inspecteur, en bleu, tend une loupe vers le programme de prévention de l’employeur, ouvert à l’onglet RPS : il a accès à tous les livres, registres et dossiers de l’employeur (LSST, art. 179).</li>\n<li>Ce qu’il peut notamment demander à voir : l’identification et l’analyse des risques psychosociaux, les mesures et priorités d’action, l’implication du comité SST (LMRSST, art. 144 et 154, qui modifient les art. 59 et 78 de la LSST).</li>\n<li>S’il l’estime opportun (flèche en tirets), il émet un avis de correction qui enjoint de se conformer à la loi ou aux règlements ; l’employeur doit y donner suite (LSST, art. 182 et 184).</li>\n<li>Quiconque contrevient à la loi ou aux règlements commet une infraction, ce qui vaut pour qui ne donne pas suite à l’avis ; la CNESST peut intenter une poursuite pénale, et l’infraction rend passible d’une amende (LSST, art. 236 et 242).</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après la section « Pouvoirs spécifiques aux RPS » de cette page. Textes officiels (recueil du wiki) : {{lien:w/legislation/10-lois-principales/lsst/art-179-lsst-decision-cnesst.html|LSST, art. 179}}, {{lien:w/legislation/10-lois-principales/lsst/art-182-lsst-contestation.html|182}}, {{lien:w/legislation/10-lois-principales/lsst/art-184-lsst-tribunal-administratif.html|184}}, {{lien:w/legislation/10-lois-principales/lsst/art-236-lsst-responsabilite-penale-de-lemployeur.html|236}} et {{lien:w/legislation/10-lois-principales/lsst/art-242-lsst-recidive.html|242}} ; contenu du programme de prévention : {{lien:w/legislation/10-lois-principales/lmrsst/art-144-lmrsst-mod-art-59-lsst.html|LMRSST, art. 144}} (modifie l’art. 59 de la LSST) ; comité de santé et de sécurité : {{lien:w/legislation/10-lois-principales/lsst/art-78-lsst-representant-prevention.html|LSST, art. 78}}, modifié par la {{lien:w/legislation/10-lois-principales/lmrsst/art-154-lmrsst-mod-art-78-lsst.html|LMRSST, art. 154}}. Schéma de principe.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-cnesst-roles-et-pouvoirs-inspection-rps-v1.svg"
+  }
+ ]
+}

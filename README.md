@@ -218,9 +218,11 @@ node tools/serve.mjs
   `content-updates/2026-09-26-libelles-liens.md`
 - **Pages RPS illustrées (suite) et deux refontes pour le thème sombre (26 septembre 2026)** : schémas sur
   Conséquences du stress, Communication souterraine (téléphone relié à la surface, RSSM art. 283), Grille INSPQ
-  (démarche) et Culture minière ; Retour au travail et Types de personnalité refaits en schémas plus grands, lisibles
-  au téléphone en thème sombre. En attente de Frank : CNESST et LMRSST (essai de pose), catégories de la grille INSPQ
-  (liste à vérifier). La LSST du recueil est à jour au 26 mars 2024, avant la réforme du programme de prévention.
+  (démarche), Culture minière, CNESST (les trois rôles ; ce que l'inspecteur peut demander à voir sur les RPS) et
+  LMRSST (document et participation selon l'effectif ; les RPS dans le programme de prévention) ; Retour au travail et
+  Types de personnalité refaits en schémas plus grands, lisibles au téléphone en thème sombre. En attente de Frank :
+  catégories de la grille INSPQ (liste à vérifier). La LSST du recueil est à jour au 26 mars 2024, avant la réforme du
+  programme de prévention.
   **À poser dans le vault**. Détail : `content-updates/2026-09-26-rps-schemas-lot9.md`
 - **Six pages RPS illustrées et Premiers signes redessiné (26 septembre 2026)** : schémas sur Les quatre formes de
   reconnaissance et Types de personnalité et lieu de contrôle (à la place d'une diapositive de cours et d'une figure de

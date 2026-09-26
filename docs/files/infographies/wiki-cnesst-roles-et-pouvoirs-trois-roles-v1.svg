@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="660" viewBox="0 0 480 660" role="img" aria-labelledby="t d">
+<title id="t">Trois rôles de la CNESST, entre l’employeur minier et le travailleur</title>
+<desc id="d">Schéma en trois colonnes reliées par des flèches horizontales. En haut, à gauche, l’employeur minier, représenté par un chevalement de mine et son bâtiment ; au centre, la CNESST, un bâtiment public générique à colonnes, sans logo ; à droite, le travailleur casqué. De chacun descend une ligne pointillée. Les flèches bleues partent de la CNESST, les flèches noires vont du travailleur vers la CNESST ; un trait en tirets marque ce qui dépend d’une condition. Rangée Prévention (LSST) : trois flèches bleues vont de la CNESST à l’employeur : l’inspection, l’avis de correction (en tirets) et les outils et formations. Rangée Indemnisation (LATMP) : une flèche noire va du travailleur à la CNESST, la réclamation ; une double flèche bleue part de la CNESST vers l’employeur et le travailleur, la décision ; une flèche bleue en tirets va au travailleur : indemnités, soins, réadaptation. Rangée Normes du travail (LNT) : une flèche noire va du travailleur à la CNESST, la plainte de harcèlement ; une double flèche bleue part de la CNESST vers les deux, l’enquête ; dessous, une double flèche bleue en tirets : la médiation, avec l’accord des parties. Aucun délai ni montant.</desc>
+<rect width="480" height="660" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Trois rôles de la CNESST</text>
+<!-- Employeur minier : chevalement et bâtiment (page : « Pour un employeur minier ») -->
+<g fill="none" stroke="#1f2328" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M37 160L48 88M67 160L56 88M45 88H59"/>
+<path d="M40 138H64M43 114H61M40 138L61 114M64 138L43 114M37 160L64 138M67 160L40 138"/>
+<path d="M57 86L98 136"/>
+<circle cx="52" cy="77" r="11" fill="#fbfaf6"/>
+</g>
+<circle cx="52" cy="77" r="3.2" fill="#1f2328"/>
+<rect x="80" y="136" width="34" height="24" fill="#eceef0" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<path d="M20 160H118" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<!-- CNESST : bâtiment public générique, sans logo (page : « l'organisme québécois qui applique les lois du travail » ; LSST, art. 137) -->
+<path d="M178 98L240 70L302 98Z" fill="#eceef0" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<rect x="184" y="98" width="112" height="28" fill="#1f2328"/>
+<text x="240" y="119" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">CNESST</text>
+<g fill="#1f2328">
+<rect x="200" y="130" width="11" height="21"/><rect x="223" y="130" width="11" height="21"/><rect x="246" y="130" width="11" height="21"/><rect x="269" y="130" width="11" height="21"/>
+<rect x="180" y="151" width="120" height="4.5"/><rect x="174" y="155.5" width="132" height="4.5"/>
+</g>
+<!-- Travailleur casqué -->
+<g transform="translate(428 160) scale(1.45)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#fbfaf6" stroke-width="2.5"/></g></g>
+<path d="M398 160H458" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<text x="24" y="186" font-size="19" font-weight="700" fill="#1f2328">employeur minier</text>
+<text x="456" y="186" font-size="19" font-weight="700" fill="#1f2328" text-anchor="end">travailleur</text>
+<!-- Lignes de vie -->
+<g stroke="#6e7781" stroke-width="2.5" stroke-dasharray="6 6">
+<path d="M52 198V644M428 198V644"/>
+<path d="M240 164V644"/>
+</g>
+<!-- Rôle 1 : prévention (page, tableau « Rôle 1 » ; LSST, art. 167, 179, 182 : l'inspecteur « peut, s'il l'estime opportun », d'où les tirets) -->
+<rect x="167.5" y="194" width="145" height="28" rx="14" fill="#1f2328"/>
+<text x="240" y="215" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">Prévention</text>
+<text x="326" y="215" font-size="19" fill="#4b535c">LSST</text>
+<g font-size="19" fill="#1565c0" text-anchor="middle">
+<text x="147" y="249">inspection</text>
+<text x="147" y="282">avis de correction</text>
+<text x="147" y="315">outils, formations</text>
+</g>
+<g stroke="#1565c0" stroke-width="3.5">
+<path d="M236 257H66M236 323H66" stroke-linecap="round"/>
+<path d="M236 290H66" stroke-dasharray="10 7"/>
+</g>
+<g fill="#1565c0"><path d="M54 257L67 250.5V263.5Z"/><path d="M54 290L67 283.5V296.5Z"/><path d="M54 323L67 316.5V329.5Z"/></g>
+<!-- Rôle 2 : indemnisation (page, tableau « Rôle 2 » ; LATMP, art. 1, 270, 349 et 354 : décision « notifiée aux intéressés » ; réparation selon la décision, d'où les tirets) -->
+<rect x="149.5" y="334" width="181" height="28" rx="14" fill="#1f2328"/>
+<text x="240" y="355" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">Indemnisation</text>
+<text x="344" y="355" font-size="19" fill="#4b535c">LATMP</text>
+<text x="334" y="388" font-size="19" fill="#1f2328" text-anchor="middle">réclamation</text>
+<path d="M424 396H256" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M243 396L256 389.5V402.5Z" fill="#1f2328"/>
+<rect x="194" y="403" width="92" height="21" fill="#fbfaf6"/>
+<text x="240" y="420" font-size="19" fill="#1565c0" text-anchor="middle">décision</text>
+<g stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"><path d="M234 429H66M246 429H414"/></g>
+<circle cx="240" cy="429" r="5.5" fill="#1565c0"/>
+<g fill="#1565c0"><path d="M54 429L67 422.5V435.5Z"/><path d="M426 429L413 422.5V435.5Z"/></g>
+<g font-size="19" fill="#1565c0" text-anchor="middle">
+<text x="334" y="453">indemnités, soins,</text>
+<text x="334" y="475">réadaptation</text>
+</g>
+<path d="M244 483H414" stroke="#1565c0" stroke-width="3.5" stroke-dasharray="10 7"/>
+<path d="M426 483L413 476.5V489.5Z" fill="#1565c0"/>
+<!-- Rôle 3 : normes du travail (page, tableau « Rôle 3 » ; LNT, art. 123.6, 123.8 ; art. 123.10 : médiation « avec l'accord des parties », d'où les tirets) -->
+<rect x="130" y="494" width="220" height="28" rx="14" fill="#1f2328"/>
+<text x="240" y="515" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">Normes du travail</text>
+<text x="364" y="515" font-size="19" fill="#4b535c">LNT</text>
+<g font-size="19" fill="#1f2328" text-anchor="middle">
+<text x="334" y="548">plainte de</text>
+<text x="334" y="570">harcèlement</text>
+</g>
+<path d="M424 578H256" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M243 578L256 571.5V584.5Z" fill="#1f2328"/>
+<rect x="194" y="585" width="92" height="21" fill="#fbfaf6"/>
+<text x="240" y="602" font-size="19" fill="#1565c0" text-anchor="middle">enquête</text>
+<g stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"><path d="M234 611H66M246 611H414"/></g>
+<circle cx="240" cy="611" r="5.5" fill="#1565c0"/>
+<g fill="#1565c0"><path d="M54 611L67 604.5V617.5Z"/><path d="M426 611L413 604.5V617.5Z"/></g>
+<rect x="64" y="620" width="352" height="21" fill="#fbfaf6"/>
+<text x="240" y="636" font-size="19" fill="#1565c0" text-anchor="middle">médiation, avec l’accord des parties</text>
+<g stroke="#1565c0" stroke-width="3.5" stroke-dasharray="10 7"><path d="M234 644H66M246 644H414"/></g>
+<circle cx="240" cy="644" r="5" fill="#fbfaf6" stroke="#1565c0" stroke-width="3"/>
+<g fill="#1565c0"><path d="M54 644L67 637.5V650.5Z"/><path d="M426 644L413 637.5V650.5Z"/></g>
+</g>
+</svg>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="580" viewBox="0 0 480 580" role="img" aria-labelledby="t d">
+<title id="t">Un risque parmi les autres, dans le programme de prévention</title>
+<desc id="d">En haut, un cadre gris, « risques pouvant affecter la santé », réunit cinq pastilles : chimiques (une fiole), biologiques (un germe), physiques (des ondes), ergonomiques (une personne penchée qui soulève une caisse) et, en dessous, au centre, surlignée en rouge : psychosociaux liés au travail (une tête de profil). Une flèche bleue descend du cadre vers un classeur bleu, « programme de prévention ». Dans le classeur, trois pastilles bleues reliées par des flèches, de gauche à droite : une loupe, « identification et analyse » ; un calendrier coché, « mesures et échéanciers » ; un œil, « suivi ». Aucune durée ni aucun ordre de priorité entre les risques : le rouge signale le sujet de la page.</desc>
+<rect width="480" height="580" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Un risque parmi les autres</text>
+<text x="24" y="74" font-size="19" fill="#4b535c">dans le programme de prévention</text>
+<rect x="16" y="90" width="448" height="256" rx="12" fill="#eceef0"/>
+<text x="32" y="120" font-size="20" font-weight="700" fill="#1f2328">risques pouvant affecter la santé</text>
+<circle cx="58" cy="166" r="26" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/><g transform="translate(58 166) scale(1.35)"><path d="M-4.5 -12H4.5M-2.5 -12V-4L-10 9Q-11 12 -8 12H8Q11 12 10 9L2.5 -4V-12" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M-6.4 3.5H6.4L8.8 8.4Q9.6 10.3 7.6 10.3H-7.6Q-9.6 10.3 -8.8 8.4Z" fill="#1f2328"/></g>
+<text x="94" y="173" font-size="20" fill="#1f2328">chimiques</text>
+<circle cx="262" cy="166" r="26" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/><g transform="translate(262 166) scale(1.35)"><circle r="5.5" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.8 2.7L8.2 4.7" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.8" cy="5.6" r="2.3" fill="#1f2328"/><path d="M0.0 5.5L0.0 9.5" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="0.0" cy="11.3" r="2.3" fill="#1f2328"/><path d="M-4.8 2.7L-8.2 4.7" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-9.8" cy="5.6" r="2.3" fill="#1f2328"/><path d="M-4.8 -2.8L-8.2 -4.8" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-9.8" cy="-5.7" r="2.3" fill="#1f2328"/><path d="M-0.0 -5.5L-0.0 -9.5" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="-0.0" cy="-11.3" r="2.3" fill="#1f2328"/><path d="M4.8 -2.8L8.2 -4.8" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.8" cy="-5.7" r="2.3" fill="#1f2328"/></g>
+<text x="298" y="173" font-size="20" fill="#1f2328">biologiques</text>
+<circle cx="58" cy="230" r="26" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/><g transform="translate(58 230) scale(1.35)"><circle cx="-9" cy="0" r="3" fill="#1f2328"/><path d="M-3 -6A8.5 8.5 0 0 1 -3 6" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 -10.5A14 14 0 0 1 2 10.5" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 -13A19 19 0 0 1 7.5 13" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="94" y="237" font-size="20" fill="#1f2328">physiques</text>
+<circle cx="262" cy="230" r="26" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/><g transform="translate(262 230) scale(1.35)"><circle cx="-6.5" cy="-8.5" r="3.2" fill="#1f2328"/><path d="M-3.5 -5.5Q2 -6 6.5 -1.5" fill="none" stroke="#1f2328" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 -1.5L5 5.5L7 12M6.5 -1.5L10 5L10.5 12" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M-2.5 -5L-4.5 1.5" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="-11.5" y="1.5" width="11" height="9" rx="1.2" fill="#1f2328"/></g>
+<text x="298" y="237" font-size="20" fill="#1f2328">ergonomiques</text>
+<rect x="110" y="267" width="260" height="66" rx="33" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/>
+<circle cx="145" cy="300" r="26" fill="#c62828"/><g transform="translate(145 300) scale(1.35)"><path d="M-5 12V7Q-10.5 3.5 -10.5 -3Q-10.5 -12.5 -0.5 -12.5Q9 -12.5 9 -4.5L11.5 0.5H9V4.5Q9 7.5 5.5 7.5H3V12" fill="none" stroke="#fbfaf6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M-4.5 -7L-0.5 -3.5L-4.5 0L-0.5 3.5" fill="none" stroke="#fbfaf6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="183" y="296" font-size="20" font-weight="700" fill="#c62828">psychosociaux</text>
+<text x="183" y="319" font-size="19" fill="#c62828">liés au travail</text>
+<path d="M240 348V370" stroke="#1565c0" stroke-width="5" stroke-linecap="round"/>
+<path d="M240 384L230 368H250Z" fill="#1565c0"/>
+<rect x="23" y="397" width="441" height="171" rx="6" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<rect x="16" y="390" width="441" height="171" rx="6" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/>
+<path d="M22 390H32V561H22Q16 561 16 555V396Q16 390 22 390Z" fill="#1565c0"/>
+<circle cx="24.0" cy="432.8" r="3.2" fill="#fbfaf6"/>
+<circle cx="24.0" cy="518.2" r="3.2" fill="#fbfaf6"/>
+<text x="244" y="420" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">programme de prévention</text>
+<circle cx="104" cy="468" r="29" fill="#fbfaf6" stroke="#1565c0" stroke-width="3"/>
+<g transform="translate(104 468) scale(1.35)"><circle cx="-3" cy="-3" r="8" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 3L10.5 10.5" fill="none" stroke="#1565c0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<circle cx="244" cy="468" r="29" fill="#fbfaf6" stroke="#1565c0" stroke-width="3"/>
+<g transform="translate(244 468) scale(1.35)"><rect x="-11" y="-9" width="22" height="20" rx="2.5" fill="none" stroke="#1565c0" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M-11 -3H11M-5.5 -12.5V-6M5.5 -12.5V-6" fill="none" stroke="#1565c0" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M-5 4L-1 8L6 0" fill="none" stroke="#1565c0" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<circle cx="384" cy="468" r="29" fill="#fbfaf6" stroke="#1565c0" stroke-width="3"/>
+<g transform="translate(384 468) scale(1.35)"><path d="M-13 0Q0 -12 13 0Q0 12 -13 0Z" fill="none" stroke="#1565c0" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><circle r="4.2" fill="#1565c0"/></g>
+<path d="M139 468H198" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M209 468L197 461V475Z" fill="#1565c0"/>
+<path d="M279 468H338" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M349 468L337 461V475Z" fill="#1565c0"/>
+<text x="104" y="524" font-size="19" fill="#1f2328" text-anchor="middle">identification</text>
+<text x="104" y="546" font-size="19" fill="#1f2328" text-anchor="middle">et analyse</text>
+<text x="244" y="524" font-size="19" fill="#1f2328" text-anchor="middle">mesures et</text>
+<text x="244" y="546" font-size="19" fill="#1f2328" text-anchor="middle">échéanciers</text>
+<text x="384" y="524" font-size="19" fill="#1f2328" text-anchor="middle">suivi</text>
+</g>
+</svg>
