@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="624" viewBox="0 0 480 624" role="img" aria-labelledby="t d">
+<title id="t">Étape 4 : soutien des premières semaines</title>
+<desc id="d">Étape 4, soutien des premières semaines. En haut à gauche, le superviseur formé, en bleu, casqué, tient le plan écrit marqué d’une coche et parle avec le travailleur, en noir, qui lui répond : deux bulles, « conversations régulières, écoute, ajustements » ; sous eux, « superviseur formé » et « aménagements respectés ». À droite, au-delà d’un trait pointillé, le PAE, en bleu, parle aussi : « suivi clinique en parallèle si nécessaire ». En bas, « Climat d’équipe », deux cadres : en bleu, « préparé à accueillir », deux collègues accueillent le travailleur, l’un le salue de la main, l’autre lui parle ; en rouge, « pas à surveiller », deux collègues le fixent : au-dessus de la tête de chacun, un petit œil bleu ; leurs regards, en pointillés rouges, convergent sur lui.</desc>
+<rect width="480" height="624" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<circle cx="42" cy="38" r="19" fill="#1565c0"/>
+<text x="42" y="45.6" font-size="22" font-weight="700" fill="#fbfaf6" text-anchor="middle">4</text>
+<text x="72" y="46" font-size="26" font-weight="700" fill="#1f2328">Soutien des</text>
+<text x="72" y="78" font-size="26" font-weight="700" fill="#1f2328">premières semaines</text>
+<!-- Le superviseur formé parle avec le travailleur, le plan écrit en main -->
+<text x="24" y="114" font-size="19" fill="#1f2328">conversations régulières,</text>
+<text x="24" y="137" font-size="19" fill="#1f2328">écoute, ajustements</text>
+<g fill="#1565c0" transform="translate(62 300) scale(0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1565c0" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M13 -75L24 -58L34 -64" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<path d="M80 204H105L114 213V248H80Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<path d="M105 204V213H114" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M89 224H104M89 227.3H104M89 234.7H100.4" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+<circle cx="114" cy="248" r="11" fill="#1565c0"/>
+<path d="M109.1 248.3L112.5 252L119.2 244.3" fill="none" stroke="#fbfaf6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+<g fill="#1f2328" transform="translate(192 300) scale(-0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<rect x="74" y="150" width="48" height="30" rx="9" fill="#fbfaf6" stroke="#1565c0" stroke-width="3"/>
+<path d="M83 178.5L79 190L95 178.5" fill="#fbfaf6" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<path d="M84.5 178.5H93.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M84 161H112M84 169H104" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<rect x="132" y="160" width="48" height="30" rx="9" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<path d="M171 188.5L175 200L159 188.5" fill="#fbfaf6" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<path d="M169.5 188.5H160.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M142 171H170M142 179H162" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<path d="M24 300H262" stroke="#4b535c" stroke-width="2.5" stroke-linecap="round"/>
+<text x="24" y="326" font-size="19" font-weight="700" fill="#1565c0">superviseur formé</text>
+<text x="24" y="350" font-size="19" fill="#1f2328">aménagements respectés</text>
+<!-- Le PAE, hors du lieu de travail : suivi clinique en parallèle, si nécessaire -->
+<path d="M286 104V356" stroke="#6e7781" stroke-width="2.5" stroke-dasharray="6 6"/>
+<text x="304" y="114" font-size="19" fill="#1f2328">suivi clinique</text>
+<text x="304" y="137" font-size="19" fill="#1f2328">en parallèle</text>
+<text x="304" y="160" font-size="19" fill="#1f2328">si nécessaire</text>
+<g fill="#1565c0" transform="translate(404 300) scale(-0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<rect x="326" y="196" width="48" height="30" rx="9" fill="#fbfaf6" stroke="#1565c0" stroke-width="3"/>
+<path d="M365 224.5L369 236L353 224.5" fill="#fbfaf6" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<path d="M363.5 224.5H354.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M336 207H364M336 215H356" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<path d="M302 300H456" stroke="#4b535c" stroke-width="2.5" stroke-linecap="round"/>
+<text x="404" y="326" font-size="20" font-weight="700" fill="#1565c0" text-anchor="middle">PAE</text>
+<!-- Climat d’équipe : préparé à accueillir, pas à surveiller -->
+<text x="24" y="392" font-size="21" font-weight="700" fill="#1f2328">Climat d’équipe</text>
+<rect x="16" y="404" width="216" height="206" rx="12" fill="#e1ecfa" stroke="#1565c0" stroke-width="3"/>
+<rect x="248" y="404" width="216" height="206" rx="12" fill="#fde3e0" stroke="#c62828" stroke-width="3"/>
+<text x="124" y="434" font-size="20" fill="#1565c0" text-anchor="middle">préparé à accueillir</text>
+<text x="356" y="434" font-size="20" fill="#c62828" text-anchor="middle">pas à surveiller</text>
+<g fill="#1f2328" transform="translate(58 594) scale(0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<g fill="#1565c0" transform="translate(136 594) scale(-0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1565c0" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M13 -76L27 -90L27 -113" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<g fill="#1565c0" transform="translate(194 594) scale(-0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1565c0" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<rect x="150" y="454" width="44" height="28" rx="9" fill="#fbfaf6" stroke="#1565c0" stroke-width="3"/>
+<path d="M185 480.5L189 492L173 480.5" fill="#fbfaf6" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<path d="M183.5 480.5H174.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M160 464H184M160 472H176" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<!-- Pas à surveiller : deux collègues le fixent ; leurs regards, en pointillés rouges, convergent sur lui -->
+<g fill="#1f2328" transform="translate(356 594) scale(0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<g fill="#1565c0" transform="translate(284 594) scale(0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1565c0" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<g fill="#1565c0" transform="translate(428 594) scale(-0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1565c0" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<path d="M272 488.3Q284 471.9 296 488.3Q284 504.7 272 488.3Z" fill="#fbfaf6" stroke="#1565c0" stroke-width="3.2" stroke-linejoin="round"/>
+<circle cx="284" cy="488.3" r="6.5" fill="#1565c0"/>
+<path d="M299 492.3L344 514" stroke="#c62828" stroke-width="3.5" stroke-dasharray="7 6" stroke-linecap="round"/>
+<path d="M416 488.3Q428 471.9 440 488.3Q428 504.7 416 488.3Z" fill="#fbfaf6" stroke="#1565c0" stroke-width="3.2" stroke-linejoin="round"/>
+<circle cx="428" cy="488.3" r="6.5" fill="#1565c0"/>
+<path d="M413 492.3L368 514" stroke="#c62828" stroke-width="3.5" stroke-dasharray="7 6" stroke-linecap="round"/>
+</g>
+</svg>

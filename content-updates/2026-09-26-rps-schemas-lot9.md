@@ -7,7 +7,8 @@ Demandes de Frank :
   schémas publiés.
 
 Les 51 schémas publiés ont été rendus à 340 px en thème sombre. Deux avaient le même défaut que l'ancien Premiers
-signes (petits pictogrammes entassés) : Retour au travail et Types de personnalité. Ils sont refaits.
+signes (petits pictogrammes entassés) : Retour au travail et Types de personnalité. Ils sont refaits, en plusieurs
+schémas plus grands.
 
 Chaque schéma a été dessiné d'après la seule page, puis relu par un relecteur contradictoire qui l'a confronté mot à mot
 au texte de la page et, pour les pages juridiques, aux textes officiels du recueil (tools/textes-loi/*.json). Dans le
@@ -17,6 +18,7 @@ wiki SST psychosociale, le texte des articles n'est pas modifié : seuls les sch
 
 | Page | Schémas |
 | --- | --- |
+| [Étapes d'un retour au travail réussi](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/etapes-dun-retour-au-travail-reussi.html) | refonte : vue d'ensemble v2 (remplace la v1), grandes stations numérotées comme dans la page ; un schéma sous chacune des étapes 1 à 4 (lien pendant l'absence ; plan écrit, chaque acteur relié au plan, sans réunion ; retour progressif ; soutien des premières semaines). L'étape 5 n'a pas de schéma propre : il redisait la vue d'ensemble et le tableau |
 | [Types de personnalité et lieu de contrôle](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/types-de-personnalite-et-lieu-de-controle.html) | refonte : lieu de contrôle interne ou externe, en deux grandes scènes ; croisement avec le type A ou B (v2, remplace la v1 publiée ce matin), mêmes mots que la v1 relue |
 | [Conséquences du stress sur la santé](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/consequences-du-stress-sur-la-sante.html) | conséquences sur trois plans, situées sur un mineur ; pourquoi c'est critique en mine (les cinq rangées du tableau) |
 | [Communication souterraine et isolement de l'équipe](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/communication-souterraine-et-isolement-de-lequipe.html) | ce qui isole l'équipe sous terre ; compenser au fil du quart, avec le téléphone relié à la surface qu'impose le RSSM, art. 283 |
@@ -44,10 +46,12 @@ Get-ChildItem content-updates\2026-09-26-*-schemas.json | ForEach-Object { node 
 node tools/build_site.mjs
 ```
 
-La boucle couvre tous les lots du jour ; les lots déjà appliqués sont reconnus et sautés. Le lot de Types de
-personnalité remplace celui du matin, sous le même nom. Il fonctionne dans les deux cas : si la note a déjà reçu la
-v1, la v2 la remplace ; si elle a encore la capture du livre, la v2 prend sa place et la légende est retirée.
-`wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg` peut ensuite quitter le dossier Infographies.
+La boucle couvre tous les lots du jour ; les lots déjà appliqués sont reconnus et sautés. Les lots de Retour au
+travail et de Types de personnalité remplacent ceux du matin, sous le même nom. Pour Retour au travail, la v2
+remplace la v1 si la note l'a déjà reçue, sinon elle est insérée sous « Cinq étapes ». Pour Types de personnalité, si
+la note a déjà reçu la v1, la v2 la remplace ; si elle a encore la capture du livre, la v2 prend sa place et la légende
+est retirée. Les fichiers `wiki-etapes-dun-retour-au-travail-reussi-parcours-v1.svg` et
+`wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg` peuvent ensuite quitter le dossier Infographies.
 
 ## Le recueil législatif : la LSST n'est pas à jour
 
@@ -160,12 +164,27 @@ une reconstruction : c'est une tâche à part.
 - La page Obligation d'identifier les RPS écrit « Programme de prévention obligatoire » et « Mise à jour : Annuelle »,
   sans le plan d'action sous 20 travailleurs.
 
+**Étapes d'un retour au travail réussi** (remarques du matin confirmées)
+
+- « Plus de 50 % » de rechutes et « réduit drastiquement » : sans source. Le chiffre ne concorde pas avec « 30 à 50 %
+  … (Joyce et al., 2016) » de Prévenir les rechutes après retour.
+- « Obligation légale de soutenir le retour (assignation temporaire, aménagements raisonnables) » est inexact.
+  L'assignation temporaire est une faculté (LATMP, art. 179 : « peut »). Ce que la loi impose : collaborer aux mesures
+  de réadaptation (art. 170.2). Le droit au retour relève de l'art. 236, ou de la LNT (art. 79.1 et 79.4).
+- La colonne « Fréquence » de l'étape 5 contient des buts. Sont sans source :
+  - les mois ;
+  - « 4 à 12 semaines » ;
+  - l'indicateur à 12 mois.
+- La référence Briand et al. (2007) a une revue fausse (International Journal of Law and Psychiatry, 30(4-5),
+  444-457).
+
 **Types de personnalité** : les remarques de la v1 restent (lien « p. 169 », références tronquées ou manquantes,
 « Type D », « Sélection à l'embauche … illégal »).
 
 ## Vérifications
 
-- Hors blocs de schéma, aucune ligne des pages n'a changé. Le bloc v1 de Types de personnalité est remplacé.
+- Hors blocs de schéma, aucune ligne des pages n'a changé. Les blocs v1 de Retour au travail et de Types de
+  personnalité sont remplacés.
 - Tests : 267 réussis sur 268 ; le seul échec, `textes-loi`, est connu et antérieur.
 - `verif_site`, `verif_liens` (0 erreur), `verif_publication --staged`, manifeste hors ligne régénéré.
 - Chromium, `verif_rendu` : chaque page dans les cinq modes, aucun défaut.

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="612" viewBox="0 0 480 612" role="img" aria-labelledby="t d">
+<title id="t">Étape 1 : maintien du lien pendant l’absence</title>
+<desc id="d">Étape 1, maintien du lien pendant l’absence. En haut, chez lui, le travailleur assis tient un téléphone ; une ligne pointillée bleue le relie à un chevalement de mine, « organisation ». Sur la ligne, une bulle bleue : « contacts réguliers et bienveillants » ; sous la ligne, une feuille d’annonce : « changements importants ». Dans la maison, derrière lui, un dossier marqué d’une croix est fermé par un cadenas bleu : « pas de discussion sur les conditions médicales ». En bas, deux cadres rouges, « À éviter » : « silence total », le travailleur seul, voûté, le téléphone muet posé sur une table, « sentiment d’abandon » ; « contacts pressants », le travailleur au téléphone entouré de quatre bulles rouges, « sentiment de pression ».</desc>
+<rect width="480" height="612" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<circle cx="42" cy="38" r="19" fill="#1565c0"/>
+<text x="42" y="45.6" font-size="22" font-weight="700" fill="#fbfaf6" text-anchor="middle">1</text>
+<text x="72" y="46" font-size="26" font-weight="700" fill="#1f2328">Maintien du lien</text>
+<text x="72" y="78" font-size="26" font-weight="700" fill="#1f2328">pendant l’absence</text>
+<!-- Chez lui : le travailleur au téléphone ; son dossier médical reste sous cadenas -->
+<path d="M34 300V196L112 138L190 196V300Z" fill="#eceef0"/>
+<path d="M34 300V198M190 300V198" stroke="#1f2328" stroke-width="4"/>
+<path d="M22 204L112 135L202 204" fill="none" stroke="#1f2328" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M26 300H198" stroke="#1f2328" stroke-width="4" stroke-linecap="round"/>
+<path d="M46 262H100M52 262V300M94 262V300" stroke="#4b535c" stroke-width="5" stroke-linecap="round"/>
+<path d="M48 226V260H98V226H71L67 220H52Q48 220 48 224Z" fill="#1f2328"/>
+<path d="M73 234V252M64 243H82" stroke="#fbfaf6" stroke-width="5.5"/>
+<g transform="translate(94 254) scale(0.9)">
+<path d="M-8 -2V-11Q-8 -21 0 -21Q8 -21 8 -11V-2" fill="none" stroke="#1565c0" stroke-width="4.5"/>
+<rect x="-13" y="-3" width="26" height="21" rx="3" fill="#1565c0"/>
+<circle cx="0" cy="6" r="3.2" fill="#fbfaf6"/>
+<path d="M0 7V12" stroke="#fbfaf6" stroke-width="2.6" stroke-linecap="round"/>
+</g>
+<g fill="#1f2328" transform="translate(138 300) scale(0.8 0.8)">
+<path d="M-27 -40V-100" stroke="#4b535c" stroke-width="6" stroke-linecap="round"/>
+<rect x="-31" y="-44" width="48" height="7" rx="2" fill="#4b535c"/>
+<path d="M-25 -37V0M11 -37V0" stroke="#4b535c" stroke-width="5"/>
+<path d="M-10 -50H22V-2H33" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="11"/>
+<g transform="rotate(0 -6 -48)">
+<path d="M-13 -86Q-13 -91 -8 -91H8Q13 -91 13 -86V-48H-13Z"/>
+<circle cx="1" cy="-104" r="11"/>
+<path d="M6 -86L22 -70L14 -99" stroke="#fbfaf6" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="14"/>
+<path d="M6 -86L22 -70L14 -99" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="8"/>
+<rect x="9" y="-116" width="11" height="24" rx="3" transform="rotate(-16 14 -104)" stroke="#fbfaf6" stroke-width="2.5"/>
+</g>
+</g>
+<text x="24" y="330" font-size="19" fill="#1f2328">pas de discussion sur</text>
+<text x="24" y="354" font-size="19" fill="#1f2328">les conditions médicales</text>
+<!-- Le lien : ligne pointillée bleue jusqu’au lieu de travail (l’organisation) -->
+<path d="M164 218H400" stroke="#1565c0" stroke-width="4" stroke-dasharray="9 7" stroke-linecap="round"/>
+<rect x="236" y="166" width="52" height="32" rx="9" fill="#e1ecfa" stroke="#1565c0" stroke-width="3"/>
+<path d="M245 196.5L241 208L257 196.5" fill="#e1ecfa" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<path d="M246.5 196.5H255.5" stroke="#e1ecfa" stroke-width="3.5"/>
+<path d="M246 178H278M246 186H270" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<text x="286" y="122" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">contacts réguliers</text>
+<text x="286" y="146" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">et bienveillants</text>
+<!-- Information : une feuille d’annonce passe aussi par le lien -->
+<path d="M214 230H239L248 239V274H214Z" fill="#fbfaf6" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<path d="M239 230V239H248" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M223 250H238M223 253.3H238M223 260.7H234.4" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<text x="258" y="240" font-size="19" fill="#1f2328">changements</text>
+<text x="258" y="263" font-size="19" fill="#1f2328">importants</text>
+<g fill="none" stroke="#1f2328" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M407 270L418 178M441 270L430 178"/>
+<path d="M410 252H438M413 234H435M416 204H432"/>
+<path d="M424 178L462 270"/>
+</g>
+<circle cx="424" cy="178" r="11" fill="#fbfaf6" stroke="#1f2328" stroke-width="4.5"/>
+<circle cx="424" cy="178" r="3" fill="#1f2328"/>
+<path d="M390 300V270H468V300Z" fill="#1f2328"/>
+<rect x="402" y="278" width="12" height="11" fill="#fbfaf6"/>
+<rect x="428" y="278" width="12" height="11" fill="#fbfaf6"/>
+<rect x="450" y="278" width="10" height="22" fill="#fbfaf6"/>
+<text x="456" y="330" font-size="19" fill="#1f2328" text-anchor="end">organisation</text>
+<!-- À éviter : silence total, contacts pressants -->
+<text x="24" y="398" font-size="21" font-weight="700" fill="#c62828">À éviter</text>
+<rect x="16" y="410" width="216" height="190" rx="12" fill="#fde3e0" stroke="#c62828" stroke-width="3"/>
+<rect x="248" y="410" width="216" height="190" rx="12" fill="#fde3e0" stroke="#c62828" stroke-width="3"/>
+<text x="124" y="440" font-size="20" font-weight="700" fill="#c62828" text-anchor="middle">silence total</text>
+<text x="354" y="440" font-size="19" font-weight="700" fill="#c62828" text-anchor="middle">contacts pressants</text>
+<g fill="#1f2328" transform="translate(78 546) scale(0.8)">
+<path d="M-27 -40V-100" stroke="#4b535c" stroke-width="6" stroke-linecap="round"/>
+<rect x="-31" y="-44" width="48" height="7" rx="2" fill="#4b535c"/>
+<path d="M-25 -37V0M11 -37V0" stroke="#4b535c" stroke-width="5"/>
+<path d="M-10 -50H22V-2H33" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="11"/>
+<path d="M-17 -46Q-22 -72 -6 -86Q4 -93 12 -86L9 -72Q3 -60 4 -46Z"/>
+<g transform="rotate(48 21 -80)"><circle cx="21" cy="-80" r="11"/></g>
+<path d="M2 -78L10 -54L27 -50L31 -30" stroke="#fbfaf6" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="14"/>
+<path d="M2 -78L10 -54L27 -50L31 -30" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="8"/>
+</g>
+<path d="M142 512H198M150 512V546M190 512V546" stroke="#4b535c" stroke-width="5" stroke-linecap="round"/>
+<rect x="157" y="466" width="26" height="44" rx="5" fill="#1f2328"/>
+<rect x="161" y="474" width="18" height="28" rx="2" fill="#fbfaf6"/>
+<text x="124" y="570" font-size="19" fill="#1f2328" text-anchor="middle">sentiment</text>
+<text x="124" y="592" font-size="19" fill="#1f2328" text-anchor="middle">d’abandon</text>
+<g fill="#1f2328" transform="translate(300 546) scale(0.8 0.8)">
+<path d="M-27 -40V-100" stroke="#4b535c" stroke-width="6" stroke-linecap="round"/>
+<rect x="-31" y="-44" width="48" height="7" rx="2" fill="#4b535c"/>
+<path d="M-25 -37V0M11 -37V0" stroke="#4b535c" stroke-width="5"/>
+<path d="M-10 -50H22V-2H33" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="11"/>
+<g transform="rotate(-8 -6 -48)">
+<path d="M-13 -86Q-13 -91 -8 -91H8Q13 -91 13 -86V-48H-13Z"/>
+<circle cx="1" cy="-104" r="11"/>
+<path d="M6 -86L22 -70L14 -99" stroke="#fbfaf6" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="14"/>
+<path d="M6 -86L22 -70L14 -99" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="8"/>
+<rect x="9" y="-116" width="11" height="24" rx="3" transform="rotate(-16 14 -104)" stroke="#fbfaf6" stroke-width="2.5"/>
+</g>
+</g>
+<rect x="346" y="454" width="40" height="26" rx="9" fill="#fbfaf6" stroke="#c62828" stroke-width="3"/>
+<path d="M355 478.5L351 490L367 478.5" fill="#fbfaf6" stroke="#c62828" stroke-width="3" stroke-linejoin="round"/>
+<path d="M356.5 478.5H365.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M356 463H376M356 471H368" stroke="#c62828" stroke-width="3" stroke-linecap="round"/>
+<rect x="398" y="468" width="40" height="26" rx="9" fill="#fbfaf6" stroke="#c62828" stroke-width="3"/>
+<path d="M407 492.5L403 504L419 492.5" fill="#fbfaf6" stroke="#c62828" stroke-width="3" stroke-linejoin="round"/>
+<path d="M408.5 492.5H417.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M408 477H428M408 485H420" stroke="#c62828" stroke-width="3" stroke-linecap="round"/>
+<rect x="352" y="498" width="40" height="26" rx="9" fill="#fbfaf6" stroke="#c62828" stroke-width="3"/>
+<path d="M361 522.5L357 534L373 522.5" fill="#fbfaf6" stroke="#c62828" stroke-width="3" stroke-linejoin="round"/>
+<path d="M362.5 522.5H371.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M362 507H382M362 515H374" stroke="#c62828" stroke-width="3" stroke-linecap="round"/>
+<rect x="404" y="512" width="40" height="26" rx="9" fill="#fbfaf6" stroke="#c62828" stroke-width="3"/>
+<path d="M413 536.5L409 548L425 536.5" fill="#fbfaf6" stroke="#c62828" stroke-width="3" stroke-linejoin="round"/>
+<path d="M414.5 536.5H423.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M414 521H434M414 529H426" stroke="#c62828" stroke-width="3" stroke-linecap="round"/>
+<text x="356" y="570" font-size="19" fill="#1f2328" text-anchor="middle">sentiment</text>
+<text x="356" y="592" font-size="19" fill="#1f2328" text-anchor="middle">de pression</text>
+</g>
+</svg>
