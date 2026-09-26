@@ -217,9 +217,16 @@ node tools/serve.mjs
   d'après une table à valider. **À faire là où est le vault** : l'outil, puis la reconstruction. Détail :
   `content-updates/2026-09-26-libelles-liens.md`
 - **Six pages RPS dans le style de Frank (26 septembre 2026)** : deux schémas chacune sur Foreur, Aide-foreur,
-  Contremaître (une série de profils), MBI, Coût économique des RPS et Confinement. Ils suivent le style de
-  l'image de Frank : grand titre, panneaux à pastille et bandeau, gros personnages, message clé en bleu. Ils
-  gardent les règles du wiki : ni ✓ ni ✗, les mots de la page, rouge pour ce qui pèse et bleu pour les leviers.
+  Contremaître, MBI, Coût économique des RPS et Confinement. Ils sont refaits à l'identique de l'infographie
+  « CNESST — comprendre les 3 volets » de Frank :
+  - fond marine ;
+  - sections encadrées de vert, de bleu ou d'orange, avec médaillon ;
+  - pictogrammes blancs ;
+  - bandeau « Repère rapide ».
+
+  Le gabarit `tools/schemas-sombres/` les produit, avec la police Figtree et les icônes Material Design Icons
+  incorporées ; il sert aussi aux prochains schémas. Les mots viennent de la page. Ces affiches, conçues sur fond
+  sombre, ne sont plus inversées par le thème sombre (option `sombre` de `tools/poser_schemas.mjs`).
   **À poser dans le vault**. En priorité : le PDF lié à la page MBI reproduit les énoncés d'un questionnaire sous
   licence. Détail et erreurs relevées : `content-updates/2026-09-26-rps-schemas-lot10.md`
 - **L'article en PDF (26 septembre 2026)** : un bouton « 📄 PDF » dans la barre de lecture de chaque article

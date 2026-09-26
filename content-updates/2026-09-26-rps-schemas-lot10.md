@@ -2,34 +2,47 @@
 
 Demandes de Frank :
 - « continue » ;
-- le style de son image « Lieu de contrôle », qu'il a choisi comme modèle des nouveaux schémas :
-  - grand titre ;
-  - panneaux à pastille et bandeau ;
-  - phrases courtes ;
-  - gros personnages ;
-  - message clé en bleu en bas.
+- « Améliore image, doit reproduire style à l'identique », puis « Même style que ces images », avec son infographie
+  « CNESST — comprendre les 3 volets » :
+  - fond marine ;
+  - sections encadrées de vert, de bleu ou d'orange, avec médaillon rond ;
+  - sous-cartes à puces ;
+  - cartes à pictogrammes blancs ;
+  - bandeau « Repère rapide ».
 
-Trois règles du wiki restent : pas de ✓ ni de ✗ qui jugeraient un travailleur, des phrases tirées de la page, le
-rouge pour ce qui pèse et le bleu pour les leviers.
+Une première version (v1), publiée l'après-midi, reprenait l'esprit de son image « Lieu de contrôle ». Les douze
+schémas sont maintenant refaits à l'identique de la référence CNESST (v2), à partir d'un même gabarit,
+`tools/schemas-sombres/` (qui produit exactement les SVG publiés et servira aux prochains schémas) :
+- **police** : Figtree, incorporée dans chaque SVG et réduite aux caractères employés (licence SIL OFL) ;
+- **pictogrammes** : Material Design Icons (Pictogrammers Free License, Apache 2.0) ;
+- **couleurs** : celles relevées sur la référence.
 
-Chaque schéma a été dessiné d'après la seule page, refait dans ce style, puis relu par un relecteur contradictoire.
-Celui-ci l'a confronté mot à mot à la page et, pour les points juridiques, aux textes du recueil. Le texte des
-articles n'est pas modifié : seuls les schémas s'ajoutent, sur la page et, s'il y en a une, sur sa copie
+Trois écarts sont voulus :
+- **taille du texte** : un peu plus grand que sur la référence, pour rester lisible au téléphone ;
+- **puces** : jamais de ✗ ; des « ! » orange marquent les conditions de travail qui pèsent, des coches marquent
+  les leviers de l'organisation ;
+- **mots** : tous tirés de la page, au plus raccourcis.
+
+Ces affiches sont conçues sur fond sombre : le thème sombre du site ne les inverse plus (classe
+« infographie-sombre »). Sur tablette, elles s'affichent jusqu'à 40 rem de large.
+
+Chaque mot a été relu face à la page par trois relecteurs de fidélité. Leurs corrections sont appliquées ; elles
+portent sur des regroupements absents de la page, des raccourcis qui perdaient une nuance et la typographie. Le
+texte des articles n'est pas modifié : seuls les schémas s'ajoutent, sur la page et, s'il y en a une, sur sa copie
 encadrement.
 
 ## Pages
 
-| Page | Schémas |
+| Page | Schémas (v2) |
 | --- | --- |
-| [Foreur, profil RPS et leadership de chantier](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/foreur-profil-rps-et-leadership-de-chantier.html) | ce qui pèse sur le foreur : charge (décisions techniques, surveillance multiple, pression de production), sécurité de soi et de l'aide-foreur. Leadership de chantier : les leviers sur le foreur et sur le binôme |
-| [Aide-foreur, profil RPS](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/aide-foreur-profil-rps.html) | ce qui pèse sur l'aide-foreur : le poste (cadence imposée par l'équipement), la relation (dépendance forte). Les leviers de l'organisation, autour du poste et de la relation |
-| [Contremaître ou capitaine, profil RPS](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/contremaitre-ou-capitaine-profil-rps.html) | le contremaître entre la direction qui pousse et l'équipe qui réclame ; sa charge mentale. Le soutenir : direction, back-up, formation, pairs, PAE |
-| [MBI, épuisement professionnel](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/mbi-epuisement-professionnel.html) | les trois dimensions, chacune avec son côté à risque, en dégradé, sans seuil ni total. Une mesure, pas un diagnostic |
-| [Coût économique des RPS pour l'employeur](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/cout-economique-des-rps-pour-lemployeur.html) | coûts visibles et coûts cachés, sans aucun montant. Ce qui alourdit le remplacement en mine |
-| [Confinement, profondeur et charge mentale](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/confinement-profondeur-et-charge-mentale.html) | la vigilance permanente qui s'ajoute à la tâche, dans une galerie vue dans l'axe. Les leviers : éclairage, repères, listes de vérification, pauses, rotation |
+| [Foreur, profil RPS et leadership de chantier](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/foreur-profil-rps-et-leadership-de-chantier.html) | ce qui pèse : cartes foreur, aide-foreur, contremaître ; sections Charge (cognitive, physique) et Responsabilité (risques particuliers, latitude). Leadership de chantier : leviers par niveau, primaire, secondaire, tertiaire, comme dans la page |
+| [Aide-foreur, profil RPS](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/aide-foreur-profil-rps.html) | ce qui pèse : sections Le poste et La relation (« Vulnérabilité particulière »). Leviers par niveau, comme dans la page |
+| [Contremaître ou capitaine, profil RPS](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/contremaitre-ou-capitaine-profil-rps.html) | ce qui pèse : cartes direction, contremaître, équipe ; sections Pivot (pression bidirectionnelle) et Charge. Le soutenir : direction, formation et pairs, soutien et conditions |
+| [MBI, épuisement professionnel](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/mbi-epuisement-professionnel.html) | les trois dimensions en cartes et leur interprétation : un sous-score par dimension, pas de total. Mesure ou diagnostic |
+| [Coût économique des RPS pour l'employeur](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/cout-economique-des-rps-pour-lemployeur.html) | éléments de l'estimation par cas et coûts cachés, sans montant. Remplacer en mine : recrutement et logistique, remplacement |
+| [Confinement, profondeur et charge mentale](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/confinement-profondeur-et-charge-mentale.html) | les six sources de charge mentale et le coût de l'adaptation. Les leviers par niveau (conception, procédures, équipe, soutien, surveillance) |
 
-Aucun schéma n'ajoute de chiffre, de seuil, de montant ou de promesse d'effet. Les objets dessinés sont des
-exemples (vanne, jumbo, détecteur, chargeuse), et les légendes le disent.
+Aucun schéma n'ajoute de chiffre, de seuil, de montant ou de promesse d'effet.
 
 ## À faire dans le vault (sinon la prochaine construction efface ces schémas)
 
@@ -38,7 +51,9 @@ Get-ChildItem content-updates\2026-09-26-*-schemas.json | ForEach-Object { node 
 node tools/build_site.mjs
 ```
 
-La boucle couvre tous les lots du jour. Les lots déjà appliqués sont reconnus et sautés.
+La boucle couvre tous les lots du jour. Les six lots du lot 10 sont remplacés sous le même nom. La v2 prend la place
+de la v1 si la note l'a déjà reçue ; sinon, elle est insérée sous la même ancre. Les deux cas sont simulés. Les
+fichiers `…-v1.svg` du lot 10 peuvent ensuite quitter le dossier Infographies.
 
 ## En priorité : droit d'auteur du MBI
 
@@ -49,34 +64,15 @@ retirer, ou à réduire à la partie interprétation. Les schémas ne reprennent
 
 ## À trancher (choix des schémas)
 
-- **Foreur** :
-  - pas d'étiquettes FOREUR et AIDE-FOREUR dans le binôme ;
-  - « Rôle de leadership reconnu » perd « institutionnelle » ;
-  - « Latitude technique réelle, responsabilités lourdes » : la virgule remplace « mais ».
-- **Aide-foreur** :
-  - message clé « Vulnérabilité particulière : la dépendance à la relation », ou la phrase exacte « Dépendance
-    forte à la qualité de la relation avec le foreur » ;
-  - leviers regroupés par poste et par relation, alors que la page les classe par niveau de prévention.
-- **Contremaître** :
-  - le message « Reconnaître le rôle de contremaître » vient d'une seule ligne du tableau et peut se lire comme
-    le levier principal ;
-  - « Charge mentale élevée » coiffe aussi la sécurité de l'équipe, que le tableau range en charge émotionnelle.
-- **MBI** :
-  - trois bandes, alors que le style prévoit deux panneaux au plus ;
-  - noms courts des dimensions (« Cynisme » pour « Dépersonnalisation ») ;
-  - « Burnout ? » figure parmi les diagnostics, comme dans la page, qui dit pourtant que le burnout n'est pas un
-    diagnostic médical.
-- **Coût des RPS** :
-  - le message « Les RPS coûtent cher » (L'essentiel) ne montre plus la prévention ;
-  - « Visibles » est un mot du schéma : la page n'a que « Coûts cachés » ;
-  - l'avion et le camp ne valent que pour les sites en rotation.
-- **Confinement** :
-  - « Agir avant l'épuisement » ampute « Le reconnaître permet » ;
-  - « Orientation sans repères naturels » est rangée sous « Vigilance », alors que le tableau en fait la ligne
-    « Repérage spatial » ;
-  - l'ancre courte « Leviers » ne doit désigner qu'une ligne de la note.
-- **Série** : les silhouettes du contremaître diffèrent un peu de celles du foreur et de l'aide-foreur (bras,
-  planchette).
+- **Densité** : le texte est un peu plus grand que sur la référence. Si tu préfères la densité exacte de ton image,
+  le gabarit se règle en une ligne et les douze schémas se régénèrent.
+- **Regroupements** : quelques sections réunissent deux niveaux voisins d'un même tableau, sans rien ajouter :
+  - « Formation et pairs » et « Soutien et conditions » (Contremaître) ;
+  - « Procédures et équipe » et « Soutien et surveillance » (Confinement).
+- **Titres de section tirés de la page** : « Pivot » (« pivot entre opérations et direction ») et « Par cas »
+  (« Estimation par cas »).
+- **MBI** : le profil de burnout de la page (« épuisement élevé + cynisme élevé + accomplissement bas ») est en puces
+  neutres. C'est un profil de scores, pas une condition de travail.
 
 ## Relevé en chemin, non modifié (à trancher)
 
@@ -175,10 +171,12 @@ générateur ne traduit pas. C'est à traiter à part.
 ## Vérifications
 
 - Hors blocs de schéma, aucune ligne des huit fichiers (pages et copies encadrement) n'a changé.
-- Essai de pose avant la pose pour chaque page.
-- Quatre relecteurs n'ont pas pu écraser les fichiers du dessinateur : le système de permissions l'a refusé. Ils
-  ont écrit leurs versions corrigées dans un dossier à part, d'où elles ont été posées, sans rien écraser.
-- Tests : 284 réussis sur 285 ; le seul échec, `textes-loi`, est connu et antérieur.
+- Essai de pose avant chaque pose. Les lots du vault ont été simulés sur une note qui a reçu la v1 et sur une note
+  qui ne l'a pas reçue.
+- Chromium : sur la page, en thème sombre comme en clair, les affiches ne sont pas inversées (filtre « none »).
+  Au téléphone, elles font 327 px de large ; sur tablette, 640 px.
+- Tests : 285 réussis sur 286 ; le seul échec, `textes-loi`, est connu et antérieur.
 - `verif_site`, `verif_liens` (0 erreur), `verif_publication --staged`, manifeste hors ligne régénéré.
 - Chromium, `verif_rendu` : les six pages dans les cinq modes, aucun défaut.
+- Le générateur du dépôt (`tools/schemas-sombres/lot10.py`) rend, octet pour octet, les douze SVG publiés.
 - Aucune validation spécialisée n'est attestée.
