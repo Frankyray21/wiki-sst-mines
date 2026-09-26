@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="660" viewBox="0 0 480 660" role="img" aria-labelledby="t d">
+<title id="t">Ce qui isole l’équipe sous terre</title>
+<desc id="d">Coupe d’une mine souterraine. En haut, la surface : un chevalement au-dessus du puits et un bâtiment bleu, les ressources de surface. Dans le puits, une flèche remonte jusqu’à la surface : « loin de la surface ». Plus haut dans la roche, une autre galerie où se tient une autre équipe. Tout en bas, au chantier, l’équipe, casquée. Un travailleur parle dans une radio ; ses ondes se brisent en rouge : zones blanches, parasites. Un autre regarde vers l’autre équipe : son regard, en pointillé, est arrêté par la roche, marqué d’une croix rouge : pas de contact visuel. Un foreur perce le front de taille ; un ventilateur souffle dans une conduite près du plafond ; des traits rouges en dents de scie marquent le bruit du forage et de la ventilation. En bas : casques et équipement de protection limitent le non-verbal. Aucune distance ni durée n’est indiquée.</desc>
+<rect width="480" height="660" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" fill="#1f2328" font-weight="700">Ce qui isole l’équipe</text>
+<text x="24" y="78" font-size="26" fill="#1f2328" font-weight="700">sous terre</text>
+<!-- Roche -->
+<path d="M16 170H464V640Q464 652 452 652H28Q16 652 16 640Z" fill="#eceef0"/>
+<!-- Puits, galeries (vides) -->
+<rect x="56" y="170" width="24" height="422" fill="#fbfaf6"/>
+<rect x="232" y="190" width="220" height="108" fill="#fbfaf6"/>
+<rect x="79" y="438" width="367" height="154" fill="#fbfaf6"/>
+<g fill="none" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"><path d="M56 170V592H80"/><path d="M80 170V438H446V592H80"/><rect x="232" y="190" width="220" height="108"/></g>
+<path d="M16 170H464" stroke="#6e7781" stroke-width="3"/>
+<!-- Page, L’essentiel : « Cet isolement est à la fois physique (loin des ressources de surface) » -->
+<g fill="none" stroke="#4b535c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M52 170L62 108M84 170L74 108"/><path d="M54.6 154H81.4M57.2 138H78.8M59.8 122H76.2"/><path d="M54.6 154L78.8 138L59.8 122"/><path d="M74 108L98 170"/><circle cx="68" cy="106" r="8" fill="#fbfaf6"/></g><circle cx="68" cy="106" r="2.5" fill="#4b535c"/>
+<path d="M116 170V138L156.0 124L196 138V170Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<rect x="147.0" y="146" width="18" height="24" fill="#1565c0"/>
+<g fill="#1565c0"><rect x="126" y="145" width="14" height="11"/><rect x="172" y="145" width="14" height="11"/></g>
+<text x="210" y="138" font-size="19" fill="#1565c0" font-weight="700">ressources</text>
+<text x="210" y="160" font-size="19" fill="#1565c0" font-weight="700">de surface</text>
+<!-- Page, Réalité souterraine : « Plusieurs kilomètres entre équipe et surface » ; « Plusieurs minutes pour rejoindre la surface » (aucune valeur dessinée) -->
+<path d="M68 580L68 185.6" fill="none" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M68 176L75.2 188L60.8 188Z" fill="#1f2328"/>
+<text x="94" y="236" font-size="19" fill="#1f2328" font-weight="700">loin de</text>
+<text x="94" y="259" font-size="19" fill="#1f2328" font-weight="700">la surface</text>
+<!-- Page : « Absence de visibilité externe » : « Pas de fenêtre, pas de contact visuel avec autres équipes » -->
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M396 232.1L394.9 246.7L393.8 263.8" stroke-width="6.4"/>
+<path d="M390.5 293.4L401.5 293.4" stroke-width="5.2"/>
+<path d="M396 254.6L394.6 273.6L393.1 292.1" stroke-width="8.2"/>
+<path d="M396 254.6L398 273.5L399.7 292.1" stroke="#fbfaf6" stroke-width="12.3"/>
+<path d="M397.1 293.4L408.1 293.4" stroke-width="5.2"/>
+<path d="M396 254.6L398 273.5L399.7 292.1" stroke-width="8.2"/>
+<path d="M396 254.6L396 230.4" stroke-width="13"/>
+<path d="M396 230.4L396 223.5" stroke-width="6.1"/>
+</g>
+<circle cx="396.7" cy="215.7" r="7.8" fill="#1f2328"/>
+<path d="M388 215A8.8 8.8 0 0 1 405.5 215Z" fill="#1f2328"/>
+<path d="M388 215H409.2" stroke="#1f2328" stroke-width="2.6" stroke-linecap="round"/>
+<rect x="402.6" y="209.1" width="3.7" height="4.4" rx="0.7" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M396 232.1L397.2 246.7L398.9 263.8" stroke="#fbfaf6" stroke-width="10"/><path d="M396 232.1L397.2 246.7L398.9 263.8" stroke="#1f2328" stroke-width="6.4"/></g>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M432 232.1L433.1 246.7L434.2 263.8" stroke-width="6.4"/>
+<path d="M437.5 293.4L426.5 293.4" stroke-width="5.2"/>
+<path d="M432 254.6L433.4 273.6L434.9 292.1" stroke-width="8.2"/>
+<path d="M432 254.6L430 273.5L428.3 292.1" stroke="#fbfaf6" stroke-width="12.3"/>
+<path d="M430.9 293.4L419.9 293.4" stroke-width="5.2"/>
+<path d="M432 254.6L430 273.5L428.3 292.1" stroke-width="8.2"/>
+<path d="M432 254.6L432 230.4" stroke-width="13"/>
+<path d="M432 230.4L432 223.5" stroke-width="6.1"/>
+</g>
+<circle cx="431.3" cy="215.7" r="7.8" fill="#1f2328"/>
+<path d="M422.5 215A8.8 8.8 0 0 1 440 215Z" fill="#1f2328"/>
+<path d="M440 215H418.8" stroke="#1f2328" stroke-width="2.6" stroke-linecap="round"/>
+<rect x="421.8" y="209.1" width="3.7" height="4.4" rx="0.7" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M432 232.1L430.8 246.7L429.1 263.8" stroke="#fbfaf6" stroke-width="10"/><path d="M432 232.1L430.8 246.7L429.1 263.8" stroke="#1f2328" stroke-width="6.4"/></g>
+<text x="242" y="252" font-size="19" fill="#1f2328" font-weight="700">autre équipe</text>
+<path d="M258 486L376 334" stroke="#1f2328" stroke-width="3" stroke-dasharray="4 7" stroke-linecap="round"/>
+<circle cx="376" cy="334" r="16" fill="#eceef0"/>
+<path d="M365 323L387 345M387 323L365 345" stroke="#c62828" stroke-width="5" stroke-linecap="round"/>
+<text x="352" y="341" font-size="19" fill="#c62828" text-anchor="end">pas de contact visuel</text>
+<!-- Page : « Bruit ambiant » : « Forage, ventilation, équipement » -->
+<path d="M334 460H422" stroke="#6e7781" stroke-width="21" fill="none"/>
+<path d="M334 460H420.5" stroke="#e1ecfa" stroke-width="16" fill="none"/>
+<circle cx="322" cy="460" r="15" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<g fill="#1f2328" transform="translate(322 460)"><ellipse cx="0" cy="-6.8" rx="3.3" ry="6.3" transform="rotate(0)"/><ellipse cx="0" cy="-6.8" rx="3.3" ry="6.3" transform="rotate(120)"/><ellipse cx="0" cy="-6.8" rx="3.3" ry="6.3" transform="rotate(240)"/></g>
+<path d="M314 484L309 489.9L316 497.6L307 502.9L310 510" fill="none" stroke="#c62828" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M330 484L327 491.1L336 496.4L329 504.1L334 510" fill="none" stroke="#c62828" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Page : « Communication radio » : « Réception variable, parasites, zones blanches » -->
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M158 516.2L159.3 533L160.5 552.8" stroke-width="7.4"/>
+<path d="M164.3 587L151.7 587" stroke-width="6"/>
+<path d="M158 542.1L159.6 564.1L161.4 585.5" stroke-width="9.5"/>
+<path d="M158 542.1L155.7 564L153.8 585.5" stroke="#fbfaf6" stroke-width="14.2"/>
+<path d="M156.7 587L144 587" stroke-width="6"/>
+<path d="M158 542.1L155.7 564L153.8 585.5" stroke-width="9.5"/>
+<path d="M158 542.1L158 514.2" stroke-width="15"/>
+<path d="M158 514.2L158 506.2" stroke-width="7"/>
+</g>
+<circle cx="157.2" cy="497.2" r="9" fill="#1f2328"/>
+<path d="M147 496.4A10.1 10.1 0 0 1 167.3 496.4Z" fill="#1f2328"/>
+<path d="M167.3 496.4H142.8" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="146.2" y="489.6" width="4.2" height="5.1" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M158 516.2L143.3 524.6L149.5 508" stroke="#fbfaf6" stroke-width="11.5"/><path d="M158 516.2L143.3 524.6L149.5 508" stroke="#1f2328" stroke-width="7.4"/></g>
+<g transform="rotate(-8 147.5 502)"><path d="M149.7 493.5V484.1" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/><rect x="143.3" y="493.5" width="8.5" height="17" rx="2.5" fill="#1f2328" stroke="#fbfaf6" stroke-width="2.5"/></g>
+<path d="M134 486.4A14 14 0 0 1 143.9 476.5" fill="none" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M124.4 483.8A24 24 0 0 1 141.3 466.8" fill="none" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M114.7 481.2A34 34 0 0 1 138.7 457.1" fill="none" stroke="#c62828" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="6 6"/>
+<path d="M105 478.6A44 44 0 0 1 136.2 447.5" fill="none" stroke="#c62828" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="6 6"/>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M244 516.2L242.3 533L240.6 552.8" stroke-width="7.4"/>
+<path d="M237.7 587L250.3 587" stroke-width="6"/>
+<path d="M244 542.1L242.4 564.1L240.6 585.5" stroke-width="9.5"/>
+<path d="M244 542.1L246.3 564L248.2 585.5" stroke="#fbfaf6" stroke-width="14.2"/>
+<path d="M245.3 587L258 587" stroke-width="6"/>
+<path d="M244 542.1L246.3 564L248.2 585.5" stroke-width="9.5"/>
+<path d="M244 542.1L244 514.2" stroke-width="15"/>
+<path d="M244 514.2L244 506.2" stroke-width="7"/>
+</g>
+<circle cx="244.8" cy="497.2" r="9" fill="#1f2328"/>
+<path d="M234.7 496.4A10.1 10.1 0 0 1 255 496.4Z" fill="#1f2328"/>
+<path d="M234.7 496.4H259.2" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="251.6" y="489.6" width="4.2" height="5.1" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M244 516.2L238.7 532.2L254.1 541" stroke="#fbfaf6" stroke-width="11.5"/><path d="M244 516.2L238.7 532.2L254.1 541" stroke="#1f2328" stroke-width="7.4"/></g>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M378.3 519.2L377.2 536L390.6 547.7" stroke-width="7.4"/>
+<path d="M355.5 587L368.2 587" stroke-width="6"/>
+<path d="M372 544.3L366.7 565.7L358.5 585.5" stroke-width="9.5"/>
+<path d="M372 544.3L380.4 564.7L385.5 585.5" stroke="#fbfaf6" stroke-width="14.2"/>
+<path d="M382.6 587L395.3 587" stroke-width="6"/>
+<path d="M372 544.3L380.4 564.7L385.5 585.5" stroke-width="9.5"/>
+<path d="M372 544.3L378.8 517.2" stroke-width="15"/>
+<path d="M378.8 517.2L380.7 509.5" stroke-width="7"/>
+</g>
+<circle cx="383.7" cy="500.8" r="9" fill="#1f2328"/>
+<path d="M373.6 499.9A10.1 10.1 0 0 1 393.9 499.9Z" fill="#1f2328"/>
+<path d="M373.6 499.9H398.1" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="390.5" y="493.2" width="4.2" height="5.1" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M378.3 519.2L383.2 535.3L397.4 546" stroke="#fbfaf6" stroke-width="11.5"/><path d="M378.3 519.2L383.2 535.3L397.4 546" stroke="#1f2328" stroke-width="7.4"/></g>
+<path d="M393.3658536585366 548.0325203252032H446" stroke="#4b535c" stroke-width="4" stroke-linecap="round"/>
+<rect x="395.3658536585366" y="539.0325203252032" width="30" height="18" rx="4" fill="#1f2328"/>
+<path d="M411.3658536585366 556.0325203252032L399.3658536585366 589" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M424 530L432.2 527.5L431.8 516.5L440 514" fill="none" stroke="#c62828" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M424 566L426.5 574.2L437.5 573.9L440 582" fill="none" stroke="#c62828" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="94" y="376" font-size="19" fill="#1f2328" font-weight="700">radio :</text>
+<text x="94" y="399" font-size="19" fill="#c62828">zones blanches,</text>
+<text x="94" y="422" font-size="19" fill="#c62828">parasites</text>
+<text x="456" y="376" font-size="19" fill="#1f2328" font-weight="700" text-anchor="end">bruit :</text>
+<text x="456" y="399" font-size="19" fill="#c62828" text-anchor="end">forage,</text>
+<text x="456" y="422" font-size="19" fill="#c62828" text-anchor="end">ventilation</text>
+<!-- Page : « Casques et équipement de protection » : « Limitent la communication non-verbale » -->
+<text x="240" y="618" font-size="19" fill="#1f2328" font-weight="700" text-anchor="middle">casques, équipement de protection :</text>
+<text x="240" y="641" font-size="19" fill="#c62828" text-anchor="middle">limitent le non-verbal</text>
+</g>
+</svg>

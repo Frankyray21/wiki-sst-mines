@@ -11,26 +11,43 @@
  },
  "medias": [
   {
-   "depuis": "docs/files/infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg",
+   "depuis": "docs/files/infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v2.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-types-de-personnalite-et-lieu-de-controle-interne-externe-v1.svg",
    "dossierVault": "Infographies"
   }
  ],
  "retouches": [
   {
-   "type": "insererApres",
+   "type": "remplacerBloc",
    "ligneContenant": "img-003.png",
-   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg|Grille de quatre cases dans un cadre « Conditions de travail » : en colonnes, le lieu de contrôle interne (« Je peux agir sur ma situation » : le travailleur agit sur un levier) ou externe (« Ce qui m’arrive dépend des autres ou du hasard » : un dé et une autre personne agissent sur lui) ; en lignes, le type A (pressé, impatient, chronomètre) ou le type B (détendu, patient). Les quatre cases sont de la même couleur.]]\n\n<p class=\"infographie-legende\">Le schéma croise les deux dimensions décrites plus haut, comme la typologie de Dolan et Arsenault, sans attribuer de risque à une case : ces traits modulent la réponse au stress sans la causer, c’est le contexte qui produit le risque. Une attribution externe n’est pas un défaut ; elle est réaliste quand l’environnement de travail offre objectivement peu de contrôle.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Le grand cadre gris représente les conditions de travail : « c’est le contexte qui produit le risque, l’individu qui le filtre ». Toute la grille est à l’intérieur de ce cadre.</li>\n<li>En colonnes, le lieu de contrôle, c’est-à-dire à quoi le travailleur attribue ce qui lui arrive. Interne, « Je peux agir sur ma situation » : une flèche part du travailleur casqué vers un levier. Externe, « Ce qui m’arrive dépend des autres ou du hasard » : deux flèches arrivent vers lui, l’une depuis un dé (le hasard), l’autre depuis une autre personne (les autres).</li>\n<li>En lignes, le type de personnalité : type A, pressé et impatient, marqué d’un chronomètre ; type B, détendu et patient. Chaque case combine une ligne et une colonne.</li>\n<li>Les quatre cases ont la même couleur : aucune combinaison n’est présentée comme dangereuse ou protectrice, car « aucun travailleur n’est à risque ou protégé en soi ».</li>\n<li>Sous la colonne externe, en bleu : quand le poste offre objectivement peu de contrôle, une attribution externe est réaliste et adaptative. Le schéma ne montre que les types A et B ; les types C, D et la hardiness sont décrits dans le tableau plus haut.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page : tableaux « Types de personnalité » et « Lieu de contrôle » (concept de Rotter, 1966), « Nuance importante », « Pourquoi en parler » et « Limites à respecter ». Le croisement des deux dimensions en quatre cases est la typologie de Dolan et Arsenault (1980), reprise dans leur ouvrage de 2009 (p. 142-143, figure 4.3) ; voir {{lien:w/psychosocial/analyse-dolan-et-arsenault-2009.html|Dolan et Arsenault (2009)}}. Schéma de principe redessiné, sans les étiquettes ni les dessins du livre, et sans niveau de risque par case.</p>\n\n</div>",
-   "marqueur": "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg"
+   "ancien": "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v2.svg|Grille de quatre cases dans un cadre « Conditions de travail » : en colonnes, le type A (pressé, impatient, marqué d’un grand chronomètre) et le type B (détendu, patient) ; en lignes, le lieu de contrôle interne (le travailleur agit sur un levier) ou externe (un dé et une autre personne agissent sur lui). Les quatre cases sont de la même couleur.]]\n\n<p class=\"infographie-legende\">Le schéma croise les deux dimensions décrites plus haut, comme la typologie de Dolan et Arsenault, sans attribuer de risque à une case : ces traits modulent la réponse au stress sans la causer, c’est le contexte qui produit le risque.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Le grand cadre gris représente les conditions de travail : « c’est le contexte qui produit le risque, l’individu qui le filtre ». Toute la grille est à l’intérieur de ce cadre.</li>\n<li>En colonnes, le type de personnalité : type A, pressé et impatient, marqué d’un grand chronomètre ; type B, détendu et patient, sans chronomètre. Dans les deux cases du type A, le travailleur a aussi un chronomètre près de la tête.</li>\n<li>En lignes, le lieu de contrôle, c’est-à-dire à quoi le travailleur attribue ce qui lui arrive. Interne, « Je peux agir sur ma situation » : une flèche part du travailleur casqué vers un levier. Externe, « Ce qui m’arrive dépend des autres ou du hasard » : deux flèches arrivent vers lui, l’une depuis un dé (le hasard), l’autre depuis une autre personne (les autres). Chaque case combine une colonne et une ligne.</li>\n<li>Les quatre cases ont la même couleur : aucune combinaison n’est présentée comme dangereuse ou protectrice, car « aucun travailleur n’est à risque ou protégé en soi ».</li>\n<li>Le schéma ne montre que les types A et B ; les types C, D et la hardiness sont décrits dans le tableau plus haut.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page : tableaux « Types de personnalité » et « Lieu de contrôle » (concept de Rotter, 1966), « Pourquoi en parler » et « Limites à respecter ». Le croisement des deux dimensions en quatre cases est la typologie de Dolan et Arsenault (1980), reprise dans leur ouvrage de 2009 (p. 142-143, figure 4.3) ; voir {{lien:w/psychosocial/analyse-dolan-et-arsenault-2009.html|Dolan et Arsenault (2009)}}. Schéma de principe redessiné, sans les étiquettes ni les dessins du livre, et sans niveau de risque par case.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v2.svg"
   },
   {
    "type": "supprimerLigne",
    "ligneContenant": "img-003.png",
-   "marqueur": "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg"
+   "marqueur": [
+    "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v2.svg",
+    "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg"
+   ]
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Nuance importante : un lieu de contrôle externe n'est pas un défaut. Quand l'environnement de travail offre objectivement peu de contrôle (ce qui est fréquent dans certains postes miniers), une attribution externe est réaliste et adaptative.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-types-de-personnalite-et-lieu-de-controle-interne-externe-v1.svg|Deux grands panneaux : lieu de contrôle interne, « Je peux agir sur ma situation », où une flèche part du travailleur casqué vers un levier ; lieu de contrôle externe, « Ce qui m’arrive dépend des autres ou du hasard », où deux flèches arrivent vers lui depuis un dé et une autre personne. En bleu, sous le second : réaliste quand le poste offre peu de contrôle.]]\n\n<p class=\"infographie-legende\">Le lieu de contrôle est une tendance à attribuer ce qui nous arrive à des causes internes ou externes. Une attribution externe n’est pas un défaut ; elle est réaliste quand l’environnement de travail offre objectivement peu de contrôle.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>En haut, le lieu de contrôle interne, « Je peux agir sur ma situation » : le travailleur casqué tend le bras et une grande flèche part de lui vers un levier de commande.</li>\n<li>En bas, le lieu de contrôle externe, « Ce qui m’arrive dépend des autres ou du hasard » : deux flèches arrivent vers le travailleur casqué, l’une depuis un dé (le hasard), l’autre depuis une autre personne, tête nue (les autres).</li>\n<li>Les deux panneaux ont la même couleur : le schéma montre à quoi le travailleur attribue ce qui lui arrive, et un lieu de contrôle externe « n’est pas un défaut ».</li>\n<li>Sous le panneau externe, en bleu : quand le poste offre objectivement peu de contrôle, une attribution externe est réaliste et adaptative.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page : tableau « Lieu de contrôle » (concept de Rotter, 1966) et « Nuance importante » ; voir aussi le tableau « Application en mines » (« Souvent l’environnement le justifie »). Schéma de principe, sans chiffre : le levier, le dé et l’autre personne sont des symboles.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-interne-externe-v1.svg"
   },
   {
    "type": "supprimerLigne",
    "ligneContenant": "Combinaison type de personnalité (A, B) × lieu de contrôle (interne, externe) : matrice HOT DOG / COOL DOG / HOT CAT / COOL CAT. Source : Dolan & Arsenault (1980), repris dans SST1010 (UQAM), séance 4. Usage personnel.",
-   "marqueur": "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg"
+   "marqueur": [
+    "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v2.svg",
+    "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg"
+   ]
   }
  ]
 }

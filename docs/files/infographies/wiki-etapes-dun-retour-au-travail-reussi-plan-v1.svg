@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="600" viewBox="0 0 480 600" role="img" aria-labelledby="t d">
+<title id="t">Étape 2 : planification du retour</title>
+<desc id="d">Étape 2, planification du retour. Au centre, une grande feuille bleue, le « plan écrit », énumère : date, poste prévu, horaires, aménagements. Autour, cinq acteurs, chacun relié au plan par un trait, sans table ni réunion : en haut, le médecin traitant et le médecin du travail, avec un stéthoscope ; à gauche, le travailleur, en noir ; à droite, l’employeur, casque et cravate ; en bas, le PAE. Tous sont en bleu, sauf le travailleur.</desc>
+<rect width="480" height="600" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<circle cx="42" cy="38" r="19" fill="#1565c0"/>
+<text x="42" y="45.6" font-size="22" font-weight="700" fill="#fbfaf6" text-anchor="middle">2</text>
+<text x="72" y="46" font-size="26" font-weight="700" fill="#1f2328">Planification du retour</text>
+<!-- Chaque acteur est relié au plan écrit ; aucun ne fait face aux autres -->
+<path d="M91.8 131.2L142 216" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M380.2 131.2L338 216" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M107.4 341L142 344" stroke="#1f2328" stroke-width="4" stroke-linecap="round"/>
+<path d="M376.2 345.2L338 344" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M240 470.9V404" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M142 176H316L338 198V404H142Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="4" stroke-linejoin="round"/>
+<path d="M316 176V198H338" fill="none" stroke="#1565c0" stroke-width="3.5" stroke-linejoin="round"/>
+<text x="230" y="216" font-size="22" font-weight="700" fill="#1565c0" text-anchor="middle">plan écrit</text>
+<path d="M160 232H320" stroke="#1565c0" stroke-width="2.5"/>
+<rect x="158" y="259" width="10" height="10" rx="2" fill="#1565c0"/>
+<text x="176" y="270" font-size="19" fill="#1f2328">date</text>
+<rect x="158" y="295" width="10" height="10" rx="2" fill="#1565c0"/>
+<text x="176" y="306" font-size="19" fill="#1f2328">poste prévu</text>
+<rect x="158" y="331" width="10" height="10" rx="2" fill="#1565c0"/>
+<text x="176" y="342" font-size="19" fill="#1f2328">horaires</text>
+<rect x="158" y="367" width="10" height="10" rx="2" fill="#1565c0"/>
+<text x="176" y="378" font-size="19" fill="#1f2328">aménagements</text>
+<g fill="#1565c0" transform="translate(70 190) scale(0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-7 -82Q-9 -64 0 -63Q9 -64 7 -82" fill="none" stroke="#fbfaf6" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M0 -63V-57" stroke="#fbfaf6" stroke-width="3.5"/>
+<circle cx="0" cy="-53" r="4.5" fill="#fbfaf6"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<text x="70" y="214" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">médecin</text>
+<text x="70" y="236" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">traitant</text>
+<g fill="#1565c0" transform="translate(402 190) scale(-0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-7 -82Q-9 -64 0 -63Q9 -64 7 -82" fill="none" stroke="#fbfaf6" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M0 -63V-57" stroke="#fbfaf6" stroke-width="3.5"/>
+<circle cx="0" cy="-53" r="4.5" fill="#fbfaf6"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<text x="402" y="214" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">médecin</text>
+<text x="402" y="236" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">du travail</text>
+<g fill="#1f2328" transform="translate(84 404) scale(0.9 0.9)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<text x="84" y="428" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">travailleur</text>
+<g fill="#1565c0" transform="translate(398 404) scale(-0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1565c0" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-3.5 -82H3.5L2 -77L4.5 -58L0 -52L-4.5 -58L-2 -77Z" fill="#fbfaf6"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<text x="398" y="428" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">employeur</text>
+<g fill="#1565c0" transform="translate(240 566) scale(0.8 0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g transform="rotate(0 0 -86)">
+<circle cx="0" cy="-95" r="11"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<text x="268" y="526" font-size="20" font-weight="700" fill="#1565c0">PAE</text>
+</g>
+</svg>

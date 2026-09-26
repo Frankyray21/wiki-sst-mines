@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="624" viewBox="0 0 480 624" role="img" aria-labelledby="t d">
+<title id="t">Pourquoi critique en mine : cinq conséquences préoccupantes</title>
+<desc id="d">Cinq rangées, dans l’ordre du tableau de la page ; à gauche un dessin, à droite la conséquence en gras et la raison pour laquelle la page la juge critique en mine, presque mot pour mot. Baisse de vigilance : un mineur qui tourne le dos à une chargeuse qui avance vers lui (flèche rouge en pointillé) ; risque direct d’accident. Troubles du sommeil : un dormeur agité (trait rouge au-dessus de la tête) et une horloge entourée d’une flèche circulaire ; amplifiés par les quarts longs et la rotation. Consommation de substances : un bâtiment de camp, une bouteille et un verre ; stigmatisée mais répandue, particulièrement en camp. Conflits familiaux : un proche devant la maison et le mineur casqué plus loin, une double flèche en pointillé entre eux et un éclat rouge au-dessus ; aggravés par les rotations et l’éloignement. Maladies cardiovasculaires : un mineur au cœur rouge dans la poussière ; cumul avec exposition physique et chimique. Sans chiffre ni classement.</desc>
+<rect width="480" height="624" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Pourquoi critique en mine</text>
+
+<!-- 1. Baisse de vigilance : mineur de dos à une chargeuse qui avance vers lui -->
+<rect x="16" y="66" width="180" height="100" rx="10" fill="#eceef0"/>
+<path d="M24 158H188" stroke="#4b535c" stroke-width="2.5" stroke-linecap="round"/>
+<g transform="translate(44 158) scale(1.3)" fill="#1f2328">
+<path d="M-7 -24H6V-1H0V-12H-1V-1H-7Z"/>
+<path d="M-7 -1H-12Q-13 -4 -9 -4H-7Z M0 -1H-5Q-6 -4 -2 -4H0Z"/>
+<path d="M-9 -24V-35Q-9 -42 -2 -42H2Q9 -42 9 -35V-24Z"/>
+<circle cx="-1" cy="-51" r="9"/>
+<path d="M-11 -53C-11 -61 -6 -66 -1 -66C4 -66 9 -61 9 -53Z"/>
+<path d="M-17 -53H10" stroke="#1f2328" stroke-width="4" stroke-linecap="round"/>
+<rect x="-14.5" y="-62" width="5" height="6" rx="1" fill="#eceef0" stroke="#1f2328" stroke-width="2"/>
+<path d="M-1 -38L-4 -22" stroke="#eceef0" stroke-width="9" stroke-linecap="round"/>
+<path d="M-1 -38L-4 -22" stroke="#1f2328" stroke-width="5.5" stroke-linecap="round"/>
+</g>
+<g transform="translate(-3 0)">
+<g fill="#1f2328">
+<path d="M108 128H98Q88 138 92 150H108Z"/>
+<path d="M106 134L122 130" stroke="#1f2328" stroke-width="6"/>
+<path d="M118 148V128Q118 124 122 124H180Q184 124 184 128V148Z"/>
+<path d="M148 124V110M164 124V110M144 110H168" stroke="#1f2328" stroke-width="4" stroke-linecap="round"/>
+<circle cx="132" cy="149" r="9" stroke="#eceef0" stroke-width="2.5"/>
+<circle cx="170" cy="149" r="9" stroke="#eceef0" stroke-width="2.5"/>
+</g>
+<path d="M188 124H196M190 134H196M188 144H196" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+</g>
+<path d="M83 140H72" stroke="#c62828" stroke-width="4.5" stroke-dasharray="5 3"/>
+<path d="M61 140L73 132.5V147.5Z" fill="#c62828"/>
+<text x="206" y="110" font-size="19" font-weight="700" fill="#1f2328">baisse de vigilance</text>
+<text x="206" y="134" font-size="19" fill="#4b535c">risque direct d’accident</text>
+
+<!-- 2. Troubles du sommeil : dormeur agité, horloge et rotation -->
+<rect x="16" y="176" width="180" height="100" rx="10" fill="#eceef0"/>
+<rect x="30" y="226" width="6" height="40" rx="2" fill="#1f2328"/>
+<rect x="36" y="248" width="94" height="10" rx="2" fill="#1f2328"/>
+<rect x="124" y="258" width="5" height="8" fill="#1f2328"/>
+<rect x="39" y="241" width="22" height="7" rx="3" fill="#eceef0" stroke="#1f2328" stroke-width="2.5"/>
+<g transform="translate(104 237) rotate(-90)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/></g>
+<path d="M38 216L44 208L50 216L56 208L62 216L68 208" fill="none" stroke="#c62828" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="160" cy="222" r="19" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<path d="M160 222V208M160 222H171" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<path d="M136.4 236.5A28 28 0 1 1 146 246.2" fill="none" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<path d="M146 254L141 242L152 244Z" fill="#1f2328"/>
+<text x="206" y="208" font-size="19" font-weight="700" fill="#1f2328">troubles du sommeil</text>
+<text x="206" y="232" font-size="19" fill="#4b535c">amplifiés par les</text>
+<text x="206" y="256" font-size="19" fill="#4b535c">quarts longs et la rotation</text>
+
+<!-- 3. Consommation de substances : bâtiment du camp, bouteille et verre -->
+<rect x="16" y="286" width="180" height="100" rx="10" fill="#eceef0"/>
+<path d="M24 376H188" stroke="#4b535c" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="30" y="322" width="104" height="54" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<path d="M24 320H140" stroke="#1f2328" stroke-width="6" stroke-linecap="round"/>
+<g fill="#eceef0" stroke="#1f2328" stroke-width="2.5">
+<rect x="40" y="334" width="16" height="13"/>
+<rect x="66" y="334" width="16" height="13"/>
+<rect x="92" y="334" width="16" height="13"/>
+</g>
+<rect x="114" y="346" width="13" height="30" fill="#1f2328"/>
+<g stroke="#1f2328" stroke-width="3" stroke-linejoin="round">
+<path d="M153 324H163V336Q170 340 170 349V376H146V349Q146 340 153 336Z" fill="#fbfaf6"/>
+<path d="M175 352H191L188 376H178Z" fill="#fbfaf6"/>
+</g>
+<path d="M178 364H188" stroke="#c62828" stroke-width="7"/>
+<text x="206" y="306" font-size="19" font-weight="700" fill="#1f2328">consommation</text>
+<text x="206" y="330" font-size="19" font-weight="700" fill="#1f2328">de substances</text>
+<text x="206" y="354" font-size="19" fill="#4b535c">stigmatisée mais répandue</text>
+<text x="206" y="378" font-size="19" fill="#4b535c">particulièrement en camp</text>
+
+<!-- 4. Conflits familiaux : proche devant la maison, mineur au loin, conflit (silhouettes à l’échelle 1,3) -->
+<rect x="16" y="396" width="180" height="100" rx="10" fill="#eceef0"/>
+<path d="M24 488H188" stroke="#4b535c" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M24 454L45 434L66 454V488H24Z" fill="#fbfaf6" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<rect x="40" y="466" width="10" height="22" fill="#1f2328"/>
+<g transform="translate(88 488) scale(1.3)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/></g>
+<g transform="translate(170 488) scale(1.3)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><rect x="-3.5" y="-6" width="7" height="6" rx="1" fill="#eceef0" stroke="#1f2328" stroke-width="2.5"/></g></g>
+<path d="M116 464H140" stroke="#1f2328" stroke-width="3" stroke-dasharray="5 5"/>
+<path d="M106 464L116 458V470Z" fill="#1f2328"/>
+<path d="M150 464L140 458V470Z" fill="#1f2328"/>
+<g transform="translate(128 426) scale(0.9) translate(-135 -428)">
+<path d="M135 410L139 421L148 415L145 425L155 428L145 431L148 441L139 435L135 446L131 435L122 441L125 431L115 428L125 425L122 415L131 421Z" fill="#fde3e0" stroke="#c62828" stroke-width="2.8" stroke-linejoin="round"/>
+<path d="M133 420L137 428L132 430L137 438" fill="none" stroke="#c62828" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text x="206" y="428" font-size="19" font-weight="700" fill="#1f2328">conflits familiaux</text>
+<text x="206" y="452" font-size="19" fill="#4b535c">aggravés par les rotations</text>
+<text x="206" y="476" font-size="19" fill="#4b535c">et l’éloignement</text>
+
+<!-- 5. Maladies cardiovasculaires : mineur (cœur rouge) dans la poussière -->
+<rect x="16" y="506" width="180" height="100" rx="10" fill="#eceef0"/>
+<path d="M24 596H188" stroke="#4b535c" stroke-width="2.5" stroke-linecap="round"/>
+<g transform="translate(70 596) scale(1.3)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><rect x="-3.5" y="-6" width="7" height="6" rx="1" fill="#eceef0" stroke="#1f2328" stroke-width="2.5"/></g></g>
+<path transform="matrix(1.4 0 0 1.4 -31.6 -221.6)" d="M74 562C69 558 66 555 66 551C66 548 68 546 70.5 546C72 546 73.3 547 74 548.5C74.7 547 76 546 77.5 546C80 546 82 548 82 551C82 555 79 558 74 562Z" fill="#c62828"/>
+<g fill="#4b535c">
+<circle cx="104" cy="530" r="3.5"/><circle cx="118" cy="522" r="3"/><circle cx="132" cy="534" r="4"/><circle cx="148" cy="524" r="3"/><circle cx="162" cy="538" r="3.5"/><circle cx="178" cy="528" r="3"/>
+<circle cx="110" cy="548" r="3"/><circle cx="126" cy="556" r="3.5"/><circle cx="142" cy="548" r="3"/><circle cx="156" cy="560" r="4"/><circle cx="174" cy="552" r="3"/><circle cx="186" cy="566" r="3.5"/>
+<circle cx="106" cy="572" r="3.5"/><circle cx="120" cy="580" r="3"/><circle cx="138" cy="574" r="3"/><circle cx="152" cy="584" r="3.5"/><circle cx="170" cy="576" r="3"/>
+<circle cx="40" cy="528" r="3"/><circle cx="34" cy="552" r="3.5"/><circle cx="44" cy="574" r="3"/>
+</g>
+<text x="206" y="526" font-size="19" font-weight="700" fill="#1f2328">maladies</text>
+<text x="206" y="550" font-size="19" font-weight="700" fill="#1f2328">cardiovasculaires</text>
+<text x="206" y="574" font-size="19" fill="#4b535c">cumul avec exposition</text>
+<text x="206" y="598" font-size="19" fill="#4b535c">physique et chimique</text>
+</g>
+</svg>

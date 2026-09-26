@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="660" viewBox="0 0 480 660" role="img" aria-labelledby="t d">
+<title id="t">Parler de santé mentale : ce qui freine</title>
+<desc id="d">Sous le titre, un bandeau rouge : la version extrême de valeurs précieuses, « jamais montrer de faiblesse », et la phrase « On endure, on chigne pas. », présentée comme une devise de la culture. Dessous, une équipe de quatre mineurs casqués, côte à côte. L’un d’eux pense « je devrais m’en sortir seul » ; sa bulle de parole est vide, en pointillés rouges : il n’en parle pas. Sous le groupe : les pairs ridiculisent ou marginalisent celui qui en parle. En bas à gauche, l’organisation : un bloc haut, risques physiques, à côté d’un bloc bas, santé mentale ; une flèche rouge marque l’écart : pas au même niveau. En bas à droite, les proches : une personne fait face au mineur casqué, et sa bulle aussi reste vide : les proches n’osent pas aborder le sujet, pour ne pas blesser. Aucun chiffre.</desc>
+<rect width="480" height="660" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Parler de santé mentale :</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">ce qui freine</text>
+<!-- L’essentiel : « Ces valeurs sont précieuses, mais leur version extrême (« jamais montrer de faiblesse ») produit une stigmatisation de la santé mentale » ; tableau, ligne « Tough guy » : « On endure, on chigne pas. » (la page ne dit pas qui la prononce : devise de la culture, dans le bandeau) -->
+<rect x="16" y="92" width="448" height="86" rx="12" fill="#fde3e0"/>
+<text x="32" y="116" font-size="19" fill="#1f2328">La version extrême de valeurs précieuses :</text>
+<text x="32" y="143" font-size="20" font-weight="700" fill="#c62828">« jamais montrer de faiblesse »</text>
+<text x="32" y="169" font-size="20" font-weight="700" fill="#c62828">« On endure, on chigne pas. »</text>
+<rect x="16" y="186" width="448" height="244" rx="12" fill="#eceef0"/>
+<!-- Une équipe : quatre mineurs côte à côte, sans écart -->
+<g transform="translate(56 348) scale(1.5)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#eceef0" stroke-width="2.5"/></g></g>
+<g transform="translate(106 348) scale(1.5)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#eceef0" stroke-width="2.5"/></g></g>
+<g transform="translate(156 348) scale(1.5)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#eceef0" stroke-width="2.5"/></g></g>
+<g transform="translate(206 348) scale(1.5)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#eceef0" stroke-width="2.5"/></g></g>
+<!-- Auto-stigmatisation : « Le travailleur croit lui-même qu’il devrait s’en sortir seul » -->
+<rect x="244" y="194" width="208" height="56" rx="28.0" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/><circle cx="256" cy="256" r="5.5" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/><circle cx="240" cy="264" r="3.5" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<text x="348" y="217" font-size="19" fill="#1f2328" text-anchor="middle">je devrais m’en</text>
+<text x="348" y="241" font-size="19" fill="#1f2328" text-anchor="middle">sortir seul</text>
+<!-- Ce qui n’est pas dit : la stigmatisation « empêche les travailleurs de demander de l’aide » (L’essentiel) -->
+<path d="M264 284H344Q356 284 356 296V312Q356 324 344 324H264Q252 324 252 312V311L221 282L252 297V296Q252 284 264 284Z" fill="#fbfaf6" stroke="#c62828" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<circle cx="291" cy="304" r="3.5" fill="#c62828"/><circle cx="304" cy="304" r="3.5" fill="#c62828"/><circle cx="317" cy="304" r="3.5" fill="#c62828"/>
+<text x="304" y="348" font-size="19" fill="#1f2328" text-anchor="middle">n’en parle pas</text>
+<!-- Stigmatisation publique : « Les pairs ridiculisent ou marginalisent celui qui parle de santé mentale » -->
+<text x="28" y="374" font-size="19" font-weight="700" fill="#1f2328">les pairs</text>
+<text x="28" y="398" font-size="19" fill="#c62828">ridiculisent ou marginalisent</text>
+<text x="28" y="422" font-size="19" fill="#c62828">celui qui en parle</text>
+<!-- Stigmatisation institutionnelle : « L’organisation ne traite pas la santé mentale au même niveau que les risques physiques » -->
+<rect x="16" y="438" width="230" height="218" rx="12" fill="#eceef0"/>
+<g transform="translate(46 463) scale(1.3)"><rect x="-11" y="-12" width="22" height="24" fill="#1f2328"/><g fill="#eceef0"><rect x="-7" y="-8" width="5" height="5"/><rect x="2" y="-8" width="5" height="5"/><rect x="-7" y="0" width="5" height="5"/><rect x="2" y="0" width="5" height="5"/></g></g>
+<text x="70" y="470" font-size="19" font-weight="700" fill="#1f2328">l’organisation</text>
+<rect x="32" y="490" width="108" height="116" rx="3" fill="#1f2328"/>
+<text x="86" y="542" font-size="19" fill="#fbfaf6" text-anchor="middle">risques</text>
+<text x="86" y="566" font-size="19" fill="#fbfaf6" text-anchor="middle">physiques</text>
+<rect x="148" y="560" width="90" height="46" rx="3" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<text x="193" y="579" font-size="19" fill="#1f2328" text-anchor="middle">santé</text>
+<text x="193" y="601" font-size="19" fill="#1f2328" text-anchor="middle">mentale</text>
+<path d="M24 606.5H240" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M140 490H238" stroke="#c62828" stroke-width="2.5" stroke-dasharray="6 5"/>
+<path d="M193 497V553" stroke="#c62828" stroke-width="3"/>
+<path d="M193 493L186.5 504H199.5Z M193 557L186.5 546H199.5Z" fill="#c62828"/>
+<text x="32" y="636" font-size="19" fill="#c62828">pas au même niveau</text>
+<!-- Stigmatisation de courtoisie : « Les proches n’osent pas aborder le sujet pour ne pas blesser » -->
+<rect x="254" y="438" width="210" height="218" rx="12" fill="#eceef0"/>
+<g transform="translate(282 461) scale(1.3)"><path d="M-12.5 -0.5L0 -12L12.5 -0.5Z" fill="#1f2328" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/><rect x="-9" y="-2" width="18" height="13" fill="#1f2328"/><rect x="-2.75" y="3.5" width="5.5" height="7.5" fill="#eceef0"/></g>
+<text x="306" y="470" font-size="19" font-weight="700" fill="#1f2328">les proches</text>
+<g transform="translate(288 572) scale(1.3)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/></g>
+<g transform="translate(428 572) scale(1.3)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#eceef0" stroke-width="2.5"/></g></g>
+<path d="M322 482H390Q400 482 400 492V506Q400 516 390 516H322Q312 516 312 506V506L301 504L312 492V492Q312 482 322 482Z" fill="#fbfaf6" stroke="#c62828" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<circle cx="343" cy="499" r="3.5" fill="#c62828"/><circle cx="356" cy="499" r="3.5" fill="#c62828"/><circle cx="369" cy="499" r="3.5" fill="#c62828"/>
+<text x="266" y="598" font-size="19" fill="#c62828">n’osent pas</text>
+<text x="266" y="622" font-size="19" fill="#c62828">aborder le sujet</text>
+<text x="266" y="646" font-size="19" fill="#1f2328">pour ne pas blesser</text>
+</g>
+</svg>
