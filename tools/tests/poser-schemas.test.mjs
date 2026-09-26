@@ -65,6 +65,14 @@ test('pose : blocs après leur ancre, capture et légende retirées, liens réso
   assert.equal(poserDansPage(h, spec, OPTS), h, 'second passage : même page');
 });
 
+test('sources : un lien <a> autre qu’un lien externe https est refusé, jamais publié en texte échappé', () => {
+  for (const lien of ['<a class="external" href="../../files/livre.pdf#page=159">livre</a>', '<a href="../../w/cible.html">cible</a>']) {
+    const spec = { page: 'w/x/page.html', note: { titre: 'Page', wiki: 'Wiki X' },
+      schemas: [schema('wiki-x-a-v1.svg', 'Texte avant la capture de cours.', { sources: `D’après ${lien}.` })] };
+    assert.throws(() => poserDansPage(PAGE, spec, OPTS), /lien de source non pris en charge/, lien);
+  }
+});
+
 test('lot : insertion puis retrait de la capture, légende retirée, et il s’applique à une note plausible', () => {
   const spec = {
     page: 'w/x/page.html', note: { titre: 'Page', wiki: 'Wiki X' },

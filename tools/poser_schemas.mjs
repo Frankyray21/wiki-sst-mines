@@ -53,7 +53,9 @@ export function blocMd(s) {
 
 // Sources : le texte est échappé, les balises <a href> et les {{lien:…}} gardées telles quelles.
 function morceaux(src) {
-  return String(src).split(/(<a href="[^"]+">[^<]*<\/a>|\{\{lien:[^|}]+\|[^}]+\}\})/);
+  // toute balise <a …>…</a> est isolée : une forme non prise en charge est refusée plus bas, jamais
+  // publiée comme du texte échappé (« &lt;a class=… »)
+  return String(src).split(/(<a\b[^>]*>[^<]*<\/a>|\{\{lien:[^|}]+\|[^}]+\}\})/);
 }
 function sourcesMd(src) {
   return morceaux(src).map(m => (m.startsWith('<a ') || m.startsWith('{{lien:')) ? m : texte(entites(m))).join('');
