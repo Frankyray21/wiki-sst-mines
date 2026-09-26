@@ -114,8 +114,12 @@ test('lot : la version texte reçue avant quitte la note, sauvegarde faite, seco
   fs.writeFileSync(ancien, JSON.stringify(ancienLot));
   execFileSync(process.execPath, [path.join(outils, 'appliquer_retouches.mjs'), '--lot', ancien, '--vault', vault, '--appliquer'], { cwd: vault, encoding: 'utf8' });
   assert.equal(fs.readFileSync(abs, 'utf8').split('Lire le schéma en texte').length - 1, 5, 'la note a reçu les cinq versions texte');
+  const avantRetrait = fs.readFileSync(abs, 'utf8');
   const sortie = outil(vault, '--appliquer');
   assert.equal((sortie.match(/✓ retirerVersionTexte/g) || []).length, 5);
+  const copie = sortie.match(/sauvegarde : (.+)$/m)?.[1];
+  assert.ok(copie && fs.existsSync(copie), 'sauvegarde écrite : ' + copie);
+  assert.equal(fs.readFileSync(copie, 'utf8'), avantRetrait, 'la sauvegarde est la note d’avant le retrait');
   const nettoyee = fs.readFileSync(abs, 'utf8');
   const vaultNeuf = vaultJetable();
   outil(vaultNeuf, '--appliquer');

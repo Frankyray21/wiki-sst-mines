@@ -79,7 +79,7 @@ adresses n'ont pas changé.
   réécrit le manifeste hors ligne en gardant l'estampille de version (seuls les fichiers modifiés changent de hash)
   et marque `sw.js` de l'empreinte du manifeste, pour que les navigateurs installent le nouveau service worker
 - `tools/poser_schemas.mjs` — pose les schémas SVG d'une page, décrits dans une spec JSON (ancre, capture remplacée,
-  version antérieure remplacée, texte alternatif, légende, version texte, sources, corrections du texte), dans la
+  version antérieure remplacée, texte alternatif, légende, sources, corrections du texte), dans la
   page publiée et sa copie encadrement, et écrit le lot du vault correspondant ; essai par défaut, `--ecrire` pour
   écrire
 - `tools/dimensions_svg.mjs` — largeur et hauteur d'un schéma SVG, posées par le générateur sur son `<img>`
@@ -235,9 +235,12 @@ node tools/serve.mjs
   licence. Détail et erreurs relevées : `content-updates/2026-09-26-rps-schemas-lot10.md`
 - **« Lire le schéma en texte » retiré (26 septembre 2026)** : à la demande de Frank, la section dépliable sous
   chaque schéma disparaît (127 schémas, 65 pages). Chaque schéma garde son image, son texte alternatif, sa légende
-  et ses sources. `tools/poser_schemas.mjs` ne la produit plus, et le générateur ne la publie plus, même depuis une
-  note qui la garde. **À faire dans le vault** : rejouer les 40 lots `content-updates\*-schemas.json` (nouvelle
-  retouche `retirerVersionTexte`). Détail : `content-updates/2026-09-26-sans-version-texte.md`
+  et ses sources. `tools/poser_schemas.mjs` ne la produit plus, et le générateur ne la publie ni ne l'indexe plus,
+  même depuis une note qui la garde. Le générateur ne s'arrête plus au démarrage (« Cannot access 'estEtude' before
+  initialization », depuis le 21 septembre). Restent, sur demande : « Lire la version texte — … » (5 infographies)
+  et « Lire l’illustration en texte » (Définition et typologie des conflits). **À faire dans le vault** : rejouer
+  les 40 lots `content-updates\*-schemas.json` (nouvelle retouche `retirerVersionTexte`). Détail :
+  `content-updates/2026-09-26-sans-version-texte.md`
 - **L'article en PDF (26 septembre 2026)** : un bouton « 📄 PDF » dans la barre de lecture de chaque article
   (à côté de A−, A+ et Lecture). Il ouvre l'impression du navigateur, où « Enregistrer au format PDF » produit le
   fichier : texte net et copiable, liens actifs, en noir sur blanc, sans menus. En tête du PDF figurent l'adresse de la
