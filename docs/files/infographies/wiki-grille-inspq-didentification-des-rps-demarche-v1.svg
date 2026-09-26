@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="600" viewBox="0 0 480 600" role="img" aria-labelledby="t d">
+<title id="t">Grille INSPQ : des sources à la grille, de la grille au plan d’action, selon la démarche de la page</title>
+<desc id="d">Trois cadres reliés par des flèches bleues, sans numéros. En haut à gauche, les sources à croiser, chacune avec un pictogramme : données RH (un calendrier), indicateurs CNESST (une feuille avec une courbe), questionnaires JCQ et ERI (une feuille à cases), entretiens de groupe (deux bulles de dialogue), observations terrain (un œil dans une galerie de mine). Une flèche mène au cadre de droite, « Cocher la grille » : deux mineurs casqués, un de chaque côté d’un tableau sur chevalet où sont alignées des cases, dont certaines sont cochées en bleu ; l’un coche une case, l’autre montre le tableau. Dessous : comité paritaire ou conseiller SST. Une flèche « prioriser » descend vers le plan d’action, qui liste des leviers par niveau : primaire, secondaire, tertiaire. Du plan d’action, une flèche repart vers la gauche puis remonte jusqu’au cadre de la grille ; le long de ce retour : « mise en œuvre », puis « reprendre la grille ». Aucun score, aucun seuil, aucune durée d’étape.</desc>
+<rect width="480" height="600" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" fill="#1f2328" font-weight="700">Des sources à la grille,</text>
+<text x="24" y="78" font-size="26" fill="#1f2328" font-weight="700">de la grille au plan d’action</text>
+<rect x="16" y="96" width="204" height="276" rx="12" fill="#eceef0"/>
+<text x="28" y="122" font-size="19" fill="#1f2328" font-weight="700">Sources à croiser</text>
+<g transform="translate(24 134.0) scale(1.18)">
+<rect x="2" y="5" width="30" height="27" rx="3" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<rect x="2" y="5" width="30" height="8" rx="2" fill="#1f2328"/>
+<path d="M10 1V8M24 1V8" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="7" y="16" width="5.5" height="5.5" fill="#6e7781"/>
+<rect x="7" y="23" width="5.5" height="5.5" fill="#6e7781"/>
+<rect x="15" y="16" width="5.5" height="5.5" fill="#1565c0"/>
+<rect x="15" y="23" width="5.5" height="5.5" fill="#6e7781"/>
+<rect x="23" y="16" width="5.5" height="5.5" fill="#6e7781"/>
+<rect x="23" y="23" width="5.5" height="5.5" fill="#1565c0"/>
+</g>
+<text x="72" y="161" font-size="19" fill="#1f2328">données RH</text>
+<g transform="translate(24 181.5) scale(1.18)">
+<path d="M5 1H22L30 9V33H5Z" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M22 1V9H30" fill="none" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M9 28L14 21L19 24L26 14" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text x="72" y="197.5" font-size="19" fill="#1f2328">indicateurs</text>
+<text x="72" y="219.5" font-size="19" fill="#1f2328">CNESST</text>
+<g transform="translate(24 229.0) scale(1.18)">
+<rect x="5" y="1" width="25" height="32" rx="2" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<rect x="9" y="6.5" width="6.5" height="6.5" fill="none" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M19 9.75H26" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="9" y="15.0" width="6.5" height="6.5" fill="none" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M19 18.25H26" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="9" y="23.5" width="6.5" height="6.5" fill="none" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M19 26.75H26" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M8.5 17.5L12 21.5L17.5 12.5" fill="none" stroke="#1565c0" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text x="72" y="245" font-size="19" fill="#1f2328">questionnaires</text>
+<text x="72" y="267" font-size="19" fill="#1f2328">JCQ, ERI</text>
+<g transform="translate(24 276.5) scale(1.18)">
+<path d="M5 3H21Q25 3 25 7V16Q25 20 21 20H11L5 25V20Q1 20 1 16V7Q1 3 5 3Z" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M16 13H30Q34 13 34 17V25Q34 29 30 29V34L25 29H16Q12 29 12 25V17Q12 13 16 13Z" fill="#1565c0" stroke="#fbfaf6" stroke-width="2.5" stroke-linejoin="round"/>
+</g>
+<text x="72" y="292.5" font-size="19" fill="#1f2328">entretiens</text>
+<text x="72" y="314.5" font-size="19" fill="#1f2328">de groupe</text>
+<g transform="translate(24 324.0) scale(1.18)">
+<path d="M2 33V17A15 15 0 0 1 32 17V33" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M0 33H34" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M7 21Q17 11 27 21Q17 31 7 21Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="17" cy="21" r="3.8" fill="#1565c0"/>
+</g>
+<text x="72" y="340" font-size="19" fill="#1f2328">observations</text>
+<text x="72" y="362" font-size="19" fill="#1f2328">terrain</text>
+<rect x="260" y="96" width="204" height="276" rx="12" fill="#eceef0"/>
+<text x="274" y="122" font-size="19" fill="#1f2328" font-weight="700">Cocher la grille</text>
+<path d="M272 306H452" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M330 268L322 306M394 268L402 306M362 268V300" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<rect x="322" y="146" width="80" height="122" rx="3" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<rect x="317" y="139" width="90" height="9" rx="3" fill="#1f2328"/>
+<rect x="330" y="157" width="11" height="11" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M350 162.5H393" stroke="#6e7781" stroke-width="3" stroke-linecap="round"/>
+<rect x="330" y="175" width="11" height="11" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M350 180.5H393" stroke="#6e7781" stroke-width="3" stroke-linecap="round"/>
+<path d="M329 179.5L334 185.5L344 172" fill="none" stroke="#1565c0" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="330" y="193" width="11" height="11" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M350 198.5H393" stroke="#6e7781" stroke-width="3" stroke-linecap="round"/>
+<path d="M329 197.5L334 203.5L344 190" fill="none" stroke="#1565c0" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="330" y="211" width="11" height="11" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M350 216.5H393" stroke="#6e7781" stroke-width="3" stroke-linecap="round"/>
+<rect x="330" y="229" width="11" height="11" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M350 234.5H393" stroke="#6e7781" stroke-width="3" stroke-linecap="round"/>
+<path d="M329 233.5L334 239.5L344 226" fill="none" stroke="#1565c0" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="330" y="247" width="11" height="11" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M350 252.5H393" stroke="#6e7781" stroke-width="3" stroke-linecap="round"/>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M294.9 238.6L297.8 254.7L299.7 268" stroke-width="7.1"/>
+<path d="M294 263.2L294.5 284.1" stroke-width="9.5"/>
+<path d="M294.5 284.1L292.1 306" stroke-width="8.5"/>
+<path d="M289.2 306.9L300.6 306.9" stroke-width="5.7"/>
+<path d="M294 263.2L294.5 284.1" stroke-width="9.5"/>
+<path d="M294.5 284.1L295.9 306" stroke-width="8.5"/>
+<path d="M293.1 306.9L304.4 306.9" stroke-width="5.7"/>
+<path d="M294 263.2L294.9 238.6" stroke-width="14.2"/>
+<path d="M294.9 238.6L296.4 230" stroke-width="6.6"/>
+</g>
+<circle cx="297.3" cy="220.5" r="8.5" fill="#1f2328"/>
+<g transform="rotate(0 297.3 220.5)">
+<path d="M285.9 219.6A11.4 11.4 0 0 1 308.7 219.6Z" fill="#1f2328"/>
+<path d="M285.9 219.6H313.5" stroke="#1f2328" stroke-width="3.3" stroke-linecap="round"/>
+<rect x="304.9" y="211.9" width="4.8" height="5.7" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+</g>
+<path d="M322.4 232L330.9 222.5" stroke="#1565c0" stroke-width="4.2" stroke-linecap="round"/>
+<path d="M294.9 238.6L312.1 249L323.4 230" fill="none" stroke="#eceef0" stroke-width="10.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M294.9 238.6L312.1 249L323.4 230" fill="none" stroke="#1f2328" stroke-width="7.1" stroke-linecap="round" stroke-linejoin="round"/>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M430.1 238.6L427.2 254.7L425.3 268" stroke-width="7.1"/>
+<path d="M431 263.2L430.5 284.1" stroke-width="9.5"/>
+<path d="M430.5 284.1L432.9 306" stroke-width="8.5"/>
+<path d="M435.8 306.9L424.4 306.9" stroke-width="5.7"/>
+<path d="M431 263.2L430.5 284.1" stroke-width="9.5"/>
+<path d="M430.5 284.1L429.1 306" stroke-width="8.5"/>
+<path d="M431.9 306.9L420.6 306.9" stroke-width="5.7"/>
+<path d="M431 263.2L430.1 238.6" stroke-width="14.2"/>
+<path d="M430.1 238.6L428.6 230" stroke-width="6.6"/>
+</g>
+<circle cx="427.7" cy="220.5" r="8.5" fill="#1f2328"/>
+<g transform="rotate(0 427.7 220.5)">
+<path d="M416.3 219.6A11.4 11.4 0 0 1 439.1 219.6Z" fill="#1f2328"/>
+<path d="M411.5 219.6H439.1" stroke="#1f2328" stroke-width="3.3" stroke-linecap="round"/>
+<rect x="415.3" y="211.9" width="4.8" height="5.7" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+</g>
+<path d="M430.1 238.6L413.9 247.1L401.6 235.7" fill="none" stroke="#eceef0" stroke-width="10.9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M430.1 238.6L413.9 247.1L401.6 235.7" fill="none" stroke="#1f2328" stroke-width="7.1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="362" y="335" font-size="19" fill="#1f2328" font-weight="700" text-anchor="middle">comité paritaire</text>
+<text x="362" y="358" font-size="19" fill="#1f2328" text-anchor="middle">ou conseiller SST</text>
+<path d="M224 234L246 234" fill="none" stroke="#1565c0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M256 234L244 241.2L244 226.8Z" fill="#1565c0"/>
+<path d="M362 376L362 398" fill="none" stroke="#1565c0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M362 408L354.8 396L369.2 396Z" fill="#1565c0"/>
+<text x="374" y="398" font-size="19" fill="#1565c0" font-weight="700">prioriser</text>
+<rect x="260" y="412" width="204" height="172" rx="12" fill="#eceef0"/>
+<text x="274" y="438" font-size="19" fill="#1f2328" font-weight="700">Plan d’action</text>
+<text x="274" y="461" font-size="19" fill="#4b535c">leviers par niveau</text>
+<rect x="274" y="472" width="176" height="98" rx="4" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<rect x="286" y="486" width="12" height="12" rx="2" fill="#1565c0"/>
+<text x="308" y="499" font-size="19" fill="#1f2328">primaire</text>
+<rect x="286" y="514" width="12" height="12" rx="2" fill="#1565c0"/>
+<text x="308" y="527" font-size="19" fill="#1f2328">secondaire</text>
+<rect x="286" y="542" width="12" height="12" rx="2" fill="#1565c0"/>
+<text x="308" y="555" font-size="19" fill="#1f2328">tertiaire</text>
+<path d="M256 528L236 528L236 346L246 346" fill="none" stroke="#1565c0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M256 346L244 353.2L244 338.8Z" fill="#1565c0"/>
+<text x="224" y="523" font-size="19" fill="#1565c0" font-weight="700" text-anchor="end">mise en œuvre</text>
+<text x="224" y="412" font-size="19" fill="#1565c0" font-weight="700" text-anchor="end">reprendre la grille</text>
+</g>
+</svg>

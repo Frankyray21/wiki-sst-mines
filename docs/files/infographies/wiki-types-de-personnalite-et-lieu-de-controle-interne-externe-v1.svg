@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="648" viewBox="0 0 480 648" role="img" aria-labelledby="t d">
+<title id="t">Lieu de contrôle : interne ou externe, à quoi le travailleur attribue ce qui lui arrive</title>
+<desc id="d">Deux grands panneaux, l’un au-dessus de l’autre. En haut, lieu de contrôle interne, « Je peux agir sur ma situation » : le travailleur casqué tend le bras et une grande flèche part de lui vers un levier de commande. En bas, lieu de contrôle externe, « Ce qui m’arrive dépend des autres ou du hasard » : deux grandes flèches arrivent vers le travailleur casqué, l’une depuis un dé (le hasard), l’autre depuis une autre personne, tête nue (les autres). Les deux panneaux ont la même couleur. Sous le panneau externe, en bleu : réaliste quand le poste offre peu de contrôle.</desc>
+<rect width="480" height="648" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" fill="#1f2328" font-weight="700">Lieu de contrôle :</text>
+<text x="24" y="78" font-size="26" fill="#1f2328" font-weight="700">interne ou externe</text>
+<rect x="16" y="98" width="448" height="222" rx="12" fill="#eceef0"/>
+<text x="32" y="130" font-size="22" fill="#1f2328" font-weight="700">Interne</text>
+<text x="32" y="158" font-size="20" fill="#1f2328">« Je peux agir sur ma situation »</text>
+<g fill="#1f2328" transform="translate(150 306) scale(1.08)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/><rect x="2" y="-45" width="10" height="45" rx="4"/>
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -76L40 -66" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<path d="M204 230.4L282 230.4" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<path d="M300 230.4L280 242.8L280 218Z" fill="#1f2328" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<g transform="translate(322 306) scale(1.1)">
+<path d="M0 -14L24 -84" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+<circle cx="24" cy="-84" r="12" fill="#1f2328"/>
+<path d="M-30 0V-10Q-30 -18 -22 -18H22Q30 -18 30 -10V0Z" fill="#1f2328"/>
+<rect x="-12" y="-15" width="24" height="5" rx="2.5" fill="#fbfaf6"/>
+</g>
+<rect x="16" y="330" width="448" height="238" rx="12" fill="#eceef0"/>
+<text x="32" y="362" font-size="22" fill="#1f2328" font-weight="700">Externe</text>
+<text x="32" y="390" font-size="20" fill="#1f2328">« Ce qui m’arrive dépend des autres</text>
+<text x="32" y="414" font-size="20" fill="#1f2328">ou du hasard »</text>
+<g fill="#1f2328" transform="translate(240 554) scale(1.08)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/><rect x="2" y="-45" width="10" height="45" rx="4"/>
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<g stroke="#1f2328" stroke-width="3.5" stroke-linejoin="round">
+<path d="M70 456.7L84.6 442.2H136.6L122 456.7Z" fill="#eceef0"/>
+<path d="M122 456.7L136.6 442.2V494.2L122 508.7Z" fill="#eceef0"/>
+<rect x="70" y="456.7" width="52" height="52" fill="#fbfaf6"/>
+</g>
+<circle cx="83" cy="469.7" r="4.7" fill="#1f2328"/>
+<circle cx="109" cy="469.7" r="4.7" fill="#1f2328"/>
+<circle cx="96" cy="482.7" r="4.7" fill="#1f2328"/>
+<circle cx="83" cy="495.7" r="4.7" fill="#1f2328"/>
+<circle cx="109" cy="495.7" r="4.7" fill="#1f2328"/>
+<ellipse cx="103.3" cy="449.4" rx="5.1" ry="2.6" fill="#1f2328"/>
+<path d="M140 482.7L188 482.7" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<path d="M206 482.7L186 495.1L186 470.3Z" fill="#1f2328" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<g fill="#1f2328" transform="translate(382 554) scale(1.04)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/><rect x="2" y="-45" width="10" height="45" rx="4"/>
+<circle cx="0" cy="-95" r="12"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" fill="none"/>
+</g>
+<path d="M350 482.7L292 482.7" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<path d="M274 482.7L294 470.3L294 495.1Z" fill="#1f2328" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M24 578V586H456V578" fill="none" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<text x="240" y="612" font-size="20" fill="#1565c0" font-weight="700" text-anchor="middle">Réaliste quand le poste</text>
+<text x="240" y="636" font-size="20" fill="#1565c0" font-weight="700" text-anchor="middle">offre peu de contrôle</text>
+</g>
+</svg>

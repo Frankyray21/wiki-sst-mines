@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="660" viewBox="0 0 480 660" role="img" aria-labelledby="t d">
+<title id="t">Conséquences sur trois plans : stress chronique au travail</title>
+<desc id="d">Silhouette de mineur casqué, debout, vue de face ; à droite, les trois plans que nomme la page, en rouge, chacun relié à sa place sur le corps ou à côté. Psychologique : la tête, teintée de rouge, porte un trait emmêlé ; mots de la page : dépression, anxiété, burnout, TSPT. Physique : six systèmes, sur le corps ou à côté, reliés à leur nom : des microbes près de l’épaule (immunitaire), un cœur sur la poitrine (cardiovasculaire), l’estomac sous le cœur (digestif), la colonne vertébrale, rouge au cou et au bas du dos (musculosquelettique), un ruban gradué autour de la taille (métabolique), les symboles féminin et masculin au bas-ventre (reproductif). Comportemental : trois dessins à côté des jambes, une bouteille et un verre (consommation), un lit sous la lune (sommeil), un véhicule et un choc rouge (accidents). Schéma de principe, sans chiffre.</desc>
+<rect width="480" height="660" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Conséquences sur trois plans</text>
+<text x="24" y="76" font-size="19" fill="#4b535c">Stress chronique au travail</text>
+
+<!-- Silhouette de mineur, de face : bras (dessous), puis tronc et jambes -->
+<g fill="#eceef0" stroke="#1f2328" stroke-width="3" stroke-linejoin="round">
+<path d="M86 206Q70 209 67 224L49 370Q46 392 57 393Q68 394 67 376L84 252Z"/>
+<path d="M150 206Q166 209 169 224L187 370Q190 392 179 393Q168 394 169 376L152 252Z"/>
+<path d="M108 182V200L89 205Q76 209 76 224L79 330L78 392L84 624L78 634H116L115 624L116 412Q118 405 120 412L121 624L120 634H158L152 624L158 392L157 330L160 224Q160 209 147 205L128 200V182Z"/>
+</g>
+<!-- tête -->
+<ellipse cx="118" cy="158" rx="25" ry="28" fill="#fde3e0" stroke="#1f2328" stroke-width="3"/>
+<!-- casque -->
+<path d="M86 134A32 30 0 0 1 150 134Z" fill="#1f2328"/>
+<path d="M80 134H156" stroke="#1f2328" stroke-width="6" stroke-linecap="round"/>
+<rect x="111" y="112" width="14" height="10" rx="2" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<!-- psychologique : pensées emmêlées dans la tête -->
+<path d="M104 164C104 150 122 146 126 156C130 166 112 172 110 162C108 150 132 148 134 162C135 172 118 178 112 172" fill="none" stroke="#c62828" stroke-width="3" stroke-linecap="round"/>
+<!-- colonne : cervicales et lombaires en rouge, dorsales en gris -->
+<g fill="#c62828">
+<rect x="113" y="186" width="10" height="7" rx="2"/>
+<rect x="113" y="195" width="10" height="7" rx="2"/>
+</g>
+<g fill="none" stroke="#6e7781" stroke-width="2.5">
+<rect x="113" y="206" width="10" height="7" rx="2"/>
+<rect x="113" y="217" width="10" height="7" rx="2"/>
+<rect x="113" y="228" width="10" height="7" rx="2"/>
+<rect x="113" y="239" width="10" height="7" rx="2"/>
+<rect x="113" y="250" width="10" height="7" rx="2"/>
+<rect x="113" y="261" width="10" height="7" rx="2"/>
+<rect x="113" y="272" width="10" height="7" rx="2"/>
+<rect x="113" y="283" width="10" height="7" rx="2"/>
+<rect x="113" y="294" width="10" height="7" rx="2"/>
+<rect x="113" y="305" width="10" height="7" rx="2"/>
+</g>
+<g fill="#c62828">
+<rect x="111" y="317" width="14" height="9" rx="2"/>
+<rect x="111" y="329" width="14" height="9" rx="2"/>
+<rect x="111" y="341" width="14" height="9" rx="2"/>
+</g>
+<!-- cœur -->
+<path d="M141 281C130 273 126 267 126 260C126 254 131 251 135 251C138 251 140 253 141 256C142 253 144 251 147 251C151 251 156 254 156 260C156 267 152 273 141 281Z" fill="#c62828"/>
+<!-- estomac -->
+<path d="M133 291C133 287 138 286 139 290C141 297 150 294 152 300C154 308 146 314 138 312C131 310 128 303 131 297Z" fill="#fde3e0" stroke="#c62828" stroke-width="3" stroke-linejoin="round"/>
+<!-- tour de taille (ruban) -->
+<rect x="76" y="359" width="84" height="14" rx="2" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/>
+<path d="M84 359V366M92 359V363M100 359V366M108 359V363M116 359V366M124 359V363M132 359V366M140 359V363M148 359V366M156 359V363" stroke="#c62828" stroke-width="2.5"/>
+<!-- bassin -->
+<g fill="none" stroke="#c62828" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="104" cy="386" r="7.5" fill="#fde3e0"/>
+<path d="M104 393.5V405M98.5 400H109.5"/>
+<circle cx="129" cy="392" r="7.5" fill="#fde3e0"/>
+<path d="M134.3 386.7L141 380M134.5 380H141V386.5"/>
+</g>
+<!-- microbes (infections) -->
+<g fill="#c62828" stroke="#c62828" stroke-width="2.5" stroke-linecap="round">
+<circle cx="207" cy="234" r="8"/>
+<path d="M214.4 237.1L219.0 239.0M210.1 241.4L212.0 246.0M203.9 241.4L202.0 246.0M199.6 237.1L195.0 239.0M199.6 230.9L195.0 229.0M203.9 226.6L202.0 222.0M210.1 226.6L212.0 222.0M214.4 230.9L219.0 229.0"/>
+<circle cx="219.0" cy="239.0" r="2.4"/>
+<circle cx="212.0" cy="246.0" r="2.4"/>
+<circle cx="202.0" cy="246.0" r="2.4"/>
+<circle cx="195.0" cy="239.0" r="2.4"/>
+<circle cx="195.0" cy="229.0" r="2.4"/>
+<circle cx="202.0" cy="222.0" r="2.4"/>
+<circle cx="212.0" cy="222.0" r="2.4"/>
+<circle cx="219.0" cy="229.0" r="2.4"/>
+<circle cx="186" cy="203" r="5.5"/>
+<path d="M191.1 205.1L194.8 206.6M188.1 208.1L189.6 211.8M183.9 208.1L182.4 211.8M180.9 205.1L177.2 206.6M180.9 200.9L177.2 199.4M183.9 197.9L182.4 194.2M188.1 197.9L189.6 194.2M191.1 200.9L194.8 199.4"/>
+<circle cx="194.8" cy="206.6" r="2"/>
+<circle cx="189.6" cy="211.8" r="2"/>
+<circle cx="182.4" cy="211.8" r="2"/>
+<circle cx="177.2" cy="206.6" r="2"/>
+<circle cx="177.2" cy="199.4" r="2"/>
+<circle cx="182.4" cy="194.2" r="2"/>
+<circle cx="189.6" cy="194.2" r="2"/>
+<circle cx="194.8" cy="199.4" r="2"/>
+</g>
+
+<!-- Étiquettes : psychologique -->
+<path d="M146 156H232" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M236 98V172" stroke="#6e7781" stroke-width="2.5"/>
+<text x="248" y="116" font-size="20" font-weight="700" fill="#c62828">psychologique</text>
+<text x="248" y="142" font-size="19" fill="#1f2328">dépression, anxiété,</text>
+<text x="248" y="166" font-size="19" fill="#1f2328">burnout, TSPT</text>
+
+<!-- Étiquettes : physique -->
+<text x="248" y="210" font-size="20" font-weight="700" fill="#c62828">physique</text>
+<g stroke="#6e7781" stroke-width="2.5" fill="none">
+<path d="M223 234H242"/>
+<path d="M156 264H242"/>
+<path d="M153 301H242"/>
+<path d="M125 334H242"/>
+<path d="M162 366H242"/>
+<path d="M139 396L147 400H242"/>
+</g>
+<text x="248" y="239" font-size="19" fill="#1f2328">immunitaire</text>
+<text x="248" y="271" font-size="19" fill="#1f2328">cardiovasculaire</text>
+<text x="248" y="307" font-size="19" fill="#1f2328">digestif</text>
+<text x="248" y="341" font-size="19" fill="#1f2328">musculosquelettique</text>
+<text x="248" y="373" font-size="19" fill="#1f2328">métabolique</text>
+<text x="248" y="407" font-size="19" fill="#1f2328">reproductif</text>
+
+<!-- Étiquettes : comportemental -->
+<text x="248" y="464" font-size="20" font-weight="700" fill="#c62828">comportemental</text>
+<!-- consommation : bouteille et verre -->
+<g stroke="#1f2328" stroke-width="3" stroke-linejoin="round">
+<path d="M259 480H269V492Q277 497 277 507V528H251V507Q251 497 259 492Z" fill="#eceef0"/>
+<path d="M283 505H301L298 528H286Z" fill="#eceef0"/>
+</g>
+<path d="M286 516H298" stroke="#c62828" stroke-width="6"/>
+<text x="314" y="512" font-size="19" fill="#1f2328">consommation</text>
+<!-- sommeil : lit, dormeur, lune -->
+<g stroke="#1f2328" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M250 548V584M250 574H304V584"/>
+</g>
+<circle cx="262" cy="562" r="6.5" fill="#1f2328"/>
+<path d="M271 558H302V574H271Z" fill="#eceef0" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<path d="M300 546A9 9 0 1 1 291 537A7 7 0 1 0 300 546Z" fill="#1f2328"/>
+<text x="314" y="570" font-size="19" fill="#1f2328">sommeil</text>
+<!-- accidents : véhicule et choc -->
+<g fill="#1f2328">
+<path d="M248 626V610H268L277 598H292L299 610V626Z"/>
+<path d="M280 602H290L294 609H280Z" fill="#fbfaf6"/>
+<circle cx="259" cy="628" r="6.5" stroke="#fbfaf6" stroke-width="2.5"/>
+<circle cx="288" cy="628" r="6.5" stroke="#fbfaf6" stroke-width="2.5"/>
+</g>
+<path d="M302 598L306 609L315 602L311 613L320 617L309 619L311 628L302 621L297 629L297 617Z" fill="#c62828"/>
+<text x="326" y="622" font-size="19" fill="#1f2328">accidents</text>
+</g>
+</svg>

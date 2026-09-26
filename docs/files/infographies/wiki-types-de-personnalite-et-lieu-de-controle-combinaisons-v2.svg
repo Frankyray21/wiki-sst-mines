@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="654" viewBox="0 0 480 654" role="img" aria-labelledby="t d">
+<title id="t">Type de personnalité et lieu de contrôle : quatre combinaisons, dans un même contexte de travail</title>
+<desc id="d">Grille de quatre cases posée à l’intérieur d’un grand cadre gris, les conditions de travail : le contexte produit le risque, l’individu le filtre. En colonnes, le type de personnalité : type A, pressé et impatient, marqué d’un grand chronomètre ; type B, détendu et patient, sans chronomètre. En lignes, le lieu de contrôle, c’est-à-dire à quoi le travailleur attribue ce qui lui arrive : interne, une flèche part du travailleur casqué vers un levier ; externe, deux flèches arrivent vers lui, l’une depuis un dé, l’autre depuis une autre personne. Chaque case combine une colonne et une ligne : dans la colonne du type A, le travailleur a un chronomètre près de la tête. Les quatre cases ont la même couleur, aucune n’est marquée comme dangereuse ou protectrice. En bas : aucun travailleur n’est à risque ou protégé en soi.</desc>
+<rect width="480" height="654" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" fill="#1f2328" font-weight="700">Type de personnalité</text>
+<text x="24" y="78" font-size="26" fill="#1f2328" font-weight="700">et lieu de contrôle</text>
+<rect x="16" y="96" width="448" height="542" rx="12" fill="#eceef0"/>
+<g transform="translate(28 106) scale(1.25)" stroke="#1f2328" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M0 40H28M5 40L11 8H17L23 40M8 25H20M7 33L19 18"/><circle cx="14" cy="4" r="6" fill="#fbfaf6"/></g>
+<text x="74" y="126" font-size="21" fill="#1f2328" font-weight="700">Conditions de travail</text>
+<text x="74" y="151" font-size="19" fill="#c62828">le contexte produit le risque,</text>
+<text x="74" y="174" font-size="19" fill="#4b535c">l’individu le filtre</text>
+<rect x="54.6" y="197.3" width="6.7" height="9.6" fill="#1f2328"/>
+<rect x="49.4" y="192" width="17.3" height="7.2" rx="2.4" fill="#1f2328"/>
+<rect x="55.1" y="196.8" width="5.8" height="8.6" fill="#1f2328" transform="rotate(45 58 228)"/>
+<circle cx="58" cy="228" r="24" fill="#fbfaf6" stroke="#1f2328" stroke-width="4"/>
+<path d="M58 228V213.1M58 228L70 230.9" stroke="#1f2328" stroke-width="4" stroke-linecap="round"/>
+<text x="96" y="214" font-size="22" fill="#1f2328" font-weight="700">Type A</text>
+<text x="96" y="238" font-size="19" fill="#4b535c">pressé,</text>
+<text x="96" y="260" font-size="19" fill="#4b535c">impatient</text>
+<text x="304" y="214" font-size="22" fill="#1f2328" font-weight="700">Type B</text>
+<text x="304" y="238" font-size="19" fill="#4b535c">détendu,</text>
+<text x="304" y="260" font-size="19" fill="#4b535c">patient</text>
+<text x="30" y="290" font-size="19" fill="#4b535c">Lieu de contrôle <tspan font-weight="700" font-size="20" fill="#1f2328">interne</tspan></text>
+<rect x="24" y="298" width="212" height="116" rx="8" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<g fill="#1f2328" transform="translate(86 405) scale(0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/><rect x="2" y="-45" width="10" height="45" rx="4"/>
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -76L40 -66" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<path d="M123.6 349L155 349" stroke="#1f2328" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M168 349L153 358.3L153 339.7Z" fill="#1f2328" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<g transform="translate(188 405) scale(0.8)">
+<path d="M0 -14L24 -84" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+<circle cx="24" cy="-84" r="12" fill="#1f2328"/>
+<path d="M-30 0V-10Q-30 -18 -22 -18H22Q30 -18 30 -10V0Z" fill="#1f2328"/>
+<rect x="-12" y="-15" width="24" height="5" rx="2.5" fill="#fbfaf6"/>
+</g>
+<rect x="47.9" y="308.8" width="4.2" height="6" fill="#1f2328"/>
+<rect x="44.6" y="305.5" width="10.8" height="4.5" rx="1.5" fill="#1f2328"/>
+<rect x="48.2" y="308.5" width="3.6" height="5.4" fill="#1f2328" transform="rotate(45 50 328)"/>
+<circle cx="50" cy="328" r="15" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<path d="M50 328V318.7M50 328L57.5 329.8" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="244" y="298" width="212" height="116" rx="8" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<g fill="#1f2328" transform="translate(306 405) scale(0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/><rect x="2" y="-45" width="10" height="45" rx="4"/>
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -76L40 -66" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<path d="M343.6 349L375 349" stroke="#1f2328" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M388 349L373 358.3L373 339.7Z" fill="#1f2328" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<g transform="translate(408 405) scale(0.8)">
+<path d="M0 -14L24 -84" stroke="#1f2328" stroke-width="8" stroke-linecap="round"/>
+<circle cx="24" cy="-84" r="12" fill="#1f2328"/>
+<path d="M-30 0V-10Q-30 -18 -22 -18H22Q30 -18 30 -10V0Z" fill="#1f2328"/>
+<rect x="-12" y="-15" width="24" height="5" rx="2.5" fill="#fbfaf6"/>
+</g>
+<text x="30" y="444" font-size="19" fill="#4b535c">Lieu de contrôle <tspan font-weight="700" font-size="20" fill="#1f2328">externe</tspan></text>
+<rect x="24" y="452" width="212" height="116" rx="8" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<g fill="#1f2328" transform="translate(136 559) scale(0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/><rect x="2" y="-45" width="10" height="45" rx="4"/>
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<g stroke="#1f2328" stroke-width="3" stroke-linejoin="round">
+<path d="M34 493.4L43 484.4H75L66 493.4Z" fill="#eceef0"/>
+<path d="M66 493.4L75 484.4V516.4L66 525.4Z" fill="#eceef0"/>
+<rect x="34" y="493.4" width="32" height="32" fill="#fbfaf6"/>
+</g>
+<circle cx="42" cy="501.4" r="2.9" fill="#1f2328"/>
+<circle cx="58" cy="501.4" r="2.9" fill="#1f2328"/>
+<circle cx="50" cy="509.4" r="2.9" fill="#1f2328"/>
+<circle cx="42" cy="517.4" r="2.9" fill="#1f2328"/>
+<circle cx="58" cy="517.4" r="2.9" fill="#1f2328"/>
+<ellipse cx="54.5" cy="488.9" rx="3.2" ry="1.6" fill="#1f2328"/>
+<path d="M80 509.4L96 509.4" stroke="#1f2328" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M109 509.4L94 518.7L94 500.1Z" fill="#1f2328" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<g fill="#1f2328" transform="translate(212 559) scale(0.72)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/><rect x="2" y="-45" width="10" height="45" rx="4"/>
+<circle cx="0" cy="-95" r="12"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" fill="none"/>
+</g>
+<path d="M190 509.4L176 509.4" stroke="#1f2328" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M163 509.4L178 500.1L178 518.7Z" fill="#1f2328" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="97.9" y="462.8" width="4.2" height="6" fill="#1f2328"/>
+<rect x="94.6" y="459.5" width="10.8" height="4.5" rx="1.5" fill="#1f2328"/>
+<rect x="98.2" y="462.5" width="3.6" height="5.4" fill="#1f2328" transform="rotate(45 100 482)"/>
+<circle cx="100" cy="482" r="15" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<path d="M100 482V472.7M100 482L107.5 483.8" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="244" y="452" width="212" height="116" rx="8" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<g fill="#1f2328" transform="translate(356 559) scale(0.8)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/><rect x="2" y="-45" width="10" height="45" rx="4"/>
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+<g stroke="#1f2328" stroke-width="3" stroke-linejoin="round">
+<path d="M254 493.4L263 484.4H295L286 493.4Z" fill="#eceef0"/>
+<path d="M286 493.4L295 484.4V516.4L286 525.4Z" fill="#eceef0"/>
+<rect x="254" y="493.4" width="32" height="32" fill="#fbfaf6"/>
+</g>
+<circle cx="262" cy="501.4" r="2.9" fill="#1f2328"/>
+<circle cx="278" cy="501.4" r="2.9" fill="#1f2328"/>
+<circle cx="270" cy="509.4" r="2.9" fill="#1f2328"/>
+<circle cx="262" cy="517.4" r="2.9" fill="#1f2328"/>
+<circle cx="278" cy="517.4" r="2.9" fill="#1f2328"/>
+<ellipse cx="274.5" cy="488.9" rx="3.2" ry="1.6" fill="#1f2328"/>
+<path d="M300 509.4L316 509.4" stroke="#1f2328" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M329 509.4L314 518.7L314 500.1Z" fill="#1f2328" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<g fill="#1f2328" transform="translate(432 559) scale(0.72)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/><rect x="2" y="-45" width="10" height="45" rx="4"/>
+<circle cx="0" cy="-95" r="12"/>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" fill="none"/>
+</g>
+<path d="M410 509.4L396 509.4" stroke="#1f2328" stroke-width="5.5" stroke-linecap="round"/>
+<path d="M383 509.4L398 500.1L398 518.7Z" fill="#1f2328" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="30" y="598" font-size="20" fill="#1f2328" font-weight="700">Aucun travailleur n’est à risque</text>
+<text x="30" y="622" font-size="20" fill="#1f2328" font-weight="700">ou protégé en soi</text>
+</g>
+</svg>

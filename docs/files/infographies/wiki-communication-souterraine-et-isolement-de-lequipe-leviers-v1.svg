@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="660" viewBox="0 0 480 660" role="img" aria-labelledby="t d">
+<title id="t">Compenser l’isolement au fil du quart</title>
+<desc id="d">Coupe d’une mine : le quart de travail se lit de gauche à droite, de la surface au fond et retour. En haut à gauche, à la surface, avant le quart : un travailleur parle à ses collègues casqués, bulle bleue : briefing de quart. En haut à droite, après le quart : des travailleurs se parlent, bulles bleues : debriefing en surface. Dans le puits, sous le chevalement, une flèche à double sens : la descente et la remontée. Sous terre, pendant le quart : au pied du puits, à la recette, un téléphone relié à la surface par une ligne bleue, obligatoire selon le RSSM, article 283. Dans la galerie, le contremaître, en bleu, marche vers l’équipe, une radio à la main ; un travailleur de l’équipe lui répond par radio et les ondes bleues vont de l’un à l’autre : check-in radio régulier, aussi moment de soutien et de détection. Sous le contremaître : présence du contremaître. Aucune fréquence ni durée n’est indiquée.</desc>
+<rect width="480" height="660" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" fill="#1f2328" font-weight="700">Compenser l’isolement</text>
+<text x="24" y="78" font-size="26" fill="#1f2328" font-weight="700">au fil du quart</text>
+<path d="M16 280H464V632Q464 644 452 644H28Q16 644 16 632Z" fill="#eceef0"/>
+<rect x="22" y="280" width="32" height="320" fill="#fbfaf6"/>
+<rect x="53" y="408" width="403" height="192" fill="#fbfaf6"/>
+<g fill="none" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"><path d="M22 280V600H456V408H54V280"/></g>
+<path d="M16 280H464" stroke="#6e7781" stroke-width="3"/>
+<g fill="none" stroke="#4b535c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M22.4 280L32.2 219.7M53.6 280L43.8 219.7"/><path d="M25 264.4H51M27.5 248.9H48.5M30 233.3H46"/><path d="M25 264.4L48.5 248.9L30 233.3"/><path d="M43.8 219.7L67.2 280"/><circle cx="38" cy="217.8" r="7.8" fill="#fbfaf6"/></g><circle cx="38" cy="217.8" r="2.4" fill="#4b535c"/>
+<path d="M38 296.8L38 459.2" fill="none" stroke="#4b535c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M38 468L31.4 457L44.6 457Z" fill="#4b535c"/>
+<path d="M38 288L44.6 299L31.4 299Z" fill="#4b535c"/>
+<text x="24" y="116" font-size="20" fill="#1f2328" font-weight="700">avant le quart</text>
+<text x="24" y="139" font-size="19" fill="#1565c0" font-weight="700">briefing de quart</text>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M100 205L98.8 221.2L97.6 240.2" stroke-width="7.2"/>
+<path d="M93.9 273.2L106.1 273.2" stroke-width="5.8"/>
+<path d="M100 230L98.5 251.1L96.7 271.7" stroke-width="9.1"/>
+<path d="M100 230L102.2 251L104.1 271.7" stroke="#fbfaf6" stroke-width="13.7"/>
+<path d="M101.2 273.2L113.4 273.2" stroke-width="5.8"/>
+<path d="M100 230L102.2 251L104.1 271.7" stroke-width="9.1"/>
+<path d="M100 230L100 203.1" stroke-width="14.4"/>
+<path d="M100 203.1L100 195.4" stroke-width="6.7"/>
+</g>
+<circle cx="100.8" cy="186.8" r="8.6" fill="#1f2328"/>
+<path d="M91.1 186A9.8 9.8 0 0 1 110.6 186Z" fill="#1f2328"/>
+<path d="M91.1 186H114.6" stroke="#1f2328" stroke-width="2.8" stroke-linecap="round"/>
+<rect x="107.3" y="179.5" width="4.1" height="4.9" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M100 205L106.1 220.1L117.9 207.7" stroke="#fbfaf6" stroke-width="11.1"/><path d="M100 205L106.1 220.1L117.9 207.7" stroke="#1f2328" stroke-width="7.2"/></g>
+<path d="M124 148H148Q156 148 156 156V164Q156 172 148 172H129L116 181L120 172H124Q116 172 116 164V156Q116 148 124 148Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<g fill="#1565c0"><circle cx="127" cy="160" r="3"/><circle cx="136" cy="160" r="3"/><circle cx="145" cy="160" r="3"/></g>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M178 205L179.2 221.2L180.4 240.2" stroke-width="7.2"/>
+<path d="M184.1 273.2L171.9 273.2" stroke-width="5.8"/>
+<path d="M178 230L179.5 251.1L181.3 271.7" stroke-width="9.1"/>
+<path d="M178 230L175.8 251L173.9 271.7" stroke="#fbfaf6" stroke-width="13.7"/>
+<path d="M176.8 273.2L164.6 273.2" stroke-width="5.8"/>
+<path d="M178 230L175.8 251L173.9 271.7" stroke-width="9.1"/>
+<path d="M178 230L178 203.1" stroke-width="14.4"/>
+<path d="M178 203.1L178 195.4" stroke-width="6.7"/>
+</g>
+<circle cx="177.2" cy="186.8" r="8.6" fill="#1f2328"/>
+<path d="M167.4 186A9.8 9.8 0 0 1 186.9 186Z" fill="#1f2328"/>
+<path d="M186.9 186H163.4" stroke="#1f2328" stroke-width="2.8" stroke-linecap="round"/>
+<rect x="166.6" y="179.5" width="4.1" height="4.9" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M178 205L176.6 221.2L174.7 240.2" stroke="#fbfaf6" stroke-width="11.1"/><path d="M178 205L176.6 221.2L174.7 240.2" stroke="#1f2328" stroke-width="7.2"/></g>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M214 205L215.2 221.2L216.4 240.2" stroke-width="7.2"/>
+<path d="M220.1 273.2L207.9 273.2" stroke-width="5.8"/>
+<path d="M214 230L215.5 251.1L217.3 271.7" stroke-width="9.1"/>
+<path d="M214 230L211.8 251L209.9 271.7" stroke="#fbfaf6" stroke-width="13.7"/>
+<path d="M212.8 273.2L200.6 273.2" stroke-width="5.8"/>
+<path d="M214 230L211.8 251L209.9 271.7" stroke-width="9.1"/>
+<path d="M214 230L214 203.1" stroke-width="14.4"/>
+<path d="M214 203.1L214 195.4" stroke-width="6.7"/>
+</g>
+<circle cx="213.2" cy="186.8" r="8.6" fill="#1f2328"/>
+<path d="M203.4 186A9.8 9.8 0 0 1 222.9 186Z" fill="#1f2328"/>
+<path d="M222.9 186H199.4" stroke="#1f2328" stroke-width="2.8" stroke-linecap="round"/>
+<rect x="202.6" y="179.5" width="4.1" height="4.9" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M214 205L212.6 221.2L210.7 240.2" stroke="#fbfaf6" stroke-width="11.1"/><path d="M214 205L212.6 221.2L210.7 240.2" stroke="#1f2328" stroke-width="7.2"/></g>
+<text x="456" y="116" font-size="20" fill="#1f2328" font-weight="700" text-anchor="end">après le quart</text>
+<text x="456" y="139" font-size="19" fill="#1565c0" font-weight="700" text-anchor="end">debriefing en surface</text>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M300 205L298.8 221.2L297.6 240.2" stroke-width="7.2"/>
+<path d="M293.9 273.2L306.1 273.2" stroke-width="5.8"/>
+<path d="M300 230L298.5 251.1L296.7 271.7" stroke-width="9.1"/>
+<path d="M300 230L302.2 251L304.1 271.7" stroke="#fbfaf6" stroke-width="13.7"/>
+<path d="M301.2 273.2L313.4 273.2" stroke-width="5.8"/>
+<path d="M300 230L302.2 251L304.1 271.7" stroke-width="9.1"/>
+<path d="M300 230L300 203.1" stroke-width="14.4"/>
+<path d="M300 203.1L300 195.4" stroke-width="6.7"/>
+</g>
+<circle cx="300.8" cy="186.8" r="8.6" fill="#1f2328"/>
+<path d="M291.1 186A9.8 9.8 0 0 1 310.6 186Z" fill="#1f2328"/>
+<path d="M291.1 186H314.6" stroke="#1f2328" stroke-width="2.8" stroke-linecap="round"/>
+<rect x="307.3" y="179.5" width="4.1" height="4.9" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M300 205L297.1 221L313 227.2" stroke="#fbfaf6" stroke-width="11.1"/><path d="M300 205L297.1 221L313 227.2" stroke="#1f2328" stroke-width="7.2"/></g>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M352 205L353.2 221.2L354.4 240.2" stroke-width="7.2"/>
+<path d="M358.1 273.2L345.9 273.2" stroke-width="5.8"/>
+<path d="M352 230L353.5 251.1L355.3 271.7" stroke-width="9.1"/>
+<path d="M352 230L349.8 251L347.9 271.7" stroke="#fbfaf6" stroke-width="13.7"/>
+<path d="M350.8 273.2L338.6 273.2" stroke-width="5.8"/>
+<path d="M352 230L349.8 251L347.9 271.7" stroke-width="9.1"/>
+<path d="M352 230L352 203.1" stroke-width="14.4"/>
+<path d="M352 203.1L352 195.4" stroke-width="6.7"/>
+</g>
+<circle cx="351.2" cy="186.8" r="8.6" fill="#1f2328"/>
+<path d="M341.4 186A9.8 9.8 0 0 1 360.9 186Z" fill="#1f2328"/>
+<path d="M360.9 186H337.4" stroke="#1f2328" stroke-width="2.8" stroke-linecap="round"/>
+<rect x="340.6" y="179.5" width="4.1" height="4.9" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M352 205L353.7 221.2L347.1 237" stroke="#fbfaf6" stroke-width="11.1"/><path d="M352 205L353.7 221.2L347.1 237" stroke="#1f2328" stroke-width="7.2"/></g>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M404 205L405.2 221.2L406.4 240.2" stroke-width="7.2"/>
+<path d="M410.1 273.2L397.9 273.2" stroke-width="5.8"/>
+<path d="M404 230L405.5 251.1L407.3 271.7" stroke-width="9.1"/>
+<path d="M404 230L401.8 251L399.9 271.7" stroke="#fbfaf6" stroke-width="13.7"/>
+<path d="M402.8 273.2L390.6 273.2" stroke-width="5.8"/>
+<path d="M404 230L401.8 251L399.9 271.7" stroke-width="9.1"/>
+<path d="M404 230L404 203.1" stroke-width="14.4"/>
+<path d="M404 203.1L404 195.4" stroke-width="6.7"/>
+</g>
+<circle cx="403.2" cy="186.8" r="8.6" fill="#1f2328"/>
+<path d="M393.4 186A9.8 9.8 0 0 1 412.9 186Z" fill="#1f2328"/>
+<path d="M412.9 186H389.4" stroke="#1f2328" stroke-width="2.8" stroke-linecap="round"/>
+<rect x="392.6" y="179.5" width="4.1" height="4.9" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M404 205L406.4 221.1L389.4 222.3" stroke="#fbfaf6" stroke-width="11.1"/><path d="M404 205L406.4 221.1L389.4 222.3" stroke="#1f2328" stroke-width="7.2"/></g>
+<path d="M312 148H336Q344 148 344 156V164Q344 172 336 172H317L304 181L308 172H312Q304 172 304 164V156Q304 148 312 148Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<g fill="#1565c0"><circle cx="315" cy="160" r="3"/><circle cx="324" cy="160" r="3"/><circle cx="333" cy="160" r="3"/></g>
+<path d="M376 148H400Q408 148 408 156V164Q408 172 400 172H395L402 181L386 172H376Q368 172 368 164V156Q368 148 376 148Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<g fill="#1565c0"><circle cx="379" cy="160" r="3"/><circle cx="388" cy="160" r="3"/><circle cx="397" cy="160" r="3"/></g>
+<text x="80" y="314" font-size="20" fill="#1f2328" font-weight="700">pendant le quart</text>
+<path d="M64 280V436H70" fill="none" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="64" cy="280" r="5" fill="#1565c0"/>
+<rect x="70" y="424" width="28" height="42" rx="4" fill="#e1ecfa" stroke="#1565c0" stroke-width="3"/>
+<path d="M78 430Q64 445 78 460" fill="none" stroke="#1565c0" stroke-width="6.5" stroke-linecap="round"/>
+<g fill="#1565c0"><circle cx="85" cy="435" r="2.3"/><circle cx="85" cy="444" r="2.3"/><circle cx="85" cy="453" r="2.3"/><circle cx="92" cy="435" r="2.3"/><circle cx="92" cy="444" r="2.3"/><circle cx="92" cy="453" r="2.3"/></g>
+<text x="108" y="440" font-size="19" fill="#1565c0" font-weight="700">téléphone relié</text>
+<text x="108" y="463" font-size="19" fill="#1565c0" font-weight="700">à la surface</text>
+<text x="108" y="490" font-size="19" fill="#1f2328" font-weight="700">obligatoire</text>
+<text x="108" y="513" font-size="19" fill="#1f2328">(RSSM, art. 283)</text>
+<g fill="none" stroke="#1565c0" stroke-linecap="round" stroke-linejoin="round">
+<path d="M292 524.2L285.4 539.8L283.5 557.4" stroke-width="7.4"/>
+<path d="M278.9 595L291.6 595" stroke-width="6"/>
+<path d="M292 550.1L290.2 572.1L281.9 591.8" stroke-width="9.5"/>
+<path d="M292 550.1L297.9 571.3L303.8 593.5" stroke="#fbfaf6" stroke-width="14.2"/>
+<path d="M300.9 595L313.6 595" stroke-width="6"/>
+<path d="M292 550.1L297.9 571.3L303.8 593.5" stroke-width="9.5"/>
+<path d="M292 550.1L292 522.2" stroke-width="15"/>
+<path d="M292 522.2L292 514.2" stroke-width="7"/>
+</g>
+<circle cx="292.8" cy="505.2" r="9" fill="#1565c0"/>
+<path d="M282.7 504.4A10.1 10.1 0 0 1 303 504.4Z" fill="#1565c0"/>
+<path d="M282.7 504.4H307.2" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<rect x="299.6" y="497.6" width="4.2" height="5.1" rx="0.8" fill="#fbfaf6" stroke="#1565c0" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M292 524.2L306.7 532.6L300.5 516" stroke="#fbfaf6" stroke-width="11.5"/><path d="M292 524.2L306.7 532.6L300.5 516" stroke="#1565c0" stroke-width="7.4"/></g>
+<g transform="rotate(8 302.5 510)"><path d="M304.6 501.5V492.1" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/><rect x="298.2" y="501.5" width="8.5" height="17" rx="2.5" fill="#1565c0" stroke="#fbfaf6" stroke-width="2.5"/></g>
+<path d="M226 552L250.4 552" fill="none" stroke="#1565c0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M260 552L248 559.2L248 544.8Z" fill="#1565c0"/>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M394 524.2L395.3 541L396.5 560.8" stroke-width="7.4"/>
+<path d="M400.3 595L387.7 595" stroke-width="6"/>
+<path d="M394 550.1L395.6 572.1L397.4 593.5" stroke-width="9.5"/>
+<path d="M394 550.1L391.7 572L389.8 593.5" stroke="#fbfaf6" stroke-width="14.2"/>
+<path d="M392.7 595L380 595" stroke-width="6"/>
+<path d="M394 550.1L391.7 572L389.8 593.5" stroke-width="9.5"/>
+<path d="M394 550.1L394 522.2" stroke-width="15"/>
+<path d="M394 522.2L394 514.2" stroke-width="7"/>
+</g>
+<circle cx="393.2" cy="505.2" r="9" fill="#1f2328"/>
+<path d="M383 504.4A10.1 10.1 0 0 1 403.3 504.4Z" fill="#1f2328"/>
+<path d="M403.3 504.4H378.8" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="382.2" y="497.6" width="4.2" height="5.1" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M394 524.2L379.3 532.6L385.5 516" stroke="#fbfaf6" stroke-width="11.5"/><path d="M394 524.2L379.3 532.6L385.5 516" stroke="#1f2328" stroke-width="7.4"/></g>
+<g transform="rotate(-8 383.5 510)"><path d="M385.7 501.5V492.1" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/><rect x="379.3" y="501.5" width="8.5" height="17" rx="2.5" fill="#1f2328" stroke="#fbfaf6" stroke-width="2.5"/></g>
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M436 524.2L437.3 541L438.5 560.8" stroke-width="7.4"/>
+<path d="M442.3 595L429.7 595" stroke-width="6"/>
+<path d="M436 550.1L437.6 572.1L439.4 593.5" stroke-width="9.5"/>
+<path d="M436 550.1L433.7 572L431.8 593.5" stroke="#fbfaf6" stroke-width="14.2"/>
+<path d="M434.7 595L422 595" stroke-width="6"/>
+<path d="M436 550.1L433.7 572L431.8 593.5" stroke-width="9.5"/>
+<path d="M436 550.1L436 522.2" stroke-width="15"/>
+<path d="M436 522.2L436 514.2" stroke-width="7"/>
+</g>
+<circle cx="435.2" cy="505.2" r="9" fill="#1f2328"/>
+<path d="M425 504.4A10.1 10.1 0 0 1 445.3 504.4Z" fill="#1f2328"/>
+<path d="M445.3 504.4H420.8" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="424.2" y="497.6" width="4.2" height="5.1" rx="0.8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M436 524.2L434.6 541L432.6 560.8" stroke="#fbfaf6" stroke-width="11.5"/><path d="M436 524.2L434.6 541L432.6 560.8" stroke="#1f2328" stroke-width="7.4"/></g>
+<path d="M308.5 489.6A12 12 0 0 1 314 496.9" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<path d="M312.5 482.7A20 20 0 0 1 321.8 494.8" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<path d="M316.5 475.7A28 28 0 0 1 329.5 492.7" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<path d="M372 496.9A12 12 0 0 1 377.5 489.6" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<path d="M364.2 494.8A20 20 0 0 1 373.5 482.7" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<path d="M356.5 492.7A28 28 0 0 1 369.5 475.7" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/>
+<text x="322" y="368" font-size="19" fill="#1565c0" font-weight="700" text-anchor="middle">check-in radio régulier :</text>
+<text x="322" y="391" font-size="19" fill="#1565c0" text-anchor="middle">aussi soutien et détection</text>
+<text x="292" y="630" font-size="19" fill="#1565c0" font-weight="700" text-anchor="middle">présence du contremaître</text>
+</g>
+</svg>
