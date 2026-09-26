@@ -1,0 +1,26 @@
+{
+ "date": "2026-09-26",
+ "revision": "2026-09-26-separation-famille-et-conjoint-en-fifo-schemas",
+ "portee": "Schémas de la page w/psychosocial/separation-famille-et-conjoint-en-fifo.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Séparation famille et conjoint en FIFO",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/separation-famille-et-conjoint-en-fifo.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-separation-famille-et-conjoint-en-fifo-cycle-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Réalité de la séparation",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-separation-famille-et-conjoint-en-fifo-cycle-v1.svg|Boucle fléchée entre la maison, à gauche, et le site minier, à droite : départ ; absence, où le travailleur est au site « dans un autre univers » tandis qu’à la maison sa place reste vide et « le conjoint gère seul » ; retour ; retrouvailles, avec « rôles à renégocier » et « routine à réadapter » ; puis nouveau départ, qui ramène à l’absence « à chaque cycle ».]]\n\n<p class=\"infographie-legende\">En FIFO, le travailleur et sa famille traversent des cycles répétés de séparation et de retrouvailles, avec, à chaque cycle, une adaptation et une désadaptation. Les noms des phases sont des repères de lecture ; les étiquettes reprennent, en abrégé, des lignes des tableaux de cette page.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Deux côtés : à gauche, sur fond bleu clair, la maison, où restent le conjoint et les enfants ; à droite, sur fond gris, avec un chevalement de mine, le site, où travaille le travailleur, casque sur la tête. Un trajet fléché fait la boucle entre les deux ; les noms des phases sont inscrits sur l’axe central.</li>\n<li>Départ : le trajet quitte la maison pour le site. Absence : le travailleur est au site, « dans un autre univers » ; à la maison, sa place reste vide (silhouette en pointillé) et « le conjoint gère seul ». Ces deux étiquettes viennent du tableau « Effets sur le couple » : « Le conjoint à la maison gère seul, le travailleur en camp est dans un autre univers ».</li>\n<li>Retour : le trajet revient à la maison. Retrouvailles : le travailleur est avec le conjoint et les enfants. Pour le couple, « rôles à renégocier » (« Renégociation des rôles », tableau « Effets sur le couple ») ; pour les enfants, « routine à réadapter » (« Enfants doivent réadapter leur routine à chaque cycle », tableau « Effets sur les enfants »).</li>\n<li>Nouveau départ : le trajet repart vers le site, puis un pointillé remonte au début de l’absence, avec la mention « à chaque cycle » (« Adaptation et désadaptation à chaque cycle », tableaux « Effets sur le couple » et « Le conjoint resté à la maison »).</li>\n<li>Les noms des phases sont des repères de lecture : la page ne découpe pas le cycle en phases ; elle parle de « séparation et de retrouvailles » et de « chaque retour ». Le schéma ne donne ni durée ni proportion : les temps d’absence selon le cycle sont dans le tableau qui suit.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page : « L’essentiel » (cycles répétés de séparation et de retrouvailles) et les tableaux « Effets sur le couple » (communication asymétrique, renégociation des rôles, tension répétée), « Effets sur les enfants » (adaptation aux retours) et « Le conjoint resté à la maison » (surcharge, désynchronisation). Schéma de principe, sans durée ni proportion.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-separation-famille-et-conjoint-en-fifo-cycle-v1.svg"
+  }
+ ]
+}

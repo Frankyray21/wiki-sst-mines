@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="634" viewBox="0 0 480 634" role="img" aria-labelledby="t d">
+<title id="t">Stress professionnel : quand les exigences dépassent les ressources</title>
+<desc id="d">Sous le titre : définition du stress professionnel. Balance à deux plateaux qui penche du côté des exigences. Sur le plateau de gauche, « Exigences », sous les mots « ce qui est demandé » : deux blocs foncés, surcharge et consignes contradictoires. Sur le plateau de droite, plus haut, « Ressources » : un bloc bleu plein, moyens, et au-dessus une case vide en pointillés, soutien, sous les mots « ce qui manque ». Ces deux étiquettes reprennent la question de repérage de la page. Sous le plateau des ressources, un mineur casqué, la main au visage, regarde le côté qui penche ; des traits rouges autour de sa tête : il ressent le déséquilibre, et le stress est sa réaction. En bas : chercher des solutions dans l’organisation, sans y voir une faiblesse personnelle.</desc>
+<rect width="480" height="634" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Quand les exigences</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">dépassent les ressources</text>
+<text x="24" y="108" font-size="19" fill="#4b535c">Définition du stress professionnel</text>
+<!-- Balance : pied, colonne, fléau incliné de 15° du côté des exigences (page : « les exigences du travail dépassent les ressources », « ce déséquilibre ») -->
+<rect x="233" y="360" width="14" height="82" fill="#6e7781"/>
+<path d="M210 458.5L220 441H260L270 458.5Z" fill="#eceef0" stroke="#6e7781" stroke-width="3" stroke-linejoin="round"/>
+<path d="M24 460H456" stroke="#6e7781" stroke-width="2.5"/>
+<rect x="-136" y="-5" width="272" height="10" rx="5" fill="#4b535c" transform="translate(240 360) rotate(-15)"/>
+<path d="M120.2 392.1V356.1M359.8 327.9V291.9" stroke="#4b535c" stroke-width="6" stroke-linecap="round"/>
+<circle cx="240" cy="360" r="9" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<rect x="28.2" y="326.1" width="184" height="30" rx="4" fill="#6e7781"/>
+<rect x="267.8" y="261.9" width="184" height="30" rx="4" fill="#6e7781"/>
+<g font-size="20" font-weight="700" fill="#fbfaf6" text-anchor="middle">
+<text x="120.2" y="348.1">Exigences</text>
+<text x="359.8" y="283.9">Ressources</text>
+</g>
+<!-- Exigences : « la surcharge, les consignes contradictoires » (À retenir) ; blocs de même taille : ni mesure ni classement -->
+<g font-size="19" fill="#fbfaf6" text-anchor="middle">
+<rect x="32.2" y="276.1" width="176" height="48" rx="4" fill="#4b535c"/>
+<text x="120.2" y="296.1">consignes</text>
+<text x="120.2" y="317.1">contradictoires</text>
+<rect x="32.2" y="226.1" width="176" height="48" rx="4" fill="#4b535c"/>
+<text x="120.2" y="257.1">surcharge</text>
+</g>
+<text x="130" y="214.1" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">ce qui est demandé</text>
+<!-- Ressources : « les ressources dont elle dispose » ; « les moyens » (Définition) ; case vide : « le manque de soutien » (À retenir) ; étiquettes : la question de repérage -->
+<rect x="271.8" y="211.9" width="176" height="48" rx="4" fill="#1565c0"/>
+<text x="359.8" y="242.9" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">moyens</text>
+<rect x="273" y="163.2" width="173.5" height="45.5" rx="4" fill="#fbfaf6" stroke="#1565c0" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="359.8" y="192.9" font-size="19" fill="#1565c0" text-anchor="middle">soutien</text>
+<text x="359.8" y="149.9" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">ce qui manque</text>
+<!-- La personne : « ressent que les exigences du travail dépassent les ressources » ; « le stress est une réaction » (traits rouges) -->
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M413.5 456.5L398.2 456.5" stroke-width="7.1"/>
+<path d="M410 454.7L407.6 429.3" stroke-width="10.6"/>
+<path d="M407.6 429.3L410 403.4" stroke-width="11.8"/>
+<path d="M410 403.4L408.8 370.3" stroke-width="17.7"/>
+<path d="M408.8 370.3L407.1 360.9" stroke-width="8.3"/>
+<circle cx="405.9" cy="350.3" r="10.6" fill="#1f2328" stroke="none"/>
+<path d="M408.8 372.7L391.1 378.6L395.8 356.2" stroke="#fbfaf6" stroke-width="13.6"/>
+<path d="M408.8 372.7L391.1 378.6L395.8 356.2" stroke="#1f2328" stroke-width="8.8"/>
+</g>
+<g transform="rotate(0 405.9 350.3)"><path d="M393.9 349.3A12 12 0 0 1 417.9 349.3Z" fill="#1f2328"/><path d="M417.9 349.3H388.9" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/><rect x="392.9" y="341.3" width="5" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/></g>
+<g stroke="#c62828" stroke-width="3" stroke-linecap="round"><path d="M422.9 341.3L429.9 336.3"/><path d="M404.9 330.3L403.9 322.3"/><path d="M391.9 335.3L386.9 329.3"/></g>
+<text x="456" y="490" font-size="19" fill="#1f2328" text-anchor="end">ressent le déséquilibre</text>
+<text x="456" y="516" font-size="20" font-weight="700" fill="#c62828" text-anchor="end">réaction : stress</text>
+<!-- Page : « chercher des solutions dans l’organisation, plutôt qu’à attribuer la difficulté à une faiblesse personnelle » -->
+<text x="24" y="560" font-size="19" font-weight="700" fill="#1565c0">Chercher des solutions</text>
+<text x="24" y="584" font-size="19" font-weight="700" fill="#1565c0">dans l’organisation,</text>
+<text x="24" y="608" font-size="19" fill="#4b535c">sans y voir une faiblesse personnelle.</text>
+</g>
+</svg>

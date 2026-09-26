@@ -131,6 +131,7 @@ node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-irr-indemnit
 #   Get-ChildItem content-updates\2026-09-25-corr-*.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
 #   Get-ChildItem content-updates\2026-09-25-titre-art-116-*.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
 # … pages RPS illustrées (même jour) : une commande par page, liste dans content-updates/2026-09-25-rps-schemas.md
+#   six autres le 26 septembre : Get-ChildItem content-updates\2026-09-26-*-schemas.json | ForEach-Object { node tools/appliquer_retouches.mjs --lot $_.FullName --appliquer }
 
 # Rendre aux phrases du vault le mot que l'auteur avait écrit (26 septembre 2026) : essai, relecture, application
 node tools/raccourcir_liens.mjs
@@ -215,6 +216,12 @@ node tools/serve.mjs
   toxicologie et de sécurité, à la note psychosociale sur la charge mentale : `tools/raccourcir_liens.mjs` les corrige
   d'après une table à valider. **À faire là où est le vault** : l'outil, puis la reconstruction. Détail :
   `content-updates/2026-09-26-libelles-liens.md`
+- **Six pages RPS illustrées (26 septembre 2026)** : schémas sur Modèle de Sélye (courbe des trois phases),
+  Définition du stress professionnel (balance exigences et ressources ; stress aigu et chronique), Étapes d'un retour
+  au travail réussi, Premiers signes en mine, Séparation famille et conjoint en FIFO et Soutien post-événement
+  traumatique structuré. Relecture contradictoire ; aucun chiffre non sourcé repris ; texte des articles inchangé.
+  **À poser dans le vault** (six lots `2026-09-26-*-schemas.json`). Détail et erreurs relevées :
+  `content-updates/2026-09-26-rps-schemas.md`
 - **Pages RPS illustrées (25 septembre 2026)** : schémas sur Médiation (Thomas-Kilmann, niveaux d'intervention),
   Modèle de Siegrist, Communication descendante, Définition des risques psychosociaux, Comparatif des cycles FIFO,
   Démarche de prévention en RPS, Harcèlement psychologique (LNT, art. 81.18), Les trois niveaux de prévention,

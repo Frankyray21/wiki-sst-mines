@@ -1,0 +1,26 @@
+{
+ "date": "2026-09-26",
+ "revision": "2026-09-26-premiers-signes-en-mine-ce-que-les-superviseurs-voient-schemas",
+ "portee": "Schémas de la page w/psychosocial/premiers-signes-en-mine-ce-que-les-superviseurs-voient.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Premiers signes en mine, ce que les superviseurs voient",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/premiers-signes-en-mine-ce-que-les-superviseurs-voient.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-premiers-signes-en-mine-ce-que-les-superviseurs-voient-signaux-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Signaux par catégorie",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-premiers-signes-en-mine-ce-que-les-superviseurs-voient-signaux-v1.svg|Un superviseur compare ce qu’il voit d’habitude et maintenant, dans les quatre catégories de signaux : erreurs nouvelles ou répétées, isolement à la cantine, hausse de la consommation visible, barrière de sécurité franchie. À part, en rouge : en cas de danger immédiat, joindre les services d’urgence au 911 et déclencher l’alerte prévue par le site ; en présence d’idées suicidaires ou d’un doute préoccupant, demander de l’aide sans attendre plusieurs jours.]]\n\n<p class=\"infographie-legende\">Le superviseur peut remarquer des changements par rapport à l’habituel, dans le travail ou le comportement : ces repères servent à orienter vers les ressources appropriées, pas à poser un diagnostic. Un signal isolé ne permet pas de déduire un état de santé.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>En haut, le superviseur, en bleu, tient un carnet : il documente factuellement ce qu’il observe, sans interprétation clinique. Il compare deux colonnes : « d’habitude », en gris, à gauche, et « maintenant », en noir, à droite.</li>\n<li>Performance et travail : quatre tâches réussies, puis deux croix rouges sur quatre, « Erreurs nouvelles ou répétées » (surtout si la personne avait un bon historique). Communication et relations : trois personnes qui se parlent à la même table, puis deux à la table et la troisième seule à une autre table, « Repli, isolement à la cantine ou en pause » (changement par rapport à l’habituel).</li>\n<li>Apparence et comportement : une tasse, puis quatre, « Hausse de la consommation visible » (la page cite l’alcool en camp, le café, les cigarettes). Comportements à risque, en rouge : un travailleur s’arrête devant une barrière, puis il la franchit, « Désengagement des consignes de sécurité », que la page juge très préoccupant.</li>\n<li>Aucune étiquette sur la personne : le schéma montre seulement ce qui a changé. Le nombre de tasses ou de croix n’est pas un seuil, et un signal isolé ne permet pas de déduire un état de santé.</li>\n<li>À part, en bas, dans un cadre rouge, l’encadré de la page « Danger immédiat : agir sans attendre » : joindre les services d’urgence au 911 et déclencher l’alerte prévue par le site ; en présence d’idées suicidaires ou d’un doute préoccupant, demander de l’aide sans attendre plusieurs jours. La page précise que l’orientation des urgences en camp ou en souterrain doit être confirmée dans le dispositif local de secours.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page : « L’essentiel », « Posture du superviseur », les tableaux de « Signaux par catégorie » (mots exacts des signaux) et l’encadré « Danger immédiat : agir sans attendre » ; voir aussi {{lien:w/psychosocial/symptomes-et-signaux-dalerte.html|Symptômes et signaux d’alerte}} et {{lien:w/psychosocial/lignes-daide-et-pae.html|Lignes d’aide et ressources de soutien}}. Schéma de principe : ni seuil ni durée.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-premiers-signes-en-mine-ce-que-les-superviseurs-voient-signaux-v1.svg"
+  }
+ ]
+}
