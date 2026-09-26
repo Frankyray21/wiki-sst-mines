@@ -24,14 +24,20 @@ wiki SST psychosociale, le texte des articles n'est pas modifié : seuls les sch
 | [Communication souterraine et isolement de l'équipe](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/communication-souterraine-et-isolement-de-lequipe.html) | ce qui isole l'équipe sous terre ; compenser au fil du quart, avec le téléphone relié à la surface qu'impose le RSSM, art. 283 |
 | [Grille INSPQ d'identification des RPS](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/grille-inspq-didentification-des-rps.html) | la démarche : des sources à la grille, de la grille au plan d'action. Le schéma des catégories attend (voir plus bas) |
 | [Culture minière et stigmatisation de la santé mentale](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/culture-miniere-et-stigmatisation-de-la-sante-mentale.html) | ce qui freine (pairs, soi, organisation, proches) ; les leviers de la page |
+| [CNESST, rôles et pouvoirs](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/cnesst-roles-et-pouvoirs.html) | les trois rôles, entre l'employeur minier et le travailleur : prévention (inspection, soutien, avis de correction « s'il l'estime opportun ») ; indemnisation (réclamation, décision, réparation) ; normes du travail (plainte de harcèlement, enquête, médiation avec l'accord des parties). Ce que l'inspecteur peut demander à voir sur les RPS, puis la suite prévue par la LSST : avis de correction, infraction, poursuite pénale possible, amende |
+| [LMRSST, vue d'ensemble pour les RPS](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/lmrsst-vue-densemble-pour-les-rps.html) | document et participation selon l'effectif de l'établissement au cours de l'année : au moins 20 travailleurs, programme de prévention, comité et représentant ; moins de 20, plan d'action et agent de liaison ; les cas particuliers. Les risques psychosociaux dans la même liste que les autres risques pour la santé, puis ce que prévoit le programme de prévention : identification et analyse, mesures et échéanciers, suivi |
 
 Aucun schéma n'ajoute de chiffre, de délai, de montant ou de promesse d'effet.
 
+CNESST et LMRSST sont posés après l'accord de Frank (« continue ») : le système de permissions avait refusé l'essai de
+pose aux relecteurs, comme pour Axe HHS. L'essai a été refait avant la pose, et les rendus revus en thème sombre à
+340 px. Les deux schémas juridiques qui citent les art. 59 et 78 de la LSST suivent leur texte modifié par la LMRSST
+(art. 144 et 154). LégisQuébec n'est pas joignable depuis la session : leur entrée en vigueur découle de la LMRSST
+elle-même (art. 313, 7° : au plus tard le 6 octobre 2025). Un changement postérieur de ces articles reste à exclure en
+consultant LégisQuébec.
+
 ## En attente de Frank
 
-- **CNESST, rôles et pouvoirs** et **LMRSST, vue d'ensemble pour les RPS** : quatre schémas dessinés et relus.
-  Relecture faite sur le fond, la forme et le rendu ; les schémas suivent les textes officiels. L'essai de pose a été
-  refusé aux relecteurs par le système de permissions ; il attend l'accord de Frank, comme pour Axe HHS.
 - **Grille INSPQ, schéma des catégories** : la liste des sept catégories de la page (charge de travail,
   reconnaissance, soutien social, latitude décisionnelle, information et communication, harcèlement et violence,
   conciliation) n'est confirmée par aucun document du wiki. La fiche INSPQ n° 2373 (avril 2018), seul document INSPQ
@@ -134,7 +140,7 @@ une reconstruction : c'est une tâche à part.
 - « Stigmatisation de courtoisie » semble employé dans un autre sens que l'usage (Goffman). « mca.com.au » est à
   vérifier.
 
-**CNESST, rôles et pouvoirs** (schémas en attente)
+**CNESST, rôles et pouvoirs**
 
 - « Sanctions administratives », deux fois : dans la LSST, l'amende est pénale (art. 236 et 242).
 - Avis de correction présenté comme automatique, deux fois. La LSST (art. 182) dit : « L'inspecteur peut, s'il
@@ -155,7 +161,7 @@ une reconstruction : c'est une tâche à part.
   - « Médecin désigné par l'employeur (art. 204 LATMP) » : l'art. 204 vise celui de la Commission, et celui de
     l'employeur est à l'art. 209.
 
-**LMRSST, vue d'ensemble pour les RPS** (schémas en attente)
+**LMRSST, vue d'ensemble pour les RPS**
 
 - La page présente l'agent de liaison comme seul mécanisme sous 20 travailleurs. Elle omet les cas où un représentant
   est exigé (LSST, art. 88 et 88.1, par la LMRSST).

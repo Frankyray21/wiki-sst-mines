@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="648" viewBox="0 0 480 648" role="img" aria-labelledby="t d">
+<title id="t">L’inspecteur de la CNESST et les risques psychosociaux</title>
+<desc id="d">Sous le titre, « ce qu’il peut demander à voir ». Sur une table, un classeur ouvert, le programme de prévention, avec un onglet rouge RPS et, sur la page de droite, une bande rouge. À gauche, l’inspecteur, en bleu, casqué, une planchette sur la poitrine, tend une loupe vers le classeur ; à droite, l’employeur, en noir, casque clair. Sous la table, une bulle grise pointée vers le classeur énumère ce qui peut être examiné : risques psychosociaux, identification et analyse (puce rouge) ; mesures et priorités d’action ; implication du comité SST. Plus bas, une flèche bleue en tirets, portant une feuille, va de l’inspecteur à l’employeur : avis de correction, s’il l’estime opportun ; l’employeur doit y donner suite. Enfin, une flèche rouge descend de l’employeur vers un encadré rouge : ne pas y donner suite, infraction ; poursuite pénale possible, amende. Aucun délai ni montant.</desc>
+<rect width="480" height="648" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">L’inspecteur et les RPS</text>
+<text x="24" y="74" font-size="19" fill="#4b535c">ce qu’il peut demander à voir</text>
+<!-- Classeur ouvert sur la table : programme de prévention, onglet RPS (page : « Vérification du programme de prévention : Section RPS incluse ») -->
+<text x="242" y="116" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">programme de prévention</text>
+<rect x="120" y="148" width="244" height="80" rx="4" fill="#eceef0" stroke="#1f2328" stroke-width="2.5"/>
+<rect x="300" y="128" width="54" height="26" rx="4" fill="#c62828"/>
+<text x="327" y="148" font-size="19" font-weight="700" fill="#fbfaf6" text-anchor="middle">RPS</text>
+<rect x="126" y="152" width="114" height="70" rx="3" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<rect x="244" y="152" width="114" height="70" rx="3" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M242 148V228" stroke="#1f2328" stroke-width="3"/>
+<g stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"><path d="M138 168H226M138 180H218M138 192H228M138 204H206"/><path d="M256 204H340M256 214H326"/></g>
+<rect x="250" y="160" width="102" height="34" rx="2" fill="#fde3e0"/>
+<g stroke="#c62828" stroke-width="2.5" stroke-linecap="round"><path d="M256 170H344M256 182H332"/></g>
+<!-- Table et sol -->
+<rect x="100" y="228" width="284" height="7" fill="#1f2328"/>
+<path d="M122 235V250M362 235V250" stroke="#1f2328" stroke-width="4"/>
+<path d="M24 250H456" stroke="#6e7781" stroke-width="2.5"/>
+<!-- Inspecteur (bleu) : planchette, loupe tendue vers le classeur (LSST, art. 179 : accès aux livres, registres et dossiers) -->
+<path d="M74 191L94 170" stroke="#1565c0" stroke-width="8" stroke-linecap="round"/>
+<path d="M94 170L104 160" stroke="#1565c0" stroke-width="5" stroke-linecap="round"/>
+<circle cx="113" cy="151" r="12.5" fill="#e1ecfa" stroke="#1565c0" stroke-width="4"/>
+<g transform="translate(58 250) scale(1.5)"><circle cx="0" cy="-53" r="9" fill="#1565c0"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1565c0"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1565c0"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1565c0"/></g><rect x="-7" y="-36" width="11" height="14" rx="1.5" fill="#fbfaf6"/><path d="M-4.5 -31H1.5M-4.5 -27H1.5" stroke="#1565c0" stroke-width="1.7"/></g>
+<!-- Employeur (encre), casque clair -->
+<g transform="translate(426 250) scale(1.5)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#fbfaf6" stroke="#1f2328" stroke-width="2"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/></g></g>
+<text x="24" y="276" font-size="19" font-weight="700" fill="#1565c0">inspecteur</text>
+<text x="456" y="276" font-size="19" font-weight="700" fill="#1f2328" text-anchor="end">employeur</text>
+<!-- Ce que l’inspecteur peut demander à voir (page : « comment l’employeur a identifié les RPS, quel plan d’action est en place, et comment le comité SST est impliqué ») -->
+<path d="M96 300Q96 290 106 290H228L242 266L256 290H410Q420 290 420 300V400Q420 410 410 410H106Q96 410 96 400Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="112" y="303" width="13" height="13" rx="2" fill="#c62828"/>
+<rect x="112" y="357" width="13" height="13" rx="2" fill="#1f2328"/>
+<rect x="112" y="385" width="13" height="13" rx="2" fill="#1f2328"/>
+<g font-size="19" fill="#1f2328">
+<text x="136" y="316">risques psychosociaux :</text>
+<text x="136" y="340">identification, analyse</text>
+<text x="136" y="370">mesures et priorités d’action</text>
+<text x="136" y="398">implication du comité SST</text>
+</g>
+<!-- Lignes de vie -->
+<g stroke="#6e7781" stroke-width="2.5" stroke-dasharray="6 6"><path d="M58 286V466M426 286V560"/></g>
+<!-- Avis de correction (page : « Avis de correction si défaillance » ; LSST, art. 182 : « peut, s’il l’estime opportun », d’où les tirets ; art. 184 : « doit y donner suite ») -->
+<text x="240" y="432" font-size="19" font-weight="700" fill="#1565c0" text-anchor="middle">avis de correction</text>
+<path d="M64 466H414" stroke="#1565c0" stroke-width="3.5" stroke-dasharray="10 7"/>
+<path d="M426 466L413 459.5V472.5Z" fill="#1565c0"/>
+<path d="M226 446H248L256 454V486H226Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M232 460H250M232 468H250M232 476H244" stroke="#1565c0" stroke-width="2.5"/>
+<text x="240" y="510" font-size="19" fill="#4b535c" text-anchor="middle">s’il l’estime opportun</text>
+<text x="414" y="540" font-size="19" fill="#1f2328" text-anchor="end">l’employeur doit y donner suite</text>
+<!-- Ne pas donner suite à l’avis (art. 184) : contravention, donc infraction (art. 236 : « Quiconque contrevient à la présente loi […] commet une infraction et est passible […] d’une amende ») ; poursuite pénale : « peut être intentée par la Commission » (art. 242) -->
+<path d="M426 560V574" stroke="#c62828" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M426 586L419.5 573H432.5Z" fill="#c62828"/>
+<rect x="24" y="586" width="432" height="54" rx="10" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/>
+<text x="40" y="608" font-size="19" font-weight="700" fill="#c62828">ne pas y donner suite : infraction</text>
+<text x="40" y="631" font-size="19" fill="#c62828">poursuite pénale possible, amende</text>
+</g>
+</svg>
