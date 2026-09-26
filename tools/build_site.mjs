@@ -1,5 +1,6 @@
 // Générateur de site statique "Wikipédia" pour le vault Obsidian WIKI SST - Mines
 // Usage : node build_site.mjs
+import { publierCnesst } from './modules/cnesst/rendu.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -2045,6 +2046,8 @@ fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas pass
     for (const f of ['wiki-sst-mines.apk', 'wiki-sst-mines.json']) fs.copyFileSync(path.join(dist, f), path.join(OUT, 'app', f));
   }
 }
+// Module CNESST : généré après les articles, avant les ressources hors ligne.
+publierCnesst(OUT);
 genererPwa(OUT, V);
 
 console.log(`  avis : relais ${relaisAvis.conf.url && !relaisAvis.avertissement ? relaisAvis.conf.url : 'non configuré — le bloc reste masqué'}`);

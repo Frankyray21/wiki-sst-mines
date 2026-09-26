@@ -1,0 +1,64 @@
+name: Module CNESST
+on:
+  push:
+    branches: [feat/cnesst-interactif]
+    paths: [tools/modules/cnesst/READY]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: cnesst-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Installer les dépendances de développement du wiki
+        run: npm --prefix tools ci
+      - name: Mesurer les tests du wiki AVANT intégration
+        run: node tools/modules/cnesst/verifier-non-regression.mjs --avant
+      - name: Appliquer les correctifs de validation de la première version
+        run: |
+          if [ -f tools/modules/cnesst/finaliser-v1.mjs ]; then
+            node tools/modules/cnesst/finaliser-v1.mjs
+          fi
+      - name: Tests du module
+        run: node --test tools/modules/cnesst/*.test.mjs
+      - name: Installer le point de génération et produire les pages
+        run: node tools/modules/cnesst/installer.mjs --appliquer
+      - name: Contrôler les interactions dans le navigateur
+        run: node tools/modules/cnesst/verif_navigateur.mjs
+      - name: Tests du wiki — aucune nouvelle défaillance après intégration
+        run: node tools/modules/cnesst/verifier-non-regression.mjs --apres
+      - name: Vérifier les ressources publiées et leurs empreintes hors ligne
+        run: npm --prefix tools run check:site
+      - name: Retirer le correctif de chantier après validation
+        run: rm -f tools/modules/cnesst/finaliser-v1.mjs
+      - name: Conserver le code généré et les preuves de validation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cnesst-validation
+          retention-days: 7
+          path: |
+            tools/modules/cnesst/
+            tools/build_site.mjs
+            docs/modules/cnesst/
+            docs/w/psychosocial/cnesst-roles-et-pouvoirs.html
+            docs/assets/hors-ligne.json
+            docs/sw.js
+            cnesst-validation/
+      - name: Enregistrer les fichiers générés sur la branche de travail seulement
+        if: success() && github.ref == 'refs/heads/feat/cnesst-interactif'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tools/build_site.mjs tools/modules/cnesst/ docs/
+          if ! git diff --cached --quiet; then
+            git commit -m 'build: intégrer le module CNESST testé et actualiser les ressources hors ligne'
+            git push origin HEAD:feat/cnesst-interactif
+          fi
