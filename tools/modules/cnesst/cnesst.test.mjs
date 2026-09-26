@@ -53,8 +53,7 @@ test('Injection sans remplacement du texte et des ancres existantes',()=>{
 });
 test('Injection rejouable sans duplication de contenu ou de ressources',()=>{
   const once=integrer(fixture); const twice=integrer(once);
-  // Normalisation des seuls sauts de ligne : les documents restent sémantiquement identiques.
-  assert.equal(twice.replace(/\n/g,''),once.replace(/\n/g,''));
+  assert.equal(twice,once);
 });
 test('Une ancre inconnue ne déclenche jamais une insertion au hasard',()=>{
   assert.throws(()=>integrer('<html><head></head><body>Autre page</body></html>'));
@@ -77,4 +76,8 @@ test('Après une nouvelle génération de l’article, le post-traitement rétab
     assert.ok(fs.existsSync(path.join(dir,'modules/cnesst/interactions.js')));
     assert.ok(fs.existsSync(path.join(dir,'modules/cnesst/index.html')));
   } finally { fs.rmSync(dir,{recursive:true,force:true}); }
+});
+
+test('Le thème autonome suit le contrat du wiki : sombre par défaut',()=>{
+  assert.ok(rendrePage().includes("if(t==='light'||t==='auto')"));
 });

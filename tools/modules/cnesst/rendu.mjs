@@ -97,7 +97,7 @@ ${contenu.branches.map(b => `<section class="ci-branch ci-${b.id}" id="ci-volet-
 export function rendrePage({ inline = false } = {}) {
   const css = fs.readFileSync(path.join(DIR,'styles.css'),'utf8');
   const js = fs.readFileSync(path.join(DIR,'interactions.js'),'utf8');
-  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark light"><title>CNESST — module interactif | Wiki SST</title><script>try{var t=localStorage.getItem('theme');if(['light','dark','auto'].includes(t))document.documentElement.dataset.theme=t;var e=localStorage.getItem('echelle');if(e&&Number(e)>0&&Number(e)<=3)document.documentElement.style.setProperty('--echelle',e)}catch(e){}</script>${inline ? `<style>${css}</style>` : '<link rel="stylesheet" href="styles.css">'}</head><body class="ci-standalone"><header class="ci-demo-header"><a href="../../w/psychosocial/cnesst-roles-et-pouvoirs.html">← Retour à l’article du wiki</a><button type="button" data-ci-theme hidden>Changer de thème</button></header><main><h1 class="ci-sr">CNESST — module interactif</h1>${rendreModule()}</main>${inline ? `<script>${js}</script>` : '<script src="interactions.js" defer></script>'}</body></html>`;
+  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark light"><title>CNESST — module interactif | Wiki SST</title><script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='auto')document.documentElement.setAttribute('data-theme',t);var e=localStorage.getItem('echelle');if(e&&Number(e)>0&&Number(e)<=3)document.documentElement.style.setProperty('--echelle',e)}catch(e){}</script>${inline ? `<style>${css}</style>` : '<link rel="stylesheet" href="styles.css">'}</head><body class="ci-standalone"><header class="ci-demo-header"><a href="../../w/psychosocial/cnesst-roles-et-pouvoirs.html">← Retour à l’article du wiki</a><button type="button" data-ci-theme hidden>Changer de thème</button></header><main><h1 class="ci-sr">CNESST — module interactif</h1>${rendreModule()}</main>${inline ? `<script>${js}</script>` : '<script src="interactions.js" defer></script>'}</body></html>`;
 }
 
 export function publierCnesst(out) {
@@ -134,7 +134,7 @@ export function integrer(html, root = '../../') {
   }
   const css = `<link data-ci-asset="style" rel="stylesheet" href="${root}modules/cnesst/styles.css">`;
   const js = `<script data-ci-asset="script" src="${root}modules/cnesst/interactions.js" defer></script>`;
-  updated = updated.replace(/<link data-ci-asset="style"[^>]*>/g,'').replace(/<script data-ci-asset="script"[^>]*><\/script>/g,'');
+  updated = updated.replace(/<link data-ci-asset="style"[^>]*>\n?/g,'').replace(/<script data-ci-asset="script"[^>]*><\/script>\n?/g,'');
   if (!updated.includes('</head>') || !updated.includes('</body>')) throw new Error('Document HTML incomplet');
   updated = updated.replace('</head>',css+'\n</head>').replace('</body>',js+'\n</body>');
   // Les sauts de ligne ajoutés ne doivent pas s’accumuler à chaque publication.
