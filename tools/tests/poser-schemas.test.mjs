@@ -136,6 +136,20 @@ test('schéma sur fond sombre : classe « infographie-sombre » dans la page et 
     assert.ok(regle.includes(sel), 'la règle couvre : ' + sel);
 });
 
+test('versions antérieures en liste : la page porte la plus récente présente, le lot les connaît toutes', () => {
+  const v2 = poserDansPage(PAGE, { page: 'w/x.html', schemas: [schema('wiki-x-a-v2.svg', 'Une section')] }, OPTS);
+  const spec = { page: 'w/x.html', note: { titre: 'X', wiki: 'W' }, schemas: [schema('wiki-x-a-v3.svg', 'Une section', { remplaceSchema: ['wiki-x-a-v2.svg', 'wiki-x-a-v1.svg'] })] };
+  const h = poserDansPage(v2, spec, OPTS);
+  assert.ok(!h.includes('wiki-x-a-v2.svg') && h.includes('<h3 id="section">Une section</h3>\n<div class="infographie infographie-compacte infographie-schema"><span class="page-img"><a class="img-lien" href="../../files/infographies/wiki-x-a-v3.svg">'));
+  assert.equal(h.split('infographie-schema').length - 1, 1, 'un seul bloc');
+  const v1 = poserDansPage(PAGE, { page: 'w/x.html', schemas: [schema('wiki-x-a-v1.svg', 'Une section')] }, OPTS);
+  assert.ok(poserDansPage(v1, spec, OPTS).includes('wiki-x-a-v3.svg') && !poserDansPage(v1, spec, OPTS).includes('wiki-x-a-v1.svg'), 'page restée en v1 : remplacée aussi');
+  assert.throws(() => poserDansPage(PAGE, spec, OPTS), /absent de la page : wiki-x-a-v2\.svg ou wiki-x-a-v1\.svg/);
+  const lot = lotDepuisSpec(spec, { date: 'd', revision: 'r', portee: 'p', precautions: '' });
+  assert.deepEqual(lot.retouches[0].ancien, ['Infographies/wiki-x-a-v2.svg', 'Infographies/wiki-x-a-v1.svg']);
+  assert.equal(lotDepuisSpec({ ...spec, schemas: [{ ...spec.schemas[0], remplaceSchema: 'wiki-x-a-v2.svg' }] }, { date: 'd', revision: 'r', portee: 'p', precautions: '' }).retouches[0].ancien, 'Infographies/wiki-x-a-v2.svg', 'une seule version : chaîne, comme avant');
+});
+
 // Rejoue la pose d'Espaces clos (faite à la main le 25 septembre 2026) : l'outil doit rendre la page
 // publiée à l'octet près, depuis la page d'avant les schémas (historique Git requis).
 const AVANT = 'f5df88ca47';

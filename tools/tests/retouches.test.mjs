@@ -100,6 +100,22 @@ test('remplacerBloc : la nouvelle version d’un schéma prend la place de l’a
   assert.match(nue.rapports[0].statut, /hors d’un bloc/);
 });
 
+test('remplacerBloc : plusieurs versions antérieures possibles (la note a pu recevoir la v1 ou la v2)', () => {
+  const bloc = v => `<div class="infographie infographie-compacte infographie-schema">\n\n![[Infographies/wiki-x-${v}.svg|alt ${v}]]\n\n<p class="infographie-legende">Légende ${v}.</p>\n\n</div>`;
+  const r = { type: 'remplacerBloc', ligneContenant: 'Options', ancien: ['Infographies/wiki-x-v2.svg', 'Infographies/wiki-x-v1.svg'], bloc: bloc('v3'), marqueur: 'Infographies/wiki-x-v3.svg' };
+  const attendu = '### Options\n\n' + bloc('v3') + '\n\nSuite.\n';
+  for (const v of ['v1', 'v2']) {
+    const r1 = appliquerRetouches('### Options\n\n' + bloc(v) + '\n\nSuite.\n', [r]);
+    assert.ok(r1.ok, v + ' : ' + JSON.stringify(r1.rapports));
+    assert.equal(r1.texte, attendu, 'la ' + v + ' est remplacée à sa place');
+    assert.equal(appliquerRetouches(r1.texte, [r]).rapports[0].statut, 'déjà faite');
+  }
+  assert.equal(appliquerRetouches('### Options\n\nSuite.\n', [r]).texte, attendu, 'aucune version : insertion après la ligne');
+  const deux = appliquerRetouches('### Options\n\n' + bloc('v1') + '\n\n' + bloc('v2') + '\n', [r]);
+  assert.equal(deux.ok, false, 'v1 et v2 toutes deux dans la note : rien n’est touché');
+  assert.match(deux.rapports[0].statut, /ambiguë/);
+});
+
 test('supprimerLigne : plusieurs marqueurs possibles (schéma ou sa version antérieure)', () => {
   const r = { type: 'supprimerLigne', ligneContenant: 'img-001.png', marqueur: ['Infographies/x-v2.svg', 'Infographies/x-v1.svg'] };
   assert.equal(appliquerRetouches('![[Infographies/x-v1.svg]]\nSuite.', [r]).rapports[0].statut, 'déjà faite', 'capture retirée par la v1');
