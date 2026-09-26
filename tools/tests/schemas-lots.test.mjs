@@ -41,13 +41,15 @@ function verifierPage(lot, adresse, page) {
   }
   for (const r of blocs) {
     const fichier = r.marqueur.slice('Infographies/'.length);
-    const html = page.match(new RegExp('<div class="infographie infographie-compacte infographie-schema">(?:(?!<div class="infographie)[\\s\\S])*?' + fichier.replace(/\./g, '\\.') + '[\\s\\S]*?</div>'))?.[0];
+    const html = page.match(new RegExp('<div class="infographie infographie-compacte infographie-schema(?: infographie-sombre)?">(?:(?!<div class="infographie)[\\s\\S])*?' + fichier.replace(/\./g, '\\.') + '[\\s\\S]*?</div>'))?.[0];
     assert.ok(html, adresse + ' : bloc publié : ' + fichier);
     assert.ok(html.includes('<p class="infographie-legende">' + r.bloc.match(/<p class="infographie-legende">([\s\S]*?)<\/p>/)[1] + '</p>'), 'même légende : ' + fichier);
     for (const p of r.bloc.matchAll(/<li>([\s\S]*?)<\/li>/g)) assert.ok(html.includes('<li>' + p[1] + '</li>'), 'même version texte : ' + fichier);
     const alt = r.bloc.match(/!\[\[Infographies\/[^|]+\|([^\]]+)\]\]/)[1];
     assert.equal(dec(html.match(/alt="([^"]*)"/)[1]), alt, 'même texte alternatif : ' + fichier);
     assert.ok(alt.length >= 40, 'texte alternatif utile : ' + fichier);
+    // un dessin sur fond sombre garde sa classe, dans la page comme dans le bloc de la note
+    assert.equal(html.includes('infographie-sombre'), r.bloc.startsWith('<div class="infographie infographie-compacte infographie-schema infographie-sombre">'), 'même classe sombre : ' + fichier);
     if (/\.svg$/i.test(fichier)) assert.match(html, /width="480" height="\d+" loading="lazy"/, 'place réservée : ' + fichier);
     else {
       const d = dimensionsImage(fs.readFileSync(path.join(racine, 'docs/files/infographies', fichier)));

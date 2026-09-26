@@ -12,6 +12,8 @@
 //   schemas[]   { fichier, ancre, remplace?, alt, legende, puces[], sources }
 //     fichier   schéma SVG (480 de large), ou image PNG / JPEG (une illustration fournie par l'auteur,
 //               par exemple : au moins 480 px de large, 1,5 Mo au plus)
+//     sombre    true : dessin conçu sur fond sombre (style retenu par Frank le 26 septembre 2026) ; le
+//               thème sombre du site ne l'inverse pas (classe « infographie-sombre »)
 //     ancre     texte visible d'un paragraphe, d'un titre ou d'une dernière puce, unique : le schéma se pose
 //               juste après ; sans ancre, il prend la place exacte de la capture qu'il remplace
 //     remplace  capture de cours que le schéma remplace (« pasted-image-AAAAMMJJhhmmss » ou nom de fichier)
@@ -35,11 +37,14 @@ const entites = s => String(s).replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, 
 export const visible = h => entites(String(h).replace(/<[^>]+>/g, ''))
   .replace(/[’‘]/g, "'").replace(/[  ]/g, ' ').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
 
+// Classes du bloc : un dessin conçu sur fond sombre porte « infographie-sombre », que le thème sombre n'inverse pas.
+const classesBloc = s => 'infographie infographie-compacte infographie-schema' + (s.sombre ? ' infographie-sombre' : '');
+
 // Bloc de la page publiée, tel que le générateur le rend depuis le bloc de la note (bloc Markdown ci-dessous).
 export function blocHtml(s, { racine, dims, titreDe, hrefDe = a => racine + a }) {
   const u = racine + 'files/infographies/' + s.fichier;
   const dim = dims ? ` width="${dims.largeur}" height="${dims.hauteur}"` : '';
-  return `<div class="infographie infographie-compacte infographie-schema"><span class="page-img"><a class="img-lien" href="${u}"><img src="${u}" alt="${esc(s.alt)}"${dim} loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>\n`
+  return `<div class="${classesBloc(s)}"><span class="page-img"><a class="img-lien" href="${u}"><img src="${u}" alt="${esc(s.alt)}"${dim} loading="lazy"></a><span class="img-zoom">Toucher l'image pour l'agrandir</span></span>\n`
     + `<p class="infographie-legende">${texte(s.legende)}</p><details class="infographie-texte">\n<summary>Lire le schéma en texte</summary>\n<ul>\n`
     + s.puces.map(p => `<li>${texte(p)}</li>\n`).join('')
     + `</ul>\n</details>\n<p class="infographie-sources">${sourcesHtml(s.sources, { titreDe, hrefDe })}</p></div>`;
@@ -47,7 +52,7 @@ export function blocHtml(s, { racine, dims, titreDe, hrefDe = a => racine + a })
 
 export function blocMd(s) {
   const alt = String(s.alt).replace(/\|/g, '/').replace(/\]\]/g, '] ]');
-  return `<div class="infographie infographie-compacte infographie-schema">\n\n![[Infographies/${s.fichier}|${alt}]]\n\n`
+  return `<div class="${classesBloc(s)}">\n\n![[Infographies/${s.fichier}|${alt}]]\n\n`
     + `<p class="infographie-legende">${texte(s.legende)}</p>\n\n<details class="infographie-texte">\n<summary>Lire le schéma en texte</summary>\n<ul>\n`
     + s.puces.map(p => `<li>${texte(p)}</li>\n`).join('')
     + `</ul>\n</details>\n<p class="infographie-sources">${sourcesMd(s.sources)}</p>\n\n</div>`;
