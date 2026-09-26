@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="656" viewBox="0 0 480 656" role="img" aria-labelledby="t d">
 <title id="t">Ce que la loi appelle harcèlement psychologique</title>
-<desc id="d">Deux voies faites de pièces de puzzle qui s’emboîtent, de haut en bas, mènent chacune par une flèche au bandeau rouge « harcèlement psychologique ». Voie de gauche : une conduite vexatoire, répétée (plusieurs petites flèches rouges qui frappent un axe du temps), hostile ou non désirée, y compris à caractère sexuel ; puis l’atteinte à la dignité ou à l’intégrité psychologique ou physique (une personne marquée d’une fissure rouge) ; puis un milieu de travail néfaste (la personne dans une galerie teintée de rouge). Voie de droite, séparée de la première par « ou » : une seule conduite grave (une grosse flèche rouge sur l’axe du temps) ; la même pièce d’atteinte, commune aux deux voies ; puis un effet nocif continu (après la flèche, l’axe du temps reste rouge). Dans chaque voie, toutes les pièces sont réunies. D’après la Loi sur les normes du travail, art. 81.18.</desc>
+<desc id="d">Deux voies faites de pièces de puzzle qui s’emboîtent, de haut en bas, mènent chacune par une flèche au bandeau rouge « harcèlement psychologique ». Voie de gauche : une conduite vexatoire faite de comportements, paroles, actes ou gestes répétés (plusieurs petites flèches rouges qui frappent un axe du temps ; l’article n’en fixe pas le nombre), qui sont hostiles ou non désirés, y compris à caractère sexuel ; puis l’atteinte à la dignité ou à l’intégrité psychologique ou physique (une personne marquée d’une fissure rouge) ; puis un milieu de travail néfaste (la personne dans une galerie teintée de rouge). Voie de droite, séparée de la première par « ou » : une seule conduite grave (une grosse flèche rouge sur l’axe du temps) ; la même pièce d’atteinte, commune aux deux voies ; puis un effet nocif continu (après la flèche, l’axe du temps reste rouge). Dans chaque voie, toutes les pièces sont réunies. D’après la Loi sur les normes du travail, art. 81.18.</desc>
 <rect width="480" height="656" fill="#fbfaf6"/>
 <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
 <text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Ce que la loi appelle</text>
@@ -39,8 +39,8 @@
 <path d="M308 174V229" stroke="#c62828" stroke-width="18"/>
 <path d="M284 227L332 227L308 261Z" fill="#c62828"/>
 <text x="346" y="228" font-size="19" font-weight="700" fill="#c62828">une seule</text>
-<circle cx="260" cy="215" r="18" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
-<text x="260" y="221" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">ou</text>
+<circle cx="260" cy="190" r="18" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<text x="260" y="196" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">ou</text>
 
 <!-- Les deux voies : atteinte à la dignité ou à l’intégrité psychologique ou physique -->
 <g transform="translate(66 398) scale(0.62)">
