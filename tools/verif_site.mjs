@@ -84,7 +84,7 @@ for (const visuel of visuels) {
     const rel = parcours + visuel.page;
     const html = lire(rel);
     assert.ok(html.includes(visuel.fichier), rel + ' : image conservée');
-    assert.match(html, /<details class="infographie-texte">[\s\S]*?<summary>[\s\S]*?<\/details>/, rel + ' : version texte');
+    assert.ok(!html.includes('infographie-texte'), rel + ' : pas de version texte dépliable (retirée le 26 septembre 2026)');
     assert.match(html, /<img[^>]+alt="[^"]{20,}"/, rel + ' : description accessible');
     assert.ok(html.includes('infographie-sources'), rel + ' : sources conservées');
     assert.ok(html.includes('Relecture éditoriale : non attestée'), rel + ' : aucune relecture inventée');
@@ -132,7 +132,9 @@ for (const wiki of SIX) {
 const voiesExposition = lire('w/toxicologie/voies-dexposition.html');
 assert.ok(!lire('w/ergonomie/postures-contraignantes.html').includes('class="article-entete"'), 'en-tête compact retiré du site (pilote Cadenassage archivé avec sa fiche)');
 assert.ok(voiesExposition.includes('ne signifie pas qu’un produit la traverse'), 'contact et absorption distingués');
-assert.ok(voiesExposition.includes('<strong>Injection :</strong>'), 'voie non illustrée conservée en texte');
+// « Lire les voies en texte » retiré avec les autres versions texte (Frank, 26 septembre 2026) : la voie
+// « injection », que le schéma ne montre pas, n'était décrite que là (signalé à Frank)
+assert.ok(!voiesExposition.includes('Lire les voies en texte'), 'voies d’exposition : version texte retirée');
 // « couleurs de transmission contextualisées » et « signes à surveiller hors du volet » :
 // assertions du 1er septembre sur la fiche travailleur « 25 - .../Vibrations », archivée le
 // 12 septembre 2026 avec le reste du wiki des travailleurs — leur texte précis n'a pas
@@ -252,9 +254,11 @@ for (const fichier of schemasEspacesClos) {
   assert.ok(!bloc.includes('infographie-texte'), 'espaces clos : pas de « Lire le schéma en texte » ' + fichier);
   assert.ok(bloc.includes('infographie-sources'), 'espaces clos : sources ' + fichier);
 }
-// « Lire le schéma en texte » retiré de tous les schémas (demande de Frank, 26 septembre 2026)
-const avecVersionTexteSchema = fs.readdirSync(out, { recursive: true }).filter(f => String(f).endsWith('.html') && lire(String(f)).includes('<summary>Lire le schéma en texte</summary>'));
-assert.equal(avecVersionTexteSchema.length, 0, 'aucun schéma avec « Lire le schéma en texte » : ' + avecVersionTexteSchema.slice(0, 3).join(', '));
+// Versions texte dépliables retirées partout (demandes de Frank, 26 septembre 2026) : ni « Lire le schéma en
+// texte », ni « Lire la version texte — … », ni « Lire l’illustration en texte » (tools/versions_texte.mjs)
+const avecVersionTexte = fs.readdirSync(out, { recursive: true }).filter(f => String(f).endsWith('.html')
+  && /<details class="infographie-texte">|<summary>Lire [^<]* en texte<\/summary>/.test(lire(String(f))));
+assert.equal(avecVersionTexte.length, 0, 'aucune version texte dépliable : ' + avecVersionTexte.slice(0, 3).join(', '));
 assert.ok(!espacesClos.includes('pasted-image-20241214152919'), 'espaces clos : capture « alarme à 10 % de la LIE » retirée');
 assert.ok(espacesClos.includes('moyen de communication bidirectionnel'), 'espaces clos : art. 308 en vigueur');
 assert.ok(!espacesClos.includes('Contact visuel, auditif'), 'espaces clos : ancien résumé de l’art. 308 retiré');

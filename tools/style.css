@@ -915,25 +915,16 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .infographie .page-img img { display: block; width: 100%; height: auto; max-height: min(34rem, 75vh); object-fit: contain; background: none; border: 0; margin: 0 auto; padding: 0; border-radius: .5rem; filter: none !important; }
 .infographie .img-zoom { display: block; padding: .5rem; font-size: .875rem; }
 .infographie-legende { font-size: 1rem; line-height: 1.6; }
-.infographie-texte { margin: 1rem 0; border: 1px solid var(--border-light); border-radius: .5rem; }
-.infographie-texte summary { cursor: pointer; padding: .85rem 1rem; font-size: 1rem; font-weight: 600; min-height: 44px; }
-.infographie-texte summary:hover { background: var(--hover); }
-.infographie-texte summary:focus-visible, .infographie a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-.infographie-texte[open] summary { border-bottom: 1px solid var(--border-light); }
-.infographie-texte ul { margin: 1rem 1.25rem 1rem 2.25rem; }
-.infographie-texte li { margin: .65rem 0; line-height: 1.6; }
-.infographie-texte > p, .infographie-texte > h4 { margin-inline: 1rem; }
-.infographie-texte > table { width: calc(100% - 2rem); margin: 1rem; }
+/* pas de version texte dépliable sous les infographies (retirée le 26 septembre 2026, tools/versions_texte.mjs) */
+.infographie a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 .infographie-sources { color: var(--text-soft); font-size: .875rem; line-height: 1.6; overflow-wrap: anywhere; }
 .infographie.infographie-compacte { padding: .65rem .8rem; margin-block: .85rem 1.15rem; }
 .infographie-compacte .page-img { margin-bottom: .35rem; }
 .infographie-compacte .img-zoom { padding: .25rem; }
 .infographie-compacte .infographie-legende { margin: .35rem 0 .5rem; font-size: .9375rem; line-height: 1.45; }
-.infographie-compacte .infographie-texte { margin: .5rem 0; }
-.infographie-compacte .infographie-texte summary { padding: .65rem .8rem; }
 .infographie-compacte .infographie-sources { margin: .35rem 0 0; }
-@media (max-width: 480px) { .infographie { padding: .65rem; } .infographie-texte summary { padding: .75rem; } }
-@media print { .infographie { break-inside: auto; } .infographie .page-img { max-width: 100mm; } .infographie-texte::details-content { content-visibility: visible; } .infographie-texte > :not(summary) { display: block !important; } }
+@media (max-width: 480px) { .infographie { padding: .65rem; } }
+@media print { .infographie { break-inside: auto; } .infographie .page-img { max-width: 100mm; } }
 /* Schémas vectoriels (classe « infographie-schema » posée dans la note) : dessinés sur fond clair,
    inversés en thème sombre pour ne pas laisser un rectangle éblouissant sous terre. Leur palette
    (encre, gris, rouge danger, bleu air) est choisie pour survivre à l'inversion ; l'impression

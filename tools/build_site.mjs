@@ -8,7 +8,7 @@ import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { dimensionsSvg, dimensionsImage } from './dimensions_svg.mjs';
 import { choisirImage } from './resoudre_image.mjs';
-import { sansVersionTexteSchema, sansVersionTexteSchemaMd } from './version_texte_schema.mjs';
+import { sansVersionsTexte, sansVersionsTexteMd } from './versions_texte.mjs';
 import { libelleLien, contexteDuLien } from './libelle_lien.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
 import { rendrePage404 } from './redirections.mjs';
@@ -255,9 +255,10 @@ for (const p of pages) {
     }
     raw = raw.slice(m[0].length);
   }
-  // « Lire le schéma en texte » retiré dès la lecture : ni publié, ni indexé par la recherche, ni repris
-  // dans les extraits, même si la note garde encore ce bloc
-  p.body = sansVersionTexteSchemaMd(raw);
+  // versions texte dépliables (« Lire le schéma en texte », « Lire la version texte — … », « Lire l’illustration
+  // en texte »…) retirées dès la lecture : ni publiées, ni indexées par la recherche, ni reprises dans les
+  // extraits, même si la note garde encore le bloc
+  p.body = sansVersionsTexteMd(raw);
   // titre unique : le H1 s'il existe, sinon le nom de fichier.
   // p.base reste la clé de résolution des wikilinks et du chemin de sortie.
   const h1 = p.body.match(/^\s*#\s+(.+?)\s*$/m);
@@ -759,7 +760,7 @@ function renderBody(md, nested = false) {
   s = renderWikilinks(s);
   s = s.replace(/==([^=\n][^=]*?)==/g, '<mark>$1</mark>');
   // par sécurité, la même règle sur le HTML rendu (bloc écrit autrement dans la note)
-  let html = sansVersionTexteSchema(marked.parse(s));
+  let html = sansVersionsTexte(marked.parse(s));
   if (!nested) {
     // ids de titres + collecte du sommaire
     html = html.replace(/<h([1-4])>([\s\S]*?)<\/h\1>/g, (m, lv, inner) => {
