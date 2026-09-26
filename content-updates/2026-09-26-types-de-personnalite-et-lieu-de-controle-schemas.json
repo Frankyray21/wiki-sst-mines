@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-26",
+ "revision": "2026-09-26-types-de-personnalite-et-lieu-de-controle-schemas",
+ "portee": "Schémas de la page w/psychosocial/types-de-personnalite-et-lieu-de-controle.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Types de personnalité et lieu de contrôle",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/types-de-personnalite-et-lieu-de-controle.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "img-003.png",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg|Grille de quatre cases dans un cadre « Conditions de travail » : en colonnes, le lieu de contrôle interne (« Je peux agir sur ma situation » : le travailleur agit sur un levier) ou externe (« Ce qui m’arrive dépend des autres ou du hasard » : un dé et une autre personne agissent sur lui) ; en lignes, le type A (pressé, impatient, chronomètre) ou le type B (détendu, patient). Les quatre cases sont de la même couleur.]]\n\n<p class=\"infographie-legende\">Le schéma croise les deux dimensions décrites plus haut, comme la typologie de Dolan et Arsenault, sans attribuer de risque à une case : ces traits modulent la réponse au stress sans la causer, c’est le contexte qui produit le risque. Une attribution externe n’est pas un défaut ; elle est réaliste quand l’environnement de travail offre objectivement peu de contrôle.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Le grand cadre gris représente les conditions de travail : « c’est le contexte qui produit le risque, l’individu qui le filtre ». Toute la grille est à l’intérieur de ce cadre.</li>\n<li>En colonnes, le lieu de contrôle, c’est-à-dire à quoi le travailleur attribue ce qui lui arrive. Interne, « Je peux agir sur ma situation » : une flèche part du travailleur casqué vers un levier. Externe, « Ce qui m’arrive dépend des autres ou du hasard » : deux flèches arrivent vers lui, l’une depuis un dé (le hasard), l’autre depuis une autre personne (les autres).</li>\n<li>En lignes, le type de personnalité : type A, pressé et impatient, marqué d’un chronomètre ; type B, détendu et patient. Chaque case combine une ligne et une colonne.</li>\n<li>Les quatre cases ont la même couleur : aucune combinaison n’est présentée comme dangereuse ou protectrice, car « aucun travailleur n’est à risque ou protégé en soi ».</li>\n<li>Sous la colonne externe, en bleu : quand le poste offre objectivement peu de contrôle, une attribution externe est réaliste et adaptative. Le schéma ne montre que les types A et B ; les types C, D et la hardiness sont décrits dans le tableau plus haut.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page : tableaux « Types de personnalité » et « Lieu de contrôle » (concept de Rotter, 1966), « Nuance importante », « Pourquoi en parler » et « Limites à respecter ». Le croisement des deux dimensions en quatre cases est la typologie de Dolan et Arsenault (1980), reprise dans leur ouvrage de 2009 (p. 142-143, figure 4.3) ; voir {{lien:w/psychosocial/analyse-dolan-et-arsenault-2009.html|Dolan et Arsenault (2009)}}. Schéma de principe redessiné, sans les étiquettes ni les dessins du livre, et sans niveau de risque par case.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "img-003.png",
+   "marqueur": "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "Combinaison type de personnalité (A, B) × lieu de contrôle (interne, externe) : matrice HOT DOG / COOL DOG / HOT CAT / COOL CAT. Source : Dolan & Arsenault (1980), repris dans SST1010 (UQAM), séance 4. Usage personnel.",
+   "marqueur": "Infographies/wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v1.svg"
+  }
+ ]
+}

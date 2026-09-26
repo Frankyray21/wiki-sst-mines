@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="660" viewBox="0 0 480 660" role="img" aria-labelledby="t d">
+<title id="t">Comportements à risque</title>
+<desc id="d">Dans chaque rangée, la case grise à gauche montre la situation « d’habitude », la case encadrée à droite, après une flèche, la situation « maintenant » ; l’étiquette au-dessus reprend les mots exacts du tableau de la page. Ici, les cases « maintenant » sont en rouge. Prise de risques inhabituelle : d’habitude, le travailleur reste hors de la zone sous une charge suspendue (pointillés) ; maintenant, il se tient dessous (« Élevé, signal grave », dit la page). Désengagement des consignes de sécurité : d’habitude, il s’arrête devant la barrière ; maintenant, il la franchit (flèche rouge en pointillé), ce que la page juge très préoccupant. Conduite imprudente d’équipement : d’habitude, le véhicule est à distance du piéton ; maintenant, il arrive vite (traits rouges) tout près de lui (signal d’alerte majeur). En bas, dans un cadre rouge, le quatrième signal du tableau, sans illustration : « Propos suicidaires ou inquiétants évoquant la mort » — « Demander une aide professionnelle sans attendre ; services d’urgence si danger immédiat ».</desc>
+<rect width="480" height="660" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#c62828">Comportements à risque</text>
+<text x="117.0" y="80" font-size="20" font-weight="700" fill="#4b535c" text-anchor="middle">d’habitude</text>
+<text x="363.0" y="80" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">maintenant</text>
+<path d="M187.0 73H279.0" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M291.0 73L277.0 64V82Z" fill="#1f2328"/>
+<!-- Prise de risques inhabituelle -->
+<text x="18" y="112" font-size="20" fill="#1f2328">Prise de risques inhabituelle</text>
+<rect x="16" y="122" width="202" height="106" rx="10" fill="#eceef0"/>
+<rect x="262" y="122" width="202" height="106" rx="10" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/>
+<path d="M224 175.0H245" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M257 175.0L243 166.0V184.0Z" fill="#1f2328"/>
+<path d="M148 122V126" stroke="#1f2328" stroke-width="3"/>
+<path d="M136 133L148 126L160 133" fill="none" stroke="#1f2328" stroke-width="2.5"/>
+<rect x="122" y="133" width="52" height="18" rx="2" fill="#1f2328"/>
+<path d="M122 142.0H174" stroke="#fbfaf6" stroke-width="2.5"/>
+<path d="M122 154V219M174 154V219" stroke="#4b535c" stroke-width="2.5" stroke-dasharray="6 5"/>
+<g fill="#1f2328" transform="translate(58 219) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<path d="M394 122V126" stroke="#1f2328" stroke-width="3"/>
+<path d="M382 133L394 126L406 133" fill="none" stroke="#1f2328" stroke-width="2.5"/>
+<rect x="368" y="133" width="52" height="18" rx="2" fill="#c62828"/>
+<path d="M368 142.0H420" stroke="#fbfaf6" stroke-width="2.5"/>
+<path d="M368 154V219M420 154V219" stroke="#c62828" stroke-width="2.5" stroke-dasharray="6 5"/>
+<g fill="#1f2328" transform="translate(394 219) scale(0.58 0.58)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<!-- Désengagement des consignes de sécurité -->
+<text x="18" y="252" font-size="20" fill="#1f2328">Désengagement des consignes de sécurité</text>
+<rect x="16" y="262" width="202" height="106" rx="10" fill="#eceef0"/>
+<rect x="262" y="262" width="202" height="106" rx="10" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/>
+<path d="M224 315.0H245" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M257 315.0L243 306.0V324.0Z" fill="#1f2328"/>
+<path d="M28 359H206" stroke="#4b535c" stroke-width="2.5" stroke-linecap="round"/>
+<g fill="#1f2328" transform="translate(74 359) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<path d="M120.0 359V319M168.0 359V319" stroke="#1f2328" stroke-width="4.5" stroke-linecap="round"/>
+<rect x="112.0" y="319" width="64" height="15" rx="2" fill="#fbfaf6" stroke="#c62828" stroke-width="3"/>
+<path d="M118.0 333L128.0 320M135.0 333L145.0 320M152.0 333L162.0 320" stroke="#c62828" stroke-width="5.5"/>
+<path d="M274 359H452" stroke="#4b535c" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M322.0 359V319M370.0 359V319" stroke="#1f2328" stroke-width="4.5" stroke-linecap="round"/>
+<rect x="314.0" y="319" width="64" height="15" rx="2" fill="#fbfaf6" stroke="#c62828" stroke-width="3"/>
+<path d="M320.0 333L330.0 320M337.0 333L347.0 320M354.0 333L364.0 320" stroke="#c62828" stroke-width="5.5"/>
+<g fill="#1f2328" transform="translate(426 359) scale(0.66 0.66)">
+<path d="M-5 -44L-17 -3M5 -44L17 -3" stroke="#1f2328" stroke-width="10" stroke-linecap="round"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<path d="M282 319Q336 257 396 301" fill="none" stroke="#c62828" stroke-width="3.5" stroke-dasharray="7 5" stroke-linecap="round"/>
+<path d="M408 313L389 308L400 293Z" fill="#c62828"/>
+<!-- Conduite imprudente d’équipement -->
+<text x="18" y="392" font-size="20" fill="#1f2328">Conduite imprudente d’équipement</text>
+<rect x="16" y="402" width="202" height="106" rx="10" fill="#eceef0"/>
+<rect x="262" y="402" width="202" height="106" rx="10" fill="#fde3e0" stroke="#c62828" stroke-width="2.5"/>
+<path d="M224 455.0H245" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M257 455.0L243 446.0V464.0Z" fill="#1f2328"/>
+<path d="M26 499H208" stroke="#4b535c" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M30 487V465H80V447Q80 443 84 443H104L118 463Q122 465 122 471V487Z" fill="#1f2328"/>
+<path d="M86 449H102L112 461H86Z" fill="#fbfaf6"/>
+<circle cx="50" cy="489" r="10" fill="#1f2328" stroke="#fbfaf6" stroke-width="3"/>
+<circle cx="50" cy="489" r="3" fill="#fbfaf6"/>
+<circle cx="102" cy="489" r="10" fill="#1f2328" stroke="#fbfaf6" stroke-width="3"/>
+<circle cx="102" cy="489" r="3" fill="#fbfaf6"/>
+<g fill="#4b535c" transform="translate(192 499) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#4b535c" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#4b535c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<path d="M272 499H454" stroke="#4b535c" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M274 451H304M282 463H310M274 475H304" stroke="#c62828" stroke-width="4" stroke-linecap="round"/>
+<path d="M320 487V465H370V447Q370 443 374 443H394L408 463Q412 465 412 471V487Z" fill="#1f2328"/>
+<path d="M376 449H392L402 461H376Z" fill="#fbfaf6"/>
+<circle cx="340" cy="489" r="10" fill="#1f2328" stroke="#fbfaf6" stroke-width="3"/>
+<circle cx="340" cy="489" r="3" fill="#fbfaf6"/>
+<circle cx="392" cy="489" r="10" fill="#1f2328" stroke="#fbfaf6" stroke-width="3"/>
+<circle cx="392" cy="489" r="3" fill="#fbfaf6"/>
+<g fill="#4b535c" transform="translate(438 499) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#4b535c" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#4b535c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<!-- Tableau « Comportements à risque », 4e signal : pas d’illustration, la consigne de la page mot pour mot -->
+<rect x="16" y="518" width="448" height="134" rx="10" fill="#fde3e0" stroke="#c62828" stroke-width="3"/>
+<text x="32" y="546" font-size="19" font-weight="700" fill="#c62828">Propos suicidaires ou inquiétants</text>
+<text x="32" y="569" font-size="19" font-weight="700" fill="#c62828">évoquant la mort</text>
+<text x="32" y="596" font-size="19" fill="#1f2328">Demander une aide professionnelle</text>
+<text x="32" y="618" font-size="19" fill="#1f2328">sans attendre ; services d’urgence</text>
+<text x="32" y="640" font-size="19" fill="#1f2328">si danger immédiat</text>
+</g>
+</svg>

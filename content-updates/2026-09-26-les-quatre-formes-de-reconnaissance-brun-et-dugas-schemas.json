@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-26",
+ "revision": "2026-09-26-les-quatre-formes-de-reconnaissance-brun-et-dugas-schemas",
+ "portee": "Schémas de la page w/psychosocial/les-quatre-formes-de-reconnaissance-brun-et-dugas.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Les quatre formes de reconnaissance (Brun et Dugas)",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/les-quatre-formes-de-reconnaissance-brun-et-dugas.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-les-quatre-formes-de-reconnaissance-brun-et-dugas-foreur-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "img-012.png",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-les-quatre-formes-de-reconnaissance-brun-et-dugas-foreur-v1.svg|Un foreur pousse sa foreuse contre un front de roche déjà percé de trous. Quatre étiquettes pointent vers ce que chaque forme reconnaît : existentielle vers le travailleur lui-même, pratique vers ses mains sur la foreuse, investissement vers l’effort de poussée, résultats vers le front foré. En bas, beaucoup d’organisations se concentrent sur une seule forme, les résultats : les trois autres sont oubliées.]]\n\n<p class=\"infographie-legende\">Les quatre formes valorisent quatre dimensions différentes du même travailleur ; se concentrer sur un seul registre laisse d’autres besoins de reconnaissance non satisfaits. Le schéma ne classe pas les formes et n’en fait pas une somme.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Au centre, un foreur casqué pousse sa foreuse contre un front de roche déjà percé de trous : c’est le même travailleur, vu sous quatre angles.</li>\n<li>Existentielle : l’étiquette pointe vers le travailleur lui-même, « la personne, son humanité », au-delà du rôle. Pratique : elle pointe vers ses mains sur la foreuse, le « comment », la manière de travailler.</li>\n<li>Investissement : elle pointe vers une flèche de poussée, près de gouttes de sueur, « l’effort, l’engagement », indépendamment du résultat. Résultats : elle pointe vers le front percé de trous, le travail foré, le « quoi », ce qui est livré.</li>\n<li>En bas, une rangée de quatre cases (personne, pratique, effort, résultats), dans l’ordre du tableau de la page : beaucoup d’organisations se concentrent sur une seule, les résultats, seule case pleine ; les trois autres, en pointillés rouges, sont oubliées et ces besoins de reconnaissance restent non satisfaits.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après les sections « L’essentiel », « Cadre » et « Les quatre formes » de cette page (Brun et Dugas, 2005) ; scène tirée des exemples de « Application en mines ». Schéma de principe, sans classement ni mesure ; voir aussi {{lien:w/psychosocial/pratiques-de-reconnaissance-pour-superviseurs.html|Pratiques de reconnaissance pour superviseurs}}.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-les-quatre-formes-de-reconnaissance-brun-et-dugas-foreur-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "img-012.png",
+   "marqueur": "Infographies/wiki-les-quatre-formes-de-reconnaissance-brun-et-dugas-foreur-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "*Schéma synthétique : Personne + Pratique + Efforts = Résultats.",
+   "marqueur": "Infographies/wiki-les-quatre-formes-de-reconnaissance-brun-et-dugas-foreur-v1.svg"
+  }
+ ]
+}

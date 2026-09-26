@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="614" viewBox="0 0 480 614" role="img" aria-labelledby="t d">
+<title id="t">Quart de nuit : l’horloge du corps et l’horaire de travail en conflit</title>
+<desc id="d">Schéma en deux colonnes, le jour (soleil) à gauche et la nuit (lune, fond gris) à droite, et deux rangées. Rangée du haut, en bleu, l’horloge du corps : le jour, éveil (personne debout) ; la nuit, sommeil et mélatonine (personne couchée). Rangée du bas, en rouge, le quart de nuit : le jour, sommeil de jour fractionné (personne couchée sous le soleil) ; la nuit, au travail, vigilance exigée (mineur casqué debout). Des flèches rouges entre les deux rangées marquent le conflit. En bas : une insuffisance cumulée de sommeil, qui altère l’humeur et la régulation émotionnelle. Aucune heure ni durée.</desc>
+<rect width="480" height="614" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Quart de nuit : le corps</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">et l’horaire en conflit</text>
+<text x="24" y="108" font-size="19" fill="#4b535c">Désynchronisation circadienne</text>
+<!-- Colonnes jour / nuit -->
+<rect x="16" y="122" width="220" height="382" rx="12" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<rect x="244" y="122" width="220" height="382" rx="12" fill="#eceef0"/>
+<circle cx="44" cy="152" r="10" fill="#fbfaf6" stroke="#4b535c" stroke-width="3"/><g stroke="#4b535c" stroke-width="3" stroke-linecap="round"><path d="M58.0 152.0L63.0 152.0"/><path d="M53.9 161.9L57.4 165.4"/><path d="M44.0 166.0L44.0 171.0"/><path d="M34.1 161.9L30.6 165.4"/><path d="M30.0 152.0L25.0 152.0"/><path d="M34.1 142.1L30.6 138.6"/><path d="M44.0 138.0L44.0 133.0"/><path d="M53.9 142.1L57.4 138.6"/></g>
+<text x="68" y="159" font-size="20" font-weight="700" fill="#1f2328">jour</text>
+<circle cx="272" cy="152" r="12" fill="#4b535c"/><circle cx="278" cy="148" r="11" fill="#eceef0"/>
+<text x="296" y="159" font-size="20" font-weight="700" fill="#1f2328">nuit</text>
+<!-- Rangée A — page : rythme circadien, « le corps se prépare au sommeil » la nuit ; mélatonine alignée sur la période de sommeil -->
+<text x="28" y="196" font-size="19" font-weight="700" fill="#1565c0">Horloge du corps</text>
+<rect x="28" y="206" width="196" height="114" rx="8" fill="#e1ecfa"/>
+<rect x="256" y="206" width="196" height="114" rx="8" fill="#e1ecfa"/>
+<g transform="translate(64 310) rotate(0)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/></g>
+<text x="100" y="268" font-size="20" font-weight="700" fill="#1565c0">éveil</text>
+<text x="268" y="234" font-size="20" font-weight="700" fill="#1565c0">sommeil,</text>
+<text x="268" y="258" font-size="19" fill="#1565c0">mélatonine</text>
+<rect x="300" y="276" width="6" height="36" rx="2" fill="#6e7781"/><rect x="306" y="296" width="120" height="10" rx="2" fill="#6e7781"/><rect x="420" y="306" width="5" height="6" fill="#6e7781"/><rect x="309" y="289" width="22" height="7" rx="3" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="translate(373 284) rotate(-90)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/></g>
+<g fill="#1565c0" font-weight="700"><text x="384" y="270" font-size="18">z</text><text x="402" y="256" font-size="20">z</text><text x="422" y="240" font-size="22">z</text></g>
+<!-- Page : « le travail exige de la vigilance au moment où le corps se prépare au sommeil » -->
+<text x="28" y="352" font-size="19" font-weight="700" fill="#c62828">Quart de nuit</text>
+<path d="M196 333V349" stroke="#c62828" stroke-width="3.5"/><path d="M196 324L189 335H203Z" fill="#c62828"/><path d="M196 358L189 347H203Z" fill="#c62828"/>
+<path d="M434 333V349" stroke="#c62828" stroke-width="3.5"/><path d="M434 324L427 335H441Z" fill="#c62828"/><path d="M434 358L427 347H441Z" fill="#c62828"/>
+<text x="420" y="348" font-size="19" font-weight="700" fill="#c62828" text-anchor="end">conflit</text>
+<rect x="28" y="362" width="196" height="130" rx="8" fill="#fde3e0"/>
+<rect x="256" y="362" width="196" height="130" rx="8" fill="#fde3e0"/>
+<!-- Page : « latence d’endormissement accrue, un sommeil fragmenté » ; « sommeil de jour fractionné et de moindre qualité » -->
+<text x="40" y="392" font-size="19" font-weight="700" fill="#c62828">sommeil de jour</text>
+<text x="40" y="416" font-size="19" fill="#c62828">fractionné</text>
+<circle cx="196" cy="436" r="9" fill="#fbfaf6" stroke="#4b535c" stroke-width="3"/><g stroke="#4b535c" stroke-width="3" stroke-linecap="round"><path d="M209.0 436.0L214.0 436.0"/><path d="M205.2 445.2L208.7 448.7"/><path d="M196.0 449.0L196.0 454.0"/><path d="M186.8 445.2L183.3 448.7"/><path d="M183.0 436.0L178.0 436.0"/><path d="M186.8 426.8L183.3 423.3"/><path d="M196.0 423.0L196.0 418.0"/><path d="M205.2 426.8L208.7 423.3"/></g>
+<rect x="44" y="446" width="6" height="36" rx="2" fill="#6e7781"/><rect x="50" y="466" width="120" height="10" rx="2" fill="#6e7781"/><rect x="164" y="476" width="5" height="6" fill="#6e7781"/><rect x="53" y="459" width="22" height="7" rx="3" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="translate(117 454) rotate(-90)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/></g>
+<g fill="#c62828" font-weight="700" font-size="19"><text x="120" y="444">z</text><text x="146" y="432">z</text></g><path d="M138 426L140 446M164 414L166 434" stroke="#c62828" stroke-width="2.5" stroke-linecap="round"/>
+<!-- Mineur au travail la nuit : « le travail exige de la vigilance » -->
+<g transform="translate(290 482) rotate(0)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><rect x="-3.5" y="-6" width="7" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/></g></g>
+<path d="M301 420L320 412M301 424L320 424" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
+<text x="330" y="434" font-size="19" fill="#1f2328">au travail :</text>
+<text x="330" y="458" font-size="20" font-weight="700" fill="#c62828">vigilance</text>
+<text x="330" y="480" font-size="20" font-weight="700" fill="#c62828">exigée</text>
+<!-- Page : « une latence d’endormissement accrue, un sommeil fragmenté et une insuffisance cumulée qui altèrent l’humeur et la régulation émotionnelle ». La question de l’adaptation (page contradictoire) n’est pas dessinée. -->
+<text x="24" y="540" font-size="20" font-weight="700" fill="#c62828">Insuffisance cumulée de sommeil</text>
+<text x="24" y="568" font-size="19" fill="#1f2328">→ humeur et régulation</text>
+<text x="24" y="592" font-size="19" fill="#1f2328">émotionnelle altérées</text>
+</g>
+</svg>

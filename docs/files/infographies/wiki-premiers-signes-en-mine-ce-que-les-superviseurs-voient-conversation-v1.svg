@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="632" viewBox="0 0 480 632" role="img" aria-labelledby="t d">
+<title id="t">Repères pour guider une conversation et le suivi</title>
+<desc id="d">Une pièce à la porte fermée : la conversation a lieu en privé. Le superviseur, en bleu, et le travailleur se font face de part et d’autre d’une table ; un carnet est posé sur la table. Échanger, en privé, avec une question ouverte (dans le dessin : « en privé, question ouverte ») : bulle bleue avec un point d’interrogation. Écouter, sans interprétation clinique : la bulle du travailleur, plus grande. Observer : décrire les changements et les faits (le carnet). Dessous, trois cadres côte à côte, sans flèche, sans lien entre eux ni numéro : Orienter (faire connaître les ressources professionnelles et le PAE), Suivre (convenir d’un suivi adapté à la situation), Travail (signaler au conseiller SST les difficultés liées au travail qui nécessitent une action). En bas, en bleu, la phrase de la page : « Ils ne servent pas à établir un diagnostic. »</desc>
+<rect width="480" height="632" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Guider une conversation</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">et le suivi</text>
+<rect x="16" y="96" width="448" height="298" rx="12" fill="#eceef0"/>
+<rect x="28" y="130" width="46" height="226" rx="3" fill="#fbfaf6" stroke="#4b535c" stroke-width="3"/>
+<circle cx="64" cy="242" r="4" fill="#4b535c"/>
+<text x="96" y="126" font-size="20" font-weight="700" fill="#1565c0">Échanger</text>
+<text x="96" y="149" font-size="19" fill="#1565c0">en privé,</text>
+<text x="96" y="171" font-size="19" fill="#1565c0">question ouverte</text>
+<text x="448" y="126" font-size="20" font-weight="700" fill="#1565c0" text-anchor="end">Écouter</text>
+<text x="448" y="149" font-size="19" fill="#1565c0" text-anchor="end">sans interprétation</text>
+<text x="448" y="171" font-size="19" fill="#1565c0" text-anchor="end">clinique</text>
+<g fill="#1565c0" transform="translate(150 332) scale(0.92 0.92)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1565c0" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1565c0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<g fill="#1f2328" transform="translate(338 332) scale(0.92 0.92)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<rect x="84" y="296" width="372" height="42" fill="#eceef0"/>
+<rect x="98" y="292" width="296" height="11" rx="3" fill="#1f2328"/>
+<rect x="160" y="184" width="46" height="34" rx="9" fill="#fbfaf6" stroke="#1565c0" stroke-width="3"/>
+<path d="M168 216.5L164 227L179 216.5" fill="#fbfaf6" stroke="#1565c0" stroke-width="3" stroke-linejoin="round"/>
+<path d="M169.5 216.5H177.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<text x="183" y="210" font-size="26" font-weight="700" fill="#1565c0" text-anchor="middle">?</text>
+<rect x="270" y="182" width="58" height="38" rx="9" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<path d="M320 218.5L324 229L309 218.5" fill="#fbfaf6" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<path d="M318.5 218.5H310.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M280 197.0H318M280 205.0H310" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="196" y="278" width="30" height="14" rx="2" fill="#fbfaf6" stroke="#1565c0" stroke-width="3"/>
+<text x="96" y="330" font-size="20" font-weight="700" fill="#1565c0">Observer</text>
+<text x="96" y="353" font-size="19" fill="#1565c0">décrire les changements</text>
+<text x="96" y="376" font-size="19" fill="#1565c0">et les faits</text>
+<rect x="16" y="406" width="172" height="124" rx="10" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<text x="102.0" y="436" font-size="20" font-weight="700" fill="#1565c0" text-anchor="middle">Orienter</text>
+<text x="102.0" y="462" font-size="19" fill="#1f2328" text-anchor="middle">ressources</text>
+<text x="102.0" y="485" font-size="19" fill="#1f2328" text-anchor="middle">professionnelles</text>
+<text x="102.0" y="508" font-size="19" fill="#1f2328" text-anchor="middle">et le PAE</text>
+<rect x="194" y="406" width="138" height="124" rx="10" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<text x="263.0" y="436" font-size="20" font-weight="700" fill="#1565c0" text-anchor="middle">Suivre</text>
+<text x="263.0" y="462" font-size="19" fill="#1f2328" text-anchor="middle">suivi adapté</text>
+<text x="263.0" y="485" font-size="19" fill="#1f2328" text-anchor="middle">à la situation</text>
+<rect x="338" y="406" width="126" height="124" rx="10" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<text x="401.0" y="436" font-size="20" font-weight="700" fill="#1565c0" text-anchor="middle">Travail</text>
+<text x="401.0" y="462" font-size="19" fill="#1f2328" text-anchor="middle">signaler au</text>
+<text x="401.0" y="485" font-size="19" fill="#1f2328" text-anchor="middle">conseiller</text>
+<text x="401.0" y="508" font-size="19" fill="#1f2328" text-anchor="middle">SST</text>
+<rect x="16" y="544" width="448" height="72" rx="10" fill="#e1ecfa"/>
+<text x="240" y="574" font-size="20" font-weight="700" fill="#1565c0" text-anchor="middle">Ils ne servent pas à établir</text>
+<text x="240" y="600" font-size="20" font-weight="700" fill="#1565c0" text-anchor="middle">un diagnostic.</text>
+</g>
+</svg>

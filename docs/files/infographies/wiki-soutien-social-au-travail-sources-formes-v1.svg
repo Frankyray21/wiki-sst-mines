@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="660" viewBox="0 0 480 660" role="img" aria-labelledby="t d">
+<title id="t">Soutien social au travail : qui aide, et comment</title>
+<desc id="d">À gauche, deux sources de soutien. En haut, le supérieur, casqué, avec une planchette : ses traits bleus mènent à trois flèches, une par forme d’aide du tableau de la page : opérationnelle (icône de clé : ressource, outil, renfort), informationnelle (bulle : consigne claire, conseil pertinent) et émotionnelle (oreille : écoute respectueuse). En bas, deux collègues casqués : une flèche bleue « coopération » (partage d’expérience, entraide, discuter du travail). Toutes les flèches aboutissent à droite à un travailleur casqué qui lève la main, une bulle « ? » au-dessus de la tête : il demande de l’aide. En bas, la question de repérage proposée : lorsqu’une personne demande de l’aide, reçoit-elle une réponse utilisable ? Un nom dans un organigramme n’y répond pas, à lui seul.</desc>
+<rect width="480" height="660" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Soutien social :</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">qui aide, et comment</text>
+<g transform="translate(62 260) scale(1.25)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#fbfaf6" stroke-width="2.5"/></g></g>
+<g transform="translate(88 206)"><rect x="-9" y="-12" width="20" height="26" rx="2.5" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/><path d="M-4 -3H6M-4 3H6M-4 9H3" stroke="#1f2328" stroke-width="2.5"/></g>
+<path d="M24 262H124" stroke="#6e7781" stroke-width="2.5"/>
+<text x="24" y="290" font-size="19" font-weight="700" fill="#1f2328">le supérieur</text>
+<path d="M84 228H162M162 132V324" fill="none" stroke="#1565c0" stroke-width="4" stroke-linecap="round"/>
+<path d="M162 132H402" stroke="#1565c0" stroke-width="4" stroke-linecap="round"/><path d="M402 132L388 124V140Z" fill="#1565c0"/>
+<text x="214" y="120" font-size="19" font-weight="700" fill="#1565c0">opérationnelle</text>
+<text x="214" y="156" font-size="19" fill="#1f2328">ressource, outil,</text>
+<text x="214" y="178" font-size="19" fill="#1f2328">renfort</text>
+<circle cx="190" cy="132" r="20" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/><g transform="translate(190 132) rotate(-45)"><path d="M0 -3V12" stroke="#1565c0" stroke-width="5" stroke-linecap="round"/><path d="M-7 -12A8 8 0 1 0 7 -12L3 -12V-5H-3V-12Z" fill="#1565c0"/></g>
+<path d="M162 228H402" stroke="#1565c0" stroke-width="4" stroke-linecap="round"/><path d="M402 228L388 220V236Z" fill="#1565c0"/>
+<text x="214" y="216" font-size="19" font-weight="700" fill="#1565c0">informationnelle</text>
+<text x="214" y="252" font-size="19" fill="#1f2328">consigne claire,</text>
+<text x="214" y="274" font-size="19" fill="#1f2328">conseil pertinent</text>
+<circle cx="190" cy="228" r="20" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/><g transform="translate(190 228)"><path d="M-11 -9H11V6H-2L-8 12V6H-11Z" fill="#fbfaf6" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/><path d="M-6 -3H6M-6 2H3" stroke="#1565c0" stroke-width="2.5"/></g>
+<path d="M162 324H402" stroke="#1565c0" stroke-width="4" stroke-linecap="round"/><path d="M402 324L388 316V332Z" fill="#1565c0"/>
+<text x="214" y="312" font-size="19" font-weight="700" fill="#1565c0">émotionnelle</text>
+<text x="214" y="348" font-size="19" fill="#1f2328">écoute</text>
+<text x="214" y="370" font-size="19" fill="#1f2328">respectueuse</text>
+<circle cx="190" cy="324" r="20" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/><g transform="translate(190 324)"><path d="M-7 -2C-7 -11 7 -12 7 -2C7 4 1 5 1 10C1 14 -5 14 -6 10" fill="none" stroke="#1565c0" stroke-width="3" stroke-linecap="round"/><path d="M-2 -2C-2 -6 3 -6 3 -2C3 1 0 2 0 4" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/></g>
+<g transform="translate(46 446) scale(1.1)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#fbfaf6" stroke-width="2.5"/></g></g>
+<g transform="translate(96 446) scale(1.1)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#fbfaf6" stroke-width="2.5"/></g></g>
+<path d="M24 448H124" stroke="#6e7781" stroke-width="2.5"/>
+<text x="24" y="476" font-size="19" font-weight="700" fill="#1f2328">les collègues</text>
+<path d="M120 420H402" stroke="#1565c0" stroke-width="4" stroke-linecap="round"/><path d="M402 420L388 412V428Z" fill="#1565c0"/>
+<circle cx="190" cy="420" r="20" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5"/><g transform="translate(190 420)" fill="#1565c0"><circle cx="-6" cy="-6" r="4.5"/><circle cx="6" cy="-6" r="4.5"/><path d="M-14 11V6Q-14 0 -6 0Q2 0 2 6V11Z"/><path d="M-2 11V6Q-2 0 6 0Q14 0 14 6V11Z" stroke="#e1ecfa" stroke-width="2.5"/></g>
+<text x="214" y="408" font-size="19" font-weight="700" fill="#1565c0">coopération</text>
+<text x="214" y="444" font-size="19" fill="#1f2328">partage d’expérience,</text>
+<text x="214" y="466" font-size="19" fill="#1f2328">entraide, discuter</text>
+<text x="214" y="488" font-size="19" fill="#1f2328">du travail</text>
+<path d="M402 132V420" stroke="#1565c0" stroke-width="4" stroke-linecap="round"/>
+<path d="M402 277H412" stroke="#1565c0" stroke-width="4" stroke-linecap="round"/>
+<path d="M422 277L408 269V285Z" fill="#1565c0"/>
+<g transform="translate(436 318) scale(1.25)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#fbfaf6" stroke-width="2.5"/></g><path d="M9 -37L17 -52L19 -66" fill="none" stroke="#1f2328" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path d="M418 320H456" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="translate(436 198)"><path d="M-18 -18H18V10H6L0 18L-6 10H-18Z" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/><text x="0" y="3" font-size="22" font-weight="700" fill="#1f2328" text-anchor="middle">?</text></g>
+<path d="M24 512H456" stroke="#6e7781" stroke-width="2.5"/>
+<text x="24" y="542" font-size="19" font-weight="700" fill="#1f2328">Question de repérage proposée :</text>
+<text x="24" y="568" font-size="19" fill="#1f2328">lorsqu’une personne demande de l’aide,</text>
+<text x="24" y="592" font-size="19" fill="#1f2328">reçoit-elle une réponse utilisable ?</text>
+<text x="24" y="622" font-size="19" fill="#4b535c">Un nom dans un organigramme</text>
+<text x="24" y="646" font-size="19" fill="#4b535c">n’y répond pas, à lui seul.</text>
+</g>
+</svg>

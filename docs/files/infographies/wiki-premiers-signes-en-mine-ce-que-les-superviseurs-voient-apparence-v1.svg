@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="530" viewBox="0 0 480 530" role="img" aria-labelledby="t d">
+<title id="t">Apparence et comportement</title>
+<desc id="d">Dans chaque rangée, la case grise à gauche montre la situation « d’habitude », la case encadrée à droite, après une flèche, la situation « maintenant » ; l’étiquette au-dessus reprend les mots exacts du tableau de la page. Fatigue marquée et persistante : d’habitude debout, pile pleine ; maintenant assis, dos voûté, tête basse, bras ballants, pile presque vide en rouge (au-delà de la fatigue normale en quart, dit la page). Plaintes physiques nouvelles : maintenant, le travailleur se tient la tête et le bas du dos, marqués de traits rouges (la page cite maux de tête, maux de dos, troubles du sommeil). Hausse de la consommation visible : d’habitude une tasse sur la table ; maintenant trois tasses et un paquet de cigarettes (la page cite alcool en camp, café, cigarettes ; l’alcool n’est pas dessiné). Le nombre d’objets n’est pas un seuil.</desc>
+<rect width="480" height="530" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Apparence et comportement</text>
+<text x="117.0" y="80" font-size="20" font-weight="700" fill="#4b535c" text-anchor="middle">d’habitude</text>
+<text x="363.0" y="80" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">maintenant</text>
+<path d="M187.0 73H279.0" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M291.0 73L277.0 64V82Z" fill="#1f2328"/>
+<!-- Fatigue marquée et persistante -->
+<text x="18" y="112" font-size="20" fill="#1f2328">Fatigue marquée et persistante</text>
+<rect x="16" y="122" width="202" height="106" rx="10" fill="#eceef0"/>
+<rect x="262" y="122" width="202" height="106" rx="10" fill="#eceef0" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M224 175.0H245" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M257 175.0L243 166.0V184.0Z" fill="#1f2328"/>
+<g fill="#1f2328" transform="translate(76 219) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<rect x="140" y="160" width="54" height="28" rx="4" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<rect x="194" y="169.0" width="5" height="10" rx="1.5" fill="#1f2328"/>
+<rect x="144.0" y="164" width="9.25" height="20" rx="1.5" fill="#1f2328"/>
+<rect x="156.25" y="164" width="9.25" height="20" rx="1.5" fill="#1f2328"/>
+<rect x="168.5" y="164" width="9.25" height="20" rx="1.5" fill="#1f2328"/>
+<rect x="180.75" y="164" width="9.25" height="20" rx="1.5" fill="#1f2328"/>
+<g fill="#1f2328" transform="translate(320 219) scale(0.8)">
+<rect x="-30" y="-44" width="46" height="7" rx="2" fill="#4b535c"/>
+<path d="M-24 -37V0M10 -37V0" stroke="#4b535c" stroke-width="5"/>
+<path d="M-10 -50H22V-2H33" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="11"/>
+<path d="M-17 -46Q-22 -72 -6 -86Q4 -93 12 -86L9 -72Q3 -60 4 -46Z"/>
+<g transform="rotate(48 21 -80)">
+<circle cx="21" cy="-80" r="10"/>
+<path d="M8 -83Q8 -101 21 -101Q34 -101 34 -83Z"/>
+<path d="M5 -83H37" stroke="#1f2328" stroke-width="6" stroke-linecap="round"/>
+</g>
+<path d="M2 -78L10 -54L27 -50L31 -30" stroke="#fbfaf6" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="14"/>
+<path d="M2 -78L10 -54L27 -50L31 -30" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="8"/>
+</g>
+<rect x="386" y="160" width="54" height="28" rx="4" fill="#fbfaf6" stroke="#c62828" stroke-width="3"/>
+<rect x="440" y="169.0" width="5" height="10" rx="1.5" fill="#c62828"/>
+<rect x="390.0" y="164" width="9.25" height="20" rx="1.5" fill="#c62828"/>
+<!-- Plaintes physiques nouvelles -->
+<text x="18" y="252" font-size="20" fill="#1f2328">Plaintes physiques nouvelles</text>
+<rect x="16" y="262" width="202" height="106" rx="10" fill="#eceef0"/>
+<rect x="262" y="262" width="202" height="106" rx="10" fill="#eceef0" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M224 315.0H245" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M257 315.0L243 306.0V324.0Z" fill="#1f2328"/>
+<g fill="#1f2328" transform="translate(117 359) scale(0.7128000000000001 0.7128000000000001)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<g fill="#1f2328" transform="translate(363 359) scale(0.7128000000000001 0.7128000000000001)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-27 -90L-15 -101" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M13 -75L24 -58L13 -50" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<path d="M339.8 287.6L329.5 291.4M340.1 281.5L330.1 276.8M344.6 277.4L340.8 267.0" stroke="#c62828" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M386.2 316.8L394.7 309.7M388.1 322.6L399.0 323.6M385.2 328.1L392.3 336.5" stroke="#c62828" stroke-width="3.5" stroke-linecap="round"/>
+<!-- Hausse de la consommation visible -->
+<text x="18" y="392" font-size="20" fill="#1f2328">Hausse de la consommation visible</text>
+<rect x="16" y="402" width="202" height="106" rx="10" fill="#eceef0"/>
+<rect x="262" y="402" width="202" height="106" rx="10" fill="#eceef0" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M224 455.0H245" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M257 455.0L243 446.0V464.0Z" fill="#1f2328"/>
+<g fill="#1f2328" transform="translate(58 490) scale(1.75)">
+<path d="M-12 0V-11Q-12 -21 -3 -21H3Q12 -21 12 -11V0Z"/>
+<circle cx="0" cy="-29" r="7.5"/>
+</g>
+<rect x="28" y="492" width="178" height="9" rx="3" fill="#1f2328"/>
+<g transform="translate(144 490) scale(1.1)">
+<path d="M-10 -24H10L8.5 -3Q8 0 5.5 0H-5.5Q-8 0 -8.5 -3Z" fill="#1f2328"/>
+<path d="M9.5 -19Q17 -19 17 -13Q17 -7 8.8 -7" fill="none" stroke="#1f2328" stroke-width="3.5"/>
+</g>
+<g fill="#1f2328" transform="translate(304 490) scale(1.75)">
+<path d="M-12 0V-11Q-12 -21 -3 -21H3Q12 -21 12 -11V0Z"/>
+<circle cx="0" cy="-29" r="7.5"/>
+</g>
+<rect x="274" y="492" width="178" height="9" rx="3" fill="#1f2328"/>
+<g transform="translate(350 490) scale(1.1)">
+<path d="M-10 -24H10L8.5 -3Q8 0 5.5 0H-5.5Q-8 0 -8.5 -3Z" fill="#1f2328"/>
+<path d="M9.5 -19Q17 -19 17 -13Q17 -7 8.8 -7" fill="none" stroke="#1f2328" stroke-width="3.5"/>
+</g>
+<g transform="translate(380 490) scale(1.1)">
+<path d="M-10 -24H10L8.5 -3Q8 0 5.5 0H-5.5Q-8 0 -8.5 -3Z" fill="#1f2328"/>
+<path d="M9.5 -19Q17 -19 17 -13Q17 -7 8.8 -7" fill="none" stroke="#1f2328" stroke-width="3.5"/>
+</g>
+<g transform="translate(410 490) scale(1.1)">
+<path d="M-10 -24H10L8.5 -3Q8 0 5.5 0H-5.5Q-8 0 -8.5 -3Z" fill="#1f2328"/>
+<path d="M9.5 -19Q17 -19 17 -13Q17 -7 8.8 -7" fill="none" stroke="#1f2328" stroke-width="3.5"/>
+</g>
+<path d="M435 460V452M441 460V449M447 460V454" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<rect x="430" y="460" width="22" height="30" rx="2" fill="#1f2328"/>
+<path d="M430 469H452" stroke="#fbfaf6" stroke-width="2.5"/>
+</g>
+</svg>

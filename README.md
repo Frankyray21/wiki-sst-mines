@@ -216,6 +216,11 @@ node tools/serve.mjs
   toxicologie et de sécurité, à la note psychosociale sur la charge mentale : `tools/raccourcir_liens.mjs` les corrige
   d'après une table à valider. **À faire là où est le vault** : l'outil, puis la reconstruction. Détail :
   `content-updates/2026-09-26-libelles-liens.md`
+- **Cinq pages RPS illustrées et Premiers signes redessiné (26 septembre 2026)** : schémas sur Les quatre formes de
+  reconnaissance et Types de personnalité et lieu de contrôle (à la place d'une diapositive de cours et d'une figure de
+  livre), PAE, Rotations jour-nuit et Soutien social ; Premiers signes en mine passe d'un schéma serré à six schémas
+  lisibles en thème sombre (vue d'ensemble, une catégorie par section, conversation). **À poser dans le vault**.
+  Détail et erreurs relevées : `content-updates/2026-09-26-rps-schemas-lot8.md`
 - **Six pages RPS illustrées (26 septembre 2026)** : schémas sur Modèle de Sélye (courbe des trois phases),
   Définition du stress professionnel (balance exigences et ressources ; stress aigu et chronique), Étapes d'un retour
   au travail réussi, Premiers signes en mine, Séparation famille et conjoint en FIFO et Soutien post-événement
