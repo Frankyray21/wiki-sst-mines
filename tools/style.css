@@ -944,6 +944,15 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 @media screen and (prefers-color-scheme: dark) {
   :root[data-theme="auto"] .infographie-schema .page-img img { filter: invert(.9) hue-rotate(180deg) !important; }
 }
+/* Schémas dessinés sur fond sombre (style retenu par Frank le 26 septembre 2026) : déjà faits pour la
+   lecture sous terre, ils ne sont jamais inversés, en clair comme en sombre. */
+.infographie-schema.infographie-sombre .page-img img,
+:root:not([data-theme="light"]):not([data-theme="auto"]) .infographie-schema.infographie-sombre .page-img img,
+:root[data-theme="auto"] .infographie-schema.infographie-sombre .page-img img { filter: none !important; }
+/* Affiches denses, en hauteur : plus larges sur tablette, et moins plafonnées en hauteur que les autres
+   schémas, pour que leur texte reste lisible (au téléphone, la largeur de l'écran reste la limite). */
+.infographie-sombre .page-img { max-width: 40rem; }
+.infographie-sombre .page-img img { max-height: min(56rem, 92vh); }
 
 /* En-tête pilote de Cadenassage : aucun autre article n'emploie cette classe. */
 .article-entete { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .5rem 1rem; margin-bottom: 1.25rem; }

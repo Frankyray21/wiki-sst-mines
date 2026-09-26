@@ -122,6 +122,20 @@ test('image PNG ou JPEG : signature, largeur et poids contrôlés, place réserv
   assert.ok(blocMd(spec.schemas[0]).includes('![[Infographies/wiki-x-a-v2.jpg|Un schéma de démonstration'));
 });
 
+// Style retenu par Frank le 26 septembre 2026 : dessin conçu sur fond sombre, que le thème sombre n'inverse pas.
+test('schéma sur fond sombre : classe « infographie-sombre » dans la page et dans la note, jamais inversé', () => {
+  const spec = { page: 'w/x.html', schemas: [schema('wiki-x-a-v2.svg', 'Une section', { sombre: true }), schema('wiki-x-b-v2.svg', 'Fin.')] };
+  const h = poserDansPage(PAGE, spec, OPTS);
+  assert.ok(h.includes('<h3 id="section">Une section</h3>\n<div class="infographie infographie-compacte infographie-schema infographie-sombre"><span class="page-img"><a class="img-lien" href="../../files/infographies/wiki-x-a-v2.svg">'));
+  assert.ok(h.includes('<p>Fin.</p>\n<div class="infographie infographie-compacte infographie-schema"><span class="page-img">'), 'sans l’option, rien ne change');
+  assert.ok(blocMd(spec.schemas[0]).startsWith('<div class="infographie infographie-compacte infographie-schema infographie-sombre">\n\n![[Infographies/wiki-x-a-v2.svg|'));
+  assert.equal(poserDansPage(h, spec, OPTS), h, 'repassage sans effet');
+  const css = fs.readFileSync(path.join(outils, 'style.css'), 'utf8');
+  const regle = css.match(/([^}]*)\{ filter: none !important; \}/g).find(r => r.includes('infographie-sombre'));
+  for (const sel of ['.infographie-schema.infographie-sombre .page-img img', ':root:not([data-theme="light"]):not([data-theme="auto"]) .infographie-schema.infographie-sombre .page-img img', ':root[data-theme="auto"] .infographie-schema.infographie-sombre .page-img img'])
+    assert.ok(regle.includes(sel), 'la règle couvre : ' + sel);
+});
+
 // Rejoue la pose d'Espaces clos (faite à la main le 25 septembre 2026) : l'outil doit rendre la page
 // publiée à l'octet près, depuis la page d'avant les schémas (historique Git requis).
 const AVANT = 'f5df88ca47';
