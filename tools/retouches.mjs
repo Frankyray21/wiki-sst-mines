@@ -17,8 +17,9 @@
 //                                                      « colle » : sans ligne vide (rangée de tableau, puce)
 //   remplacerBloc  { ligneContenant, ancien, bloc, marqueur } nouvelle version d'un schéma : remplace le bloc
 //                                                      <div class="infographie…"> qui intègre « ancien » (fichier
-//                                                      de la version publiée avant) ; si la note ne l'a jamais
-//                                                      reçu, insère le bloc après la ligne, comme insererApres
+//                                                      de la version publiée avant, ou liste des versions
+//                                                      antérieures) ; si la note n'en a reçu aucune, insère le
+//                                                      bloc après la ligne, comme insererApres
 // Le « marqueur » de supprimerLigne peut être une liste : la ligne a été retirée par l'un ou l'autre
 // (le schéma et sa version antérieure, par exemple).
 // Dans « apres », « par » et « bloc », {{lien:<adresse publiée>|<libellé>}} devient un wikilink vers
@@ -83,7 +84,8 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
     rapports.push(rapport);
     if (r.type === 'remplacerBloc') {
       // l'ancienne version est dans la note : son bloc est remplacé là où il est, sans égard à la ligne désignée
-      const anciens = lignes.flatMap((l, i) => l.includes(r.ancien) ? [i] : []);
+      const marques = [].concat(r.ancien);
+      const anciens = lignes.flatMap((l, i) => marques.some(m => l.includes(m)) ? [i] : []);
       const nouveau = lignes.some(l => l.includes(r.marqueur));
       if (nouveau && anciens.length) { rapport.statut = 'ancienne et nouvelle versions du schéma toutes deux présentes'; ok = false; continue; }
       if (anciens.length > 1) { rapport.statut = `ancienne version ambiguë (${anciens.length} lignes)`; ok = false; continue; }

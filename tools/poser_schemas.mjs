@@ -17,9 +17,10 @@
 //     ancre     texte visible d'un paragraphe, d'un titre ou d'une dernière puce, unique : le schéma se pose
 //               juste après ; sans ancre, il prend la place exacte de la capture qu'il remplace
 //     remplace  capture de cours que le schéma remplace (« pasted-image-AAAAMMJJhhmmss » ou nom de fichier)
-//     remplaceSchema  fichier de la version publiée avant (« …-v1.svg ») : le nouveau bloc prend sa place,
-//               dans la page comme dans la note (retouche remplacerBloc) ; l'ancien fichier, s'il n'est
-//               plus cité par aucune page, est retiré du site
+//     remplaceSchema  fichier de la version publiée avant (« …-v1.svg »), ou liste des versions antérieures
+//               (la plus récente d'abord : la note a pu recevoir l'une ou l'autre) : le nouveau bloc prend sa
+//               place, dans la page comme dans la note (retouche remplacerBloc) ; un ancien fichier qui n'est
+//               plus cité par aucune page est retiré du site
 //     sources   liens internes {{lien:w/…/page.html|libellé}}, liens externes <a href="https://…">libellé</a>
 //   paragraphesRetires[]  texte visible de <p> à retirer (légende d'une capture retirée, par exemple)
 //   remplacementsHtml[]   { avant, apres } : correction exacte dans la page publiée (une seule occurrence)
@@ -36,6 +37,9 @@ const entites = s => String(s).replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, 
 // texte visible d'un fragment HTML, comparé sans égard aux apostrophes, espaces insécables et blancs
 export const visible = h => entites(String(h).replace(/<[^>]+>/g, ''))
   .replace(/[’‘]/g, "'").replace(/[  ]/g, ' ').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
+
+// Versions antérieures d'un schéma (remplaceSchema : un fichier ou une liste, la plus récente d'abord).
+export const precedents = s => [].concat(s.remplaceSchema || []);
 
 // Classes du bloc : un dessin conçu sur fond sombre porte « infographie-sombre », que le thème sombre n'inverse pas.
 const classesBloc = s => 'infographie infographie-compacte infographie-schema' + (s.sombre ? ' infographie-sombre' : '');
@@ -131,11 +135,12 @@ export function poserDansPage(html, spec, { racine, dimsDe, titreDe, hrefDe = a 
     // schéma déjà posé : on le remplace par sa version à jour (spec corrigée)
     const deja = blocPublie(s.fichier);
     if (deja.test(h)) { h = h.replace(deja, () => bloc); continue; }
-    // nouvelle version d'un schéma publié : elle prend la place de l'ancienne
+    // nouvelle version d'un schéma publié : elle prend la place de l'ancienne (une seule présente, comme côté vault)
     if (s.remplaceSchema) {
-      const ancien = blocPublie(s.remplaceSchema);
-      if (!ancien.test(h)) throw new Error('schéma à remplacer absent de la page : ' + s.remplaceSchema);
-      h = h.replace(ancien, () => bloc);
+      const presents = precedents(s).filter(a => blocPublie(a).test(h));
+      if (!presents.length) throw new Error('schéma à remplacer absent de la page : ' + precedents(s).join(' ou '));
+      if (presents.length > 1) throw new Error('plusieurs versions du schéma à remplacer dans la page : ' + presents.join(' et '));
+      h = h.replace(blocPublie(presents[0]), () => bloc);
       continue;
     }
     // sans ancre : le schéma prend la place exacte de la capture qu'il remplace (sous un tableau, par exemple)
@@ -160,13 +165,16 @@ export function poserDansPage(html, spec, { racine, dimsDe, titreDe, hrefDe = a 
 
 export function lotDepuisSpec(spec, { date, revision, portee, precautions }) {
   const retouches = [];
-  // ce qui a retiré une ligne de la note : le schéma, ou sa version antérieure si la note l'a déjà reçue
-  const retireePar = s => s.remplaceSchema ? ['Infographies/' + s.fichier, 'Infographies/' + s.remplaceSchema] : 'Infographies/' + s.fichier;
+  // ce qui a retiré une ligne de la note : le schéma, ou une version antérieure si la note l'a déjà reçue
+  const retireePar = s => s.remplaceSchema ? ['Infographies/' + s.fichier, ...precedents(s).map(a => 'Infographies/' + a)] : 'Infographies/' + s.fichier;
   for (const s of spec.schemas) {
     const marqueur = 'Infographies/' + s.fichier;
     // sans ancre, le bloc se pose après la ligne de la capture, puis cette ligne est retirée : il prend sa place
     const ligneContenant = s.ancre || repereCapture(s.remplace);
-    if (s.remplaceSchema) retouches.push({ type: 'remplacerBloc', ligneContenant, ancien: 'Infographies/' + s.remplaceSchema, bloc: blocMd(s), marqueur });
+    if (s.remplaceSchema) {
+      const anciens = precedents(s).map(a => 'Infographies/' + a);
+      retouches.push({ type: 'remplacerBloc', ligneContenant, ancien: anciens.length === 1 ? anciens[0] : anciens, bloc: blocMd(s), marqueur });
+    }
     else retouches.push({ type: 'insererApres', ligneContenant, bloc: blocMd(s), marqueur });
     if (s.remplace) retouches.push({ type: 'supprimerLigne', ligneContenant: repereCapture(s.remplace), marqueur: retireePar(s) });
   }
@@ -250,13 +258,20 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     for (const s of spec.schemas) fs.copyFileSync(path.join(medias, s.fichier), path.join(docs, 'files', 'infographies', s.fichier));
     for (const { p, apres } of poses) fs.writeFileSync(path.join(docs, p), apres);
     fs.writeFileSync(lotChemin, JSON.stringify(lot, null, 1) + '\n');
-    // version remplacée : son fichier quitte le site quand plus aucune page ne l'affiche
-    const anciens = spec.schemas.map(s => s.remplaceSchema).filter(Boolean);
+    // version remplacée : son fichier quitte le site quand plus aucune page ne l'affiche et qu'aucun autre
+    // lot du vault ne le fournit encore (medias.depuis), sinon ce lot ne s'appliquerait plus
+    const anciens = spec.schemas.flatMap(precedents);
     if (anciens.length) {
       const pagesHtml = fs.readdirSync(docs, { recursive: true }).filter(f => String(f).endsWith('.html'));
+      const dossierLots = path.resolve(outils, '../content-updates');
+      const autresLots = fs.readdirSync(dossierLots).filter(f => f.endsWith('.json') && path.resolve(dossierLots, f) !== path.resolve(lotChemin))
+        .map(f => fs.readFileSync(path.join(dossierLots, f), 'utf8'));
       for (const a of anciens) {
         const f = path.join(docs, 'files', 'infographies', a);
-        if (fs.existsSync(f) && !pagesHtml.some(x => fs.readFileSync(path.join(docs, x), 'utf8').includes(a))) {
+        if (!fs.existsSync(f)) continue;
+        const lot = autresLots.find(l => l.includes('docs/files/infographies/' + a + '"'));
+        if (lot) { console.log('Gardé (fourni par un autre lot du vault) : files/infographies/' + a); continue; }
+        if (!pagesHtml.some(x => fs.readFileSync(path.join(docs, x), 'utf8').includes(a))) {
           fs.rmSync(f);
           console.log('Retiré du site (plus cité) : files/infographies/' + a);
         }

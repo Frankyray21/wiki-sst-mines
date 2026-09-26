@@ -17,12 +17,13 @@ BLANC = '#ffffff'
 GRIS_TEXTE = '#c5d0d9'
 SOUS_TITRE = '#9fb0bf'
 CARTE, CARTE_BORD = '#0f202b', '#23384a'
-COULEURS = {
-    #          bord       clair (titres, puces)  entête     corps      sous-carte  médaillon
-    'vert':   ('#3fcf7a', '#6fe3a0',             '#0a3320', '#06201a', '#0c2c25', '#062016'),
-    'bleu':   ('#2596ec', '#5cb8ff',             '#0a2c47', '#061f33', '#0b2940', '#061a2c'),
-    'orange': ('#f59a2c', '#ffb454',             '#3b230c', '#1b150f', '#2a1e12', '#1e1308'),
-}
+# Structure neutre (retour de Frank : « pas trop de couleur, une raison pour chaque couleur ») : cadres, entêtes,
+# médaillons et titres restent dans les bleus-gris du fond. La couleur ne marque que les puces, et chaque
+# couleur employée est expliquée par la légende sous le titre.
+NEUTRE = dict(bord='#2e4356', entete='#142331', corps='#0f1c26', souscarte='#152531', medaillon='#0b1822',
+              anneau='#4f667a', icone='#e2e9ef', titre_col='#e2e9ef', etiquette='#a9b8c6', note_titre='#a9b8c6')
+PUCES = {'alerte': ('#f59a2c', 'ce qui pèse'), 'coche': ('#3fcf7a', 'levier de l’organisation'), 'point': ('#8fa1b1', None)}
+FOND_PUCE = '#0b1822'
 
 # ---------- police ----------
 POIDS = (500, 600, 700, 800, 900)
@@ -149,11 +150,13 @@ def cartes(liste, y):
     return out, y + h + 8
 
 
-def puce(genre, x, y, clair, fond):
-    """Puce ronde de la couleur de la section : coche (ce que l'on fait), point d'exclamation (ce qui
-    pèse) ou point simple. Jamais de croix : rien ne juge un travailleur."""
+def puce(genre, x, y):
+    """Puce ronde : « ! » orange (ce qui pèse), coche verte (levier de l'organisation) ou point gris (neutre).
+    Jamais de croix : rien ne juge un travailleur. Seules les puces portent de la couleur, expliquée par la légende."""
     r = 7.2
-    out = [f'<circle cx="{x + r:.1f}" cy="{y:.1f}" r="{r}" fill="{clair}"/>']
+    couleur = PUCES[genre][0]
+    fond = FOND_PUCE
+    out = [f'<circle cx="{x + r:.1f}" cy="{y:.1f}" r="{r}" fill="{couleur}"/>']
     if genre == 'coche':
         out.append(f'<path d="M{x + 3.6:.1f} {y + 0.2:.1f} l2.6 2.7 l5 -5.2" fill="none" stroke="{fond}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>')
     elif genre == 'alerte':
@@ -163,23 +166,34 @@ def puce(genre, x, y, clair, fond):
     return out
 
 
-def colonne(col, x, y, w, couleur, titres=True):
-    """Sous-carte : titre de couleur, puis éléments (puce ronde ou pictogramme blanc) et texte blanc. Sans
+def puce_de(it, col):
+    """Genre de la puce d'un élément, ou None s'il porte un pictogramme blanc (neutre, hors légende)."""
+    return None if isinstance(it, dict) and it.get('icone') else col.get('puce', 'coche')
+
+
+def genres_legende(spec):
+    """Couleurs employées par les puces du schéma, dans l'ordre de la légende. Le point gris est neutre : pas de légende."""
+    employes = {puce_de(i, c) for s in spec['sections'] for c in s['colonnes'] for i in c['items']}
+    return [g for g in ('alerte', 'coche') if g in employes]
+
+
+def colonne(col, x, y, w, titres=True):
+    """Sous-carte : titre neutre, puis éléments (puce ronde ou pictogramme blanc) et texte blanc. Sans
     titre dans aucune colonne de la section, la liste remonte en haut de la sous-carte."""
-    bord, clair, entete, corps, souscarte, medaillon = COULEURS[couleur]
     out = []
     yy = y + (20 if titres else 2)
     if col.get('titre'):
-        out.append(t(x + 11, yy, col['titre'], 800, 13.5, clair))
+        out.append(t(x + 11, yy, col['titre'], 800, 13.5, NEUTRE['titre_col']))
     yy += 6
     for it in col['items']:
         texte = it if isinstance(it, str) else it['texte']
         lignes = couper(texte, 500, 13, w - 11 - 22 - 8)
         cy = yy + 11
-        if isinstance(it, dict) and it.get('icone'):
-            out.append(icone(it['icone'], x + 10, cy - 8, 16, '#eef3f6'))
+        genre = puce_de(it, col)
+        if genre:
+            out += puce(genre, x + 11, cy)
         else:
-            out += puce(col.get('puce', 'coche'), x + 11, cy, clair, medaillon)
+            out.append(icone(it['icone'], x + 10, cy - 8, 16, '#eef3f6'))
         for j, l in enumerate(lignes):
             out.append(t(x + 11 + 24, cy + 4.5 + j * 15.5, l, 500, 13, BLANC))
         yy += 8 + 15.5 * len(lignes) + 3
@@ -188,7 +202,8 @@ def colonne(col, x, y, w, couleur, titres=True):
 
 
 def section(sec, y):
-    bord, clair, entete, corps, souscarte, medaillon = COULEURS[sec['couleur']]
+    bord, entete, corps, souscarte, medaillon = NEUTRE['bord'], NEUTRE['entete'], NEUTRE['corps'], NEUTRE['souscarte'], NEUTRE['medaillon']
+    clair = NEUTRE['etiquette']
     x0, w0 = MARGE, W - 2 * MARGE
     # entête : médaillon, titre, séparateur, étiquette ; note à droite
     note = sec.get('note')
@@ -207,23 +222,21 @@ def section(sec, y):
     rendus, hauteurs = [], []
     for i, col in enumerate(colonnes):
         cx = x0 + 8 + i * (cw + gap)
-        r, h = colonne(col, cx, y + h_ent + 8, cw, sec['couleur'], any(c.get('titre') for c in colonnes))
+        r, h = colonne(col, cx, y + h_ent + 8, cw, any(c.get('titre') for c in colonnes))
         rendus.append((cx, r))
         hauteurs.append(h)
     h_corps = max(hauteurs) + 16
     H = h_ent + h_corps
     out = [f'<rect x="{x0}" y="{y:.1f}" width="{w0}" height="{H:.1f}" rx="11" fill="{corps}"/>',
            f'<path d="M{x0} {y + h_ent:.1f} V{y + 11:.1f} a11 11 0 0 1 11 -11 H{x0 + w0 - 11} a11 11 0 0 1 11 11 V{y + h_ent:.1f} Z" fill="{entete}"/>',
-           f'<line x1="{x0 + 1.5}" y1="{y + h_ent:.1f}" x2="{x0 + w0 - 1.5}" y2="{y + h_ent:.1f}" stroke="{bord}" stroke-opacity="0.45" stroke-width="1"/>',
-           f'<rect x="{x0}" y="{y:.1f}" width="{w0}" height="{H:.1f}" rx="11" fill="none" stroke="{bord}" stroke-width="3.5" stroke-opacity="0.45" filter="url(#lueur)"/>',
-           f'<rect x="{x0}" y="{y:.1f}" width="{w0}" height="{H:.1f}" rx="11" fill="none" stroke="{bord}" stroke-width="2"/>']
+           f'<line x1="{x0 + 1.5}" y1="{y + h_ent:.1f}" x2="{x0 + w0 - 1.5}" y2="{y + h_ent:.1f}" stroke="{bord}" stroke-width="1"/>',
+           f'<rect x="{x0}" y="{y:.1f}" width="{w0}" height="{H:.1f}" rx="11" fill="none" stroke="{bord}" stroke-width="1.6"/>']
     cy = y + h_ent / 2
-    out.append(f'<circle cx="{x0 + 12 + 23}" cy="{cy:.1f}" r="21" fill="none" stroke="{clair}" stroke-width="4" stroke-opacity="0.35" filter="url(#lueur)"/>')
-    out.append(f'<circle cx="{x0 + 12 + 23}" cy="{cy:.1f}" r="21" fill="{medaillon}" stroke="{clair}" stroke-width="2.6"/>')
-    out.append(icone(sec['icone'], x0 + 12 + 23 - 12.5, cy - 12.5, 25, clair))
+    out.append(f'<circle cx="{x0 + 12 + 23}" cy="{cy:.1f}" r="21" fill="{medaillon}" stroke="{NEUTRE["anneau"]}" stroke-width="2"/>')
+    out.append(icone(sec['icone'], x0 + 12 + 23 - 12.5, cy - 12.5, 25, NEUTRE['icone']))
     out.append(t(x_titre, cy + 7.5, sec['titre'], 900, 21, BLANC, espacement=-0.2))
     if etiquette:
-        out.append(f'<line x1="{x_sep:.1f}" y1="{cy - 14:.1f}" x2="{x_sep:.1f}" y2="{cy + 14:.1f}" stroke="{clair}" stroke-opacity="0.55" stroke-width="1.2"/>')
+        out.append(f'<line x1="{x_sep:.1f}" y1="{cy - 14:.1f}" x2="{x_sep:.1f}" y2="{cy + 14:.1f}" stroke="{NEUTRE["anneau"]}" stroke-width="1.2"/>')
         out.append(t(x_sep + 11, cy + 5, etiquette, 800, 13, clair))
     if note:
         yy = cy - (13.5 * len(lignes_note) + (14 if note.get('titre') else 0)) / 2 + 10
@@ -237,6 +250,26 @@ def section(sec, y):
         out.append(f'<rect x="{cx:.1f}" y="{y + h_ent + 8:.1f}" width="{cw:.1f}" height="{max(hauteurs):.1f}" rx="8" fill="{souscarte}" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>')
         out += r
     return out, y + H + 8
+
+
+def legende_textes(genres, libelles):
+    return [(g, libelles.get(g) or PUCES[g][1]) for g in genres]
+
+
+def legende(genres, libelles, y):
+    """Ligne de légende centrée : chaque couleur employée, et ce qu'elle marque."""
+    items = legende_textes(genres, libelles)
+    largeurs = [15 + 5 + largeur(txt, 600, 12) for g, txt in items]
+    total = sum(largeurs) + 18 * (len(items) - 1)
+    if total > W - 2 * MARGE:
+        raise ValueError(f'légende trop longue ({total:.0f} pour {W - 2 * MARGE}) : {items}')
+    x = W / 2 - total / 2
+    out = []
+    for (g, txt), w in zip(items, largeurs):
+        out += puce(g, x, y + 3)
+        out.append(t(x + 20, y + 7.2, txt, 600, 12, '#c5d0d9'))
+        x += w + 18
+    return out
 
 
 def repere(rep, y):
@@ -268,6 +301,10 @@ def schema(spec):
     y = 4
     r, y = en_tete(spec['titre'], spec.get('sous_titre'), y)
     corps += r
+    y_legende = y
+    genres = genres_legende(spec)
+    if genres:
+        y += 18
     if spec.get('cartes'):
         r, y = cartes(spec['cartes'], y)
         corps += r
@@ -279,12 +316,13 @@ def schema(spec):
         corps += r
     else:
         y += MARGE - 8
+    if genres:
+        corps += legende(genres, spec.get('legende_couleurs', {}), y_legende)
     H = int(round(y))
     fond = (f'<defs><linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{FOND_HAUT}"/>'
             f'<stop offset="1" stop-color="{FOND_BAS}"/></linearGradient>'
             f'<radialGradient id="h" cx="0.5" cy="0" r="0.8"><stop offset="0" stop-color="#15324a" stop-opacity="0.55"/>'
-            f'<stop offset="1" stop-color="#15324a" stop-opacity="0"/></radialGradient>'
-            f'<filter id="lueur" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="2.4"/></filter></defs>'
+            f'<stop offset="1" stop-color="#15324a" stop-opacity="0"/></radialGradient></defs>'
             f'<rect width="{W}" height="{H}" fill="url(#f)"/><rect width="{W}" height="{H}" fill="url(#h)"/>')
     css = polices_css()
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" '

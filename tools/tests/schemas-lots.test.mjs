@@ -29,8 +29,10 @@ function verifierPage(lot, adresse, page) {
   // un bloc par schéma : inséré, ou remplaçant la version publiée avant (remplacerBloc)
   const blocs = lot.retouches.filter(r => (r.type === 'insererApres' || r.type === 'remplacerBloc') && String(r.marqueur).startsWith('Infographies/'));
   for (const r of blocs.filter(x => x.type === 'remplacerBloc')) {
-    assert.ok(!page.includes(r.ancien.slice('Infographies/'.length)), adresse + ' : version remplacée retirée : ' + r.ancien);
-    assert.notEqual(r.ancien, r.marqueur);
+    for (const a of [].concat(r.ancien)) {
+      assert.ok(!page.includes(a.slice('Infographies/'.length)), adresse + ' : version remplacée retirée : ' + a);
+      assert.notEqual(a, r.marqueur);
+    }
   }
   assert.equal(blocs.length, lot.medias.length, 'un bloc par schéma');
   for (const m of lot.medias) {
