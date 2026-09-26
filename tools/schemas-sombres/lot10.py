@@ -1,12 +1,13 @@
-# Lot 10, version 2 : les douze schémas refaits à l'identique du style sombre de Frank (référence « CNESST —
-# comprendre les 3 volets »). Chaque mot vient de la page ; texte alternatif et version texte sont tirés de
-# la mise en page elle-même, pour dire exactement ce que montre le dessin.
+# Lot 10, version 3 : les douze schémas au style sombre de Frank (référence « CNESST — comprendre les 3 volets »),
+# avec la règle de couleur de son retour (« pas trop de couleur, une raison pour chaque couleur ») : structure en
+# bleu-gris neutre, couleur réservée aux puces, légende sous le titre. Chaque mot vient de la page ; texte
+# alternatif et version texte sont tirés de la mise en page elle-même, pour dire exactement ce que montre le dessin.
 import json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gabarit as kit
 
 ICI = os.path.dirname(os.path.abspath(__file__))
-SORTIE = os.environ.get('SORTIE') or os.path.join(os.getcwd(), 'lot10v2')  # dossier de sortie (SVG + spec.json par page)
+SORTIE = os.environ.get('SORTIE') or os.path.join(os.getcwd(), 'lot10v3')  # dossier de sortie (SVG + spec.json par page)
 NB, FI = ' ', ' '
 
 
@@ -26,10 +27,8 @@ def tyl(o):
     if isinstance(o, list):
         return [tyl(x) for x in o]
     if isinstance(o, dict):
-        return {k: (tyl(v) if k not in ('icone', 'couleur', 'puce') else v) for k, v in o.items()}
+        return {k: (tyl(v) if k not in ('icone', 'puce') else v) for k, v in o.items()}
     return o
-
-
 
 
 def g(s):
@@ -47,13 +46,10 @@ def decrire(sp):
     if sp.get('sous_titre'):
         tete += f', sous-titre {g(sp["sous_titre"])}'
     puces.append(tete + '. Infographie sur fond sombre.')
-    genres = [x for x in ('alerte', 'coche') if any(c.get('puce', 'coche') == x and any(isinstance(i, str) for i in c['items'])
-                                                    for s in sp['sections'] for c in s['colonnes'])]
-    if genres:
-        noms = {'alerte': 'puces orange « ! »', 'coche': 'coches vertes'}
-        lib = sp.get('legende_couleurs', {})
-        defaut = {'alerte': 'ce qui pèse', 'coche': 'levier de l’organisation'}
-        puces.append(f'Sous le titre, la légende des couleurs{NB}: ' + f'{FI}; '.join(f'{noms[x]}, {lib.get(x) or defaut[x]}' for x in genres) + '. Le reste est en bleu-gris neutre.')
+    legende = kit.legende_textes(kit.genres_legende(sp), sp.get('legende_couleurs', {}))
+    nom_puce = {'alerte': 'puces orange ' + g('!'), 'coche': 'coches vertes'}
+    if legende:
+        puces.append(f'Sous le titre, la légende des couleurs{NB}: ' + f'{FI}; '.join(f'{nom_puce[x]}, {txt}' for x, txt in legende) + '. Le reste est en bleu-gris neutre.')
     if sp.get('cartes'):
         n = len(sp['cartes'])
         cs = f'{FI};'.join(f' {g(c["titre"])}' + (f', {c["texte"]}' if c.get('texte') else '') for c in sp['cartes'])
@@ -74,9 +70,13 @@ def decrire(sp):
         puces.append(f'En bas, {g(sp["repere"]["titre"])}{NB}: {sp["repere"]["texte"]}')
     noms = ', '.join(g(s['titre']) for s in sp['sections'])
     alt = f'Infographie sur fond sombre, {g(sp["titre"])}'
+    if sp.get('sous_titre'):
+        alt += f' ({sp["sous_titre"]})'
     if sp.get('cartes'):
         alt += f'{NB}: ' + ', '.join(c['titre'] for c in sp['cartes'])
     alt += f'{FI}; ' + ('section ' if len(sp['sections']) == 1 else 'sections ') + noms
+    if legende:
+        alt += f'{FI}; ' + ', '.join(f'{nom_puce[x]}{NB}: {txt}' for x, txt in legende)
     if sp.get('repere'):
         alt += f'{FI}; en bas{NB}: {sp["repere"]["texte"]}'
     return puces, alt.rstrip('.') + '.'
@@ -86,9 +86,9 @@ SCHEMAS = [
   # ------------------------------------------------------------------ Foreur
   dict(page='foreur-profil-rps-et-leadership-de-chantier', sujet='profil', ancre='Burnout possible chez les foreurs très investis',
    titre="Ce qui pèse sur le foreur", sous_titre="Souvent chef de chantier de fait, sans titre formel",
-   cartes=[dict(icone='mdiAccountHardHat', titre='Foreur', texte="opère la foreuse, conduit le chantier"),
-           dict(icone='mdiAccountHardHat', titre='Aide-foreur', texte="son travail est coordonné par le foreur"),
-           dict(icone='mdiAccountSupervisor', titre='Contremaître', texte="le foreur communique avec lui et les autres équipes")],
+   cartes=[dict(icone='mdiAccountHardHat', titre='Foreur', texte="responsable de la foreuse et du chantier"),
+           dict(icone='mdiAccountHardHat', titre='Aide-foreur', texte="coordination de son travail par le foreur"),
+           dict(icone='mdiAccountSupervisor', titre='Contremaître', texte="communication avec le foreur")],
    sections=[
      dict(icone='mdiBrain', titre='Charge', etiquette='Élevée',
           note=dict(titre='Profil typique :', texte='charge cognitive et physique élevées'),
@@ -96,9 +96,10 @@ SCHEMAS = [
                     dict(titre='Physique', puce='alerte', items=["Opération d'équipement", 'Manipulation', 'Terrain'])]),
      dict(icone='mdiShieldAccount', titre='Responsabilité', etiquette='Lourde',
           note=dict(titre='Profil typique :', texte="sécurité de soi et de l'aide-foreur"),
-          colonnes=[dict(titre='Risques particuliers', puce='alerte', items=['Stress de responsabilité', 'Tensions de pression de production', 'Burnout possible chez les très investis']),
-                    dict(titre='Latitude', items=[dict(icone='mdiCog', texte='Technique : réelle, choix de méthode'),
-                                                  dict(icone='mdiLock', texte='Managériale : limitée, structure du chantier dictée')])])],
+          colonnes=[dict(titre='Risques particuliers', puce='alerte', items=['Stress de responsabilité', 'Tensions de pression de production', 'Burnout possible chez les très investis'])]),
+     dict(icone='mdiSignDirection', titre='Latitude',
+          colonnes=[dict(titre='', items=[dict(icone='mdiCog', texte='Technique : réelle, choix de méthode')]),
+                    dict(titre='', items=[dict(icone='mdiLock', texte='Managériale : limitée, structure du chantier dictée')])])],
    repere=dict(titre='Repère rapide', texte='latitude technique réelle, mais responsabilités lourdes.'),
    legende="Le profil RPS typique que la page décrit pour le foreur : des charges élevées et une responsabilité lourde, avec une latitude technique réelle mais une latitude managériale limitée. Ce sont des conditions du poste ; le schéma n’en mesure pas l’intensité.",
    sources="D’après « L’essentiel », la « Description du poste », le tableau « Profil RPS » et les « Risques particuliers » de cette page, qui décrivent un profil typique, sans mesure. Voir aussi {{lien:w/psychosocial/aide-foreur-profil-rps.html|Aide-foreur, profil RPS}}. Schéma de principe."),
@@ -169,15 +170,14 @@ SCHEMAS = [
   dict(page='contremaitre-ou-capitaine-profil-rps', sujet='leviers', ancre='Soutenir le contremaître',
    titre='Soutenir le contremaître', sous_titre='Contremaître ou capitaine en souterrain',
    sections=[
-     dict(icone='mdiAccountTie', titre='Direction', etiquette='Niveau',
+     dict(icone='mdiAccountTie', titre='Direction',
           colonnes=[dict(titre='', puce='coche', items=['Reconnaître la charge, ne pas surcharger', 'Ratios cadres-travailleurs raisonnables', 'Soutien à la décision : back-up, conseiller SST disponible'])]),
      dict(icone='mdiSchool', titre='Formation et pairs', etiquette='',
           colonnes=[dict(titre='Formation', puce='coche', items=['Au leadership', 'À la gestion de conflits', 'À la communication']),
                     dict(titre='Pairs', puce='coche', items=['Communauté de contremaîtres pour échange'])]),
      dict(icone='mdiMedicalBag', titre='Soutien et conditions', etiquette='',
           colonnes=[dict(titre='Soutien clinique', puce='coche', items=['PAE accessible', 'Débriefing post-incident']),
-                    dict(titre='Reconnaissance, conditions', items=[dict(icone='mdiStar', texte='Du rôle de contremaître'),
-                                               dict(icone='mdiTools', texte='Outils, équipement, temps suffisants')])])],
+                    dict(titre='Reconnaissance, conditions', puce='coche', items=['Du rôle de contremaître', 'Outils, équipement, temps suffisants'])])],
    repere=dict(titre='Repère rapide', texte="un contremaître pour trop de monde ne peut pas soutenir."),
    legende="Les leviers que la page propose pour soutenir le contremaître, avec les niveaux de son tableau (direction, formation, soutien clinique, pairs, reconnaissance, conditions). Ce sont des choix de l’organisation, pas des garanties d’effet.",
    sources="D’après le tableau « Soutenir le contremaître » et L’essentiel de cette page, qui ne cite pas d’étude ; PAE : {{lien:w/psychosocial/programme-daide-aux-employes-pae.html|Programme d’aide aux employés (PAE)}}. Schéma de principe."),
@@ -196,7 +196,7 @@ SCHEMAS = [
    legende="Les trois dimensions que mesure le MBI, et la lecture qu’en donne la page : un sous-score par dimension, sans total, comparé aux normes par secteur. Aucun énoncé du questionnaire, aucune valeur ni aucun seuil.",
    sources="D’après cette page : L’essentiel, section Définition (tableau des trois dimensions et paragraphe sur la CIM-11), tableau Mesure (ligne « Sous-scores ») et paragraphe Interprétation. Voir aussi la note d’analyse {{lien:w/psychosocial/analyse-inrs-2024.html|INRS (2024)}}. Schéma de principe."),
   dict(page='mbi-epuisement-professionnel', sujet='diagnostic', ancre='Interprétation : trois sous-scores comparés aux normes par secteur. Burnout = épuisement élevé + cynisme élevé + accomplissement bas.',
-   titre='Mesure ou diagnostic ?', sous_titre='Le résultat du questionnaire',
+   titre='Mesure ou diagnostic ?', sous_titre='Maslach Burnout Inventory',
    sections=[
      dict(icone='mdiClipboardText', titre='Mesure', etiquette='MBI',
           note=dict(titre='Limite :', texte='le MBI est un instrument de mesure, pas un diagnostic'),
@@ -238,16 +238,16 @@ SCHEMAS = [
    sources="D’après le tableau « Particularités du minier » de la section « Application en mines » et L’essentiel de cette page. Voir aussi {{lien:w/psychosocial/comparatif-des-cycles-fifo-14-14-20-10-21-7.html|Comparatif des cycles FIFO}}. Schéma de principe, sans montant ni durée."),
   # ------------------------------------------------------------------ Confinement
   dict(page='confinement-profondeur-et-charge-mentale', sujet='vigilance', ancre="Cette charge mentale s'ajoute à la charge cognitive de la tâche elle-même.",
-   titre='Charge mentale sous terre', sous_titre='En confinement, à grande profondeur',
+   titre='Charge mentale en souterrain', sous_titre='En confinement, à grande profondeur',
    cartes=[dict(icone='mdiLandslide', titre='Effondrement', texte=''),
            dict(icone='mdiWeatherWindy', titre='Gaz, ventilation', texte=''),
            dict(icone='mdiTruck', titre='Équipement', texte='')],
    sections=[
      dict(icone='mdiBrain', titre='Charge mentale', etiquette='Spécifique',
-          note=dict(titre='Selon la page :', texte='la vigilance permanente consomme des ressources cognitives'),
+          note=dict(titre='Selon la page :', texte='la vigilance permanente face aux risques consomme des ressources cognitives'),
           colonnes=[dict(titre='Source de charge mentale', puce='alerte', items=['Vigilance environnementale', 'Repérage spatial', 'Anticipation des risques']),
-                    dict(titre='', puce='alerte', items=['Procédures à suivre', 'Communication contrainte', 'Gestion de la fatigue'])]),
-     dict(icone='mdiTimerSand', titre='Adaptation', etiquette='Un coût',
+                    dict(titre='Source de charge mentale', puce='alerte', items=['Procédures à suivre', 'Communication contrainte', 'Gestion de la fatigue'])]),
+     dict(icone='mdiTimerSand', titre='Adaptation',
           note=dict(titre='', texte='un coût qui s\'accumule sur la rotation, la carrière'),
           colonnes=[dict(titre="Coût de l'adaptation", puce='alerte', items=['Fatigue cognitive en fin de quart', 'Vulnérabilité accrue si la fatigue est déjà installée', "Diminution de la marge en cas d'événement imprévu"])])],
    repere=dict(titre='Repère rapide', texte="cette charge mentale s'ajoute à la charge cognitive de la tâche elle-même."),
@@ -256,7 +256,7 @@ SCHEMAS = [
   dict(page='confinement-profondeur-et-charge-mentale', sujet='leviers', ancre='Leviers',
    titre='Charge mentale : les leviers', sous_titre='En confinement, à grande profondeur',
    sections=[
-     dict(icone='mdiLightbulbOn', titre='Conception', etiquette='Niveau',
+     dict(icone='mdiLightbulbOn', titre='Conception',
           colonnes=[dict(titre='', puce='coche', items=['Pauses régulières dans des zones décompressantes : refuges, salles d\'équipement', 'Éclairage adéquat, repères visuels, signalisation claire'])]),
      dict(icone='mdiFormatListChecks', titre='Procédures et équipe', etiquette='',
           colonnes=[dict(titre='Procédures', puce='coche', items=['Listes de vérification pour décharger la mémoire de travail']),

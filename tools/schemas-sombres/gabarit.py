@@ -32,7 +32,6 @@ _cmap = {p: f.getBestCmap() for p, f in _polices.items()}
 _hmtx = {p: f['hmtx'] for p, f in _polices.items()}
 _upem = {p: f['head'].unitsPerEm for p, f in _polices.items()}
 _employes = {p: set() for p in POIDS}
-_genres = set()
 
 
 def largeur(texte, poids, taille, espacement=0.0):
@@ -153,7 +152,7 @@ def cartes(liste, y):
 
 def puce(genre, x, y):
     """Puce ronde : « ! » orange (ce qui pèse), coche verte (levier de l'organisation) ou point gris (neutre).
-    Jamais de croix : rien ne juge un travailleur. La couleur est la seule de la section."""
+    Jamais de croix : rien ne juge un travailleur. Seules les puces portent de la couleur, expliquée par la légende."""
     r = 7.2
     couleur = PUCES[genre][0]
     fond = FOND_PUCE
@@ -167,8 +166,19 @@ def puce(genre, x, y):
     return out
 
 
-def colonne(col, x, y, w, couleur, titres=True):
-    """Sous-carte : titre de couleur, puis éléments (puce ronde ou pictogramme blanc) et texte blanc. Sans
+def puce_de(it, col):
+    """Genre de la puce d'un élément, ou None s'il porte un pictogramme blanc (neutre, hors légende)."""
+    return None if isinstance(it, dict) and it.get('icone') else col.get('puce', 'coche')
+
+
+def genres_legende(spec):
+    """Couleurs employées par les puces du schéma, dans l'ordre de la légende. Le point gris est neutre : pas de légende."""
+    employes = {puce_de(i, c) for s in spec['sections'] for c in s['colonnes'] for i in c['items']}
+    return [g for g in ('alerte', 'coche') if g in employes]
+
+
+def colonne(col, x, y, w, titres=True):
+    """Sous-carte : titre neutre, puis éléments (puce ronde ou pictogramme blanc) et texte blanc. Sans
     titre dans aucune colonne de la section, la liste remonte en haut de la sous-carte."""
     out = []
     yy = y + (20 if titres else 2)
@@ -179,11 +189,11 @@ def colonne(col, x, y, w, couleur, titres=True):
         texte = it if isinstance(it, str) else it['texte']
         lignes = couper(texte, 500, 13, w - 11 - 22 - 8)
         cy = yy + 11
-        if isinstance(it, dict) and it.get('icone'):
-            out.append(icone(it['icone'], x + 10, cy - 8, 16, '#eef3f6'))
+        genre = puce_de(it, col)
+        if genre:
+            out += puce(genre, x + 11, cy)
         else:
-            out += puce(col.get('puce', 'coche'), x + 11, cy)
-            _genres.add(col.get('puce', 'coche'))
+            out.append(icone(it['icone'], x + 10, cy - 8, 16, '#eef3f6'))
         for j, l in enumerate(lignes):
             out.append(t(x + 11 + 24, cy + 4.5 + j * 15.5, l, 500, 13, BLANC))
         yy += 8 + 15.5 * len(lignes) + 3
@@ -212,7 +222,7 @@ def section(sec, y):
     rendus, hauteurs = [], []
     for i, col in enumerate(colonnes):
         cx = x0 + 8 + i * (cw + gap)
-        r, h = colonne(col, cx, y + h_ent + 8, cw, None, any(c.get('titre') for c in colonnes))
+        r, h = colonne(col, cx, y + h_ent + 8, cw, any(c.get('titre') for c in colonnes))
         rendus.append((cx, r))
         hauteurs.append(h)
     h_corps = max(hauteurs) + 16
@@ -251,6 +261,8 @@ def legende(genres, libelles, y):
     items = legende_textes(genres, libelles)
     largeurs = [15 + 5 + largeur(txt, 600, 12) for g, txt in items]
     total = sum(largeurs) + 18 * (len(items) - 1)
+    if total > W - 2 * MARGE:
+        raise ValueError(f'légende trop longue ({total:.0f} pour {W - 2 * MARGE}) : {items}')
     x = W / 2 - total / 2
     out = []
     for (g, txt), w in zip(items, largeurs):
@@ -285,14 +297,12 @@ def schema(spec):
     """spec : titre, sous_titre, cartes?, sections, repere?, desc (texte accessible), titre_access."""
     for p in POIDS:
         _employes[p].clear()
-    _genres.clear()
     corps = []
     y = 4
     r, y = en_tete(spec['titre'], spec.get('sous_titre'), y)
     corps += r
     y_legende = y
-    genres = [g for g in ('alerte', 'coche') if any(c.get('puce', 'coche') == g and any(isinstance(i, str) or not i.get('icone') for i in c['items'])
-                                                      for s in spec['sections'] for c in s['colonnes'])]
+    genres = genres_legende(spec)
     if genres:
         y += 18
     if spec.get('cartes'):

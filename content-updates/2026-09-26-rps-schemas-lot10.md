@@ -8,34 +8,59 @@ Demandes de Frank :
   - sections encadrées de vert, de bleu ou d'orange, avec médaillon rond ;
   - sous-cartes à puces ;
   - cartes à pictogrammes blancs ;
-  - bandeau « Repère rapide ».
+  - bandeau « Repère rapide » ;
+- « Revoit, pas trop couleur, doit savoir une raison pour justifier utilisation couleur » (capture du schéma
+  Foreur v2 au téléphone).
 
-Une première version (v1), publiée l'après-midi, reprenait l'esprit de son image « Lieu de contrôle ». Les douze
-schémas sont maintenant refaits à l'identique de la référence CNESST (v2), à partir d'un même gabarit,
-`tools/schemas-sombres/` (qui produit exactement les SVG publiés et servira aux prochains schémas) :
+Trois versions se sont suivies le même jour :
+- **v1** reprenait l'esprit de son image « Lieu de contrôle » ;
+- **v2** refaisait les douze schémas à l'identique de la référence CNESST, cadres verts, bleus et orange compris ;
+- **v3**, publiée maintenant, garde la mise en page de la v2 et applique la règle de couleur de Frank.
+
+Le gabarit `tools/schemas-sombres/` produit exactement les SVG publiés et servira aux prochains schémas :
 - **police** : Figtree, incorporée dans chaque SVG et réduite aux caractères employés (licence SIL OFL) ;
-- **pictogrammes** : Material Design Icons (Pictogrammers Free License, Apache 2.0) ;
-- **couleurs** : celles relevées sur la référence.
+- **pictogrammes** : Material Design Icons (Pictogrammers Free License, Apache 2.0).
 
-Trois écarts sont voulus :
+### Pourquoi chaque couleur (v3)
+
+- **Structure neutre** : cadres, entêtes, médaillons et titres de colonne restent dans les bleus-gris du fond. Ils
+  ne disent rien de plus que leur texte, ils n'ont donc pas de couleur.
+- **Orange « ! »** : une condition de travail qui pèse (« un coût » sur les deux schémas du coût des RPS).
+- **Vert, coche** : un levier de l'organisation.
+- **Gris, point** : un élément neutre (le profil de scores du MBI, par exemple). Pas de légende.
+- **Pictogramme blanc** : un fait ou une particularité, sans jugement (latitude, confidentialité, pénurie…).
+- **Légende** sous le titre : chaque couleur employée y est nommée. Aucun schéma n'en emploie plus d'une.
+- Jamais de ✗ : rien ne juge un travailleur.
+
+Deux autres écarts avec la référence sont voulus :
 - **taille du texte** : un peu plus grand que sur la référence, pour rester lisible au téléphone ;
-- **puces** : jamais de ✗ ; des « ! » orange marquent les conditions de travail qui pèsent, des coches marquent
-  les leviers de l'organisation ;
 - **mots** : tous tirés de la page, au plus raccourcis.
 
 Ces affiches sont conçues sur fond sombre : le thème sombre du site ne les inverse plus (classe
 « infographie-sombre »). Sur tablette, elles s'affichent jusqu'à 40 rem de large.
 
-Chaque mot a été relu face à la page par trois relecteurs de fidélité. Leurs corrections sont appliquées ; elles
-portent sur des regroupements absents de la page, des raccourcis qui perdaient une nuance et la typographie. Le
-texte des articles n'est pas modifié : seuls les schémas s'ajoutent, sur la page et, s'il y en a une, sur sa copie
+Chaque mot a été relu face à la page par trois relecteurs de fidélité (v2). La v3 est passée par un audit
+(justification de chaque couleur, lisibilité au téléphone, mots), qui a corrigé :
+- **Contremaître** : les deux leviers « Reconnaissance, conditions » portaient des pictogrammes au lieu de la coche
+  verte ; l'étiquette « Niveau » isolée sur « Direction » est retirée ;
+- **Foreur** : la latitude devient une section à part, comme dans le tableau de la page, au lieu de paraître découler
+  de la responsabilité ; les cartes reprennent les mots de la page (« responsable de la foreuse et du chantier »,
+  « coordination de son travail par le foreur », « communication avec le foreur ») ;
+- **Confinement** : titre « Charge mentale en souterrain » (mot de la page) ; « face aux risques » rétabli dans
+  l'en-tête ; les deux colonnes portent « Source de charge mentale », pour que « ! Procédures à suivre » ne se
+  lise pas comme une consigne ; étiquettes « Un coût » et « Niveau » redondantes retirées ;
+- **MBI** : sous-titre « Maslach Burnout Inventory » au lieu d'une formule absente de la page ;
+- **Texte alternatif** : il donne aussi le sous-titre et la légende des couleurs ; espaces insécables autour du
+  « ! ».
+
+Le texte des articles n'est pas modifié : seuls les schémas changent, sur la page et, s'il y en a une, sur sa copie
 encadrement.
 
 ## Pages
 
-| Page | Schémas (v2) |
+| Page | Schémas (v3) |
 | --- | --- |
-| [Foreur, profil RPS et leadership de chantier](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/foreur-profil-rps-et-leadership-de-chantier.html) | ce qui pèse : cartes foreur, aide-foreur, contremaître ; sections Charge (cognitive, physique) et Responsabilité (risques particuliers, latitude). Leadership de chantier : leviers par niveau, primaire, secondaire, tertiaire, comme dans la page |
+| [Foreur, profil RPS et leadership de chantier](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/foreur-profil-rps-et-leadership-de-chantier.html) | ce qui pèse : cartes foreur, aide-foreur, contremaître ; sections Charge (cognitive, physique), Responsabilité (risques particuliers) et Latitude (technique, managériale). Leadership de chantier : leviers par niveau, primaire, secondaire, tertiaire, comme dans la page |
 | [Aide-foreur, profil RPS](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/aide-foreur-profil-rps.html) | ce qui pèse : sections Le poste et La relation (« Vulnérabilité particulière »). Leviers par niveau, comme dans la page |
 | [Contremaître ou capitaine, profil RPS](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/contremaitre-ou-capitaine-profil-rps.html) | ce qui pèse : cartes direction, contremaître, équipe ; sections Pivot (pression bidirectionnelle) et Charge. Le soutenir : direction, formation et pairs, soutien et conditions |
 | [MBI, épuisement professionnel](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/mbi-epuisement-professionnel.html) | les trois dimensions en cartes et leur interprétation : un sous-score par dimension, pas de total. Mesure ou diagnostic |
@@ -51,9 +76,10 @@ Get-ChildItem content-updates\2026-09-26-*-schemas.json | ForEach-Object { node 
 node tools/build_site.mjs
 ```
 
-La boucle couvre tous les lots du jour. Les six lots du lot 10 sont remplacés sous le même nom. La v2 prend la place
-de la v1 si la note l'a déjà reçue ; sinon, elle est insérée sous la même ancre. Les deux cas sont simulés. Les
-fichiers `…-v1.svg` du lot 10 peuvent ensuite quitter le dossier Infographies.
+La boucle couvre tous les lots du jour. Les six lots du lot 10 sont remplacés sous le même nom. La v3 prend la place
+de la version que la note porte, v2 ou v1 ; une note qui n'a reçu aucune version la reçoit sous la même ancre. Une
+note qui porterait à la fois la v1 et la v2 est refusée, sans rien modifier. Ces cas sont simulés. Les fichiers
+`…-v1.svg` et `…-v2.svg` du lot 10 peuvent ensuite quitter le dossier Infographies.
 
 ## En priorité : droit d'auteur du MBI
 
@@ -66,6 +92,8 @@ retirer, ou à réduire à la partie interprétation. Les schémas ne reprennent
 
 - **Densité** : le texte est un peu plus grand que sur la référence. Si tu préfères la densité exacte de ton image,
   le gabarit se règle en une ligne et les douze schémas se régénèrent.
+- **Couleur** : si tu veux encore moins de couleur, la légende et les puces peuvent passer toutes en gris ; le
+  schéma ne distinguerait alors plus ce qui pèse des leviers que par le titre.
 - **Regroupements** : quelques sections réunissent deux niveaux voisins d'un même tableau, sans rien ajouter :
   - « Formation et pairs » et « Soutien et conditions » (Contremaître) ;
   - « Procédures et équipe » et « Soutien et surveillance » (Confinement).
@@ -171,12 +199,13 @@ générateur ne traduit pas. C'est à traiter à part.
 ## Vérifications
 
 - Hors blocs de schéma, aucune ligne des huit fichiers (pages et copies encadrement) n'a changé.
-- Essai de pose avant chaque pose. Les lots du vault ont été simulés sur une note qui a reçu la v1 et sur une note
-  qui ne l'a pas reçue.
+- Essai de pose avant chaque pose. Les lots du vault ont été simulés sur une note qui a reçu la v2, sur une note
+  restée en v1 et sur une note sans schéma ; une note qui porte v1 et v2 est refusée.
+- Chaque schéma n'emploie qu'une couleur de puce, nommée dans sa légende ; le reste est en bleu-gris.
 - Chromium : sur la page, en thème sombre comme en clair, les affiches ne sont pas inversées (filtre « none »).
   Au téléphone, elles font 327 px de large ; sur tablette, 640 px.
-- Tests : 285 réussis sur 286 ; le seul échec, `textes-loi`, est connu et antérieur.
+- Tests : 287 réussis sur 288 ; le seul échec, `textes-loi`, est connu et antérieur.
 - `verif_site`, `verif_liens` (0 erreur), `verif_publication --staged`, manifeste hors ligne régénéré.
 - Chromium, `verif_rendu` : les six pages dans les cinq modes, aucun défaut.
-- Le générateur du dépôt (`tools/schemas-sombres/lot10.py`) rend, octet pour octet, les douze SVG publiés.
+- Le générateur du dépôt (`tools/schemas-sombres/lot10.py`) rend, octet pour octet, les douze SVG publiés (v3).
 - Aucune validation spécialisée n'est attestée.

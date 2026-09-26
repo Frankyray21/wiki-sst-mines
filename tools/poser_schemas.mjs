@@ -135,11 +135,12 @@ export function poserDansPage(html, spec, { racine, dimsDe, titreDe, hrefDe = a 
     // schéma déjà posé : on le remplace par sa version à jour (spec corrigée)
     const deja = blocPublie(s.fichier);
     if (deja.test(h)) { h = h.replace(deja, () => bloc); continue; }
-    // nouvelle version d'un schéma publié : elle prend la place de l'ancienne (la plus récente présente)
+    // nouvelle version d'un schéma publié : elle prend la place de l'ancienne (une seule présente, comme côté vault)
     if (s.remplaceSchema) {
-      const ancien = precedents(s).map(blocPublie).find(m => m.test(h));
-      if (!ancien) throw new Error('schéma à remplacer absent de la page : ' + precedents(s).join(' ou '));
-      h = h.replace(ancien, () => bloc);
+      const presents = precedents(s).filter(a => blocPublie(a).test(h));
+      if (!presents.length) throw new Error('schéma à remplacer absent de la page : ' + precedents(s).join(' ou '));
+      if (presents.length > 1) throw new Error('plusieurs versions du schéma à remplacer dans la page : ' + presents.join(' et '));
+      h = h.replace(blocPublie(presents[0]), () => bloc);
       continue;
     }
     // sans ancre : le schéma prend la place exacte de la capture qu'il remplace (sous un tableau, par exemple)
@@ -257,13 +258,20 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     for (const s of spec.schemas) fs.copyFileSync(path.join(medias, s.fichier), path.join(docs, 'files', 'infographies', s.fichier));
     for (const { p, apres } of poses) fs.writeFileSync(path.join(docs, p), apres);
     fs.writeFileSync(lotChemin, JSON.stringify(lot, null, 1) + '\n');
-    // version remplacée : son fichier quitte le site quand plus aucune page ne l'affiche
+    // version remplacée : son fichier quitte le site quand plus aucune page ne l'affiche et qu'aucun autre
+    // lot du vault ne le fournit encore (medias.depuis), sinon ce lot ne s'appliquerait plus
     const anciens = spec.schemas.flatMap(precedents);
     if (anciens.length) {
       const pagesHtml = fs.readdirSync(docs, { recursive: true }).filter(f => String(f).endsWith('.html'));
+      const dossierLots = path.resolve(outils, '../content-updates');
+      const autresLots = fs.readdirSync(dossierLots).filter(f => f.endsWith('.json') && path.resolve(dossierLots, f) !== path.resolve(lotChemin))
+        .map(f => fs.readFileSync(path.join(dossierLots, f), 'utf8'));
       for (const a of anciens) {
         const f = path.join(docs, 'files', 'infographies', a);
-        if (fs.existsSync(f) && !pagesHtml.some(x => fs.readFileSync(path.join(docs, x), 'utf8').includes(a))) {
+        if (!fs.existsSync(f)) continue;
+        const lot = autresLots.find(l => l.includes('docs/files/infographies/' + a + '"'));
+        if (lot) { console.log('Gardé (fourni par un autre lot du vault) : files/infographies/' + a); continue; }
+        if (!pagesHtml.some(x => fs.readFileSync(path.join(docs, x), 'utf8').includes(a))) {
           fs.rmSync(f);
           console.log('Retiré du site (plus cité) : files/infographies/' + a);
         }

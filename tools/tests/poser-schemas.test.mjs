@@ -136,7 +136,7 @@ test('schéma sur fond sombre : classe « infographie-sombre » dans la page et 
     assert.ok(regle.includes(sel), 'la règle couvre : ' + sel);
 });
 
-test('versions antérieures en liste : la page porte la plus récente présente, le lot les connaît toutes', () => {
+test('versions antérieures en liste : la page en porte une, remplacée ; le lot les connaît toutes', () => {
   const v2 = poserDansPage(PAGE, { page: 'w/x.html', schemas: [schema('wiki-x-a-v2.svg', 'Une section')] }, OPTS);
   const spec = { page: 'w/x.html', note: { titre: 'X', wiki: 'W' }, schemas: [schema('wiki-x-a-v3.svg', 'Une section', { remplaceSchema: ['wiki-x-a-v2.svg', 'wiki-x-a-v1.svg'] })] };
   const h = poserDansPage(v2, spec, OPTS);
@@ -145,6 +145,10 @@ test('versions antérieures en liste : la page porte la plus récente présente,
   const v1 = poserDansPage(PAGE, { page: 'w/x.html', schemas: [schema('wiki-x-a-v1.svg', 'Une section')] }, OPTS);
   assert.ok(poserDansPage(v1, spec, OPTS).includes('wiki-x-a-v3.svg') && !poserDansPage(v1, spec, OPTS).includes('wiki-x-a-v1.svg'), 'page restée en v1 : remplacée aussi');
   assert.throws(() => poserDansPage(PAGE, spec, OPTS), /absent de la page : wiki-x-a-v2\.svg ou wiki-x-a-v1\.svg/);
+  // deux versions dans la page : refus, comme le lot du vault (remplacer l'une laisserait l'autre, et son fichier)
+  const deux = poserDansPage(PAGE, { page: 'w/x.html', schemas: [schema('wiki-x-a-v1.svg', 'Une section'), schema('wiki-x-a-v2.svg', 'Fin.')] }, OPTS);
+  assert.ok(deux.includes('wiki-x-a-v1.svg') && deux.includes('wiki-x-a-v2.svg'));
+  assert.throws(() => poserDansPage(deux, spec, OPTS), /plusieurs versions du schéma à remplacer dans la page : wiki-x-a-v2\.svg et wiki-x-a-v1\.svg/);
   const lot = lotDepuisSpec(spec, { date: 'd', revision: 'r', portee: 'p', precautions: '' });
   assert.deepEqual(lot.retouches[0].ancien, ['Infographies/wiki-x-a-v2.svg', 'Infographies/wiki-x-a-v1.svg']);
   assert.equal(lotDepuisSpec({ ...spec, schemas: [{ ...spec.schemas[0], remplaceSchema: 'wiki-x-a-v2.svg' }] }, { date: 'd', revision: 'r', portee: 'p', precautions: '' }).retouches[0].ancien, 'Infographies/wiki-x-a-v2.svg', 'une seule version : chaîne, comme avant');

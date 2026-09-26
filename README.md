@@ -220,9 +220,13 @@ node tools/serve.mjs
   Contremaître, MBI, Coût économique des RPS et Confinement. Ils sont refaits à l'identique de l'infographie
   « CNESST — comprendre les 3 volets » de Frank :
   - fond marine ;
-  - sections encadrées de vert, de bleu ou d'orange, avec médaillon ;
+  - sections encadrées, avec médaillon ;
   - pictogrammes blancs ;
   - bandeau « Repère rapide ».
+
+  Version 3, à la demande de Frank (« pas trop de couleur, une raison pour chaque couleur ») : la structure reste en
+  bleu-gris neutre. Seules les puces sont en couleur : « ! » orange pour ce qui pèse, coche verte pour un levier de
+  l'organisation. Une légende sous le titre nomme chaque couleur employée.
 
   Le gabarit `tools/schemas-sombres/` les produit, avec la police Figtree et les icônes Material Design Icons
   incorporées ; il sert aussi aux prochains schémas. Les mots viennent de la page. Ces affiches, conçues sur fond
