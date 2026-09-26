@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="660" viewBox="0 0 480 660" role="img" aria-labelledby="t d">
+<title id="t">Le soutien dans le temps après un événement traumatique</title>
+<desc id="d">Axe du temps vertical, sans échelle ni délai, qui part d’un point noir marqué « Événement » et descend jusqu’à une flèche ; il donne l’ordre des phases. En bleu, qui intervient ; en gris, les personnes concernées. Stabilisation : trois personnes sous un toit bleu, à l’abri. Information : la direction, une bulle de parole, s’adresse à cinq personnes, tous les concernés. Soutien collectif, rencontre optionnelle : un intervenant et deux participants à une table, l’un d’eux parle. Soutien individuel, continu : une barre bleue longe tout l’axe ; un intervenant, superviseur ou PAE, écoute une personne qui parle. Surveillance : deux des personnes les plus exposées, chacune avec son questionnaire PCL-5. De là part un embranchement, la référence clinique, si symptômes persistants : une flèche bleue va d’une personne vers un professionnel spécialisé. Après une coupure de l’axe, le suivi long terme : un calendrier près d’une personne.</desc>
+<rect width="480" height="660" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Le soutien dans le temps</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">après l’événement</text>
+<path d="M26.6 112V103.1Q26.6 97.1 32.5 97.1H37.5Q43.4 97.1 43.4 103.1V112Z" fill="#1565c0"/>
+<circle cx="35" cy="91.7" r="4.5" fill="#1565c0"/>
+<text x="50" y="110" font-size="19" fill="#1f2328">intervenants</text>
+<path d="M196.6 112V103.1Q196.6 97.1 202.5 97.1H207.5Q213.4 97.1 213.4 103.1V112Z" fill="#6e7781"/>
+<circle cx="205" cy="91.7" r="4.5" fill="#6e7781"/>
+<text x="220" y="110" font-size="19" fill="#1f2328">personnes concernées</text>
+<path d="M27 181V632" stroke="#1565c0" stroke-width="6" stroke-linecap="round"/>
+<path d="M44 146V642" stroke="#6e7781" stroke-width="3"/>
+<path d="M36 640L44 656L52 640Z" fill="#6e7781"/>
+<rect x="35" y="579" width="18" height="10" fill="#fbfaf6"/>
+<path d="M35 583L53 577M35 591L53 585" stroke="#6e7781" stroke-width="2.5"/>
+<circle cx="44" cy="146" r="10" fill="#1f2328"/>
+<text x="64" y="153" font-size="20" font-weight="700" fill="#1f2328">Événement</text>
+<circle cx="44" cy="181" r="7" fill="#1f2328" stroke="#fbfaf6" stroke-width="2.5"/>
+<text x="64" y="188" font-size="20" font-weight="700" fill="#1f2328">Stabilisation</text>
+<path d="M354.4 194V181.8Q354.4 173.6 362.6 173.6H369.4Q377.6 173.6 377.6 181.8V194Z" fill="#6e7781"/>
+<circle cx="366" cy="166.1" r="6.1" fill="#6e7781"/>
+<path d="M386.4 194V181.8Q386.4 173.6 394.6 173.6H401.4Q409.6 173.6 409.6 181.8V194Z" fill="#6e7781"/>
+<circle cx="398" cy="166.1" r="6.1" fill="#6e7781"/>
+<path d="M418.4 194V181.8Q418.4 173.6 426.6 173.6H433.4Q441.6 173.6 441.6 181.8V194Z" fill="#6e7781"/>
+<circle cx="430" cy="166.1" r="6.1" fill="#6e7781"/>
+<path d="M342 168L398 144L454 168" fill="none" stroke="#1565c0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="44" cy="245" r="7" fill="#1f2328" stroke="#fbfaf6" stroke-width="2.5"/>
+<text x="64" y="252" font-size="20" font-weight="700" fill="#1f2328">Information</text>
+<path d="M210.4 258V245.8Q210.4 237.6 218.6 237.6H225.4Q233.6 237.6 233.6 245.8V258Z" fill="#1565c0"/>
+<circle cx="222" cy="230.1" r="6.1" fill="#1565c0"/>
+<rect x="238" y="218" width="30" height="17" rx="6" fill="#fbfaf6" stroke="#1565c0" stroke-width="2.5"/>
+<path d="M244 234L239 243L252 234" fill="#fbfaf6" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M242 233.5H253" stroke="#fbfaf6" stroke-width="3"/>
+<path d="M245 226.5H261" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M284.4 258V245.8Q284.4 237.6 292.6 237.6H299.4Q307.6 237.6 307.6 245.8V258Z" fill="#6e7781"/>
+<circle cx="296" cy="230.1" r="6.1" fill="#6e7781"/>
+<path d="M314.4 258V245.8Q314.4 237.6 322.6 237.6H329.4Q337.6 237.6 337.6 245.8V258Z" fill="#6e7781"/>
+<circle cx="326" cy="230.1" r="6.1" fill="#6e7781"/>
+<path d="M344.4 258V245.8Q344.4 237.6 352.6 237.6H359.4Q367.6 237.6 367.6 245.8V258Z" fill="#6e7781"/>
+<circle cx="356" cy="230.1" r="6.1" fill="#6e7781"/>
+<path d="M374.4 258V245.8Q374.4 237.6 382.6 237.6H389.4Q397.6 237.6 397.6 245.8V258Z" fill="#6e7781"/>
+<circle cx="386" cy="230.1" r="6.1" fill="#6e7781"/>
+<path d="M404.4 258V245.8Q404.4 237.6 412.6 237.6H419.4Q427.6 237.6 427.6 245.8V258Z" fill="#6e7781"/>
+<circle cx="416" cy="230.1" r="6.1" fill="#6e7781"/>
+<text x="222" y="278" font-size="19" fill="#1f2328" text-anchor="middle">direction</text>
+<text x="456" y="278" font-size="19" fill="#1f2328" text-anchor="end">tous les concernés</text>
+<circle cx="44" cy="315" r="7" fill="#1f2328" stroke="#fbfaf6" stroke-width="2.5"/>
+<text x="64" y="322" font-size="20" font-weight="700" fill="#1f2328">Soutien collectif</text>
+<text x="64" y="346" font-size="19" fill="#4b535c">rencontre optionnelle</text>
+<rect x="292" y="326" width="114" height="8" rx="2" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M302.4 328V315.8Q302.4 307.6 310.6 307.6H317.4Q325.6 307.6 325.6 315.8V328Z" fill="#1565c0"/>
+<circle cx="314" cy="300.1" r="6.1" fill="#1565c0"/>
+<path d="M336.4 328V315.8Q336.4 307.6 344.6 307.6H351.4Q359.6 307.6 359.6 315.8V328Z" fill="#6e7781"/>
+<circle cx="348" cy="300.1" r="6.1" fill="#6e7781"/>
+<path d="M370.4 328V315.8Q370.4 307.6 378.6 307.6H385.4Q393.6 307.6 393.6 315.8V328Z" fill="#6e7781"/>
+<circle cx="382" cy="300.1" r="6.1" fill="#6e7781"/>
+<rect x="396" y="288" width="28" height="16" rx="6" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M402 303L397 312L410 303" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M400 302.5H411" stroke="#fbfaf6" stroke-width="3"/>
+<path d="M403 296H417" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M27 383H44" stroke="#1565c0" stroke-width="4"/>
+<circle cx="44" cy="383" r="7" fill="#1565c0" stroke="#fbfaf6" stroke-width="2.5"/>
+<text x="64" y="390" font-size="20" font-weight="700" fill="#1565c0">Soutien individuel</text>
+<text x="64" y="414" font-size="19" fill="#4b535c">continu</text>
+<path d="M318.4 396V383.8Q318.4 375.6 326.6 375.6H333.4Q341.6 375.6 341.6 383.8V396Z" fill="#1565c0"/>
+<circle cx="330" cy="368.1" r="6.1" fill="#1565c0"/>
+<path d="M398.4 396V383.8Q398.4 375.6 406.6 375.6H413.4Q421.6 375.6 421.6 383.8V396Z" fill="#6e7781"/>
+<circle cx="410" cy="368.1" r="6.1" fill="#6e7781"/>
+<rect x="352" y="356" width="34" height="17" rx="6" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M380 372L385 381L372 372" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M371 371.5H382" stroke="#fbfaf6" stroke-width="3"/>
+<path d="M359 364.5H379" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
+<text x="456" y="416" font-size="19" fill="#1f2328" text-anchor="end">superviseur, PAE</text>
+<circle cx="44" cy="451" r="7" fill="#1f2328" stroke="#fbfaf6" stroke-width="2.5"/>
+<text x="64" y="458" font-size="20" font-weight="700" fill="#1f2328">Surveillance</text>
+<path d="M250.4 464V451.8Q250.4 443.6 258.6 443.6H265.4Q273.6 443.6 273.6 451.8V464Z" fill="#6e7781"/>
+<circle cx="262" cy="436.1" r="6.1" fill="#6e7781"/>
+<path d="M280 436H294L300 442V462H280Z" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M285 447H295M285 454H295" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M326.4 464V451.8Q326.4 443.6 334.6 443.6H341.4Q349.6 443.6 349.6 451.8V464Z" fill="#6e7781"/>
+<circle cx="338" cy="436.1" r="6.1" fill="#6e7781"/>
+<path d="M356 436H370L376 442V462H356Z" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M361 447H371M361 454H371" stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"/>
+<text x="392" y="458" font-size="19" font-weight="700" fill="#1f2328">PCL-5</text>
+<text x="300" y="484" font-size="19" fill="#1f2328" text-anchor="middle">les plus exposées</text>
+<path d="M44 461C44 508 50 515 62 515H66" fill="none" stroke="#6e7781" stroke-width="3"/>
+<path d="M64 508L76 515L64 522Z" fill="#6e7781"/>
+<text x="84" y="522" font-size="20" font-weight="700" fill="#1f2328">Référence clinique</text>
+<text x="84" y="546" font-size="19" fill="#4b535c">si symptômes</text>
+<text x="84" y="570" font-size="19" fill="#4b535c">persistants</text>
+<path d="M320.4 530V517.8Q320.4 509.6 328.6 509.6H335.4Q343.6 509.6 343.6 517.8V530Z" fill="#6e7781"/>
+<circle cx="332" cy="502.1" r="6.1" fill="#6e7781"/>
+<path d="M352 516H384" stroke="#1565c0" stroke-width="4" stroke-linecap="round"/>
+<path d="M382 509L394 516L382 523Z" fill="#1565c0"/>
+<path d="M408.4 530V517.8Q408.4 509.6 416.6 509.6H423.4Q431.6 509.6 431.6 517.8V530Z" fill="#1565c0"/>
+<circle cx="420" cy="502.1" r="6.1" fill="#1565c0"/>
+<text x="456" y="552" font-size="19" fill="#1f2328" text-anchor="end">professionnel</text>
+<text x="456" y="574" font-size="19" fill="#1f2328" text-anchor="end">spécialisé</text>
+<circle cx="44" cy="611" r="7" fill="#1f2328" stroke="#fbfaf6" stroke-width="2.5"/>
+<text x="64" y="618" font-size="20" font-weight="700" fill="#1f2328">Suivi long terme</text>
+<rect x="372" y="596" width="36" height="28" rx="3" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M372 604H408" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M381 591V600M399 591V600" stroke="#6e7781" stroke-width="3" stroke-linecap="round"/>
+<rect x="379" y="608" width="4" height="4" fill="#6e7781"/>
+<rect x="379" y="615" width="4" height="4" fill="#6e7781"/>
+<rect x="388" y="608" width="4" height="4" fill="#6e7781"/>
+<rect x="388" y="615" width="4" height="4" fill="#6e7781"/>
+<rect x="397" y="608" width="4" height="4" fill="#6e7781"/>
+<rect x="397" y="615" width="4" height="4" fill="#6e7781"/>
+<path d="M428.4 624V611.8Q428.4 603.6 436.6 603.6H443.4Q451.6 603.6 451.6 611.8V624Z" fill="#6e7781"/>
+<circle cx="440" cy="596.1" r="6.1" fill="#6e7781"/>
+</g>
+</svg>

@@ -1,0 +1,26 @@
+{
+ "date": "2026-09-26",
+ "revision": "2026-09-26-etapes-dun-retour-au-travail-reussi-schemas",
+ "portee": "Schémas de la page w/psychosocial/etapes-dun-retour-au-travail-reussi.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Étapes d'un retour au travail réussi",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/etapes-dun-retour-au-travail-reussi.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-etapes-dun-retour-au-travail-reussi-parcours-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Cinq étapes",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-etapes-dun-retour-au-travail-reussi-parcours-v1.svg|Parcours du même travailleur en cinq étapes numérotées. Pendant l’absence, chez lui, des contacts réguliers le relient au travail, puis un plan écrit se prépare avec le médecin traitant, le médecin du travail, l’employeur et le PAE ; de retour au travail, il avance sur trois marches (démarrage, progression, stabilisation), soutenu par l’équipe, le superviseur et le PAE, puis des évaluations jalonnent le suivi à long terme.]]\n\n<p class=\"infographie-legende\">Les cinq étapes de la page, vues comme un parcours : garder le lien pendant l’absence, planifier le retour par écrit, reprendre graduellement, soutenir les premières semaines, puis suivre dans la durée. Les personnes dessinées sont celles que la page nomme à chaque étape ; le schéma n’indique aucune durée.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Cinq étapes numérotées, reliées de haut en bas par une ligne bleue fléchée : le même travailleur, en noir, figure à chaque étape. Les étapes 1 et 2 se passent pendant l’absence (fond gris) ; aux étapes 3 à 5, casqué, il est de retour au travail.</li>\n<li>Étapes 1 et 2 : chez lui, le travailleur tient un téléphone ; une ligne pointillée portant une bulle le relie au lieu de travail, un chevalement de mine : des contacts réguliers et bienveillants, sans pression, sans discussion sur les conditions médicales. Puis, quand le médecin signale que le retour est envisageable, le travailleur prépare un plan écrit, assis à une table avec quatre personnes en gris : le médecin traitant, le médecin du travail, l’employeur et le PAE.</li>\n<li>Étape 3, retour progressif : trois marches, démarrage (heures réduites, tâches allégées, supervision rapprochée), progression (augmentation graduelle des heures et de la charge), puis stabilisation (retour à temps plein avec aménagements maintenus si nécessaire) ; une flèche bleue monte de la première à la dernière.</li>\n<li>Étape 4, soutien des premières semaines : l’équipe, préparée à accueillir (un collègue le salue de la main), et un superviseur formé, qui lui parle (bulle bleue) ; au-delà d’un trait pointillé, le PAE lui parle aussi : un suivi clinique en parallèle, si nécessaire.</li>\n<li>Étape 5, suivi à long terme : devant le travailleur, une ligne fléchée jalonnée de quatre coches, les évaluations qui suivent le retour. Le schéma n’en donne pas les moments ; les marches et les écarts ne mesurent rien.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après la section « Cinq étapes » de cette page (tableaux des étapes 1 à 5 : actions, acteurs, phases, soutiens, évaluations) ; la maison, la table, le chevalement et le casque sont des images descriptives. Pour le détail : {{lien:w/psychosocial/plan-de-retour-progressif.html|Plan de retour progressif}}, {{lien:w/psychosocial/role-du-superviseur-dans-le-retour-au-travail.html|Rôle du superviseur dans le retour au travail}} et {{lien:w/psychosocial/coordination-avec-le-medecin-traitant-et-le-pae.html|Coordination avec le médecin traitant et le PAE}}.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-etapes-dun-retour-au-travail-reussi-parcours-v1.svg"
+  }
+ ]
+}

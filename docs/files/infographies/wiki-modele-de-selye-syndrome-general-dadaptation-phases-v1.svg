@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="600" viewBox="0 0 480 600" role="img" aria-labelledby="t d">
+<title id="t">Trois phases face au stress</title>
+<desc id="d">Graphique de la réponse du corps au fil du temps, quand le stress dure, en trois colonnes. Alarme, colonne étroite à gauche : la courbe part du bas et monte vite jusqu’à une pointe ; dessous, un mineur casqué, debout, aux aguets (traits autour de la tête) : il se mobilise. Résistance, colonne large au centre : la courbe redescend un peu, puis reste haute et plate ; sous l’axe du temps, un coin rouge grossit d’un bout à l’autre de la colonne : la dette physiologique qui s’accumule ; le mineur, debout, lève le pouce et dit « Ça va, je gère » : il « tient le coup ». Épuisement, colonne teintée de rouge à droite : la courbe, en rouge, s’effondre brutalement jusqu’au bas ; le mineur, en rouge, est assis, la tête dans les mains : il craque. En bas : qui « tient toujours le coup » n’est pas plus fort.</desc>
+<rect width="480" height="600" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Trois phases face au stress</text>
+<text x="24" y="78" font-size="19" fill="#4b535c">Réponse du corps quand le stress dure</text>
+<!-- Colonnes des trois phases -->
+<rect x="326" y="128" width="130" height="350" fill="#fde3e0"/>
+<path d="M104 128V478" stroke="#6e7781" stroke-width="2.5" stroke-dasharray="6 6"/>
+<text x="64" y="118" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Alarme</text>
+<text x="215" y="118" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">Résistance</text>
+<text x="391" y="118" font-size="20" font-weight="700" fill="#c62828" text-anchor="middle">Épuisement</text>
+<!-- Axe du temps -->
+<path d="M24 276H444" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M456 276L442 269L442 283Z" fill="#6e7781"/>
+<text x="452" y="300" font-size="19" fill="#4b535c" text-anchor="end">temps</text>
+<!-- Réponse du corps : pointe (alarme), retour partiel puis plateau haut (résistance), effondrement jusqu’au niveau de départ (épuisement) -->
+<path d="M24 258C40 258 50 140 74 140C92 140 100 172 122 172H326" stroke="#1f2328" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M326 172C350 172 352 258 386 258H448" stroke="#c62828" stroke-width="5" fill="none" stroke-linecap="round"/>
+<!-- Dette physiologique : coin rouge qui grossit pendant toute la résistance -->
+<path d="M104 283H326V305Z" fill="#c62828"/>
+<text x="215" y="328" font-size="19" fill="#c62828" text-anchor="middle">dette physiologique</text>
+<text x="215" y="352" font-size="19" fill="#c62828" text-anchor="middle">qui s’accumule</text>
+<!-- Alarme : mineur debout, aux aguets (traits d’alerte) -->
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M59 475L72 475" stroke-width="6"/>
+<path d="M62 473.5L62.5 452" stroke-width="9"/>
+<path d="M62.5 452L62 430" stroke-width="10"/>
+<path d="M62 430L63 402" stroke-width="15"/>
+<path d="M63 402L64.5 394" stroke-width="7"/>
+<circle cx="65.5" cy="385" r="9" fill="#1f2328" stroke="none"/>
+<path d="M63 404L70 420L82 416" stroke="#fbfaf6" stroke-width="11.5"/>
+<path d="M63 404L70 420L82 416" stroke="#1f2328" stroke-width="7.5"/>
+</g>
+<g transform="rotate(0 65.5 385)"><path d="M53.5 384A12 12 0 0 1 77.5 384Z" fill="#1f2328"/><path d="M53.5 384H82.5" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/><rect x="73.5" y="376" width="5" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/></g>
+<g stroke="#1f2328" stroke-width="3" stroke-linecap="round"><path d="M48.5 375L40.5 370"/><path d="M65.5 365L65.5 356"/><path d="M81.5 371L87.5 364"/></g>
+<!-- Résistance : mineur debout, pouce levé, qui dit « Ça va, je gère » (page, Signaux de transition) : il « tient le coup » -->
+<g transform="translate(-80 0)">
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M247 475L260 475" stroke-width="6"/>
+<path d="M250 473.5L250.5 452" stroke-width="9"/>
+<path d="M250.5 452L250 430" stroke-width="10"/>
+<path d="M250 430L251 402" stroke-width="15"/>
+<path d="M251 402L252.5 394" stroke-width="7"/>
+<circle cx="253.5" cy="385" r="9" fill="#1f2328" stroke="none"/>
+<path d="M251 404L255 421L265 413" stroke="#fbfaf6" stroke-width="11.5"/>
+<path d="M251 404L255 421L265 413" stroke="#1f2328" stroke-width="7.5"/>
+</g>
+<g transform="rotate(0 253.5 385)"><path d="M241.5 384A12 12 0 0 1 265.5 384Z" fill="#1f2328"/><path d="M241.5 384H270.5" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/><rect x="261.5" y="376" width="5" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/></g>
+<circle cx="268" cy="412" r="6.5" fill="#1f2328"/>
+<path d="M267.5 408V398" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+</g>
+<path d="M218 372H286A12 12 0 0 1 298 384V418A12 12 0 0 1 286 430H218A12 12 0 0 1 206 418V397L197 390L206 384A12 12 0 0 1 218 372Z" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="252" y="395" font-size="19" fill="#1f2328" text-anchor="middle">Ça va,</text>
+<text x="252" y="418" font-size="19" fill="#1f2328" text-anchor="middle">je gère</text>
+<!-- Épuisement : mineur assis, la tête dans la main, en rouge : il craque -->
+<rect x="370" y="452" width="28" height="26" rx="2" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
+<g fill="none" stroke="#c62828" stroke-linecap="round" stroke-linejoin="round">
+<path d="M407 475L420 475" stroke-width="6"/>
+<path d="M410 473.5L410 451" stroke-width="9"/>
+<path d="M410 451L386 451" stroke-width="10"/>
+<path d="M386 451L400 425" stroke-width="15"/>
+<path d="M400 425L406 420" stroke-width="7"/>
+<circle cx="413" cy="416" r="9" fill="#c62828" stroke="none"/>
+<path d="M399 427L408 440L415 425" stroke="#fbfaf6" stroke-width="11.5"/>
+<path d="M399 427L408 440L415 425" stroke="#c62828" stroke-width="7.5"/>
+</g>
+<g transform="rotate(28 413 416)"><path d="M401 415A12 12 0 0 1 425 415Z" fill="#c62828"/><path d="M401 415H430" stroke="#c62828" stroke-width="3.5" stroke-linecap="round"/><rect x="421" y="407" width="5" height="6" rx="1" fill="#fbfaf6" stroke="#c62828" stroke-width="2.5"/></g>
+<path d="M24 478H456" stroke="#6e7781" stroke-width="2.5"/>
+<text x="24" y="504" font-size="19" font-weight="600" fill="#1f2328">se mobilise</text>
+<text x="250" y="504" font-size="19" font-weight="600" fill="#1f2328" text-anchor="middle">« tient le coup »</text>
+<text x="398" y="504" font-size="19" font-weight="600" fill="#c62828" text-anchor="middle">craque</text>
+<!-- Leçon de la page : tenir le coup n’est pas être plus fort -->
+<text x="24" y="550" font-size="19" fill="#4b535c">Qui « tient toujours le coup »</text>
+<text x="24" y="574" font-size="19" fill="#4b535c">n’est pas plus fort.</text>
+</g>
+</svg>

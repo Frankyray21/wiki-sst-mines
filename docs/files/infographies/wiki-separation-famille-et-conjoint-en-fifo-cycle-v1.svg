@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="594" viewBox="0 0 480 594" role="img" aria-labelledby="t d">
+<title id="t">Séparation et retrouvailles, cycle après cycle : le travailleur au site, la famille à la maison</title>
+<desc id="d">Schéma en boucle sur deux côtés. À gauche, sur fond bleu clair : à la maison, où restent le conjoint et les enfants. À droite, sur fond gris, avec un chevalement de mine : au site, où travaille le travailleur casqué. Un trajet fléché fait la boucle ; les noms des phases sont inscrits sur l’axe central. Départ : le trajet part de la maison vers le site. Absence : le travailleur est au site, « dans un autre univers » ; à la maison, sa place reste vide (silhouette en pointillé) et « le conjoint gère seul ». Retour : le trajet revient à la maison. Retrouvailles : le travailleur est avec le conjoint et les enfants ; pour le couple, « rôles à renégocier » ; pour les enfants, « routine à réadapter ». Nouveau départ : le trajet repart vers le site, puis un pointillé remonte au début de l’absence, avec la mention « à chaque cycle ». Aucune durée ni proportion.</desc>
+<rect width="480" height="594" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" fill="#1f2328" font-weight="700">Séparation et retrouvailles,</text>
+<text x="24" y="78" font-size="26" fill="#1f2328" font-weight="700">cycle après cycle</text>
+<rect x="16" y="98" width="242" height="482" rx="12" fill="#e1ecfa"/>
+<rect x="266" y="98" width="198" height="482" rx="12" fill="#eceef0"/>
+<g transform="translate(40 122)"><path d="M-12.5 -0.5L0 -12L12.5 -0.5Z" fill="#1565c0" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/><rect x="-9" y="-2" width="18" height="13" fill="#1565c0"/><rect x="-2.75" y="3.5" width="5.5" height="7.5" fill="#fbfaf6"/></g>
+<text x="60" y="129" font-size="20" fill="#1565c0" font-weight="700">à la maison</text>
+<g transform="translate(290 122)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#4b535c"/><rect x="-14.5" y="2.5" width="29" height="4.5" rx="2.25" fill="#4b535c"/><path d="M-2.6 -9.6V2.6M2.6 -9.6V2.6" stroke="#fbfaf6" stroke-width="2.5"/></g>
+<text x="312" y="129" font-size="20" fill="#1f2328" font-weight="700">au site</text>
+<path d="M46 148V166Q46 176 56 176H426Q436 176 436 186V342Q436 352 426 352H56Q46 352 46 362V538Q46 548 56 548H444" fill="none" stroke="#4b535c" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="46" cy="148" r="5.5" fill="#4b535c"/>
+<path d="M444 548Q454 548 454 538V186Q454 176 444 176H442" fill="none" stroke="#6e7781" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"/>
+<path d="M401 176L383 167L383 185Z" fill="#4b535c"/>
+<path d="M436 259L427 241L445 241Z" fill="#4b535c"/>
+<path d="M111 352L129 343L129 361Z" fill="#4b535c"/>
+<path d="M46 461L37 443L55 443Z" fill="#4b535c"/>
+<path d="M409 548L391 539L391 557Z" fill="#4b535c"/>
+<path d="M454 352L446 368L462 368Z" fill="#6e7781"/>
+<rect x="212.0" y="160" width="100" height="32" rx="16" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<text x="262" y="182.5" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">départ</text>
+<rect x="204.0" y="280" width="116" height="32" rx="16" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<text x="262" y="302.5" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">absence</text>
+<rect x="214.0" y="336" width="96" height="32" rx="16" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<text x="262" y="358.5" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">retour</text>
+<rect x="180.0" y="460" width="164" height="32" rx="16" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<text x="262" y="482.5" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">retrouvailles</text>
+<rect x="163.0" y="532" width="198" height="32" rx="16" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<text x="262" y="554.5" font-size="19" font-weight="700" fill="#1f2328" text-anchor="middle">nouveau départ</text>
+<g transform="translate(76 326)"><circle cx="0" cy="-53" r="9" fill="#1565c0"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1565c0"/></g>
+<g transform="translate(108 326) scale(0.72)"><circle cx="0" cy="-53" r="9" fill="#1565c0"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1565c0"/></g>
+<g transform="translate(134 326) scale(0.62)"><circle cx="0" cy="-53" r="9" fill="#1565c0"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1565c0"/></g>
+<g transform="translate(172 326)"><g fill="none" stroke="#4b535c" stroke-width="2.5" stroke-dasharray="4.5 3.5" stroke-linejoin="round"><circle cx="0" cy="-53" r="9"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H-8V-24Z"/></g></g>
+<text x="62" y="230" font-size="19" fill="#1565c0">le conjoint</text>
+<text x="62" y="253" font-size="19" fill="#1565c0">gère seul</text>
+<g fill="none" stroke="#6e7781" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M386 326L391 270M402 326L397 270M387 320L400.5 306L388.5 292L398.5 279M397 276L422 326M374 326H430"/><circle cx="394" cy="263" r="8.5" fill="#fbfaf6"/></g>
+<circle cx="394" cy="263" r="2.5" fill="#6e7781"/>
+<g transform="translate(344 326)"><circle cx="0" cy="-53" r="9" fill="#4b535c"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#4b535c"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#4b535c"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#4b535c"/><path d="M-2.6 -9.6V2.2M2.6 -9.6V2.2" stroke="#fbfaf6" stroke-width="2.5"/></g></g>
+<text x="284" y="230" font-size="19" fill="#1f2328">dans un autre</text>
+<text x="284" y="253" font-size="19" fill="#1f2328">univers</text>
+<g transform="translate(76 506)"><circle cx="0" cy="-53" r="9" fill="#4b535c"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#4b535c"/></g>
+<g transform="translate(104 506)"><circle cx="0" cy="-53" r="9" fill="#1565c0"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1565c0"/></g>
+<g transform="translate(134 506) scale(0.72)"><circle cx="0" cy="-53" r="9" fill="#1565c0"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1565c0"/></g>
+<g transform="translate(158 506) scale(0.62)"><circle cx="0" cy="-53" r="9" fill="#1565c0"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1565c0"/></g>
+<text x="62" y="406" font-size="19" fill="#1f2328">rôles à renégocier</text>
+<text x="62" y="430" font-size="19" fill="#1565c0">routine à réadapter</text>
+<text x="444" y="424" font-size="19" fill="#4b535c" text-anchor="end">à chaque</text>
+<text x="444" y="447" font-size="19" fill="#4b535c" text-anchor="end">cycle</text>
+</g>
+</svg>
