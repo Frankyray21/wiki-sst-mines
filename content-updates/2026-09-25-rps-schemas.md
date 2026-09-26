@@ -7,7 +7,7 @@ schémas, on retire seulement les captures fausses ou tierces et leur légende.
 Chaque schéma a été dessiné d'après la page, ses notes d'analyse et, pour le harcèlement, le texte officiel de la LNT.
 Chaque dessinateur a vérifié ses sources, le rendu en clair et en sombre et la pose. Un relecteur contradictoire a
 ensuite confronté chaque schéma à ses sources, citation par citation ; ses corrections sont publiées (voir « Après
-relecture »). Seuls Harcèlement et Les trois niveaux n'ont pas eu ce second regard.
+relecture »).
 
 ## Pages modifiées
 
@@ -50,6 +50,13 @@ aboutissent au même texte, et un second passage ne change rien.
   maintenant plus haut que celle du haut, sans plus. Une citation attribuée au rapport Tissot et al. (2022), p. 9,
   est introuvable dans le PDF : remplacée par la vraie phrase, section 4.6, p. 34.
 - **Reconnaissance, Comparatif des cycles FIFO.** Déjà corrigés après relecture ; passés en v2 pour que le vault suive.
+- **Harcèlement psychologique.** « conduite vexatoire répétée, hostile ou non désirée » se lisait comme trois choix ;
+  la légende et le texte alternatif reprennent la loi (« des comportements, des paroles, des actes ou des gestes
+  répétés, qui sont hostiles ou non désirés ») et précisent que l'article ne fixe ni nombre de répétitions ni durée.
+- **Les trois niveaux.** « seul le primaire change le travail » devient « seul le primaire agit sur les causes » (le
+  tableau « Cadre » ne donne les causes pour cible qu'au primaire ; une mesure tertiaire peut changer le travail d'une
+  personne, par une assignation temporaire). Dans l'exemple minier, les flèches rouges qui affirmaient un lien de cause
+  entre l'horaire, les premiers signes et l'atteinte sont retirées, comme le « même cas » qui reliait les trois exemples.
 - **Théories de la motivation** (relue avant publication). La colonne des motivateurs de Herzberg était posée sur le
   plancher d'hygiène, ce qui affirmait que les motivateurs n'agissent qu'une fois l'hygiène assurée : la page ne le dit
   pas (cette condition est celle qu'elle prête à Maslow). Elle est maintenant à côté. Les vagues du voilier, qui
@@ -91,8 +98,11 @@ node tools/build_site.mjs
   - l'intention de nuire et le caractère délibéré ne sont pas dans l'art. 81.18 ;
   - la « hausse du taux de cotisation » ne figure pas dans la LNT ;
   - les liens « art. 81 » mènent à l'article sur le congé de mariage.
-  Le recueil local de la LNT est à jour au 26 mars 2024 : vérifier sur LégisQuébec une modification de 2024 de
-  l'art. 81.19. Le schéma des obligations de l'employeur est mis de côté pour cette raison.
+  L'« Essentiel » attache le « milieu néfaste » à la conduite grave unique, que le 2e alinéa soumet plutôt à un « effet
+  nocif continu ». La « Démarche de signalement » ne dit pas que la personne syndiquée exerce les recours de sa
+  convention collective (art. 81.20), ce qui compte en mine. Le recueil local de la LNT est à jour au 26 mars 2024 :
+  vérifier sur LégisQuébec une modification de 2024 des art. 81.18 et 81.19. Le schéma des obligations de l'employeur
+  est mis de côté pour cette raison.
 - **Modèle de Siegrist.** L'affirmation « LMRSST : la reconnaissance… » va au-delà de l'art. 144. « Réduit
   significativement les scores ERI » n'a pas de source. La référence Kivimäki (2007) est tronquée. La page mêle deux
   conceptions du surengagement (effort intrinsèque, puis amplificateur) ; la source « Siegrist (2009, version
@@ -102,7 +112,10 @@ node tools/build_site.mjs
   soutien → reconnaissance → santé comme des étapes, alors que sa propre phrase parle d'une demande modulée par les
   trois autres.
 - **Les trois niveaux.** La légende retirée annonçait une prévention « primordiale », dont la page ne parle pas. « 6 à
-  18 mois » n'a pas de source (comme sur Démarche de prévention).
+  18 mois » n'a pas de source (comme sur Démarche de prévention), ni « le primaire est le plus efficace et le moins
+  coûteux à long terme ». La politique anti-harcèlement est classée primaire dans le tableau, secondaire dans « Erreur
+  classique en mine ». L'assignation temporaire est présentée comme une « obligation légale » : la LATMP (art. 179) en
+  fait une faculté de l'employeur (« peut … assigner temporairement un travail »).
 - **Démarche de prévention.** Deux coquilles : « plan.p » et « primaire s ». « 6 à 18 mois » n'a pas de source (repris
   sur plusieurs pages ; « Démarrage rapide pour direction et RH » dit « 12-18 mois »). La responsabilité de
   « l'opérateur principal » envers les sous-traitants n'a pas d'appui dans le recueil : la LSST vise l'employeur envers

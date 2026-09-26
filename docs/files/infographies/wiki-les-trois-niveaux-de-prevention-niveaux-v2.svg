@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="540" viewBox="0 0 480 540" role="img" aria-labelledby="t d">
 <title id="t">Trois niveaux, trois moments</title>
-<desc id="d">Trois scènes du même travailleur, posées sur une flèche qui va d’« avant le problème » à « après son apparition » et qui rougit vers la droite. Légende : la charge, des caisses rouges, figure les conditions de travail. Primaire, avant le problème : le travailleur, debout, porte la charge sur le dos ; une flèche bleue en retire une caisse : agir sur les causes. Secondaire, tôt, avant aggravation : il plie sous toute la charge et montre des premiers signes, des traits rouges autour de la tête ; une personne, en face, lui parle (bulle bleue) : détecter et gérer. Tertiaire, après son apparition : le travailleur, en rouge, est assis, la tête dans la main ; une personne pose la main sur son dos (bras bleu) : soutenir le rétablissement ; la charge est toujours là, posée à côté. Mention : « Les trois sont nécessaires ; seul le primaire change le travail. »</desc>
+<desc id="d">Trois scènes du même travailleur, posées sur une flèche qui va d’« avant le problème » à « après son apparition » et qui rougit vers la droite. Légende : la charge, des caisses rouges, figure les conditions de travail. Primaire, avant le problème : le travailleur, debout, porte la charge sur le dos ; une flèche bleue en retire une caisse : agir sur les causes. Secondaire, tôt, avant aggravation : il plie sous toute la charge et montre des premiers signes, des traits rouges autour de la tête ; une personne, en face, lui parle (bulle bleue) : détecter et gérer. Tertiaire, après son apparition : le travailleur, en rouge, est assis, la tête dans la main ; une personne pose la main sur son dos (bras bleu) : soutenir le rétablissement ; la charge est toujours là, posée à côté. Mention : « Les trois sont nécessaires ; seul le primaire agit sur les causes. »</desc>
 <defs>
 <linearGradient id="evolution" gradientUnits="userSpaceOnUse" x1="24" y1="0" x2="440" y2="0"><stop offset="0" stop-color="#eceef0"/><stop offset="0.45" stop-color="#fde3e0"/><stop offset="1" stop-color="#c62828"/></linearGradient>
 </defs>
@@ -107,6 +107,6 @@
 <text x="384" y="424" font-size="19" fill="#1f2328" text-anchor="middle">après son</text>
 <text x="384" y="448" font-size="19" fill="#1f2328" text-anchor="middle">apparition</text>
 <text x="24" y="494" font-size="19" fill="#4b535c">Les trois sont nécessaires ;</text>
-<text x="24" y="518" font-size="19" fill="#4b535c">seul le primaire change le travail.</text>
+<text x="24" y="518" font-size="19" fill="#4b535c">seul le primaire agit sur les causes.</text>
 </g>
 </svg>

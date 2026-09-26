@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="480" height="656" viewBox="0 0 480 656" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="626" viewBox="0 0 480 626" role="img" aria-labelledby="t d">
 <title id="t">Stress en mine : un exemple par niveau</title>
-<desc id="d">Exemple minier en trois rangées, pour des cycles FIFO et des quarts de nuit. Primaire, sur la source : un horaire en rotation, des jours (soleils) puis des nuits (lunes sur fond rouge), qui se poursuit hors du cadre ; un crayon bleu le réaménage : aménager les horaires. Une flèche rouge descend de l’horaire vers un mineur casqué, courbé, qui montre des premiers signes (traits rouges). Secondaire, sur la réaction : le superviseur, en face, lui parle (bulle bleue) : superviseur formé, repère les signaux. Une seconde flèche rouge descend vers le même mineur, en rouge, assis, la tête dans la main. Tertiaire, sur les effets : une personne pose la main sur son dos (bras bleu) et une flèche bleue le mène, debout, vers son retour au travail : PAE, plan de retour au travail. Mention : « Sans le primaire, le problème n’est pas réglé. »</desc>
+<desc id="d">Un exemple minier par niveau, en trois rangées. Primaire, sur les causes : un horaire en rotation, des jours (soleils) puis des nuits (lunes sur fond rouge), qui se poursuit hors du cadre ; un crayon bleu le réaménage : aménager les horaires. Secondaire, sur les capacités : un mineur casqué, courbé, montre des premiers signes (traits rouges) ; un superviseur, en face, lui parle (bulle bleue) : superviseur formé, repère les signaux. Tertiaire, sur les conséquences : un mineur, en rouge, est assis, la tête dans la main ; une personne pose la main sur son dos (bras bleu) et une flèche bleue le mène, debout, vers son retour au travail : PAE, plan de retour au travail. Mention : « Sans le primaire, le problème n’est pas réglé. »</desc>
 <defs><clipPath id="fenetre"><rect x="29.3" y="140" width="177.5" height="100"/></clipPath></defs>
-<rect width="480" height="656" fill="#fbfaf6"/>
+<rect width="480" height="626" fill="#fbfaf6"/>
 <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
 <text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Stress en mine :</text>
 <text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">un exemple par niveau</text>
-<text x="24" y="112" font-size="19" fill="#4b535c">Cas : cycles FIFO et quarts de nuit</text>
-<!-- Primaire : on agit sur la source du stress, l’horaire lui-même (jours, puis nuits en rouge) ; crayon bleu : on le réaménage -->
+<g transform="translate(0 -30)">
+<!-- Primaire, sur les causes : l’horaire lui-même (jours, puis nuits en rouge) ; crayon bleu : on le réaménage (aménagement des horaires) -->
 <rect x="28" y="144" width="180" height="90" rx="8" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
 <path d="M28 164V152Q28 144 36 144H200Q208 144 208 152V164Z" fill="#6e7781"/>
 <!-- la bande continue sous le bord droit du cadre : un horaire en rotation, sans cycle fermé à compter -->
@@ -29,10 +29,10 @@
 <path d="M208.8 219.1L228.3 191.2L217.6 183.8L198.1 211.6Z" fill="#e1ecfa" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
 <path d="M196 226L208.8 219.1L198.1 211.6Z" fill="#1565c0" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
 <text x="244" y="162" font-size="20" font-weight="700" fill="#1f2328">Primaire</text>
-<text x="244" y="190" font-size="19" fill="#4b535c">sur la source</text>
+<text x="244" y="190" font-size="19" fill="#4b535c">sur les causes</text>
 <text x="244" y="218" font-size="19" font-weight="600" fill="#1565c0">aménager</text>
 <text x="244" y="242" font-size="19" font-weight="600" fill="#1565c0">les horaires</text>
-<!-- Secondaire : l’horaire pèse sur le mineur (flèche rouge), premiers signes (traits rouges) ; le superviseur formé les repère et en parle (bulle bleue) -->
+<!-- Secondaire, sur les capacités : premiers signes (traits rouges) ; le superviseur formé les repère et en parle (bulle bleue) -->
 <g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
 <path d="M80.7 406.7L95 406.7" stroke-width="6.6"/>
 <path d="M84 405.1L88.4 381.4" stroke-width="9.9"/>
@@ -60,10 +60,10 @@
 <g fill="#1565c0"><circle cx="161" cy="263" r="3.5"/><circle cx="174" cy="263" r="3.5"/><circle cx="187" cy="263" r="3.5"/></g>
 <path d="M36 410H208" stroke="#6e7781" stroke-width="2.5"/>
 <text x="244" y="326" font-size="20" font-weight="700" fill="#1f2328">Secondaire</text>
-<text x="244" y="354" font-size="19" fill="#4b535c">sur la réaction</text>
+<text x="244" y="354" font-size="19" fill="#4b535c">sur les capacités</text>
 <text x="244" y="382" font-size="19" font-weight="600" fill="#1565c0">superviseur formé</text>
 <text x="244" y="406" font-size="19" font-weight="600" fill="#1565c0">repère les signaux</text>
-<!-- Tertiaire : le mineur atteint (en rouge) est soutenu (PAE), puis un plan prépare son retour au travail (flèche bleue) -->
+<!-- Tertiaire, sur les conséquences : un mineur atteint (en rouge) est soutenu (PAE) ; flèche bleue : plan de retour au travail -->
 <rect x="56" y="544" width="28" height="26" rx="2" fill="#eceef0" stroke="#6e7781" stroke-width="2.5"/>
 <g fill="none" stroke="#c62828" stroke-linecap="round" stroke-linejoin="round">
 <path d="M95.1 566.7L109.4 566.7" stroke-width="6.6"/>
@@ -101,15 +101,11 @@
 <g transform="rotate(0 213.8 467.7)"><path d="M201.8 466.7A12 12 0 0 1 225.8 466.7Z" fill="#1f2328"/><path d="M201.8 466.7H230.8" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/><rect x="221.8" y="458.7" width="5" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/></g>
 <path d="M36 570H228" stroke="#6e7781" stroke-width="2.5"/>
 <text x="244" y="490" font-size="20" font-weight="700" fill="#1f2328">Tertiaire</text>
-<text x="244" y="518" font-size="19" fill="#4b535c">sur les effets</text>
+<text x="244" y="518" font-size="19" fill="#4b535c">sur les conséquences</text>
 <text x="244" y="546" font-size="19" font-weight="600" fill="#1565c0">PAE, plan de</text>
 <text x="244" y="570" font-size="19" font-weight="600" fill="#1565c0">retour au travail</text>
-<!-- Chaîne du stress (rouge) : l’horaire pèse sur le mineur, puis les effets s’installent -->
-<path d="M104 240C104 254 100 266 95 276" stroke="#c62828" stroke-width="4" fill="none" stroke-linecap="round"/>
-<path d="M91 290L103.4 277.1L88.1 272.3Z" fill="#c62828"/>
-<path d="M132 420C132 440 126 456 118 468" stroke="#c62828" stroke-width="4" fill="none" stroke-linecap="round"/>
-<path d="M112 480L126.3 469.3L112 462.1Z" fill="#c62828"/>
 <text x="24" y="614" font-size="19" fill="#4b535c">Sans le primaire,</text>
 <text x="24" y="638" font-size="19" fill="#4b535c">le problème n’est pas réglé.</text>
+</g>
 </g>
 </svg>
