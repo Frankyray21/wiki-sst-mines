@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="612" viewBox="0 0 480 612" role="img" aria-labelledby="t d">
+<title id="t">Dormir au camp : ce qui nuit, les leviers d’aménagement et les transitions de quart</title>
+<desc id="d">Deux chambres de camp côte à côte. À gauche, sur fond rouge pâle, ce qui nuit : chambre partagée, un compagnon de chambre debout près de son lit fait du bruit (ondes rouges) près du travailleur qui dort ; résultat : difficulté à dormir. À droite, sur fond bleu pâle, les leviers d’aménagement nommés par la page : chambre calme, rideau opaque sur la fenêtre, climatiseur, mur doublé d’une isolation phonique, ondes de bruit dessinées à l’extérieur. En bas, les transitions de quart, trois dessins reliés par des flèches : sieste avant le premier quart de nuit, le premier quart de nuit (mineur casqué sous la lune), puis pause après le quart. Aucune heure, durée ni garantie d’effet.</desc>
+<rect width="480" height="612" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Dormir au camp :</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">ce qui nuit, les leviers</text>
+<rect x="16" y="96" width="220" height="322" rx="12" fill="#fde3e0"/>
+<rect x="244" y="96" width="220" height="322" rx="12" fill="#e1ecfa"/>
+<text x="28" y="124" font-size="20" font-weight="700" fill="#c62828">ce qui nuit</text>
+<text x="256" y="124" font-size="20" font-weight="700" fill="#1565c0">leviers</text>
+<!-- Page : « difficulté à dormir en camp à cause du bruit et du partage des chambres » ; « sommeil de jour fractionné et de moindre qualité » -->
+<rect x="30" y="138" width="192" height="130" fill="#fbfaf6" stroke="#6e7781" stroke-width="3"/>
+<rect x="38" y="156" width="6" height="36" rx="2" fill="#6e7781"/><rect x="44" y="176" width="92" height="10" rx="2" fill="#6e7781"/><rect x="130" y="186" width="5" height="6" fill="#6e7781"/><rect x="47" y="169" width="22" height="7" rx="3" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<rect x="38" y="230" width="6" height="36" rx="2" fill="#6e7781"/><rect x="44" y="250" width="92" height="10" rx="2" fill="#6e7781"/><rect x="130" y="260" width="5" height="6" fill="#6e7781"/><rect x="47" y="243" width="22" height="7" rx="3" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="translate(111 238) rotate(-90)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/></g>
+<g transform="translate(196 266) rotate(0)"><circle cx="0" cy="-53" r="9" fill="#4b535c"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#4b535c"/></g>
+<g fill="none" stroke="#c62828" stroke-width="3" stroke-linecap="round"><path d="M169.0 204A6 6 0 0 0 169.0 216"/><path d="M166.0 198A12 12 0 0 0 166.0 222"/><path d="M163.0 192A18 18 0 0 0 163.0 228"/></g>
+<g font-size="19" fill="#1f2328">
+<text x="30" y="298">bruit</text><text x="30" y="322">chambre partagée</text></g>
+<text x="30" y="370" font-size="20" font-weight="700" fill="#c62828">difficulté</text><text x="30" y="394" font-size="20" font-weight="700" fill="#c62828">à dormir</text>
+<!-- Page : « chambres calmes avec rideaux opaques et climatisation » ; « occultation et isolation phonique du camp » -->
+<rect x="258" y="138" width="170" height="130" fill="#fbfaf6" stroke="#6e7781" stroke-width="3"/>
+<rect x="426" y="138" width="10" height="130" fill="#6e7781"/>
+<g stroke="#fbfaf6" stroke-width="2.5"><path d="M426 150L436 140M426 166L436 156M426 182L436 172M426 198L436 188M426 214L436 204M426 230L436 220M426 246L436 236M426 262L436 252"/></g>
+<g fill="none" stroke="#c62828" stroke-width="3" stroke-dasharray="5 4" stroke-linecap="round"><path d="M455.0 208A6 6 0 0 0 455.0 220"/><path d="M452.0 202A12 12 0 0 0 452.0 226"/></g>
+<path d="M264 148H332" stroke="#4b535c" stroke-width="3" stroke-linecap="round"/>
+<rect x="270" y="150" width="56" height="48" fill="#4b535c"/>
+<g stroke="#6e7781" stroke-width="2.5"><path d="M284 152V196M298 152V196M312 152V196"/></g>
+<rect x="350" y="150" width="62" height="22" rx="3" fill="#fbfaf6" stroke="#1565c0" stroke-width="2.5"/>
+<path d="M356 166H406" stroke="#1565c0" stroke-width="2.5"/>
+<g fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linecap="round"><path d="M362 178q-4 6 0 12t0 12M381 178q-4 6 0 12t0 12M400 178q-4 6 0 12t0 12"/></g>
+<rect x="266" y="230" width="6" height="36" rx="2" fill="#6e7781"/><rect x="272" y="250" width="92" height="10" rx="2" fill="#6e7781"/><rect x="358" y="260" width="5" height="6" fill="#6e7781"/><rect x="275" y="243" width="22" height="7" rx="3" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="translate(339 238) rotate(-90)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/></g>
+<g font-size="19" fill="#1f2328">
+<text x="258" y="298">chambres calmes</text><text x="258" y="322">rideaux opaques</text><text x="258" y="346">climatisation</text><text x="258" y="370">isolation phonique</text></g>
+<!-- Page : « Transitions de quart : sieste avant le premier quart de nuit et pause après le quart » -->
+<text x="24" y="450" font-size="20" font-weight="700" fill="#1f2328">Transitions de quart</text>
+<rect x="40" y="506" width="6" height="36" rx="2" fill="#6e7781"/><rect x="46" y="526" width="92" height="10" rx="2" fill="#6e7781"/><rect x="132" y="536" width="5" height="6" fill="#6e7781"/><rect x="49" y="519" width="22" height="7" rx="3" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<g transform="translate(113 514) rotate(-90)"><circle cx="0" cy="-53" r="9" fill="#1565c0"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1565c0"/></g>
+<g fill="#1565c0" font-weight="700"><text x="116" y="500" font-size="18">z</text><text x="130" y="486" font-size="20">z</text></g>
+<g stroke="#6e7781" stroke-width="3"><path d="M158 510H182"/><path d="M306 510H330"/></g><path d="M192 510L180 503V517Z" fill="#6e7781"/><path d="M340 510L328 503V517Z" fill="#6e7781"/>
+<g transform="translate(236 540) rotate(0)"><circle cx="0" cy="-53" r="9" fill="#1f2328"/><path d="M-11 -24V-33Q-11 -42 -2.5 -42H2.5Q11 -42 11 -33V-24H8V0H1V-15H-1V0H-8V-24Z" fill="#1f2328"/><g transform="translate(0 -57)"><path d="M-10.5 3C-10.5 -5.5 -5.5 -10.5 0 -10.5C5.5 -10.5 10.5 -5.5 10.5 3Z" fill="#1f2328"/><rect x="-14" y="2" width="28" height="4.5" rx="2.25" fill="#1f2328"/><rect x="-3.5" y="-6" width="7" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/></g></g>
+<circle cx="276" cy="480" r="10" fill="#4b535c"/><circle cx="282" cy="476" r="9" fill="#fbfaf6"/>
+<circle cx="394" cy="508" r="26" fill="#e1ecfa" stroke="#1565c0" stroke-width="3"/>
+<rect x="383" y="495" width="7" height="26" rx="1.5" fill="#1565c0"/><rect x="398" y="495" width="7" height="26" rx="1.5" fill="#1565c0"/>
+<g font-size="19" text-anchor="middle">
+<text x="92" y="570" font-weight="700" fill="#1565c0">sieste avant</text>
+<text x="244" y="570" fill="#1f2328">premier quart</text><text x="244" y="594" fill="#1f2328">de nuit</text>
+<text x="394" y="570" font-weight="700" fill="#1565c0">pause après</text></g>
+</g>
+</svg>

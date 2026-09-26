@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="530" viewBox="0 0 480 530" role="img" aria-labelledby="t d">
+<title id="t">Communication et relations</title>
+<desc id="d">Dans chaque rangée, la case grise à gauche montre la situation « d’habitude », la case encadrée à droite, après une flèche, la situation « maintenant » ; l’étiquette au-dessus reprend les mots exacts du tableau de la page. Repli, isolement à la cantine ou en pause : d’habitude, trois personnes se parlent à la même table ; maintenant, deux sont à la table et la troisième est seule à une autre table. Baisse des interactions spontanées : d’habitude, le travailleur et son collègue (en gris) se parlent tous les deux ; maintenant, seul le collègue parle (moins de discussions, moins de présence). Conflits inhabituels avec collègues : d’habitude, un échange calme ; maintenant, les deux tendent le bras l’un vers l’autre sous une bulle rouge en dents de scie (tension qui apparaît).</desc>
+<rect width="480" height="530" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Communication et relations</text>
+<text x="117.0" y="80" font-size="20" font-weight="700" fill="#4b535c" text-anchor="middle">d’habitude</text>
+<text x="363.0" y="80" font-size="20" font-weight="700" fill="#1f2328" text-anchor="middle">maintenant</text>
+<path d="M187.0 73H279.0" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M291.0 73L277.0 64V82Z" fill="#1f2328"/>
+<!-- Repli, isolement à la cantine ou en pause -->
+<text x="18" y="112" font-size="20" fill="#1f2328">Repli, isolement à la cantine ou en pause</text>
+<rect x="16" y="122" width="202" height="106" rx="10" fill="#eceef0"/>
+<rect x="262" y="122" width="202" height="106" rx="10" fill="#eceef0" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M224 175.0H245" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M257 175.0L243 166.0V184.0Z" fill="#1f2328"/>
+<rect x="30" y="202" width="174" height="9" rx="3" fill="#1f2328"/>
+<g fill="#1f2328" transform="translate(62 202) scale(1.55)">
+<path d="M-12 0V-11Q-12 -21 -3 -21H3Q12 -21 12 -11V0Z"/>
+<circle cx="0" cy="-29" r="7.5"/>
+</g>
+<g fill="#1f2328" transform="translate(117 202) scale(1.55)">
+<path d="M-12 0V-11Q-12 -21 -3 -21H3Q12 -21 12 -11V0Z"/>
+<circle cx="0" cy="-29" r="7.5"/>
+</g>
+<g fill="#1f2328" transform="translate(172 202) scale(1.55)">
+<path d="M-12 0V-11Q-12 -21 -3 -21H3Q12 -21 12 -11V0Z"/>
+<circle cx="0" cy="-29" r="7.5"/>
+</g>
+<rect x="74" y="128" width="40" height="24" rx="9" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<path d="M82 150.5L78 161L93 150.5" fill="#fbfaf6" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<path d="M83.5 150.5H91.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M84 136.0H104M84 144.0H96" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="272" y="202" width="118" height="9" rx="3" fill="#1f2328"/>
+<g fill="#1f2328" transform="translate(302 202) scale(1.55)">
+<path d="M-12 0V-11Q-12 -21 -3 -21H3Q12 -21 12 -11V0Z"/>
+<circle cx="0" cy="-29" r="7.5"/>
+</g>
+<g fill="#1f2328" transform="translate(358 202) scale(1.55)">
+<path d="M-12 0V-11Q-12 -21 -3 -21H3Q12 -21 12 -11V0Z"/>
+<circle cx="0" cy="-29" r="7.5"/>
+</g>
+<rect x="314" y="128" width="40" height="24" rx="9" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<path d="M322 150.5L318 161L333 150.5" fill="#fbfaf6" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<path d="M323.5 150.5H331.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M324 136.0H344M324 144.0H336" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<rect x="412" y="202" width="44" height="9" rx="3" fill="#1f2328"/>
+<g fill="#1f2328" transform="translate(434 202) scale(1.55)">
+<path d="M-12 0V-11Q-12 -21 -3 -21H3Q12 -21 12 -11V0Z"/>
+<circle cx="0" cy="-29" r="7.5"/>
+</g>
+<!-- Baisse des interactions spontanées -->
+<text x="18" y="252" font-size="20" fill="#1f2328">Baisse des interactions spontanées</text>
+<rect x="16" y="262" width="202" height="106" rx="10" fill="#eceef0"/>
+<rect x="262" y="262" width="202" height="106" rx="10" fill="#eceef0" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M224 315.0H245" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M257 315.0L243 306.0V324.0Z" fill="#1f2328"/>
+<g fill="#1f2328" transform="translate(74 359) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<g fill="#4b535c" transform="translate(162 359) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#4b535c" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#4b535c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<rect x="176" y="268" width="36" height="24" rx="9" fill="#fbfaf6" stroke="#4b535c" stroke-width="3"/>
+<path d="M184 290.5L180 301L195 290.5" fill="#fbfaf6" stroke="#4b535c" stroke-width="3" stroke-linejoin="round"/>
+<path d="M185.5 290.5H193.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M186 276.0H202M186 284.0H194" stroke="#4b535c" stroke-width="3" stroke-linecap="round"/>
+<rect x="22" y="268" width="36" height="24" rx="9" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<path d="M50 290.5L54 301L39 290.5" fill="#fbfaf6" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<path d="M48.5 290.5H40.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M32 276.0H48M32 284.0H40" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<g fill="#1f2328" transform="translate(320 359) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<g fill="#4b535c" transform="translate(408 359) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#4b535c" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#4b535c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<rect x="422" y="268" width="36" height="24" rx="9" fill="#fbfaf6" stroke="#4b535c" stroke-width="3"/>
+<path d="M430 290.5L426 301L441 290.5" fill="#fbfaf6" stroke="#4b535c" stroke-width="3" stroke-linejoin="round"/>
+<path d="M431.5 290.5H439.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M432 276.0H448M432 284.0H440" stroke="#4b535c" stroke-width="3" stroke-linecap="round"/>
+<!-- Conflits inhabituels avec collègues -->
+<text x="18" y="392" font-size="20" fill="#1f2328">Conflits inhabituels avec collègues</text>
+<rect x="16" y="402" width="202" height="106" rx="10" fill="#eceef0"/>
+<rect x="262" y="402" width="202" height="106" rx="10" fill="#eceef0" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M224 455.0H245" stroke="#1f2328" stroke-width="5" stroke-linecap="round"/>
+<path d="M257 455.0L243 446.0V464.0Z" fill="#1f2328"/>
+<g fill="#1f2328" transform="translate(80 499) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<g fill="#4b535c" transform="translate(154 499) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#4b535c" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -75L22 -48" stroke="#4b535c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<rect x="96" y="404" width="40" height="24" rx="9" fill="#fbfaf6" stroke="#1f2328" stroke-width="3"/>
+<path d="M104 426.5L100 437L115 426.5" fill="#fbfaf6" stroke="#1f2328" stroke-width="3" stroke-linejoin="round"/>
+<path d="M105.5 426.5H113.5" stroke="#fbfaf6" stroke-width="3.5"/>
+<path d="M106 412.0H126M106 420.0H118" stroke="#1f2328" stroke-width="3" stroke-linecap="round"/>
+<g fill="#1f2328" transform="translate(312 499) scale(0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#1f2328" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -76L36 -84" stroke="#1f2328" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<g fill="#4b535c" transform="translate(414 499) scale(-0.66 0.66)">
+<rect x="-12" y="-45" width="10" height="45" rx="4"/>
+<rect x="2" y="-45" width="10" height="45" rx="4"/>
+<g>
+<g transform="translate(0 0)">
+<circle cx="0" cy="-95" r="11"/>
+<path d="M-15 -98Q-15 -118 0 -118Q15 -118 15 -98Z"/>
+<path d="M-17 -98H17" stroke="#4b535c" stroke-width="7" stroke-linecap="round"/>
+<rect x="-4.5" y="-113" width="9" height="7" rx="2" fill="#fbfaf6"/>
+</g>
+<path d="M-13 -77Q-13 -82 -8 -82H8Q13 -82 13 -77V-41H-13Z"/>
+<path d="M-13 -75L-22 -48M13 -76L36 -84" stroke="#4b535c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</g>
+</g>
+<path d="M387.0 424.0L379.4 427.3L383.8 433.0L375.0 433.0L375.0 439.6L367.4 436.3L363.0 442.0L358.6 436.3L351.0 439.6L351.0 433.0L342.2 433.0L346.6 427.3L339.0 424.0L346.6 420.7L342.2 415.0L351.0 415.0L351.0 408.4L358.6 411.7L363.0 406.0L367.4 411.7L375.0 408.4L375.0 415.0L383.8 415.0L379.4 420.7Z" fill="#fde3e0" stroke="#c62828" stroke-width="3" stroke-linejoin="round"/>
+<path d="M356 422L362 427L364 421L370 426" fill="none" stroke="#c62828" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

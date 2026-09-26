@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-26",
+ "revision": "2026-09-26-programme-daide-aux-employes-pae-schemas",
+ "portee": "Schémas de la page w/psychosocial/programme-daide-aux-employes-pae.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Programme d'aide aux employés (PAE)",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/programme-daide-aux-employes-pae.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-programme-daide-aux-employes-pae-confidentialite-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-programme-daide-aux-employes-pae-limites-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Pour un superviseur en mine : c'est un outil que tu peux proposer sans avoir à connaître les détails de la situation du travailleur. C'est aussi un moyen d'aider sans franchir la limite de ton rôle.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-programme-daide-aux-employes-pae-confidentialite-v1.svg|Une zone bleue « principe : confidentialité totale » entoure le travailleur, sa famille et le professionnel du PAE, que le travailleur contacte directement, sans autorisation de l’employeur. Hors de la zone, l’employeur paie et reçoit des statistiques agrégées, mais sa flèche bute sur un cadenas : ni contenu, ni identité ; un superviseur propose le PAE ; aucune trace dans le dossier d’employé.]]\n\n<p class=\"infographie-legende\">Principe décrit par cette page : le travailleur contacte directement le PAE, sans autorisation de l’employeur ; l’employeur paie le service global et reçoit des rapports statistiques agrégés, sans accès au contenu des consultations ni à l’identité des utilisateurs. La page nuance : en petit camp ou petite équipe, un long appel personnel peut être remarqué, d’où la nécessité d’un espace privé.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Dans la zone bleue en pointillés, « principe : confidentialité totale » : à gauche, un travailleur casqué et deux membres de sa famille (le PAE est offert aux travailleurs et souvent à leur conjoint et enfants) ; à droite, le professionnel du PAE, généralement d’un fournisseur externe (psychologue, travailleur social, conseiller financier ou juridique).</li>\n<li>Une flèche bleue va du travailleur au PAE : il le contacte directement, sans autorisation de l’employeur.</li>\n<li>Sous la zone, l’employeur : une flèche bleue montre qu’il paie le service global ; une flèche grise, avec une feuille de barres sans valeur, lui rapporte des statistiques agrégées (nombre d’utilisations, types de services).</li>\n<li>Une flèche rouge part de l’employeur vers la zone et bute sur un cadenas : ni contenu des consultations, ni identité des utilisateurs. En bas : aucune trace dans le dossier d’employé.</li>\n<li>À gauche, hors de la zone, un superviseur : une flèche en pointillés vers le travailleur ; il propose le PAE sans avoir à connaître les détails de la situation, et sans franchir la limite de son rôle.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page (Définition, Comment ça fonctionne, Application en mines, Comment référer un travailleur). Voir aussi {{lien:w/psychosocial/coordination-avec-le-medecin-traitant-et-le-pae.html|Coordination avec le médecin traitant et le PAE}} et {{lien:w/psychosocial/lignes-daide-et-pae.html|Lignes d’aide et ressources de soutien}}. Schéma de principe : la feuille de barres ne porte aucune valeur.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-programme-daide-aux-employes-pae-confidentialite-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Travailleur qui « épuise » ses séances PAE en 2 mois → besoin de soutien clinique soutenu, référence vers RAMQ ou assurance",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-programme-daide-aux-employes-pae-limites-v1.svg|Des conditions de travail en cadre rouge (surcharge, harcèlement, job strain) pèsent sur une équipe de quatre mineurs ; chacun porte un pansement bleu, le PAE, centré sur l’individu. Quand plusieurs consultent, une enquête organisationnelle mène, par une flèche bleue, à la prévention primaire : corriger à la source.]]\n\n<p class=\"infographie-legende\">Le PAE intervient quand le problème individuel est déjà installé et ne change rien aux conditions de travail qui y ont contribué. Selon cette page, quand une équipe entière l’utilise pour des raisons liées au travail, le problème est organisationnel ; dès que plusieurs travailleurs d’une même équipe consultent, une enquête organisationnelle est requise, et l’employeur reste tenu à la prévention primaire.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>En haut, un cadre rouge, « conditions de travail », avec trois exemples nommés par la page : surcharge, harcèlement, job strain. Des flèches rouges descendent vers une équipe.</li>\n<li>Quatre mineurs de la même équipe portent chacun un pansement bleu : le PAE, centré sur l’individu. Le cadre rouge, au-dessus, reste le même : le PAE ne change rien aux conditions de travail qui ont contribué au problème.</li>\n<li>Sous l’équipe, une flèche « plusieurs consultent » mène à un bloc bleu, « enquête organisationnelle » : selon la page, quand plusieurs travailleurs d’une même équipe consultent, une enquête organisationnelle est requise ; si c’est une équipe entière, pour des raisons liées au travail, le problème est organisationnel, pas individuel.</li>\n<li>De ce bloc, une grande flèche bleue remonte à gauche jusqu’au cadre rouge : prévention primaire, corriger à la source. Selon la page, le PAE ne dispense pas l’employeur des obligations de prévention primaire (identifier et corriger les risques psychosociaux à la source).</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page (Limites du PAE, Cadre légal). Voir aussi {{lien:w/psychosocial/les-trois-niveaux-de-prevention.html|Les trois niveaux de prévention}} et {{lien:w/psychosocial/intervention-organisationnelle-vs-individuelle.html|Intervention organisationnelle vs individuelle}}. Schéma de principe : le nombre de travailleurs dessinés n’est pas un seuil.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-programme-daide-aux-employes-pae-limites-v1.svg"
+  }
+ ]
+}

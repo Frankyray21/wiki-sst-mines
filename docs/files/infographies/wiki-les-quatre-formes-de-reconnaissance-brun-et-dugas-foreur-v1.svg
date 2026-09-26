@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="652" viewBox="0 0 480 652" role="img" aria-labelledby="t d">
+<title id="t">Quatre formes de reconnaissance au travail (Brun et Dugas)</title>
+<desc id="d">Un foreur casqué pousse sa foreuse contre un front de roche déjà percé de trous. Quatre étiquettes montrent ce que chaque forme reconnaît chez ce même travailleur : « Existentielle, la personne, son humanité » pointe vers le travailleur lui-même ; « Pratique, le comment » pointe vers ses mains sur la foreuse, sa manière de travailler ; « Investissement, l’effort, l’engagement » pointe vers une flèche bleue de poussée, avec des gouttes de sueur ; « Résultats, le quoi, ce qui est livré » pointe vers le front percé de trous, ce que le foreur a livré. En bas : beaucoup d’organisations se concentrent sur une seule forme ; dans une rangée de quatre cases, personne, pratique, effort et résultats, seule la case résultats est pleine ; les trois autres, en pointillés rouges, sont oubliées : besoins non satisfaits.</desc>
+<rect width="480" height="652" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Quatre formes</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">de reconnaissance</text>
+<text x="24" y="108" font-size="19" fill="#4b535c">Ce que chacune reconnaît (Brun et Dugas)</text>
+<!-- Scène : un foreur et son propre travail (page : « un foreur », « un aide-foreur qui se forme pour devenir foreur ») -->
+<path d="M24 410H456" stroke="#6e7781" stroke-width="2.5"/>
+<!-- Front de roche percé : la volée forée, ce que le foreur livre -->
+<path d="M364 196H456V410H358L366 360L356 318L364 270L358 232Z" fill="#eceef0" stroke="#6e7781" stroke-width="2.5" stroke-linejoin="round"/>
+<g fill="#4b535c"><circle cx="386" cy="224" r="6"/><circle cx="412" cy="218" r="6"/><circle cx="440" cy="226" r="6"/><circle cx="388" cy="258" r="6"/><circle cx="440" cy="262" r="6"/><circle cx="412" cy="292" r="6"/><circle cx="388" cy="330" r="6"/><circle cx="440" cy="326" r="6"/><circle cx="412" cy="356" r="6"/><circle cx="386" cy="384" r="6"/><circle cx="440" cy="384" r="6"/></g>
+<!-- Foreuse : corps, fleuret, béquille -->
+<path d="M312 304L296 408" stroke="#6e7781" stroke-width="6" stroke-linecap="round"/>
+<path d="M336 297H363" stroke="#4b535c" stroke-width="4" stroke-linecap="round"/>
+<rect x="280" y="289" width="60" height="16" rx="3" fill="#4b535c"/>
+<!-- Travailleur penché vers l’avant, face au front -->
+<g fill="none" stroke="#1f2328" stroke-linecap="round" stroke-linejoin="round">
+<path d="M210 406H228" stroke-width="7.8"/>
+<path d="M218 404L222 372" stroke-width="11.7"/>
+<path d="M222 372L236 334" stroke-width="13"/>
+<path d="M262 406H280" stroke-width="7.8"/>
+<path d="M266 404L256 368" stroke-width="11.7"/>
+<path d="M256 368L236 334" stroke-width="13"/>
+<path d="M236 334L252 286" stroke-width="19.5"/>
+<path d="M252 286L258 270" stroke-width="9.1"/>
+<circle cx="261" cy="258" r="11.7" fill="#1f2328" stroke="none"/>
+<path d="M250 292L264 314L290 302" stroke="#fbfaf6" stroke-width="15"/>
+<path d="M250 292L264 314L290 302" stroke="#1f2328" stroke-width="9.8"/>
+<path d="M250 290L276 296L308 296" stroke="#fbfaf6" stroke-width="15"/>
+<path d="M250 290L276 296L308 296" stroke="#1f2328" stroke-width="9.8"/>
+</g>
+<path d="M249 257A12 12 0 0 1 273 257Z" fill="#1f2328"/>
+<path d="M245 257H278" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<rect x="266" y="249" width="5" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<!-- Investissement : poussée et sueur (page : « l’effort, l’engagement, la persévérance ») -->
+<path d="M174 299H200V290L218 306L200 322V313H174Z" fill="#1565c0"/>
+<path d="M230 256Q224 266 230 270Q236 266 230 256Z" fill="#1565c0"/>
+<path d="M218 272Q212 282 218 286Q224 282 218 272Z" fill="#1565c0"/>
+<!-- Renvois : chaque étiquette pointe vers ce que la forme reconnaît -->
+<g stroke="#6e7781" stroke-width="2.5" stroke-linecap="round"><path d="M240 186L252 242"/><path d="M340 186L306 284"/><path d="M130 262L170 302"/><path d="M426 424L426 394"/></g>
+<g fill="#6e7781"><circle cx="252" cy="242" r="4"/><circle cx="306" cy="284" r="4"/><circle cx="170" cy="302" r="4"/><circle cx="426" cy="394" r="4"/></g>
+<!-- Étiquettes (mots du tableau « Les quatre formes ») -->
+<text x="24" y="150" font-size="20" font-weight="700" fill="#1f2328">Existentielle</text>
+<text x="24" y="174" font-size="19" fill="#4b535c">la personne, son humanité</text>
+<text x="456" y="150" font-size="20" font-weight="700" fill="#1f2328" text-anchor="end">Pratique</text>
+<text x="456" y="174" font-size="19" fill="#4b535c" text-anchor="end">le «&#160;comment&#160;»</text>
+<text x="24" y="226" font-size="20" font-weight="700" fill="#1f2328">Investissement</text>
+<text x="24" y="250" font-size="19" fill="#4b535c">l’effort, l’engagement</text>
+<text x="456" y="444" font-size="20" font-weight="700" fill="#1f2328" text-anchor="end">Résultats</text>
+<text x="456" y="468" font-size="19" fill="#4b535c" text-anchor="end">le «&#160;quoi&#160;», ce qui est livré</text>
+<!-- Piège (page : « Beaucoup d’organisations se concentrent sur une seule (les résultats) et oublient les autres ») -->
+<text x="24" y="510" font-size="20" font-weight="700" fill="#1f2328">Beaucoup d’organisations</text>
+<text x="24" y="534" font-size="19" fill="#4b535c">se concentrent sur une seule</text>
+<g font-size="19" text-anchor="middle">
+<rect x="24" y="552" width="105" height="40" rx="6" fill="#fbfaf6" stroke="#c62828" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="76.5" y="578" fill="#c62828">personne</text>
+<rect x="133" y="552" width="105" height="40" rx="6" fill="#fbfaf6" stroke="#c62828" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="185.5" y="578" fill="#c62828">pratique</text>
+<rect x="242" y="552" width="105" height="40" rx="6" fill="#fbfaf6" stroke="#c62828" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="294.5" y="578" fill="#c62828">effort</text>
+<rect x="351" y="552" width="105" height="40" rx="6" fill="#1f2328"/>
+<text x="403.5" y="578" fill="#fbfaf6" font-weight="700">résultats</text>
+</g>
+<path d="M26 602V610H345V602M185.5 610V616" stroke="#c62828" stroke-width="2.5" fill="none"/>
+<text x="24" y="640" font-size="19" font-weight="700" fill="#c62828">oubliées&#160;: besoins non satisfaits</text>
+</g>
+</svg>

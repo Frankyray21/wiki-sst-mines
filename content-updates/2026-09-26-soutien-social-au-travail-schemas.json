@@ -1,0 +1,26 @@
+{
+ "date": "2026-09-26",
+ "revision": "2026-09-26-soutien-social-au-travail-schemas",
+ "portee": "Schémas de la page w/psychosocial/soutien-social-au-travail.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Soutien social au travail",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/soutien-social-au-travail.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-soutien-social-au-travail-sources-formes-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Question de repérage proposée : lorsqu'une personne demande de l'aide, reçoit-elle une réponse utilisable ? La présence d'un nom dans un organigramme ne répond pas, à elle seule, à cette question.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema\">\n\n![[Infographies/wiki-soutien-social-au-travail-sources-formes-v1.svg|À gauche, deux sources de soutien : du supérieur partent trois flèches bleues, une par forme d’aide (opérationnelle : ressource, outil, renfort ; informationnelle : consigne claire, conseil pertinent ; émotionnelle : écoute respectueuse) ; des collègues part une flèche « coopération » (partage d’expérience, entraide, discuter du travail). Toutes aboutissent à un travailleur qui lève la main pour demander de l’aide ; en bas, la question : reçoit-il une réponse utilisable ?]]\n\n<p class=\"infographie-legende\">Le supérieur et les collègues sont deux sources de soutien à examiner. Les trois formes d’aide viennent de la fiche de l’INSPQ sur le soutien du supérieur immédiat ; pour les collègues, la page décrit une coopération quotidienne.</p>\n\n<details class=\"infographie-texte\">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>À gauche, les deux sources de soutien que l’INSPQ distingue et que la page invite à examiner toutes les deux : en haut, le supérieur (casqué, avec une planchette) ; en bas, deux collègues casqués.</li>\n<li>Du supérieur partent trois flèches, une par forme d’aide du tableau de la page : opérationnelle (clé, pour obtenir une ressource, un outil ou un renfort), informationnelle (bulle, pour recevoir une consigne claire ou un conseil pertinent) et émotionnelle (oreille, pour être écouté avec respect). La page tire ces formes de la fiche de l’INSPQ sur le soutien du supérieur immédiat, qui décrit ses formes d’aide.</li>\n<li>Des collègues part une flèche « coopération » : la page parle d’une coopération quotidienne faite de partage d’expérience, d’entraide et d’un espace pour discuter du travail. Le dessin n’affirme pas que les collègues n’apportent aucune des trois formes d’aide ; il suit seulement ce que la page attribue à chaque source.</li>\n<li>À droite, toutes les flèches aboutissent à un travailleur casqué qui lève la main, une bulle « ? » au-dessus de la tête : il demande de l’aide.</li>\n<li>En bas, la question de repérage proposée par la page : lorsqu’une personne demande de l’aide, reçoit-elle une réponse utilisable ? La présence d’un nom dans un organigramme ne répond pas, à elle seule, à cette question. Les formes d’aide ne constituent pas une échelle de mesure.</li>\n</ul>\n</details>\n<p class=\"infographie-sources\">D’après cette page (Définition, Une aide adaptée au besoin, Sources de soutien) et ses références : INSPQ, <a href=\"https://www.inspq.qc.ca/recueil-de-fiches-portant-sur-les-indicateurs-de-la-grille-d-identification-de-risques-psychosociaux-du-travail/composantes-cles-de-l-organisation-du-travail/fiche-2-c-indicateur-soutien-social-du-superieur-immediat\">Fiche 2-C : Soutien social du supérieur immédiat</a> ; INSPQ, <a href=\"https://www.inspq.qc.ca/recueil-de-fiches-portant-sur-les-indicateurs-de-la-grille-d-identification-de-risques-psychosociaux-du-travail/composantes-cles-de-l-organisation-du-travail/fiche-2-d-indicateur-soutien-social-des-collegues\">Fiche 2-D : Soutien social des collègues</a>. Schéma de principe : ni mesure ni classement des formes d’aide.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-soutien-social-au-travail-sources-formes-v1.svg"
+  }
+ ]
+}

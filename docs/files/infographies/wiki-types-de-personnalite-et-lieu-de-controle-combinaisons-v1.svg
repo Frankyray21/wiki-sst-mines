@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="626" viewBox="0 0 480 626" role="img" aria-labelledby="t d">
+<title id="t">Type de personnalité et lieu de contrôle : quatre combinaisons, dans un même contexte de travail</title>
+<desc id="d">Grille de quatre cases posée à l’intérieur d’un grand cadre gris, les conditions de travail : le contexte produit le risque, l’individu le filtre. En colonnes, le lieu de contrôle, c’est-à-dire à quoi le travailleur attribue ce qui lui arrive : interne, « Je peux agir sur ma situation », dessiné par une flèche qui part du travailleur casqué vers un levier ; externe, « Ce qui m’arrive dépend des autres ou du hasard », dessiné par deux flèches qui arrivent vers lui, l’une depuis un dé, l’autre depuis une autre personne. En lignes, le type de personnalité : type A, pressé et impatient, marqué d’un chronomètre ; type B, détendu et patient. Chaque case combine les deux ; les quatre cases ont la même couleur, aucune n’est marquée comme dangereuse ou protectrice. Sous la colonne externe, en bleu : réaliste quand le poste offre peu de contrôle. En bas à gauche : aucun travailleur n’est à risque ou protégé en soi.</desc>
+<rect width="480" height="626" fill="#fbfaf6"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" fill="#1f2328" font-weight="700">Type de personnalité</text>
+<text x="24" y="78" font-size="26" fill="#1f2328" font-weight="700">et lieu de contrôle</text>
+<rect x="16" y="96" width="448" height="514" rx="12" fill="#eceef0"/>
+<g stroke="#1f2328" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M26 146H54M31 146L37 114H43L49 146M34 131H46M33 139L45 124"/><circle cx="40" cy="110" r="6" fill="#fbfaf6"/></g>
+<text x="62" y="124" font-size="20" fill="#1f2328" font-weight="700">Conditions de travail</text>
+<text x="62" y="148" font-size="19" fill="#c62828">le contexte produit le risque,</text>
+<text x="62" y="171" font-size="19" fill="#4b535c">l’individu le filtre</text>
+<text x="290" y="198" font-size="19" fill="#4b535c" text-anchor="middle">Lieu de contrôle</text>
+<path d="M132 205H448" stroke="#6e7781" stroke-width="2.5"/>
+<text x="207" y="226" font-size="20" fill="#1f2328" font-weight="700" text-anchor="middle">Interne</text>
+<text x="207" y="249" font-size="19" fill="#4b535c" text-anchor="middle">« Je peux</text>
+<text x="207" y="271" font-size="19" fill="#4b535c" text-anchor="middle">agir sur ma</text>
+<text x="207" y="293" font-size="19" fill="#4b535c" text-anchor="middle">situation »</text>
+<text x="372" y="226" font-size="20" fill="#1f2328" font-weight="700" text-anchor="middle">Externe</text>
+<text x="368" y="249" font-size="19" fill="#4b535c" text-anchor="middle">« Ce qui m’arrive</text>
+<text x="368" y="271" font-size="19" fill="#4b535c" text-anchor="middle">dépend des autres</text>
+<text x="368" y="293" font-size="19" fill="#4b535c" text-anchor="middle">ou du hasard »</text>
+<rect x="37" y="309" width="6" height="5" rx="1" fill="#1f2328"/>
+<circle cx="40" cy="324" r="9" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M40 324V318M40 324L45 326" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<text x="28" y="358" font-size="20" fill="#1f2328" font-weight="700">Type A</text>
+<text x="28" y="380" font-size="19" fill="#4b535c">pressé,</text>
+<text x="28" y="401" font-size="19" fill="#4b535c">impatient</text>
+<text x="28" y="468" font-size="20" fill="#1f2328" font-weight="700">Type B</text>
+<text x="28" y="490" font-size="19" fill="#4b535c">détendu,</text>
+<text x="28" y="511" font-size="19" fill="#4b535c">patient</text>
+<rect x="128" y="302" width="159" height="104" rx="6" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M148 378Q148 362 165 362Q182 362 182 378Z" fill="#1f2328"/>
+<circle cx="165" cy="348" r="10" fill="#1f2328"/>
+<path d="M153 346A12 12 0 0 1 177 346Z" fill="#1f2328" stroke="#fbfaf6" stroke-width="1.5"/>
+<path d="M150 346H178" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<rect x="162" y="338" width="6" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M185 352H224" stroke="#4b535c" stroke-width="4" stroke-linecap="round"/>
+<path d="M233 352L222 345L222 359Z" fill="#4b535c"/>
+<path d="M251 374L263 348" stroke="#4b535c" stroke-width="4" stroke-linecap="round"/>
+<circle cx="263" cy="348" r="5.5" fill="#4b535c"/>
+<path d="M237 378A14 10 0 0 1 265 378Z" fill="#4b535c"/>
+<rect x="184" y="310" width="6" height="5" rx="1" fill="#1f2328"/>
+<circle cx="187" cy="324" r="8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M187 324V319M187 324L191 326" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="293" y="302" width="159" height="104" rx="6" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M355 378Q355 362 372 362Q389 362 389 378Z" fill="#1f2328"/>
+<circle cx="372" cy="348" r="10" fill="#1f2328"/>
+<path d="M360 346A12 12 0 0 1 384 346Z" fill="#1f2328" stroke="#fbfaf6" stroke-width="1.5"/>
+<path d="M357 346H385" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<rect x="369" y="338" width="6" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<rect x="303" y="339" width="26" height="26" rx="5" fill="#fbfaf6" stroke="#4b535c" stroke-width="2.5"/>
+<circle cx="310" cy="346" r="2.6" fill="#4b535c"/>
+<circle cx="316" cy="352" r="2.6" fill="#4b535c"/>
+<circle cx="322" cy="358" r="2.6" fill="#4b535c"/>
+<path d="M333 352H343" stroke="#4b535c" stroke-width="4" stroke-linecap="round"/>
+<path d="M352 352L341 345L341 359Z" fill="#4b535c"/>
+<path d="M415 378Q415 362 430 362Q445 362 445 378Z" fill="#6e7781"/>
+<circle cx="430" cy="348" r="9.5" fill="#6e7781"/>
+<path d="M410 352H401" stroke="#4b535c" stroke-width="4" stroke-linecap="round"/>
+<path d="M392 352L403 345L403 359Z" fill="#4b535c"/>
+<rect x="391" y="310" width="6" height="5" rx="1" fill="#1f2328"/>
+<circle cx="394" cy="324" r="8" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M394 324V319M394 324L398 326" stroke="#1f2328" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="128" y="412" width="159" height="104" rx="6" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M148 488Q148 472 165 472Q182 472 182 488Z" fill="#1f2328"/>
+<circle cx="165" cy="458" r="10" fill="#1f2328"/>
+<path d="M153 456A12 12 0 0 1 177 456Z" fill="#1f2328" stroke="#fbfaf6" stroke-width="1.5"/>
+<path d="M150 456H178" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<rect x="162" y="448" width="6" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<path d="M185 462H224" stroke="#4b535c" stroke-width="4" stroke-linecap="round"/>
+<path d="M233 462L222 455L222 469Z" fill="#4b535c"/>
+<path d="M251 484L263 458" stroke="#4b535c" stroke-width="4" stroke-linecap="round"/>
+<circle cx="263" cy="458" r="5.5" fill="#4b535c"/>
+<path d="M237 488A14 10 0 0 1 265 488Z" fill="#4b535c"/>
+<rect x="293" y="412" width="159" height="104" rx="6" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M355 488Q355 472 372 472Q389 472 389 488Z" fill="#1f2328"/>
+<circle cx="372" cy="458" r="10" fill="#1f2328"/>
+<path d="M360 456A12 12 0 0 1 384 456Z" fill="#1f2328" stroke="#fbfaf6" stroke-width="1.5"/>
+<path d="M357 456H385" stroke="#1f2328" stroke-width="3.5" stroke-linecap="round"/>
+<rect x="369" y="448" width="6" height="6" rx="1" fill="#fbfaf6" stroke="#1f2328" stroke-width="2.5"/>
+<rect x="303" y="449" width="26" height="26" rx="5" fill="#fbfaf6" stroke="#4b535c" stroke-width="2.5"/>
+<circle cx="310" cy="456" r="2.6" fill="#4b535c"/>
+<circle cx="316" cy="462" r="2.6" fill="#4b535c"/>
+<circle cx="322" cy="468" r="2.6" fill="#4b535c"/>
+<path d="M333 462H343" stroke="#4b535c" stroke-width="4" stroke-linecap="round"/>
+<path d="M352 462L341 455L341 469Z" fill="#4b535c"/>
+<path d="M415 488Q415 472 430 472Q445 472 445 488Z" fill="#6e7781"/>
+<circle cx="430" cy="458" r="9.5" fill="#6e7781"/>
+<path d="M410 462H401" stroke="#4b535c" stroke-width="4" stroke-linecap="round"/>
+<path d="M392 462L403 455L403 469Z" fill="#4b535c"/>
+<path d="M297 524V532H448V524" fill="none" stroke="#1565c0" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="372" y="556" font-size="19" fill="#1565c0" font-weight="700" text-anchor="middle">Réaliste quand</text>
+<text x="372" y="579" font-size="19" fill="#1565c0" text-anchor="middle">le poste offre</text>
+<text x="372" y="602" font-size="19" fill="#1565c0" text-anchor="middle">peu de contrôle</text>
+<text x="28" y="556" font-size="19" fill="#1f2328" font-weight="700">Aucun travailleur n’est</text>
+<text x="28" y="579" font-size="19" fill="#1f2328" font-weight="700">à risque ou protégé</text>
+<text x="28" y="602" font-size="19" fill="#1f2328" font-weight="700">en soi</text>
+</g>
+</svg>
