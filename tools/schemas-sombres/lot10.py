@@ -1,7 +1,8 @@
 # Lot 10, version 3 : les douze schémas au style sombre de Frank (référence « CNESST — comprendre les 3 volets »),
 # avec la règle de couleur de son retour (« pas trop de couleur, une raison pour chaque couleur ») : structure en
 # bleu-gris neutre, couleur réservée aux puces, légende sous le titre. Chaque mot vient de la page ; texte
-# alternatif et version texte sont tirés de la mise en page elle-même, pour dire exactement ce que montre le dessin.
+# alternatif et description du SVG (<desc>) sont tirés de la mise en page elle-même, pour dire exactement ce que
+# montre le dessin. (Pas de version texte « Lire le schéma en texte » sous le schéma : retirée le 26 septembre 2026.)
 import json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gabarit as kit
@@ -40,7 +41,7 @@ def texte_item(it):
 
 
 def decrire(sp):
-    """Version texte (puces) et texte alternatif, tirés de la mise en page."""
+    """Description détaillée (phrases de la <desc> du SVG) et texte alternatif, tirés de la mise en page."""
     puces = []
     tete = f'Titre{NB}: {g(sp["titre"])}'
     if sp.get('sous_titre'):
@@ -290,7 +291,7 @@ def construire(filtre=None):
         spec = specs.setdefault(s['page'], {'page': f'w/psychosocial/{s["page"]}.html', 'note': None, 'schemas': []})
         spec['schemas'].append({'fichier': fichier, 'ancre': s['ancre'], 'remplace': None,
                                 'remplaceSchema': [f'wiki-{s["page"]}-{s["sujet"]}-v2.svg', f'wiki-{s["page"]}-{s["sujet"]}-v1.svg'], 'sombre': True,
-                                'alt': alt, 'legende': ty(s['legende']), 'puces': puces, 'sources': ty(s['sources'])})
+                                'alt': alt, 'legende': ty(s['legende']), 'sources': ty(s['sources'])})
         print(f'{fichier} : {H} de haut, {len(svg.encode()) // 1024} Ko')
     return specs
 

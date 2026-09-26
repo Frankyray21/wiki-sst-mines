@@ -46,7 +46,11 @@ function verifierPage(lot, adresse, page) {
     const html = page.match(new RegExp('<div class="infographie infographie-compacte infographie-schema(?: infographie-sombre)?">(?:(?!<div class="infographie)[\\s\\S])*?' + fichier.replace(/\./g, '\\.') + '[\\s\\S]*?</div>'))?.[0];
     assert.ok(html, adresse + ' : bloc publié : ' + fichier);
     assert.ok(html.includes('<p class="infographie-legende">' + r.bloc.match(/<p class="infographie-legende">([\s\S]*?)<\/p>/)[1] + '</p>'), 'même légende : ' + fichier);
-    for (const p of r.bloc.matchAll(/<li>([\s\S]*?)<\/li>/g)) assert.ok(html.includes('<li>' + p[1] + '</li>'), 'même version texte : ' + fichier);
+    // « Lire le schéma en texte » retiré le 26 septembre 2026 : ni dans la page, ni dans le bloc de la note, et le
+    // lot la retire d'une note qui l'aurait reçue avant
+    assert.ok(!html.includes('infographie-texte') && !r.bloc.includes('infographie-texte'), 'sans version texte : ' + fichier);
+    assert.ok(html.includes('</p><p class="infographie-sources">') && r.bloc.includes('</p>\n\n<p class="infographie-sources">'), 'la légende suivie des sources, comme le rend le générateur : ' + fichier);
+    assert.ok(lot.retouches.some(x => x.type === 'retirerVersionTexte' && x.marqueur === r.marqueur), 'retrait de la version texte dans la note : ' + fichier);
     const alt = r.bloc.match(/!\[\[Infographies\/[^|]+\|([^\]]+)\]\]/)[1];
     assert.equal(dec(html.match(/alt="([^"]*)"/)[1]), alt, 'même texte alternatif : ' + fichier);
     assert.ok(alt.length >= 40, 'texte alternatif utile : ' + fichier);

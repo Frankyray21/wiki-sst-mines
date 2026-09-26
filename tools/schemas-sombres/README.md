@@ -23,7 +23,9 @@ orange de la référence sont devenus neutres (lot 10, version 3).
   - rend un SVG de 480 de large, identique d'une fois à l'autre.
 - `lot10.py` : les douze schémas du lot 10 (version 3). Il écrit, par page, les SVG et un `spec.json` pour
   `tools/poser_schemas.mjs`, avec `"sombre": true` et les versions antérieures à remplacer (`remplaceSchema`). Le
-  texte alternatif et la version texte sont tirés de la mise en page, légende des couleurs comprise.
+  texte alternatif et la description du SVG (`<desc>`) sont tirés de la mise en page, légende des couleurs comprise.
+  Il n'y a plus de version texte dépliable (« Lire le schéma en texte ») sous le schéma : elle a été retirée du
+  site le 26 septembre 2026.
 - `figtree-500.woff2` à `figtree-900.woff2` : la police Figtree (`LICENCE-figtree.txt`, SIL Open Font License 1.1).
 - `icones.json` : un extrait de Material Design Icons (`@mdi/js`), avec sa licence dans `LICENCE-icones.txt`
   (Pictogrammers Free License, Apache 2.0). Pour ajouter une icône : `npm pack @mdi/js`, puis copier son tracé
@@ -57,7 +59,7 @@ qu'aucun autre lot ne le fournit.
   - la structure (cadres, entêtes, médaillons, titres de colonne) reste en bleu-gris neutre ;
   - seules les puces portent de la couleur ;
   - chaque couleur employée est nommée dans la légende sous le titre (`genres_legende`, même règle pour le dessin,
-    le texte alternatif et la version texte) ;
+    le texte alternatif et la description du SVG) ;
   - une seule couleur par schéma, autant que possible.
 
 ## Affichage

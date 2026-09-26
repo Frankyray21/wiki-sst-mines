@@ -8,6 +8,7 @@ import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { dimensionsSvg, dimensionsImage } from './dimensions_svg.mjs';
 import { choisirImage } from './resoudre_image.mjs';
+import { sansVersionTexteSchema, sansVersionTexteSchemaMd } from './version_texte_schema.mjs';
 import { libelleLien, contexteDuLien } from './libelle_lien.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
 import { rendrePage404 } from './redirections.mjs';
@@ -254,7 +255,9 @@ for (const p of pages) {
     }
     raw = raw.slice(m[0].length);
   }
-  p.body = raw;
+  // « Lire le schéma en texte » retiré dès la lecture : ni publié, ni indexé par la recherche, ni repris
+  // dans les extraits, même si la note garde encore ce bloc
+  p.body = sansVersionTexteSchemaMd(raw);
   // titre unique : le H1 s'il existe, sinon le nom de fichier.
   // p.base reste la clé de résolution des wikilinks et du chemin de sortie.
   const h1 = p.body.match(/^\s*#\s+(.+?)\s*$/m);
@@ -755,7 +758,8 @@ function renderBody(md, nested = false) {
   s = renderCallouts(s);
   s = renderWikilinks(s);
   s = s.replace(/==([^=\n][^=]*?)==/g, '<mark>$1</mark>');
-  let html = marked.parse(s);
+  // par sécurité, la même règle sur le HTML rendu (bloc écrit autrement dans la note)
+  let html = sansVersionTexteSchema(marked.parse(s));
   if (!nested) {
     // ids de titres + collecte du sommaire
     html = html.replace(/<h([1-4])>([\s\S]*?)<\/h\1>/g, (m, lv, inner) => {
@@ -1040,6 +1044,15 @@ const categories = [...parTag.entries()]
   .sort((a, b) => b[1].length - a[1].length);
 const slugTag = new Map(categories.map(([t]) => [t, slugify(t)]));
 
+// Une notion dont le titre porte une année entre parenthèses (« Karasek (1979) - … ») ou commence
+// par « Analyse - » est la fiche d'une source, pas une notion du sujet. Frank, 14 sept. 2026 :
+// elles quittent les volets de l'accueil, qui redevient une entrée par notion, et se retrouvent
+// sur une page « Études et rapports » du wiki, classées par thème. Aucune n'est perdue : la page
+// du thème, elle, continue de lister toutes ses pages, études comprises. (Déclarée avant son premier
+// appel ci-dessous : plus bas, le générateur s'arrêtait au démarrage sur « Cannot access 'estEtude'
+// before initialization ».)
+const estEtude = (q) => estEtudeTitre(q.title);
+
 // Sources directes des notes d'analyse (DOI, sinon première adresse externe) : affichées à côté
 // de chaque citation dans une liste ou un tableau, et comptées comme source pour la page qui cite.
 const sourceEtudes = new Map();
@@ -1139,12 +1152,6 @@ for (const wikiKey of SIX_WIKIS) {
   }
 }
 // ---------- études et rapports ----------
-// Une notion dont le titre porte une année entre parenthèses (« Karasek (1979) - … ») ou commence
-// par « Analyse - » est la fiche d'une source, pas une notion du sujet. Frank, 14 sept. 2026 :
-// elles quittent les volets de l'accueil, qui redevient une entrée par notion, et se retrouvent
-// sur une page « Études et rapports » du wiki, classées par thème. Aucune n'est perdue : la page
-// du thème, elle, continue de lister toutes ses pages, études comprises.
-const estEtude = (q) => estEtudeTitre(q.title);
 const etudesParWiki = new Map(SIX_WIKIS.map(k => [k,
   pages.filter(q => q.wikiKey === k && q.role === 'notion' && estEtude(q)).sort((a, b) => a.title.localeCompare(b.title, 'fr'))]));
 const pageEtudes = (wikiKey) => (etudesParWiki.get(wikiKey) || []).length ? `w/${WIKIS[wikiKey].slug}/etudes-et-rapports.html` : null;

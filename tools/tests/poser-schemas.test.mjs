@@ -58,7 +58,9 @@ test('pose : blocs après leur ancre, capture et légende retirées, liens réso
   assert.ok(h.includes('<p>Texte avant la capture de cours.</p>\n<div class="infographie infographie-compacte infographie-schema">'));
   assert.ok(h.includes('</ul>\n<div class="infographie infographie-compacte infographie-schema"><span class="page-img"><a class="img-lien" href="../../files/infographies/wiki-x-b-v1.svg">'));
   assert.ok(h.includes('alt="Un schéma de démonstration qui montre un mécanisme simple, en deux parties." width="480" height="500" loading="lazy"'));
-  assert.ok(h.includes('densité &gt; 1') && h.includes('<li>Seconde partie &lt; 1.</li>'));
+  // pas de version texte dépliable (retirée le 26 septembre 2026) : la légende est suivie des sources
+  assert.ok(h.includes('<p class="infographie-legende">Légende prudente : densité &gt; 1, sans chiffre inventé.</p><p class="infographie-sources">'));
+  assert.ok(!h.includes('infographie-texte') && !h.includes('Seconde partie'), 'le champ « puces » est ignoré');
   assert.ok(h.includes('<a href="../../w/cible.html" title="Cible : l’exemple d\'essai">la page cible</a>'));
   assert.ok(h.includes('<a class="external" target="_blank" rel="noopener" href="https://exemple.org/x">Exemple</a>'));
   assert.ok(h.includes('<p>Fin corrigée.</p>'));
@@ -81,7 +83,8 @@ test('lot : insertion puis retrait de la capture, légende retirée, et il s’a
     retouchesVault: [{ type: 'remplacer', ligneContenant: 'Fin', avant: 'Fin.', apres: 'Fin corrigée.' }],
   };
   const lot = lotDepuisSpec(spec, { date: '2026-09-25', revision: 'essai', portee: 'p', precautions: '' });
-  assert.deepEqual(lot.retouches.map(r => r.type), ['insererApres', 'supprimerLigne', 'supprimerLigne', 'remplacer']);
+  assert.deepEqual(lot.retouches.map(r => r.type), ['insererApres', 'supprimerLigne', 'supprimerLigne', 'remplacer', 'retirerVersionTexte']);
+  assert.deepEqual(lot.retouches[4], { type: 'retirerVersionTexte', ligneContenant: 'wiki-x-a-v1.svg', marqueur: 'Infographies/wiki-x-a-v1.svg' });
   assert.equal(lot.retouches[1].ligneContenant, '20240101000000');
   assert.deepEqual(lot.medias, [{ depuis: 'docs/files/infographies/wiki-x-a-v1.svg', dossierVault: 'Infographies' }]);
   const note = ['# Page', '', "Premier paragraphe d'introduction, assez long pour servir d'ancre.", '', '### Une section', '', 'Texte avant la capture de cours.', '', '![[Pasted image 20240101000000.png]]', '', 'Légende de la capture. Usage personnel.', '', 'Fin.', ''].join('\n');
@@ -91,6 +94,8 @@ test('lot : insertion puis retrait de la capture, légende retirée, et il s’a
   assert.ok(r.texte.includes('{{lien') === false && r.texte.includes('[[Cible|la page cible]]'));
   assert.ok(r.texte.includes('Fin corrigée.'));
   assert.ok(blocMd(spec.schemas[0]).includes('densité &gt; 1'), 'bloc de la note échappé comme la page');
+  assert.ok(blocMd(spec.schemas[0]).includes('sans chiffre inventé.</p>\n\n<p class="infographie-sources">') && !r.texte.includes('<details'), 'note : pas de version texte');
+  assert.equal(r.rapports[4].statut, 'déjà faite', 'bloc neuf : rien à retirer');
 });
 
 test('repère de capture et contrôle des SVG', () => {
@@ -190,7 +195,7 @@ test('sans ancre : le schéma prend la place exacte de la capture, dans la page 
   assert.ok(r.ok, JSON.stringify(r.rapports));
   assert.match(r.texte, /\| x \|\n\n<div class="infographie[^\n]*\n\n!\[\[Infographies\/wiki-x-sur-place-v1\.svg\|/, 'bloc à la place de la capture');
   assert.ok(!r.texte.includes('Pasted image') && r.texte.includes('</div>\n\nSuite.'));
-  assert.deepEqual(appliquerRetouches(r.texte, lot.retouches, { resoudreLien: () => 'Cible' }).rapports.map(x => x.statut), ['déjà faite', 'déjà faite']);
+  assert.deepEqual(appliquerRetouches(r.texte, lot.retouches, { resoudreLien: () => 'Cible' }).rapports.map(x => x.statut), ['déjà faite', 'déjà faite', 'déjà faite']);
 });
 
 test('correction de texte : un {{lien:…}} devient un lien avec la racine de la page, repassage sans effet', () => {
@@ -224,7 +229,7 @@ test('nouvelle version d’un schéma publié : elle prend la place de l’ancie
   // la note : bloc v1 remplacé ; note neuve : bloc inséré sous l'ancre
   const lot1 = lotDepuisSpec(v1, { date: 'd', revision: 'r', portee: 'p', precautions: '' });
   const lot2 = lotDepuisSpec(v2, { date: 'd', revision: 'r', portee: 'p', precautions: '' });
-  assert.deepEqual(lot2.retouches.map(r => [r.type, r.ancien]), [['remplacerBloc', 'Infographies/wiki-x-a-v1.svg']]);
+  assert.deepEqual(lot2.retouches.map(r => [r.type, r.ancien]), [['remplacerBloc', 'Infographies/wiki-x-a-v1.svg'], ['retirerVersionTexte', undefined]]);
   assert.deepEqual(lot2.medias, [{ depuis: 'docs/files/infographies/wiki-x-a-v2.svg', dossierVault: 'Infographies' }]);
   const note = ['# Page', '', '### Une section', '', 'Texte avant la capture de cours.', ''].join('\n');
   const opts = { resoudreLien: () => 'Cible' };
@@ -250,5 +255,32 @@ test('nouvelle version d’un schéma qui avait remplacé une capture : capture 
   assert.ok(depuisV1.ok, JSON.stringify(depuisV1.rapports));
   assert.ok(depuisRien.ok, JSON.stringify(depuisRien.rapports));
   assert.equal(depuisV1.texte, depuisRien.texte);
-  assert.deepEqual(appliquerRetouches(depuisV1.texte, lot(v2).retouches, opts).rapports.map(x => x.statut), ['déjà faite', 'déjà faite', 'déjà faite']);
+  assert.deepEqual(appliquerRetouches(depuisV1.texte, lot(v2).retouches, opts).rapports.map(x => x.statut), ['déjà faite', 'déjà faite', 'déjà faite', 'déjà faite']);
+});
+
+// « Lire le schéma en texte » retiré le 26 septembre 2026 : une note qui a reçu le bloc avec sa version texte
+// la perd au prochain passage du lot, et devient identique à une note qui reçoit le bloc aujourd'hui.
+test('version texte retirée : la note qui l’avait reçue la perd, comme une note neuve n’en reçoit pas', () => {
+  const spec = { page: 'w/x/page.html', note: { titre: 'Page' }, schemas: [schema('wiki-x-a-v1.svg', 'Une section'), schema('wiki-x-b-v1.svg', 'Fin.')] };
+  const lot = lotDepuisSpec(spec, { date: 'd', revision: 'r', portee: 'p', precautions: '' });
+  const ancienBloc = b => b.replace('</p>\n\n<p class="infographie-sources">', '</p>\n\n<details class="infographie-texte">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Première partie.</li>\n<li>Seconde partie &lt; 1.</li>\n</ul>\n</details>\n<p class="infographie-sources">');
+  const ancien = lot.retouches.map(r => r.bloc ? { ...r, bloc: ancienBloc(r.bloc) } : r).filter(r => r.type !== 'retirerVersionTexte');
+  assert.ok(ancien[0].bloc.includes('<summary>Lire le schéma en texte</summary>'));
+  const note = ['# Page', '', '### Une section', '', 'Texte.', '', 'Fin.', ''].join('\r\n');
+  const opts = { resoudreLien: () => 'Cible' };
+  const recue = appliquerRetouches(note, ancien, opts).texte;
+  assert.equal(recue.split('Lire le schéma en texte').length - 1, 2);
+  const nettoyee = appliquerRetouches(recue, lot.retouches, opts);
+  const neuve = appliquerRetouches(note, lot.retouches, opts);
+  assert.ok(nettoyee.ok && neuve.ok, JSON.stringify(nettoyee.rapports));
+  assert.deepEqual(nettoyee.rapports.map(x => x.statut), ['déjà faite', 'déjà faite', 'appliquée', 'appliquée']);
+  assert.equal(nettoyee.texte, neuve.texte, 'même note, qu’elle ait reçu la version texte ou non');
+  assert.ok(!nettoyee.texte.includes('<details') && !nettoyee.texte.includes('\r\n\r\n\r\n') && nettoyee.texte.includes('\r\n'), 'fins de ligne CRLF gardées, pas de ligne vide en trop');
+  assert.deepEqual(appliquerRetouches(nettoyee.texte, lot.retouches, opts).rapports.map(x => x.statut), ['déjà faite', 'déjà faite', 'déjà faite', 'déjà faite']);
+  // une autre version texte (autre résumé) n'est pas touchée ; un schéma absent arrête le lot
+  const autre = recue.replace('<summary>Lire le schéma en texte</summary>', '<summary>Lire la version texte — autre</summary>');
+  const r2 = appliquerRetouches(autre, lot.retouches, opts);
+  assert.ok(r2.ok && r2.texte.includes('Lire la version texte — autre') && r2.texte.split('<details').length - 1 === 1);
+  const sans = appliquerRetouches(note, [lot.retouches[2]], opts);
+  assert.ok(!sans.ok && sans.rapports[0].statut === 'schéma absent de la note');
 });

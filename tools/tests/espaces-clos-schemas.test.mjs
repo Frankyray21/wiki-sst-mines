@@ -102,6 +102,34 @@ test('lot : essai sans écriture, application, second passage sans effet', () =>
   fs.rmSync(vault, { recursive: true, force: true });
 });
 
+// « Lire le schéma en texte » retiré le 26 septembre 2026 : la note qui avait reçu les cinq blocs avec leur
+// version texte la perd au passage du lot, avec le vrai outil, et devient la note qu'il produit aujourd'hui.
+test('lot : la version texte reçue avant quitte la note, sauvegarde faite, second passage sans effet', () => {
+  const avecTexte = r => (r.type === 'insererApres' && r.marqueur.startsWith('Infographies/')) ? { ...r, bloc: r.bloc.replace('</p>\n\n<p class="infographie-sources">', '</p>\n\n<details class="infographie-texte">\n<summary>Lire le schéma en texte</summary>\n<ul>\n<li>Puce.</li>\n</ul>\n</details>\n<p class="infographie-sources">') } : r;
+  const ancienLot = { ...lot, retouches: lot.retouches.filter(r => r.type !== 'retirerVersionTexte').map(avecTexte) };
+  assert.equal(ancienLot.retouches.filter(r => r.bloc?.includes('Lire le schéma en texte')).length, 5);
+  const vault = vaultJetable();
+  const abs = path.join(vault, lot.note.chemin);
+  const ancien = path.join(vault, 'ancien-lot.json');
+  fs.writeFileSync(ancien, JSON.stringify(ancienLot));
+  execFileSync(process.execPath, [path.join(outils, 'appliquer_retouches.mjs'), '--lot', ancien, '--vault', vault, '--appliquer'], { cwd: vault, encoding: 'utf8' });
+  assert.equal(fs.readFileSync(abs, 'utf8').split('Lire le schéma en texte').length - 1, 5, 'la note a reçu les cinq versions texte');
+  const avantRetrait = fs.readFileSync(abs, 'utf8');
+  const sortie = outil(vault, '--appliquer');
+  assert.equal((sortie.match(/✓ retirerVersionTexte/g) || []).length, 5);
+  const copie = sortie.match(/sauvegarde : (.+)$/m)?.[1];
+  assert.ok(copie && fs.existsSync(copie), 'sauvegarde écrite : ' + copie);
+  assert.equal(fs.readFileSync(copie, 'utf8'), avantRetrait, 'la sauvegarde est la note d’avant le retrait');
+  const nettoyee = fs.readFileSync(abs, 'utf8');
+  const vaultNeuf = vaultJetable();
+  outil(vaultNeuf, '--appliquer');
+  assert.equal(nettoyee, fs.readFileSync(path.join(vaultNeuf, lot.note.chemin), 'utf8'), 'même note qu’une note qui reçoit le lot aujourd’hui');
+  assert.ok(!nettoyee.includes('<details'));
+  assert.match(outil(vault, '--appliquer'), /Rien à changer/);
+  fs.rmSync(vault, { recursive: true, force: true });
+  fs.rmSync(vaultNeuf, { recursive: true, force: true });
+});
+
 test('lot : une ligne introuvable dans la note arrête tout, rien n’est écrit', () => {
   const vault = vaultJetable();
   const abs = path.join(vault, lot.note.chemin);

@@ -116,6 +116,29 @@ test('remplacerBloc : plusieurs versions antérieures possibles (la note a pu re
   assert.match(deux.rapports[0].statut, /ambiguë/);
 });
 
+test('retirerVersionTexte : seule la version « Lire le schéma en texte » du bloc désigné quitte la note', () => {
+  const details = s => `<details class="infographie-texte">\n<summary>${s}</summary>\n<ul>\n<li>Puce.</li>\n</ul>\n</details>`;
+  const bloc = (v, d) => `<div class="infographie infographie-compacte infographie-schema">\n\n![[Infographies/wiki-x-${v}.svg|alt ${v}]]\n\n<p class="infographie-legende">Légende ${v}.</p>\n\n${d ? d + '\n' : ''}<p class="infographie-sources">Sources ${v}.</p>\n\n</div>`;
+  const r = v => ({ type: 'retirerVersionTexte', ligneContenant: `wiki-x-${v}.svg`, marqueur: `Infographies/wiki-x-${v}.svg` });
+  const note = ['### A', '', bloc('a', details('Lire le schéma en texte')), '', '### B', '', bloc('b', details('Lire le schéma en texte')), ''].join('\n');
+  const une = appliquerRetouches(note, [r('a')]);
+  assert.ok(une.ok, JSON.stringify(une.rapports));
+  assert.equal(une.texte, ['### A', '', bloc('a'), '', '### B', '', bloc('b', details('Lire le schéma en texte')), ''].join('\n'), 'le bloc b garde la sienne');
+  assert.equal(appliquerRetouches(une.texte, [r('a')]).rapports[0].statut, 'déjà faite');
+  // une ligne vide laissée après </details> ne double pas l'espacement
+  const aere = note.replace('</details>\n<p class="infographie-sources">Sources a.', '</details>\n\n<p class="infographie-sources">Sources a.');
+  assert.equal(appliquerRetouches(aere, [r('a')]).texte, une.texte);
+  // autre résumé (infographie d'hygiène, par exemple) : rien n'est touché
+  const autre = bloc('a', details('Lire la version texte — les deux catégories'));
+  assert.equal(appliquerRetouches(autre, [r('a')]).texte, autre);
+  // refus : schéma absent, ou version texte sans fin dans le bloc (la note reste intacte)
+  assert.match(appliquerRetouches('### A\n', [r('a')]).rapports[0].statut, /absent/);
+  const coupee = bloc('a', '<details class="infographie-texte">\n<summary>Lire le schéma en texte</summary>\n<ul>');
+  const rc = appliquerRetouches(coupee, [r('a')]);
+  assert.equal(rc.ok, false);
+  assert.equal(rc.texte, coupee);
+});
+
 test('supprimerLigne : plusieurs marqueurs possibles (schéma ou sa version antérieure)', () => {
   const r = { type: 'supprimerLigne', ligneContenant: 'img-001.png', marqueur: ['Infographies/x-v2.svg', 'Infographies/x-v1.svg'] };
   assert.equal(appliquerRetouches('![[Infographies/x-v1.svg]]\nSuite.', [r]).rapports[0].statut, 'déjà faite', 'capture retirée par la v1');
