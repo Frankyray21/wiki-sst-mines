@@ -8,6 +8,7 @@ import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { dimensionsSvg } from './dimensions_svg.mjs';
 import { choisirImage } from './resoudre_image.mjs';
+import { libelleLien, contexteDuLien } from './libelle_lien.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
 import { rendrePage404 } from './redirections.mjs';
 import { rendrePortailContenu } from './portail_racine.mjs';
@@ -551,7 +552,23 @@ function resolvePage(target, from, profondeur = 0) {
   if (sameDir.length) return sameDir[0];
   const sameWiki = cands.filter(c => c.wikiKey === from.wikiKey);
   if (sameWiki.length) return sameWiki[0];
-  return cands.slice().sort((a, b) => a.relPath.length - b.relPath.length)[0];
+  // Hors du wiki de la page, le nom de fichier l'emporte sur l'alias d'une autre page, comme dans Obsidian
+  // (qui n'ouvre un lien que par le nom de fichier) : un chemin plus court ne suffit plus à faire gagner un alias.
+  const parNom = cands.filter(c => looseKey(c.base) === looseKey(t));
+  return (parNom.length ? parNom : cands).slice().sort((a, b) => a.relPath.length - b.relPath.length)[0];
+}
+
+// Lien qui mène, par un autre nom que celui de la page (alias, renvoi d'une fiche archivée), à une page
+// d'un AUTRE wiki thématique : relevé en fin de construction, pour vérifier que la page d'arrivée a bien
+// le même sens. Un mot courant ne veut pas dire la même chose d'un wiki à l'autre : « Confinement » d'une
+// source de poussières (hygiène) n'est pas le confinement d'une équipe sous terre (psychosocial).
+const liensHorsWiki = new Map(); // « saisi » → note d'arrivée -> Set(notes citantes)
+function noterLienHorsWiki(saisi, pg) {
+  const R = 'Recueil législatif SST';
+  if (pg.wikiKey === CUR.wikiKey || pg.wikiKey === R || CUR.wikiKey === R) return;
+  const cle = `« ${saisi} » → ${pg.relPath}`;
+  if (!liensHorsWiki.has(cle)) liensHorsWiki.set(cle, new Set());
+  liensHorsWiki.get(cle).add(CUR.relPath);
 }
 
 // essai : relatif au dossier de la page, puis chemin complet, puis nom de fichier (tools/resoudre_image.mjs) ;
@@ -614,7 +631,7 @@ const blocks = [];// blocs HTML protégés du parseur markdown
 function protect(html) { blocks.push(html); return `\n\nXBLOCKX${blocks.length - 1}X\n\n`; }
 
 function renderWikilinks(md) {
-  return md.replace(/(!?)\[\[([^\[\]]+?)\]\]/g, (m, bang, inner) => {
+  return md.replace(/(!?)\[\[([^\[\]]+?)\]\]/g, (m, bang, inner, pos, texte) => {
     inner = inner.replace(/\\\|/g, '|');
     const pipe = inner.indexOf('|');
     let target = pipe >= 0 ? inner.slice(0, pipe) : inner;
@@ -684,13 +701,13 @@ function renderWikilinks(md) {
       return `<a href="#${headingSlug(anchor)}">${esc(alias || anchor)}</a>`;
     }
     const pg = resolvePage(target, CUR);
-    // Libellé : jamais le chemin Obsidian complet. On affiche le titre de la page cible,
-    // sauf quand le lien passe par un alias — « [[ISO 2631]] » doit rester « ISO 2631 »
-    // et non devenir « ISO 2631 - Vibrations globales du corps » en pleine phrase.
+    // Libellé : jamais le chemin Obsidian complet. En pleine phrase, le mot saisi ; le titre de la page
+    // pour un nom de code (art-59-LATMP), une note d'analyse et une ligne faite de liens seulement
+    // (règle détaillée dans tools/libelle_lien.mjs). Un lien passé par un alias garde le mot saisi.
     const saisi = target.split('/').pop();
-    const parAlias = pg && looseKey(saisi) !== looseKey(pg.base) && looseKey(saisi) !== looseKey(pg.title);
-    const nom = pg ? (parAlias ? saisi : pg.title) : saisi;
-    const label = alias || (anchor ? `${nom} › ${anchor}` : nom);
+    const parNom = !!pg && (looseKey(saisi) === looseKey(pg.base) || looseKey(saisi) === looseKey(pg.title));
+    const label = alias || libelleLien({ saisi, titre: pg ? pg.title : null, parNom, ancre: anchor, ligne: contexteDuLien(texte, pos), cle: looseKey });
+    if (pg && !parNom) noterLienHorsWiki(saisi, pg);
     if (!pg) {
       // article remplacé ou abrogé : mention grisée, pas de lien — la page n'existe pas volontairement
       const retire = articlesRetires.get(target.split('/').pop().trim().toLowerCase());
@@ -2040,6 +2057,14 @@ if (badFm.length) {
   const reparés = badFm.filter(l => l.endsWith('(réparé)')).length;
   console.warn(`\n⚠ Frontmatter YAML : ${badFm.length} note(s) en erreur — ${reparés} réparée(s), ${badFm.length - reparés} illisible(s)`);
   badFm.filter(l => !l.endsWith('(réparé)')).slice(0, 20).forEach(l => console.warn('   ' + l));
+}
+if (liensHorsWiki.size) {
+  const n = [...liensHorsWiki.values()].reduce((a, e) => a + e.size, 0);
+  console.warn(`\n⚠ Liens vers un autre wiki par un alias : ${liensHorsWiki.size} nom(s), dans ${n} note(s). Aucune page du wiki de`
+    + ' la note ne porte ce nom ; le lien suit l’alias d’une page (ou le renvoi d’une fiche archivée) : vérifier que la page'
+    + ' d’arrivée a le même sens.');
+  [...liensHorsWiki].slice(0, 30).forEach(([cle, notes]) => console.warn(`   ${cle}  ←  ${[...notes].slice(0, 3).join(' ; ')}${notes.size > 3 ? ` (+${notes.size - 3})` : ''}`));
+  if (liensHorsWiki.size > 30) console.warn(`   … et ${liensHorsWiki.size - 30} autre(s)`);
 }
 if (imagesAmbigues.size) {
   console.warn(`\n⚠ Images ambiguës : ${imagesAmbigues.size} renvoi(s) à un nom que portent plusieurs fichiers ; le premier a été pris, peut-être`
