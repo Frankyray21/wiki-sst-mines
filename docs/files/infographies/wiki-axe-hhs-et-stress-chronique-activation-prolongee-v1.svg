@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="660" viewBox="0 0 480 660" role="img" aria-labelledby="t d">
+<title id="t">Une activation qui ne s’arrête plus : l’axe HHS en stress chronique</title>
+<desc id="d">Une activation qui ne s’arrête plus : elle peut durer des mois ou des années. Le même buste de mineur casqué, mais tout le circuit est rouge. L’hypothalamus, l’hypophyse et les surrénales sont en rouge : axe HHS dérégulé. Le cortisol, en points rouges nombreux, reste élevé, maintenu. Depuis les surrénales, une flèche rouge monte vers le cœur, dans la poitrine : réaction cardiovasculaire, avec hypertension, inflammation et dysfonction endothéliale. Une flèche descend de ces trois mots vers la dernière étiquette : excès de risque de maladie coronarienne. En bas : le travailleur paraît fonctionnel, mais la dette physiologique s’accumule. Aucun chiffre dans le dessin, aucune durée à l’échelle.</desc>
+<rect width="480" height="660" fill="#fbfaf6"/>
+<defs>
+<marker id="fr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#c62828"/></marker>
+</defs>
+<g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Arial, sans-serif">
+<text x="24" y="46" font-size="26" font-weight="700" fill="#1f2328">Une activation</text>
+<text x="24" y="78" font-size="26" font-weight="700" fill="#1f2328">qui ne s’arrête plus</text>
+<text x="24" y="108" font-size="19" fill="#4b535c">Elle peut durer des mois ou des années</text>
+<!-- Même buste que le schéma du circuit, décalé de 30 vers le bas -->
+<g transform="translate(0 30)">
+<path d="M110 282V256H150V282Q198 286 210 314L216 540H44L50 314Q62 286 110 282Z" fill="#eceef0" stroke="#6e7781" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="130" cy="204" rx="54" ry="62" fill="#eceef0" stroke="#6e7781" stroke-width="3"/>
+<path d="M76 176A54 50 0 0 1 184 176Z" fill="#6e7781"/>
+<path d="M68 176H192" stroke="#6e7781" stroke-width="5" stroke-linecap="round"/>
+<rect x="124" y="142" width="12" height="12" rx="2" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<!-- Axe HHS dérégulé (page : « un axe HHS dérégulé ») : même circuit, en rouge -->
+<ellipse cx="130" cy="192" rx="17" ry="10" fill="#c62828"/>
+<path d="M130 203V217" stroke="#c62828" stroke-width="3.5" stroke-linecap="round" marker-end="url(#fr)"/>
+<circle cx="130" cy="228" r="9" fill="#c62828"/>
+<path d="M130 239V396" stroke="#c62828" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+<path d="M130 396L107 420" stroke="#c62828" stroke-width="3.5" fill="none" stroke-linecap="round" marker-end="url(#fr)"/>
+<path d="M130 396L153 420" stroke="#c62828" stroke-width="3.5" fill="none" stroke-linecap="round" marker-end="url(#fr)"/>
+<ellipse cx="96" cy="474" rx="17" ry="28" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<ellipse cx="164" cy="474" rx="17" ry="28" fill="#fbfaf6" stroke="#6e7781" stroke-width="2.5"/>
+<path d="M80 450Q96 422 112 450Z" fill="#c62828"/>
+<path d="M148 450Q164 422 180 450Z" fill="#c62828"/>
+<path d="M150 192H238" stroke="#6e7781" stroke-width="2.5"/>
+<!-- Cortisol maintenu élevé (page : « le corps maintient un niveau élevé de cortisol » ; « cortisol élevés chroniquement ») : points rouges nombreux -->
+<g fill="#c62828">
+<circle cx="72" cy="330" r="5"/><circle cx="94" cy="318" r="5"/><circle cx="66" cy="362" r="5"/><circle cx="90" cy="350" r="5"/>
+<circle cx="70" cy="396" r="5"/><circle cx="94" cy="384" r="5"/><circle cx="68" cy="430" r="5"/><circle cx="192" cy="424" r="5"/>
+<circle cx="198" cy="392" r="5"/><circle cx="62" cy="500" r="5"/><circle cx="172" cy="296" r="5"/>
+<circle cx="198" cy="500" r="5"/><circle cx="130" cy="516" r="5"/><circle cx="108" cy="306" r="5"/><circle cx="196" cy="456" r="5"/>
+</g>
+<!-- Vers le cœur : réaction cardiovasculaire (Application terrain, maillon 4) -->
+<path d="M170 432C182 412 182 388 172 374" stroke="#c62828" stroke-width="3.5" fill="none" stroke-linecap="round" marker-end="url(#fr)"/>
+<path d="M165 328C165 312 187 312 187 326C187 312 209 312 209 328C209 342 192 350 187 360C182 350 165 342 165 328Z" fill="#c62828" transform="translate(-16 4)"/>
+</g>
+<text x="246" y="226" font-size="20" font-weight="700" fill="#c62828">axe HHS</text>
+<text x="246" y="250" font-size="19" font-weight="700" fill="#c62828">dérégulé</text>
+<!-- Cortisol maintenu élevé -->
+<path d="M178 324L238 298" stroke="#6e7781" stroke-width="2.5"/>
+<text x="246" y="296" font-size="19" font-weight="700" fill="#c62828">cortisol élevé</text>
+<text x="246" y="320" font-size="19" fill="#c62828">maintenu</text>
+<!-- Réaction cardiovasculaire : « hypertension, inflammation, dysfonction endothéliale » -->
+<path d="M196 370H232M232 344V454" stroke="#6e7781" stroke-width="2.5" fill="none"/>
+<text x="246" y="362" font-size="19" fill="#1f2328">hypertension</text>
+<text x="246" y="394" font-size="19" fill="#1f2328">inflammation</text>
+<text x="246" y="426" font-size="19" fill="#1f2328">dysfonction</text>
+<text x="246" y="448" font-size="19" fill="#1f2328">endothéliale</text>
+<!-- Au bout de la chaîne : « excès de risque de maladie coronarienne » (sans chiffre) -->
+<path d="M300 464V486" stroke="#c62828" stroke-width="3.5" stroke-linecap="round" marker-end="url(#fr)"/>
+<text x="246" y="514" font-size="19" font-weight="700" fill="#c62828">excès de risque</text>
+<text x="246" y="538" font-size="19" font-weight="700" fill="#c62828">de maladie</text>
+<text x="246" y="562" font-size="19" font-weight="700" fill="#c62828">coronarienne</text>
+<!-- « le travailleur paraît fonctionnel tout en accumulant une dette physiologique » -->
+<text x="24" y="604" font-size="19" fill="#4b535c">Paraît fonctionnel, mais la dette</text>
+<text x="24" y="628" font-size="19" fill="#4b535c">physiologique s’accumule.</text>
+</g>
+</svg>

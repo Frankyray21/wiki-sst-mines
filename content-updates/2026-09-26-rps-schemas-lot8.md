@@ -1,4 +1,4 @@
-# Cinq pages RPS illustrées et Premiers signes redessiné — 26 septembre 2026
+# Six pages RPS illustrées et Premiers signes redessiné — 26 septembre 2026
 
 Deux demandes de Frank :
 
@@ -19,12 +19,10 @@ avec leur légende : une diapositive de cours et une figure de livre.
 | [Programme d'aide aux employés (PAE)](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/programme-daide-aux-employes-pae.html) | accès direct et confidentialité (principe), ce que l'employeur reçoit ou non ; un pansement, pas un traitement des causes | — |
 | [Rotations jour-nuit](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/rotations-jour-nuit.html) | conflit entre l'horloge du corps et le quart de nuit ; dormir au camp : ce qui nuit, les leviers | — |
 | [Soutien social au travail](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/soutien-social-au-travail.html) | qui aide et comment : les trois formes d'aide du supérieur, la coopération des collègues, la question de repérage | — |
+| [Axe HHS et stress chronique](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/axe-hhs-et-stress-chronique.html) | le circuit hypothalamus, hypophyse, surrénales et la mobilisation immédiate des ressources ; une activation qui ne s'arrête plus : cortisol élevé maintenu, réactions cardiovasculaires, excès de risque de maladie coronarienne (sans le 23 %) | — |
 | [Premiers signes en mine](https://frankyray21.github.io/wiki-sst-mines/w/psychosocial/premiers-signes-en-mine-ce-que-les-superviseurs-voient.html) | vue d'ensemble v2 (remplace la v1) ; un schéma par catégorie (performance, relations, apparence, comportements à risque) en scènes « d'habitude → maintenant » ; « Que faire quand on détecte », sans étapes numérotées | schéma v1, retiré du site |
 
 Aucun schéma n'ajoute de chiffre, de délai ou de promesse d'effet.
-
-**Axe HHS et stress chronique** : deux schémas dessinés et relus, mais non posés. L'essai de pose n'a pas pu être fait
-en relecture ; il attend l'accord de Frank.
 
 ## À faire dans le vault (sinon la prochaine construction efface ces schémas)
 
@@ -95,11 +93,15 @@ schéma v1, il est remplacé par la v2 à sa place (`remplacerBloc`) ; sinon, la
 - Le schéma « Danger immédiat » séparé a été écarté : il redisait l'encadré qui ouvre la page. La vue d'ensemble y
   renvoie, et le schéma des comportements à risque garde la consigne sur les propos suicidaires, mot pour mot.
 
-**Axe HHS et stress chronique**, schémas non posés :
+**Axe HHS et stress chronique** (posé après accord de Frank, le relecteur n'ayant pas pu lancer l'essai de pose ;
+essai refait avant la pose)
 
-- la section Définition attribue à Définition du stress professionnel des contenus absents de cette page ;
-- « quelques heures » est sans source ;
-- les graphies ne sont pas harmonisées (HHS, HPA, « corticosurrénalien » ; Selye, Sélye).
+- Le sens hypothalamus → hypophyse → surrénales et la libération du cortisol par les surrénales sont dessinés comme en
+  physiologie, mais aucune page du wiki ne l'écrit en toutes lettres : la page ne le donne que par le nom de l'axe et le
+  mot « circuit ». À sourcer dans une note d'analyse.
+- La section Définition attribue à Définition du stress professionnel des contenus absents de cette page.
+- « Quelques heures » est sans source.
+- Les graphies ne sont pas harmonisées (HHS, HPA, « corticosurrénalien » ; Selye, Sélye).
 
 ## Vérifications
 
