@@ -696,7 +696,7 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .accueil-chapeau { font-size: 15.5px; line-height: 1.55; margin: 14px 0 8px; }
 .accueil-chapeau p { margin: 0 0 8px; }
 .accueil-index { font-size: 14px; margin: 4px 0 16px; color: var(--text-soft); }
-.accueil-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.accueil-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; grid-auto-flow: dense; }
 .accueil-boite { border: 1px solid var(--chapo-bd); background: var(--content-bg); border-radius: 3px; min-width: 0; }
 .accueil-large { grid-column: 1 / -1; }
 .page-body .accueil-titre { font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif; font-size: 19px; font-weight: 600; margin: 0; padding: 7px 12px; background: var(--infobox-titre-bg); border-bottom: 1px solid var(--chapo-bd); line-height: 1.3; }
@@ -730,7 +730,11 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .accueil-themes-nav { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 12px; }
 .accueil-themes-nav a { display: inline-flex; align-items: center; min-height: 34px; padding: 4px 11px; border: 1px solid var(--border-light); border-radius: 999px; background: var(--bg); font-size: 13.5px; text-decoration: none; }
 .accueil-themes-nav a:hover { background: var(--hover); border-color: var(--hover-bd); }
-.accueil-theme { min-width: 0; margin: 0 0 10px; }
+/* Les volets coulent en colonnes (26 sept. 2026) : la grille laissait, sous un volet court, tout le vide
+   du plus long de sa rangée. Fermé, un volet tient sur une ligne : sa description ne s'affiche qu'ouvert. */
+.accueil-groupes.accueil-themes { display: block; columns: 230px 3; column-gap: 22px; }
+.accueil-theme { min-width: 0; margin: 0 0 10px; break-inside: avoid; }
+.accueil-theme:not([open]) > summary .accueil-theme-desc { display: none; }
 .accueil-theme > summary {
   cursor: pointer; list-style: none; padding: 7px 10px; border-left: 4px solid var(--accent);
   background: var(--infobox-titre-bg); border-radius: 0 3px 3px 0; line-height: 1.3;
@@ -750,8 +754,20 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .page-body .accueil-theme ul { margin: 4px 0 4px 28px; }
 .accueil-theme-page { display: inline-block; margin: 4px 0 2px 10px; font-size: 13.5px; }
 .accueil-corps table { display: block; overflow-x: auto; max-width: 100%; }
+/* Boîtes repliées (26 sept. 2026, Frank : « améliore la page d'accueil ») : une boîte dont la moitié
+   des liens ou plus est déjà offerte par les thèmes ou l'index se rend repliée — titre et nombre de
+   pages sur une ligne, tout le bandeau ouvre. Rien n'est retiré : ouverte, la boîte est entière. */
+details.accueil-boite > summary { list-style: none; cursor: pointer; }
+details.accueil-boite > summary::-webkit-details-marker { display: none; }
+details.accueil-boite > summary .accueil-titre::before { content: '▸'; display: inline-block; width: 1em; color: var(--text-soft); transition: transform .15s; }
+details.accueil-boite[open] > summary .accueil-titre::before { transform: rotate(90deg); }
+details.accueil-boite:not([open]) > summary .accueil-titre { border-bottom: 0; }
+details.accueil-boite > summary:hover .accueil-titre { background: var(--hover); }
+.page-body .accueil-compte { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 12.5px; font-weight: 400; color: var(--text-soft); margin-left: 6px; white-space: nowrap; }
+@media print { details.accueil-boite::details-content, .accueil-theme::details-content { content-visibility: visible; } details.accueil-boite > :not(summary), .accueil-theme > :not(summary) { display: block !important; } }
 @media (max-width: 480px) {
   .accueil-groupes { grid-template-columns: 1fr; }
+  .accueil-groupes.accueil-themes { columns: 1; }
   .accueil-corps li { padding: 3px 0; }
 }
 
@@ -850,6 +866,8 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
   .accueil-banniere { padding: 12px; gap: 12px; }
   .accueil-icone { font-size: 36px; }
   .accueil-groupes { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  /* les volets sont refermés par app.js et tiennent sur une ligne : la barre de raccourcis les doublerait */
+  .accueil-themes-nav { display: none; }
   .page-body .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); }
   /* cibles tactiles : la zone d'un lien de liste atteint 24 px de haut (WCAG 2.5.8) sans changer la ligne */
   .accueil-corps a, .accueil-index a, .accueil-chapeau a, .accueil-titre a { padding: 4px 0; }
@@ -1035,6 +1053,7 @@ html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
 @media screen and (min-width: 700px) and (max-width: 900px) {
   .content { padding: 20px 26px 40px; }
   .accueil-groupes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .accueil-groupes.accueil-themes { columns: 2; }
   .page-body .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); }
   .accueil-colonnes, .accueil-large .accueil-colonnes { columns: 2; }
   .accueil-colonnes-courtes, .accueil-large .accueil-colonnes-courtes { columns: 3; }

@@ -233,6 +233,13 @@ node tools/serve.mjs
   sombre, ne sont plus inversées par le thème sombre (option `sombre` de `tools/poser_schemas.mjs`).
   **À poser dans le vault**. En priorité : le PDF lié à la page MBI reproduit les énoncés d'un questionnaire sous
   licence. Détail et erreurs relevées : `content-updates/2026-09-26-rps-schemas-lot10.md`
+- **Pages d'accueil allégées (26 septembre 2026)** : à la demande de Frank, les six accueils de wiki ne répètent
+  plus, sous les volets de thèmes, les mêmes articles regroupés par public : une boîte dont la moitié des liens
+  ou plus est déjà offerte plus haut se rend repliée (titre et nombre de pages), entière à l'ouverture. Les
+  tuiles par rôle perdent la description qui répétait le titre de la boîte et forment une rangée ; les volets
+  coulent en colonnes et, fermés, tiennent sur une ligne ; au téléphone, la barre de raccourcis disparaît. Même
+  règle dans le générateur et sur le site (`epurerAccueil`, `tools/accueil_wiki.mjs`). Ergonomie : 2 769 → 1 462 px
+  au téléphone. Détail : `content-updates/2026-09-26-accueils-plus-legers.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma
   en texte » (127 schémas, 65 pages), puis toutes les autres (« Lire la version texte — … », « Lire les voies en
   texte », « Lire l’illustration en texte » : 16 sections, 10 pages) disparaissent. Chaque image garde son texte

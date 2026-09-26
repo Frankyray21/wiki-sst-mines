@@ -21,7 +21,7 @@ import { rendreTitreArticle } from './entete-article.mjs';
 import { normaliserBibliographie } from './bibliographie.mjs';
 import { motsDePage, encoderListe } from './recherche_mots.mjs';
 import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
-import { estAccueil, decouperAccueil, rendreAccueil, titreAccueil, piedAccueil } from './accueil_wiki.mjs';
+import { estAccueil, decouperAccueil, rendreAccueil, titreAccueil, piedAccueil, epurerAccueil, liensDe } from './accueil_wiki.mjs';
 import { blocAvis, lireConfAvis, ecrireConfAvis } from './avis.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -1367,6 +1367,15 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied, adresse = p.
       ];
     }
   }
+  // Accueil allégé (Frank, 26 sept. 2026) : ce qui est déjà offert par les volets de thèmes et la barre
+  // d'index n'est pas répété en clair plus bas — les boîtes par public (internes, travailleurs,
+  // gestionnaires) sont repliées ; les tuiles par rôle perdent la description qui répétait le titre
+  // de la boîte et forment une rangée. La note du vault n'est pas touchée.
+  const offerts = liensDe(sections.filter(s => s.id === 'themes-du-wiki').map(s => s.html).join(''));
+  for (const l of index) offerts.add(l.url);
+  const epure = epurerAccueil(sections, { liensOfferts: offerts });
+  sections = epure.sections;
+  for (const j of epure.journal) console.log(`  accueil ${p.relPath} : « ${j.boite} »${j.replie ? ` repliée (${j.repris} de ses ${j.liens} liens déjà dans les thèmes ou l’index)` : ''}${j.sansDescription ? `${j.replie ? ' ;' : ''} ${j.sansDescription} tuile(s) sans la description qui répétait le titre` : ''}`);
   // un éventuel « En bref » de la note ouvre le chapeau, sans son étiquette
   return `
 <div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
