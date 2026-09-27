@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, extraireCorps, rendreAccueil, piedAccueil, tuile, epurerAccueil, rendreBoite, liensDe, icone, iconeTheme, genreBoite, scinderChapeau, rendreThemesAccueil, ordonnerBoites, estDemarrage } from '../accueil_wiki.mjs';
+import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, extraireCorps, rendreAccueil, piedAccueil, tuile, epurerAccueil, rendreBoite, liensDe, icone, iconeTheme, genreBoite, scinderChapeau, rendreThemesAccueil, ordonnerBoites, estDemarrage, pictoTuile } from '../accueil_wiki.mjs';
 
 const PICTO = (nom) => `<span class="accueil-boite-icone" aria-hidden="true">${icone(nom)}</span>`;
 const CHEVRON = '<span class="accueil-chevron" aria-hidden="true"></span>';
@@ -89,10 +89,15 @@ test('colonnes : listes de premier niveau seulement, huit entrées et plus', () 
   assert.equal(piedAccueil('2026-09-09'), '<div class="page-meta"><span>Site généré le 2026-09-09</span><span class="accueil-marque">WIKI SST — Mines</span></div>');
   assert.equal(piedAccueil('2026-09-09', '<a href="x">Voir</a>'), '<div class="page-meta"><span>Site généré le 2026-09-09 · <a href="x">Voir</a></span><span class="accueil-marque">WIKI SST — Mines</span></div>');
   // tuile : pictogramme hors lecture d'écran, libellé + description tirée du texte qui suit ou du titre de la cible, jamais quand il répète le libellé
-  const picto = (e) => `<span class="accueil-tuile-emoji" aria-hidden="true">${e}</span>`;
-  assert.equal(tuile('👷 <a href="a" title="👷 Bienvenue, travailleur">Travailleur, opérateur</a>'), picto('👷') + '<a href="a" title="👷 Bienvenue, travailleur"><span class="accueil-tuile-libelle">Travailleur, opérateur</span><small class="accueil-tuile-desc">Bienvenue, travailleur</small></a>');
-  assert.equal(tuile('👷 <a href="a" title="x">Démarrage - Travailleur</a> - tes droits'), picto('👷') + '<a href="a" title="x"><span class="accueil-tuile-libelle">Démarrage - Travailleur</span><small class="accueil-tuile-desc">tes droits</small></a>');
-  assert.equal(tuile('👨‍💼 <a href="a" title="Superviseur">Superviseur</a>'), picto('👨‍💼') + '<a href="a" title="Superviseur"><span class="accueil-tuile-libelle">Superviseur</span></a>');
+  // l'emoji de la note choisit un pictogramme MDI teinté (maquette) ; un emoji inconnu reste affiché
+  const picto = (e, libelle) => pictoTuile(e, libelle);
+  assert.equal(pictoTuile('👷', ''), '<span class="accueil-tuile-icone teinte-ambre" aria-hidden="true">' + icone('mdiAccountHardHat') + '</span>');
+  assert.equal(pictoTuile('', 'Direction, RH'), '<span class="accueil-tuile-icone teinte-bleu" aria-hidden="true">' + icone('mdiOfficeBuildingOutline') + '</span>', 'sans emoji, le libellé suffit');
+  assert.equal(pictoTuile('🚀', 'Autre'), '<span class="accueil-tuile-emoji" aria-hidden="true">🚀</span>', 'emoji inconnu conservé');
+  assert.equal(pictoTuile('', ''), '');
+  assert.equal(tuile('👷 <a href="a" title="👷 Bienvenue, travailleur">Travailleur, opérateur</a>'), picto('👷', 'Travailleur, opérateur') + '<a href="a" title="👷 Bienvenue, travailleur"><span class="accueil-tuile-libelle">Travailleur, opérateur</span><small class="accueil-tuile-desc">Bienvenue, travailleur</small></a>');
+  assert.equal(tuile('👷 <a href="a" title="x">Démarrage - Travailleur</a> - tes droits'), picto('👷', 'Démarrage - Travailleur') + '<a href="a" title="x"><span class="accueil-tuile-libelle">Démarrage - Travailleur</span><small class="accueil-tuile-desc">tes droits</small></a>');
+  assert.equal(tuile('👨‍💼 <a href="a" title="Superviseur">Superviseur</a>'), picto('👨‍💼', 'Superviseur') + '<a href="a" title="Superviseur"><span class="accueil-tuile-libelle">Superviseur</span></a>');
   assert.ok(colonnes(roles).includes('accueil-tuile-libelle'), 'les tuiles portent le libellé structuré');
 });
 
@@ -107,13 +112,13 @@ test('extraireCorps : entre le corps et les blocs voisins, backlinks et pied', (
 // description, nombre d'articles, place de la barre Lecture / PDF), ligne d'index, cartes à pictogramme.
 test('rendu : carte d’entrée avec titre, chapeau scindé, domaine lu et nombre d’articles vu, index, cartes', () => {
   const html = rendreAccueil({ titre: '🏠 Wiki Test, mines', icone: '🧠', domaine: 'Page d’accueil du wiki <a href="i.html">🧠 Test</a>', compte: '12', chapeau: '<p>Chapeau <strong>court</strong>. Suite du chapeau.</p><p>Second paragraphe.</p>', index: [{ url: 'ia.html', libelle: 'Index alphabétique' }, { url: 't.html', libelle: 'Tous les thèmes' }], sections: [{ id: 's1', titre: 'Navigation', html: '<ul><li><a href="a">A</a></li></ul>', grand: false }, { id: 'themes-du-wiki', titre: 'Thèmes', html: '<div class="accueil-groupes accueil-themes"></div>', grand: true }] });
-  assert.ok(html.startsWith('<div class="accueil-banniere">\n<span class="accueil-icone" aria-hidden="true">🧠</span>\n<header class="article-titre">\n<h1 class="page-title">Wiki Test, mines</h1>\n<div class="accueil-chapeau"><p class="accueil-sous-titre">Chapeau <strong>court</strong>.</p><p>Suite du chapeau.</p><p>Second paragraphe.</p></div>\n<div class="page-sub"><span class="accueil-domaine">Page d’accueil du wiki <a href="i.html">🧠 Test</a></span><span class="accueil-compte-pages">' + icone('mdiBookOpenPageVariantOutline') + ' 12 articles</span></div>\n</header>\n</div>'), 'en-tête titre + domaine conservé pour la barre de lecture et verif_site');
+  assert.ok(html.startsWith('<div class="accueil-banniere">\n<span class="accueil-icone" aria-hidden="true">🧠</span>\n<header class="article-titre">\n<h1 class="page-title">Wiki Test, mines</h1>\n<div class="accueil-chapeau"><p class="accueil-sous-titre">Chapeau <strong>court</strong>.</p><p>Suite du chapeau.</p><p>Second paragraphe.</p></div>\n<div class="page-sub"><span class="accueil-domaine">Page d’accueil du wiki <a href="i.html">🧠 Test</a></span><span class="accueil-compte-pages">' + icone('mdiBookOpenPageVariantOutline') + ' <span class="accueil-nombre">12</span> articles</span></div>\n</header>\n</div>'), 'en-tête titre + domaine conservé pour la barre de lecture et verif_site');
   assert.ok(html.includes('<nav class="accueil-index" aria-label="Index et outils du wiki"><a href="ia.html">Index alphabétique</a></nav>'), '« Tous les thèmes » quitte la ligne d’index pour la boîte des thèmes');
   assert.ok(html.includes('<div class="page-body accueil-grille">'));
   assert.ok(html.includes('<section class="accueil-boite" aria-labelledby="s1"><div class="accueil-entete">' + PICTO('mdiCompassOutline') + '<div class="accueil-entete-texte"><h2 class="accueil-titre" id="s1">Navigation</h2></div></div><div class="accueil-corps">'));
   assert.ok(html.includes('<section class="accueil-boite accueil-large" aria-labelledby="themes-du-wiki"><div class="accueil-entete">' + PICTO('mdiLayersTripleOutline') + '<div class="accueil-entete-texte"><h2 class="accueil-titre" id="themes-du-wiki">Thèmes</h2></div><a class="accueil-entete-lien" href="t.html">Explorer tous les thèmes' + CHEVRON + '</a></div>'));
   assert.ok(!html.includes('infobox') && !html.includes('class="toc'));
-  assert.ok(rendreAccueil({ titre: 'T', icone: 'x', domaine: 'd', compte: '1', chapeau: '', sections: [], index: [] }).includes(' 1 article</span>'), 'singulier');
+  assert.ok(rendreAccueil({ titre: 'T', icone: 'x', domaine: 'd', compte: '1', chapeau: '', sections: [], index: [] }).includes(' <span class="accueil-nombre">1</span> article</span>'), 'singulier');
   // sans boîte des thèmes (accueil d'une section), « Tous les thèmes » reste dans la ligne d'index
   assert.ok(rendreAccueil({ titre: 'T', icone: 'x', domaine: 'd', compte: '2', chapeau: '', sections: [], index: [{ url: 't.html', libelle: 'Tous les thèmes' }] }).includes('<a href="t.html">Tous les thèmes</a>'));
   // le chapeau : première phrase hors balise et hors emphase ouverte
@@ -209,7 +214,7 @@ test('site publié : les dix-sept accueils et leurs cinq copies encadrement sont
     assert.ok(html.includes('<nav class="accueil-index"') && html.includes('index-alphabetique.html'), rel + ' : index du wiki');
     assert.match(html, /<div class="page-meta"><span>Site généré le \d{4}-\d{2}-\d{2}(?: · <a [^>]*>Voir cette page dans le fond documentaire<\/a>)?<\/span><span class="accueil-marque">WIKI SST — Mines<\/span><\/div>/, rel + ' : pied réduit à la date de génération et à la marque');
     assert.ok(!html.includes('<details class="backlinks">') && !html.includes('Relecture éditoriale'), rel + ' : ni pages liées ni indicateurs éditoriaux');
-    assert.match(html, /<div class="page-sub"><span class="accueil-domaine">(?:Page d’accueil du wiki|Section « [^»]+ » du wiki) <a href="[^"]*">[^<]*<\/a><\/span><span class="accueil-compte-pages"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="[^"]*"\/><\/svg> [\d\s\u00a0\u202f]+ articles?<\/span><\/div>/, rel + ' : domaine lu, nombre d’articles vu');
+    assert.match(html, /<div class="page-sub"><span class="accueil-domaine">(?:Page d’accueil du wiki|Section « [^»]+ » du wiki) <a href="[^"]*">[^<]*<\/a><\/span><span class="accueil-compte-pages"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="[^"]*"\/><\/svg> <span class="accueil-nombre">[\d\s\u00a0\u202f]+<\/span> articles?<\/span><\/div>/, rel + ' : domaine lu, nombre d’articles vu');
     assert.ok(html.includes('<span class="brand-sst">') || html.includes('<strong>WIKI SST</strong>'), rel + ' : marque (balise du générateur, ou posée par app.js)');
   }
   // l'accueil du wiki : fil d'Ariane arrêté au wiki, compteur = pages du wiki
@@ -219,7 +224,7 @@ test('site publié : les dix-sept accueils et leurs cinq copies encadrement sont
   assert.ok(!psy.includes('Virage_strat'), 'nom de la vidéo non publiée retiré');
   assert.ok(psy.includes('<section class="accueil-boite accueil-large" aria-labelledby="demarrage-rapide-par-role">'), 'démarrage rapide par rôle : une rangée de tuiles sur toute la largeur');
   assert.ok(psy.includes('<ul class="accueil-tuiles">') && !psy.includes('accueil-tuile-desc'), 'tuiles sans la description qui répétait « Démarrage rapide »');
-  assert.ok(psy.includes('<li><span class="accueil-tuile-emoji" aria-hidden="true">'), 'pictogramme de tuile hors lecture d’écran');
+  assert.ok(psy.includes('<li><span class="accueil-tuile-icone teinte-bleu" aria-hidden="true">') && !psy.includes('<li>👨‍💼'), 'pictogramme de tuile MDI teinté, hors lecture d’écran');
   assert.ok(psy.includes('<p class="accueil-sous-titre">Base de connaissances sur <strong>dimensions psychosociales en SST</strong>') || psy.includes('<p class="accueil-sous-titre">Base de connaissances sur les <strong>dimensions psychosociales en SST</strong>'), 'première phrase du chapeau en sous-titre');
   assert.ok(fs.readFileSync(path.join(DOCS, 'w/legislation/00-accueil/00-accueil.html'), 'utf8').includes('<small class="accueil-tuile-desc">tes droits, tes obligations, tes recours en SST</small>'), 'une vraie description de tuile reste');
   // les six accueils de wiki : les boîtes par public, qui répètent les thèmes, sont repliées ; les thèmes et le démarrage rapide restent ouverts
@@ -255,6 +260,9 @@ test('ordre de la maquette : le démarrage rapide par rôle précède les thème
 test('feuille de style : layout de la passe de correction (flex sans chevauchement, tuiles 2 × 2, cartes compactes)', () => {
   const css = fs.readFileSync(path.join(R, 'tools/style.css'), 'utf8');
   const bloc900 = css.slice(css.lastIndexOf('@media (max-width: 900px)'));
+  // les pictogrammes prennent la couleur du texte (sans fill, un <path> est noir)
+  assert.match(css, /\.ic \{ fill: currentColor;/, 'fill des pictogrammes');
+  assert.ok(css.indexOf('.ic { fill: currentColor;') < css.indexOf('.accueil-banniere {'), 'règle posée avant la section des accueils');
   // en-tête de boîte en flex : le titre cède (min-width: 0), le lien de droite ne rétrécit pas
   assert.match(css, /\.accueil-entete \{ display: flex; align-items: center; gap: 12px;/);
   assert.match(css, /\.accueil-entete-texte \{ flex: 1 1 auto; min-width: 0; \}/);

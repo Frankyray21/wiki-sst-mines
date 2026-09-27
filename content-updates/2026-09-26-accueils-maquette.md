@@ -70,6 +70,29 @@ Mesuré dans Chromium (Liberation Sans, un peu plus large que Roboto : ce qui ti
 
 Aucun débordement horizontal à 320, 360, 375, 390, 412, 768, 1024 et 1280 px.
 
+## Validation visuelle finale (capture à 390 × 844 px face à la maquette)
+
+Comparaison élément par élément, couleurs échantillonnées sur la maquette (fond `#0b151f`, cartes `#132233`,
+lignes de thèmes `#101b27`, tuiles `#17293c`, bordures `#1e3249` et `#364c64`, bouton Lecture `#327bcf`,
+texte doux `#b6c2d1`, teintes des pictogrammes), puis troisième passe :
+
+- **Pictogrammes noirs** : aucune règle `fill` n'existait, un `<path>` MDI se remplissait en noir — sur les
+  pages publiées le 27 septembre aussi. Règle `.ic { fill: currentColor }` ajoutée, testée ; les pictogrammes
+  prennent enfin leur teinte (rose, bleu, vert, violet, ambre) et l'accent.
+- **Palette sombre** alignée sur la maquette (jetons ci-dessous) ; bouton Lecture en `#2d6fc4` (5,0:1 sur
+  blanc, la maquette est à 4,3:1) ; nouveaux jetons `--bg-surface-creux` (lignes de thèmes, plus sombres que
+  la carte, comme la maquette) et `--bg-entete`.
+- **En-tête** : « WIKI SST » à 18–22 px au téléphone, menu en icône nue, boutons plus sombres que l'en-tête,
+  recherche sur une surface plus claire. **Fil d'Ariane** : seuls le dernier maillon est en accent.
+- **Pictogrammes d'en-tête de section et de ligne de thème** nus (sans tuile), 25 à 28 px ; ceux des cartes
+  repliées gardent leur tuile, comme la maquette.
+- **Tuiles par rôle** : l'emoji de la note choisit un pictogramme MDI teinté (`pictoTuile` — casque ambre,
+  cravate bleue, cœur vert, immeuble bleu ; le rôle nommé dans le libellé sert de repli, un emoji inconnu reste
+  affiché) ; libellé en blanc ; toute la tuile est le lien.
+- **Boutons Lecture et PDF** : pictogrammes MDI (livre ouvert, document) à la place des emojis, sur les
+  accueils seulement (`app.js`). « 66 » en blanc, « articles » en accent.
+- **Pied** sans filet, en texte doux.
+
 ## Ce qui est conservé
 
 - Tout le contenu des notes d'accueil : chapeau, boîtes, listes, liens. Les boîtes repliées de la veille
@@ -86,8 +109,9 @@ Aucun débordement horizontal à 320, 360, 375, 390, 412, 768, 1024 et 1280 px.
 Le site avait déjà ses variables ; la maquette en ajoute quelques-unes, en clair et dans les deux blocs
 sombres (`tools/style.css`) : `--bg-surface`, `--bg-surface-2`, `--bg-surface-hover`, `--accent-ui`,
 `--accent-ui-hover`, `--accent-ui-text`, `--teinte-rose` à `--teinte-turquoise`, `--rayon`, `--rayon-petit`,
-`--ombre-legere`. La palette sombre passe du gris neutre au bleu-noir de la maquette (`--bg #0d1219`,
-`--content-bg #10161f`, bordures `#243248` / `#33435a`), sur tout le site.
+`--ombre-legere`, `--bg-surface-creux`, `--bg-entete`. La palette sombre passe du gris neutre au bleu-noir de la
+maquette, échantillonné sur l'image (`--bg #0b151f`, `--content-bg #0c1620`, surfaces `#132233` / `#17293c`,
+bordures `#1e3249` / `#364c64`, texte `#f2f6fa` / `#b6c2d1`, accent `#2d6fc4` et `#7cc0ff`), sur tout le site.
 
 ## Fichiers
 
@@ -120,7 +144,11 @@ sombres (`tools/style.css`) : `--bg-surface`, `--bg-surface-2`, `--bg-surface-ho
   le garde dans la colonne du titre, ce qui, à 390 px et avec des polices lisibles, coupait chaque ligne.
 - Les libellés de rôles tiennent sur deux lignes (« Superviseur, / contremaître »), comme sur la capture de la
   maquette au téléphone ; les titres des cartes secondaires aussi, à 390 px.
-- Les emojis des rôles viennent des notes ; la maquette a des pictogrammes teintés d'un seul style.
+- Les pictogrammes des rôles sont choisis d'après l'emoji de la note (casque, cravate, cœur, immeuble) : quatre
+  pictogrammes MDI teintés, proches de ceux de la maquette sans être les mêmes dessins.
+- Les tailles de texte (21–24 px, 15,5 px, 13,5 px) sont plus grandes, relativement à la largeur, que sur la
+  maquette, qui est dessinée pour un écran plus large : d'où le sous-titre sur trois lignes et la description
+  sur quatre à 390 px, contre deux et trois sur l'image. Les descendre sous 13 px nuirait à la lecture.
 - Sur ordinateur, les volets s'ouvrent et coulent en colonnes, comme avant ; la maquette ne montre que le
   téléphone.
 
@@ -134,5 +162,6 @@ sombres (`tools/style.css`) : `--bg-surface`, `--bg-surface-2`, `--bg-surface-ho
   repose produit à partir de l'ancienne page : générateur et site publié disent la même chose.
 - Page d'article (Foreur) et portail regardés à 390 px : en-tête, fil d'Ariane et palette en place, rien de
   cassé.
-- Tests : 300 réussis sur 301. Le seul échec, `textes-loi`, est connu et antérieur.
+- Tests : 300 réussis sur 301 (dont le `fill` des pictogrammes, `pictoTuile`, le compte). Le seul échec,
+  `textes-loi`, est connu et antérieur.
 - `verif_site`, `verif_liens` (0 erreur), `verif_publication` ; manifeste hors ligne régénéré.

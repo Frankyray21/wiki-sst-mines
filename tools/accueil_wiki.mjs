@@ -102,7 +102,25 @@ export function decouperAccueil(html, { resoudre } = {}) {
 
 function nbItems(html) { return (html.match(/<li>/g) || []).length; }
 
-// Une tuile : emoji, libellé du lien, puis une ligne de description — le texte qui suit le lien
+// Pictogramme d'une tuile par rôle (maquette du 26 sept. 2026) : l'emoji de la note, ou le rôle nommé
+// dans le libellé, choisit un pictogramme MDI teinté — casque pour le travailleur, cravate pour le
+// superviseur, cœur pour le conseiller, immeuble pour la direction. Un emoji inconnu reste affiché.
+// Décoratif dans les deux cas (aria-hidden) : le libellé porte le sens.
+const PICTOS_ROLES = [
+  [/^👷/u, /travailleur|op[ée]rateur|mineur/, 'mdiAccountHardHat', 'ambre'],
+  [/^(?:👨‍💼|🧑‍💼|👩‍💼|👔|🛡️|🛡)/u, /superviseur|contrema[iî]tre|chef d/, 'mdiAccountTie', 'bleu'],
+  [/^(?:👩‍⚕️|👨‍⚕️|🧑‍⚕️|🩺|🎯)/u, /conseill|ergonome|hygi[ée]niste|toxicologue|pr[ée]ventionniste/, 'mdiAccountHeart', 'vert'],
+  [/^(?:🏢|🏛️|🏛|🏭)/u, /direction|\brh\b|gestionnaire|employeur/, 'mdiOfficeBuildingOutline', 'bleu'],
+];
+export function pictoTuile(emoji, libelle = '') {
+  const e = String(emoji || '').trim();
+  const l = sansAccents(texteNu(libelle));
+  const r = PICTOS_ROLES.find(([re, mots]) => (e && re.test(e)) || (l && mots.test(l)));
+  if (r) return `<span class="accueil-tuile-icone teinte-${r[3]}" aria-hidden="true">${icone(r[2])}</span>`;
+  return e ? `<span class="accueil-tuile-emoji" aria-hidden="true">${e}</span>` : '';
+}
+
+// Une tuile : pictogramme, libellé du lien, puis une ligne de description — le texte qui suit le lien
 // dans la note (« - tes droits, tes recours ») ou, à défaut, le titre de la page cible (attribut
 // title posé par le générateur), quand il ne répète pas le libellé.
 export function tuile(entree) {
@@ -113,7 +131,7 @@ export function tuile(entree) {
   const sansEmoji = (t) => t.replace(EMOJIS_DE_TETE, '').trim();
   let desc = suite.trim();
   if (!desc && titre && sansEmoji(titre).toLowerCase() !== libelle.trim().toLowerCase()) desc = sansEmoji(titre);
-  const pictogramme = emoji.trim() ? `<span class="accueil-tuile-emoji" aria-hidden="true">${emoji.trim()}</span>` : '';
+  const pictogramme = pictoTuile(emoji, libelle);
   return `${pictogramme}<a ${attrs}><span class="accueil-tuile-libelle">${libelle.trim()}</span>${desc ? `<small class="accueil-tuile-desc">${desc}</small>` : ''}</a>`;
 }
 // entrées de premier niveau d'une liste (les sous-listes ne comptent pas)
@@ -348,7 +366,7 @@ export function rendreAccueil({ titre, icone: pictogramme, domaine, compte, chap
 <span class="accueil-icone" aria-hidden="true">${pictogramme}</span>
 <header class="article-titre">
 <h1 class="page-title">${esc(titreAccueil(titre))}</h1>
-${chapeau ? `<div class="accueil-chapeau">${scinderChapeau(chapeau)}</div>\n` : ''}<div class="page-sub"><span class="accueil-domaine">${domaine}</span><span class="accueil-compte-pages">${icone('mdiBookOpenPageVariantOutline')} ${n} article${n === '1' ? '' : 's'}</span></div>
+${chapeau ? `<div class="accueil-chapeau">${scinderChapeau(chapeau)}</div>\n` : ''}<div class="page-sub"><span class="accueil-domaine">${domaine}</span><span class="accueil-compte-pages">${icone('mdiBookOpenPageVariantOutline')} <span class="accueil-nombre">${n}</span> article${n === '1' ? '' : 's'}</span></div>
 </header>
 </div>
 <div class="page-body accueil-grille">
