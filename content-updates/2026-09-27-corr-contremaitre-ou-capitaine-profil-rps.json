@@ -46,6 +46,20 @@
    "avant": "| Effet sur l'équipe |",
    "apres": "| Effet attendu sur l'équipe (source à préciser) |",
    "motif": "Les effets des tableaux « Effet sur l'équipe » (« réduit iso-strain », « Réduit ERI », etc.) ne citent aucune étude : l'en-tête devient « Effet attendu sur l'équipe (source à préciser) » dans les deux tableaux, qui portent le même en-tête (retouche « toutes »), plutôt qu'une marque par cellule."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Présence terrain, écoute",
+   "avant": "Renforce le soutien social et réduit iso-strain (source à préciser)",
+   "apres": "Renforce le soutien social, réduit iso-strain",
+   "motif": "Retouche inverse. La version précédente de ce lot (PR #49) marquait la cellule une à une ; la marque est désormais portée par l'en-tête « Effet attendu sur l'équipe (source à préciser) » de la colonne. Une note qui a reçu la version précédente retrouve le texte d'origine de la cellule ; une note qui ne l'a pas reçue le porte déjà (retouche reconnue comme faite)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Reconnaissance régulière",
+   "avant": "Réduit ERI (source à préciser), motive",
+   "apres": "Réduit ERI, motive",
+   "motif": "Retouche inverse. La version précédente de ce lot (PR #49) marquait la cellule une à une ; la marque est désormais portée par l'en-tête « Effet attendu sur l'équipe (source à préciser) » de la colonne. Une note qui a reçu la version précédente retrouve le texte d'origine de la cellule ; une note qui ne l'a pas reçue le porte déjà (retouche reconnue comme faite)."
   }
  ]
 }
