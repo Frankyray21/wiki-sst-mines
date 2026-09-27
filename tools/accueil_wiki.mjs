@@ -6,9 +6,21 @@
 // artefacts illisibles (nom de fichier d'une vidéo non publiée, wikilink resté brut, item qui ne
 // mène qu'à une source interne), et chaque retrait est signalé à la construction.
 
+import fs from 'node:fs';
+
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+// Pictogrammes de l'interface : Material Design Icons (@mdi/js, Pictogrammers Free License), le même extrait
+// que les schémas (tools/schemas-sombres/icones.json, LICENCE-icones.txt).
+const ICONES = JSON.parse(fs.readFileSync(new URL('./schemas-sombres/icones.json', import.meta.url), 'utf8'));
+export function icone(nom) {
+  if (!ICONES[nom]) throw new Error('icône inconnue : ' + nom);
+  return `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${ICONES[nom]}"/></svg>`;
+}
+const texteNu = (h) => String(h).replace(/<[^>]+>/g, '').replace(EMOJIS_DE_TETE_G, '').trim();
+const sansAccents = (t) => String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 // même règle que le sommaire du générateur : préfixe « 15 - » retiré, titres numérotés légitimes conservés
 const EMOJIS_DE_TETE = /^(?:\p{Extended_Pictographic}(?:️|\p{Emoji_Modifier})?(?:‍\p{Extended_Pictographic}️?)*|\s)+/u;
+const EMOJIS_DE_TETE_G = new RegExp(EMOJIS_DE_TETE.source, 'u');
 const MEDIA = /^!?[^\s<>]+\.(?:mp4|m4a|mp3|png|jpe?g|gif|svg|webp|pdf)$/i;
 // entrée « point d'entrée » : un emoji, un lien, au plus une courte description après un tiret
 const ENTREE_TUILE = /^\s*(?:\p{Extended_Pictographic}(?:️|\p{Emoji_Modifier})?(?:‍\p{Extended_Pictographic}️?)*)\s*<a [^>]*>[^<]+<\/a>\s*(?:[-–—:]\s*[^<]*)?$/u;
@@ -101,7 +113,8 @@ export function tuile(entree) {
   const sansEmoji = (t) => t.replace(EMOJIS_DE_TETE, '').trim();
   let desc = suite.trim();
   if (!desc && titre && sansEmoji(titre).toLowerCase() !== libelle.trim().toLowerCase()) desc = sansEmoji(titre);
-  return `${emoji}<a ${attrs}><span class="accueil-tuile-libelle">${libelle.trim()}</span>${desc ? `<small class="accueil-tuile-desc">${desc}</small>` : ''}</a>`;
+  const pictogramme = emoji.trim() ? `<span class="accueil-tuile-emoji" aria-hidden="true">${emoji.trim()}</span>` : '';
+  return `${pictogramme}<a ${attrs}><span class="accueil-tuile-libelle">${libelle.trim()}</span>${desc ? `<small class="accueil-tuile-desc">${desc}</small>` : ''}</a>`;
 }
 // entrées de premier niveau d'une liste (les sous-listes ne comptent pas)
 function entreesNiveau1(bloc) {
@@ -184,35 +197,161 @@ export function epurerAccueil(sections, { liensOfferts = new Set() } = {}) {
   return { sections: resultat, journal };
 }
 
-// Une boîte : section ouverte, ou volet replié (titre et nombre de pages dans le résumé).
-export function rendreBoite(s) {
-  const classes = 'accueil-boite' + (s.grand ? ' accueil-large' : '') + (s.replie ? ' accueil-repli' : '');
-  const titre = `<h2 class="accueil-titre" id="${s.id}">${s.titre}${s.replie ? ` <small class="accueil-compte">${nbLiensTexte(s.nbLiens)}</small>` : ''}</h2>`;
-  if (s.replie) return `<details class="${classes}"><summary>${titre}</summary><div class="accueil-corps">\n${s.html}\n</div></details>`;
-  return `<section class="${classes}" aria-labelledby="${s.id}">${titre}<div class="accueil-corps">\n${s.html}\n</div></section>`;
+// ---------- l'accueil selon la maquette de Frank (26 septembre 2026) ----------
+// Une application sobre, lue au téléphone : carte d'entrée (pictogramme, titre, chapeau, nombre d'articles,
+// Lecture et PDF), tuiles par rôle, lignes de thèmes à pictogramme coloré, cartes secondaires repliées.
+// Le contenu reste celui des notes ; les pictogrammes, les sous-titres des cartes par public et le lien
+// « Explorer tous les thèmes » sont de l'habillage, les mêmes pour les six wikis.
+
+// Pictogramme d'un thème, d'après son titre ; teinte par position, pour reconnaître les catégories.
+const ICONES_THEMES = [
+  [/anatom|biomecan|\bcorps\b/, 'mdiHuman'],
+  [/contrainte/, 'mdiCogOutline'],
+  [/accident/, 'mdiMagnifyScan'],
+  [/hierarchie/, 'mdiFormatListNumbered'],
+  [/demarche|organisationnel|facteur/, 'mdiSitemapOutline'],
+  [/fondement|theorie|modele/, 'mdiBookOpenVariant'],
+  [/\btms\b|musculo/, 'mdiShieldPlusOutline'],
+  [/communication/, 'mdiMessageTextOutline'],
+  [/conditions? de travail|horaire/, 'mdiClockOutline'],
+  [/conflit|harcelement|violence/, 'mdiAccountAlertOutline'],
+  [/evaluation|outil|priorisation/, 'mdiClipboardTextOutline'],
+  [/gestion|prevention/, 'mdiShieldCheck'],
+  [/invalidit|lesion/, 'mdiBandage'],
+  [/legislation|norme/, 'mdiGavel'],
+  [/employeur/, 'mdiOfficeBuildingOutline'],
+  [/droit|recours|obligation/, 'mdiScaleBalance'],
+  [/minier|fifo|souterrain/, 'mdiPickaxe'],
+  [/reconnaissance|motivation/, 'mdiStarFourPointsOutline'],
+  [/retour au travail|readaptation/, 'mdiAccountArrowRightOutline'],
+  [/psychosoc|\brps\b|stress/, 'mdiBrain'],
+  [/sante/, 'mdiHeartPulse'],
+  [/soutien|ressource|aide/, 'mdiHandHeartOutline'],
+  [/supervision|superviseur|\brole/, 'mdiAccountSupervisorOutline'],
+  [/biologique/, 'mdiBiohazard'],
+  [/chimique|contaminant|substance/, 'mdiFlaskOutline'],
+  [/physique|bruit|vibration/, 'mdiEarHearing'],
+  [/machine|equipement/, 'mdiCogs'],
+  [/organe|toxicit/, 'mdiStethoscope'],
+  [/cinetique|\badme\b/, 'mdiTimerSandEmpty'],
+  [/cnesst|regime|cotisation/, 'mdiBankOutline'],
+];
+export function iconeTheme(titre) {
+  const t = sansAccents(texteNu(titre));
+  const r = ICONES_THEMES.find(([re]) => re.test(t));
+  return r ? r[1] : 'mdiTagOutline';
 }
 
-// Pied d'une page d'accueil : la date de génération seule — les indicateurs éditoriaux (relecture,
-// vérification des sources) et les outils qualifient des articles, pas une page de navigation.
+// Pictogramme et sous-titre d'une boîte de la note, d'après son titre. Le sous-titre ne va qu'aux boîtes
+// par public (« Articles … ») et au démarrage rapide ; les autres n'ont qu'un pictogramme, ou rien.
+export function genreBoite({ id, titre }) {
+  if (id === 'themes-du-wiki') return { icone: 'mdiLayersTripleOutline', sousTexte: '' };
+  const t = sansAccents(texteNu(titre));
+  const liste = /^(?:articles?|pages?)\b/.test(t);
+  if (/demarrage rapide/.test(t) && /role|profil/.test(t)) return { icone: 'mdiAccountGroupOutline', sousTexte: 'Accédez rapidement aux contenus pertinents pour votre rôle.' };
+  if (/interne|conseiller/.test(t)) return { icone: 'mdiFileDocumentOutline', sousTexte: liste ? 'Outils, méthodes et références pour les professionnels.' : '' };
+  if (/travailleur|vulgaris/.test(t)) return { icone: 'mdiAccountGroupOutline', sousTexte: liste ? 'Des explications simples et concrètes pour le terrain.' : '' };
+  if (/gestionnaire|encadrement|strategique/.test(t)) return { icone: 'mdiAccountTieOutline', sousTexte: liste ? 'Programmes et décisions pour l’encadrement.' : '' };
+  if (/navigation|liens utiles|mode d.emploi/.test(t)) return { icone: 'mdiCompassOutline', sousTexte: '' };
+  if (/index/.test(t)) return { icone: 'mdiListBoxOutline', sousTexte: '' };
+  if (/glossaire/.test(t)) return { icone: 'mdiSchoolOutline', sousTexte: '' };
+  if (/\bloi\b|legal|reglement|normatif|conformite/.test(t)) return { icone: 'mdiScaleBalance', sousTexte: '' };
+  if (/lesion|programme|evaluation|risque/.test(t)) return { icone: 'mdiClipboardTextOutline', sousTexte: '' };
+  return { icone: '', sousTexte: '' };
+}
+
+// Chapeau de la note : la première phrase devient le sous-titre de la carte, le reste sa description.
+// La coupe se fait hors balise et hors emphase ouverte (« … <strong>roche dure</strong>. Couvre … »).
+export function scinderChapeau(html) {
+  const m = String(html).match(/^<p>([\s\S]*?)<\/p>([\s\S]*)$/);
+  if (!m) return html;
+  const [, p, reste] = m;
+  let prof = 0, i = 0, coupe = -1;
+  while (i < p.length) {
+    if (p[i] === '<') {
+      const fin = p.indexOf('>', i);
+      if (fin < 0) break;
+      if (p[i + 1] === '/') prof--; else if (p[fin - 1] !== '/' && !/^<(?:br|img|wbr)\b/.test(p.slice(i, fin + 1))) prof++;
+      i = fin + 1; continue;
+    }
+    if (/[.!?]/.test(p[i]) && prof === 0 && (i + 1 === p.length || /\s/.test(p[i + 1]))) { coupe = i + 1; break; }
+    i++;
+  }
+  if (coupe < 0 || !p.slice(coupe).trim()) return `<p class="accueil-sous-titre">${p}</p>${reste}`;
+  return `<p class="accueil-sous-titre">${p.slice(0, coupe)}</p><p>${p.slice(coupe).trim()}</p>${reste}`;
+}
+
+// Ordre de la maquette : la carte d'entrée, le démarrage rapide par rôle, les thèmes, puis les autres
+// boîtes. La note met les thèmes en premier ; on avance la boîte de démarrage juste devant eux.
+export function estDemarrage({ titre }) {
+  const t = sansAccents(texteNu(titre));
+  return /demarrage rapide/.test(t) && /role|profil/.test(t);
+}
+export function ordonnerBoites(sections) {
+  const iThemes = sections.findIndex(s => s.id === 'themes-du-wiki');
+  const iRoles = sections.findIndex(estDemarrage);
+  if (iThemes < 0 || iRoles < 0 || iRoles < iThemes) return sections;
+  const ordre = sections.filter((s, i) => i !== iRoles);
+  ordre.splice(iThemes, 0, sections[iRoles]);
+  return ordre;
+}
+
+const CHEVRON = '<span class="accueil-chevron" aria-hidden="true"></span>';
+
+// Boîte « Thèmes » de l'accueil d'un wiki : barre de raccourcis (ordinateur), puis un volet par thème —
+// pictogramme teinté, titre qui mène à la page du thème, compte, description (visible ouvert), notions.
+// themes : [{ id, url, titre, desc, notions: [{ url, titre }] }], dans l'ordre alphabétique.
+export function rendreThemesAccueil(themes) {
+  const raccourcis = themes.map(t => `<a href="#${t.id}">${esc(t.titre)}</a>`).join('');
+  const volets = themes.map((t, i) => {
+    const n = t.notions.length;
+    const listes = n ? `<ul>${t.notions.map(q => `<li><a href="${q.url}">${esc(q.titre)}</a></li>`).join('')}</ul>` : '<p class="page-sub">Aucun article rattaché pour l’instant.</p>';
+    return `<details class="accueil-theme" id="${t.id}" open><summary><span class="accueil-theme-icone teinte-${i % 6 + 1}" aria-hidden="true">${icone(iconeTheme(t.titre))}</span><span class="accueil-theme-texte"><span class="accueil-theme-titre"><a href="${t.url}">${esc(t.titre)}</a></span>${t.desc ? `<span class="accueil-theme-desc">${esc(t.desc)}</span>` : ''}</span><small>${n} article${n > 1 ? 's' : ''}</small>${CHEVRON}</summary>${listes}<a class="accueil-theme-page" href="${t.url}">Page du thème →</a></details>`;
+  }).join('');
+  return `<nav class="accueil-themes-nav" aria-label="Aller à un thème">${raccourcis}</nav><div class="accueil-groupes accueil-themes">${volets}</div>`;
+}
+
+// Une boîte : carte ouverte (en-tête à pictogramme, sous-titre, lien « Explorer tous les thèmes » sur la
+// boîte des thèmes), ou carte repliée (résumé : pictogramme, titre, sous-titre, nombre de pages, chevron).
+export function rendreBoite(s, { lienTousThemes = null } = {}) {
+  const g = genreBoite(s);
+  const classes = 'accueil-boite' + (s.grand ? ' accueil-large' : '') + (s.replie ? ' accueil-repli' : '');
+  const pictogramme = g.icone ? `<span class="accueil-boite-icone" aria-hidden="true">${icone(g.icone)}</span>` : '';
+  const texte = `<div class="accueil-entete-texte"><h2 class="accueil-titre" id="${s.id}">${s.titre}</h2>${g.sousTexte ? `<p class="accueil-sous-texte">${g.sousTexte}</p>` : ''}</div>`;
+  if (s.replie) {
+    return `<details class="${classes}"><summary><div class="accueil-entete">${pictogramme}${texte}<span class="accueil-compte">${nbLiensTexte(s.nbLiens)}</span>${CHEVRON}</div></summary><div class="accueil-corps">\n${s.html}\n</div></details>`;
+  }
+  const lien = s.id === 'themes-du-wiki' && lienTousThemes ? `<a class="accueil-entete-lien" href="${lienTousThemes.url}">Explorer tous les thèmes${CHEVRON}</a>` : '';
+  return `<section class="${classes}" aria-labelledby="${s.id}"><div class="accueil-entete">${pictogramme}${texte}${lien}</div><div class="accueil-corps">\n${s.html}\n</div></section>`;
+}
+
+// Pied d'une page d'accueil : la date de génération, la marque à droite — les indicateurs éditoriaux
+// (relecture, vérification des sources) et les outils qualifient des articles, pas une page de navigation.
 export function piedAccueil(date, complement = '') {
-  return `<div class="page-meta">Site généré le ${esc(date)}${complement ? ' · ' + complement : ''}</div>`;
+  return `<div class="page-meta"><span>Site généré le ${esc(date)}${complement ? ' · ' + complement : ''}</span><span class="accueil-marque">WIKI SST — Mines</span></div>`;
 }
 
 // HTML de la page (sans fil d'Ariane ni pied de page, fournis par l'habillage commun).
-export function rendreAccueil({ titre, icone, sousTitre, chapeau, sections, index = [] }) {
-  const boites = sections.map(rendreBoite).join('\n');
+//   domaine : « Page d’accueil du wiki <a>…</a> » ou « Section « … » du wiki <a>…</a> », lu par les lecteurs
+//   d'écran ; compte : nombre de pages du wiki ou de la section, affiché ; chapeau : texte de la note avant son
+//   premier titre ; index : liens d'index du wiki, rendus en ligne discrète sous les boîtes (« Tous les thèmes »
+//   passe dans la boîte des thèmes). Les mêmes liens sont dans le menu latéral.
+export function rendreAccueil({ titre, icone: pictogramme, domaine, compte, chapeau, sections, index = [] }) {
+  const aThemes = sections.some(s => s.id === 'themes-du-wiki');
+  const tousThemes = aThemes ? index.find(l => /tous les th[èe]mes/i.test(l.libelle)) : null;
+  const liensIndex = index.filter(l => l !== tousThemes);
+  const boites = ordonnerBoites(sections).map(s => rendreBoite(s, { lienTousThemes: tousThemes })).join('\n');
+  const n = String(compte);
   // <header class="article-titre"> reste tel quel : la barre de lecture s'insère après .page-sub
   // et verif_site exige ce groupe titre + domaine sur toute page à corps.
   return `<div class="accueil-banniere">
-<span class="accueil-icone" aria-hidden="true">${icone}</span>
+<span class="accueil-icone" aria-hidden="true">${pictogramme}</span>
 <header class="article-titre">
 <h1 class="page-title">${esc(titreAccueil(titre))}</h1>
-<div class="page-sub">${sousTitre}</div>
+${chapeau ? `<div class="accueil-chapeau">${scinderChapeau(chapeau)}</div>\n` : ''}<div class="page-sub"><span class="accueil-domaine">${domaine}</span><span class="accueil-compte-pages">${icone('mdiBookOpenPageVariantOutline')} ${n} article${n === '1' ? '' : 's'}</span></div>
 </header>
 </div>
-${chapeau ? `<div class="accueil-chapeau">${chapeau}</div>` : ''}
-${index.length ? `<nav class="accueil-index" aria-label="Index et outils du wiki">${index.map(l => `<a href="${l.url}">${esc(l.libelle)}</a>`).join(' <span class="crumb-sep">·</span> ')}</nav>` : ''}
 <div class="page-body accueil-grille">
 ${boites}
-</div>`;
+</div>${liensIndex.length ? `\n<nav class="accueil-index" aria-label="Index et outils du wiki">${liensIndex.map(l => `<a href="${l.url}">${esc(l.libelle)}</a>`).join(' <span class="crumb-sep">·</span> ')}</nav>` : ''}`;
 }

@@ -158,10 +158,11 @@ node tools/serve.mjs
 - **Recherche plein texte** : numéros d'article (`art 4 RSST`, `RSST 51`), tolérance aux pluriels et aux accents, filtres par wiki, pagination, suggestion en cas de zéro résultat
 - **Wikilinks Obsidian** résolus, y compris les variantes (chiffres romains/arabes, zéros de tête) ; liens rouges pour les pages réellement absentes du vault
 - Callouts, **infobox** générée depuis le frontmatter YAML (réparé automatiquement s'il est invalide), sommaires, backlinks
-- **Pages d'accueil** (chaque wiki, et les pages d'accueil de l'encadrement) : bandeau avec le nom du wiki et son
-  nombre de pages, chapeau, une grille des thèmes en tête sur l'accueil du wiki, puis une boîte par section de la
-  note avec listes en colonnes — ni infobox, ni sommaire, ni préfixe de classement dans les titres, comme la page
-  d'accueil d'un vrai wiki
+- **Pages d'accueil** (chaque wiki, et les pages d'accueil de l'encadrement) : carte d'entrée (pictogramme, nom
+  du wiki, chapeau, nombre d'articles, Lecture et PDF), démarrage rapide par rôle en tuiles, lignes de thèmes à
+  pictogramme teinté sur l'accueil du wiki, puis une boîte par section de la note (les boîtes par public,
+  repliées, sur une ligne ; les autres avec listes en colonnes) — ni infobox, ni sommaire, ni préfixe de
+  classement dans les titres, comme la page d'accueil d'un vrai wiki
 - **Thèmes** : une page par thème (`w/<wiki>/theme/<slug>.html`), source authored (« type: thème ») ou — faute de
   thème, en Ergonomie — la note index d'un sous-dossier ; chaque notion rattachée porte un fil d'Ariane à trois
   maillons (Portail › Wiki › Thème) et un bloc « Voir aussi » (version jumelle publiée, notions du même thème).
@@ -240,6 +241,15 @@ node tools/serve.mjs
   coulent en colonnes et, fermés, tiennent sur une ligne ; au téléphone, la barre de raccourcis disparaît. Même
   règle dans le générateur et sur le site (`epurerAccueil`, `tools/accueil_wiki.mjs`). Ergonomie : 2 769 → 1 462 px
   au téléphone. Détail : `content-updates/2026-09-26-accueils-plus-legers.md`
+- **Accueils selon la maquette de Frank (26 et 27 septembre 2026)** : les 17 accueils (wikis, Recueil, encadrement
+  et copies `g/`) reprennent la maquette « Wiki Ergonomie, mines » : en-tête à « SST » en bleu d'accent, carte
+  d'entrée, démarrage rapide par rôle en 2 × 2 avant les thèmes, lignes de thèmes à pictogramme teinté (MDI,
+  `tools/schemas-sombres/icones.json`), cartes secondaires repliées sur une ligne, index du wiki en ligne discrète
+  sous les boîtes, pied « Site généré le … / WIKI SST — Mines ». A− et A+ passent dans le menu (« Taille du
+  texte ») ; la palette sombre devient bleu-noir sur tout le site (jetons `--bg-surface*`, `--accent-ui*`,
+  `--teinte-*`, `tools/style.css`). Même rendu par le générateur (`rendreAccueil`, `ordonnerBoites`,
+  `tools/accueil_wiki.mjs`) et sur le site. Ergonomie : 1 932 → 1 416 px à 390 px. Détail, mesures par largeur et
+  écarts avec la maquette : `content-updates/2026-09-26-accueils-maquette.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma
   en texte » (127 schémas, 65 pages), puis toutes les autres (« Lire la version texte — … », « Lire les voies en
   texte », « Lire l’illustration en texte » : 16 sections, 10 pages) disparaissent. Chaque image garde son texte

@@ -21,7 +21,7 @@ import { rendreTitreArticle } from './entete-article.mjs';
 import { normaliserBibliographie } from './bibliographie.mjs';
 import { motsDePage, encoderListe } from './recherche_mots.mjs';
 import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
-import { estAccueil, decouperAccueil, rendreAccueil, titreAccueil, piedAccueil, epurerAccueil, liensDe } from './accueil_wiki.mjs';
+import { estAccueil, decouperAccueil, rendreAccueil, rendreThemesAccueil, titreAccueil, piedAccueil, epurerAccueil, liensDe } from './accueil_wiki.mjs';
 import { blocAvis, lireConfAvis, ecrireConfAvis } from './avis.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -831,7 +831,7 @@ ${metaPwa(ROOT)}
 <body>
 <header class="site-header">
   <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">☰</button>
-  <a class="brand" href="${ROOT}index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI SST</strong><small>Mines · Québec</small></span></a>
+  <a class="brand" href="${ROOT}index.html"><span class="brand-icon">⛏️</span><span class="brand-text"><strong>WIKI <span class="brand-sst">SST</span></strong><small>Mines · Québec</small></span></a>
   <div class="searchbox">
     <input type="search" id="q" aria-label="Rechercher dans le wiki" placeholder="Rechercher dans le wiki…" autocomplete="off">
     <div id="suggest" class="suggest" hidden></div>
@@ -1321,9 +1321,8 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied, adresse = p.
   const prefixe = accueilDuWiki ? parts[0] + '/' : parts.slice(0, 2).join('/') + '/';
   const compte = pages.filter(q => q.relPath.startsWith(prefixe)).length.toLocaleString('fr-CA');
   const lienWiki = `<a href="{{ROOT}}w/${wiki.slug}/index.html">${wiki.icon} ${esc(wiki.name)}</a>`;
-  const sousTitre = accueilDuWiki
-    ? `Page d’accueil du wiki ${lienWiki} · ${compte} pages`
-    : `Section « ${esc(cleanLabel(parts[1]))} » du wiki ${lienWiki} · ${compte} pages`;
+  // lu par les lecteurs d'écran ; à l'écran, la carte montre le nombre d'articles (maquette du 26 sept. 2026)
+  const domaine = accueilDuWiki ? `Page d’accueil du wiki ${lienWiki}` : `Section « ${esc(cleanLabel(parts[1]))} » du wiki ${lienWiki}`;
   const index = [{ url: `{{ROOT}}w/${wiki.slug}/index-alphabetique.html`, libelle: 'Index alphabétique' }];
   if (p.wikiKey === 'Recueil législatif SST') index.push({ url: `{{ROOT}}w/${wiki.slug}/index-par-loi.html`, libelle: 'Index par loi' });
   if (accueilDuWiki && pageEtudes(p.wikiKey)) index.push({ url: '{{ROOT}}' + pageEtudes(p.wikiKey), libelle: 'Études et rapports' });
@@ -1343,22 +1342,16 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied, adresse = p.
   if (accueilDuWiki && p.wikiKey !== 'Recueil législatif SST') {
     const themes = themesParWiki.get(p.wikiKey) || [];
     if (themes.length) {
-      const lien = (q) => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`;
-      const raccourcis = themes.map(t => `<a href="#theme-${slugify(t.base)}">${esc(t.title)}</a>`).join('');
-      const volets = themes.map(t => {
-        // les études du thème sont sur la page « Études et rapports » du wiki ; la page du thème,
-        // elle, les liste avec le reste
-        const notions = pages.filter(q => q.wikiKey === p.wikiKey && q.role === 'notion' && (q.themes || []).includes(t) && !estEtude(q))
-          .sort((a, b) => a.title.localeCompare(b.title, 'fr'));
-        const desc = sousTitreTheme(t);
-        const listes = notions.length
-          ? `<ul>${notions.map(lien).join('')}</ul>`
-          : '<p class="page-sub">Aucun article rattaché pour l’instant.</p>';
-        // Le titre mène à la page du thème (le volet se replie par la flèche ou le reste de la ligne).
-        return `<details class="accueil-theme" id="theme-${slugify(t.base)}" open><summary><span class="accueil-theme-titre"><a href="{{ROOT}}${t.out}">${esc(t.title)}</a></span> <small>${notions.length} article${notions.length > 1 ? 's' : ''}</small>${desc ? `<span class="accueil-theme-desc">${esc(desc)}</span>` : ''}</summary>${listes}<a class="accueil-theme-page" href="{{ROOT}}${t.out}">Page du thème →</a></details>`;
-      }).join('');
+      // les études du thème sont sur la page « Études et rapports » du wiki ; la page du thème, elle, les
+      // liste avec le reste. Rendu par accueil_wiki.rendreThemesAccueil (lignes à pictogramme, maquette du
+      // 26 sept. 2026) : le titre mène à la page du thème, le reste de la ligne replie le volet.
+      const donnees = themes.map(t => ({
+        id: `theme-${slugify(t.base)}`, url: `{{ROOT}}${t.out}`, titre: t.title, desc: sousTitreTheme(t),
+        notions: pages.filter(q => q.wikiKey === p.wikiKey && q.role === 'notion' && (q.themes || []).includes(t) && !estEtude(q))
+          .sort((a, b) => a.title.localeCompare(b.title, 'fr')).map(q => ({ url: `{{ROOT}}${q.out}`, titre: q.title })),
+      }));
       sections = [
-        { id: 'themes-du-wiki', titre: 'Thèmes', html: `<nav class="accueil-themes-nav" aria-label="Aller à un thème">${raccourcis}</nav><div class="accueil-groupes accueil-themes">${volets}</div>`, grand: true },
+        { id: 'themes-du-wiki', titre: 'Thèmes', html: rendreThemesAccueil(donnees), grand: true },
         ...accueil.sections.filter(s => {
           const doublon = /^th[èe]mes$/i.test(String(s.titre).replace(/<[^>]+>/g, '').trim());
           if (doublon) console.log(`  accueil ${p.relPath} : section rédigée « Thèmes » masquée (doublon de la grille des thèmes)`);
@@ -1379,7 +1372,7 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied, adresse = p.
   // un éventuel « En bref » de la note ouvre le chapeau, sans son étiquette
   return `
 <div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
-${rendreAccueil({ titre: p.title, icone: wiki.icon, sousTitre, chapeau: (chapoHtml || '') + accueil.chapeau, sections, index })}
+${rendreAccueil({ titre: p.title, icone: wiki.icon, domaine, compte, chapeau: (chapoHtml || '') + accueil.chapeau, sections, index })}
 ${blocAvis({ adresse, titre: titreAccueil(p.title), wiki: wikiAvis || wiki.name })}
 ${pied}`;
 }

@@ -49,6 +49,11 @@
   --carte-public-grad: #fbfdff;
   --carte-public-hover: #4b77bd;
   --ombre: rgba(0,0,0,.13);
+  /* Maquette du 26 sept. 2026 : surfaces, accent bleu de l'interface, teintes des pictogrammes, rayons. */
+  --bg-surface: #ffffff; --bg-surface-2: #f1f4f8; --bg-surface-hover: #e7edf5;
+  --accent-ui: #2563eb; --accent-ui-hover: #1d4ed8; --accent-ui-text: #1d4ed8;
+  --teinte-rose: #c2255c; --teinte-bleu: #1971c2; --teinte-vert: #2b8a3e; --teinte-violet: #6741d9; --teinte-ambre: #b7791f; --teinte-turquoise: #0b7285;
+  --rayon: 12px; --rayon-petit: 10px; --ombre-legere: 0 1px 2px rgba(0,0,0,.06);
 
   --hh: 60px; /* hauteur de l'en-tête */
   font-size: 16px;
@@ -61,14 +66,14 @@
    data-theme : absent (ou « dark ») = sombre, « light » = clair, « auto » = comme l'appareil. */
 @media screen and (prefers-color-scheme: dark) {
   :root[data-theme="auto"] {
-    --bg: #16181d;
-    --content-bg: #1d2026;
-    --border: #4d545e;
-    --border-light: #3a404a;
-    --border-soft: #2b3038;
-    --text: #e4e6e8;
-    --text-soft: #a9b1ba;
-    --text-faint: #8b939c;
+    --bg: #0d1219;
+    --content-bg: #10161f;
+    --border: #4a5b73;
+    --border-light: #33435a;
+    --border-soft: #243248;
+    --text: #e6ebf2;
+    --text-soft: #a9b5c5;
+    --text-faint: #8794a6;
     --link: #7ab0ff;
     --link-visited: #c3a0f0;
     --link-new: #ff8b82;
@@ -108,6 +113,10 @@
     --carte-public-grad: #212936;
     --carte-public-hover: #7ab0ff;
     --ombre: rgba(0,0,0,.5);
+    --bg-surface: #172231; --bg-surface-2: #1e2b3d; --bg-surface-hover: #243449;
+    --accent-ui: #2563eb; --accent-ui-hover: #1d4ed8; --accent-ui-text: #8ab8ff;
+    --teinte-rose: #f783ac; --teinte-bleu: #74c0fc; --teinte-vert: #69db7c; --teinte-violet: #b197fc; --teinte-ambre: #ffd43b; --teinte-turquoise: #66d9e8;
+    --ombre-legere: 0 1px 2px rgba(0,0,0,.35);
     color-scheme: dark;
   }
 }
@@ -118,14 +127,14 @@
      Hors écran (impression), aucun de ces blocs ne s’applique : la palette claire de
      :root reste seule, et une page imprimée l’est en noir sur blanc. */
   :root:not([data-theme="light"]):not([data-theme="auto"]) {
-    --bg: #16181d;
-    --content-bg: #1d2026;
-    --border: #4d545e;
-    --border-light: #3a404a;
-    --border-soft: #2b3038;
-    --text: #e4e6e8;
-    --text-soft: #a9b1ba;
-    --text-faint: #8b939c;
+    --bg: #0d1219;
+    --content-bg: #10161f;
+    --border: #4a5b73;
+    --border-light: #33435a;
+    --border-soft: #243248;
+    --text: #e6ebf2;
+    --text-soft: #a9b5c5;
+    --text-faint: #8794a6;
     --link: #7ab0ff;
     --link-visited: #c3a0f0;
     --link-new: #ff8b82;
@@ -164,6 +173,10 @@
     --carte-public-grad: #212936;
     --carte-public-hover: #7ab0ff;
     --ombre: rgba(0,0,0,.5);
+    --bg-surface: #172231; --bg-surface-2: #1e2b3d; --bg-surface-hover: #243449;
+    --accent-ui: #2563eb; --accent-ui-hover: #1d4ed8; --accent-ui-text: #8ab8ff;
+    --teinte-rose: #f783ac; --teinte-bleu: #74c0fc; --teinte-vert: #69db7c; --teinte-violet: #b197fc; --teinte-ambre: #ffd43b; --teinte-turquoise: #66d9e8;
+    --ombre-legere: 0 1px 2px rgba(0,0,0,.35);
     color-scheme: dark;
   }
 }
@@ -188,25 +201,25 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 /* ---------- entête ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  display: flex; align-items: center; gap: 14px;
-  background: var(--content-bg);
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg);
   border-bottom: 1px solid var(--border-soft);
-  padding: 8px 16px;
-  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  padding: 10px 16px;
 }
-.burger { display: none; background: none; border: 1px solid var(--border-light); border-radius: 3px; font-size: 18px; padding: 2px 9px; cursor: pointer; color: var(--text); }
+.burger { display: none; background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--rayon-petit); font-size: 18px; padding: 2px 9px; cursor: pointer; color: var(--text); }
 .brand { display: flex; align-items: center; gap: 9px; color: var(--text) !important; }
 .brand:hover { text-decoration: none; }
 .brand-icon { font-size: 27px; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
-.brand-text strong { font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif; font-size: 19px; letter-spacing: .5px; }
+.brand-text strong { font-family: inherit; font-size: 20px; font-weight: 800; letter-spacing: .02em; }
+.brand-sst { color: var(--accent-ui-text); }
 .brand-text small { color: var(--text-soft); font-size: 11.5px; }
 .searchbox { position: relative; flex: 1; max-width: 540px; margin-left: auto; }
 .searchbox input, .portal-search input {
-  width: 100%; padding: 7px 12px 7px 34px;
-  border: 1px solid var(--border); border-radius: 3px;
-  font-size: 14.5px; color: var(--text);
-  background: var(--content-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23888f97'%3E%3Cpath d='M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z'/%3E%3C/svg%3E") no-repeat 10px center / 15px;
+  width: 100%; padding: 9px 12px 9px 36px; min-height: 42px;
+  border: 1px solid var(--border-light); border-radius: var(--rayon);
+  font-size: 15px; color: var(--text);
+  background: var(--bg-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23888f97'%3E%3Cpath d='M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z'/%3E%3C/svg%3E") no-repeat 10px center / 15px;
 }
 .searchbox input:focus, .portal-search input:focus { outline: 2px solid var(--focus); outline-offset: -1px; }
 
@@ -214,7 +227,7 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .btn-theme {
   flex-shrink: 0; width: 38px; height: 38px;
   display: flex; align-items: center; justify-content: center;
-  background: none; border: 1px solid var(--border-light); border-radius: 3px;
+  background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--rayon-petit);
   font-size: 17px; cursor: pointer; color: var(--text); line-height: 1;
 }
 .btn-theme:hover { background: var(--hover); border-color: var(--hover-bd); }
@@ -266,7 +279,14 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 }
 
 /* ---------- article ---------- */
-.breadcrumbs { font-size: 12.5px; color: var(--text-soft); margin-bottom: 10px; }
+.breadcrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; font-size: 14px; color: var(--text-soft); margin-bottom: 14px; }
+/* maison (pictogramme MDI, même extrait que les schémas), « › », puis les maillons séparés par « / » ;
+   le dernier, la page courante, en couleur d'accent (maquette du 26 sept. 2026) */
+.breadcrumbs::before { content: ''; flex: none; width: 18px; height: 18px; background: currentColor; -webkit-mask: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'><path%20d='M12%205.69L17%2010.19V18H15V12H9V18H7V10.19L12%205.69M12%203L2%2012H5V20H11V14H13V20H19V12H22'/></svg>") center / contain no-repeat; mask: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'><path%20d='M12%205.69L17%2010.19V18H15V12H9V18H7V10.19L12%205.69M12%203L2%2012H5V20H11V14H13V20H19V12H22'/></svg>") center / contain no-repeat; }
+.breadcrumbs > a:first-of-type::before { content: '›'; margin-right: 6px; color: var(--text-faint); }
+.breadcrumbs .crumb-sep { font-size: 0; }
+.breadcrumbs .crumb-sep::before { content: '/'; font-size: 14px; color: var(--text-faint); }
+.breadcrumbs > a:last-of-type { color: var(--accent-ui-text); font-weight: 600; }
 .crumb-sep { color: var(--text-faint); margin: 0 2px; }
 .page-title {
   font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif;
@@ -687,83 +707,138 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .site-footer { text-align: center; font-size: 12px; color: var(--text-soft); padding: 22px 10px 30px; }
 
 /* ---------- responsive ---------- */
-/* ---------- pages d'accueil des wikis : bandeau et boîtes, comme la page d'accueil d'un wiki ---------- */
-.accueil-banniere { display: flex; align-items: center; gap: 16px; padding: 14px 18px; border: 1px solid var(--chapo-bd); background: var(--chapo-bg); border-radius: 3px; }
-.accueil-icone { font-size: 46px; line-height: 1; flex: none; }
-.accueil-banniere .article-titre { min-width: 0; margin: 0; gap: .3rem; }
-.accueil-banniere .page-title { border-bottom: 0; margin: 0; }
-.accueil-banniere .page-sub { margin: 0; }
-.accueil-chapeau { font-size: 15.5px; line-height: 1.55; margin: 14px 0 8px; }
-.accueil-chapeau p { margin: 0 0 8px; }
-.accueil-index { font-size: 14px; margin: 4px 0 16px; color: var(--text-soft); }
+/* ---------- pages d'accueil des wikis (maquette de Frank, 26 sept. 2026) ----------
+   Une application sobre, lue au téléphone : carte d'entrée (pictogramme, titre, chapeau, nombre
+   d'articles, Lecture et PDF), tuiles par rôle en 2 × 2, lignes de thèmes à pictogramme teinté,
+   cartes secondaires repliées sur une ligne. Surfaces et bordures viennent des jetons --bg-surface*,
+   --border-soft. Le bloc 900 px resserre tout pour le téléphone ; rien n'y borne la largeur : la
+   page occupe l'écran moins les 16 px de marge de .content. */
+.accueil-banniere {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "icone titre titre" "icone chapeau chapeau" ". compte actions";
+  gap: 8px 16px; align-items: center; padding: 18px 20px; margin-bottom: 14px;
+  border: 1px solid var(--border-soft); background: var(--bg-surface); border-radius: var(--rayon); box-shadow: var(--ombre-legere);
+}
+.accueil-banniere .article-titre { display: contents; }
+.accueil-icone { grid-area: icone; align-self: start; display: flex; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 16px; background: var(--bg-surface-2); border: 1px solid var(--border-soft); font-size: 42px; line-height: 1; }
+.accueil-banniere .page-title { grid-area: titre; font-family: inherit; font-size: 27px; font-weight: 700; line-height: 1.2; letter-spacing: -.01em; border-bottom: 0; padding: 0; margin: 0; }
+.accueil-banniere .accueil-chapeau { grid-area: chapeau; margin: 0; }
+.accueil-chapeau p { margin: 0 0 6px; font-size: 14.5px; line-height: 1.5; color: var(--text-soft); }
+.accueil-chapeau p:last-child { margin-bottom: 0; }
+.accueil-chapeau .accueil-sous-titre { font-size: 16.5px; line-height: 1.4; color: var(--text); font-weight: 500; }
+.accueil-chapeau .accueil-sous-titre strong { font-weight: inherit; }
+.accueil-banniere .page-sub { grid-area: compte; display: flex; align-items: center; gap: 8px; margin: 0; font-size: 14.5px; color: var(--text-soft); }
+.accueil-domaine { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } /* lu, pas vu */
+.accueil-compte-pages { display: inline-flex; align-items: center; gap: 7px; font-weight: 500; white-space: nowrap; }
+.accueil-compte-pages .ic { width: 22px; height: 22px; color: var(--accent-ui-text); }
+/* Lecture et PDF, posés par app.js après .page-sub : Lecture en bouton principal, PDF en secondaire.
+   Sur un accueil, app.js déplace A− et A+ dans le menu latéral (« Taille du texte ») ; s'il n'y a pas
+   de menu, ils restent ici, discrets, après PDF. */
+.accueil-banniere .lecture-outils { grid-area: actions; justify-self: end; margin: 0; gap: 8px; }
+.accueil-banniere .lecture-outils::before { content: ''; order: 0; align-self: stretch; width: 1px; margin: 8px 6px 8px 0; background: var(--border-light); } /* séparateur court */
+.accueil-banniere .lecture-outils button { min-height: 44px; border-radius: var(--rayon-petit); padding: 8px 15px; font-size: 14.5px; font-weight: 600; border: 1px solid var(--border-light); background: var(--bg-surface-2); white-space: nowrap; }
+.accueil-banniere .lecture-outils [data-lecture] { order: 1; background: var(--accent-ui); border-color: var(--accent-ui); color: #fff; }
+.accueil-banniere .lecture-outils [data-lecture]:hover:not(:disabled), .accueil-banniere .lecture-outils [data-lecture].actif { background: var(--accent-ui-hover); border-color: var(--accent-ui-hover); color: #fff; }
+.accueil-banniere .lecture-outils [data-pdf] { order: 2; }
+.accueil-banniere .lecture-outils [data-moins], .accueil-banniere .lecture-outils [data-plus] { order: 3; min-width: 38px; min-height: 38px; padding: 4px 8px; font-size: 13px; font-weight: 500; color: var(--text-soft); background: none; border-color: transparent; }
+.accueil-banniere .lecture-outils [data-moins]:hover:not(:disabled), .accueil-banniere .lecture-outils [data-plus]:hover:not(:disabled) { border-color: var(--border-light); background: var(--bg-surface-hover); }
+.lecture-taille-boutons { display: flex; gap: 8px; padding: 2px 0 4px; }
+.lecture-taille-boutons button { min-width: 48px; min-height: 40px; padding: 6px 10px; border: 1px solid var(--border-light); border-radius: var(--rayon-petit); background: var(--bg-surface-2); color: var(--text); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.lecture-taille-boutons button:hover:not(:disabled) { background: var(--bg-surface-hover); border-color: var(--hover-bd); }
+.lecture-taille-boutons button:disabled { opacity: .45; cursor: default; }
+.lecture-taille-boutons button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+/* index du wiki (alphabétique, catégories…) : ligne discrète sous les boîtes ; les mêmes liens sont au menu */
+.accueil-index { margin: 16px 2px 0; font-size: 13px; color: var(--text-faint); }
 .accueil-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; grid-auto-flow: dense; }
-.accueil-boite { border: 1px solid var(--chapo-bd); background: var(--content-bg); border-radius: 3px; min-width: 0; }
+.accueil-boite { border: 1px solid var(--border-soft); background: var(--bg-surface); border-radius: var(--rayon); box-shadow: var(--ombre-legere); min-width: 0; }
 .accueil-large { grid-column: 1 / -1; }
-.page-body .accueil-titre { font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif; font-size: 19px; font-weight: 600; margin: 0; padding: 7px 12px; background: var(--infobox-titre-bg); border-bottom: 1px solid var(--chapo-bd); line-height: 1.3; }
-/* Un en-tête de boîte peut être un lien (« Articles internes … ») : il garde la couleur de titre.
-   En bleu de lien il tombait à 4,27:1 sur le fond pastel en thème clair, sous le seuil AA de 4,5:1
-   (19 px en graisse 600 n'est pas du « texte large », qui commence à 18,66 px en graisse 700), et
-   un en-tête sur cinq n'avait pas l'aspect des autres. */
+/* en-tête d'une boîte : pictogramme, titre et sous-titre (colonne souple), puis le lien « Explorer tous
+   les thèmes » ou, sur une carte repliée, le nombre de pages et le chevron — jamais l'un sur l'autre */
+.accueil-entete { display: flex; align-items: center; gap: 12px; padding: 14px 16px 10px; }
+.accueil-boite-icone { flex: none; display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: var(--rayon-petit); background: var(--bg-surface-2); color: var(--accent-ui-text); }
+.accueil-boite-icone .ic { width: 23px; height: 23px; }
+.accueil-entete-texte { flex: 1 1 auto; min-width: 0; }
+.page-body .accueil-titre { font-family: inherit; font-size: 20px; font-weight: 700; line-height: 1.25; margin: 0; padding: 0; background: none; border: 0; overflow-wrap: break-word; }
+/* un en-tête de boîte qui est un lien garde la couleur de titre : en bleu de lien, 4,27:1 sur le
+   fond pastel en thème clair, sous le seuil WCAG AA de 4,5:1 */
 .page-body .accueil-titre a { color: inherit; }
-.accueil-corps { padding: 8px 12px 10px; }
+.page-body .accueil-sous-texte { margin: 2px 0 0; font-size: 13.5px; line-height: 1.4; color: var(--text-soft); }
+/* boîte ouverte avec sous-titre : le pictogramme se centre sur la ligne du titre, pas sur le bloc */
+section.accueil-boite > .accueil-entete:has(.accueil-sous-texte) { align-items: flex-start; }
+section.accueil-boite > .accueil-entete:has(.accueil-sous-texte) > .accueil-boite-icone { margin-top: -6px; }
+.accueil-entete-lien { flex: none; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-size: 14px; font-weight: 600; color: var(--accent-ui-text); text-decoration: none; padding: 6px 0; }
+.accueil-entete-lien:hover { text-decoration: underline; }
+.accueil-corps { padding: 0 16px 14px; }
 .accueil-corps > p:first-child { margin-top: 2px; }
 .accueil-corps ul { margin: 4px 0 4px 20px; }
 .accueil-corps li { margin: 3px 0; break-inside: avoid; }
-/* colonnes par largeur : elles s'ajoutent quand la boîte est large, retombent seules à une sur téléphone */
+.accueil-corps table { display: block; overflow-x: auto; max-width: 100%; }
+/* listes longues en colonnes (l'accueil du Recueil, les accueils de l'encadrement) */
 .accueil-colonnes { columns: 12em 3; column-gap: 28px; }
 .accueil-large .accueil-colonnes { columns: 13em 3; }
 .accueil-colonnes-courtes, .accueil-large .accueil-colonnes-courtes { columns: 9em 3; column-gap: 18px; }
-/* points d'entrée (rôles) en tuiles, toute la tuile touchable */
-.page-body .accueil-tuiles { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin: 4px 0; }
-.page-body .accueil-tuiles li { margin: 0; padding: 9px 12px; min-height: 44px; display: flex; align-items: center; gap: 9px; border: 1px solid var(--border-light); border-radius: 3px; background: var(--bg); font-weight: 600; line-height: 1.35; }
-.page-body .accueil-tuiles li:hover { background: var(--hover); border-color: var(--hover-bd); }
-.page-body .accueil-tuiles a { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.page-body .accueil-tuile-desc { font-weight: 400; font-size: 12.5px; line-height: 1.35; color: var(--text-soft); }
+/* chevron : un angle tourné, qui pivote à l'ouverture d'un volet */
+.accueil-chevron { flex: none; display: inline-block; width: 9px; height: 9px; margin: 0 4px 0 2px; border-right: 2px solid var(--text-faint); border-bottom: 2px solid var(--text-faint); transform: rotate(-45deg); transition: transform .15s; }
+details[open] > summary .accueil-chevron { transform: rotate(45deg); }
+/* tuiles par rôle : deux colonnes de même hauteur, emoji, libellé, chevron ; quatre par rangée sur ordinateur */
+.page-body .accueil-tuiles { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 10px; margin: 2px 0 0; }
+.page-body .accueil-tuiles li { position: relative; margin: 0; display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 6px 8px 6px 10px; border: 1px solid var(--border-light); border-radius: var(--rayon-petit); background: var(--bg-surface-2); font-size: 14.5px; font-weight: 600; line-height: 1.2; }
+.page-body .accueil-tuiles li::after { content: ''; flex: none; width: 8px; height: 8px; margin: 0 2px 0 1px; border-right: 2px solid var(--text-faint); border-bottom: 2px solid var(--text-faint); transform: rotate(-45deg); }
+.page-body .accueil-tuiles li:hover { background: var(--bg-surface-hover); border-color: var(--hover-bd); }
+.page-body .accueil-tuiles a { flex: 1; min-width: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: center; gap: 1px; padding: 0; text-decoration: none; }
+.page-body .accueil-tuiles a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; } /* toute la tuile ouvre le lien */
+.page-body .accueil-tuiles a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+.accueil-tuile-emoji { flex: none; width: 22px; text-align: center; font-size: 20px; line-height: 1; }
+.page-body .accueil-tuile-desc { font-weight: 400; font-size: 13px; line-height: 1.35; color: var(--text-soft); }
+@media (min-width: 901px) { .accueil-large .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); } }
+/* groupes de liens (sous-titres de la note) */
 .accueil-groupes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 4px 22px; }
 .accueil-groupe { min-width: 0; }
 .page-body .accueil-groupe h3 { font-size: 15.5px; margin: 8px 0 2px; padding: 0 0 2px; border-bottom: 1px solid var(--border-soft); }
-/* Thèmes sur l'accueil du wiki (13 sept. 2026, Frank : « le thème doit mieux ressortir »,
-   puis « interface trop lourde ») : une barre de raccourcis, puis un volet repliable par
-   thème — titre en bandeau (serif, gras, couleur de texte), compte et sous-titre dans le
-   résumé, notions puis études dans le volet. Rendu ouvert (sans script, tout se lit) ;
-   app.js referme les volets sur téléphone. */
-.accueil-themes-nav { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 12px; }
-.accueil-themes-nav a { display: inline-flex; align-items: center; min-height: 34px; padding: 4px 11px; border: 1px solid var(--border-light); border-radius: 999px; background: var(--bg); font-size: 13.5px; text-decoration: none; }
-.accueil-themes-nav a:hover { background: var(--hover); border-color: var(--hover-bd); }
-/* Les volets coulent en colonnes (26 sept. 2026) : la grille laissait, sous un volet court, tout le vide
-   du plus long de sa rangée. Fermé, un volet tient sur une ligne : sa description ne s'affiche qu'ouvert. */
-.accueil-groupes.accueil-themes { display: block; columns: 230px 3; column-gap: 22px; }
-.accueil-theme { min-width: 0; margin: 0 0 10px; break-inside: avoid; }
-.accueil-theme:not([open]) > summary .accueil-theme-desc { display: none; }
-.accueil-theme > summary {
-  cursor: pointer; list-style: none; padding: 7px 10px; border-left: 4px solid var(--accent);
-  background: var(--infobox-titre-bg); border-radius: 0 3px 3px 0; line-height: 1.3;
-}
+/* thèmes : barre de raccourcis (ordinateur), puis une ligne par thème — pictogramme teinté, titre qui
+   mène à la page du thème, compte aligné à droite, chevron. La ligne est un volet : ouvert, il montre
+   la description et les notions. Les volets coulent en colonnes sur ordinateur (pas de vide sous un
+   volet court). */
+.accueil-themes-nav { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.accueil-themes-nav a { display: inline-flex; align-items: center; min-height: 34px; padding: 4px 11px; border: 1px solid var(--border-light); border-radius: 999px; background: var(--bg-surface-2); font-size: 13.5px; text-decoration: none; }
+.accueil-themes-nav a:hover { background: var(--bg-surface-hover); border-color: var(--hover-bd); }
+.accueil-groupes.accueil-themes { display: block; columns: 230px 3; column-gap: 16px; }
+.accueil-theme { min-width: 0; margin: 0 0 6px; break-inside: avoid; border: 1px solid var(--border-soft); border-radius: var(--rayon-petit); background: var(--bg-surface-2); }
+.accueil-themes > .accueil-theme:last-child { margin-bottom: 0; }
+.accueil-theme > summary { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 10px 6px 8px; cursor: pointer; list-style: none; border-radius: var(--rayon-petit); }
 .accueil-theme > summary::-webkit-details-marker { display: none; }
-.accueil-theme > summary::before { content: '▸'; display: inline-block; width: 1em; color: var(--text-soft); transition: transform .15s; }
-.accueil-theme[open] > summary::before { transform: rotate(90deg); }
-.accueil-theme-titre { font-family: 'Linux Libertine', Georgia, 'Times New Roman', serif; font-size: 19px; font-weight: 700; }
-/* Le titre du thème mène à sa page ; il garde la couleur de titre (le bleu de lien tomberait à
-   4,3:1 sur le fond pastel du bandeau) et se souligne au survol. Le volet se replie par la flèche
-   ou par le reste de la ligne. */
+.accueil-theme > summary:hover { background: var(--bg-surface-hover); }
+.accueil-theme > summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.accueil-theme-icone { flex: none; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9px; background: var(--bg-surface); }
+.accueil-theme-icone .ic { width: 22px; height: 22px; }
+.teinte-1 { color: var(--teinte-rose); } .teinte-2 { color: var(--teinte-bleu); } .teinte-3 { color: var(--teinte-vert); }
+.teinte-4 { color: var(--teinte-violet); } .teinte-5 { color: var(--teinte-ambre); } .teinte-6 { color: var(--teinte-turquoise); }
+.accueil-theme-texte { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.accueil-theme-titre { font-family: inherit; font-size: 15.5px; font-weight: 600; line-height: 1.3; }
 .accueil-theme-titre a { color: inherit; text-decoration: none; }
 .accueil-theme-titre a:hover { text-decoration: underline; text-underline-offset: 2px; }
-.accueil-theme > summary small { font-size: 12.5px; color: var(--text-soft); margin-left: 6px; white-space: nowrap; }
-.accueil-theme-desc { display: block; margin: 3px 0 0 1em; font-size: 13.5px; line-height: 1.4; color: var(--text-soft); font-weight: 400; }
-.page-body .accueil-theme h4 { font-size: 12.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--text-soft); margin: 10px 0 2px 10px; }
-.page-body .accueil-theme ul { margin: 4px 0 4px 28px; }
-.accueil-theme-page { display: inline-block; margin: 4px 0 2px 10px; font-size: 13.5px; }
-.accueil-corps table { display: block; overflow-x: auto; max-width: 100%; }
-/* Boîtes repliées (26 sept. 2026, Frank : « améliore la page d'accueil ») : une boîte dont la moitié
-   des liens ou plus est déjà offerte par les thèmes ou l'index se rend repliée — titre et nombre de
-   pages sur une ligne, tout le bandeau ouvre. Rien n'est retiré : ouverte, la boîte est entière. */
-details.accueil-boite > summary { list-style: none; cursor: pointer; }
+.accueil-theme > summary small { flex: none; font-size: 13.5px; color: var(--text-soft); white-space: nowrap; }
+.accueil-theme-desc { font-size: 13.5px; line-height: 1.4; color: var(--text-soft); font-weight: 400; }
+.accueil-theme:not([open]) > summary .accueil-theme-desc { display: none; }
+.page-body .accueil-theme ul { margin: 2px 12px 8px 26px; }
+.accueil-theme-page { display: inline-block; margin: 0 12px 10px 14px; font-size: 13.5px; }
+/* cartes repliées (« Articles internes », « Articles travailleurs »…) : une ligne — petit pictogramme,
+   titre et sous-titre, nombre de pages, chevron ; tout le bandeau ouvre */
+details.accueil-boite > summary { list-style: none; cursor: pointer; border-radius: var(--rayon); }
 details.accueil-boite > summary::-webkit-details-marker { display: none; }
-details.accueil-boite > summary .accueil-titre::before { content: '▸'; display: inline-block; width: 1em; color: var(--text-soft); transition: transform .15s; }
-details.accueil-boite[open] > summary .accueil-titre::before { transform: rotate(90deg); }
-details.accueil-boite:not([open]) > summary .accueil-titre { border-bottom: 0; }
-details.accueil-boite > summary:hover .accueil-titre { background: var(--hover); }
-.page-body .accueil-compte { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 12.5px; font-weight: 400; color: var(--text-soft); margin-left: 6px; white-space: nowrap; }
+details.accueil-boite > summary .accueil-entete { padding: 12px 16px; min-height: 64px; gap: 12px; }
+details.accueil-boite > summary:hover { background: var(--bg-surface-hover); }
+details.accueil-boite > summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+details.accueil-boite[open] > summary { border-radius: var(--rayon) var(--rayon) 0 0; border-bottom: 1px solid var(--border-soft); }
+details.accueil-boite[open] > .accueil-corps { padding-top: 10px; }
+details.accueil-boite .accueil-boite-icone { width: 34px; height: 34px; }
+details.accueil-boite .accueil-boite-icone .ic { width: 21px; height: 21px; }
+.page-body details.accueil-boite .accueil-titre { font-size: 15.5px; font-weight: 600; line-height: 1.28; }
+.page-body details.accueil-boite .accueil-sous-texte { font-size: 13px; line-height: 1.35; }
+.page-body .accueil-compte { flex: none; font-size: 13.5px; color: var(--text-soft); white-space: nowrap; }
+/* pied : la date à gauche, la marque à droite ; le pied commun du site ne se répète pas sous un accueil */
+body:has(.accueil-banniere) .page-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px; font-size: 13px; }
+.accueil-marque { color: var(--text-faint); font-weight: 600; letter-spacing: .02em; }
+body:has(.accueil-banniere) .site-footer { display: none; }
 @media print { details.accueil-boite::details-content, .accueil-theme::details-content { content-visibility: visible; } details.accueil-boite > :not(summary), .accueil-theme > :not(summary) { display: block !important; } }
 @media (max-width: 480px) {
   .accueil-groupes { grid-template-columns: 1fr; }
@@ -861,22 +936,68 @@ details.accueil-boite > summary:hover .accueil-titre { background: var(--hover);
   .avis { padding: 12px; }
   .avis-pouce { flex: 1 1 auto; justify-content: center; }
   .avis-envoyer { justify-self: stretch; }
-  /* pages d'accueil : boîtes en une colonne, listes sur deux */
-  .accueil-grille { grid-template-columns: 1fr; gap: 12px; }
-  .accueil-banniere { padding: 12px; gap: 12px; }
-  .accueil-icone { font-size: 36px; }
+  /* pages d'accueil (maquette) : une colonne, 16 px de marge et rien d'autre. La carte d'entrée met le
+     pictogramme et le titre côte à côte, puis le chapeau sur toute la largeur (ligne plus longue, moins
+     de retours), puis « N articles » et les boutons sur une ligne ; tuiles en 2 × 2, cartes plus denses */
+  body:has(.accueil-banniere) .content { padding: 14px 14px 32px; }
+  .accueil-grille { grid-template-columns: 1fr; gap: 10px; }
+  .accueil-banniere { padding: 14px; gap: 8px 12px; margin-bottom: 10px; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "icone titre titre" "chapeau chapeau chapeau" "compte compte actions"; }
+  .accueil-icone { width: 64px; height: 64px; font-size: 36px; border-radius: 14px; align-self: center; }
+  .accueil-banniere .page-title { font-size: clamp(21px, 5.6vw, 24px); }
+  .accueil-banniere .accueil-chapeau { margin-top: 2px; }
+  .accueil-chapeau p { font-size: 13.5px; }
+  .accueil-chapeau .accueil-sous-titre { font-size: 15.5px; }
+  .accueil-banniere .page-sub { margin-top: 2px; font-size: 14px; }
+  .accueil-banniere .lecture-outils { margin-top: 2px; }
+  .accueil-banniere .lecture-outils::before { margin-right: 4px; }
+  .accueil-banniere .lecture-outils button { padding: 8px 12px; font-size: 14px; }
+  .accueil-entete { gap: 10px; padding: 12px 14px 8px; }
+  .accueil-entete-lien { font-size: 13.5px; }
+  .accueil-corps { padding: 0 14px 12px; font-size: 15px; }
+  details.accueil-boite > summary .accueil-entete { padding: 10px 14px; min-height: 60px; gap: 10px; }
+  details.accueil-boite .accueil-boite-icone { width: 32px; height: 32px; }
+  details.accueil-boite .accueil-boite-icone .ic { width: 20px; height: 20px; }
   .accueil-groupes { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
   /* les volets sont refermés par app.js et tiennent sur une ligne : la barre de raccourcis les doublerait */
   .accueil-themes-nav { display: none; }
-  .page-body .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(min(190px, 100%), 1fr)); }
+  .accueil-theme > summary { gap: 8px; min-height: 50px; padding: 5px 8px 5px 7px; }
+  .accueil-theme-icone { width: 32px; height: 32px; }
+  .accueil-theme-titre { font-size: 14.5px; letter-spacing: -.005em; }
+  .accueil-theme > summary small { font-size: 13px; }
+  .accueil-theme > summary .accueil-chevron { margin: 0 2px 0 0; }
+  /* tuiles 2 × 2 : le libellé se resserre un peu (12,5 à 14,5 px) et passe sur deux lignes au besoin */
+  .page-body .accueil-tuiles { gap: 8px; }
+  .page-body .accueil-tuiles li { font-size: clamp(12.5px, 3.3vw, 14px); gap: 6px; padding: 6px 6px 6px 8px; }
+  /* tuiles à description (accueil du Recueil) : une par rangée sous 600 px, sinon la description s'étire en hauteur */
+  .page-body .accueil-tuiles:has(.accueil-tuile-desc) { grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
+  .accueil-tuile-emoji { width: 20px; font-size: 18px; }
   /* cibles tactiles : la zone d'un lien de liste atteint 24 px de haut (WCAG 2.5.8) sans changer la ligne */
-  .accueil-corps a, .accueil-index a, .accueil-chapeau a, .accueil-titre a { padding: 4px 0; }
-  .accueil-corps { font-size: 15px; }
+  .accueil-corps a, .accueil-chapeau a, .accueil-titre a { padding: 4px 0; }
+  .accueil-index a { display: inline-block; padding: 6px 0; }
   /* Même plancher que les autres textes secondaires du site sur petit écran (13 px). */
   .page-body .accueil-tuile-desc { font-size: 13px; }
   /* L'arbre de la hiérarchie normative défile dans son cadre plutôt que de passer à la ligne, qui
      casserait son alignement ; encore faut-il voir que c'est un cadre : bordure franche. */
   .accueil-corps pre { border-color: var(--border); }
+}
+@media (max-width: 374px) {
+  /* trop étroit pour « 66 articles | Lecture PDF » sur une ligne : les boutons passent dessous, à parts égales */
+  .accueil-banniere { grid-template-areas: "icone titre titre" "chapeau chapeau chapeau" "compte compte compte" "actions actions actions"; }
+  .accueil-banniere .lecture-outils { justify-self: stretch; padding-left: 0; border-left: 0; margin-top: 0; }
+  .accueil-banniere .lecture-outils [data-lecture], .accueil-banniere .lecture-outils [data-pdf] { flex: 1 1 auto; justify-content: center; }
+  .accueil-banniere .lecture-outils::before { display: none; }
+  /* « Thèmes » et « Explorer tous les thèmes » ne tiennent plus côte à côte : le lien passe dessous */
+  .accueil-entete:has(> .accueil-entete-lien) { flex-wrap: wrap; }
+  .accueil-entete > .accueil-entete-lien { flex: 1 0 100%; padding-top: 0; margin-top: -4px; }
+  /* tuiles toujours en 2 × 2 : la boîte rogne ses marges pour que « Conseiller SST, ergonome » tienne sur deux lignes */
+  .accueil-corps:has(> .accueil-tuiles) { padding-left: 10px; padding-right: 10px; }
+  .page-body .accueil-tuiles { gap: 6px; }
+  .page-body .accueil-tuiles li { font-size: 12px; padding: 6px 5px 6px 7px; gap: 5px; }
+  .accueil-tuile-emoji { width: 18px; font-size: 17px; }
+}
+@media (max-width: 340px) {
+  /* écrans vraiment étroits : une tuile par rangée */
+  .page-body .accueil-tuiles { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   /* Une rangée d'actions, une rangée de recherche, même après ajout de l'aide/PWA. */
@@ -1054,7 +1175,6 @@ html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
   .content { padding: 20px 26px 40px; }
   .accueil-groupes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .accueil-groupes.accueil-themes { columns: 2; }
-  .page-body .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); }
   .accueil-colonnes, .accueil-large .accueil-colonnes { columns: 2; }
   .accueil-colonnes-courtes, .accueil-large .accueil-colonnes-courtes { columns: 3; }
 }
