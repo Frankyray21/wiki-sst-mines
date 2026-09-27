@@ -1,7 +1,7 @@
 {
  "date": "2026-09-27",
  "revision": "2026-09-27-corr-types-de-personnalite-et-lieu-de-controle",
- "portee": "Types de personnalité et lieu de contrôle : deux affirmations sans source marquées (type D, sélection à l'embauche), la référence Kobasa (1979) complétée, Rotter (1966) ajoutée et Denollet signalé à préciser dans les références",
+ "portee": "Types de personnalité et lieu de contrôle : deux affirmations sans source marquées (type D, sélection à l'embauche), la référence Kobasa (1979) complétée, Rotter (1966) ajoutée et Denollet signalé à préciser dans les références ; lien vers Dolan et Arsenault (2009) : p. 138-140 au lieu de « p. 169 »",
  "precautions": "",
  "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
  "note": {
@@ -39,6 +39,14 @@
    "marqueur": "Rotter, J. B. (1966)",
    "bloc": "- Rotter, J. B. (1966). Generalized expectancies for internal versus external control of reinforcement. *Psychological Monographs: General and Applied*, 80(1), 1-28.\n- Denollet (référence à préciser).",
    "motif": "Points relevés : les références de Rotter (1966), dont la page présente le concept, et de Denollet (type D) manquaient. Rotter ajoutée d'après la référence fournie par la relecture (elle concorde avec Dolan et Arsenault, 2009, p. 140, note 4 : « Psychological Monographs, vol. 80, tout le n° 609 ») ; Denollet signalé à préciser."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "Typologie de Friedman et Rosenman (1959)",
+   "libelle": "Dolan & Arsenault 2009 p. 169",
+   "nouveau": "Dolan & Arsenault 2009, p. 138-140",
+   "ancre": "#page=158",
+   "motif": "« p. 169 » vient d'une lecture erronée de l'en-tête du PDF : la page PDF 159 est la p. 139 du livre. La section « Types de personnalité A, B et C » (Friedman et Rosenman) couvre les p. 138-140 (pages PDF 158 à 160) ; libellé corrigé et lien ouvert au début de la section."
   }
  ]
 }

@@ -307,6 +307,9 @@ mark.surligne mark.surligne { padding: 0 1px; }
 .article-titre { display: grid; gap: .5rem; margin-bottom: 1rem; min-width: 0; }
 .article-titre .page-title, .article-titre .page-sub, .article-titre .lecture-outils { margin: 0; }
 .page-body { font-size: calc(15px * var(--echelle, 1)); max-width: 100%; }
+/* Un mot plus long que la colonne (adresse, flèche d'un schéma en caractères) passe à la ligne au lieu de faire
+   défiler toute la page de côté ; les autres mots ne sont jamais coupés (break-word, et non anywhere). */
+.page-body p, .page-body li, .page-body dd, .page-body blockquote { overflow-wrap: break-word; }
 /* Appels bibliographiques : discrets dans la phrase, sans modifier la bibliographie. */
 .page-body a[href^="#ref-"] {
   font-size: max(.75rem, .72em);
@@ -1198,6 +1201,9 @@ html[data-lecture] .article-entete .lecture-outils { grid-column: 1 / -1; }
   .accueil-chapeau a, .page-sub a, .page-meta a, .infobox a { padding-top: 5px; padding-bottom: 5px; }
   .accueil-theme-titre a { display: inline-block; padding: 6px 0; }
   .page-body a.ref-source { padding-top: 5px; padding-bottom: 5px; }
+  /* appels bibliographiques « 1 », « 2 » : en exposant, sans interligne, ils restaient sous 16 px de haut ;
+     la zone touchable grandit sans bouger la ligne (le rembourrage d'un élément en ligne ne l'écarte pas) */
+  .page-body a[href^="#ref-"] { padding-block: 7px; padding-inline: .45em; }
   /* titres de boîte et de groupe cliquables sur les accueils */
   .accueil-titre a, .accueil-groupe > h3 > a { display: inline-block; padding: 5px 0; }
   .infobox-tags a.tag { padding-top: 6px; padding-bottom: 6px; }

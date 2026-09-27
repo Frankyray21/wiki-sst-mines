@@ -73,6 +73,12 @@
    "avant": "Effet documenté sur la rétention et la santé familiale.",
    "apres": "Effet sur la rétention et la santé familiale (source à préciser).",
    "motif": "Même affirmation que l'en-tête « Effet documenté » : un effet annoncé comme documenté sans rien citer ; « documenté » retiré et l'effet marqué (source à préciser). Sans ce changement, l'en-tête corrigé ne serait pas reconnu au rejeu du lot (« Effet documenté » resterait sur une autre ligne)."
+  },
+  {
+   "type": "ajouterFin",
+   "ligneContenant": "Souvent oublié dans les programmes employeurs",
+   "texte": ".",
+   "motif": "Point final manquant après « enjeux psychosociaux »."
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "date": "2026-09-27",
  "revision": "2026-09-27-corr-foreur-profil-rps-et-leadership-de-chantier",
- "portee": "Foreur, profil RPS et leadership de chantier : effets et comparaisons sans source marqués, rang du stress lié au superviseur corrigé d'après la note Bowers et al. (2018), termes « cachage » et « Intimidation → Iso-strain » précisés, rappel de l'obligation de formation et de supervision de l'employeur (LSST, art. 51, 9°)",
+ "portee": "Foreur, profil RPS et leadership de chantier : effets et comparaisons sans source marqués, rang du stress lié au superviseur corrigé d'après la note Bowers et al. (2018), termes « cachage » et « Intimidation → Iso-strain » précisés, rappel de l'obligation de formation et de supervision de l'employeur (LSST, art. 51, 9°) ; colonne « Effet » des deux tableaux marquée (source à préciser)",
  "precautions": "",
  "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
  "note": {
@@ -66,6 +66,14 @@
    "avant": "qui situe le stress lié au superviseur parmi les prédicteurs dominants de la détresse psychologique en régime FIFO.",
    "apres": "qui situe le stress lié au superviseur au 5e rang des prédicteurs indépendants de la détresse psychologique en régime FIFO (OR 4,3), la stigmatisation étant le prédicteur dominant (OR 23,5). L'étude est transversale : elle n'établit pas de lien de causalité.",
    "motif": "« Prédicteurs dominants » inexact : dans le tableau de la note Bowers et al. (2018), la ligne « Stress lié au superviseur | 4,3 | Relations hiérarchiques » vient au 5e rang, après « Stigmatisation (santé mentale = faiblesse) | 23,5*** | Prédicteur dominant - barrière culturelle à l'aide » ; la note précise « Limite principale : devis transversal - causalité non établissable »."
+  },
+  {
+   "type": "remplacer",
+   "toutes": true,
+   "ligneContenant": "Comportement | Effet",
+   "avant": "| Effet |",
+   "apres": "| Effet attendu (source à préciser) |",
+   "motif": "La colonne « Effet » des deux tableaux de comportements (protecteurs, destructeurs) ne cite aucune étude : l'en-tête devient « Effet attendu (source à préciser) » dans les deux tableaux, qui portent le même en-tête (retouche « toutes »)."
   }
  ]
 }

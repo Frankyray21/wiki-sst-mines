@@ -1,0 +1,25 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-reintegration-au-foyer-entre-rotations",
+ "portee": "Réintégration au foyer entre rotations : la phase « Réadaptation » (jours 3-5) n'est plus un lien vers la page de droit « Droit à la réadaptation »",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Réintégration au foyer entre rotations",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/reintegration-au-foyer-entre-rotations.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "delier",
+   "ligneContenant": "Reprise progressive du rôle familial",
+   "libelle": [
+    "Réadaptation",
+    "Droit à la réadaptation"
+   ],
+   "texte": "Réadaptation",
+   "motif": "Dans « Phases typiques du retour », la phase des jours 3-5 (reprise progressive du rôle familial) était un lien vers la page de droit « Droit à la réadaptation » (LATMP), que la cellule affichait sous ce titre : le mot redevient un nom de phase, sans lien."
+  }
+ ]
+}

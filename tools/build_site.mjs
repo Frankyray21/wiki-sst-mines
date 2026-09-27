@@ -14,7 +14,7 @@ import { libelleLien, contexteDuLien } from './libelle_lien.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
 import { rendrePage404 } from './redirections.mjs';
 import { rendrePortailContenu } from './portail_racine.mjs';
-import { slugify, cleanLabel, attribuerAdresses, ancienneAdresse, formuleMiroir } from './adresses.mjs';
+import { slugify, cleanLabel, attribuerAdresses, ancienneAdresse, formuleMiroir, titreFenetre } from './adresses.mjs';
 import { analyserQualite, LIBELLES, estEtude as estEtudeTitre, sourceDeLaNote, poserSourcesHeritees } from './qualite.mjs';
 import { normaliserNavigationInterne, metadonneesEditoriales, indicateursDocumentaires } from './editorial.mjs';
 import { genererPwa, metaPwa, genererListeHorsLigne } from './pwa.mjs';
@@ -831,7 +831,7 @@ function pageShell({ out, title, wikiKey, content, sidebarExtra = '' }) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${esc(title)} — WIKI SST Mines</title>
+<title>${esc(titreFenetre(title))} — WIKI SST Mines</title>
 <link rel="stylesheet" href="${ROOT}assets/style.css?v=${V}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 ${metaPwa(ROOT)}
@@ -1953,7 +1953,7 @@ function pageTableauDeBord({ out, titre, corps, dataPub }) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${esc(titre)} — WIKI SST Mines</title>
+<title>${esc(titreFenetre(titre))} — WIKI SST Mines</title>
 <link rel="stylesheet" href="${R}assets/portail.css?v=${V}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 ${metaPwa(R)}
@@ -1974,7 +1974,7 @@ function pageAutonome({ out, titre, contenu }) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${esc(titre)} — WIKI SST Mines</title>
+<title>${esc(titreFenetre(titre))} — WIKI SST Mines</title>
 <link rel="stylesheet" href="${R}assets/style.css?v=${V}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
 <script>window.ROOT='${R}';${SCRIPT_THEME}</script>

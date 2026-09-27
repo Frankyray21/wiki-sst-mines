@@ -1,7 +1,7 @@
 {
  "date": "2026-09-27",
  "revision": "2026-09-27-corr-contremaitre-ou-capitaine-profil-rps",
- "portee": "Contremaître ou capitaine, profil RPS : classements, taux de burnout, effets sur l'équipe et « multiplicateur » sans source marqués ; statut du contremaître, exclu de la définition de « travailleur » de la LSST (art. 1), ajouté à la description du poste",
+ "portee": "Contremaître ou capitaine, profil RPS : classements, taux de burnout, effets sur l'équipe (en-tête des deux tableaux) et « multiplicateur » sans source marqués ; statut du contremaître, exclu de la définition de « travailleur » de la LSST (art. 1), ajouté à la description du poste",
  "precautions": "",
  "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
  "note": {
@@ -27,20 +27,6 @@
   },
   {
    "type": "remplacer",
-   "ligneContenant": "Présence terrain, écoute",
-   "avant": "Renforce le soutien social, réduit iso-strain",
-   "apres": "Renforce le soutien social et réduit iso-strain (source à préciser)",
-   "motif": "Effet sur l'iso-strain affirmé sans étude : marqué (l'en-tête « Effet sur l'équipe », identique dans les deux tableaux, ne peut pas être désigné seul)."
-  },
-  {
-   "type": "remplacer",
-   "ligneContenant": "Reconnaissance régulière",
-   "avant": "Réduit ERI, motive",
-   "apres": "Réduit ERI (source à préciser), motive",
-   "motif": "Effet sur le déséquilibre efforts-récompenses affirmé sans étude : marqué (l'en-tête « Effet sur l'équipe », identique dans les deux tableaux, ne peut pas être désigné seul)."
-  },
-  {
-   "type": "remplacer",
    "ligneContenant": "investir dans le contremaître est un",
    "avant": "d'effet sur la santé psychologique d'une équipe entière.",
    "apres": "d'effet sur la santé psychologique d'une équipe entière (source à préciser).",
@@ -52,6 +38,28 @@
    "avant": "des taux élevés de burnout et de troubles d'adaptation.",
    "apres": "des taux élevés de burnout et de troubles d'adaptation (source à préciser).",
    "motif": "Taux de burnout et de troubles d'adaptation affirmés sans source : marqués."
+  },
+  {
+   "type": "remplacer",
+   "toutes": true,
+   "ligneContenant": "Comportement contremaître",
+   "avant": "| Effet sur l'équipe |",
+   "apres": "| Effet attendu sur l'équipe (source à préciser) |",
+   "motif": "Les effets des tableaux « Effet sur l'équipe » (« réduit iso-strain », « Réduit ERI », etc.) ne citent aucune étude : l'en-tête devient « Effet attendu sur l'équipe (source à préciser) » dans les deux tableaux, qui portent le même en-tête (retouche « toutes »), plutôt qu'une marque par cellule."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Présence terrain, écoute",
+   "avant": "Renforce le soutien social et réduit iso-strain (source à préciser)",
+   "apres": "Renforce le soutien social, réduit iso-strain",
+   "motif": "Retouche inverse. La version précédente de ce lot (PR #49) marquait la cellule une à une ; la marque est désormais portée par l'en-tête « Effet attendu sur l'équipe (source à préciser) » de la colonne. Une note qui a reçu la version précédente retrouve le texte d'origine de la cellule ; une note qui ne l'a pas reçue le porte déjà (retouche reconnue comme faite)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Reconnaissance régulière",
+   "avant": "Réduit ERI (source à préciser), motive",
+   "apres": "Réduit ERI, motive",
+   "motif": "Retouche inverse. La version précédente de ce lot (PR #49) marquait la cellule une à une ; la marque est désormais portée par l'en-tête « Effet attendu sur l'équipe (source à préciser) » de la colonne. Une note qui a reçu la version précédente retrouve le texte d'origine de la cellule ; une note qui ne l'a pas reçue le porte déjà (retouche reconnue comme faite)."
   }
  ]
 }
