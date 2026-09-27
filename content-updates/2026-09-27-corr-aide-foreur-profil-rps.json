@@ -1,7 +1,7 @@
 {
  "date": "2026-09-27",
  "revision": "2026-09-27-corr-aide-foreur-profil-rps",
- "portee": "Aide-foreur, profil RPS : classement, effet, coût, durée de quart et références sans source marqués, mécanisme du job strain corrigé (demande psychologique et latitude décisionnelle), formation des foreurs au leadership rangée au niveau primaire comme sur la page Foreur, lien « job strain » dirigé vers la page Job strain",
+ "portee": "Aide-foreur, profil RPS : classement, effet, coût, durée de quart et références sans source marqués, mécanisme du job strain corrigé (demande psychologique et latitude décisionnelle), formation des foreurs au leadership rangée au niveau primaire comme sur la page Foreur, lien « job strain » dirigé vers la page Job strain ; « premier poste » déplacé de la liste des tâches vers l'évolution typique",
  "precautions": "",
  "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
  "note": {
@@ -66,6 +66,18 @@
    "avant": "Études internationales sur les profils RPS en industrie minière.",
    "apres": "Études internationales sur les profils RPS en industrie minière (référence à préciser).",
    "motif": "Référence sans titre ni année : marquée."
+  },
+  {
+   "type": "ajouterFin",
+   "ligneContenant": "aide-foreur → foreur (avec formation et expérience)",
+   "texte": " L'aide-foreur est le premier poste de beaucoup de travailleurs miniers.",
+   "motif": "« Premier poste pour beaucoup de travailleurs miniers » était rangé parmi les tâches typiques : ce n'est pas une tâche mais un fait de parcours, déplacé dans « Évolution typique » (retouche suivante : la puce quitte la liste)."
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "Premier poste pour beaucoup de travailleurs miniers",
+   "marqueur": "L'aide-foreur est le premier poste de beaucoup de travailleurs miniers",
+   "motif": "La puce quitte la liste des tâches typiques ; son contenu est dans « Évolution typique » (retouche précédente)."
   }
  ]
 }

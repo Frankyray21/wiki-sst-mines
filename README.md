@@ -73,8 +73,9 @@ adresses n'ont pas changé.
   essai par défaut, sauvegarde avant écriture
 - `tools/retouches.mjs` + `tools/appliquer_retouches.mjs` — pose dans le vault un lot de retouches préparé
   sans accès au vault (médias à copier, lignes désignées par leur texte visible, liens vers une adresse
-  publiée ; nouvelle version d'un schéma à la place de l'ancienne ; lien d'un libellé donné redirigé vers une autre
-  note, `recibler`) ; essai par défaut, tout ou rien, rejouable, sauvegarde avant écriture
+  publiée ; nouvelle version d'un schéma à la place de l'ancienne ; lien redirigé, relibellé ou délié, `recibler`,
+  `relibeller`, `delier` ; point ou marque en fin de ligne, `ajouterFin` ; même correction sur plusieurs lignes,
+  `toutes`) ; essai par défaut, tout ou rien, rejouable, sauvegarde avant écriture
 - `tools/rejouer_lots.mjs` — rejoue dans le vault, en une commande, tous les lots préparés depuis le 25 septembre
   2026 (`content-updates/*.json`) : essai de tous les lots, puis, si aucun n'échoue, application dans l'ordre
   (corrections, schémas, corrections du 27), retrait des versions texte et libellés de liens courts
@@ -265,15 +266,16 @@ node tools/serve.mjs
   teinté choisi d'après l'emoji de la note (`pictoTuile`). Même rendu par le générateur (`rendreAccueil`,
   `ordonnerBoites`, `tools/accueil_wiki.mjs`) et sur le site. Ergonomie : 1 932 → 1 407 px à 390 px. Détail,
   mesures par largeur et écarts avec la maquette : `content-updates/2026-09-26-accueils-maquette.md`
-- **Choix de contenu tranchés et améliorations (27 septembre 2026)** : 51 pages corrigées (238 retouches), dont
-  36 pages RPS relevées lors des relectures (lots du 26 septembre, 8, 9 et 10). Même politique partout : erreur
+- **Choix de contenu tranchés et améliorations (27 septembre 2026)** : 52 pages corrigées (247 retouches), dont
+  37 pages RPS relevées lors des relectures (lots du 26 septembre, 8, 9 et 10). Même politique partout : erreur
   juridique corrigée d'après le recueil, avec la phrase de loi recopiée dans le motif ; affirmation sans source
   marquée « (source à préciser) », jamais supprimée. Rotations jour-nuit nommées dans le bon sens sur huit pages.
   Accueils : lien tronqué réparé, liens « Pages gestionnaires » vers le bon wiki, « Vues d'ensemble ». Voies
   d'exposition : l'injection revient dans la légende. Deux schémas passent en v4 (Aide-foreur, Confinement). Un
   schéma s'ajoute : « Grille INSPQ : 12 indicateurs ». Surlignages colorés des notes d'analyse rendus (22 pages).
   Nouveau style du portail, de la page Thèmes et des pages de thème ; un dessin par wiki sur la carte d'entrée.
-  **À faire dans le vault** : `node tools/rejouer_lots.mjs` (essai), puis `--appliquer`, puis quelques retouches à
+  Titres de fenêtre sans emoji de tête (47 pages) ; renvois numérotés touchables au doigt (28 px).
+  **À faire dans le vault** : `node tools/rejouer_lots.mjs` (essai), puis `--appliquer`, puis trois retouches à
   la main. Détail, liste des retouches manuelles et points non traités :
   `content-updates/2026-09-27-choix-contenu-et-ameliorations.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma

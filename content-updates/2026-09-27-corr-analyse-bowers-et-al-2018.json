@@ -1,7 +1,7 @@
 {
  "date": "2026-09-27",
  "revision": "2026-09-27-corr-analyse-bowers-et-al-2018",
- "portee": "Analyse Bowers et al. (2018) : la thèse centrale alignée sur le tableau des prédicteurs de la note (stigmatisation au premier rang, stress lié au superviseur au cinquième)",
+ "portee": "Analyse Bowers et al. (2018) : la thèse centrale alignée sur le tableau des prédicteurs de la note (stigmatisation au premier rang, stress lié au superviseur au cinquième) ; libellés « Roberts et al. » des liens vers le PDF corrigés en « Bowers et al. »",
  "precautions": "",
  "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
  "note": {
@@ -17,6 +17,21 @@
    "avant": "la stigmatisation et le stress lié au superviseur ressortent comme les prédicteurs dominants de la détresse psychologique en contexte FIFO.",
    "apres": "la stigmatisation ressort comme le prédicteur dominant de la détresse psychologique en contexte FIFO (OR 23,5) ; le stress lié au superviseur figure aussi parmi les prédicteurs indépendants (OR 4,3, au 5e rang).",
    "motif": "Contradiction interne : la thèse faisait du stress lié au superviseur un prédicteur dominant, alors que le tableau de la note le place au 5e rang (« Stress lié au superviseur | 4,3 | Relations hiérarchiques »), après « Stigmatisation (santé mentale = faiblesse) | 23,5*** | Prédicteur dominant - barrière culturelle à l'aide », et que la citation de l'article retenue par la note dit « The strongest predictor of psychological distress overall was fear of stigmatisation ». Même correction que sur la page Foreur, profil RPS et leadership de chantier."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "Roberts et al., 2018, p. 392",
+   "libelle": "Roberts et al., 2018, p. 392",
+   "nouveau": "Bowers et al., 2018, p. 392",
+   "motif": "Le PDF porte le nom de fichier « Roberts, P. et al. (2018)… », mais la note le dit : « aucun Roberts dans la liste d'auteurs » ; les auteurs sont Bowers et al. (2018). Libellé du lien corrigé, cible inchangée."
+  },
+  {
+   "type": "relibeller",
+   "toutes": true,
+   "ligneContenant": "Roberts et al., 2018, p. 393",
+   "libelle": "Roberts et al., 2018, p. 393",
+   "nouveau": "Bowers et al., 2018, p. 393",
+   "motif": "Le PDF porte le nom de fichier « Roberts, P. et al. (2018)… », mais la note le dit : « aucun Roberts dans la liste d'auteurs » ; les auteurs sont Bowers et al. (2018). Libellé du lien corrigé, cible inchangée. Deux liens, sur deux citations (retouche « toutes »)."
   }
  ]
 }

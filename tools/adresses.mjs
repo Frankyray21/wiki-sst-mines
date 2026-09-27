@@ -27,6 +27,12 @@ export function slugify(s) {
 // un ZWJ), retirée avec le préfixe numérique de classement.
 const EMOJIS_DE_TETE = /^(?:\p{Extended_Pictographic}(?:️|\p{Emoji_Modifier})?(?:‍\p{Extended_Pictographic}️?)*|\s)+/u;
 
+// Titre de fenêtre (onglet, historique, lecteur d'écran) : sans emoji de tête, que le lecteur d'écran
+// annoncerait (« cible », « livre ouvert ») avant le titre ; le titre de la page (h1) les garde.
+export function titreFenetre(titre) {
+  return String(titre).replace(EMOJIS_DE_TETE, '').trim() || String(titre);
+}
+
 export function cleanLabel(name) {
   // "20 - Articles" -> "Articles" ; retire aussi les emojis de tête
   return String(name).replace(/^\d+\s*-\s*/, '').replace(EMOJIS_DE_TETE, '').trim() || String(name);

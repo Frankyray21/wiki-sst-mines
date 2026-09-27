@@ -1,7 +1,7 @@
 {
  "date": "2026-09-27",
  "revision": "2026-09-27-corr-programme-daide-aux-employes-pae",
- "portee": "Programme d'aide aux employés (PAE) : titre d'encadré sans syntaxe brute, cadre légal corrigé (la loi ne mentionne pas le PAE ; programme de prévention selon LMRSST, art. 144), confidentialité harmonisée avec la nuance de la page, cinq chiffres sans source marqués",
+ "portee": "Programme d'aide aux employés (PAE) : titre d'encadré sans syntaxe brute, cadre légal corrigé (la loi ne mentionne pas le PAE ; programme de prévention selon LMRSST, art. 144), confidentialité harmonisée avec la nuance de la page, cinq chiffres sans source marqués ; lien de la page vers elle-même retiré",
  "precautions": "",
  "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
  "note": {
@@ -73,6 +73,12 @@
    "avant": "1500 km de son PAE local",
    "apres": "1500 km (source à préciser) de son PAE local",
    "motif": "Point relevé : la distance « 1500 km » n'a pas de source ; marquée (source à préciser)."
+  },
+  {
+   "type": "delier",
+   "ligneContenant": "est un service confidentiel offert par l'employeur",
+   "libelle": "Le PAE",
+   "motif": "Dans L'essentiel, « Le PAE » était un lien vers la page elle-même : texte simple."
   }
  ]
 }

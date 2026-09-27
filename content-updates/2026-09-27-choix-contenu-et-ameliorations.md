@@ -29,8 +29,8 @@ CCHST.
 ### Pages RPS relevées (lots 26 septembre, 8, 9 et 10)
 
 **Chiffres du lot :**
-- 51 lots `2026-09-27-corr-*.json` au total, 238 retouches ;
-- 36 pages RPS, dont 3 notes d'analyse (Bowers, INRS, Kivimäki) ;
+- 52 lots `2026-09-27-corr-*.json` au total, 247 retouches ;
+- 37 pages RPS, dont 3 notes d'analyse (Bowers, INRS, Kivimäki) ;
 - 1 page du Recueil législatif (CNESST).
 
 **Politique appliquée, la même partout :**
@@ -42,7 +42,7 @@ CCHST.
 - **Référence fausse** : corrigée d'après la note d'analyse du wiki ou une source vérifiée ; le motif cite la ligne
   qui fait foi.
 - **Chiffre ou affirmation sans source** : rien n'est supprimé. La marque « (source à préciser) » est ajoutée, ou
-  « (référence à préciser) » pour une référence. Il y en a 116. Quand le wiki donne la valeur sourcée, on la cite à
+  « (référence à préciser) » pour une référence. Il y en a 117. Quand le wiki donne la valeur sourcée, on la cite à
   la place de la marque, par exemple la date du 1er octobre 2025 (LMRSST, art. 313 ; Décret 1154-2025).
 - **Contradiction interne** : alignée sur la version sourcée.
 
@@ -145,24 +145,53 @@ node tools/build_site.mjs
 
 Si un lot échoue à l'essai, rien n'est écrit : le message nomme le lot et la ligne introuvable.
 
-**À faire à la main, parce qu'une retouche désignée par le texte visible ne peut pas le faire proprement :**
-- **Foreur** : en-tête « Effet » ; **Contremaître** : en-tête « Effet sur l'équipe ». Chacun figure à l'identique dans
-  deux tableaux de la note. Proposition : « Effet attendu (source à préciser) ».
-- **Aide-foreur** : la puce « Premier poste pour beaucoup… » est rangée parmi les tâches ; la déplacer.
-- **Note Bowers et al. (2018)** : trois liens vers le PDF sont libellés « Roberts et al., 2018 ».
-- **Types de personnalité** : le lien « Dolan & Arsenault 2009 p. 169 » ouvre la page PDF 159, soit la p. 139 du
-  livre. La typologie est aux p. 142-143 (page PDF 162).
-- **Réintégration au foyer entre rotations** : la cellule « Droit à la réadaptation » (jours 3-5) est un lien
-  `[[Réadaptation]]` vers la page de droit. Écrire « Réadaptation » en texte simple.
-- **Séparation famille en FIFO** : point final manquant après `**enjeux psychosociaux**`.
-- **Premiers signes en mine** : la Trousse d'outils de l'INSPQ est à marquer (référence à préciser).
-- **PAE** : un lien « Le PAE » mène à la page elle-même.
-- **MBI** : le lien « Maslach 1981 p. 1 » ouvre une fiche qui cite Maslach (1996) ; le titre du PDF porte la
-  coquille « Invenvotory ».
+**À faire à la main**, parce qu'aucune retouche ne peut le faire sans connaître le texte exact de la note :
+- **MBI** : le lien « Maslach 1981 p. 1 » ouvre une fiche de cours qui cite Maslach (1996) ; le titre du PDF porte
+  la coquille « Invenvotory ». À régler avec la question du PDF (droit d'auteur, plus bas).
 - **Grille INSPQ** : dans le tableau, les cellules « Soutien social au travail » et « Latitude décisionnelle » restent
-  des liens vers les pages du wiki. Le nom officiel des indicateurs est en tête de la cellule voisine.
+  des liens vers les pages du wiki ; une cellule faite d'un seul lien affiche le titre de la page visée. Le nom
+  officiel des indicateurs est en tête de la cellule voisine.
 - **Modèle de Selye** : le titre de la note, et de l'encadré « Ce que Sélye n'explique pas », garde l'accent. Renommer
   la note dans Obsidian corrige aussi les liens.
+
+## Suite du 27 septembre : retouches manuelles rendues automatiques
+
+Quatre nouveaux types de retouche (`tools/retouches.mjs`, tests dans `tools/tests/retouches.test.mjs`) : tous
+rejouables et reconnus « déjà faits » au second passage.
+- `remplacer` avec `toutes: true` : la même correction sur chaque ligne désignée (un en-tête identique dans deux
+  tableaux) ;
+- `relibeller` : le libellé d'un lien change, sa cible reste (ou change d'ancre de page PDF, `ancre`) ;
+- `delier` : un lien devient du texte simple ;
+- `ajouterFin` : un point final manquant, ou une marque juste avant le point final.
+
+Huit des retouches autrefois manuelles sont désormais dans les lots, et publiées :
+- **Foreur** : la colonne « Effet » des deux tableaux de comportements devient « Effet attendu (source à préciser) ».
+- **Contremaître** : de même, « Effet attendu sur l'équipe (source à préciser) » dans les deux tableaux ; les deux
+  cellules marquées une à une reprennent leur texte d'origine, pour ne pas marquer deux fois.
+- **Aide-foreur** : « Premier poste pour beaucoup de travailleurs miniers » quitte la liste des tâches ;
+  « L'aide-foreur est le premier poste de beaucoup de travailleurs miniers. » s'ajoute à l'évolution typique.
+- **Note Bowers et al. (2018)** : les trois liens vers le PDF s'intitulent « Bowers et al., 2018, p. 392 / 393 ».
+- **Types de personnalité** : le lien « Dolan & Arsenault 2009 p. 169 » devient « Dolan & Arsenault 2009, p. 138-140 »
+  et ouvre la page PDF 158. Vérifié dans le PDF : l'en-tête de la page PDF 159 se lit « 169 » par erreur d'OCR, c'est
+  la p. 139. La section « Types de personnalité A, B et C » (Friedman et Rosenman) couvre les p. 138 à 140. La
+  typologie des p. 142-143, proposée par la relecture, est celle de Dolan et Arsenault (HOT/COOL, CAT/DOG), citée
+  ailleurs sur la page.
+- **Réintégration au foyer entre rotations** : la phase « Réadaptation » (jours 3-5) n'est plus un lien vers la page
+  de droit « Droit à la réadaptation » (nouveau lot `2026-09-27-corr-reintegration-au-foyer-entre-rotations.json`).
+  La page Droit à la réadaptation perd ce rétrolien, et le graphe perd cette arête.
+- **Séparation famille en FIFO** : point final ajouté après « enjeux psychosociaux ».
+- **Premiers signes en mine** : la Trousse d'outils de l'INSPQ est marquée (référence à préciser).
+- **PAE** : le lien de la page vers elle-même, dans L'essentiel, devient du texte simple.
+
+Trois défauts d'affichage sont corrigés, dont deux relevés à la première livraison :
+- **Titre de fenêtre sans emoji de tête** sur 47 pages (Démarrage rapide, Glossaire commun, Index des images…) : un
+  lecteur d'écran annonçait l'emoji (« livre ouvert ») avant le titre. Le générateur applique la même règle
+  (`titreFenetre`, `tools/adresses.mjs`) ; le titre de la page, dans la page, garde son emoji.
+- **Renvois numérotés « 1 », « 2 »** : sur écran tactile, leur zone touchable passe à 28 px de haut, sans écarter
+  les lignes (`tools/style.css`).
+- **Mot plus long que la colonne** : la page De la conformité à la prévention défilait de côté au téléphone (516 px
+  pour 390), à cause de la flèche d'un schéma en caractères (« └────▶ »). Dans le texte des pages, un tel mot passe
+  désormais à la ligne (`overflow-wrap: break-word`) ; les autres mots ne sont jamais coupés.
 
 ## Non traité, et pourquoi
 
@@ -184,8 +213,9 @@ Si un lot échoue à l'essai, rien n'est écrit : le message nomme le lot et la 
   - La note « INSPQ 2021 » parle de « huit dimensions », ce qui contredit les 12 indicateurs de la Grille.
   - Page Obligation d'identifier : « Pas de mise à jour annuelle » et « Outil québécois de référence » ne sont pas
     sourcés.
-  - Sur les pages de contenu, les renvois numérotés « 1 », « 2 » sont des cibles tactiles de moins de 24 px
-    (Soutien social, par exemple).
+  - Page De la conformité à la prévention : la courbe de Bradley, dessinée en caractères, est aplatie en un
+    paragraphe (les lignes du dessin se suivent). Dans la note, la mettre dans un bloc de code, ou en faire un
+    schéma.
 
 ## Vérifications
 
@@ -194,7 +224,7 @@ Si un lot échoue à l'essai, rien n'est écrit : le message nomme le lot et la 
 - `tools/tests/corrections-contenu.test.mjs` applique chaque lot deux fois à une note reconstituée. Le second
   passage ne change rien. Le test vérifie aussi que la page publiée porte le texte corrigé, sans l'ancien.
 - `node tools/verif_site.mjs` : OK. `node tools/verif_liens.mjs` : 245 725 liens internes, aucune erreur.
-- Rendu réel dans Chromium (`tools/verif_rendu.mjs`) : les 51 pages corrigées, le portail et la page Thèmes, en cinq
+- Rendu réel dans Chromium (`tools/verif_rendu.mjs`) : les pages corrigées, le portail et la page Thèmes, en cinq
   modes. Aucun défaut dû à ces changements.
 - Toutes les citations entre guillemets des motifs ont été retrouvées mot pour mot dans le texte de loi du recueil,
   la page du wiki ou la note d'analyse citée. Les exceptions sont vérifiées à la main : fiche PDF du MBI, fiche

@@ -1,7 +1,7 @@
 {
  "date": "2026-09-27",
  "revision": "2026-09-27-corr-premiers-signes-en-mine-ce-que-les-superviseurs-voient",
- "portee": "Premiers signes en mine : encadré « Danger immédiat » harmonisé sur « sans attendre », précisions sans source marquées (jours d'absentéisme, observation 24/7) et programme « Travailleur Avisé » marqué (source à préciser)",
+ "portee": "Premiers signes en mine : encadré « Danger immédiat » harmonisé sur « sans attendre », précisions sans source marquées (jours d'absentéisme, observation 24/7) et programme « Travailleur Avisé » marqué (source à préciser) ; Trousse d'outils de l'INSPQ marquée (référence à préciser)",
  "precautions": "",
  "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
  "note": {
@@ -38,6 +38,13 @@
    "avant": "Programme « Travailleur Avisé »",
    "apres": "Programme intitulé « Travailleur Avisé » (source à préciser)",
    "motif": "Nom et existence du programme non sourcés, aucun programme CNESST de ce nom trouvé à la vérification : marqué, pas supprimé ; « intitulé » ajouté pour que la marque puisse se placer avant le lien qui termine la cellule."
+  },
+  {
+   "type": "ajouterFin",
+   "ligneContenant": "Trousse d'outils pour la surveillance de la santé mentale",
+   "texte": " (référence à préciser)",
+   "avantPoint": true,
+   "motif": "Référence introuvable, sans année ni lien (même marque que sur la page Grille INSPQ d'identification des RPS)."
   }
  ]
 }

@@ -169,3 +169,80 @@ test('recibler : un lien homonyme résolu vers un autre wiki vise la note voulue
   assert.equal(appliquerRetouches(note, [{ ...lot[0], libelle: 'Autre' }], { resoudreLien }).ok, false);
   assert.equal(appliquerRetouches(note, [{ ...lot[0], adresse: 'w/x/y.html' }], { resoudreLien }).ok, false);
 });
+
+test('remplacer « toutes » : le même en-tête dans deux tableaux, corrigé partout, puis reconnu', () => {
+  const note = '# Foreur\n\n**Protecteurs**\n\n| Comportement | Effet |\n|---|---|\n| Écoute | Soutien |\n\n**Destructeurs**\n\n| Comportement | Effet |\n|---|---|\n| Intimidation | Iso-strain |\n';
+  const lot = [{ type: 'remplacer', toutes: true, ligneContenant: 'Comportement | Effet', avant: '| Effet |', apres: '| Effet attendu (source à préciser) |' }];
+  const r = appliquerRetouches(note, lot);
+  assert.ok(r.ok);
+  assert.equal(r.rapports[0].statut, 'appliquée');
+  assert.equal((r.texte.match(/\| Comportement \| Effet attendu \(source à préciser\) \|/g) || []).length, 2);
+  assert.ok(!/\| Effet \|/.test(r.texte));
+  const r2 = appliquerRetouches(r.texte, lot);
+  assert.equal(r2.rapports[0].statut, 'déjà faite');
+  assert.equal(r2.texte, r.texte);
+  // sans « toutes », deux lignes désignées : ambiguë, rien n'est écrit
+  assert.equal(appliquerRetouches(note, [{ ...lot[0], toutes: false }]).ok, false);
+  assert.equal(appliquerRetouches('# Rien\n', lot).rapports[0].statut, 'introuvable');
+});
+
+test('relibeller : libellé d’un lien corrigé, cible gardée ou ancre de page changée ; rejoué sans effet', () => {
+  const note = '# Bowers\n\n« Citation un. » (Bowers et al., 2018, p. 392). [[Roberts P. (2018).pdf#page=2|Roberts et al., 2018, p. 392]]\n\n'
+    + '« Citation deux. » [[Roberts P. (2018).pdf#page=3|Roberts et al., 2018, p. 393]]\n\n« Citation trois. » [[Roberts P. (2018).pdf#page=3|Roberts et al., 2018, p. 393]]\n\n'
+    + '| Doc | [[Dolan 2009.pdf#page=159\\|Dolan & Arsenault 2009 p. 169]] |\n';
+  const lot = [
+    { type: 'relibeller', ligneContenant: 'Roberts et al., 2018, p. 392', libelle: 'Roberts et al., 2018, p. 392', nouveau: 'Bowers et al., 2018, p. 392' },
+    { type: 'relibeller', toutes: true, ligneContenant: 'Roberts et al., 2018, p. 393', libelle: 'Roberts et al., 2018, p. 393', nouveau: 'Bowers et al., 2018, p. 393' },
+    { type: 'relibeller', ligneContenant: '| Doc |', libelle: 'Dolan & Arsenault 2009 p. 169', nouveau: 'Dolan & Arsenault 2009, p. 138-140', ancre: '#page=158' },
+  ];
+  const r = appliquerRetouches(note, lot);
+  assert.ok(r.ok, JSON.stringify(r.rapports));
+  assert.match(r.texte, /\[\[Roberts P\. \(2018\)\.pdf#page=2\|Bowers et al\., 2018, p\. 392\]\]/);
+  assert.equal((r.texte.match(/\[\[Roberts P\. \(2018\)\.pdf#page=3\|Bowers et al\., 2018, p\. 393\]\]/g) || []).length, 2);
+  assert.match(r.texte, /\| Doc \| \[\[Dolan 2009\.pdf#page=158\\\|Dolan & Arsenault 2009, p\. 138-140\]\] \|/, 'barre de tableau gardée, ancre changée');
+  const r2 = appliquerRetouches(r.texte, lot);
+  assert.deepEqual(r2.rapports.map(x => x.statut), ['déjà faite', 'déjà faite', 'déjà faite']);
+  assert.equal(r2.texte, r.texte);
+  assert.equal(appliquerRetouches('# Rien\n', [lot[0]]).ok, false, 'lien absent : rien n’est écrit');
+});
+
+test('delier : un lien devient du texte simple (libellé ou texte donné), une image intégrée n’est pas touchée', () => {
+  const note = '# PAE\n\n**L\'essentiel** : [[Programme d\'aide aux employés (PAE)|Le PAE]] est un service confidentiel. ![[Le PAE]]\n\n| 3-5 | [[Réadaptation]] | Reprise progressive du rôle familial |\n';
+  const lot = [
+    { type: 'delier', ligneContenant: 'est un service confidentiel', libelle: 'Le PAE' },
+    { type: 'delier', ligneContenant: 'Reprise progressive du rôle familial', libelle: ['Réadaptation', 'Droit à la réadaptation'], texte: 'Réadaptation' },
+  ];
+  const r = appliquerRetouches(note, lot);
+  assert.ok(r.ok, JSON.stringify(r.rapports));
+  assert.match(r.texte, /: Le PAE est un service confidentiel\. !\[\[Le PAE\]\]$/m);
+  assert.match(r.texte, /^\| 3-5 \| Réadaptation \| Reprise progressive du rôle familial \|$/m);
+  const r2 = appliquerRetouches(r.texte, lot);
+  assert.deepEqual(r2.rapports.map(x => x.statut), ['déjà faite', 'déjà faite']);
+  assert.equal(r2.texte, r.texte);
+  assert.equal(appliquerRetouches(note, [{ ...lot[0], libelle: 'Autre' }]).ok, false);
+});
+
+test('ajouterFin : point final manquant, marque avant le point final ; rejoué sans effet', () => {
+  const note = '# FIFO\n\nLe conjoint vit aussi des **enjeux psychosociaux**\n\n- [[INSPQ]]. *Trousse d\'outils pour la surveillance de la santé mentale*.\n';
+  const lot = [
+    { type: 'ajouterFin', ligneContenant: 'Le conjoint vit aussi des enjeux psychosociaux', texte: '.' },
+    { type: 'ajouterFin', ligneContenant: 'Trousse d\'outils pour la surveillance', texte: ' (référence à préciser)', avantPoint: true },
+  ];
+  const r = appliquerRetouches(note, lot);
+  assert.ok(r.ok, JSON.stringify(r.rapports));
+  assert.match(r.texte, /^Le conjoint vit aussi des \*\*enjeux psychosociaux\*\*\.$/m);
+  assert.match(r.texte, /^- \[\[INSPQ\]\]\. \*Trousse d'outils pour la surveillance de la santé mentale\* \(référence à préciser\)\.$/m);
+  const r2 = appliquerRetouches(r.texte, lot);
+  assert.deepEqual(r2.rapports.map(x => x.statut), ['déjà faite', 'déjà faite']);
+  assert.equal(r2.texte, r.texte);
+});
+
+test('relibeller : un lien homonyme sur une autre ligne, non visée, ne bloque pas le rejeu', () => {
+  const note = '# P\n\nTypologie de Friedman : [[Dolan.pdf#page=159|Dolan p. 169]]\n\nAilleurs : [[Dolan.pdf#page=159|Dolan p. 169]]\n';
+  const lot = [{ type: 'relibeller', ligneContenant: 'Typologie de Friedman', libelle: 'Dolan p. 169', nouveau: 'Dolan, p. 138-140', ancre: '#page=158' }];
+  const r = appliquerRetouches(note, lot);
+  assert.ok(r.ok);
+  assert.match(r.texte, /Typologie de Friedman : \[\[Dolan\.pdf#page=158\|Dolan, p\. 138-140\]\]/);
+  assert.match(r.texte, /Ailleurs : \[\[Dolan\.pdf#page=159\|Dolan p\. 169\]\]/, 'la ligne non visée ne change pas');
+  assert.equal(appliquerRetouches(r.texte, lot).rapports[0].statut, 'déjà faite');
+});

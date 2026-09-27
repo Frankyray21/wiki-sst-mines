@@ -29,6 +29,17 @@
 //                                                      désormais vers la note qui produit « adresse » (un lien
 //                                                      homonyme résolu vers un autre wiki, p. ex.) ; le libellé ne
 //                                                      change pas. Déjà faite si le lien vise déjà cette note
+//   relibeller     { ligneContenant, libelle, nouveau, ancre?, toutes? } le lien de libellé « libelle » de la
+//                                                      ligne s'affiche désormais « nouveau » (la cible ne change pas,
+//                                                      sauf « ancre » : « #page=158 » remplace l'ancre d'un lien vers
+//                                                      un PDF). Déjà faite si la ligne n'a plus que le nouveau libellé
+//   delier         { ligneContenant, libelle, texte?, toutes? } le lien de libellé « libelle » (ou d'un des libellés
+//                                                      d'une liste) devient du texte simple, « texte » ou son libellé
+//   ajouterFin     { ligneContenant, texte, avantPoint? } ajoute « texte » en fin de ligne (un point final
+//                                                      manquant, p. ex.) ; « avantPoint » : juste avant le point final
+//                                                      (« … (référence à préciser). »). Déjà faite si la ligne finit ainsi
+// « toutes: true » (remplacer, relibeller, delier) : la retouche vaut pour chaque ligne désignée (un en-tête
+// de colonne identique dans deux tableaux, p. ex.), et non pour une seule.
 // Le « marqueur » de supprimerLigne peut être une liste : la ligne a été retirée par l'un ou l'autre
 // (le schéma et sa version antérieure, par exemple).
 // Dans « apres », « par » et « bloc », {{lien:<adresse publiée>|<libellé>}} devient un wikilink vers
@@ -63,6 +74,17 @@ export function resoudreLiens(texte, resoudreLien, { tableau = false } = {}) {
     return `[[${cible}${tableau ? '\\|' : '|'}${libelle}]]`;
   });
 }
+
+// Wikilinks d'une ligne (pas les images intégrées « ![[…]] ») : cible, barre (« | » ou « \| » dans un
+// tableau) et libellé affiché (l'alias, sinon la cible).
+function liensDe(ligne) {
+  return [...ligne.matchAll(/(!?)\[\[([^\]|\\]+?)(?:(\\?\|)([^\]]+))?\]\]/g)]
+    .filter(m => !m[1])
+    .map(m => ({ tout: m[0], cible: m[2], barre: m[3] || '', alias: m[4], libelle: m[4] ?? m[2] }));
+}
+const memeLibelle = (a, b) => normaliser(a) === normaliser(b);
+// cible d'un lien sans son ancre (« Fichier.pdf#page=159 » → « Fichier.pdf »), puis avec l'ancre voulue
+const avecAncre = (cible, ancre) => ancre ? cible.replace(/#.*$/, '') + ancre : cible;
 
 // Bloc <div class="infographie…"> … </div> qui contient la ligne i (un schéma : image, légende, version
 // texte, sources, sans <div> imbriqué) ; null si la ligne n'est pas dans un tel bloc.
@@ -137,6 +159,62 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
       rapport.ligne = i + 1;
       if (ancienne.trim() === cible) { rapport.statut = 'déjà faite'; continue; }
       lignes[i] = lignes[i].replace(tout, () => `[[${cible}${barre || '|'}${libelle ?? ancienne}]]`);
+      rapport.statut = 'appliquée';
+      continue;
+    }
+    if (r.type === 'relibeller' || r.type === 'delier') {
+      const anciens = [].concat(r.libelle);
+      const porteAncien = l => liensDe(l).some(k => anciens.some(a => memeLibelle(k.libelle, a)));
+      // lignes visées : celles que désigne « ligneContenant » ; si aucune ne l'est plus (le libellé lui-même
+      // servait à les désigner), la retouche est faite quand plus aucune ligne ne porte l'ancien libellé
+      const portee = trouvees.length ? trouvees : [];
+      if (!r.toutes && portee.length > 1) { rapport.statut = `ambiguë (${portee.length} lignes)`; ok = false; continue; }
+      const aFaire = portee.filter(i => porteAncien(lignes[i]));
+      if (!aFaire.length) {
+        // (les lignes visées n'ont plus l'ancien libellé, puisque rien n'est à faire ; sans ligne visée, aucune
+        // ligne de la note ne doit plus le porter)
+        const fait = r.type === 'relibeller'
+          ? (portee.length > 0 || !lignes.some(porteAncien)) && lignes.some(l => liensDe(l).some(k => memeLibelle(k.libelle, r.nouveau) && (!r.ancre || k.cible.endsWith(r.ancre))))
+          : portee.length > 0 && portee.every(i => !porteAncien(lignes[i]) && normaliser(lignes[i]).includes(normaliser(r.texte ?? anciens[0])));
+        if (fait) { rapport.statut = 'déjà faite'; continue; }
+        rapport.statut = portee.length ? `lien « ${anciens[0]} » absent de la ligne` : 'introuvable';
+        ok = false; continue;
+      }
+      for (const i of aFaire) {
+        for (const k of liensDe(lignes[i]).filter(k => anciens.some(a => memeLibelle(k.libelle, a)))) {
+          const neuf = r.type === 'relibeller'
+            ? `[[${avecAncre(k.cible, r.ancre)}${k.barre || '|'}${r.nouveau}]]`
+            : (r.texte ?? k.libelle);
+          lignes[i] = lignes[i].replace(k.tout, () => neuf);
+        }
+      }
+      rapport.ligne = aFaire.map(i => i + 1).join(', ');
+      rapport.statut = 'appliquée';
+      continue;
+    }
+    if (r.type === 'ajouterFin') {
+      if (trouvees.length !== 1) { rapport.statut = trouvees.length ? `ambiguë (${trouvees.length} lignes)` : 'introuvable'; ok = false; continue; }
+      const i = trouvees[0];
+      const brute = lignes[i].replace(/\s+$/, '');
+      rapport.ligne = i + 1;
+      const fin = new RegExp(motifSouple(r.texte).source + (r.avantPoint ? '\\.' : '') + '$');
+      if (fin.test(brute)) { rapport.statut = 'déjà faite'; continue; }
+      lignes[i] = r.avantPoint ? brute.replace(/\.?$/, () => r.texte + '.') : brute + r.texte;
+      rapport.statut = 'appliquée';
+      continue;
+    }
+    if (r.type === 'remplacer' && r.toutes) {
+      // la même correction sur chaque ligne désignée (un en-tête identique dans deux tableaux, p. ex.)
+      const avantL = motifSouple(r.avant), apres = resoudreLiens(r.apres, resoudreLien, r), apresL = motifSouple(apres);
+      const aFaire = trouvees.filter(i => avantL.test(lignes[i]));
+      if (!aFaire.length) {
+        const fait = !lignes.some(l => avantL.test(l)) && lignes.some(l => apresL.test(l));
+        rapport.statut = fait ? 'déjà faite' : (trouvees.length ? 'fragment « avant » absent des lignes' : 'introuvable');
+        if (!fait) ok = false;
+        continue;
+      }
+      for (const i of aFaire) lignes[i] = lignes[i].replace(avantL, () => apres);
+      rapport.ligne = aFaire.map(i => i + 1).join(', ');
       rapport.statut = 'appliquée';
       continue;
     }
