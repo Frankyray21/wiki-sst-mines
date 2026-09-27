@@ -804,7 +804,7 @@
     if (document.querySelector('.page-body')) {
       return ['tour-article', [
         { titre: 'Lire un article', texte: 'Voici les repères d’une page du wiki. Quelques repères, et vous êtes autonome.' },
-        { titre: 'Lire à votre aise', texte: 'A− et A+ règlent la taille du texte, et « Lecture » ne garde que l’article : pratique sur un téléphone, sous terre. Le réglage vous suit d’une page à l’autre. « PDF » enregistre l’article, pour le garder ou le partager.', cible: '.lecture-outils' },
+        { titre: 'Lire à votre aise', texte: document.querySelector('.accueil-banniere') ? '« Lecture » ne garde que la page, pratique sur un téléphone, sous terre ; « PDF » l’enregistre, pour la garder ou la partager. A− et A+, dans le menu, règlent la taille du texte, et le réglage vous suit d’une page à l’autre.' : 'A− et A+ règlent la taille du texte, et « Lecture » ne garde que l’article : pratique sur un téléphone, sous terre. Le réglage vous suit d’une page à l’autre. « PDF » enregistre l’article, pour le garder ou le partager.', cible: '.lecture-outils' },
         { titre: 'L’essentiel, tout de suite', texte: 'Le résumé en tête donne la substance de l’article avant d’entrer dans le détail.', cible: '.chapo' },
         { titre: 'La fiche signalétique', texte: 'Loi, article, statut, date de révision : les repères de la page. Les mots-clés en bas sont cliquables et mènent à toutes les pages du même sujet.', cible: '.infobox' },
         { titre: 'Passer à la page voisine', texte: 'En bas de l’article, « Précédent » et « Suivant » enchaînent les pages du même dossier : les articles de loi se lisent ainsi dans l’ordre.', cible: '.voisins' },
@@ -1609,6 +1609,25 @@
     bPlus.addEventListener('click', function () { var i = PALIERS.indexOf(lireEchelle()); if (i < PALIERS.length - 1) poserEchelle(PALIERS[i + 1]); });
     var bPdf = barre.querySelector('[data-pdf]');
     if (bPdf) bPdf.addEventListener('click', function () { PDF.imprimer(); });
+    // Accueil d'un wiki (maquette du 26 sept. 2026) : la carte d'entrée ne garde que Lecture et PDF ;
+    // A− et A+ passent dans le menu latéral, sous « Taille du texte ». Même boutons, mêmes écouteurs.
+    var menu = document.getElementById('sidebar');
+    if (menu && document.querySelector('.accueil-banniere')) {
+      var groupe = document.createElement('div');
+      groupe.className = 'nav-group lecture-taille';
+      groupe.setAttribute('role', 'group');
+      groupe.setAttribute('aria-label', 'Taille du texte');
+      var titreGroupe = document.createElement('div');
+      titreGroupe.className = 'nav-title';
+      titreGroupe.textContent = 'Taille du texte';
+      var rangee = document.createElement('div');
+      rangee.className = 'lecture-taille-boutons';
+      rangee.appendChild(bMoins);
+      rangee.appendChild(bPlus);
+      groupe.appendChild(titreGroupe);
+      groupe.appendChild(rangee);
+      menu.appendChild(groupe);
+    }
     bLect.addEventListener('click', function () {
       var on = document.documentElement.getAttribute('data-lecture') !== '1';
       if (on) document.documentElement.setAttribute('data-lecture', '1');
@@ -1672,6 +1691,20 @@
     window.addEventListener('scroll', afficheHaut, { passive: true });
     afficheHaut();
   }
+
+  // ---------- marque : « SST » en couleur d'accent (maquette du 26 sept. 2026) ----------
+  // Le générateur pose la balise ; une page publiée avant lui la reçoit ici, sans reconstruction.
+  (function marque() {
+    var t = document.querySelector('.site-header .brand-text strong');
+    if (!t || t.querySelector('.brand-sst')) return;
+    var m = t.textContent.match(/^(.*?\s)SST$/);
+    if (!m) return;
+    t.textContent = m[1];
+    var sst = document.createElement('span');
+    sst.className = 'brand-sst';
+    sst.textContent = 'SST';
+    t.appendChild(sst);
+  })();
 
   // ---------- thèmes de l'accueil d'un wiki : volets repliables (13 sept. 2026) ----------
   // Rendus ouverts par le générateur (sans script, tout se lit). Sur téléphone on les referme,
