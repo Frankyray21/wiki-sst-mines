@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-index-des-images-du-cours",
+ "portee": "Index des images du cours : la capture HOT/COOL DOG/CAT, encore donnée comme intégrée à la page Types de personnalité et lieu de contrôle, signalée comme retirée le 26 septembre 2026 et remplacée par un schéma",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "🖼️ Index des images du cours SST1010",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/index-des-images-du-cours.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "lieu de contrôle (HOT/COOL DOG/CAT)",
+   "avant": "(HOT/COOL DOG/CAT)",
+   "apres": "(HOT/COOL DOG/CAT ; capture retirée de la page le 26 septembre 2026, remplacée par un schéma)",
+   "motif": "Point relevé : le tableau « Schémas clés déjà intégrés » donne encore la capture 04-stress-modèles/img-003.png comme intégrée à Types de personnalité et lieu de contrôle ; le lot 2026-09-26-types-de-personnalite-et-lieu-de-controle-schemas l'a retirée de cette page (supprimerLigne « img-003.png ») et remplacée par le schéma wiki-types-de-personnalite-et-lieu-de-controle-combinaisons-v2.svg."
+  }
+ ]
+}

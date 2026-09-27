@@ -1,0 +1,106 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-confinement-profondeur-et-charge-mentale",
+ "portee": "Confinement, profondeur et charge mentale : « vs » remplacés, deux-points ajouté, affirmations sans source marquées, droit de refus (LSST, art. 12) et salles de refuge (RSSM, art. 126 à 128) précisés, références imprécises marquées et Siffre (1962) situé",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Confinement, profondeur et charge mentale",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/confinement-profondeur-et-charge-mentale.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "La majorité des travailleurs s'adaptent",
+   "avant": "La majorité des travailleurs s'adaptent,",
+   "apres": "La majorité des travailleurs s'adaptent (source à préciser),",
+   "motif": "« La majorité… » : proportion affirmée sans source, marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Charge cognitive vs charge mentale",
+   "avant": "Charge cognitive vs charge mentale",
+   "apres": "Charge cognitive par rapport à la charge mentale",
+   "motif": "« vs » est un anglicisme ; le titre compare deux notions, d'où « par rapport à »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les travailleurs souterrains expérimentés s'adaptent",
+   "avant": "conscient. Mais cette adaptation a un coût",
+   "apres": "conscient, mais cette adaptation a un coût :",
+   "motif": "Deux-points manquant avant la liste des coûts de l'adaptation ; ajouté (phrase jointe à la précédente par « , mais » pour que le lot reste rejouable)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Niveau d'attention",
+   "avant": "Niveau d'attention",
+   "apres": "Niveaux d'attention (source à préciser)",
+   "motif": "Les niveaux d'alerte du tableau n'ont pas de source ; une seule marque, dans l'en-tête de la colonne (au pluriel pour que le lot reste rejouable)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Refus ou évitement de certaines tâches souterraines",
+   "avant": "Élevé, peut signaler claustrophobie ou stress",
+   "apres": "Élevé, peut signaler une claustrophobie ou du stress ; un refus peut aussi être l'exercice du droit de refus (LSST, art. 12)",
+   "motif": "Le refus était présenté comme un simple signal ; LSST, art. 12 : « Un travailleur a le droit de refuser d’exécuter un travail s’il a des motifs raisonnables de croire que l’exécution de ce travail l’expose à un danger pour sa santé, sa sécurité ou son intégrité physique ou psychique ou peut avoir l’effet d’exposer une autre personne à un semblable danger. » (« ou psychique » inséré par la LMRSST, art. 233 : « par l’insertion, partout où ceci se trouve dans les articles 3, 4, 12, 13, 18, 49.1, 51.2, 186, 217 et 237 et après « physique », de « ou psychique » »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "la majorité des travailleurs souterrains présentent occasionnellement",
+   "avant": "Anxiété situationnelle vs claustrophobie clinique",
+   "apres": "Anxiété situationnelle ou claustrophobie clinique",
+   "motif": "« vs » est un anglicisme ; le paragraphe distingue deux états, d'où « ou »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "la majorité des travailleurs souterrains présentent occasionnellement",
+   "avant": "(face à des conditions particulières).",
+   "apres": "(face à des conditions particulières) (source à préciser).",
+   "motif": "« La majorité… » : proportion affirmée sans source, marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "la majorité des travailleurs souterrains présentent occasionnellement",
+   "avant": "est plus rare et nécessite",
+   "apres": "est plus rare (source à préciser) et nécessite",
+   "motif": "« Plus rare » : comparaison sans source, marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Quart de 12 h en confinement profond",
+   "avant": "Quart de 12 h en confinement profond",
+   "apres": "Quart de 12 h (source à préciser) en confinement profond",
+   "motif": "« Quart de 12 h » : durée sans source, marquée juste après le chiffre."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Pauses régulières dans des zones décompressantes",
+   "avant": "(refuges, salles d'équipement)",
+   "apres": "(salles d'équipement). Les salles de refuge sont, elles, des abris d'urgence (RSSM, art. 126 à 128)",
+   "motif": "Les refuges étaient présentés comme zones de pause ; le RSSM les encadre comme salles de refuge, art. 126 : « Une salle de refuge doit être aménagée sur tout niveau souterrain en exploitation d’où il n’est pas possible, après que le système d’alarme ait été déclenché, d’atteindre une autre salle de refuge ou la surface dans un délai (…) »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Recherches sur la charge mentale en milieux confinés",
+   "avant": "(industrie, sous-marine, spatial).",
+   "apres": "(industrie, sous-marine, spatial) (référence à préciser).",
+   "motif": "Référence qui ne désigne aucun document identifiable ; marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Recherches sur la charge mentale en milieux confinés",
+   "avant": ", sur l'expérience hors du temps.",
+   "apres": ", sur l'expérience hors du temps (porte sur le rythme circadien).",
+   "motif": "Siffre (1962) est cité parmi les recherches sur la charge mentale en milieux confinés alors que la note porte sur le rythme circadien : « Elle sert à illustrer le contrôle endogène du rythme circadien » (note Siffre, 1962)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "IRSST. Études sur le travail minier québécois.",
+   "avant": "IRSST. Études sur le travail minier québécois.",
+   "apres": "IRSST. Études sur le travail minier québécois (référence à préciser).",
+   "motif": "Référence qui ne désigne aucun document identifiable (ni titre ni année) ; marquée."
+  }
+ ]
+}

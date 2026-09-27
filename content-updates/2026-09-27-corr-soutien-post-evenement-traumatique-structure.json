@@ -1,0 +1,50 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-soutien-post-evenement-traumatique-structure",
+ "portee": "Soutien post-événement traumatique structuré : effet et chiffres sans source marqués (source à préciser), rencontre de groupe « optionnelle » marquée, conclusion de Rose et al. (2002) précisée avec la revue Cochrane, délais du tableau des phases signalés à harmoniser avec le protocole minier",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Soutien post-événement traumatique structuré",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/soutien-post-evenement-traumatique-structure.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "réduit significativement le risque de",
+   "avant": "et de chronicisation. La démarche",
+   "apres": "et de chronicisation (source à préciser). La démarche",
+   "motif": "Point relevé : « réduit significativement le risque de TSPT » n'a pas de source ; la seule référence de la page, Rose et al. (2002), porte sur le debriefing. Marqué à la fin de l'affirmation."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "présentent des symptômes aigus dans les premiers jours",
+   "avant": "30 à 50 % des personnes exposées",
+   "apres": "30 à 50 % (source à préciser) des personnes exposées",
+   "motif": "Point relevé : « 30 à 50 % » des personnes exposées avec des symptômes aigus, chiffre sans source. Marqué après le chiffre."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "développeront un TSPT durable selon la nature",
+   "avant": "5 à 30 % développeront",
+   "apres": "5 à 30 % (source à préciser) développeront",
+   "motif": "Point relevé : « 5 à 30 % » développant un TSPT durable, chiffre sans source. Marqué après le chiffre."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "espace pour exprimer (pas",
+   "avant": "groupe optionnelle, espace",
+   "apres": "groupe optionnelle (source à préciser), espace",
+   "motif": "Point relevé : la rencontre de groupe « optionnelle » n'a pas de source ; Rose et al. (2002), seule référence, vise le debriefing. Marqué une fois, dans le tableau des phases."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "espace pour exprimer (pas",
+   "avant": "(pas debriefing intrusif)",
+   "apres": "(pas de debriefing intrusif). Rose et al. (2002) ne trouvent aucune preuve qu'un debriefing psychologique individuel en une seule séance prévienne le TSPT ; il ne doit pas être imposé ([Cochrane, 2002](https://pubmed.ncbi.nlm.nih.gov/11686967/)).",
+   "motif": "Point relevé : Rose et al. (2002) vise le debriefing, pas la rencontre de groupe ; phrase ajoutée d'après la revue Cochrane (PubMed 11686967, source fournie et vérifiée) : aucune preuve que le debriefing individuel en une séance prévienne le TSPT, et il ne faut pas l'imposer. Coquille corrigée dans la même phrase : « pas debriefing » devient « pas de debriefing »."
+  }
+ ]
+}

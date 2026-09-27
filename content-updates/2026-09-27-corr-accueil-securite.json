@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-accueil-securite",
+ "portee": "Accueil Sécurité : lien « Pages gestionnaires » vers l'accueil gestionnaires de Sécurité",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "🏠 Wiki Sécurité industrielle, mines",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/index.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "recibler",
+   "ligneContenant": "Pages gestionnaires",
+   "libelle": "Pages gestionnaires",
+   "adresse": "w/securite/00-accueil-gestionnaires.html",
+   "motif": "Le lien menait à l'accueil gestionnaires du wiki Ergonomie (note homonyme) ; il mène à celui de ce wiki."
+  }
+ ]
+}

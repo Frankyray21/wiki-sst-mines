@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-rythme-circadien",
+ "portee": "Rythme circadien : la rotation jour, soir, nuit nommée correctement (horaire, dite vers l'avant, et non antihoraire), avec la source CCHST",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Rythme circadien",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/rythme-circadien.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "préférer la rotation antihoraire (jour, soir, nuit), qui s'aligne mieux avec le rythme circadien",
+   "avant": "préférer la rotation antihoraire (jour, soir, nuit), qui s'aligne mieux avec le rythme circadien,",
+   "apres": "préférer la rotation horaire, dite vers l'avant (jour, soir, nuit), qui s'aligne mieux avec le rythme circadien ([CCHST — Travail en rotation](https://www.cchst.ca/oshanswers/ergonomics/shiftwrk.html)),",
+   "motif": "Point relevé : la rotation jour, soir, nuit était dite « antihoraire » ; c'est la rotation horaire, dite vers l'avant, que recommande le CCHST (rotation vers l'avant : jours, puis soirs, puis nuits), l'antihoraire (vers l'arrière) allant de nuit à soir puis jour. Terme corrigé, recommandation conservée, source CCHST ajoutée."
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-analyse-bowers-et-al-2018",
+ "portee": "Analyse Bowers et al. (2018) : la thèse centrale alignée sur le tableau des prédicteurs de la note (stigmatisation au premier rang, stress lié au superviseur au cinquième)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Bowers et al. (2018) - Détresse psychologique chez les travailleurs miniers et de construction éloignés en Australie",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/analyse-bowers-et-al-2018.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "ressortent comme les prédicteurs dominants de la détresse psychologique",
+   "avant": "la stigmatisation et le stress lié au superviseur ressortent comme les prédicteurs dominants de la détresse psychologique en contexte FIFO.",
+   "apres": "la stigmatisation ressort comme le prédicteur dominant de la détresse psychologique en contexte FIFO (OR 23,5) ; le stress lié au superviseur figure aussi parmi les prédicteurs indépendants (OR 4,3, au 5e rang).",
+   "motif": "Contradiction interne : la thèse faisait du stress lié au superviseur un prédicteur dominant, alors que le tableau de la note le place au 5e rang (« Stress lié au superviseur | 4,3 | Relations hiérarchiques »), après « Stigmatisation (santé mentale = faiblesse) | 23,5*** | Prédicteur dominant - barrière culturelle à l'aide », et que la citation de l'article retenue par la note dit « The strongest predictor of psychological distress overall was fear of stigmatisation ». Même correction que sur la page Foreur, profil RPS et leadership de chantier."
+  }
+ ]
+}

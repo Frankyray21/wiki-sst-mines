@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-soutien-social-au-travail",
+ "portee": "Soutien social au travail : le renvoi « consulter la page Iso-strain » devient un lien",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Soutien social au travail",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/soutien-social-au-travail.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Pour examiner les résultats de recherche et leurs limites, consulter la page Iso-strain",
+   "avant": "consulter la page Iso-strain.",
+   "apres": "consulter la page {{lien:w/psychosocial/iso-strain.html|Iso-strain}}.",
+   "motif": "Point relevé : « consulter la page Iso-strain » n'était pas un lien ; lien ajouté vers la page Iso-strain du wiki, qui présente les méta-analyses et leur limite (« Le risque est statistique »)."
+  }
+ ]
+}

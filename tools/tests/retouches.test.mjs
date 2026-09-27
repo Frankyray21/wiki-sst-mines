@@ -146,3 +146,26 @@ test('supprimerLigne : plusieurs marqueurs possibles (schéma ou sa version ant�
   assert.equal(appliquerRetouches('Suite.', [r]).rapports[0].statut, 'introuvable');
   assert.equal(appliquerRetouches('![[img-001.png]]\n\nSuite.', [r]).texte, '\nSuite.');
 });
+
+test('recibler : un lien homonyme résolu vers un autre wiki vise la note voulue, libellé conservé', () => {
+  const resoudreLien = a => ({ 'w/hygiene/00-accueil-gestionnaires.html': 'Wiki Hygiène industrielle/00 - Accueil gestionnaires' })[a] || null;
+  const note = '# Accueil\n\nHub : [[27 - Articles gestionnaires|Pages gestionnaires]]\n\n### [[27 - Articles gestionnaires]]\n| a | [[27 - Articles gestionnaires\\|Pages gestionnaires]] |\n';
+  const lot = [{ type: 'recibler', ligneContenant: 'Hub : Pages gestionnaires', libelle: 'Pages gestionnaires', adresse: 'w/hygiene/00-accueil-gestionnaires.html' }];
+  const r = appliquerRetouches(note, lot, { resoudreLien });
+  assert.ok(r.ok);
+  assert.match(r.texte, /^Hub : \[\[Wiki Hygiène industrielle\/00 - Accueil gestionnaires\|Pages gestionnaires\]\]$/m);
+  assert.match(r.texte, /^### \[\[27 - Articles gestionnaires\]\]$/m, 'les autres lignes ne bougent pas');
+  // rejoué : déjà fait, texte inchangé
+  const r2 = appliquerRetouches(r.texte, lot, { resoudreLien });
+  assert.equal(r2.rapports[0].statut, 'déjà faite');
+  assert.equal(r2.texte, r.texte);
+  // lien sans alias, et barre échappée d'une cellule de tableau conservée
+  const r3 = appliquerRetouches(note, [{ type: 'recibler', ligneContenant: '### 27 - Articles gestionnaires', libelle: '27 - Articles gestionnaires', adresse: 'w/hygiene/00-accueil-gestionnaires.html' },
+    { type: 'recibler', ligneContenant: '| a |', libelle: 'Pages gestionnaires', adresse: 'w/hygiene/00-accueil-gestionnaires.html' }], { resoudreLien });
+  assert.ok(r3.ok);
+  assert.match(r3.texte, /^### \[\[Wiki Hygiène industrielle\/00 - Accueil gestionnaires\|27 - Articles gestionnaires\]\]$/m);
+  assert.match(r3.texte, /\| a \| \[\[Wiki Hygiène industrielle\/00 - Accueil gestionnaires\\\|Pages gestionnaires\]\] \|/);
+  // lien absent ou note introuvable : rien n'est écrit
+  assert.equal(appliquerRetouches(note, [{ ...lot[0], libelle: 'Autre' }], { resoudreLien }).ok, false);
+  assert.equal(appliquerRetouches(note, [{ ...lot[0], adresse: 'w/x/y.html' }], { resoudreLien }).ok, false);
+});

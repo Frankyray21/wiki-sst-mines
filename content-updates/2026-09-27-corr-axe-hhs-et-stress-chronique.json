@@ -1,0 +1,43 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-axe-hhs-et-stress-chronique",
+ "portee": "Axe HHS et stress chronique : le sens hypothalamus, hypophyse, surrénales et la libération du cortisol écrits en toutes lettres (Smith et Vale, 2006), « quelques heures » marqué, attribution à Définition du stress professionnel marquée (source à préciser), HPA ramené à HHS",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Axe HHS et stress chronique",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/axe-hhs-et-stress-chronique.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "est le circuit hormonal qui libère le cortisol lorsque l'organisme",
+   "avant": "doit répondre à une demande. Sur quelques heures",
+   "apres": "doit répondre à une demande. En réponse à un stress, l'hypothalamus libère la CRH, qui stimule l'hypophyse ; celle-ci libère l'ACTH, qui stimule le cortex des glandes surrénales, lequel libère le cortisol ([Smith et Vale, 2006](https://doi.org/10.31887/DCNS.2006.8.4/ssmith)). Sur quelques heures",
+   "motif": "Point relevé : le sens hypothalamus, hypophyse, surrénales et la libération du cortisol par les surrénales sont dessinés mais écrits nulle part ; phrase ajoutée d'après Smith, S. M., & Vale, W. W. (2006), Dialogues in Clinical Neuroscience, 8(4), 383-395 : en réponse au stress, l'hypothalamus libère la CRH, qui déclenche une cascade aboutissant à la libération de glucocorticoïdes (le cortisol chez l'humain) par le cortex des glandes surrénales."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "est le circuit hormonal qui libère le cortisol lorsque l'organisme",
+   "avant": "Sur quelques heures, cette activation",
+   "apres": "Sur quelques heures (source à préciser), cette activation",
+   "motif": "Point relevé : la durée « quelques heures » pendant laquelle l'activation est utile n'a pas de source ; marquée (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "est l'un des quatre systèmes qui composent la réponse physiologique au stress",
+   "avant": "L'axe HPA, ou hypothalamo-hypophyso-surrénalien, est l'un des quatre systèmes qui composent",
+   "apres": "L'axe HHS (HPA en anglais), ou hypothalamo-hypophyso-surrénalien, est l'un des quatre systèmes (source à préciser) qui composent",
+   "motif": "Points relevés : graphie HPA seule (première et seule occurrence), ramenée à HHS comme le reste de la page ; et attribution à Définition du stress professionnel, page qui ne parle ni de l'axe, ni du cortisol, ni de quatre systèmes : l'affirmation des « quatre systèmes » est marquée (source à préciser), le lien conservé."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les trois autres systèmes mobilisés en parallèle",
+   "avant": "Les trois autres systèmes mobilisés en parallèle sont",
+   "apres": "Les trois autres systèmes mobilisés en parallèle (source à préciser) sont",
+   "motif": "Point relevé : la seconde attribution à Définition du stress professionnel (systèmes sympathique, immunitaire et cognition) renvoie à une page qui ne décrit pas ces systèmes ; marquée (source à préciser), le lien conservé."
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-pratiques-de-reconnaissance-pour-superviseurs",
+ "portee": "Pratiques de reconnaissance pour superviseurs : programme « Travailleur Avisé » de la CNESST, dont le nom et l'existence ne sont pas sourcés, marqué (source à préciser)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Pratiques de reconnaissance pour superviseurs",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/pratiques-de-reconnaissance-pour-superviseurs.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Programme « Travailleur Avisé »",
+   "avant": "Programme « Travailleur Avisé »",
+   "apres": "Programme intitulé « Travailleur Avisé » (source à préciser)",
+   "motif": "Nom et existence du programme non sourcés, aucun programme CNESST de ce nom trouvé à la vérification : marqué, pas supprimé ; « intitulé » ajouté pour que la marque puisse se placer avant le lien qui termine la cellule."
+  }
+ ]
+}

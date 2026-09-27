@@ -19,7 +19,7 @@
   },
   {
    "type": "remplacer",
-   "ligneContenant": "NIOSH 5040",
+   "ligneContenant": "comparable site à site",
    "avant": "Campagne annuelle EC (carbone élémentaire,",
    "apres": "Mesures au moins tous les 6 mois, en carbone total ({{lien:w/legislation/20-reglements/rssm/art-102-rssm-conditions-utilisation-moteur-diesel-souterrain.html|RSSM, art. 102}} et 103.1 ;",
    "tableau": true

@@ -1,5 +1,5 @@
 // Retouche de docs/ sans reconstruction complète (vault absent) : recopie les sources partagées
-// (style.css, app.js) comme le fait build_site.mjs, puis réécrit le manifeste hors ligne en
+// (style.css, app.js, portail.css) comme le fait build_site.mjs, puis réécrit le manifeste hors ligne en
 // GARDANT l'estampille de version en place — les pages ne sont pas régénérées, leur « ?v= »
 // reste valable, et seuls les fichiers réellement modifiés changent de hash (le service worker
 // ne retélécharge qu'eux).
@@ -31,6 +31,8 @@ export function regenerer(OUT, outils) {
   const { version } = JSON.parse(fs.readFileSync(manifeste, 'utf8'));
   if (!/^\d{14}$/.test(version)) throw new Error('Estampille de version illisible : ' + version);
   for (const f of ['style.css', 'app.js']) fs.copyFileSync(path.join(outils, f), path.join(OUT, 'assets', f));
+  // la feuille du portail de l'encadrement, copiée elle aussi par build_site.mjs (27 septembre 2026)
+  if (fs.existsSync(path.join(outils, 'portail.css'))) fs.copyFileSync(path.join(outils, 'portail.css'), path.join(OUT, 'assets', 'portail.css'));
   const r = genererListeHorsLigne(OUT, version);
   const empreinte = crypto.createHash('sha1').update(fs.readFileSync(manifeste)).digest('hex').slice(0, 10);
   const sw = path.join(OUT, 'sw.js');

@@ -1,0 +1,78 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-consequences-du-stress-sur-la-sante",
+ "portee": "Conséquences du stress sur la santé : données clés de Kivimäki et al. (2012) alignées sur la note d'analyse (maladie coronarienne, 197 473 participants) et affirmations ou chiffres sans source marqués (source à préciser)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Conséquences du stress sur la santé",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/consequences-du-stress-sur-la-sante.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les méta-analyses sont sans ambiguïté",
+   "avant": "le risque de maladies majeures et de mortalité prématurée.",
+   "apres": "le risque de maladies majeures et de mortalité prématurée (source à préciser).",
+   "motif": "Affirmation sans source : aucune des trois références de la page (Stansfeld et Candy, 2006 ; Kivimäki et al., 2012 ; Theorell et al., 2015) ne porte sur la mortalité prématurée. Marquée (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "sur 200 000 travailleurs montre que le",
+   "avant": "sur 200 000 travailleurs montre que le",
+   "apres": "sur près de 200 000 travailleurs (197 473) montre que le",
+   "motif": "Effectif précisé d'après la note Kivimäki et al. (2012) du wiki : « Méta-analyse collaborative sur données individuelles (13 cohortes prospectives, N=197 473, 2-14 ans suivi) »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "augmente de 23 % le risque de maladie cardiovasculaire",
+   "avant": "augmente de 23 % le risque de maladie cardiovasculaire",
+   "apres": "augmente de 23 % le risque de maladie coronarienne",
+   "motif": "La méta-analyse porte sur la maladie coronarienne, pas sur l'ensemble des maladies cardiovasculaires ; note Kivimäki et al. (2012) : « Critère : maladie coronaire incidente (infarctus, angine, revascularisation, dossiers/registres) »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Le risque cumulatif sur 20 ans est substantiel.",
+   "avant": "Le risque cumulatif sur 20 ans est substantiel.",
+   "apres": "Le risque cumulatif sur 20 ans est substantiel (source à préciser).",
+   "motif": "Affirmation sans source : le suivi de l'étude citée ne va pas jusqu'à 20 ans (note Kivimäki et al. (2012) : « Suivi prospectif : 2 à 14 ans (médiane 7 ans) »). Marquée (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Risque doublé en cas de job strain",
+   "avant": "Risque doublé en cas de job strain",
+   "apres": "Risque doublé (source à préciser) en cas de job strain",
+   "motif": "Le wiki n'a pas de note sur Stansfeld et Candy (2006), et la note Theorell et al. (2015) donne l'OR 1,74 pour les symptômes dépressifs (« Interprétation : +74 % d'augmentation du risque de symptômes dépressifs »), pas pour la dépression majeure de la rangée. « Risque doublé » marqué (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Risque 1,5 à 2 fois supérieur",
+   "avant": "Risque 1,5 à 2 fois supérieur",
+   "apres": "Risque 1,5 à 2 fois (source à préciser) supérieur",
+   "motif": "Chiffre sans source ; marqué (source à préciser) juste après le chiffre, la cellule finissant sur l'affirmation."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Conséquence directe de l'exposition prolongée",
+   "avant": "Conséquence directe de l'exposition prolongée",
+   "apres": "Conséquence directe (source à préciser) de l'exposition prolongée",
+   "motif": "Affirmation sans source ; marquée (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Augmentation significative en contextes",
+   "avant": "Augmentation significative en contextes",
+   "apres": "Augmentation significative (source à préciser) en contextes",
+   "motif": "Affirmation sans source ; marquée (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "invalidité psychologique prolongée coûte typiquement",
+   "avant": "entre 50 000 $ et 200 000 $ entre indemnités",
+   "apres": "entre 50 000 $ et 200 000 $ (source à préciser) entre indemnités",
+   "motif": "Montant sans source ; marqué (source à préciser)."
+  }
+ ]
+}

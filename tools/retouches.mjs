@@ -25,6 +25,10 @@
 //                                                      <details> « Lire le schéma en texte » (retirée le
 //                                                      26 septembre 2026) ; « ligneContenant » ne sert qu'au
 //                                                      rapport. Sans cette version texte : déjà faite
+//   recibler       { ligneContenant, libelle, adresse } le lien de libellé « libelle » de la ligne pointe
+//                                                      désormais vers la note qui produit « adresse » (un lien
+//                                                      homonyme résolu vers un autre wiki, p. ex.) ; le libellé ne
+//                                                      change pas. Déjà faite si le lien vise déjà cette note
 // Le « marqueur » de supprimerLigne peut être une liste : la ligne a été retirée par l'un ou l'autre
 // (le schéma et sa version antérieure, par exemple).
 // Dans « apres », « par » et « bloc », {{lien:<adresse publiée>|<libellé>}} devient un wikilink vers
@@ -117,6 +121,22 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
       // pas deux lignes vides de suite là où était la version texte
       if (lignes[debut]?.trim() === '' && lignes[debut - 1]?.trim() === '') lignes.splice(debut, 1);
       rapport.ligne = debut + 1;
+      rapport.statut = 'appliquée';
+      continue;
+    }
+    if (r.type === 'recibler') {
+      if (trouvees.length !== 1) { rapport.statut = trouvees.length ? `ambiguë (${trouvees.length} lignes)` : 'introuvable'; ok = false; continue; }
+      const i = trouvees[0];
+      const cible = resoudreLien(String(r.adresse).trim());
+      if (!cible) { rapport.statut = 'lien sans note : ' + r.adresse; ok = false; continue; }
+      // [[cible|libellé]] (barre échappée dans un tableau) ou [[libellé]] sans alias
+      const liens = [...lignes[i].matchAll(/\[\[([^\]|\\]+?)(?:(\\?\|)([^\]]+))?\]\]/g)]
+        .filter(m => normaliser(m[3] ?? m[1]) === normaliser(r.libelle));
+      if (liens.length !== 1) { rapport.statut = liens.length ? `lien « ${r.libelle} » ambigu (${liens.length})` : `lien « ${r.libelle} » absent de la ligne`; ok = false; continue; }
+      const [tout, ancienne, barre, libelle] = liens[0];
+      rapport.ligne = i + 1;
+      if (ancienne.trim() === cible) { rapport.statut = 'déjà faite'; continue; }
+      lignes[i] = lignes[i].replace(tout, () => `[[${cible}${barre || '|'}${libelle ?? ancienne}]]`);
       rapport.statut = 'appliquée';
       continue;
     }

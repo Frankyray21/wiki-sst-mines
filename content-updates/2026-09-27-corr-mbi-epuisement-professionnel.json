@@ -1,0 +1,58 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-mbi-epuisement-professionnel",
+ "portee": "MBI, épuisement professionnel : mention de la CIM-10 reformulée prudemment, durée alignée sur la note INRS (2024), affirmations et coût sans source marqués, phrase LATMP corrigée d'après la définition de l'art. 2",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "MBI, épuisement professionnel",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/mbi-epuisement-professionnel.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "l'a inscrit en 2019 dans la CIM-11 comme",
+   "avant": "(ni au DSM ni à la CIM-10), mais l'",
+   "apres": "(il est absent du DSM). L'épuisement professionnel figurait déjà dans la CIM-10 parmi les facteurs influant sur l'état de santé, sans y être classé comme maladie (source à préciser), et l'",
+   "motif": "« Ni à la CIM-10 » est probablement inexact : selon le relevé, l'OMS (2019) indique que le burn-out figurait déjà dans la CIM-10 (Z73.0, facteurs influant sur l'état de santé) sans y être classé comme maladie. Reformulé prudemment et marqué, aucune note du wiki ne l'appuyant."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "quand le contexte de travail est en cause",
+   "avant": "quand le contexte de travail est en cause.",
+   "apres": "quand le contexte de travail est en cause (source à préciser).",
+   "motif": "« Cause fréquente d'invalidité reconnue par la CNESST » : affirmation sans source, marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "10 à 15 minutes",
+   "avant": "10 à 15 minutes",
+   "apres": "5 à 10 minutes, selon la note d'analyse {{lien:w/psychosocial/analyse-inrs-2024.html|INRS (2024)}}",
+   "tableau": true,
+   "motif": "Durée sans source, contredite par la note d'analyse INRS (2024), dont la ligne fait foi : « Autoévaluation de 5 à 10 minutes ». Alignée sur la note, qui est citée (lien écrit pour une cellule de tableau)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Licence commerciale (~3-5 $ par administration)",
+   "avant": "Licence commerciale (~3-5 $ par administration)",
+   "apres": "Licence commerciale, ~3-5 $ par administration (source à préciser)",
+   "motif": "Coût par administration sans source, marqué (parenthèse remplacée par une virgule pour placer la marque juste après le montant)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Pour un usage organisationnel récurrent en mine",
+   "avant": "est souvent préféré.",
+   "apres": "est souvent préféré (source à préciser).",
+   "motif": "« Le CBI est souvent préféré » : affirmation sans source, marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "reconnu comme lésion professionnelle si lien",
+   "avant": "le burnout reconnu comme lésion professionnelle si lien avec conditions de travail démontré.",
+   "apres": "la loi ne nomme pas le burnout ; il peut être reconnu comme lésion professionnelle (accident du travail ou maladie professionnelle) si le lien avec le travail est démontré (LATMP, art. 2).",
+   "motif": "Le mot « burnout » n'est pas dans la LATMP ; la reconnaissance passe par les définitions de l'art. 2 : « « lésion professionnelle » : une blessure ou une maladie qui survient par le fait ou à l’occasion d’un accident du travail, ou une maladie professionnelle, y compris la récidive, la rechute ou l’aggravation; » et « « maladie professionnelle » : une maladie contractée par le fait ou à l’occasion du travail et qui est caractéristique de ce travail ou reliée directement aux risques particuliers de ce travail; »."
+  }
+ ]
+}

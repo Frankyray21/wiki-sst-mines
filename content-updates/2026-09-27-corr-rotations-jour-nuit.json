@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-rotations-jour-nuit",
+ "portee": "Rotations jour-nuit : la rotation jour, puis soir, puis nuit nommée correctement (sens horaire, dit vers l'avant, source CCHST) et les deux passages sur l'adaptation au travail de nuit permanent harmonisés d'après Folkard (2008)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Rotations jour-nuit",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/rotations-jour-nuit.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "le sens décrit comme antihoraire, soit jour puis soir puis nuit",
+   "avant": "le sens décrit comme antihoraire, soit jour puis soir puis nuit, est présenté comme plus tolérable",
+   "apres": "le sens horaire, dit vers l'avant (jour, puis soir, puis nuit), est présenté comme plus tolérable ([CCHST — Travail en rotation](https://www.cchst.ca/oshanswers/ergonomics/shiftwrk.html))",
+   "motif": "Point relevé : la rotation jour, puis soir, puis nuit était décrite comme « antihoraire » ; c'est le sens horaire, dit vers l'avant, que recommande le CCHST (rotation vers l'avant : jours, puis soirs, puis nuits), l'antihoraire (vers l'arrière) allant de nuit à soir puis jour. Terme corrigé, recommandation conservée, source CCHST ajoutée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "la plus fortement associée à la dépression, davantage que la nuit permanente",
+   "avant": "pour laquelle une adaptation est jugée possible.",
+   "apres": "pour laquelle une adaptation partielle est possible chez une minorité ; une adaptation complète est rare (moins de 3 % des travailleurs de nuit permanents, [Folkard, 2008](https://doi.org/10.1080/07420520802106835)).",
+   "motif": "Contradiction interne : l'introduction dit l'adaptation à la nuit permanente « jugée possible », la section sur le mécanisme dit qu'« aucune adaptation complète » n'est possible. Harmonisé d'après Folkard, S. (2008), Do permanent night workers show circadian adjustment?, Chronobiology International, 25(2-3), 215-224 : moins de 3 % des travailleurs de nuit permanents montrent une adaptation complète de leur rythme de mélatonine, et moins d'un sur quatre une adaptation assez importante pour en tirer un bénéfice."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Point important pour la gestion",
+   "avant": "aucune adaptation complète au travail de nuit n'est possible,",
+   "apres": "une adaptation partielle au travail de nuit est possible chez une minorité ; une adaptation complète est rare (moins de 3 % des travailleurs de nuit permanents, [Folkard, 2008](https://doi.org/10.1080/07420520802106835)),",
+   "motif": "Contradiction interne : « aucune adaptation complète au travail de nuit n'est possible » contredisait l'adaptation « jugée possible » de l'introduction ; harmonisé sur la même formulation, le reste de la phrase conservé. Source : Folkard (2008), Chronobiology International, 25(2-3), 215-224 : moins de 3 % des travailleurs de nuit permanents montrent une adaptation complète de leur rythme de mélatonine, et moins d'un sur quatre une adaptation assez importante pour en tirer un bénéfice."
+  }
+ ]
+}

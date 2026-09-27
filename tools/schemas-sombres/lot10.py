@@ -137,14 +137,16 @@ SCHEMAS = [
    repere=dict(titre='Repère rapide', texte='comprendre ce profil structurel permet de cibler les leviers de prévention.'),
    legende="Selon la page, le profil RPS typique de l’aide-foreur combine charge physique élevée, cadence imposée par l’équipement, faible latitude décisionnelle et dépendance forte au foreur. Ce sont des conditions du poste, pas des traits de la personne.",
    sources="D’après cette page (L’essentiel ; tableau « Profil RPS structurel » ; « Vulnérabilité particulière »). Voir aussi {{lien:w/psychosocial/foreur-profil-rps-et-leadership-de-chantier.html|Foreur, profil RPS et leadership de chantier}}. Schéma de principe : aucun chiffre ni durée."),
-  dict(page='aide-foreur-profil-rps', sujet='leviers', ancre='Leviers de prévention',
+  # version 4 (27 septembre 2026) : la formation des foreurs au leadership passe au niveau primaire, comme sur la
+  # page Foreur (correction du tableau de la page, lot 2026-09-27-corr-aide-foreur-profil-rps)
+  dict(page='aide-foreur-profil-rps', sujet='leviers', ancre='Leviers de prévention', version=4,
    titre='Leviers de prévention', sous_titre='Aide-foreur, profil RPS',
    sections=[
      dict(icone='mdiSitemap', titre='Primaire', etiquette='Niveau',
-          colonnes=[dict(titre='', puce='coche', items=['Concevoir le poste avec une marge de manœuvre minimale (séquençage, méthodes)', 'Plan de progression clair vers foreur']),
-                    dict(titre='', puce='coche', items=['Rotation des paires foreur-aide-foreur, si applicable', 'Reconnaissance institutionnelle du poste'])]),
+          colonnes=[dict(titre='', puce='coche', items=['Concevoir le poste avec une marge de manœuvre minimale (séquençage, méthodes)', 'Plan de progression clair vers foreur', 'Rotation des paires foreur-aide-foreur, si applicable']),
+                    dict(titre='', puce='coche', items=['Reconnaissance institutionnelle du poste', 'Formation des foreurs au leadership et à la communication'])]),
      dict(icone='mdiSchool', titre='Secondaire', etiquette='Niveau',
-          colonnes=[dict(titre='', puce='coche', items=['Formation des foreurs au leadership et à la communication', 'Sensibilisation des superviseurs au profil RPS du poste'])]),
+          colonnes=[dict(titre='', puce='coche', items=['Sensibilisation des superviseurs au profil RPS du poste'])]),
      dict(icone='mdiBullhorn', titre='Tertiaire', etiquette='Niveau',
           colonnes=[dict(titre='', puce='coche', items=['Mécanismes de signalement accessibles, en cas de conflit avec le foreur'])])],
    repere=dict(titre='Repère rapide', texte='évolution typique : aide-foreur, puis foreur, puis contremaître ou postes spécialisés.'),
@@ -254,11 +256,13 @@ SCHEMAS = [
    repere=dict(titre='Repère rapide', texte="cette charge mentale s'ajoute à la charge cognitive de la tâche elle-même."),
    legende="Même quand les tâches sont routinières, le travail en confinement à grande profondeur ajoute une vigilance permanente face aux risques ; l’adaptation a un coût. Schéma de principe : sans durée ni niveau.",
    sources="D’après « L’essentiel » et les sections « Charge mentale spécifique » et « Mécanismes » de cette page. Voir aussi {{lien:w/psychosocial/communication-souterraine-et-isolement-de-lequipe.html|Communication souterraine et isolement de l’équipe}}. Schéma de principe."),
-  dict(page='confinement-profondeur-et-charge-mentale', sujet='leviers', ancre='Leviers',
+  # version 4 (27 septembre 2026) : les salles de refuge sont des abris d'urgence (RSSM, art. 126 à 128), pas des
+  # zones de pause (correction du tableau de la page, lot 2026-09-27-corr-confinement-profondeur-et-charge-mentale)
+  dict(page='confinement-profondeur-et-charge-mentale', sujet='leviers', ancre='Leviers', version=4,
    titre='Charge mentale : les leviers', sous_titre='En confinement, à grande profondeur',
    sections=[
      dict(icone='mdiLightbulbOn', titre='Conception',
-          colonnes=[dict(titre='', puce='coche', items=['Pauses régulières dans des zones décompressantes : refuges, salles d\'équipement', 'Éclairage adéquat, repères visuels, signalisation claire'])]),
+          colonnes=[dict(titre='', puce='coche', items=['Pauses régulières dans des zones décompressantes : salles d\'équipement', 'Éclairage adéquat, repères visuels, signalisation claire'])]),
      dict(icone='mdiFormatListChecks', titre='Procédures et équipe', etiquette='',
           colonnes=[dict(titre='Procédures', puce='coche', items=['Listes de vérification pour décharger la mémoire de travail']),
                     dict(titre='Équipe', puce='coche', items=['Rotation entre tâches à charge cognitive variée'])]),
@@ -276,7 +280,7 @@ def construire(filtre=None):
     for s in SCHEMAS:
         if filtre and filtre not in s['page'] + '-' + s['sujet']:
             continue
-        sp = tyl({k: v for k, v in s.items() if k not in ('page', 'sujet', 'ancre', 'legende', 'sources', 'legende_couleurs')})
+        sp = tyl({k: v for k, v in s.items() if k not in ('page', 'sujet', 'ancre', 'legende', 'sources', 'legende_couleurs', 'version')})
         if s.get('legende_couleurs'):
             sp['legende_couleurs'] = tyl(s['legende_couleurs'])
         sp['sections'] = [dict(x, etiquette=x.get('etiquette') or None) for x in sp['sections']]
@@ -286,11 +290,13 @@ def construire(filtre=None):
         svg, H = kit.schema(sp)
         dossier = os.path.join(SORTIE, s['page'])
         os.makedirs(dossier, exist_ok=True)
-        fichier = f'wiki-{s["page"]}-{s["sujet"]}-v3.svg'
+        # version 3 par défaut ; une version ultérieure remplace toutes les précédentes (la plus récente d'abord)
+        v = s.get('version', 3)
+        fichier = f'wiki-{s["page"]}-{s["sujet"]}-v{v}.svg'
         open(os.path.join(dossier, fichier), 'w', encoding='utf-8').write(svg)
         spec = specs.setdefault(s['page'], {'page': f'w/psychosocial/{s["page"]}.html', 'note': None, 'schemas': []})
         spec['schemas'].append({'fichier': fichier, 'ancre': s['ancre'], 'remplace': None,
-                                'remplaceSchema': [f'wiki-{s["page"]}-{s["sujet"]}-v2.svg', f'wiki-{s["page"]}-{s["sujet"]}-v1.svg'], 'sombre': True,
+                                'remplaceSchema': [f'wiki-{s["page"]}-{s["sujet"]}-v{k}.svg' for k in range(v - 1, 0, -1)], 'sombre': True,
                                 'alt': alt, 'legende': ty(s['legende']), 'sources': ty(s['sources'])})
         print(f'{fichier} : {H} de haut, {len(svg.encode()) // 1024} Ko')
     return specs

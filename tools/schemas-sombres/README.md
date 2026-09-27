@@ -26,6 +26,12 @@ orange de la référence sont devenus neutres (lot 10, version 3).
   texte alternatif et la description du SVG (`<desc>`) sont tirés de la mise en page, légende des couleurs comprise.
   Il n'y a plus de version texte dépliable (« Lire le schéma en texte ») sous le schéma : elle a été retirée du
   site le 26 septembre 2026.
+  Un schéma corrigé après publication prend un numéro de version (`version=4`) : son fichier s'appelle `…-v4.svg`
+  et remplace toutes les versions antérieures, dans la page comme dans le vault. Le 27 septembre 2026, c'est le cas
+  des leviers de l'Aide-foreur (formation des foreurs au leadership au niveau primaire) et de Confinement (les salles
+  de refuge ne sont pas des zones de pause).
+- `grille_inspq.py` : le schéma « Grille INSPQ : 12 indicateurs » (27 septembre 2026), sur les mêmes règles ; les
+  indicateurs y sont des éléments neutres (points gris).
 - `figtree-500.woff2` à `figtree-900.woff2` : la police Figtree (`LICENCE-figtree.txt`, SIL Open Font License 1.1).
 - `icones.json` : un extrait de Material Design Icons (`@mdi/js`), avec sa licence dans `LICENCE-icones.txt`
   (Pictogrammers Free License, Apache 2.0). Pour ajouter une icône : `npm pack @mdi/js`, puis copier son tracé

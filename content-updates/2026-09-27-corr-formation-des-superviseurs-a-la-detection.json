@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-formation-des-superviseurs-a-la-detection",
+ "portee": "Formation des superviseurs à la détection : programme « Travailleur Avisé » de la CNESST, dont le nom et l'existence ne sont pas sourcés, marqué (source à préciser)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Formation des superviseurs à la détection",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/formation-des-superviseurs-a-la-detection.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Programme « Travailleur Avisé »",
+   "avant": "Programme « Travailleur Avisé »",
+   "apres": "Programme intitulé « Travailleur Avisé » (source à préciser)",
+   "motif": "Nom et existence du programme non sourcés, aucun programme CNESST de ce nom trouvé à la vérification : marqué, pas supprimé ; « intitulé » ajouté pour que la marque puisse se placer avant le lien qui termine la cellule."
+  }
+ ]
+}

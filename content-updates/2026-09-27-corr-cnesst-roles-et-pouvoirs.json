@@ -1,0 +1,92 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-cnesst-roles-et-pouvoirs",
+ "portee": "CNESST, rôles et pouvoirs : amendes pénales et non administratives, avis de correction laissé au jugement de l'inspecteur, révision puis contestation au Tribunal, plainte de harcèlement selon la LNT, médiation avec l'accord des parties, indemnité de remplacement du revenu, plan d'action situé par rapport au programme de prévention ; inspection annuelle et politique anti-violence marquées",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "CNESST, rôles et pouvoirs",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/cnesst-roles-et-pouvoirs.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Amendes en cas de non-conformité",
+   "avant": "Sanctions administratives",
+   "apres": "Sanctions pénales (LSST, art. 236 et 242)",
+   "motif": "Dans la LSST, l'amende est une sanction pénale, pas administrative. LSST, art. 236 : « Quiconque contrevient à la présente loi ou aux règlements ou refuse de se conformer à une décision ou à un ordre rendu en vertu de la présente loi ou des règlements ou incite une personne à ne pas s’y conformer commet une infraction et est passible: » (d'une amende) ; art. 242 : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Amendes administratives en cas de manquement",
+   "avant": "Amendes administratives en cas de manquement",
+   "apres": "Amendes en cas de manquement (sanctions pénales, LSST, art. 236 et 242)",
+   "motif": "Deuxième mention d'amendes « administratives » : l'amende est pénale. LSST, art. 236 : « Quiconque contrevient à la présente loi ou aux règlements […] commet une infraction et est passible: » (d'une amende) ; art. 242 : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Émis si manquement constaté",
+   "avant": "Émis si manquement constaté",
+   "apres": "Peut être émis, si l'inspecteur l'estime opportun, en cas de manquement constaté (LSST, art. 182)",
+   "motif": "L'avis de correction était présenté comme automatique. LSST, art. 182 : « L’inspecteur peut, s’il l’estime opportun, émettre un avis de correction enjoignant une personne de se conformer à la présente loi ou aux règlements et fixer un délai pour y parvenir. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Inspection en lien avec RPS",
+   "avant": "Avis de correction si défaillance",
+   "apres": "Avis de correction possible en cas de défaillance, si l'inspecteur l'estime opportun (LSST, art. 182)",
+   "motif": "Deuxième mention d'un avis de correction automatique. LSST, art. 182 : « L’inspecteur peut, s’il l’estime opportun, émettre un avis de correction enjoignant une personne de se conformer à la présente loi ou aux règlements et fixer un délai pour y parvenir. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Procédure interne, appel TAT",
+   "avant": "Procédure interne, appel TAT",
+   "apres": "Demande de révision (LATMP, art. 358), puis contestation devant le Tribunal administratif du travail (LATMP, art. 359)",
+   "motif": "La LATMP ne prévoit pas un « appel » au TAT mais une révision puis une contestation. LATMP, art. 358 : « Une personne qui se croit lésée par une décision rendue par la Commission en vertu de la présente loi peut, dans les 30 jours de sa notification, en demander la révision. » ; art. 359 : « Une personne qui se croit lésée par une décision rendue à la suite d’une demande faite en vertu de l’article 358 peut la contester devant le Tribunal dans les 60 jours de sa notification. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Réception des réclamations",
+   "avant": "Lésions professionnelles, harcèlement",
+   "apres": "Lésions professionnelles (une plainte pour harcèlement psychologique relève de la LNT, art. 123.6)",
+   "motif": "Le harcèlement était rangé parmi les réclamations LATMP ; c'est une plainte selon la LNT. LNT, art. 123.6 : « La personne salariée qui croit avoir été victime de harcèlement psychologique peut adresser, par écrit, une plainte à la Commission. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Service de médiation pour certains litiges",
+   "avant": "Service de médiation pour certains litiges",
+   "apres": "Médiation pour certains litiges, avec l'accord des parties (LNT, art. 123.10)",
+   "motif": "La médiation n'est pas un service offert à la demande : elle se fait avec l'accord des parties. LNT, art. 123.10 : « La Commission peut en tout temps, au cours de l’enquête et avec l’accord des parties, demander au ministre de nommer une personne pour entreprendre avec elles une médiation. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Versement d'indemnités",
+   "avant": "Salaire, soins, réadaptation",
+   "apres": "Indemnité de remplacement du revenu, soins, réadaptation (LATMP, art. 1)",
+   "motif": "La CNESST ne verse pas un salaire mais une indemnité de remplacement du revenu. LATMP, art. 1 : « Le processus de réparation des lésions professionnelles comprend la fourniture des soins nécessaires à la consolidation d’une lésion, la réadaptation physique, sociale et professionnelle du travailleur victime d’une lésion, le paiement d’indemnités de remplacement du revenu, […] »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "L'inspecteur peut vérifier la section RPS du programme",
+   "avant": "Inspection annuelle ou suite à plainte",
+   "apres": "Inspection annuelle (source à préciser) ou suite à plainte",
+   "motif": "Aucune fréquence annuelle d'inspection n'est prévue par la LSST (art. 179 : l'inspecteur peut pénétrer « à toute heure raisonnable » et inspecter) ; affirmation marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Vérification des mesures",
+   "avant": "Application de la politique anti-violence",
+   "apres": "Application d'une politique anti-violence (source à préciser)",
+   "motif": "Aucune « politique anti-violence » n'est prévue par les textes du recueil ; affirmation marquée (article « la » devenu « une » pour ne pas présupposer une politique imposée, et pour que le lot reste rejouable)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "peut désormais demander à voir comment l'employeur a identifié les RPS",
+   "avant": "quel plan d'action est en place",
+   "apres": "quelles mesures prévoit son programme de prévention ou, dans un établissement qui n'est pas tenu d'en avoir un, son plan d'action (LSST, art. 61.1, inséré par la LMRSST, art. 147)",
+   "motif": "Le plan d'action est l'outil des établissements sans programme de prévention. LMRSST, art. 147, qui insère l'art. 61.1 de la LSST : « Lorsqu’aucun programme de prévention ne doit être élaboré ou mis en application pour un établissement, l’employeur doit élaborer et mettre en application un plan d’action propre à cet établissement. »"
+  }
+ ]
+}

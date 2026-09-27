@@ -1,0 +1,78 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-separation-famille-et-conjoint-en-fifo",
+ "portee": "Séparation famille et conjoint en FIFO : affirmations sans source marquées (source à préciser), parts et semaines du tableau présentées comme un calcul d'après la durée du cycle, en-tête « Effet documenté » renommé, espace manquante corrigée",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Séparation famille et conjoint en FIFO",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/separation-famille-et-conjoint-en-fifo.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les recherches montrent un risque accru",
+   "avant": "et de difficultés parentales.",
+   "apres": "et de difficultés parentales (source à préciser).",
+   "motif": "Point relevé : « Les recherches montrent… » ne cite aucune étude, et les deux références de la page (Roche et al., 2016 ; Asare et al., 2021) n'ont ni note d'analyse ni PDF dans le wiki. Affirmation gardée, marquée à sa fin."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "~50 % des événements",
+   "avant": "~50 % des événements",
+   "apres": "~50 % (calcul d'après la durée du cycle, pas une mesure) des événements",
+   "motif": "Point relevé : les parts d'événements manqués (~50 %, ~67 %, ~75 %) et les semaines d'absence ne sont pas sourcées ; ce sont les parts de jours au site du cycle (14/28, 20/30, 21/28) appliquées à l'année. Précisé une fois, dans la première rangée, un ajout en fin d'en-tête n'étant pas rejouable."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Effet documenté | Description",
+   "avant": "Effet documenté",
+   "apres": "Effet rapporté (source à préciser)",
+   "motif": "Point relevé : l'en-tête « Effet documenté » annonce des effets documentés sans rien citer ; renommé comme demandé. « site » vise la cellule d'en-tête, car « Effet documenté » figure aussi dans le paragraphe « Bonne pratique »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "que dans les régimes réguliers",
+   "avant": "Taux plus élevés en FIFO long",
+   "apres": "Taux plus élevés (source à préciser) en FIFO long",
+   "motif": "Point relevé : taux de séparation plus élevés en FIFO long, sans source. Marqué après l'affirmation."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "la durée et la fréquence des rotations",
+   "avant": "Augmente avec la durée",
+   "apres": "Augmente (source à préciser) avec la durée",
+   "motif": "Point relevé : insatisfaction conjugale qui augmente avec la durée et la fréquence des rotations, sans source. Marqué après l'affirmation."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "dépend grandement de la qualité",
+   "avant": "mitigées; dépend",
+   "apres": "mitigées ; dépend",
+   "motif": "Coquille relevée : espace manquante avant le point-virgule (« mitigées; dépend »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "ne sont pas inévitables",
+   "avant": "les effets sur les enfants ne sont pas",
+   "apres": "les effets sur les enfants (source à préciser) ne sont pas",
+   "motif": "Point relevé : les effets sur les enfants (tableau « Effets sur les enfants ») ne sont pas sourcés. Une seule marque, après « les effets sur les enfants », une marque en fin de cellule ou d'en-tête n'étant pas rejouable."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "que les cycles plus longs",
+   "avant": "Le 14/14 est mieux toléré par",
+   "apres": "Le 14/14 est mieux toléré (source à préciser) par",
+   "motif": "Point relevé : « le 14/14 est mieux toléré » par les familles que les cycles plus longs, sans source. Marqué après l'affirmation."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "groupes de conjoints, capsules d'éducation, soutien aux parents",
+   "avant": "Effet documenté sur la rétention et la santé familiale.",
+   "apres": "Effet sur la rétention et la santé familiale (source à préciser).",
+   "motif": "Même affirmation que l'en-tête « Effet documenté » : un effet annoncé comme documenté sans rien citer ; « documenté » retiré et l'effet marqué (source à préciser). Sans ce changement, l'en-tête corrigé ne serait pas reconnu au rejeu du lot (« Effet documenté » resterait sur une autre ligne)."
+  }
+ ]
+}

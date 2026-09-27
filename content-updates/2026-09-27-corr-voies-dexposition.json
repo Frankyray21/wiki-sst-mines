@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-voies-dexposition",
+ "portee": "Voies d'exposition : l'injection et les yeux nommés dans la légende du schéma (ils ne l'étaient plus que dans la version texte retirée le 26 septembre 2026)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Voies d'exposition",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/voies-dexposition.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Le dessin situe trois voies, sans toutes les représenter",
+   "avant": "sans toutes les représenter. Un contact",
+   "apres": "sans toutes les représenter. Deux autres sont à considérer : les yeux, et l’injection, soit la pénétration à travers la peau, par exemple lors d’une piqûre contaminée. Un contact",
+   "motif": "Mots repris de la version texte retirée (« Injection : pénétration à travers la peau, par exemple lors d’une piqûre contaminée »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "complètent ces repères dans le texte",
+   "avant": "complètent ces repères dans le texte.",
+   "apres": "complètent ces repères dans la légende.",
+   "motif": "Texte de remplacement de l'image : la version texte n'existe plus, la légende les nomme."
+  }
+ ]
+}

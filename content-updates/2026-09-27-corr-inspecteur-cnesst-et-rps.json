@@ -1,0 +1,57 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-inspecteur-cnesst-et-rps",
+ "portee": "Inspecteur CNESST et RPS : tableau des conséquences des manquements aligné sur la LSST (avis de correction au jugement de l'inspecteur, amendes pénales, poursuite pénale possible pour toute infraction) ; cellules sans appui et « plan d'action sur la violence (depuis 2024) » marqués",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Inspecteur CNESST et RPS",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/inspecteur-cnesst-et-rps.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Recommandation, suivi",
+   "avant": "Recommandation, suivi",
+   "apres": "Recommandation et suivi (source à préciser)",
+   "motif": "La LSST ne prévoit pas de palier « manquement mineur » réglé par une recommandation : toute contravention est une infraction (art. 236 : « Quiconque contrevient à la présente loi ou aux règlements […] commet une infraction ») ; la loi ne permet pas de corriger simplement cette cellule, marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Avis de correction avec délai",
+   "avant": "Avis de correction avec délai",
+   "apres": "Avis de correction fixant un délai, si l'inspecteur l'estime opportun (LSST, art. 182)",
+   "motif": "L'avis de correction ne dépend pas d'un niveau de gravité mais du jugement de l'inspecteur. LSST, art. 182 : « L’inspecteur peut, s’il l’estime opportun, émettre un avis de correction enjoignant une personne de se conformer à la présente loi ou aux règlements et fixer un délai pour y parvenir. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Sanction administrative pécuniaire",
+   "avant": "Sanction administrative pécuniaire",
+   "apres": "Amende, sur poursuite pénale (LSST, art. 236 et 242)",
+   "motif": "La LSST ne prévoit pas de sanction administrative pécuniaire : l'amende est pénale. Art. 236 : « Quiconque contrevient à la présente loi ou aux règlements ou refuse de se conformer à une décision ou à un ordre rendu en vertu de la présente loi ou des règlements ou incite une personne à ne pas s’y conformer commet une infraction et est passible: » (d'une amende) ; art. 242 : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Sanctions plus importantes, surveillance renforcée",
+   "avant": "Sanctions plus importantes, surveillance renforcée",
+   "apres": "Amendes plus élevées en cas de récidive (LSST, art. 236), surveillance renforcée (source à préciser)",
+   "motif": "La hausse des sanctions en cas de manquement répété correspond aux amendes de récidive. LSST, art. 236 : « d’une amende d’au moins 1 500 $ et d’au plus 3 000 $ dans le cas d’une récidive et d’une amende d’au moins 3 000 $ et d’au plus 6 000 $ pour toute récidive additionnelle » (personne physique) ; la « surveillance renforcée » n'y figure pas : marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Procédure pénale possible",
+   "avant": "Procédure pénale possible",
+   "apres": "Poursuite pénale possible, comme pour toute infraction à la loi (LSST, art. 236 et 242)",
+   "motif": "La poursuite pénale n'est pas réservée à la faute lourde. LSST, art. 242 : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. » ; art. 236 : « Quiconque contrevient à la présente loi ou aux règlements […] commet une infraction »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Politique anti-violence",
+   "avant": "Plan d'action sur la violence (depuis 2024)",
+   "apres": "Plan d'action sur la violence, depuis 2024 (source à préciser)",
+   "motif": "Aucun « plan d'action sur la violence » ni aucune date de 2024 ne figurent dans les textes du recueil ; affirmation marquée (parenthèse remplacée par une virgule pour que le lot reste rejouable)."
+  }
+ ]
+}

@@ -1,0 +1,71 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-foreur-profil-rps-et-leadership-de-chantier",
+ "portee": "Foreur, profil RPS et leadership de chantier : effets et comparaisons sans source marqués, rang du stress lié au superviseur corrigé d'après la note Bowers et al. (2018), termes « cachage » et « Intimidation → Iso-strain » précisés, rappel de l'obligation de formation et de supervision de l'employeur (LSST, art. 51, 9°)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Foreur, profil RPS et leadership de chantier",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/foreur-profil-rps-et-leadership-de-chantier.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Investir dans son leadership a un effet en cascade",
+   "avant": "a un effet en cascade sur la santé psychologique de plusieurs travailleurs.",
+   "apres": "a un effet en cascade sur la santé psychologique de plusieurs travailleurs (source à préciser).",
+   "motif": "« Effet en cascade » affirmé sans source : la seule étude citée, Bowers et al. (2018), porte sur le stress lié au superviseur immédiat et sa note précise « Limite principale : devis transversal - causalité non établissable ». Marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "de fait, même sans titre formel",
+   "avant": "même sans titre formel.",
+   "apres": "même sans titre formel ; l'employeur reste néanmoins tenu d'assurer au travailleur la formation, l'entraînement et la supervision appropriés (LSST, art. 51, 9°).",
+   "motif": "Rappel : la formation et la supervision incombent à l'employeur, LSST, art. 51 : « L’employeur doit […] notamment: […] 9° informer adéquatement le travailleur sur les risques reliés à son travail et lui assurer la formation, l’entraînement et la supervision appropriés afin de faire en sorte que le travailleur ait l’habileté et les connaissances requises pour accomplir de façon sécuritaire le travail qui lui est confié; ». L'art. 49, 3° n'est pas cité : il oblige le travailleur à « veiller à ne pas mettre en danger la santé, la sécurité ou l’intégrité physique ou psychique des autres personnes qui se trouvent sur les lieux de travail ou à proximité des lieux de travail » et ne dit rien de la formation."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Souvent meilleure que celle de l'aide-foreur",
+   "avant": "Souvent meilleure que celle de l'aide-foreur",
+   "apres": "Souvent meilleure (source à préciser) que celle de l'aide-foreur",
+   "motif": "Comparaison de la reconnaissance du foreur et de l'aide-foreur sans source : marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "lié à l'identification au métier",
+   "avant": ") lié à l'identification au métier",
+   "apres": "), lié à l'identification au métier (source à préciser)",
+   "motif": "Le lien avec l'identification au métier est absent des notes Siegrist (1996) et Siegrist (2017), qui décrivent le surengagement comme « Composante intra-individuelle : disposition à s'investir au-delà du raisonnable, difficulté à se détacher du travail ». Marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Intimidation, dévalorisation",
+   "avant": ", démotivation",
+   "apres": " (l'intimidation réduit le soutien social, une de ses composantes) et démotivation",
+   "motif": "« Intimidation → Iso-strain » était un raccourci : l'iso-strain est un job strain avec faible soutien social (« Job strain + faible soutien = configuration la plus dommageable documentée », page Modèle de Karasek) ; le mécanisme est précisé à côté du lien, qui ne peut pas être remplacé."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Tolérance zéro aux erreurs d'apprentissage",
+   "avant": "Cachage des erreurs",
+   "apres": "Dissimulation des erreurs",
+   "motif": "Terme impropre : « cachage » remplacé par « dissimulation »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Un foreur formé au leadership protège la santé psychologique",
+   "avant": "qui passe par son chantier. Sur une carrière, c'est des dizaines de travailleurs influencés positivement.",
+   "apres": "qui passe par son chantier (source à préciser). Sur une carrière, ce sont des dizaines de travailleurs influencés positivement (source à préciser).",
+   "motif": "Effet affirmé et chiffré (« des dizaines ») sans source : les deux affirmations de l'encadré sont marquées ; accord corrigé (« c'est des dizaines » devient « ce sont des dizaines »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Sur l'effet du superviseur immédiat en contexte minier éloigné",
+   "avant": "qui situe le stress lié au superviseur parmi les prédicteurs dominants de la détresse psychologique en régime FIFO.",
+   "apres": "qui situe le stress lié au superviseur au 5e rang des prédicteurs indépendants de la détresse psychologique en régime FIFO (OR 4,3), la stigmatisation étant le prédicteur dominant (OR 23,5). L'étude est transversale : elle n'établit pas de lien de causalité.",
+   "motif": "« Prédicteurs dominants » inexact : dans le tableau de la note Bowers et al. (2018), la ligne « Stress lié au superviseur | 4,3 | Relations hiérarchiques » vient au 5e rang, après « Stigmatisation (santé mentale = faiblesse) | 23,5*** | Prédicteur dominant - barrière culturelle à l'aide » ; la note précise « Limite principale : devis transversal - causalité non établissable »."
+  }
+ ]
+}

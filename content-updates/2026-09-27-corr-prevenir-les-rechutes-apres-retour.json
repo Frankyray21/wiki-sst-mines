@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-prevenir-les-rechutes-apres-retour",
+ "portee": "Prévenir les rechutes après retour : chiffre « Plus de 50 % » de rechutes, sans source, marqué dans L'essentiel (le « 30 à 50 % » sourcé par Joyce et al., 2016, est inchangé)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Prévenir les rechutes après retour",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/prevenir-les-rechutes-apres-retour.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Plus de 50 % des travailleurs en invalidité psychologique rechutent dans les 12 mois suivant leur retour",
+   "avant": "si le retour est mal accompagné. La prévention des rechutes",
+   "apres": "si le retour est mal accompagné (source à préciser). La prévention des rechutes",
+   "motif": "Chiffre de rechute sans source : marqué, pas supprimé. Le « 30 à 50 % … (Joyce et al., 2016) » de la section suivante porte sur les nouvelles absences en général, pas sur les retours mal accompagnés, et reste tel quel."
+  }
+ ]
+}

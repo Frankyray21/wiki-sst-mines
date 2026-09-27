@@ -1,0 +1,50 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lmrsst-vue-densemble-pour-les-rps",
+ "portee": "LMRSST, vue d'ensemble pour les RPS : effectif compté au cours de l'année, représentant en santé et en sécurité exigible sous 20 travailleurs, mutuelle de prévention marquée (source à préciser), date du 1er octobre 2025 rattachée à sa source (LMRSST, art. 313 ; Décret 1154-2025)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "LMRSST, vue d'ensemble pour les RPS",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/lmrsst-vue-densemble-pour-les-rps.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "et non simplement à l'entreprise entière",
+   "avant": "et non simplement à l'entreprise entière.",
+   "apres": "et non simplement à l'entreprise entière : on retient les travailleurs que l'établissement groupe au cours de l'année (LSST, art. 58 et 68, tels que remplacés par la LMRSST, art. 143 et 150).",
+   "motif": "Les seuils de la loi se comptent « au cours de l'année », ce que la page omettait. LMRSST, art. 143 (art. 58 LSST) : « L’employeur doit élaborer et mettre en application un programme de prévention propre à chaque établissement groupant au moins 20 travailleurs au cours de l’année. » ; art. 150 (art. 68 LSST) : « Un comité de santé et de sécurité doit être formé au sein d’un établissement groupant au moins 20 travailleurs au cours de l’année. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Elles peuvent imposer un programme de prévention",
+   "avant": "l'adhésion à une mutuelle de prévention, l'approche",
+   "apres": "l'adhésion à une mutuelle de prévention (source à préciser), l'approche",
+   "motif": "La mutuelle de prévention ne figure dans aucun texte du recueil (LSST, LMRSST) ; affirmation marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Elles peuvent imposer un programme de prévention",
+   "avant": "de 19 travailleurs ou moins. Les chantiers",
+   "apres": "de 19 travailleurs ou moins. Un représentant en santé et en sécurité peut aussi y être exigé, dans les cas prévus par règlement ou si la CNESST le juge opportun (LSST, art. 88 et 88.1, tels que remplacés par la LMRSST, art. 161). Les chantiers",
+   "motif": "L'agent de liaison n'est pas le seul mécanisme sous 20 travailleurs. LMRSST, art. 161 (art. 88 LSST) : « Lorsqu’un établissement groupe moins de 20 travailleurs au cours de l’année, […] au moins un représentant en santé et en sécurité doit être désigné parmi les travailleurs de cet établissement dans les cas et selon les conditions prévus par règlement. » ; (art. 88.1) : « Si la Commission le juge opportun pour protéger la santé ou assurer la sécurité et l’intégrité physique ou psychique des travailleurs, elle peut exiger qu’un représentant en santé et en sécurité soit désigné dans un établissement où il n’y pas de comité de santé et de sécurité. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "entrée en vigueur du régime permanent en établissement",
+   "avant": "entrée en vigueur du régime permanent en établissement.",
+   "apres": "entrée en vigueur du régime permanent en établissement ({{lien:w/legislation/10-lois-principales/lmrsst/art-313-lmrsst-entree-en-vigueur.html|LMRSST, art. 313}} ; Décret 1154-2025).",
+   "motif": "La date du 1er octobre 2025 est sourcée dans le Recueil législatif du wiki (page de l'art. 146 de la LMRSST : « Entrée en vigueur : 1er octobre 2025 (régime permanent : art. 313 ¶7, Décret 1154-2025) ») ; la LMRSST, art. 313, 7°, renvoie aux dates « fixées par le gouvernement, lesquelles ne peuvent être postérieures au 6 octobre 2025 ». Source citée au lieu d'une marque."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Pour le plan d'action, le délai général débute",
+   "avant": "débute le 1er octobre 2025 ou à la création",
+   "apres": "débute le 1er octobre 2025 (Décret 1154-2025) ou à la création",
+   "motif": "La date du 1er octobre 2025 est sourcée dans le Recueil législatif du wiki (page de l'art. 146 de la LMRSST : « Entrée en vigueur : 1er octobre 2025 (régime permanent : art. 313 ¶7, Décret 1154-2025) ») ; la LMRSST, art. 313, 7°, renvoie aux dates « fixées par le gouvernement, lesquelles ne peuvent être postérieures au 6 octobre 2025 ». Source citée au lieu d'une marque."
+  }
+ ]
+}

@@ -26,12 +26,13 @@
      le thème : sans cette déclaration, un bouton sans couleur restait noir sur fond sombre. */
   color-scheme: light;
 }
-/* Sombre par défaut, comme le wiki : voir l'entête de style.css. */
+/* Sombre par défaut, comme le wiki : voir l'entête de style.css. Palette bleu-noir de la maquette du
+   26 septembre 2026, la même que celle du wiki (27 septembre). */
 @media screen and (prefers-color-scheme: dark) {
   :root[data-theme="auto"] {
-    --p-bleu: #6ba4ff; --p-bleu-fonce: #8ab8ff; --p-bleu-pale: #1c2740;
-    --p-fond: #14171c; --p-carte: #1b1f26; --p-bordure: #2b3038; --p-bordure-forte: #3a414b;
-    --p-texte: #e6e8ea; --p-texte-doux: #a0a8b2;
+    --p-bleu: #7cc0ff; --p-bleu-fonce: #9fd1ff; --p-bleu-pale: #1b2b3f;
+    --p-fond: #0b151f; --p-carte: #132233; --p-bordure: #1e3249; --p-bordure-forte: #364c64;
+    --p-texte: #f2f6fa; --p-texte-doux: #b6c2d1;
     --p-ombre: 0 1px 2px rgba(0,0,0,.4); --p-ombre-forte: 0 4px 14px rgba(0,0,0,.55);
     color-scheme: dark;
   }
@@ -42,9 +43,9 @@
      Hors écran (impression), aucun de ces blocs ne s’applique : la palette claire de
      :root reste seule, et une page imprimée l’est en noir sur blanc. */
   :root:not([data-theme="light"]):not([data-theme="auto"]) {
-    --p-bleu: #6ba4ff; --p-bleu-fonce: #8ab8ff; --p-bleu-pale: #1c2740;
-    --p-fond: #14171c; --p-carte: #1b1f26; --p-bordure: #2b3038; --p-bordure-forte: #3a414b;
-    --p-texte: #e6e8ea; --p-texte-doux: #a0a8b2;
+    --p-bleu: #7cc0ff; --p-bleu-fonce: #9fd1ff; --p-bleu-pale: #1b2b3f;
+    --p-fond: #0b151f; --p-carte: #132233; --p-bordure: #1e3249; --p-bordure-forte: #364c64;
+    --p-texte: #f2f6fa; --p-texte-doux: #b6c2d1;
     --p-ombre: 0 1px 2px rgba(0,0,0,.4); --p-ombre-forte: 0 4px 14px rgba(0,0,0,.55);
     color-scheme: dark;
   }

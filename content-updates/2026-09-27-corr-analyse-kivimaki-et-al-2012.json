@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-analyse-kivimaki-et-al-2012",
+ "portee": "Kivimäki et al. (2012) : nombre d'événements coronariens aligné sur la citation de l'article recopiée dans la note (2 358, et non 1 957)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Kivimäki et al. (2012) - Job strain et maladies coronariennes : méta-analyse de 197 473 travailleurs",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/analyse-kivimaki-et-al-2012.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "1 957 événements incidents détectés",
+   "avant": "1 957 événements incidents détectés",
+   "apres": "2 358 événements incidents détectés",
+   "motif": "Contradiction interne : la citation de l'article recopiée dans la note dit « we recorded 2358 events of incident coronary heart disease » (Kivimäki et al., 2012, p. 1491), et « 1 957 » ne désigne aucun sous-ensemble. Aligné sur 2 358."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "1 957 events sur 197 473",
+   "avant": "1 957 events sur 197 473",
+   "apres": "2 358 events sur 197 473",
+   "motif": "Même chiffre dans le tableau, rapporté à tous les participants (« sur 197 473 »), donc pas à un sous-ensemble ; aligné sur la citation de l'article : « we recorded 2358 events of incident coronary heart disease » (Kivimäki et al., 2012, p. 1491)."
+  }
+ ]
+}

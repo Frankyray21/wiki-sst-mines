@@ -1,0 +1,176 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-grille-inspq-didentification-des-rps",
+ "portee": "Grille INSPQ d'identification des RPS : 12 indicateurs en deux parties (Recueil de fiches de l'INSPQ) au lieu de 7 catégories, noms officiels et partie dans le tableau, indicateurs de la partie 1 absents nommés, outil non imposé par la CNESST, démarche INSPQ en quatre étapes ajoutée après le tableau, formation, anachronisme LMRSST corrigé, référence EQCOTESST corrigée ; « le plus accessible et reconnu », annualité, cycle T1 à T4 et Trousse 2018 marqués",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Grille INSPQ d'identification des RPS",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/grille-inspq-didentification-des-rps.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Gratuite, applicable à tous les secteurs",
+   "avant": "est l'outil québécois officiel pour identifier les risques psychosociaux dans une entreprise.",
+   "apres": "est un outil québécois pour identifier les risques psychosociaux dans une entreprise ; la CNESST n'impose pas d'outil unique.",
+   "motif": "« Officiel » est sans source et contredit la page Obligation d'identifier les risques psychosociaux : « La CNESST n'impose pas d'outil unique mais demande une démarche structurée et documentée. » (section Méthodes acceptées)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Gratuite, applicable à tous les secteurs",
+   "avant": "elle couvre 7 catégories de",
+   "apres": "elle couvre 12 indicateurs, en deux parties ([Recueil de fiches de l'INSPQ](https://www.inspq.qc.ca/recueil-de-fiches-portant-sur-les-indicateurs-de-la-grille-d-identification-de-risques-psychosociaux-du-travail)), pour repérer les",
+   "motif": "La Grille compte 12 indicateurs en deux parties (partie 1 « Contexte de travail et mesures de prévention en place », 1-A à 1-F ; partie 2 « Composantes clés de l'organisation du travail », 2-A à 2-F) : INSPQ, Recueil de fiches portant sur les indicateurs de la Grille d'identification de risques psychosociaux du travail (publication 2371), source vérifiée fournie."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "pour aider les employeurs à identifier les RPS présents dans leur milieu",
+   "avant": "conformément aux exigences de la",
+   "apres": "utile aujourd'hui pour répondre à l'obligation d'identifier les risques psychosociaux que précise la",
+   "motif": "Anachronisme : la Grille existait en avril 2018 (fiche INSPQ 2373, avril 2018 : « l’Institut national de santé publique du Québec (INSPQ) et ses collaborateurs ont développé une Grille d’identification de risques psychosociaux du travail ») ; la LMRSST, de 2021, a ajouté au programme de prévention (LMRSST, art. 144) « l’identification et l’analyse des risques […] dont les risques chimiques, biologiques, physiques, ergonomiques et psychosociaux liés au travail »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Conçu pour être utilisable par un conseiller SST ou un comité paritaire",
+   "avant": "sans expertise pointue en psychologie du travail.",
+   "apres": "après une formation offerte par l'INSPQ.",
+   "motif": "L'usage de la Grille suppose une formation. Page Soutien social au travail (Documents et outils) : « l'utilisation de la Grille d'identification des risques psychosociaux requiert une formation spécifique. Lire une fiche ne remplace pas cette formation. » ; fiche INSPQ 2373 (avril 2018, citée par la page Définition des risques psychosociaux) : « La crédibilité est aussi acquise en utilisant les outils de l’INSPQ et après avoir suivi la formation. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "pour faire l'inventaire initial des RPS",
+   "avant": "le plus accessible et reconnu pour faire",
+   "apres": "le plus accessible et reconnu (source à préciser) pour faire",
+   "motif": "Classement « le plus accessible et reconnu » sans source ; affirmation marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "La grille couvre",
+   "avant": "7 grandes catégories de RPS",
+   "apres": "12 indicateurs, en deux parties",
+   "motif": "Même correction que dans L'essentiel : 12 indicateurs en deux parties (INSPQ, Recueil de fiches portant sur les indicateurs de la Grille, publication 2371, source vérifiée fournie)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Quantité, rythme, interruptions, délais",
+   "avant": "1. Charge de travail",
+   "apres": "Charge de travail (partie 2)",
+   "motif": "Nom officiel de l'indicateur 2-A « Charge de travail », partie 2 (Recueil de fiches de l'INSPQ, publication 2371) ; exemples de Frank gardés."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Rétroaction, équilibre efforts récompenses",
+   "avant": "2. Reconnaissance",
+   "apres": "Reconnaissance au travail (partie 2)",
+   "motif": "Nom officiel de l'indicateur 2-B « Reconnaissance au travail », partie 2 (Recueil de fiches de l'INSPQ, publication 2371) ; exemples gardés."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "s, collègues, climat",
+   "avant": "Supérieurs, collègues, climat",
+   "apres": "Soutien social du supérieur et des collègues (partie 2) : supérieurs, collègues, climat",
+   "motif": "Indicateurs 2-C « Soutien social du supérieur » et 2-D « Soutien social des collègues », partie 2 (Recueil de fiches de l'INSPQ, publication 2371). La cellule de catégorie est un lien vers la page Soutien social au travail (libellé identique au titre) : le nom officiel est placé en tête de la cellule d'exemples, qui sont gardés."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "utilisation des compétences",
+   "avant": "Autonomie, utilisation des compétences",
+   "apres": "Autonomie décisionnelle (partie 2) : autonomie, utilisation des compétences",
+   "motif": "Indicateur 2-E « Autonomie décisionnelle », partie 2 (Recueil de fiches de l'INSPQ, publication 2371). La cellule de catégorie est un lien vers la page Latitude décisionnelle : le nom officiel est placé en tête de la cellule d'exemples, qui sont gardés."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "s, collègues, climat",
+   "avant": "3. ",
+   "apres": "",
+   "motif": "Numéro de l'ancienne liste de 7 catégories retiré, comme sur les autres rangées ; la cellule garde son lien vers la page Soutien social au travail, le nom officiel des indicateurs étant dans la cellule voisine."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "utilisation des compétences",
+   "avant": "4. ",
+   "apres": "",
+   "motif": "Numéro de l'ancienne liste de 7 catégories retiré, comme sur les autres rangées ; la cellule garde son lien vers la page Latitude décisionnelle, le nom officiel de l'indicateur étant dans la cellule voisine."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Clarté, accès, transparence",
+   "avant": "5. Information et communication",
+   "apres": "Information et communication (partie 2)",
+   "motif": "Nom officiel de l'indicateur 2-F « Information et communication », partie 2 (Recueil de fiches de l'INSPQ, publication 2371) ; exemples gardés."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Conduites vexatoires, agressions",
+   "avant": "6. Harcèlement et violence",
+   "apres": "Activités ou politique contre la violence et le harcèlement (partie 1)",
+   "motif": "Nom officiel de l'indicateur 1-D « Activités ou politique contre la violence et le harcèlement », partie 1 (Recueil de fiches de l'INSPQ, publication 2371) ; exemples gardés."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Horaires, charge à domicile",
+   "avant": "7. Conciliation travail-vie personnelle",
+   "apres": "Activités ou politique de conciliation travail et vie personnelle (partie 1)",
+   "motif": "Nom officiel de l'indicateur 1-F « Activités ou politique de conciliation travail et vie personnelle », partie 1 (Recueil de fiches de l'INSPQ, publication 2371) ; exemples gardés."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "définition, exemples, indicateurs observables",
+   "avant": "Chaque catégorie est documentée avec",
+   "apres": "La partie 1 compte aussi quatre indicateurs absents du tableau : contexte de travail et d'emploi ; absentéisme maladie et présentéisme ; activités ou politique de santé au travail ; activités ou politique de retour au travail. Chaque indicateur est documenté avec",
+   "motif": "Indicateurs 1-A « Contexte de travail et d'emploi », 1-B « Absentéisme maladie et présentéisme », 1-C « Activités ou politique de santé au travail » et 1-E « Activités ou politique de retour au travail » (Recueil de fiches de l'INSPQ, publication 2371) ; « catégorie » devient « indicateur », comme dans la correction du nombre."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Reprendre la grille annuellement",
+   "avant": "Reprendre la grille annuellement",
+   "apres": "Reprendre annuellement la grille (source à préciser)",
+   "motif": "Aucune source ni aucun délai légal pour une reprise annuelle (la loi renvoie au règlement : LMRSST, art. 143, « mis à jour selon les modalités et les délais prescrits par règlement ») ; marquée, tableau gardé (adverbe déplacé pour que le lot reste rejouable)."
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "6. Réévaluation",
+   "bloc": "La démarche proposée par l'INSPQ compte quatre étapes : informer et sensibiliser le milieu, évaluer le milieu à l'aide de la Grille, soutenir la prise en charge, puis faire un suivi du plan d'action. Le tableau en donne une déclinaison pratique.",
+   "marqueur": "La démarche proposée par l'INSPQ compte quatre étapes",
+   "motif": "Démarche de la fiche INSPQ 2373 (avril 2018, p. 5) : « Un intervenant souhaitant accompagner un milieu de travail pourrait adopter les étapes suivantes : informer et sensibiliser le milieu, évaluer le milieu à l’aide la Grille d’identification de risques psychosociaux du travail, soutenir la prise en charge et faire un suivi du plan d’action. » Tableau gardé (un schéma publié le suit)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Cycle annuel typique en mine",
+   "avant": "Cycle annuel typique en mine",
+   "apres": "En mine, cycle annuel typique (source à préciser)",
+   "motif": "Le cycle trimestriel T1 à T4 n'a pas de source et n'est pas un délai légal ; marqué une fois, sur son intertitre."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Trousse d'outils pour la surveillance de la santé mentale",
+   "avant": "(2018).",
+   "apres": "(2018) (référence à préciser).",
+   "motif": "Référence introuvable (INSPQ, Trousse d'outils pour la surveillance de la santé mentale en milieu de travail, 2018) ; marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Enquête québécoise sur des conditions de travail",
+   "avant": "Vézina, M. et al. (2011).",
+   "apres": "Vézina, M., Cloutier, E., Stock, S., Lippel, K., Fortin, É., Delisle, A. et al. (2011).",
+   "motif": "Référence vérifiée fournie : « Vézina, M., Cloutier, E., Stock, S., Lippel, K., Fortin, É., Delisle, A. et al. (2011). Enquête québécoise sur des conditions de travail, d'emploi et de santé et de sécurité du travail (EQCOTESST) (rapport R-691). Québec : IRSST, INSPQ et ISQ. » (aucune note d'analyse du wiki ne la donne)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Enquête québécoise sur des conditions de travail",
+   "avant": "d'emploi et de SST (EQCOTESST)",
+   "apres": "d'emploi et de santé et de sécurité du travail (EQCOTESST)",
+   "motif": "Titre exact, d'après la référence vérifiée fournie et la page EQCOTESST du recueil : « Enquête québécoise sur des conditions de travail, d'emploi et de santé et de sécurité du travail, réalisée par l'IRSST (publiée en 2011, données 2007-2008) »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Enquête québécoise sur des conditions de travail",
+   "avant": ". INSPQ.",
+   "apres": " (rapport R-691). Québec : IRSST, INSPQ et ISQ.",
+   "motif": "Éditeurs et numéro de rapport d'après la référence vérifiée fournie : « (rapport R-691). Québec : IRSST, INSPQ et ISQ. » ; la fiche INSPQ 2373 cite aussi « IRSST, INSPQ, ISQ »."
+  }
+ ]
+}

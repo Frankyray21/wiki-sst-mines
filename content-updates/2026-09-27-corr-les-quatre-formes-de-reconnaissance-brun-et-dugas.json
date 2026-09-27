@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-les-quatre-formes-de-reconnaissance-brun-et-dugas",
+ "portee": "Les quatre formes de reconnaissance : le coût d'une absence de reconnaissance rattaché au déséquilibre efforts-reconnaissance (modèle de Siegrist) plutôt qu'à l'iso-strain, et la source de Brun et Dugas (2005) alignée sur la référence de fin de page (Gestion, 30(2), 79-88)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Les quatre formes de reconnaissance (Brun et Dugas)",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/les-quatre-formes-de-reconnaissance-brun-et-dugas.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "démotivation, désengagement",
+   "avant": "augmentation de l'iso-strain (",
+   "apres": "déséquilibre efforts-récompenses ({{lien:w/psychosocial/modele-de-siegrist-desequilibre-efforts-recompenses.html|modèle de Siegrist}}, distinct de l'",
+   "motif": "Point relevé : « augmentation de l'iso-strain » en cas de manque de reconnaissance n'a pas de source, l'iso-strain combinant demande, latitude et soutien ; le modèle du wiki qui relie la reconnaissance à la santé est celui de Siegrist (page Modèle de Siegrist : « Les efforts (charge, heures, engagement) doivent être équilibrés par les récompenses (salaire, reconnaissance, sécurité d'emploi, perspectives) »). Le lien Iso-strain, qu'une retouche ne peut pas retirer, reste comme renvoi à distinguer."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Chaire CGSST, Université Laval",
+   "avant": "Chaire CGSST, Université Laval",
+   "apres": "Revue Gestion, 30(2), 79-88",
+   "motif": "Point relevé : Brun et Dugas (2005) avait pour source la « Chaire CGSST » ; aligné sur la référence de fin de page : « Brun, J.-P. & Dugas, N. (2005). La reconnaissance au travail, analyse d'un concept riche de sens. Gestion, 30(2), 79-88. » (le type « Article » est juste pour un article de revue)."
+  }
+ ]
+}

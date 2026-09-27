@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-gestion-post-incident-en-sst",
+ "portee": "Gestion post-incident en SST : les parts de 30 à 50 % (symptômes aigus) et de 5 à 30 % (TSPT durable), reprises sans source de Soutien post-événement traumatique structuré, marquées (source à préciser)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Gestion post-incident en SST",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/gestion-post-incident-en-sst.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "présentent des symptômes aigus dans les premiers jours",
+   "avant": "30 à 50 % des personnes exposées",
+   "apres": "30 à 50 % (source à préciser) des personnes exposées",
+   "motif": "Point relevé : « 30 à 50 % » de symptômes aigus, repris de Soutien post-événement traumatique structuré où il n'est pas sourcé. Marqué après le chiffre."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "développeront un TSPT durable, selon la nature",
+   "avant": "De 5 à 30 % développeront",
+   "apres": "De 5 à 30 % (source à préciser) développeront",
+   "motif": "Point relevé : « 5 à 30 % » de TSPT durable, même origine, sans source. Marqué après le chiffre."
+  }
+ ]
+}

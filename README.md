@@ -73,8 +73,16 @@ adresses n'ont pas changé.
   essai par défaut, sauvegarde avant écriture
 - `tools/retouches.mjs` + `tools/appliquer_retouches.mjs` — pose dans le vault un lot de retouches préparé
   sans accès au vault (médias à copier, lignes désignées par leur texte visible, liens vers une adresse
-  publiée ; nouvelle version d'un schéma à la place de l'ancienne) ; essai par défaut, tout ou rien, rejouable,
-  sauvegarde avant écriture
+  publiée ; nouvelle version d'un schéma à la place de l'ancienne ; lien d'un libellé donné redirigé vers une autre
+  note, `recibler`) ; essai par défaut, tout ou rien, rejouable, sauvegarde avant écriture
+- `tools/rejouer_lots.mjs` — rejoue dans le vault, en une commande, tous les lots préparés depuis le 25 septembre
+  2026 (`content-updates/*.json`) : essai de tous les lots, puis, si aucun n'échoue, application dans l'ordre
+  (corrections, schémas, corrections du 27), retrait des versions texte et libellés de liens courts
+- `tools/surlignage.mjs` — surlignages colorés du greffon Obsidian (`~={red}texte=~`), rendus en `<mark>` lisible
+  en clair et en sombre (générateur, et repose des pages publiées)
+- `tools/habillage_pages.mjs` — style du portail, de la page Thèmes et des pages de thème (rangées à pictogramme,
+  nombre d'articles, chevron), le même que produit le générateur ; `tools/illustrations/` — un dessin par wiki,
+  sur la carte d'entrée de son accueil et sur le portail
 - `tools/regenerer_hors_ligne.mjs` — retouche de `docs/` sans reconstruction : recopie `style.css` et `app.js`,
   réécrit le manifeste hors ligne en gardant l'estampille de version (seuls les fichiers modifiés changent de hash)
   et marque `sw.js` de l'empreinte du manifeste, pour que les navigateurs installent le nouveau service worker
@@ -112,6 +120,10 @@ npm --prefix tools test
 # Ré-extraire le texte des lois depuis les PDF du recueil (après une mise à jour des PDF)
 npm --prefix tools install          # installe pdfjs-dist (dépendance de développement)
 node tools/extraire_textes_loi.mjs  # → tools/textes-loi/*.json, puis reconstruire le site
+
+# Tout rejouer dans le vault en une fois (lots du 25 au 27 septembre 2026) : essai, puis application
+node tools/rejouer_lots.mjs --vault "C:/…/WIKI SST - Mines"
+node tools/rejouer_lots.mjs --vault "C:/…/WIKI SST - Mines" --appliquer --construire
 
 # Poser un lot de retouches préparé hors du vault (schémas d'Espaces clos, 25 septembre 2026)
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-25-espaces-clos-schemas.json
@@ -253,6 +265,17 @@ node tools/serve.mjs
   teinté choisi d'après l'emoji de la note (`pictoTuile`). Même rendu par le générateur (`rendreAccueil`,
   `ordonnerBoites`, `tools/accueil_wiki.mjs`) et sur le site. Ergonomie : 1 932 → 1 407 px à 390 px. Détail,
   mesures par largeur et écarts avec la maquette : `content-updates/2026-09-26-accueils-maquette.md`
+- **Choix de contenu tranchés et améliorations (27 septembre 2026)** : 51 pages corrigées (238 retouches), dont
+  36 pages RPS relevées lors des relectures (lots du 26 septembre, 8, 9 et 10). Même politique partout : erreur
+  juridique corrigée d'après le recueil, avec la phrase de loi recopiée dans le motif ; affirmation sans source
+  marquée « (source à préciser) », jamais supprimée. Rotations jour-nuit nommées dans le bon sens sur huit pages.
+  Accueils : lien tronqué réparé, liens « Pages gestionnaires » vers le bon wiki, « Vues d'ensemble ». Voies
+  d'exposition : l'injection revient dans la légende. Deux schémas passent en v4 (Aide-foreur, Confinement). Un
+  schéma s'ajoute : « Grille INSPQ : 12 indicateurs ». Surlignages colorés des notes d'analyse rendus (22 pages).
+  Nouveau style du portail, de la page Thèmes et des pages de thème ; un dessin par wiki sur la carte d'entrée.
+  **À faire dans le vault** : `node tools/rejouer_lots.mjs` (essai), puis `--appliquer`, puis quelques retouches à
+  la main. Détail, liste des retouches manuelles et points non traités :
+  `content-updates/2026-09-27-choix-contenu-et-ameliorations.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma
   en texte » (127 schémas, 65 pages), puis toutes les autres (« Lire la version texte — … », « Lire les voies en
   texte », « Lire l’illustration en texte » : 16 sections, 10 pages) disparaissent. Chaque image garde son texte
@@ -260,8 +283,9 @@ node tools/serve.mjs
   publie ni ne les indexe plus, même depuis une note qui les garde (`tools/versions_texte.mjs`), et ne s'arrête plus
   au démarrage (« Cannot access 'estEtude' before initialization », depuis le 21 septembre). **À faire dans le
   vault** : rejouer les 40 lots `content-updates\*-schemas.json`, puis `node tools/retirer_versions_texte.mjs`
-  (essai, puis `--appliquer`). **À trancher** : la voie « injection » n'était décrite que dans la version texte de
-  Voies d'exposition. Détail : `content-updates/2026-09-26-sans-version-texte.md`
+  (essai, puis `--appliquer`). La voie « injection », qui n'était décrite que dans la version texte de Voies
+  d'exposition, revient dans la légende du schéma le 27 septembre. Détail :
+  `content-updates/2026-09-26-sans-version-texte.md`
 - **L'article en PDF (26 septembre 2026)** : un bouton « 📄 PDF » dans la barre de lecture de chaque article
   (à côté de A−, A+ et Lecture). Il ouvre l'impression du navigateur, où « Enregistrer au format PDF » produit le
   fichier : texte net et copiable, liens actifs, en noir sur blanc, sans menus. En tête du PDF figurent l'adresse de la
@@ -279,9 +303,9 @@ node tools/serve.mjs
   Conséquences du stress, Communication souterraine (téléphone relié à la surface, RSSM art. 283), Grille INSPQ
   (démarche), Culture minière, CNESST (les trois rôles ; ce que l'inspecteur peut demander à voir sur les RPS) et
   LMRSST (document et participation selon l'effectif ; les RPS dans le programme de prévention) ; Retour au travail et
-  Types de personnalité refaits en schémas plus grands, lisibles au téléphone en thème sombre. En attente de Frank :
-  catégories de la grille INSPQ (liste à vérifier). La LSST du recueil est à jour au 26 mars 2024, avant la réforme du
-  programme de prévention.
+  Types de personnalité refaits en schémas plus grands, lisibles au téléphone en thème sombre. La liste des
+  catégories de la grille INSPQ, en attente, est remplacée le 27 septembre par les 12 indicateurs officiels. La LSST
+  du recueil est à jour au 26 mars 2024, avant la réforme du programme de prévention.
   **À poser dans le vault**. Détail : `content-updates/2026-09-26-rps-schemas-lot9.md`
 - **Six pages RPS illustrées et Premiers signes redessiné (26 septembre 2026)** : schémas sur Les quatre formes de
   reconnaissance et Types de personnalité et lieu de contrôle (à la place d'une diapositive de cours et d'une figure de

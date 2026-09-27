@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-accueil-hygiene",
+ "portee": "Accueil Hygiène : lien « Pages gestionnaires » vers l'accueil gestionnaires d'Hygiène ; boîte « Pages-index de sections » renommée « Vues d'ensemble »",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "🏠 Wiki Hygiène industrielle, mines",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/index.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "recibler",
+   "ligneContenant": "Hub : Pages gestionnaires",
+   "libelle": "Pages gestionnaires",
+   "adresse": "w/hygiene/00-accueil-gestionnaires.html",
+   "motif": "Le lien menait à l'accueil gestionnaires du wiki Ergonomie (note homonyme) ; il mène à celui de ce wiki."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Pages-index de sections",
+   "avant": "Pages-index de sections",
+   "apres": "Vues d'ensemble",
+   "motif": "Titre de boîte qui parlait d'organisation du vault ; la boîte réunit des pages de vue d'ensemble."
+  }
+ ]
+}
