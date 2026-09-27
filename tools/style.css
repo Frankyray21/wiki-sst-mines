@@ -50,7 +50,7 @@
   --carte-public-hover: #4b77bd;
   --ombre: rgba(0,0,0,.13);
   /* Maquette du 26 sept. 2026 : surfaces, accent bleu de l'interface, teintes des pictogrammes, rayons. */
-  --bg-surface: #ffffff; --bg-surface-2: #f1f4f8; --bg-surface-hover: #e7edf5;
+  --bg-surface: #ffffff; --bg-surface-2: #f1f4f8; --bg-surface-hover: #e7edf5; --bg-surface-creux: #f3f5f8; --bg-entete: var(--bg);
   --accent-ui: #2563eb; --accent-ui-hover: #1d4ed8; --accent-ui-text: #1d4ed8;
   --teinte-rose: #c2255c; --teinte-bleu: #1971c2; --teinte-vert: #2b8a3e; --teinte-violet: #6741d9; --teinte-ambre: #b7791f; --teinte-turquoise: #0b7285;
   --rayon: 12px; --rayon-petit: 10px; --ombre-legere: 0 1px 2px rgba(0,0,0,.06);
@@ -66,20 +66,20 @@
    data-theme : absent (ou « dark ») = sombre, « light » = clair, « auto » = comme l'appareil. */
 @media screen and (prefers-color-scheme: dark) {
   :root[data-theme="auto"] {
-    --bg: #0d1219;
-    --content-bg: #10161f;
-    --border: #4a5b73;
-    --border-light: #33435a;
-    --border-soft: #243248;
-    --text: #e6ebf2;
-    --text-soft: #a9b5c5;
-    --text-faint: #8794a6;
-    --link: #7ab0ff;
+    --bg: #0b151f;
+    --content-bg: #0c1620;
+    --border: #4a5f7a;
+    --border-light: #364c64;
+    --border-soft: #1e3249;
+    --text: #f2f6fa;
+    --text-soft: #b6c2d1;
+    --text-faint: #8fa0b3;
+    --link: #7cc0ff;
     --link-visited: #c3a0f0;
     --link-new: #ff8b82;
     --accent: #ff9a9a;
-    --focus: #7ab0ff;
-    --hover: #253247;
+    --focus: #7cc0ff;
+    --hover: #1b2b3f;
     --hover-bd: #3f5f8f;
 
     --code-bg: #262a31;
@@ -113,9 +113,9 @@
     --carte-public-grad: #212936;
     --carte-public-hover: #7ab0ff;
     --ombre: rgba(0,0,0,.5);
-    --bg-surface: #172231; --bg-surface-2: #1e2b3d; --bg-surface-hover: #243449;
-    --accent-ui: #2563eb; --accent-ui-hover: #1d4ed8; --accent-ui-text: #8ab8ff;
-    --teinte-rose: #f783ac; --teinte-bleu: #74c0fc; --teinte-vert: #69db7c; --teinte-violet: #b197fc; --teinte-ambre: #ffd43b; --teinte-turquoise: #66d9e8;
+    --bg-surface: #132233; --bg-surface-2: #17293c; --bg-surface-hover: #1c3044; --bg-surface-creux: #101b27; --bg-entete: #111d29;
+    --accent-ui: #2d6fc4; --accent-ui-hover: #2662b0; --accent-ui-text: #7cc0ff;
+    --teinte-rose: #f9a1a5; --teinte-bleu: #7ecdff; --teinte-vert: #75fcc6; --teinte-violet: #cf9fff; --teinte-ambre: #fbb843; --teinte-turquoise: #45f1b9;
     --ombre-legere: 0 1px 2px rgba(0,0,0,.35);
     color-scheme: dark;
   }
@@ -127,20 +127,20 @@
      Hors écran (impression), aucun de ces blocs ne s’applique : la palette claire de
      :root reste seule, et une page imprimée l’est en noir sur blanc. */
   :root:not([data-theme="light"]):not([data-theme="auto"]) {
-    --bg: #0d1219;
-    --content-bg: #10161f;
-    --border: #4a5b73;
-    --border-light: #33435a;
-    --border-soft: #243248;
-    --text: #e6ebf2;
-    --text-soft: #a9b5c5;
-    --text-faint: #8794a6;
-    --link: #7ab0ff;
+    --bg: #0b151f;
+    --content-bg: #0c1620;
+    --border: #4a5f7a;
+    --border-light: #364c64;
+    --border-soft: #1e3249;
+    --text: #f2f6fa;
+    --text-soft: #b6c2d1;
+    --text-faint: #8fa0b3;
+    --link: #7cc0ff;
     --link-visited: #c3a0f0;
     --link-new: #ff8b82;
     --accent: #ff9a9a;
-    --focus: #7ab0ff;
-    --hover: #253247;
+    --focus: #7cc0ff;
+    --hover: #1b2b3f;
     --hover-bd: #3f5f8f;
 
     --code-bg: #262a31;
@@ -173,9 +173,9 @@
     --carte-public-grad: #212936;
     --carte-public-hover: #7ab0ff;
     --ombre: rgba(0,0,0,.5);
-    --bg-surface: #172231; --bg-surface-2: #1e2b3d; --bg-surface-hover: #243449;
-    --accent-ui: #2563eb; --accent-ui-hover: #1d4ed8; --accent-ui-text: #8ab8ff;
-    --teinte-rose: #f783ac; --teinte-bleu: #74c0fc; --teinte-vert: #69db7c; --teinte-violet: #b197fc; --teinte-ambre: #ffd43b; --teinte-turquoise: #66d9e8;
+    --bg-surface: #132233; --bg-surface-2: #17293c; --bg-surface-hover: #1c3044; --bg-surface-creux: #101b27; --bg-entete: #111d29;
+    --accent-ui: #2d6fc4; --accent-ui-hover: #2662b0; --accent-ui-text: #7cc0ff;
+    --teinte-rose: #f9a1a5; --teinte-bleu: #7ecdff; --teinte-vert: #75fcc6; --teinte-violet: #cf9fff; --teinte-ambre: #fbb843; --teinte-turquoise: #45f1b9;
     --ombre-legere: 0 1px 2px rgba(0,0,0,.35);
     color-scheme: dark;
   }
@@ -202,7 +202,7 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .site-header {
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; gap: 12px;
-  background: var(--bg);
+  background: var(--bg-entete);
   border-bottom: 1px solid var(--border-soft);
   padding: 10px 16px;
 }
@@ -219,7 +219,7 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
   width: 100%; padding: 9px 12px 9px 36px; min-height: 42px;
   border: 1px solid var(--border-light); border-radius: var(--rayon);
   font-size: 15px; color: var(--text);
-  background: var(--bg-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23888f97'%3E%3Cpath d='M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z'/%3E%3C/svg%3E") no-repeat 10px center / 15px;
+  background: var(--bg-surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23888f97'%3E%3Cpath d='M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z'/%3E%3C/svg%3E") no-repeat 10px center / 15px;
 }
 .searchbox input:focus, .portal-search input:focus { outline: 2px solid var(--focus); outline-offset: -1px; }
 
@@ -227,7 +227,7 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .btn-theme {
   flex-shrink: 0; width: 38px; height: 38px;
   display: flex; align-items: center; justify-content: center;
-  background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--rayon-petit);
+  background: var(--bg); border: 1px solid var(--border-light); border-radius: var(--rayon-petit);
   font-size: 17px; cursor: pointer; color: var(--text); line-height: 1;
 }
 .btn-theme:hover { background: var(--hover); border-color: var(--hover-bd); }
@@ -286,6 +286,7 @@ mark { background: var(--surlignage-bg); color: var(--surlignage-fg); padding: 0
 .breadcrumbs > a:first-of-type::before { content: '›'; margin-right: 6px; color: var(--text-faint); }
 .breadcrumbs .crumb-sep { font-size: 0; }
 .breadcrumbs .crumb-sep::before { content: '/'; font-size: 14px; color: var(--text-faint); }
+.breadcrumbs > a { color: var(--text-soft); }
 .breadcrumbs > a:last-of-type { color: var(--accent-ui-text); font-weight: 600; }
 .crumb-sep { color: var(--text-faint); margin: 0 2px; }
 .page-title {
@@ -713,6 +714,9 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
    cartes secondaires repliées sur une ligne. Surfaces et bordures viennent des jetons --bg-surface*,
    --border-soft. Le bloc 900 px resserre tout pour le téléphone ; rien n'y borne la largeur : la
    page occupe l'écran moins les 16 px de marge de .content. */
+/* pictogrammes MDI en ligne (accueils, boutons Lecture et PDF) : ils prennent la couleur du texte ; sans
+   cette règle, un <path> se remplit en noir */
+.ic { fill: currentColor; display: inline-block; vertical-align: middle; flex: none; }
 .accueil-banniere {
   display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "icone titre titre" "icone chapeau chapeau" ". compte actions";
   gap: 8px 16px; align-items: center; padding: 18px 20px; margin-bottom: 14px;
@@ -728,7 +732,8 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .accueil-chapeau .accueil-sous-titre strong { font-weight: inherit; }
 .accueil-banniere .page-sub { grid-area: compte; display: flex; align-items: center; gap: 8px; margin: 0; font-size: 14.5px; color: var(--text-soft); }
 .accueil-domaine { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } /* lu, pas vu */
-.accueil-compte-pages { display: inline-flex; align-items: center; gap: 7px; font-weight: 500; white-space: nowrap; }
+.accueil-compte-pages { display: inline-flex; align-items: center; gap: 7px; font-weight: 500; white-space: nowrap; color: var(--accent-ui-text); }
+.accueil-nombre { color: var(--text); font-weight: 600; }
 .accueil-compte-pages .ic { width: 22px; height: 22px; color: var(--accent-ui-text); }
 /* Lecture et PDF, posés par app.js après .page-sub : Lecture en bouton principal, PDF en secondaire.
    Sur un accueil, app.js déplace A− et A+ dans le menu latéral (« Taille du texte ») ; s'il n'y a pas
@@ -736,6 +741,8 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .accueil-banniere .lecture-outils { grid-area: actions; justify-self: end; margin: 0; gap: 8px; }
 .accueil-banniere .lecture-outils::before { content: ''; order: 0; align-self: stretch; width: 1px; margin: 8px 6px 8px 0; background: var(--border-light); } /* séparateur court */
 .accueil-banniere .lecture-outils button { min-height: 44px; border-radius: var(--rayon-petit); padding: 8px 15px; font-size: 14.5px; font-weight: 600; border: 1px solid var(--border-light); background: var(--bg-surface-2); white-space: nowrap; }
+.accueil-banniere .lecture-outils button { display: inline-flex; align-items: center; gap: 7px; }
+.accueil-banniere .lecture-outils .ic { width: 20px; height: 20px; flex: none; }
 .accueil-banniere .lecture-outils [data-lecture] { order: 1; background: var(--accent-ui); border-color: var(--accent-ui); color: #fff; }
 .accueil-banniere .lecture-outils [data-lecture]:hover:not(:disabled), .accueil-banniere .lecture-outils [data-lecture].actif { background: var(--accent-ui-hover); border-color: var(--accent-ui-hover); color: #fff; }
 .accueil-banniere .lecture-outils [data-pdf] { order: 2; }
@@ -754,8 +761,9 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 /* en-tête d'une boîte : pictogramme, titre et sous-titre (colonne souple), puis le lien « Explorer tous
    les thèmes » ou, sur une carte repliée, le nombre de pages et le chevron — jamais l'un sur l'autre */
 .accueil-entete { display: flex; align-items: center; gap: 12px; padding: 14px 16px 10px; }
-.accueil-boite-icone { flex: none; display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: var(--rayon-petit); background: var(--bg-surface-2); color: var(--accent-ui-text); }
-.accueil-boite-icone .ic { width: 23px; height: 23px; }
+/* pictogramme d'en-tête de section : nu, en accent (maquette) ; sur une carte repliée, dans une tuile */
+.accueil-boite-icone { flex: none; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; color: var(--accent-ui-text); }
+.accueil-boite-icone .ic { width: 28px; height: 28px; }
 .accueil-entete-texte { flex: 1 1 auto; min-width: 0; }
 .page-body .accueil-titre { font-family: inherit; font-size: 20px; font-weight: 700; line-height: 1.25; margin: 0; padding: 0; background: none; border: 0; overflow-wrap: break-word; }
 /* un en-tête de boîte qui est un lien garde la couleur de titre : en bleu de lien, 4,27:1 sur le
@@ -764,7 +772,7 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .page-body .accueil-sous-texte { margin: 2px 0 0; font-size: 13.5px; line-height: 1.4; color: var(--text-soft); }
 /* boîte ouverte avec sous-titre : le pictogramme se centre sur la ligne du titre, pas sur le bloc */
 section.accueil-boite > .accueil-entete:has(.accueil-sous-texte) { align-items: flex-start; }
-section.accueil-boite > .accueil-entete:has(.accueil-sous-texte) > .accueil-boite-icone { margin-top: -6px; }
+section.accueil-boite > .accueil-entete:has(.accueil-sous-texte) > .accueil-boite-icone { margin-top: -3px; }
 .accueil-entete-lien { flex: none; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-size: 14px; font-weight: 600; color: var(--accent-ui-text); text-decoration: none; padding: 6px 0; }
 .accueil-entete-lien:hover { text-decoration: underline; }
 .accueil-corps { padding: 0 16px 14px; }
@@ -777,17 +785,21 @@ section.accueil-boite > .accueil-entete:has(.accueil-sous-texte) > .accueil-boit
 .accueil-large .accueil-colonnes { columns: 13em 3; }
 .accueil-colonnes-courtes, .accueil-large .accueil-colonnes-courtes { columns: 9em 3; column-gap: 18px; }
 /* chevron : un angle tourné, qui pivote à l'ouverture d'un volet */
-.accueil-chevron { flex: none; display: inline-block; width: 9px; height: 9px; margin: 0 4px 0 2px; border-right: 2px solid var(--text-faint); border-bottom: 2px solid var(--text-faint); transform: rotate(-45deg); transition: transform .15s; }
+.accueil-chevron { flex: none; display: inline-block; width: 9px; height: 9px; margin: 0 4px 0 2px; border-right: 2px solid var(--text-soft); border-bottom: 2px solid var(--text-soft); transform: rotate(-45deg); transition: transform .15s; }
 details[open] > summary .accueil-chevron { transform: rotate(45deg); }
 /* tuiles par rôle : deux colonnes de même hauteur, emoji, libellé, chevron ; quatre par rangée sur ordinateur */
 .page-body .accueil-tuiles { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 10px; margin: 2px 0 0; }
 .page-body .accueil-tuiles li { position: relative; margin: 0; display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 6px 8px 6px 10px; border: 1px solid var(--border-light); border-radius: var(--rayon-petit); background: var(--bg-surface-2); font-size: 14.5px; font-weight: 600; line-height: 1.2; }
-.page-body .accueil-tuiles li::after { content: ''; flex: none; width: 8px; height: 8px; margin: 0 2px 0 1px; border-right: 2px solid var(--text-faint); border-bottom: 2px solid var(--text-faint); transform: rotate(-45deg); }
+.page-body .accueil-tuiles li::after { content: ''; flex: none; width: 8px; height: 8px; margin: 0 2px 0 1px; border-right: 2px solid var(--text-soft); border-bottom: 2px solid var(--text-soft); transform: rotate(-45deg); }
 .page-body .accueil-tuiles li:hover { background: var(--bg-surface-hover); border-color: var(--hover-bd); }
-.page-body .accueil-tuiles a { flex: 1; min-width: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: center; gap: 1px; padding: 0; text-decoration: none; }
+.page-body .accueil-tuiles a { flex: 1; min-width: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: center; gap: 1px; padding: 0; text-decoration: none; color: var(--text); }
 .page-body .accueil-tuiles a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; } /* toute la tuile ouvre le lien */
 .page-body .accueil-tuiles a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
 .accueil-tuile-emoji { flex: none; width: 22px; text-align: center; font-size: 20px; line-height: 1; }
+.accueil-tuile-icone { flex: none; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; }
+.accueil-tuile-icone .ic { width: 24px; height: 24px; }
+.teinte-rose { color: var(--teinte-rose); } .teinte-bleu { color: var(--teinte-bleu); } .teinte-vert { color: var(--teinte-vert); }
+.teinte-violet { color: var(--teinte-violet); } .teinte-ambre { color: var(--teinte-ambre); } .teinte-turquoise { color: var(--teinte-turquoise); }
 .page-body .accueil-tuile-desc { font-weight: 400; font-size: 13px; line-height: 1.35; color: var(--text-soft); }
 @media (min-width: 901px) { .accueil-large .accueil-tuiles { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); } }
 /* groupes de liens (sous-titres de la note) */
@@ -802,14 +814,14 @@ details[open] > summary .accueil-chevron { transform: rotate(45deg); }
 .accueil-themes-nav a { display: inline-flex; align-items: center; min-height: 34px; padding: 4px 11px; border: 1px solid var(--border-light); border-radius: 999px; background: var(--bg-surface-2); font-size: 13.5px; text-decoration: none; }
 .accueil-themes-nav a:hover { background: var(--bg-surface-hover); border-color: var(--hover-bd); }
 .accueil-groupes.accueil-themes { display: block; columns: 230px 3; column-gap: 16px; }
-.accueil-theme { min-width: 0; margin: 0 0 6px; break-inside: avoid; border: 1px solid var(--border-soft); border-radius: var(--rayon-petit); background: var(--bg-surface-2); }
+.accueil-theme { min-width: 0; margin: 0 0 6px; break-inside: avoid; border: 1px solid var(--border-soft); border-radius: var(--rayon-petit); background: var(--bg-surface-creux); }
 .accueil-themes > .accueil-theme:last-child { margin-bottom: 0; }
 .accueil-theme > summary { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 10px 6px 8px; cursor: pointer; list-style: none; border-radius: var(--rayon-petit); }
 .accueil-theme > summary::-webkit-details-marker { display: none; }
 .accueil-theme > summary:hover { background: var(--bg-surface-hover); }
 .accueil-theme > summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-.accueil-theme-icone { flex: none; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9px; background: var(--bg-surface); }
-.accueil-theme-icone .ic { width: 22px; height: 22px; }
+.accueil-theme-icone { flex: none; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; }
+.accueil-theme-icone .ic { width: 26px; height: 26px; }
 .teinte-1 { color: var(--teinte-rose); } .teinte-2 { color: var(--teinte-bleu); } .teinte-3 { color: var(--teinte-vert); }
 .teinte-4 { color: var(--teinte-violet); } .teinte-5 { color: var(--teinte-ambre); } .teinte-6 { color: var(--teinte-turquoise); }
 .accueil-theme-texte { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
@@ -830,14 +842,14 @@ details.accueil-boite > summary:hover { background: var(--bg-surface-hover); }
 details.accueil-boite > summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 details.accueil-boite[open] > summary { border-radius: var(--rayon) var(--rayon) 0 0; border-bottom: 1px solid var(--border-soft); }
 details.accueil-boite[open] > .accueil-corps { padding-top: 10px; }
-details.accueil-boite .accueil-boite-icone { width: 34px; height: 34px; }
-details.accueil-boite .accueil-boite-icone .ic { width: 21px; height: 21px; }
+details.accueil-boite .accueil-boite-icone { width: 38px; height: 38px; border-radius: var(--rayon-petit); background: var(--bg-surface-2); border: 1px solid var(--border-soft); }
+details.accueil-boite .accueil-boite-icone .ic { width: 22px; height: 22px; }
 .page-body details.accueil-boite .accueil-titre { font-size: 15.5px; font-weight: 600; line-height: 1.28; }
 .page-body details.accueil-boite .accueil-sous-texte { font-size: 13px; line-height: 1.35; }
 .page-body .accueil-compte { flex: none; font-size: 13.5px; color: var(--text-soft); white-space: nowrap; }
 /* pied : la date à gauche, la marque à droite ; le pied commun du site ne se répète pas sous un accueil */
-body:has(.accueil-banniere) .page-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px; font-size: 13px; }
-.accueil-marque { color: var(--text-faint); font-weight: 600; letter-spacing: .02em; }
+body:has(.accueil-banniere) .page-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px; font-size: 13px; border-top: 0; padding-top: 4px; color: var(--text-soft); }
+.accueil-marque { color: var(--text-soft); font-weight: 500; letter-spacing: .02em; }
 body:has(.accueil-banniere) .site-footer { display: none; }
 @media print { details.accueil-boite::details-content, .accueil-theme::details-content { content-visibility: visible; } details.accueil-boite > :not(summary), .accueil-theme > :not(summary) { display: block !important; } }
 @media (max-width: 480px) {
@@ -955,13 +967,14 @@ body:has(.accueil-banniere) .site-footer { display: none; }
   .accueil-entete-lien { font-size: 13.5px; }
   .accueil-corps { padding: 0 14px 12px; font-size: 15px; }
   details.accueil-boite > summary .accueil-entete { padding: 10px 14px; min-height: 60px; gap: 10px; }
-  details.accueil-boite .accueil-boite-icone { width: 32px; height: 32px; }
-  details.accueil-boite .accueil-boite-icone .ic { width: 20px; height: 20px; }
+  details.accueil-boite .accueil-boite-icone { width: 36px; height: 36px; }
+  details.accueil-boite .accueil-boite-icone .ic { width: 21px; height: 21px; }
   .accueil-groupes { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
   /* les volets sont refermés par app.js et tiennent sur une ligne : la barre de raccourcis les doublerait */
   .accueil-themes-nav { display: none; }
   .accueil-theme > summary { gap: 8px; min-height: 50px; padding: 5px 8px 5px 7px; }
-  .accueil-theme-icone { width: 32px; height: 32px; }
+  .accueil-theme-icone { width: 30px; height: 30px; }
+  .accueil-theme-icone .ic { width: 25px; height: 25px; }
   .accueil-theme-titre { font-size: 14.5px; letter-spacing: -.005em; }
   .accueil-theme > summary small { font-size: 13px; }
   .accueil-theme > summary .accueil-chevron { margin: 0 2px 0 0; }
@@ -971,6 +984,7 @@ body:has(.accueil-banniere) .site-footer { display: none; }
   /* tuiles à description (accueil du Recueil) : une par rangée sous 600 px, sinon la description s'étire en hauteur */
   .page-body .accueil-tuiles:has(.accueil-tuile-desc) { grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
   .accueil-tuile-emoji { width: 20px; font-size: 18px; }
+  .accueil-tuile-icone, .accueil-tuile-icone .ic { width: 22px; height: 22px; }
   /* cibles tactiles : la zone d'un lien de liste atteint 24 px de haut (WCAG 2.5.8) sans changer la ligne */
   .accueil-corps a, .accueil-chapeau a, .accueil-titre a { padding: 4px 0; }
   .accueil-index a { display: inline-block; padding: 6px 0; }
@@ -994,6 +1008,7 @@ body:has(.accueil-banniere) .site-footer { display: none; }
   .page-body .accueil-tuiles { gap: 6px; }
   .page-body .accueil-tuiles li { font-size: 12px; padding: 6px 5px 6px 7px; gap: 5px; }
   .accueil-tuile-emoji { width: 18px; font-size: 17px; }
+  .accueil-tuile-icone, .accueil-tuile-icone .ic { width: 20px; height: 20px; }
 }
 @media (max-width: 340px) {
   /* écrans vraiment étroits : une tuile par rangée */
@@ -1010,7 +1025,8 @@ body:has(.accueil-banniere) .site-footer { display: none; }
   .site-header > .burger { grid-area: 1 / 1; padding-inline: 0; }
   .site-header > .brand { grid-area: 1 / 2; min-width: 0; }
   .site-header .brand-icon { display: none; }
-  .site-header .brand-text strong { font-size: clamp(.875rem, 4vw, 1rem); letter-spacing: 0; }
+  .site-header .brand-text strong { font-size: clamp(1.125rem, 5.6vw, 1.375rem); letter-spacing: 0; } /* « WIKI SST » de la taille de la maquette */
+  .site-header > .burger { background: none; border-color: transparent; font-size: 22px; } /* icône nue, comme la maquette */
   .site-header > #btnFav { grid-area: 1 / 3; }
   .site-header > #btnAide { grid-area: 1 / 4; }
   .site-header > #btnHorsLigne { grid-area: 1 / 5; }

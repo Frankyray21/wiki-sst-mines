@@ -40,7 +40,7 @@ test('la palette sombre s’applique sans attribut, la claire sur demande', () =
   for (const feuille of [css, portail]) assert.ok(!/@media \(pointer: coarse\)/.test(feuille), 'les blocs tactiles sont limités à l’écran');
   const print = css.slice(css.indexOf('@media print {\n  .site-header'));
   assert.match(print, /:root \{ --bg: #fff;/, 'l’impression force la palette claire');
-  const sombres = [...css.matchAll(/--bg: #0d1219/g)].map(m => m.index); // bleu-noir de la maquette du 26 sept. 2026
+  const sombres = [...css.matchAll(/--bg: #0b151f/g)].map(m => m.index); // bleu-noir de la maquette du 26 sept. 2026
   assert.equal(sombres.length, 2, 'deux blocs sombres : défaut et auto');
   for (const i of sombres) {
     const avant = css.slice(0, i);

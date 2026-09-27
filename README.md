@@ -247,9 +247,11 @@ node tools/serve.mjs
   `tools/schemas-sombres/icones.json`), cartes secondaires repliées sur une ligne, index du wiki en ligne discrète
   sous les boîtes, pied « Site généré le … / WIKI SST — Mines ». A− et A+ passent dans le menu (« Taille du
   texte ») ; la palette sombre devient bleu-noir sur tout le site (jetons `--bg-surface*`, `--accent-ui*`,
-  `--teinte-*`, `tools/style.css`). Même rendu par le générateur (`rendreAccueil`, `ordonnerBoites`,
-  `tools/accueil_wiki.mjs`) et sur le site. Ergonomie : 1 932 → 1 416 px à 390 px. Détail, mesures par largeur et
-  écarts avec la maquette : `content-updates/2026-09-26-accueils-maquette.md`
+  `--teinte-*`, `tools/style.css`, échantillonnée sur la maquette) ; les pictogrammes MDI prennent la couleur du
+  texte (`.ic { fill: currentColor }`, sans quoi ils étaient noirs) ; les tuiles par rôle portent un pictogramme
+  teinté choisi d'après l'emoji de la note (`pictoTuile`). Même rendu par le générateur (`rendreAccueil`,
+  `ordonnerBoites`, `tools/accueil_wiki.mjs`) et sur le site. Ergonomie : 1 932 → 1 407 px à 390 px. Détail,
+  mesures par largeur et écarts avec la maquette : `content-updates/2026-09-26-accueils-maquette.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma
   en texte » (127 schémas, 65 pages), puis toutes les autres (« Lire la version texte — … », « Lire les voies en
   texte », « Lire l’illustration en texte » : 16 sections, 10 pages) disparaissent. Chaque image garde son texte
