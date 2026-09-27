@@ -189,7 +189,7 @@ test('feuille de style : les règles que seul un rendu réel révèle', () => {
   assert.equal((css.match(/--bg-surface: /g) || []).length, 3, 'surfaces définies en clair et dans les deux blocs sombres');
   assert.match(css, /\.brand-sst \{ color: var\(--accent-ui-text\); \}/);
   assert.match(css, /\.accueil-banniere \{\s*display: grid; grid-template-columns: auto minmax\(0, 1fr\) auto;/);
-  assert.match(css, /\.accueil-banniere \.lecture-outils \[data-lecture\] \{ order: 1; background: var\(--accent-ui\);/, 'Lecture en bouton principal');
+  assert.ok(!/grid-area: actions/.test(css) && !/\.accueil-banniere \.lecture-outils/.test(css), 'plus de boutons Lecture et PDF dans la carte d’entrée (retirés par app.js)');
   assert.match(css, /body:has\(\.accueil-banniere\) \.site-footer \{ display: none; \}/);
   assert.match(css, /\.breadcrumbs > a:last-of-type \{ color: var\(--accent-ui-text\); font-weight: 600; \}/);
   assert.match(css, /\.accueil-grille \{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; grid-auto-flow: dense; \}/, 'les petites boîtes comblent les trous');
@@ -274,10 +274,9 @@ test('feuille de style : layout de la passe de correction (flex sans chevaucheme
   assert.match(css, /@media \(max-width: 340px\) \{[^}]*\.page-body \.accueil-tuiles \{ grid-template-columns: 1fr; \}/);
   assert.match(css, /\.page-body \.accueil-tuiles a::after \{ content: ''; position: absolute; inset: 0;/, 'toute la tuile est le lien');
   // carte d'entrée au téléphone : titre à côté du pictogramme, chapeau pleine largeur, compte et boutons sur une ligne ; marge sous la carte
-  assert.match(bloc900, /\.accueil-banniere \{ padding: 14px; gap: 8px 12px; margin-bottom: 10px; grid-template-columns: auto minmax\(0, 1fr\) auto; grid-template-areas: "icone titre titre" "chapeau chapeau chapeau" "compte compte actions"; \}/);
+  assert.match(bloc900, /\.accueil-banniere \{ padding: 14px; gap: 8px 12px; margin-bottom: 10px; grid-template-columns: auto minmax\(0, 1fr\) auto; grid-template-areas: "icone titre titre" "chapeau chapeau chapeau" "compte compte compte"; \}/);
   assert.match(bloc900, /\.accueil-banniere \.page-title \{ font-size: clamp\(21px, 5\.6vw, 24px\); \}/);
   assert.match(bloc900, /body:has\(\.accueil-banniere\) \.content \{ padding: 14px 14px 32px; \}/, '14 px de marge, comme la maquette');
-  assert.match(css, /@media \(max-width: 374px\) \{[\s\S]*?"compte compte compte" "actions actions actions"/, 'sous 375 px les boutons passent sous le compte');
   // cartes repliées : titre de 15,5 px, sous-titre sans la marge des paragraphes d'article
   assert.match(css, /\.page-body details\.accueil-boite \.accueil-titre \{ font-size: 15\.5px; font-weight: 600;/);
   assert.match(css, /\.page-body \.accueil-sous-texte \{ margin: 2px 0 0;/, 'spécificité : l’emporte sur .page-body p');
@@ -286,6 +285,8 @@ test('feuille de style : layout de la passe de correction (flex sans chevaucheme
   const app = fs.readFileSync(path.join(R, 'tools/app.js'), 'utf8');
   assert.match(app, /if \(menu && document\.querySelector\('\.accueil-banniere'\)\) \{/, 'app.js déplace A− et A+ sur un accueil');
   assert.match(app, /rangee\.appendChild\(bMoins\);\r?\n\s*rangee\.appendChild\(bPlus\);/);
+  assert.match(app, /menu\.appendChild\(groupe\);\r?\n\s*barre\.remove\(\);\r?\n\s*document\.documentElement\.removeAttribute\('data-lecture'\);/, 'sur un accueil, ni Lecture ni PDF, jamais en mode lecture');
+  assert.match(app, /\(PDF \? '<button type="button" data-pdf /, 'le bouton PDF des articles reste');
 });
 
 test('site publié : les six accueils de wiki suivent l’ordre de la maquette et portent l’index sous les boîtes', () => {

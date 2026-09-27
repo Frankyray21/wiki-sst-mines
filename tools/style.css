@@ -718,7 +718,7 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
    cette règle, un <path> se remplit en noir */
 .ic { fill: currentColor; display: inline-block; vertical-align: middle; flex: none; }
 .accueil-banniere {
-  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "icone titre titre" "icone chapeau chapeau" ". compte actions";
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "icone titre titre" "icone chapeau chapeau" ". compte compte";
   gap: 8px 16px; align-items: center; padding: 18px 20px; margin-bottom: 14px;
   border: 1px solid var(--border-soft); background: var(--bg-surface); border-radius: var(--rayon); box-shadow: var(--ombre-legere);
 }
@@ -735,19 +735,8 @@ body.portal { background-color: var(--bg); background-image: linear-gradient(180
 .accueil-compte-pages { display: inline-flex; align-items: center; gap: 7px; font-weight: 500; white-space: nowrap; color: var(--accent-ui-text); }
 .accueil-nombre { color: var(--text); font-weight: 600; }
 .accueil-compte-pages .ic { width: 22px; height: 22px; color: var(--accent-ui-text); }
-/* Lecture et PDF, posés par app.js après .page-sub : Lecture en bouton principal, PDF en secondaire.
-   Sur un accueil, app.js déplace A− et A+ dans le menu latéral (« Taille du texte ») ; s'il n'y a pas
-   de menu, ils restent ici, discrets, après PDF. */
-.accueil-banniere .lecture-outils { grid-area: actions; justify-self: end; margin: 0; gap: 8px; }
-.accueil-banniere .lecture-outils::before { content: ''; order: 0; align-self: stretch; width: 1px; margin: 8px 6px 8px 0; background: var(--border-light); } /* séparateur court */
-.accueil-banniere .lecture-outils button { min-height: 44px; border-radius: var(--rayon-petit); padding: 8px 15px; font-size: 14.5px; font-weight: 600; border: 1px solid var(--border-light); background: var(--bg-surface-2); white-space: nowrap; }
-.accueil-banniere .lecture-outils button { display: inline-flex; align-items: center; gap: 7px; }
-.accueil-banniere .lecture-outils .ic { width: 20px; height: 20px; flex: none; }
-.accueil-banniere .lecture-outils [data-lecture] { order: 1; background: var(--accent-ui); border-color: var(--accent-ui); color: #fff; }
-.accueil-banniere .lecture-outils [data-lecture]:hover:not(:disabled), .accueil-banniere .lecture-outils [data-lecture].actif { background: var(--accent-ui-hover); border-color: var(--accent-ui-hover); color: #fff; }
-.accueil-banniere .lecture-outils [data-pdf] { order: 2; }
-.accueil-banniere .lecture-outils [data-moins], .accueil-banniere .lecture-outils [data-plus] { order: 3; min-width: 38px; min-height: 38px; padding: 4px 8px; font-size: 13px; font-weight: 500; color: var(--text-soft); background: none; border-color: transparent; }
-.accueil-banniere .lecture-outils [data-moins]:hover:not(:disabled), .accueil-banniere .lecture-outils [data-plus]:hover:not(:disabled) { border-color: var(--border-light); background: var(--bg-surface-hover); }
+/* Ni Lecture ni PDF sur un accueil : app.js retire la barre de lecture (PDF reste sur les articles) et
+   déplace A− et A+ dans le menu latéral, sous « Taille du texte ». */
 .lecture-taille-boutons { display: flex; gap: 8px; padding: 2px 0 4px; }
 .lecture-taille-boutons button { min-width: 48px; min-height: 40px; padding: 6px 10px; border: 1px solid var(--border-light); border-radius: var(--rayon-petit); background: var(--bg-surface-2); color: var(--text); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
 .lecture-taille-boutons button:hover:not(:disabled) { background: var(--bg-surface-hover); border-color: var(--hover-bd); }
@@ -953,16 +942,13 @@ body:has(.accueil-banniere) .site-footer { display: none; }
      de retours), puis « N articles » et les boutons sur une ligne ; tuiles en 2 × 2, cartes plus denses */
   body:has(.accueil-banniere) .content { padding: 14px 14px 32px; }
   .accueil-grille { grid-template-columns: 1fr; gap: 10px; }
-  .accueil-banniere { padding: 14px; gap: 8px 12px; margin-bottom: 10px; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "icone titre titre" "chapeau chapeau chapeau" "compte compte actions"; }
+  .accueil-banniere { padding: 14px; gap: 8px 12px; margin-bottom: 10px; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "icone titre titre" "chapeau chapeau chapeau" "compte compte compte"; }
   .accueil-icone { width: 64px; height: 64px; font-size: 36px; border-radius: 14px; align-self: center; }
   .accueil-banniere .page-title { font-size: clamp(21px, 5.6vw, 24px); }
   .accueil-banniere .accueil-chapeau { margin-top: 2px; }
   .accueil-chapeau p { font-size: 13.5px; }
   .accueil-chapeau .accueil-sous-titre { font-size: 15.5px; }
   .accueil-banniere .page-sub { margin-top: 2px; font-size: 14px; }
-  .accueil-banniere .lecture-outils { margin-top: 2px; }
-  .accueil-banniere .lecture-outils::before { margin-right: 4px; }
-  .accueil-banniere .lecture-outils button { padding: 8px 12px; font-size: 14px; }
   .accueil-entete { gap: 10px; padding: 12px 14px 8px; }
   .accueil-entete-lien { font-size: 13.5px; }
   .accueil-corps { padding: 0 14px 12px; font-size: 15px; }
@@ -995,11 +981,6 @@ body:has(.accueil-banniere) .site-footer { display: none; }
   .accueil-corps pre { border-color: var(--border); }
 }
 @media (max-width: 374px) {
-  /* trop étroit pour « 66 articles | Lecture PDF » sur une ligne : les boutons passent dessous, à parts égales */
-  .accueil-banniere { grid-template-areas: "icone titre titre" "chapeau chapeau chapeau" "compte compte compte" "actions actions actions"; }
-  .accueil-banniere .lecture-outils { justify-self: stretch; padding-left: 0; border-left: 0; margin-top: 0; }
-  .accueil-banniere .lecture-outils [data-lecture], .accueil-banniere .lecture-outils [data-pdf] { flex: 1 1 auto; justify-content: center; }
-  .accueil-banniere .lecture-outils::before { display: none; }
   /* « Thèmes » et « Explorer tous les thèmes » ne tiennent plus côte à côte : le lien passe dessous */
   .accueil-entete:has(> .accueil-entete-lien) { flex-wrap: wrap; }
   .accueil-entete > .accueil-entete-lien { flex: 1 0 100%; padding-top: 0; margin-top: -4px; }

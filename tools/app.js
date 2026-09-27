@@ -804,7 +804,7 @@
     if (document.querySelector('.page-body')) {
       return ['tour-article', [
         { titre: 'Lire un article', texte: 'Voici les repères d’une page du wiki. Quelques repères, et vous êtes autonome.' },
-        { titre: 'Lire à votre aise', texte: document.querySelector('.accueil-banniere') ? '« Lecture » ne garde que la page, pratique sur un téléphone, sous terre ; « PDF » l’enregistre, pour la garder ou la partager. A− et A+, dans le menu, règlent la taille du texte, et le réglage vous suit d’une page à l’autre.' : 'A− et A+ règlent la taille du texte, et « Lecture » ne garde que l’article : pratique sur un téléphone, sous terre. Le réglage vous suit d’une page à l’autre. « PDF » enregistre l’article, pour le garder ou le partager.', cible: '.lecture-outils' },
+        document.querySelector('.accueil-banniere') ? { titre: 'Lire à votre aise', texte: 'A− et A+, dans le menu, règlent la taille du texte ; le réglage vous suit d’une page à l’autre. Sur un article, « Lecture » ne garde que le texte et « PDF » l’enregistre, pour le garder ou le partager.', cible: window.matchMedia('(max-width: 900px)').matches ? '#burger' : '.lecture-taille' } : { titre: 'Lire à votre aise', texte: 'A− et A+ règlent la taille du texte, et « Lecture » ne garde que l’article : pratique sur un téléphone, sous terre. Le réglage vous suit d’une page à l’autre. « PDF » enregistre l’article, pour le garder ou le partager.', cible: '.lecture-outils' },
         { titre: 'L’essentiel, tout de suite', texte: 'Le résumé en tête donne la substance de l’article avant d’entrer dans le détail.', cible: '.chapo' },
         { titre: 'La fiche signalétique', texte: 'Loi, article, statut, date de révision : les repères de la page. Les mots-clés en bas sont cliquables et mènent à toutes les pages du même sujet.', cible: '.infobox' },
         { titre: 'Passer à la page voisine', texte: 'En bas de l’article, « Précédent » et « Suivant » enchaînent les pages du même dossier : les articles de loi se lisent ainsi dans l’ordre.', cible: '.voisins' },
@@ -1609,14 +1609,12 @@
     bPlus.addEventListener('click', function () { var i = PALIERS.indexOf(lireEchelle()); if (i < PALIERS.length - 1) poserEchelle(PALIERS[i + 1]); });
     var bPdf = barre.querySelector('[data-pdf]');
     if (bPdf) bPdf.addEventListener('click', function () { PDF.imprimer(); });
-    // Accueil d'un wiki (maquette du 26 sept. 2026) : la carte d'entrée ne garde que Lecture et PDF ;
-    // A− et A+ passent dans le menu latéral, sous « Taille du texte ». Même boutons, mêmes écouteurs.
+    // Accueil d'un wiki (maquette du 26 sept. 2026, choix de Frank du 27) : ni Lecture ni PDF sur la carte
+    // d'entrée — la barre est retirée, PDF reste sur les articles — et A− et A+ passent dans le menu
+    // latéral, sous « Taille du texte » (mêmes boutons, mêmes écouteurs). Un accueil ne se lit jamais en
+    // mode lecture : la préférence mémorisée reste, elle s'applique au prochain article.
     var menu = document.getElementById('sidebar');
     if (menu && document.querySelector('.accueil-banniere')) {
-      // pictogrammes MDI (livre ouvert, document) à la place des emojis, comme la maquette
-      var svg = function (d) { return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' + d + '"/></svg> '; };
-      bLect.innerHTML = svg('M12 21.5C10.65 20.65 8.2 20 6.5 20C4.85 20 3.15 20.3 1.75 21.05C1.65 21.1 1.6 21.1 1.5 21.1C1.25 21.1 1 20.85 1 20.6V6C1.6 5.55 2.25 5.25 3 5C4.11 4.65 5.33 4.5 6.5 4.5C8.45 4.5 10.55 4.9 12 6C13.45 4.9 15.55 4.5 17.5 4.5C18.67 4.5 19.89 4.65 21 5C21.75 5.25 22.4 5.55 23 6V20.6C23 20.85 22.75 21.1 22.5 21.1C22.4 21.1 22.35 21.1 22.25 21.05C20.85 20.3 19.15 20 17.5 20C15.8 20 13.35 20.65 12 21.5M12 8V19.5C13.35 18.65 15.8 18 17.5 18C18.7 18 19.9 18.15 21 18.5V7C19.9 6.65 18.7 6.5 17.5 6.5C15.8 6.5 13.35 7.15 12 8M13 11.5C14.11 10.82 15.6 10.5 17.5 10.5C18.41 10.5 19.26 10.59 20 10.78V9.23C19.13 9.08 18.29 9 17.5 9C15.73 9 14.23 9.28 13 9.84V11.5M17.5 11.67C15.79 11.67 14.29 11.93 13 12.46V14.15C14.11 13.5 15.6 13.16 17.5 13.16C18.54 13.16 19.38 13.24 20 13.4V11.9C19.13 11.74 18.29 11.67 17.5 11.67M20 14.57C19.13 14.41 18.29 14.33 17.5 14.33C15.67 14.33 14.17 14.6 13 15.13V16.82C14.11 16.16 15.6 15.83 17.5 15.83C18.54 15.83 19.38 15.91 20 16.07V14.57Z') + 'Lecture';
-      if (bPdf) bPdf.innerHTML = svg('M6,2A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6M6,4H13V9H18V20H6V4M8,12V14H16V12H8M8,16V18H13V16H8Z') + 'PDF';
       var groupe = document.createElement('div');
       groupe.className = 'nav-group lecture-taille';
       groupe.setAttribute('role', 'group');
@@ -1631,6 +1629,8 @@
       groupe.appendChild(titreGroupe);
       groupe.appendChild(rangee);
       menu.appendChild(groupe);
+      barre.remove();
+      document.documentElement.removeAttribute('data-lecture');
     }
     bLect.addEventListener('click', function () {
       var on = document.documentElement.getAttribute('data-lecture') !== '1';
