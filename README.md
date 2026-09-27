@@ -159,7 +159,8 @@ node tools/serve.mjs
 - **Wikilinks Obsidian** résolus, y compris les variantes (chiffres romains/arabes, zéros de tête) ; liens rouges pour les pages réellement absentes du vault
 - Callouts, **infobox** générée depuis le frontmatter YAML (réparé automatiquement s'il est invalide), sommaires, backlinks
 - **Pages d'accueil** (chaque wiki, et les pages d'accueil de l'encadrement) : carte d'entrée (pictogramme, nom
-  du wiki, chapeau, nombre d'articles, Lecture et PDF), démarrage rapide par rôle en tuiles, lignes de thèmes à
+  du wiki, chapeau, nombre d'articles ; ni Lecture ni PDF, qui restent aux articles), démarrage rapide par rôle
+  en tuiles, lignes de thèmes à
   pictogramme teinté sur l'accueil du wiki, puis une boîte par section de la note (les boîtes par public,
   repliées, sur une ligne ; les autres avec listes en colonnes) — ni infobox, ni sommaire, ni préfixe de
   classement dans les titres, comme la page d'accueil d'un vrai wiki
@@ -246,7 +247,7 @@ node tools/serve.mjs
   d'entrée, démarrage rapide par rôle en 2 × 2 avant les thèmes, lignes de thèmes à pictogramme teinté (MDI,
   `tools/schemas-sombres/icones.json`), cartes secondaires repliées sur une ligne, index du wiki en ligne discrète
   sous les boîtes, pied « Site généré le … / WIKI SST — Mines ». A− et A+ passent dans le menu (« Taille du
-  texte ») ; la palette sombre devient bleu-noir sur tout le site (jetons `--bg-surface*`, `--accent-ui*`,
+  texte »), Lecture et PDF ne sont pas affichés sur un accueil ; la palette sombre devient bleu-noir sur tout le site (jetons `--bg-surface*`, `--accent-ui*`,
   `--teinte-*`, `tools/style.css`, échantillonnée sur la maquette) ; les pictogrammes MDI prennent la couleur du
   texte (`.ic { fill: currentColor }`, sans quoi ils étaient noirs) ; les tuiles par rôle portent un pictogramme
   teinté choisi d'après l'emoji de la note (`pictoTuile`). Même rendu par le générateur (`rendreAccueil`,

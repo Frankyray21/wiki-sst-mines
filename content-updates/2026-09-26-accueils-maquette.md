@@ -10,9 +10,10 @@ fonctions, et sans casser les autres pages.
   discrète ; recherche pleine largeur, arrondie, sur un fond un peu plus clair que la page.
 - **Fil d'Ariane** : maison, « › », Portail, « / », page courante en bleu d'accent.
 - **Carte d'entrée** : pictogramme du wiki sur une tuile arrondie ; titre ; la première phrase du chapeau en
-  sous-titre, le reste en description ; « 66 articles » avec un pictogramme de livre ; Lecture en bouton
-  principal bleu, PDF en bouton secondaire, sur la même ligne que le compte. A− et A+ ne sont plus dans la
-  carte : ils passent dans le menu latéral, sous « Taille du texte » (même boutons, même réglage).
+  sous-titre, le reste en description ; « 66 articles » avec un pictogramme de livre. Ni Lecture ni PDF sur un
+  accueil (demande de Frank du 27 septembre : PDF reste sur les articles) ; A− et A+ passent dans le menu
+  latéral, sous « Taille du texte » (mêmes boutons, même réglage). Un accueil ne s'affiche jamais en mode
+  lecture ; la préférence mémorisée s'applique au prochain article.
 - **Démarrage rapide par rôle**, avant les thèmes comme dans la maquette : pictogramme, sous-titre « Accédez
   rapidement aux contenus pertinents pour votre rôle. », tuiles à chevron en 2 × 2 dès 341 px (libellé sur deux
   lignes au besoin, hauteur égale), quatre par rangée sur ordinateur ; toute la tuile est le lien.
@@ -47,8 +48,7 @@ Frank a comparé la maquette et le premier rendu ; corrections, dans l'ordre dem
    cartes à 14 px de marge intérieure.
 3. **Carte principale** : le titre (21 à 24 px selon la largeur, `clamp`) est à côté du pictogramme (64 px) et
    tient sur une ligne dès 375 px ; le chapeau prend toute la largeur de la carte ; sous-titre 15,5 px, description
-   13,5 px en couleur douce ; « 66 articles | Lecture PDF » sur une ligne, séparateur court. Sous 375 px, les
-   boutons passent sous le compte.
+   13,5 px en couleur douce ; « 66 articles » sur sa ligne.
 4. **A− et A+** retirés de la carte, déplacés dans le menu (`app.js`, groupe « Taille du texte »).
 5. **Ligne d'index** déplacée sous les boîtes.
 6. **Tuiles** en 2 × 2 à 360, 375, 390 et 412 px (`repeat(2, minmax(0, 1fr))`, `grid-auto-rows: 1fr`, libellé
@@ -89,8 +89,8 @@ texte doux `#b6c2d1`, teintes des pictogrammes), puis troisième passe :
 - **Tuiles par rôle** : l'emoji de la note choisit un pictogramme MDI teinté (`pictoTuile` — casque ambre,
   cravate bleue, cœur vert, immeuble bleu ; le rôle nommé dans le libellé sert de repli, un emoji inconnu reste
   affiché) ; libellé en blanc ; toute la tuile est le lien.
-- **Boutons Lecture et PDF** : pictogrammes MDI (livre ouvert, document) à la place des emojis, sur les
-  accueils seulement (`app.js`). « 66 » en blanc, « articles » en accent.
+- **Lecture et PDF retirés de l'accueil** (demande de Frank, après la validation) ; PDF reste sur les articles.
+  « 66 » en blanc, « articles » en accent.
 - **Pied** sans filet, en texte doux.
 
 ## Ce qui est conservé
@@ -98,8 +98,8 @@ texte doux `#b6c2d1`, teintes des pictogrammes), puis troisième passe :
 - Tout le contenu des notes d'accueil : chapeau, boîtes, listes, liens. Les boîtes repliées de la veille
   restent repliées ; ouvertes, elles sont entières.
 - Toutes les fonctions : menu, recherche et suggestions, favoris, aide, thème clair ou sombre, A− et A+ (dans le
-  menu), mode Lecture, PDF, volets de thèmes (fermés au téléphone par `app.js`), index, catégories, espace
-  encadrement. La visite guidée dit, sur un accueil, où sont A− et A+.
+  menu), mode Lecture et PDF sur les articles, volets de thèmes (fermés au téléphone par `app.js`), index,
+  catégories, espace encadrement. La visite guidée dit, sur un accueil, où sont A− et A+.
 - Le domaine (« Page d'accueil du wiki Ergonomie ») reste dans la page pour les lecteurs d'écran ; à l'écran,
   la carte montre le nombre d'articles.
 - Le thème clair, avec ses propres surfaces et teintes (contrastes vérifiés à l'œil sur capture).
@@ -121,8 +121,8 @@ bordures `#1e3249` / `#364c64`, texte `#f2f6fa` / `#b6c2d1`, accent `#2d6fc4` et
   `genreBoite`, `estDemarrage`, `icone` ; `tuile` met l'emoji dans un élément hors lecture d'écran.
 - `tools/build_site.mjs` : `contenuAccueil` fournit les thèmes en données ; `pageShell` pose « SST » dans sa
   balise.
-- `tools/app.js` : pose la balise « SST » sur une page publiée avant le générateur ; sur un accueil, déplace A− et
-  A+ dans le menu et adapte la visite guidée.
+- `tools/app.js` : pose la balise « SST » sur une page publiée avant le générateur ; sur un accueil, retire la barre
+  Lecture / PDF, déplace A− et A+ dans le menu, sort du mode lecture et adapte la visite guidée.
 - `tools/style.css` : jetons, en-tête, recherche, fil d'Ariane, section des accueils (en-têtes en flex, tuiles,
   lignes, cartes repliées, réglages de taille du menu), blocs téléphone (900, 374 et 340 px), tablette et
   impression.
