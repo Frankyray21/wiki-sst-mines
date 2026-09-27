@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, extraireCorps, rendreAccueil, piedAccueil, tuile, epurerAccueil, rendreBoite, liensDe, icone, iconeTheme, genreBoite, scinderChapeau, rendreThemesAccueil, ordonnerBoites, estDemarrage, pictoTuile } from '../accueil_wiki.mjs';
+import { estAccueil, titreAccueil, libelleSection, decouperAccueil, colonnes, extraireCorps, rendreAccueil, piedAccueil, tuile, epurerAccueil, rendreBoite, liensDe, icone, iconeTheme, genreBoite, scinderChapeau, rendreThemesAccueil, ordonnerBoites, estDemarrage, pictoTuile, illustrationWiki } from '../accueil_wiki.mjs';
 
 const PICTO = (nom) => `<span class="accueil-boite-icone" aria-hidden="true">${icone(nom)}</span>`;
 const CHEVRON = '<span class="accueil-chevron" aria-hidden="true"></span>';
@@ -240,6 +240,15 @@ test('site publié : les dix-sept accueils et leurs cinq copies encadrement sont
 });
 
 // ---------- passe de correction du 27 septembre 2026 : ordre, largeur, densité (comparaison à la maquette) ----------
+test('boîte « Vues d’ensemble » (ancienne « Pages-index de sections ») : même pictogramme de liste', () => {
+  assert.equal(genreBoite({ id: 'vues-densemble', titre: 'Vues d’ensemble' }).icone, 'mdiListBoxOutline');
+  assert.equal(genreBoite({ id: 'pages-index-de-sections', titre: 'Pages-index de sections' }).icone, 'mdiListBoxOutline');
+  for (const w of ['psychosocial', 'hygiene', 'droit-travail']) {
+    const h = fs.readFileSync(path.join(DOCS, 'w', w, 'index.html'), 'utf8');
+    assert.ok(h.includes('<h2 class="accueil-titre" id="vues-densemble">Vues d&#39;ensemble</h2>') && !h.includes('Pages-index de sections'), w);
+  }
+});
+
 test('ordre de la maquette : le démarrage rapide par rôle précède les thèmes, le reste ne bouge pas', () => {
   const themes = { id: 'themes-du-wiki', titre: 'Thèmes' }, roles = { id: 'demarrage-rapide-par-role', titre: 'Démarrage rapide par rôle' };
   const internes = { id: 'internes', titre: 'Articles internes' }, nav = { id: 'nav', titre: 'Navigation' };
@@ -297,4 +306,23 @@ test('site publié : les six accueils de wiki suivent l’ordre de la maquette e
     assert.ok(grille > 0 && index > themes && h.slice(grille, index).includes('themes-du-wiki'), w + ' : index après la grille');
     assert.ok(!h.includes('</header>\n</div>\n<nav class="accueil-index"'), w + ' : rien entre la carte et la grille');
   }
+});
+
+test('illustrations de la carte d’entrée : une par wiki, décorative, posée sur les dix-sept accueils', () => {
+  for (const slug of ['ergonomie', 'hygiene', 'toxicologie', 'securite', 'droit-travail', 'psychosocial', 'legislation']) {
+    const svg = illustrationWiki(slug);
+    assert.match(svg, /^<svg class="illustration" xmlns="http:\/\/www\.w3\.org\/2000\/svg" aria-hidden="true" focusable="false" viewBox="0 0 96 96">/, slug);
+    assert.ok(!/\sid="/.test(svg) && !/<!--/.test(svg) && svg.length < 2500, slug + ' : sans id ni commentaire, léger');
+  }
+  assert.equal(illustrationWiki('inconnu'), '');
+  const avec = rendreAccueil({ titre: 'T', icone: '🦺', wiki: 'ergonomie', domaine: 'd', compte: '3', chapeau: '', sections: [] });
+  assert.ok(avec.startsWith('<div class="accueil-banniere">\n<span class="accueil-icone accueil-illustration" aria-hidden="true"><svg class="illustration"'));
+  assert.ok(rendreAccueil({ titre: 'T', icone: '🦺', domaine: 'd', compte: '3', chapeau: '', sections: [] }).includes('<span class="accueil-icone" aria-hidden="true">🦺</span>'), 'sans wiki : l’emoji');
+  for (const rel of [...ACCUEILS.map(r => 'w/' + r), ...ACCUEILS_G.map(r => 'g/w/' + r)]) {
+    const html = fs.readFileSync(path.join(DOCS, rel), 'utf8');
+    const slug = rel.replace(/^g\//, '').split('/')[1];
+    assert.ok(html.includes(`<span class="accueil-icone accueil-illustration" aria-hidden="true">${illustrationWiki(slug)}</span>`), rel);
+  }
+  const css = fs.readFileSync(path.join(R, 'tools/style.css'), 'utf8');
+  assert.match(css, /\.accueil-illustration \.illustration \{ width: 84%; height: 84%;/);
 });

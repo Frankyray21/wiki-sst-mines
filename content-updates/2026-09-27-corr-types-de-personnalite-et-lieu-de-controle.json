@@ -1,0 +1,44 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-types-de-personnalite-et-lieu-de-controle",
+ "portee": "Types de personnalité et lieu de contrôle : deux affirmations sans source marquées (type D, sélection à l'embauche), la référence Kobasa (1979) complétée, Rotter (1966) ajoutée et Denollet signalé à préciser dans les références",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Types de personnalité et lieu de contrôle",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/types-de-personnalite-et-lieu-de-controle.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Risque cardiovasculaire confirmé par études récentes",
+   "avant": "Risque cardiovasculaire confirmé par études récentes",
+   "apres": "Risque cardiovasculaire confirmé par des études récentes (source à préciser)",
+   "motif": "Point relevé : le risque cardiovasculaire du type D « confirmé par études récentes » n'a pas de source ; marqué (source à préciser), l'article « des » ajouté pour que la retouche reste rejouable."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "illégal et inefficace pour la santé psychologique",
+   "avant": "illégal et inefficace",
+   "apres": "illégal (source à préciser) et inefficace",
+   "motif": "Point relevé : l'illégalité d'une sélection à l'embauche basée sur la personnalité est affirmée sans source ; marquée (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Kobasa, S. C. (1979). Stressful life events, personality, and health",
+   "avant": "and health, an inquiry into hardiness. *Journal of Personality and Social P",
+   "apres": "and health: An inquiry into hardiness. *Journal of Personality and Social Psychology*, 37(1), 1-11.",
+   "motif": "Point relevé : la référence Kobasa (1979) était tronquée (« *Journal of Personality and Social P ») ; complétée d'après la référence fournie par la relecture."
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Kobasa, S. C. (1979). Stressful life events, personality, and health",
+   "colle": true,
+   "marqueur": "Rotter, J. B. (1966)",
+   "bloc": "- Rotter, J. B. (1966). Generalized expectancies for internal versus external control of reinforcement. *Psychological Monographs: General and Applied*, 80(1), 1-28.\n- Denollet (référence à préciser).",
+   "motif": "Points relevés : les références de Rotter (1966), dont la page présente le concept, et de Denollet (type D) manquaient. Rotter ajoutée d'après la référence fournie par la relecture (elle concorde avec Dolan et Arsenault, 2009, p. 140, note 4 : « Psychological Monographs, vol. 80, tout le n° 609 ») ; Denollet signalé à préciser."
+  }
+ ]
+}

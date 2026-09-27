@@ -1,0 +1,57 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-contremaitre-ou-capitaine-profil-rps",
+ "portee": "Contremaître ou capitaine, profil RPS : classements, taux de burnout, effets sur l'équipe et « multiplicateur » sans source marqués ; statut du contremaître, exclu de la définition de « travailleur » de la LSST (art. 1), ajouté à la description du poste",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Contremaître ou capitaine, profil RPS",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/contremaitre-ou-capitaine-profil-rps.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "C'est l'un des postes les plus exposés au burnout en mine",
+   "avant": "au burnout en mine, mais aussi celui qui a le plus d'effet sur la santé psychologique de l'équipe.",
+   "apres": "au burnout en mine (source à préciser), mais aussi celui qui a le plus d'effet sur la santé psychologique de l'équipe (source à préciser).",
+   "motif": "Deux classements sans source (la page ne consigne « aucune référence précise ») : chacun est marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Premier niveau d'encadrement, pivot entre opérations et direction",
+   "avant": "pivot entre opérations et direction.",
+   "apres": "pivot entre opérations et direction, le contremaître n'est pas un « travailleur » au sens de la LSST : la définition de ce terme exclut la personne « employée à titre de gérant, surintendant, contremaître ou représentant de l'employeur dans ses relations avec les travailleurs » (LSST, art. 1). Il reste un « travailleur » au sens de la LATMP, dont la définition ne l'exclut pas (LATMP, art. 2).",
+   "motif": "Statut légal du poste absent de la page. LSST, art. 1 : « « travailleur » : une personne qui exécute, en vertu d’un contrat de travail ou d’un contrat d’apprentissage, même sans rémunération, un travail pour un employeur, y compris un étudiant qui effectue, sous la responsabilité d’un établissement d’enseignement, un stage d’observation ou de travail, à l’exception: 1° d’une personne qui est employée à titre de gérant, surintendant, contremaître ou représentant de l’employeur dans ses relations avec les travailleurs; » LATMP, art. 2 : « « travailleur » : une personne physique qui exécute un travail pour un employeur, moyennant rémunération, en vertu d’un contrat de travail ou d’apprentissage, à l’exclusion: » du travailleur domestique, de la personne qui pratique le sport, du dirigeant d’une personne morale et des ressources de type familial ou intermédiaires : le contremaître n’en est pas exclu."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Présence terrain, écoute",
+   "avant": "Renforce le soutien social, réduit iso-strain",
+   "apres": "Renforce le soutien social et réduit iso-strain (source à préciser)",
+   "motif": "Effet sur l'iso-strain affirmé sans étude : marqué (l'en-tête « Effet sur l'équipe », identique dans les deux tableaux, ne peut pas être désigné seul)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Reconnaissance régulière",
+   "avant": "Réduit ERI, motive",
+   "apres": "Réduit ERI (source à préciser), motive",
+   "motif": "Effet sur le déséquilibre efforts-récompenses affirmé sans étude : marqué (l'en-tête « Effet sur l'équipe », identique dans les deux tableaux, ne peut pas être désigné seul)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "investir dans le contremaître est un",
+   "avant": "d'effet sur la santé psychologique d'une équipe entière.",
+   "apres": "d'effet sur la santé psychologique d'une équipe entière (source à préciser).",
+   "motif": "« Multiplicateur d'effet » affirmé sans source : marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les contremaîtres présentent souvent des taux élevés",
+   "avant": "des taux élevés de burnout et de troubles d'adaptation.",
+   "apres": "des taux élevés de burnout et de troubles d'adaptation (source à préciser).",
+   "motif": "Taux de burnout et de troubles d'adaptation affirmés sans source : marqués."
+  }
+ ]
+}

@@ -1,0 +1,85 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-communication-souterraine-et-isolement-de-lequipe",
+ "portee": "Communication souterraine et isolement de l'équipe : norme CSA Z1004 et « règlement minier » mal désignés corrigés, obligations du RSSM citées (art. 15 : vérifications et travailleur seul ; art. 283 : téléphone), chiffres sans source marqués et phrase sans sujet complétée",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Communication souterraine et isolement de l'équipe",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/communication-souterraine-et-isolement-de-lequipe.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Plusieurs kilomètres entre équipe et surface",
+   "avant": "Plusieurs kilomètres entre équipe et surface",
+   "apres": "Plusieurs kilomètres (source à préciser) entre équipe et surface",
+   "motif": "Chiffre sans source ; marqué (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Plusieurs minutes pour rejoindre la surface",
+   "avant": "Plusieurs minutes pour rejoindre la surface",
+   "apres": "Plusieurs minutes (source à préciser) pour rejoindre la surface",
+   "motif": "Chiffre sans source ; marqué (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "est structurellement réduite en souterrain pendant le quart",
+   "avant": "Compense par d'autres mécanismes",
+   "apres": "Cette réduction se compense par d'autres mécanismes",
+   "motif": "Phrase sans sujet ; sujet repris de la phrase précédente (« la dimension soutien social est structurellement réduite en souterrain pendant le quart »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Check-ins toutes les 1-2 heures",
+   "avant": "Check-ins toutes les 1-2 heures",
+   "apres": "Check-ins au moins toutes les 2 heures (RSSM, art. 15, pour un travailleur seul)",
+   "motif": "Chiffre sans source aligné sur la loi : « Lorsqu’un travailleur est seul à son poste de travail, l’employeur doit communiquer avec lui au moins à toutes les 2 heures, sauf si ce dernier est à vue. » (RSSM, art. 15)"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Système de communication de secours",
+   "avant": "Téléphone d'urgence, ligne directe",
+   "apres": "Téléphone d'urgence (exigé par le RSSM, art. 283), ligne directe",
+   "motif": "Le téléphone est une obligation, pas une bonne pratique : « Un appareil téléphonique reliant la surface à toutes les recettes et aux autres niveaux utilisés, incluant les trémies de chargement, doit être installé dans toute mine souterraine. » (RSSM, art. 283)"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "C'est aussi un moment de soutien social et de détection",
+   "avant": "et de détection. Les contremaîtres devraient",
+   "apres": "et de détection. La réglementation en fixe le minimum : « Tous les postes de travail doivent être vérifiés au moins une fois par quart de travail » et, lorsqu'un travailleur est seul à son poste, l'employeur doit communiquer avec lui « au moins à toutes les 2 heures, sauf si ce dernier est à vue » (RSSM, art. 15). Les contremaîtres devraient",
+   "motif": "RSSM, art. 15, cité là où la page parle des vérifications et du contact en quart : « Tous les postes de travail doivent être vérifiés au moins une fois par quart de travail. » et « Lorsqu’un travailleur est seul à son poste de travail, l’employeur doit communiquer avec lui au moins à toutes les 2 heures, sauf si ce dernier est à vue. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Équipe restreinte (2-3 personnes)",
+   "avant": "Équipe restreinte (2-3 personnes)",
+   "apres": "Équipe restreinte (2-3 personnes, source à préciser)",
+   "motif": "Chiffre sans source ; marqué (source à préciser) dans la parenthèse existante."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Norme CSA Z1004 sur le travail isolé.",
+   "avant": "Norme CSA Z1004 sur le travail isolé.",
+   "apres": "Norme sur le travail isolé (référence exacte à préciser).",
+   "motif": "CSA Z1004 n'est pas une norme sur le travail isolé : le recueil (page CSA) la donne comme « CSA Z1004 : Ergonomie en milieu de travail ». Attribution retirée, référence à préciser."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Norme CSA Z1004 sur le travail isolé",
+   "avant": "Norme CSA Z1004 sur le travail isolé",
+   "apres": "Norme sur le travail isolé (référence à préciser)",
+   "motif": "Même attribution fausse dans le tableau des documents : le recueil (page CSA) donne « CSA Z1004 : Ergonomie en milieu de travail ». Attribution retirée, référence à préciser."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Règlement minier sur les communications",
+   "avant": "Règlement minier sur les communications",
+   "apres": "Règlement sur la santé et la sécurité du travail dans les mines (RSSM)",
+   "motif": "Le règlement S-2.1, r. 14 (colonne voisine) est le RSSM lui-même (recueil : « texte officiel du RSSM (RLRQ c. S-2.1, r. 14) ») ; il n'existe pas de règlement minier distinct sur les communications."
+  }
+ ]
+}

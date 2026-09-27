@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-analyse-inrs-2024",
+ "portee": "Note INRS (2024) : « diagnostic clinique valide » marqué (source à préciser) et cotation inversée de l'accomplissement marquée (à vérifier)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "INRS (2024) - Épuisement professionnel : modèle Maslach et progression RPS vers le burnout clinique",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/analyse-inrs-2024.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "l'a officiellement reconnu par la CIM-11 en 2019",
+   "avant": "ce qui en fait un diagnostic clinique valide.",
+   "apres": "ce qui en fait un diagnostic clinique valide (source à préciser).",
+   "motif": "La note fait du burnout « un diagnostic clinique valide » sans source, alors que la page MBI du wiki dit que l'OMS l'a inscrit dans la CIM-11 comme « phénomène lié au travail » et qu'il n'est pas un diagnostic médical ; marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "RPA : 8 items, max 48",
+   "avant": "max 48 (cotation INVERSÉE : un score supérieur signifie réellement moins d'accomplissement)",
+   "apres": "max 48 ; cotation INVERSÉE : un score supérieur signifie réellement moins d'accomplissement (à vérifier)",
+   "motif": "La « cotation INVERSÉE » (score supérieur = moins d'accomplissement) est contredite par la fiche MBI liée du wiki (score d'accomplissement de 0 à 48, « 0 - 33 Degré faible ») et par les seuils de la note elle-même (« RPA faible : ≤21/48 ») ; marquée (à vérifier), la parenthèse devenant un point-virgule pour recevoir la marque."
+  }
+ ]
+}

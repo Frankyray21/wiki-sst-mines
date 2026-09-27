@@ -94,6 +94,7 @@ test('la page est joignable : barre d’index de l’accueil et barre latérale 
 test('la page d’un thème continue de lister ses études', () => {
   const html = lire('w/psychosocial/theme/communication.html');
   assert.match(html, /<h2>Articles de ce thème \(\d+\)<\/h2>/);
-  const liens = [...html.matchAll(/<ul class="cat-pages">([\s\S]*?)<\/ul>/g)].map(m => m[1]).join('');
+  // liste des articles du thème (habillée en rangées depuis le 27 sept. 2026 : classe theme-notions)
+  const liens = [...html.matchAll(/<ul class="cat-pages theme-notions">([\s\S]*?)<\/ul>/g)].map(m => m[1]).join('');
   assert.ok(/analyse-fruhen-et-al-2023\.html/.test(liens), 'l’étude Fruhen et al. (2023) reste sur la page du thème');
 });

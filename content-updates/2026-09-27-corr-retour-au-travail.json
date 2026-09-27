@@ -1,0 +1,30 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-retour-au-travail",
+ "portee": "Retour au Travail (page de section) : chiffre « plus de 50 % » de rechutes, sans source, marqué dans les deux descriptions qui le reprennent (Prévenir les rechutes après retour, Étapes d'un retour au travail réussi)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Retour au Travail",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/retour-au-travail.html",
+  "chemin": "Wiki SST psychosociale/20 - Articles/Retour au Travail/Retour au Travail.md"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Plus de 50 % des travailleurs en invalidité psychologique rechutent dans les 12 mois",
+   "avant": "si le retour est mal accompagné. La prévention des rechutes repose sur",
+   "apres": "si le retour est mal accompagné (source à préciser). La prévention des rechutes repose sur",
+   "motif": "Chiffre de rechute sans source, repris de Prévenir les rechutes après retour : marqué comme dans cette page."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "un retour mal planifié mène à la rechute dans plus de 50 % des cas",
+   "avant": "dans plus de 50 % des cas. Les étapes clés",
+   "apres": "dans plus de 50 % des cas (source à préciser). Les étapes clés",
+   "motif": "Chiffre de rechute sans source, repris d'Étapes d'un retour au travail réussi : marqué comme dans cette page."
+  }
+ ]
+}

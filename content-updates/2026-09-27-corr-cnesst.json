@@ -1,0 +1,43 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-cnesst",
+ "portee": "CNESST (recueil) : pouvoirs de l'inspecteur rattachés aux art. 177 à 186 LSST (et non à l'art. 238, ordonnance du tribunal) et médecin désigné par l'employeur rattaché à l'art. 209 LATMP (et non à l'art. 204, qui vise celui de la Commission) ; libellés et cibles des deux liens corrigés",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "CNESST",
+  "wiki": "Recueil législatif SST",
+  "page": "w/legislation/30-organismes-et-tribunaux/cnesst.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "visite tout lieu de travail à toute heure raisonnable",
+   "avant": "art. 238 LSST",
+   "apres": "art. 177 à 186 LSST",
+   "motif": "Les pouvoirs de l'inspecteur sont aux art. 177 à 186 LSST, par ex. art. 179 : « Un inspecteur peut, dans l’exercice de ses fonctions, pénétrer à toute heure raisonnable du jour ou de la nuit dans un lieu où sont exercées des activités dans les domaines visés dans la présente loi et les règlements, et l’inspecter. » ; l'art. 238 vise l'ordonnance du tribunal : « Le tribunal peut, sur demande du poursuivant, ordonner à la personne déclarée coupable d’une infraction à une disposition de l’article 236 ou 237 de se conformer aux exigences de la loi ou des règlements […] »."
+  },
+  {
+   "type": "recibler",
+   "ligneContenant": "art. 177 à 186 LSST) : visite tout lieu",
+   "libelle": "art. 177 à 186 LSST",
+   "adresse": "w/legislation/10-lois-principales/lsst/art-177-lsst-pouvoirs-cnesst.html",
+   "motif": "Le lien corrigé à la retouche précédente menait encore à l'art. 238 ; il mène à l'art. 177, premier article des pouvoirs de l'inspecteur (« Aux fins de l’application de la présente loi et des règlements, des inspecteurs sont nommés […] »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "faire évaluer un travailleur en lésion par un médecin de son choix",
+   "avant": "art. 204 LATMP",
+   "apres": "art. 209 LATMP",
+   "motif": "LATMP, art. 209 : « L’employeur qui a droit d’accès au dossier que la Commission possède au sujet d’une lésion professionnelle dont a été victime un travailleur peut exiger que celui-ci se soumette à l’examen du professionnel de la santé qu’il désigne […] » ; l'art. 204 vise celui de la Commission : « La Commission peut exiger d’un travailleur victime d’une lésion professionnelle qu’il se soumette à l’examen du professionnel de la santé qu’elle désigne […] »."
+  },
+  {
+   "type": "recibler",
+   "ligneContenant": "art. 209 LATMP) : peut faire évaluer",
+   "libelle": "art. 209 LATMP",
+   "adresse": "w/legislation/10-lois-principales/latmp/art-209-latmp-adaptation-poste.html",
+   "motif": "Le lien corrigé à la retouche précédente menait encore à l'art. 204 ; il mène à l'art. 209 (examen par le professionnel de la santé que désigne l'employeur)."
+  }
+ ]
+}

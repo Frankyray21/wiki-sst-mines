@@ -1,0 +1,71 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-aide-foreur-profil-rps",
+ "portee": "Aide-foreur, profil RPS : classement, effet, coût, durée de quart et références sans source marqués, mécanisme du job strain corrigé (demande psychologique et latitude décisionnelle), formation des foreurs au leadership rangée au niveau primaire comme sur la page Foreur, lien « job strain » dirigé vers la page Job strain",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Aide-foreur, profil RPS",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/aide-foreur-profil-rps.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "C'est l'un des postes miniers les plus exposés au",
+   "avant": "et à l'iso-strain.",
+   "apres": "et à l'iso-strain (source à préciser).",
+   "motif": "Classement (« l'un des postes miniers les plus exposés ») sans source : marqué."
+  },
+  {
+   "type": "recibler",
+   "ligneContenant": "exposés au job strain et à l'iso-strain",
+   "libelle": "job strain",
+   "adresse": "w/psychosocial/job-strain.html",
+   "motif": "Le lien « job strain » menait à la page Iso-strain - Ce que ça signifie ; il mène désormais à la page Job strain, qui traite de cette notion (libellé inchangé)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Standard minier : quart 12 h",
+   "avant": "Standard minier : quart 12 h,",
+   "apres": "Standard minier : quart 12 h (source à préciser),",
+   "motif": "Quart de 12 h présenté comme la norme minière sans source : marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Charge élevée + faible contrôle",
+   "avant": "Charge élevée + faible contrôle",
+   "apres": "Demande psychologique élevée + faible latitude décisionnelle",
+   "motif": "Le job strain croise la demande psychologique et la latitude décisionnelle, pas la charge physique : note Karasek (1979), « Définition : Combinaison simultanée de fortes exigences psychologiques (demandes) ET faible contrôle sur les méthodes/rythme (latitude) »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Formation des foreurs au leadership et à la communication",
+   "avant": "Secondaire",
+   "apres": "Primaire",
+   "motif": "Niveau harmonisé avec la page Foreur, profil RPS et leadership de chantier (« Primaire ») : cette formation porte sur la communication, le soutien et la reconnaissance des aides-foreurs (encadré « Action à fort effet » de cette page), actions que la page Les trois niveaux de prévention range au primaire (« Renforcement du soutien », « Reconnaissance ») ; la « Formation des superviseurs » qu'elle range au secondaire vise la détection des signaux. Le schéma des leviers passe en version 4 (lot 2026-09-26-aide-foreur-profil-rps-schemas)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "incluant communication, soutien, reconnaissance des aides-foreurs",
+   "avant": "transforme le profil RPS du poste à coût faible.",
+   "apres": "transforme le profil RPS du poste à coût faible (source à préciser).",
+   "motif": "Effet (« transforme ») et coût (« à coût faible ») affirmés sans source : marqués."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Études sur les métiers miniers québécois",
+   "avant": "Études sur les métiers miniers québécois.",
+   "apres": "Études sur les métiers miniers québécois (référence à préciser).",
+   "motif": "Référence sans titre ni année : marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Études internationales sur les profils RPS en industrie minière",
+   "avant": "Études internationales sur les profils RPS en industrie minière.",
+   "apres": "Études internationales sur les profils RPS en industrie minière (référence à préciser).",
+   "motif": "Référence sans titre ni année : marquée."
+  }
+ ]
+}

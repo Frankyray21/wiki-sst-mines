@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-accueil-psychosocial",
+ "portee": "Accueil SST psychosociale : boîte « Pages-index de sections » renommée « Vues d'ensemble »",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "🏠 Wiki SST psychosociale, mines",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/index.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Pages-index de sections",
+   "avant": "Pages-index de sections",
+   "apres": "Vues d'ensemble",
+   "motif": "Titre de boîte qui parlait d'organisation du vault ; la boîte réunit des pages de vue d'ensemble."
+  }
+ ]
+}

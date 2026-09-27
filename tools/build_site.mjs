@@ -8,6 +8,7 @@ import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { dimensionsSvg, dimensionsImage } from './dimensions_svg.mjs';
 import { choisirImage } from './resoudre_image.mjs';
+import { surlignagesColores } from './surlignage.mjs';
 import { sansVersionsTexte, sansVersionsTexteMd } from './versions_texte.mjs';
 import { libelleLien, contexteDuLien } from './libelle_lien.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
@@ -21,7 +22,7 @@ import { rendreTitreArticle } from './entete-article.mjs';
 import { normaliserBibliographie } from './bibliographie.mjs';
 import { motsDePage, encoderListe } from './recherche_mots.mjs';
 import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
-import { estAccueil, decouperAccueil, rendreAccueil, rendreThemesAccueil, titreAccueil, piedAccueil, epurerAccueil, liensDe } from './accueil_wiki.mjs';
+import { estAccueil, decouperAccueil, rendreAccueil, rendreThemesAccueil, titreAccueil, piedAccueil, epurerAccueil, liensDe, icone, iconeTheme, illustrationWiki } from './accueil_wiki.mjs';
 import { blocAvis, lireConfAvis, ecrireConfAvis } from './avis.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -754,10 +755,18 @@ function renderCallouts(md) {
   return out.join('\n');
 }
 
+// Pictogramme teinté d'un thème dans une liste (page Thèmes, « Autres thèmes du wiki ») : même dessin et même
+// teinte que sa ligne sur l'accueil du wiki (teinte selon la place du thème dans la liste alphabétique).
+function pictoThemeListe(t, themesDuWiki) {
+  const i = Math.max(0, themesDuWiki.indexOf(t));
+  return `<span class="accueil-theme-icone teinte-${i % 6 + 1}" aria-hidden="true">${icone(iconeTheme(t.title))}</span>`;
+}
+
 function renderBody(md, nested = false) {
   let s = md.replace(/%%[\s\S]*?%%/g, '');
   s = renderCallouts(s);
   s = renderWikilinks(s);
+  s = surlignagesColores(s);
   s = s.replace(/==([^=\n][^=]*?)==/g, '<mark>$1</mark>');
   // par sécurité, la même règle sur le HTML rendu (bloc écrit autrement dans la note)
   let html = sansVersionsTexte(marked.parse(s));
@@ -1263,8 +1272,8 @@ ${rendreTitreArticle({ titre: p.title, domaineHtml: `Un thème du wiki <a href="
 <div class="page-body">
 ${p.html}
 <h2>Articles de ce thème (${notionsDuTheme.length})</h2>
-${notionsDuTheme.length ? `<ul class="cat-pages">${notionsDuTheme.map(q => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`).join('')}</ul>` : '<p class="page-sub">Aucun article n’est pour l’instant rattaché à ce thème.</p>'}
-${autresThemes.length ? `<h2>Autres thèmes du wiki</h2><ul class="cat-pages">${autresThemes.map(t => `<li><a href="{{ROOT}}${t.out}">${esc(t.title)}</a></li>`).join('')}</ul>` : ''}
+${notionsDuTheme.length ? `<ul class="cat-pages theme-notions">${notionsDuTheme.map(q => `<li><a href="{{ROOT}}${q.out}">${esc(q.title)}</a></li>`).join('')}</ul>` : '<p class="page-sub">Aucun article n’est pour l’instant rattaché à ce thème.</p>'}
+${autresThemes.length ? `<h2>Autres thèmes du wiki</h2><ul class="cat-pages theme-voisins">${autresThemes.map(t => `<li><a href="{{ROOT}}${t.out}">${pictoThemeListe(t, themesParWiki.get(p.wikiKey))}${esc(t.title)}</a></li>`).join('')}</ul>` : ''}
 </div>
 ${blocAvis({ adresse: p.out, titre: p.title, wiki: WIKIS[p.wikiKey].name })}
 <div class="page-meta">${revisionHtml} · <a href="{{ROOT}}graphe.html?focus=${encodeURIComponent(p.out)}">🕸️ Voir cette page dans le graphe</a></div>`;
@@ -1372,7 +1381,7 @@ function contenuAccueil(p, { crumbs, accueil, chapoHtml = '', pied, adresse = p.
   // un éventuel « En bref » de la note ouvre le chapeau, sans son étiquette
   return `
 <div class="breadcrumbs">${fil.join(' <span class="crumb-sep">›</span> ')}</div>
-${rendreAccueil({ titre: p.title, icone: wiki.icon, domaine, compte, chapeau: (chapoHtml || '') + accueil.chapeau, sections, index })}
+${rendreAccueil({ titre: p.title, icone: wiki.icon, wiki: wiki.slug, domaine, compte, chapeau: (chapoHtml || '') + accueil.chapeau, sections, index })}
 ${blocAvis({ adresse, titre: titreAccueil(p.title), wiki: wikiAvis || wiki.name })}
 ${pied}`;
 }
@@ -1608,9 +1617,10 @@ let nbThemesTotal = 0;
     if (!themes.length) return '';
     const items = themes.map(t => {
       const n = pages.filter(q => q.wikiKey === k && q.role === 'notion' && (q.themes || []).includes(t)).length;
-      return `<li><a href="{{ROOT}}${t.out}">${esc(t.title)}</a> <small class="cat-compte">${n}</small></li>`;
+      return `<li><a href="{{ROOT}}${t.out}">${pictoThemeListe(t, themes)}<span class="themes-nom">${esc(t.title)}</span><small class="cat-compte">${n} article${n > 1 ? 's' : ''}</small><span class="accueil-chevron" aria-hidden="true"></span></a></li>`;
     }).join('');
-    return `<h2>${WIKIS[k].icon} ${esc(WIKIS[k].name)} <small>(${themes.length})</small></h2><ul class="cat-pages">${items}</ul>`;
+    const illu = illustrationWiki(WIKIS[k].slug);
+    return `<section class="themes-wiki"><h2 class="themes-wiki-titre">${illu ? `<span class="themes-wiki-illu" aria-hidden="true">${illu}</span>` : WIKIS[k].icon + ' '}${esc(WIKIS[k].name)} <small>(${themes.length})</small></h2><ul class="themes-liste">${items}</ul></section>`;
   }).join('');
   const content = `
 <div class="breadcrumbs"><a href="{{ROOT}}index.html">Portail</a></div>
@@ -2011,7 +2021,7 @@ fs.writeFileSync(path.join(OUT, '404.html'), rendrePage404(tableRedirections));
   const cards = Object.entries(WIKIS).map(([k, w]) => {
     const home = wikiHome(k);
     return `<a class="portal-card" href="${home ? home.out : 'w/' + w.slug + '/index.html'}">
-      <span class="portal-icon">${w.icon}</span>
+      ${illustrationWiki(w.slug) ? `<span class="portal-icon portal-illu" aria-hidden="true">${illustrationWiki(w.slug)}</span>` : `<span class="portal-icon">${w.icon}</span>`}
       <span class="portal-info"><strong>${esc(w.name)}</strong><span class="portal-desc">${esc(w.desc)}</span><span class="portal-count">${counts[k] || 0} articles</span></span>
     </a>`;
   }).join('');

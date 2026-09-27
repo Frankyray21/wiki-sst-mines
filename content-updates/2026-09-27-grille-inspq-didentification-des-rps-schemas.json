@@ -1,0 +1,31 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-grille-inspq-didentification-des-rps-schemas",
+ "portee": "Schémas de la page w/psychosocial/grille-inspq-didentification-des-rps.html",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Grille INSPQ d'identification des RPS",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/grille-inspq-didentification-des-rps.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-grille-inspq-didentification-des-rps-indicateurs-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "définition, exemples, indicateurs observables, recommandations d'action",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-grille-inspq-didentification-des-rps-indicateurs-v1.svg|Infographie sur fond sombre, « Grille INSPQ : 12 indicateurs » (Grille d’identification de risques psychosociaux du travail) ; sections « Partie 1 », « Partie 2 » ; en bas : la démarche de l’INSPQ : informer et sensibiliser le milieu, l’évaluer à l’aide de la Grille, soutenir la prise en charge, puis suivre le plan d’action.]]\n\n<p class=\"infographie-legende\">Les 12 indicateurs de la Grille, sous leurs noms officiels, dans ses deux parties : le contexte de travail et les mesures de prévention en place, puis les composantes clés de l’organisation du travail. Le tableau de la page en illustre huit par des exemples ; la phrase qui le suit nomme les quatre autres.</p>\n\n<p class=\"infographie-sources\">D’après cette page (L’essentiel ; Structure de la grille ; Démarche d’utilisation) et le <a href=\"https://www.inspq.qc.ca/recueil-de-fiches-portant-sur-les-indicateurs-de-la-grille-d-identification-de-risques-psychosociaux-du-travail\">Recueil de fiches de l’INSPQ</a> (noms et partie des indicateurs). Schéma de principe : aucun ordre de priorité entre les indicateurs, aucun score.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-grille-inspq-didentification-des-rps-indicateurs-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-grille-inspq-didentification-des-rps-indicateurs-v1.svg",
+   "marqueur": "Infographies/wiki-grille-inspq-didentification-des-rps-indicateurs-v1.svg"
+  }
+ ]
+}

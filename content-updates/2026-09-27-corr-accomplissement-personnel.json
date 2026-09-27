@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-accomplissement-personnel",
+ "portee": "Accomplissement personnel : section Mesure harmonisée avec la Définition et le MBI (un score bas d'accomplissement signale l'épuisement)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Accomplissement personnel",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/accomplissement-personnel.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Dans le Maslach Burnout Inventory, la sous-échelle d'accomplissement personnel",
+   "avant": "avec cotation inversée : un score plus élevé signifie en réalité moins d'accomplissement",
+   "apres": "avec un sens inversé par rapport aux deux autres dimensions : un score bas signale un accomplissement faible, donc un signe d'épuisement",
+   "motif": "La page se contredisait : « un score bas signalant le burnout » (Définition) et « un score plus élevé signifie en réalité moins d'accomplissement » (Mesure). Harmonisé sur la version cohérente avec le MBI : « Burnout = épuisement élevé + cynisme élevé + accomplissement bas » (page MBI) et « RPA faible : ≤21/48 » (note INRS, 2024)."
+  }
+ ]
+}

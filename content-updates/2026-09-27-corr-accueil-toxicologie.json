@@ -1,0 +1,28 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-accueil-toxicologie",
+ "portee": "Accueil Toxicologie : item « LATMP art. 2, définitions » réparé ; lien « Pages gestionnaires » vers l'accueil gestionnaires de Toxicologie",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "🏠 Wiki Toxicologie, mines",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/index.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "art. 2, défin",
+   "par": "- {{lien:w/legislation/10-lois-principales/latmp/latmp.html|LATMP}} {{lien:w/toxicologie/art-2-latmp-termes-utilises.html|art. 2, définitions}}",
+   "motif": "Item coupé sur « défin » : wikilink jamais fermé dans la note (relevé le 9 septembre 2026)."
+  },
+  {
+   "type": "recibler",
+   "ligneContenant": "Pages gestionnaires",
+   "libelle": "Pages gestionnaires",
+   "adresse": "w/toxicologie/00-accueil-gestionnaires.html",
+   "motif": "Le lien menait à l'accueil gestionnaires du wiki Ergonomie (note homonyme) ; il mène à celui de ce wiki."
+  }
+ ]
+}

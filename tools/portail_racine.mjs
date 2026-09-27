@@ -1,6 +1,8 @@
 // Contenu du portail racine (index.html). L'habillage (en-tête, pied, scripts) reste dans
 // build_site.mjs ; ce module ne produit que l'intérieur de <main>, pour être testable.
 
+import { icone } from './accueil_wiki.mjs';
+
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const nb = (n) => Number(n).toLocaleString('fr-CA');
 
@@ -9,7 +11,7 @@ export function rendrePortailContenu({ total, cartesWikis, nbThemes, nbPagesEnca
   return `
 <div class="portal-hero">
   <div class="portal-globe">⛏️</div>
-  <h1>WIKI SST — Mines</h1>
+  <h1>WIKI <span class="brand-sst">SST</span> — Mines</h1>
   <p class="portal-tagline">L'encyclopédie santé et sécurité du travail en milieu minier<br>${nb(total)} articles en français · construite à partir des notes de cours</p>
   <div class="portal-search"><input type="search" id="q2" aria-label="Rechercher dans le wiki" placeholder="Rechercher parmi ${nb(total)} articles…" autocomplete="off"><div id="suggest2" class="suggest" hidden></div></div>
 </div>
@@ -19,22 +21,22 @@ export function rendrePortailContenu({ total, cartesWikis, nbThemes, nbPagesEnca
 <h2 class="portal-section">Parcourir par sujet</h2>
 <div class="portal-grid portal-sujets">
   <a class="portal-card" href="categories.html">
-    <span class="portal-icon">🏷️</span>
+    <span class="portal-icon portal-picto" aria-hidden="true">${icone('mdiTagOutline')}</span>
     <span class="portal-info"><strong>Catégories</strong><span class="portal-desc">Les mots-clés qui traversent les disciplines : bruit, explosifs, espaces clos, silice… Chaque catégorie réunit les articles du même sujet, quel que soit le domaine.</span><span class="portal-count">${nbCategories} catégories</span></span>
   </a>
   <a class="portal-card" href="themes.html">
-    <span class="portal-icon">🗂️</span>
+    <span class="portal-icon portal-picto" aria-hidden="true">${icone('mdiLayersTripleOutline')}</span>
     <span class="portal-info"><strong>Thèmes</strong><span class="portal-desc">Les portails de chaque discipline : chaque thème réunit ses articles, ses lois et ses outils.</span><span class="portal-count">${nbThemes} thèmes</span></span>
   </a>
   <a class="portal-card" href="qualite.html">
-    <span class="portal-icon">🔧</span>
+    <span class="portal-icon portal-picto" aria-hidden="true">${icone('mdiWrench')}</span>
     <span class="portal-info"><strong>Contrôles de forme</strong><span class="portal-desc">Repérer les textes coupés, sections vides et références à vérifier. Ces signalements automatiques ne valident ni le contenu SST ni sa conformité.</span><span class="portal-count">${nbPagesQualite} pages à examiner</span></span>
   </a>
 </div>
 <h2 class="portal-section">Espace encadrement</h2>
 <div class="portal-grid portal-publics">
   <a class="portal-card carte-public" href="g/index.html">
-    <span class="portal-icon">🎓</span>
+    <span class="portal-icon portal-picto" aria-hidden="true">${icone('mdiSchoolOutline')}</span>
     <span class="portal-info"><strong>Je supervise ou je dirige</strong><span class="portal-desc">${esc(taglineEncadrement)}</span><span class="portal-count">${nbPagesEncadrement} pages + les articles de loi</span></span>
   </a>
 </div>

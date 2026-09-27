@@ -1,0 +1,30 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-theme-retour-au-travail",
+ "portee": "Retour au Travail (thème) : chiffre de rechute sans source (« plus de la moitié des cas », « plus de 50 % des cas ») marqué aux deux endroits",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Retour au Travail",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/theme/retour-au-travail.html",
+  "chemin": "Wiki SST psychosociale/10 - Thèmes/Retour au Travail.md"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Mal mené, il produit une rechute dans plus de la moitié des cas",
+   "avant": "une rechute dans plus de la moitié des cas,",
+   "apres": "une rechute dans plus de la moitié des cas (source à préciser),",
+   "motif": "Même chiffre de rechute que « plus de 50 % », sans source : marqué, pas supprimé."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "qui revient mal préparé tombe à nouveau en arrêt dans plus de 50 % des cas",
+   "avant": "tombe à nouveau en arrêt dans plus de 50 % des cas,",
+   "apres": "tombe à nouveau en arrêt dans plus de 50 % des cas (source à préciser),",
+   "motif": "Chiffre de rechute sans source : marqué, pas supprimé."
+  }
+ ]
+}

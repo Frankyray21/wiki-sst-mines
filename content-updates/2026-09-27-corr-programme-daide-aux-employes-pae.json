@@ -1,0 +1,78 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-programme-daide-aux-employes-pae",
+ "portee": "Programme d'aide aux employés (PAE) : titre d'encadré sans syntaxe brute, cadre légal corrigé (la loi ne mentionne pas le PAE ; programme de prévention selon LMRSST, art. 144), confidentialité harmonisée avec la nuance de la page, cinq chiffres sans source marqués",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Programme d'aide aux employés (PAE)",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/programme-daide-aux-employes-pae.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "n'est pas une solution organisationnelle",
+   "avant": "[[Le PAE, comment ça marche|Le PAE]] n'est pas une solution organisationnelle",
+   "apres": "Le PAE n'est pas une solution organisationnelle",
+   "motif": "Point relevé : le titre d'encadré affichait la syntaxe brute d'un lien (les titres d'encadré ne traitent pas les liens) ; corrigé en texte simple."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "le PAE peut faire partie du programme de prévention au volet tertiaire",
+   "avant": "le PAE peut faire partie du programme de prévention au volet tertiaire, mais ne dispense pas l'employeur",
+   "apres": "la loi ne mentionne pas le PAE. Le programme de prévention doit identifier et analyser les risques, dont les risques psychosociaux ({{lien:w/legislation/10-lois-principales/lmrsst/art-144-lmrsst-mod-art-59-lsst.html|LMRSST, art. 144}}, qui modifie l'art. 59 de la LSST) ; un PAE peut s'y ajouter comme mesure tertiaire, sans en tenir lieu ni dispenser l'employeur",
+   "motif": "Point relevé : aucun texte du recueil ne parle de PAE ni de volet tertiaire. LMRSST, art. 144, qui remplace le deuxième alinéa de l'art. 59 de la LSST : le programme de prévention doit « prévoir notamment : 1° l’identification et l’analyse des risques pouvant affecter la santé des travailleurs de l’établissement, dont les risques chimiques, biologiques, physiques, ergonomiques et psychosociaux liés au travail, ainsi que de ceux pouvant affecter leur sécurité; »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Aucune trace dans le dossier d'employé",
+   "avant": "L'employeur ne sait jamais qu'un travailleur a utilisé le PAE.",
+   "apres": "L'employeur n'a pas accès à l'identité des utilisateurs, mais en petit camp ou petite équipe, un long appel personnel peut être remarqué.",
+   "motif": "Contradiction interne : « L'employeur ne sait jamais » est nuancé par la page elle-même (Application en mines : « En petit camp ou petite équipe, un travailleur qui « passe un appel personnel long » peut être remarqué » ; « confidentialité présumée ») ; harmonisé sur la Définition de la page (« n'a aucun accès au contenu des consultations ni à l'identité des utilisateurs ») et sur cette nuance."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "C'est gratuit, c'est confidentiel, et l'employeur ne le sait jamais",
+   "avant": "et l'employeur ne le sait jamais.",
+   "apres": "et l'employeur ne reçoit pas ton nom.",
+   "motif": "Même contradiction interne, dans la phrase proposée aux superviseurs : « l'employeur ne le sait jamais » promettait ce que la page nuance (un appel peut être remarqué, « confidentialité présumée ») ; ramené à ce que la Définition garantit (l'employeur n'a pas accès à l'identité des utilisateurs)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Généralement 3 à 12 séances",
+   "avant": "3 à 12 séances (selon le contrat employeur), en personne",
+   "apres": "3 à 12 séances (source à préciser) selon le contrat employeur, en personne",
+   "motif": "Point relevé : le nombre de séances « 3 à 12 » n'a pas de source ; marqué (source à préciser), la parenthèse « selon le contrat employeur » gardée sans parenthèses."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "par travailleur par année selon le niveau de service contracté",
+   "avant": "par travailleur par année selon le niveau",
+   "apres": "par travailleur par année (source à préciser) selon le niveau",
+   "motif": "Point relevé : le coût « 30 $ à 150 $ par travailleur par année » n'a pas de source ; marqué (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Taux d'utilisation typique de 5 % à 15 %",
+   "avant": "15 %; les plus à risque",
+   "apres": "15 % (source à préciser) ; les plus à risque",
+   "motif": "Point relevé : le taux d'utilisation « 5 % à 15 % » n'a pas de source ; marqué (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "ses séances PAE en 2 mois",
+   "avant": "ses séances PAE en 2 mois →",
+   "apres": "ses séances PAE en 2 mois (source à préciser) →",
+   "motif": "Point relevé : le délai « 2 mois » n'a pas de source ; marqué (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Le travailleur peut être à 1500 km de son PAE local",
+   "avant": "1500 km de son PAE local",
+   "apres": "1500 km (source à préciser) de son PAE local",
+   "motif": "Point relevé : la distance « 1500 km » n'a pas de source ; marquée (source à préciser)."
+  }
+ ]
+}

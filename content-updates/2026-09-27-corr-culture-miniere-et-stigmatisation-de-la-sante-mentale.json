@@ -1,0 +1,71 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-culture-miniere-et-stigmatisation-de-la-sante-mentale",
+ "portee": "Culture minière et stigmatisation de la santé mentale : titre de la référence Bowers et al. (2018) et adresse du Minerals Council of Australia corrigés, stigmatisation de courtoisie définie, affirmations et chiffres sans source marqués (source à préciser)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Culture minière et stigmatisation de la santé mentale",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/culture-miniere-et-stigmatisation-de-la-sante-mentale.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Stigmatisation de courtoisie",
+   "avant": "Stigmatisation de courtoisie",
+   "apres": "Silence bienveillant des proches",
+   "motif": "Terme employé dans un autre sens que l'usage : la stigmatisation de courtoisie (Goffman) est le stigmate qui touche les proches d'une personne stigmatisée, par association ; la rangée décrit autre chose (« Les proches n'osent pas aborder le sujet pour ne pas blesser »). Le terme est remplacé par une description de ce que la rangée expose."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "consultent moins pour des raisons de santé mentale",
+   "avant": "attendent plus longtemps avant de signaler des symptômes.",
+   "apres": "attendent plus longtemps avant de signaler des symptômes (source à préciser).",
+   "motif": "Affirmation sans source (les hommes consultent moins, demandent moins d'aide, signalent plus tard) ; marquée (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "consultent moins pour des raisons de santé mentale",
+   "avant": "sont significativement plus élevés que la population générale.",
+   "apres": "sont significativement plus élevés que la population générale (source à préciser).",
+   "motif": "Affirmation sans source sur les taux de suicide ; la note Bowers et al. (2018) du wiki porte sur la détresse psychologique, pas sur le suicide. Marquée (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Faible taux d'utilisation malgré besoin documenté",
+   "avant": "Faible taux d'utilisation malgré besoin documenté",
+   "apres": "Faible taux d'utilisation malgré un besoin documenté (source à préciser)",
+   "motif": "Affirmation sans source (« besoin documenté » sans document cité) ; marquée (source à préciser), l'article « un » permettant de placer la marque après l'affirmation qui finit la cellule."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Travailleurs présents mais en détresse",
+   "avant": "en détresse, risque accru d'accidents",
+   "apres": "en détresse ; risque accru d'accidents (source à préciser)",
+   "motif": "Présentéisme et risque accru d'accidents sans source ; marqués (source à préciser), la virgule devenant point-virgule pour placer la marque après l'affirmation qui finit la cellule."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Effort continu sur 2-3 ans pour modifier la culture.",
+   "avant": "Effort continu sur 2-3 ans pour modifier la culture.",
+   "apres": "Effort continu sur 2-3 ans (source à préciser) pour modifier la culture.",
+   "motif": "Durée sans source ; marquée (source à préciser)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Initiatives de l'industrie minière australienne",
+   "avant": "mca.com.au",
+   "apres": "minerals.org.au",
+   "motif": "Adresse erronée : le site du Minerals Council of Australia est minerals.org.au (vérifié)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Suicide in fly-in, fly-out workers in Western Australia.",
+   "avant": "Suicide in fly-in, fly-out workers in Western Australia.",
+   "apres": "Psychological distress in remote mining and construction workers in Australia.",
+   "motif": "Titre erroné ; ligne de la note Bowers et al. (2018) qui fait foi : « Bowers, J., Lo, J., Miller, P., Mawren, D., et Jones, B. (2018). Psychological distress in remote mining and construction workers in Australia. Medical Journal of Australia, 208(9), 391-397. https://doi.org/10.5694/mja17.00950 »."
+  }
+ ]
+}

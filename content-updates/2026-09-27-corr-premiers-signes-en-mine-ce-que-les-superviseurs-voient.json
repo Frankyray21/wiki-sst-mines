@@ -1,0 +1,43 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-premiers-signes-en-mine-ce-que-les-superviseurs-voient",
+ "portee": "Premiers signes en mine : encadré « Danger immédiat » harmonisé sur « sans attendre », précisions sans source marquées (jours d'absentéisme, observation 24/7) et programme « Travailleur Avisé » marqué (source à préciser)",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Premiers signes en mine, ce que les superviseurs voient",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/premiers-signes-en-mine-ce-que-les-superviseurs-voient.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "En présence d'idées suicidaires ou d'un doute préoccupant, demander de l'aide sans attendre plusieurs jours",
+   "avant": "demander de l'aide sans attendre plusieurs jours.",
+   "apres": "demander de l'aide sans attendre.",
+   "motif": "Contradiction interne : l'encadré est harmonisé sur la consigne du tableau des comportements à risque, « Demander une aide professionnelle sans attendre » ; aucun schéma de la page, ni sa légende ni son texte de remplacement, ne reprend « plusieurs jours »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Lundis, vendredis, lendemains de quart",
+   "avant": "Lundis, vendredis, lendemains de quart",
+   "apres": "Lundis, vendredis et lendemains de quart (source à préciser)",
+   "motif": "Précision sans source : marquée ; la virgule avant « lendemains » devient « et » pour que la cellule, réduite à l'affirmation, puisse recevoir la marque."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Plus d'observations possibles (24/7) mais aussi plus de promiscuité",
+   "avant": "Plus d'observations possibles (24/7) mais",
+   "apres": "Plus d'observations possibles (24/7) (source à préciser) mais",
+   "motif": "Précision « (24/7) » sans source : marquée juste après, pas supprimée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Programme « Travailleur Avisé »",
+   "avant": "Programme « Travailleur Avisé »",
+   "apres": "Programme intitulé « Travailleur Avisé » (source à préciser)",
+   "motif": "Nom et existence du programme non sourcés, aucun programme CNESST de ce nom trouvé à la vérification : marqué, pas supprimé ; « intitulé » ajouté pour que la marque puisse se placer avant le lien qui termine la cellule."
+  }
+ ]
+}

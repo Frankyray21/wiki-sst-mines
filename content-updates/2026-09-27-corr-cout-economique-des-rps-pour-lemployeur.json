@@ -1,0 +1,155 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-cout-economique-des-rps-pour-lemployeur",
+ "portee": "Coût économique des RPS : montants et ratios sans source marqués, précisions LATMP (art. 60, 124, 326, 304.1, 65), « Sanctions administratives » corrigé (LSST, art. 236 ; LATMP, art. 170.4), rendement de la prévention nuancé",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Coût économique des RPS pour l'employeur",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/cout-economique-des-rps-pour-lemployeur.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "chaque dollar investi en prévention primaire RPS",
+   "avant": "rapporte 2 à 5 dollars en économies sur 3 à 5 ans.",
+   "apres": "rapporte 2 à 5 dollars en économies sur 3 à 5 ans (source à préciser).",
+   "motif": "Ratio de 2 à 5 $ par dollar sans source précise (attribué ici à la prévention primaire, plus bas à un « programme intégré ») ; marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Salaire pendant invalidité (assurance ou",
+   "avant": "), soins, traitements",
+   "apres": "), soins et traitements ; en lésion professionnelle, la CNESST rembourse à l'employeur le salaire qu'il a versé pour les 14 premiers jours (LATMP, art. 60), puis verse elle-même l'indemnité (LATMP, art. 124)",
+   "motif": "Précision pour éviter de compter l'indemnité comme un coût direct de l'employeur : art. 60 : « Ce salaire constitue l’indemnité de remplacement du revenu à laquelle le travailleur a droit pour les 14 jours complets suivant le début de son incapacité et la Commission en rembourse le montant à l’employeur dans les 14 jours de la réception de la réclamation de celui-ci, à défaut de quoi elle lui paie des intérêts, dont le taux est déterminé suivant les règles établies par règlement. » ; art. 124 : « La Commission verse au travailleur l’indemnité de remplacement du revenu à laquelle il a droit à compter du quinzième jour complet suivant le début de l’incapacité du travailleur d’exercer son emploi. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Lésions reconnues = hausse du taux personnalisé",
+   "avant": "Lésions reconnues = hausse du taux personnalisé",
+   "apres": "Lésions reconnues = coût des prestations imputé à l'employeur (LATMP, art. 326 et 328), d'où une hausse du taux personnalisé si l'employeur y est assujetti (LATMP, art. 304.1)",
+   "motif": "Le taux personnalisé ne vise que certains employeurs ; art. 304.1 : « La Commission fixe, conformément à ses règlements, un taux personnalisé de cotisation applicable à l’employeur en regard de chaque unité dans laquelle il est classé, si cet employeur satisfait, pour l’année de cotisation, aux conditions d’assujettissement déterminées par ces règlements. » ; art. 326 : « La Commission impute à l’employeur le coût des prestations dues en raison d’un accident du travail survenu à un travailleur alors qu’il était à son emploi. » (art. 328 : même règle pour la maladie professionnelle)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Si non-conformité",
+   "avant": "Sanctions administratives",
+   "apres": "Amendes et sanctions",
+   "motif": "« Sanctions administratives » est inexact : dans la LSST, l'amende est pénale ; art. 236 : « Quiconque contrevient à la présente loi ou aux règlements ou refuse de se conformer à une décision ou à un ordre rendu en vertu de la présente loi ou des règlements ou incite une personne à ne pas s’y conformer commet une infraction et est passible: » (…) « d’une amende »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Si non-conformité",
+   "avant": "Si non-conformité",
+   "apres": "Amende pénale en cas d'infraction (LSST, art. 236) ; sanction administrative pécuniaire si l'employeur refuse de collaborer au retour au travail ou de réintégrer le travailleur (LATMP, art. 170.4, inséré par la LMRSST, art. 40) ; voir",
+   "motif": "Seule sanction administrative pécuniaire du recueil ; LATMP, art. 170.4 (inséré par la LMRSST, art. 40) : « La Commission peut ordonner à un employeur qui refuse de se conformer aux obligations prévues aux articles 170.1 et 170.2 ou de réintégrer un travailleur malgré une décision qui établit sa capacité à occuper son emploi, un emploi équivalent ou un emploi convenable, de lui payer, dans le délai qu’elle indique, une sanction administrative pécuniaire équivalente au coût des prestations auxquelles aurait pu avoir droit le travailleur durant la période du défaut de l’employeur, le cas échéant, mais dont le montant ne peut être supérieur au montant annuel de l’indemnité de remplacement du revenu auquel a droit le travailleur. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Indemnités sur 6-12 mois",
+   "avant": "25 000 $ à 75 000 $",
+   "apres": "25 000 à 75 000 $ (source à préciser) ; l'indemnité se calcule sur un revenu plafonné au maximum annuel assurable (LATMP, art. 65)",
+   "motif": "Montant sans source, marqué (écrit « 25 000 à 75 000 $ » pour que le lot reste rejouable) ; l'indemnité est plafonnée, art. 65 : « Aux fins du calcul de l’indemnité de remplacement du revenu, le revenu brut annuel d’emploi ne peut être inférieur au revenu brut annuel déterminé sur la base du salaire minimum en vigueur lorsque se manifeste la lésion professionnelle ni supérieur au maximum annuel assurable en vigueur à ce moment. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Remplacement (poste critique)",
+   "avant": "10 000 $ à 50 000 $",
+   "apres": "10 000 à 50 000 $ (source à préciser)",
+   "motif": "Montant sans source, marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Variable (5 000 $ à 30 000 $)",
+   "avant": "Variable (5 000 $ à 30 000 $)",
+   "apres": "Variable, de 5 000 à 30 000 $ (source à préciser) ; cette hausse répercute le coût des prestations imputé à l'employeur (LATMP, art. 326) : l'additionner aux indemnités risque de compter deux fois le même coût",
+   "motif": "Montant sans source, marqué. Double compte signalé : la CNESST verse l'indemnité (art. 124 ; art. 60 pour les 14 premiers jours, remboursés à l'employeur) et en impute le coût à l'employeur, art. 326 : « La Commission impute à l’employeur le coût des prestations dues en raison d’un accident du travail survenu à un travailleur alors qu’il était à son emploi. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Perte productivité avant et après",
+   "avant": "10 000 $ à 30 000 $",
+   "apres": "10 000 à 30 000 $ (source à préciser)",
+   "motif": "Montant sans source, marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Recrutement si départ définitif",
+   "avant": "15 000 $ à 50 000 $",
+   "apres": "15 000 à 50 000 $ (source à préciser)",
+   "motif": "Montant sans source, marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Total typique par cas",
+   "avant": "50 000 $ à 200 000 $",
+   "apres": "50 000 à 200 000 $ (source à préciser)",
+   "motif": "Total par cas sans source, marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Pour postes spécialisés ou de cadre",
+   "avant": "peut dépasser 300 000 $ par cas.",
+   "apres": "peut dépasser 300 000 $ par cas (source à préciser).",
+   "motif": "Montant sans source, marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Estimé à 2-3 fois le coût d'absentéisme",
+   "avant": "Estimé à 2-3 fois le coût d'absentéisme",
+   "apres": "Estimé entre 2 et 3 fois le coût d'absentéisme (source à préciser)",
+   "motif": "Ratio « 2-3 fois » sans source, marqué (« entre 2 et 3 » pour que le lot reste rejouable)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Programme intégré de santé psychologique",
+   "avant": "1 $ → 2 à 5 $ (3-5 ans)",
+   "apres": "1 $ → 2 à 5 $ sur 3-5 ans (source à préciser)",
+   "motif": "Ratio de 2 à 5 $ par dollar sans source précise (attribué ici à un « programme intégré », dans L'essentiel à la prévention primaire) ; marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Programmes individuels seuls",
+   "avant": "ROI faible",
+   "apres": "Faible ROI (source à préciser)",
+   "motif": "« ROI faible » : affirmation sans source, marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "la prévention primaire a le meilleur ROI",
+   "avant": "a le meilleur ROI parce qu'elle",
+   "apres": "a le meilleur ROI (source à préciser) parce qu'elle",
+   "motif": "« Meilleur ROI » : affirmation sans source, marquée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Effet de contagion plus fort",
+   "avant": "Effet de contagion plus fort",
+   "apres": "Effet de contagion plus marqué (source à préciser)",
+   "motif": "« Effet de contagion plus fort » : affirmation sans source, marquée (« plus marqué » pour que le lot reste rejouable)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Cas d'invalidité psychologique (5-15)",
+   "avant": "250 000 $ à 3 000 000 $",
+   "apres": "250 000 à 3 000 000 $ (source à préciser)",
+   "motif": "Montant annuel sans source, marqué."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "selon la taille du site (conseiller SST, formations, outils, suivi)",
+   "avant": "à partir de 50 000 à 200 000 $ par année",
+   "apres": "de 50 000 à 200 000 $ par année (source à préciser)",
+   "motif": "« À partir de 50 000 à 200 000 $ » se contredit ; corrigé en « de 50 000 à 200 000 $ » et marqué, le montant étant sans source (Démarrage rapide pour direction et RH dit « quelques milliers de $ par année »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "est largement favorable à la prévention",
+   "avant": "est largement favorable à la prévention.",
+   "apres": "est largement favorable à la prévention (source à préciser) ; un rendement se calcule toutefois sur les coûts évités, et non en comparant le coût total des cas au coût du programme.",
+   "motif": "Comparer le coût total des cas au coût d'un programme ne donne pas un rendement ; conclusion sans source, marquée, et précision ajoutée."
+  }
+ ]
+}

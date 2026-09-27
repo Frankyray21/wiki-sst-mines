@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-obligation-didentifier-les-risques-psychosociaux",
+ "portee": "Obligation d'identifier les RPS : programme de prévention ou plan d'action selon l'effectif (LSST, art. 58 et 61.1 par la LMRSST) ; mise à jour « annuelle » marquée",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Obligation d'identifier les risques psychosociaux",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/obligation-didentifier-les-risques-psychosociaux.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Obligation de documentation",
+   "avant": "Programme de prévention obligatoire",
+   "apres": "Programme de prévention (établissement groupant au moins 20 travailleurs au cours de l'année) ou, sinon, plan d'action (LSST, art. 58 et 61.1, tels que remplacés ou insérés par la LMRSST, art. 143 et 147)",
+   "motif": "Le programme de prévention n'est pas obligatoire partout : sous 20 travailleurs, c'est un plan d'action. LMRSST, art. 143 (art. 58 LSST) : « L’employeur doit élaborer et mettre en application un programme de prévention propre à chaque établissement groupant au moins 20 travailleurs au cours de l’année. » ; art. 147 (art. 61.1 LSST) : « Lorsqu’aucun programme de prévention ne doit être élaboré ou mis en application pour un établissement, l’employeur doit élaborer et mettre en application un plan d’action propre à cet établissement. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Annuelle ou suite à changement significatif",
+   "avant": "Annuelle ou suite à changement significatif",
+   "apres": "Annuelle (source à préciser) ou suite à changement significatif",
+   "motif": "La loi ne fixe pas de mise à jour annuelle ; elle renvoie au règlement. LMRSST, art. 143 (art. 58 LSST) : « Un programme de prévention doit être élaboré, mis en application et mis à jour selon les modalités et les délais prescrits par règlement. » ; art. 147 (art. 61.1) : « Un plan d’action doit être élaboré, mis en application et mis à jour selon les modalités et les délais prescrits par règlement. » Périodicité marquée."
+  }
+ ]
+}

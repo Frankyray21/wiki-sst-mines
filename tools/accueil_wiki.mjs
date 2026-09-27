@@ -12,6 +12,22 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 // Pictogrammes de l'interface : Material Design Icons (@mdi/js, Pictogrammers Free License), le même extrait
 // que les schémas (tools/schemas-sombres/icones.json, LICENCE-icones.txt).
 const ICONES = JSON.parse(fs.readFileSync(new URL('./schemas-sombres/icones.json', import.meta.url), 'utf8'));
+// Illustration de la carte d'entrée d'un wiki (tools/illustrations/<slug>.svg, dessin plat dans l'esprit de la
+// maquette du 26 sept. 2026) : insérée telle quelle, décorative ; sans fichier, l'emoji du wiki reste.
+const ILLUSTRATIONS = new Map();
+export function illustrationWiki(slug) {
+  if (!slug) return '';
+  if (!ILLUSTRATIONS.has(slug)) {
+    const f = new URL(`./illustrations/${slug}.svg`, import.meta.url);
+    let svg = '';
+    try { svg = fs.readFileSync(f, 'utf8'); } catch { /* pas d'illustration : l'emoji */ }
+    svg = svg.replace(/<!--[\s\S]*?-->/g, '').replace(/\n\s*/g, '').trim()
+      .replace(/^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"/, '<svg class="illustration" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"');
+    ILLUSTRATIONS.set(slug, svg);
+  }
+  return ILLUSTRATIONS.get(slug);
+}
+
 export function icone(nom) {
   if (!ICONES[nom]) throw new Error('icône inconnue : ' + nom);
   return `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${ICONES[nom]}"/></svg>`;
@@ -271,7 +287,7 @@ export function genreBoite({ id, titre }) {
   if (/travailleur|vulgaris/.test(t)) return { icone: 'mdiAccountGroupOutline', sousTexte: liste ? 'Des explications simples et concrètes pour le terrain.' : '' };
   if (/gestionnaire|encadrement|strategique/.test(t)) return { icone: 'mdiAccountTieOutline', sousTexte: liste ? 'Programmes et décisions pour l’encadrement.' : '' };
   if (/navigation|liens utiles|mode d.emploi/.test(t)) return { icone: 'mdiCompassOutline', sousTexte: '' };
-  if (/index/.test(t)) return { icone: 'mdiListBoxOutline', sousTexte: '' };
+  if (/index|vues? d.ensemble/.test(t)) return { icone: 'mdiListBoxOutline', sousTexte: '' };
   if (/glossaire/.test(t)) return { icone: 'mdiSchoolOutline', sousTexte: '' };
   if (/\bloi\b|legal|reglement|normatif|conformite/.test(t)) return { icone: 'mdiScaleBalance', sousTexte: '' };
   if (/lesion|programme|evaluation|risque/.test(t)) return { icone: 'mdiClipboardTextOutline', sousTexte: '' };
@@ -354,7 +370,7 @@ export function piedAccueil(date, complement = '') {
 //   d'écran ; compte : nombre de pages du wiki ou de la section, affiché ; chapeau : texte de la note avant son
 //   premier titre ; index : liens d'index du wiki, rendus en ligne discrète sous les boîtes (« Tous les thèmes »
 //   passe dans la boîte des thèmes). Les mêmes liens sont dans le menu latéral.
-export function rendreAccueil({ titre, icone: pictogramme, domaine, compte, chapeau, sections, index = [] }) {
+export function rendreAccueil({ titre, icone: pictogramme, wiki = '', domaine, compte, chapeau, sections, index = [] }) {
   const aThemes = sections.some(s => s.id === 'themes-du-wiki');
   const tousThemes = aThemes ? index.find(l => /tous les th[èe]mes/i.test(l.libelle)) : null;
   const liensIndex = index.filter(l => l !== tousThemes);
@@ -363,7 +379,7 @@ export function rendreAccueil({ titre, icone: pictogramme, domaine, compte, chap
   // <header class="article-titre"> reste tel quel : la barre de lecture s'insère après .page-sub
   // et verif_site exige ce groupe titre + domaine sur toute page à corps.
   return `<div class="accueil-banniere">
-<span class="accueil-icone" aria-hidden="true">${pictogramme}</span>
+${illustrationWiki(wiki) ? `<span class="accueil-icone accueil-illustration" aria-hidden="true">${illustrationWiki(wiki)}</span>` : `<span class="accueil-icone" aria-hidden="true">${pictogramme}</span>`}
 <header class="article-titre">
 <h1 class="page-title">${esc(titreAccueil(titre))}</h1>
 ${chapeau ? `<div class="accueil-chapeau">${scinderChapeau(chapeau)}</div>\n` : ''}<div class="page-sub"><span class="accueil-domaine">${domaine}</span><span class="accueil-compte-pages">${icone('mdiBookOpenPageVariantOutline')} <span class="accueil-nombre">${n}</span> article${n === '1' ? '' : 's'}</span></div>

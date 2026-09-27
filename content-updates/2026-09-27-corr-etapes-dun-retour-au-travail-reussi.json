@@ -1,0 +1,92 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-etapes-dun-retour-au-travail-reussi",
+ "portee": "Étapes d'un retour au travail réussi : chiffres et durées sans source marqués (rechutes, réduction du risque, durée du retour progressif, échéances de suivi), obligation légale réécrite d'après la LATMP et la LNT, en-tête « Fréquence » renommé, revue de la référence Briand et al. (2007) corrigée",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Étapes d'un retour au travail réussi",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/etapes-dun-retour-au-travail-reussi.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "La recherche est claire : un retour mal planifié mène à la rechute dans plus de 50 % des cas",
+   "avant": "mène à la rechute dans plus de 50 % des cas.",
+   "apres": "mène à la rechute dans plus de 50 % des cas (source à préciser).",
+   "motif": "Chiffre de rechute sans source, ni dans la page ni dans une note d'analyse du wiki : marqué, pas supprimé."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Plus de 50 % des travailleurs rechutent dans les 12 mois si le retour est mal planifié",
+   "avant": "Plus de 50 % des travailleurs rechutent",
+   "apres": "Plus de 50 % (source à préciser) des travailleurs rechutent",
+   "motif": "Chiffre de rechute sans source : marqué juste après le chiffre (la puce se termine sur l'affirmation)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "L'employeur a une obligation légale de soutenir le retour",
+   "avant": "L'employeur a une obligation légale de soutenir le retour (assignation temporaire, aménagements raisonnables)",
+   "apres": "En cas de lésion professionnelle, l'employeur peut assigner temporairement un travail, avec l'avis favorable du professionnel de la santé qui a charge du travailleur (LATMP, art. 179), et doit, sous réserve de la démonstration d'une contrainte excessive, collaborer aux mesures de réadaptation, qui peuvent comprendre un retour progressif au travail (LATMP, art. 170.2 et 167, 9°). Hors lésion professionnelle, c'est la LNT qui s'applique : droit de s'absenter pour maladie, puis réintégration dans le poste habituel (LNT, art. 79.1 et 79.4).",
+   "motif": "L'assignation temporaire est une faculté soumise à l'avis favorable du professionnel de la santé et l'accommodement raisonnable relève de la Charte, absente du recueil ; réécrit d'après LATMP art. 179 « L’employeur d’un travailleur victime d’une lésion professionnelle peut, en utilisant le formulaire prescrit par la Commission, assigner temporairement un travail à ce dernier, en attendant qu’il redevienne capable d’exercer son emploi ou devienne capable d’exercer un emploi convenable, même si sa lésion n’est pas consolidée, si le professionnel de la santé qui a charge du travailleur croit que: » et « Un employeur ne peut assigner temporairement un travail à un travailleur si le professionnel de la santé qui a charge du travailleur n’a pas consigné son avis favorable sur le formulaire prescrit par la Commission. », art. 170.2 « L’employeur doit, sous réserve de la démonstration d’une contrainte excessive, collaborer à la mise en oeuvre des mesures qui doivent être réalisées dans son établissement. », art. 167 « Un programme de réadaptation professionnelle peut comprendre: […] 9° un retour progressif au travail; », LNT art. 79.1 « Une personne salariée peut s’absenter du travail pendant une période d’au plus 26 semaines sur une période de 12 mois pour cause de maladie, de don d’organes ou de tissus à des fins de greffe, d’accident, de violence conjugale ou de violence à caractère sexuel dont elle a été victime. » et « Toutefois, le présent article ne s’applique pas s’il s’agit d’une lésion professionnelle au sens de la Loi sur les accidents du travail et les maladies professionnelles (chapitre A-3.001). », art. 79.4 « À la fin de la période d’absence, l’employeur doit réintégrer la personne salariée dans son poste habituel, avec les mêmes avantages, y compris le salaire auquel elle aurait eu droit si elle était restée au travail. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Un retour structuré coûte du temps mais réduit drastiquement le risque de rechute",
+   "avant": "réduit drastiquement le risque de rechute.",
+   "apres": "réduit drastiquement le risque de rechute (source à préciser).",
+   "motif": "Affirmation d'efficacité sans source : marquée, pas supprimée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "4 à 12 semaines selon la sévérité initiale et la nature du travail",
+   "avant": "selon la sévérité initiale et la nature du travail.",
+   "apres": "selon la sévérité initiale et la nature du travail (source à préciser).",
+   "motif": "Durée typique du retour progressif (4 à 12 semaines) sans source : marquée, pas supprimée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Fréquence",
+   "avant": "Fréquence",
+   "apres": "Repère visé",
+   "motif": "La colonne de l'étape 5 contient des objectifs (identifier, confirmer, prévenir, documenter), pas des fréquences : en-tête renommé « Repère visé »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Évaluation à 1 mois post-retour",
+   "avant": "Évaluation à 1 mois post-retour",
+   "apres": "Évaluation de suivi à 1 mois post-retour (source à préciser)",
+   "motif": "Échéance de suivi (1 mois) sans source : marquée ; « de suivi » ajouté pour que la cellule, réduite à l'affirmation, puisse recevoir la marque."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Confirmer la stabilisation",
+   "avant": "Évaluation à 3 mois",
+   "apres": "Évaluation de suivi à 3 mois (source à préciser)",
+   "motif": "Échéance de suivi (3 mois) sans source : marquée ; « de suivi » ajouté pour que la cellule, réduite à l'affirmation, puisse recevoir la marque."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Évaluation à 6 mois",
+   "avant": "Évaluation à 6 mois",
+   "apres": "Évaluation de suivi à 6 mois (source à préciser)",
+   "motif": "Échéance de suivi (6 mois) sans source : marquée ; « de suivi » ajouté pour que la cellule, réduite à l'affirmation, puisse recevoir la marque."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Documenter le retour réussi",
+   "avant": "Évaluation à 12 mois",
+   "apres": "Évaluation de suivi à 12 mois (source à préciser)",
+   "motif": "Échéance de suivi (12 mois) sans source : marquée ; « de suivi » ajouté pour que la cellule, réduite à l'affirmation, puisse recevoir la marque."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Briand, C. et al. (2007). Work and mental health, learning from return-to-work rehabilitation programs",
+   "avant": "Journal of Occupational Rehabilitation",
+   "apres": "International Journal of Law and Psychiatry, 30(4-5), 444-457",
+   "motif": "Revue erronée, corrigée d'après la note d'analyse Briand et al. (2008) : « Article scientifique préliminaire : Briand, C., Durand, M.-J., St-Arnaud, L., & Corbière, M. (2007). Work and mental health: Learning from return-to-work rehabilitation programs designed for workers with musculoskeletal disorders. International Journal of Law and Psychiatry, 30(4-5), 444-457. »"
+  }
+ ]
+}
