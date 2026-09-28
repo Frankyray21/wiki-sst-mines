@@ -62,5 +62,5 @@ test('site publié : portail, page Thèmes et pages de thème habillés ; feuill
   const css = fs.readFileSync(path.join(R, 'tools/style.css'), 'utf8');
   for (const r of ['.portal-illu .illustration', '.themes-wiki {', '.cat-pages.theme-voisins li a { display: flex;', '.cat-pages.theme-notions li a { position: relative; display: flex;', '.portal-card::after']) assert.ok(css.includes(r), r);
   const portailCss = fs.readFileSync(path.join(R, 'tools/portail.css'), 'utf8');
-  assert.equal((portailCss.match(/--p-fond: #0b151f;/g) || []).length, 2, 'portail de l’encadrement : palette bleu-noir dans les deux blocs sombres');
+  assert.equal((portailCss.match(/--p-fond: #14171c;/g) || []).length, 2, 'portail de l’encadrement : fond noir dans les deux blocs sombres');
 });

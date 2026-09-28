@@ -291,6 +291,10 @@ node tools/serve.mjs
   rapport de qualité publié datent d'avant le 21 septembre. Deux débordements au téléphone corrigés après balayage des
   4 272 pages. Les lots gardent la trace des versions déjà posées (`ancienApres`) : une note du vault marquée passe à
   la version sourcée. Détail, sources posées et décisions à prendre : `content-updates/2026-09-27-bloc-2-sources-lois-forme.md`
+- **Fond noir rétabli (28 septembre 2026)** : à la demande de Frank, le thème sombre (le thème par défaut) perd le
+  bleu-noir de la maquette. Fonds, cartes et bordures reprennent le noir neutre d'avant le 27 septembre (`--bg`
+  #16181d, cartes #1d2026, `tools/style.css` ; portail de l'encadrement #14171c, `tools/portail.css`). Les
+  textes, les liens, les teintes des pictogrammes et le thème clair ne changent pas.
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma
   en texte » (127 schémas, 65 pages), puis toutes les autres (« Lire la version texte — … », « Lire les voies en
   texte », « Lire l’illustration en texte » : 16 sections, 10 pages) disparaissent. Chaque image garde son texte
