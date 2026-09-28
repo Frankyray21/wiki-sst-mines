@@ -14,9 +14,10 @@
   {
    "type": "remplacer",
    "ligneContenant": "Les recherches montrent un risque accru",
-   "avant": "et de difficultés parentales.",
-   "apres": "et de difficultés parentales (source à préciser).",
-   "motif": "Point relevé : « Les recherches montrent… » ne cite aucune étude, et les deux références de la page (Roche et al., 2016 ; Asare et al., 2021) n'ont ni note d'analyse ni PDF dans le wiki. Affirmation gardée, marquée à sa fin."
+   "avant": "Les recherches montrent un risque accru de problèmes de couple, d'isolement du conjoint resté à la maison, et de difficultés parentales.",
+   "apres": "Les recherches, surtout australiennes, suggèrent que le FIFO peut avoir des effets négatifs, mais aussi positifs ou minimes, sur les enfants et les relations familiales, selon le contexte (culture de travail, horaires, milieu familial) ([Meredith et al., 2014](https://aifs.gov.au/sites/default/files/cfca/pubs/papers/a146119/cfca19_0.pdf)).",
+   "ancienApres": "Les recherches montrent un risque accru de problèmes de couple, d'isolement du conjoint resté à la maison, et de difficultés parentales (source à préciser).",
+   "motif": "Marque du lot précédent remplacée par une source vérifiée : Meredith, V., Rush, P., & Robinson, E. (2014). Fly-in fly-out workforce practices in Australia: The effects on children and family relationships (CFCA Paper No. 19). Australian Institute of Family Studies. https://aifs.gov.au/sites/default/files/cfca/pubs/papers/a146119/cfca19_0.pdf. Appui (résultat de recherche du 27 septembre 2026) : « « A limited but growing amount of Australian research into fly-in fly-out (FIFO) work practices tentatively suggests that a FIFO lifestyle can have positive, negative or few effects on children and on family relationships, depending on the circumstances. » « Effects vary according to a range of contextual factors, such as workplace cultures, rosters and recruitment practices, as well as community and home environments, and individual characteristics. » » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",
@@ -57,8 +58,9 @@
    "type": "remplacer",
    "ligneContenant": "ne sont pas inévitables",
    "avant": "les effets sur les enfants ne sont pas",
-   "apres": "les effets sur les enfants (source à préciser) ne sont pas",
-   "motif": "Point relevé : les effets sur les enfants (tableau « Effets sur les enfants ») ne sont pas sourcés. Une seule marque, après « les effets sur les enfants », une marque en fin de cellule ou d'en-tête n'étant pas rejouable."
+   "apres": "les effets sur les enfants ([Meredith et al., 2014](https://aifs.gov.au/sites/default/files/cfca/pubs/papers/a146119/cfca19_0.pdf)) ne sont pas",
+   "ancienApres": "les effets sur les enfants (source à préciser) ne sont pas",
+   "motif": "Marque du lot précédent remplacée par une source vérifiée : Meredith, V., Rush, P., & Robinson, E. (2014). Fly-in fly-out workforce practices in Australia: The effects on children and family relationships (CFCA Paper No. 19). Australian Institute of Family Studies. https://aifs.gov.au/sites/default/files/cfca/pubs/papers/a146119/cfca19_0.pdf. Appui (résultat de recherche du 27 septembre 2026) : « « A limited but growing amount of Australian research into fly-in fly-out (FIFO) work practices tentatively suggests that a FIFO lifestyle can have positive, negative or few effects on children and on family relationships, depending on the circumstances. » »"
   },
   {
    "type": "remplacer",

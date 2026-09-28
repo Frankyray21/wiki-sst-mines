@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-300-rsst-excavation-tranchee",
+ "portee": "Renvois aux lois de la page « art-300-RSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-300-RSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-300-rsst-excavation-tranchee.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Il définit la liste des 14 éléments obligatoires que doit comprendre le programme",
+   "avant": "Il définit la liste des 14 éléments obligatoires que doit comprendre le programme avant toute entrée en espace clos.",
+   "apres": "Il exige qu'avant tout travail dans un espace clos, les renseignements sur les risques (atmosphère, ensevelissement ou noyade, autres risques) et les moyens de prévention soient disponibles par écrit sur les lieux, recueillis ou établis par une personne qualifiée.",
+   "motif": "RSST, art. 300 : « Avant que ne soit entrepris un travail dans un espace clos, les renseignements et les moyens de prévention suivants doivent être disponibles, par écrit, sur les lieux mêmes du travail: 1° ceux concernant les risques associés à l’atmosphère […]; 2° ceux concernant les risques associés aux matières à écoulement libre […] qui peuvent causer l’ensevelissement ou la noyade du travailleur […]; 3° ceux concernant les autres risques […]; 4° les moyens de prévention […]. Les renseignements visés aux paragraphes 1, 2 et 3 du premier alinéa doivent être recueillis par une personne qualifiée. Les moyens de prévention visés au paragraphe 4 du premier alinéa doivent être établis par une personne qualifiée et mis en application. » L'article ne compte aucune liste de 14 éléments."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Le programme est révisé pour ajuster la durée de ventilation préalable",
+   "avant": " par. 14 (révision périodique) est appliqué.",
+   "apres": " est appliqué (renseignements et moyens de prévention établis par une personne qualifiée) ; la ventilation doit maintenir l'oxygène entre 20,5 % et 23 % (art. 302).",
+   "motif": "L'art. 300 n'a que quatre paragraphes (« 1° ceux concernant les risques associés à l’atmosphère […] 4° les moyens de prévention à prendre […] ») et ne prévoit aucune révision périodique. La teneur en oxygène est fixée par l'art. 302 : « aucun travailleur ne peut pénétrer ou être présent dans un espace clos à moins que celui-ci ne soit ventilé par des moyens naturels ou par des moyens mécaniques de manière à ce qu’y soient maintenues les conditions atmosphériques suivantes: 1° la concentration d’oxygène doit être supérieure ou égale à 20,5% et inférieure ou égale à 23%; […] »."
+  }
+ ]
+}

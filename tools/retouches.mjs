@@ -8,7 +8,9 @@
 // l'est : la note reste intacte. Une retouche déjà faite est reconnue et sautée (lot rejouable).
 //
 // Types :
-//   remplacer      { ligneContenant, avant, apres }  remplace « avant » dans la ligne
+//   remplacer      { ligneContenant, avant, apres, ancienApres? } remplace « avant » dans la ligne ; si la note a
+//                                                      reçu une version antérieure de la correction (« ancienApres »,
+//                                                      un texte ou une liste), c'est elle qui est remplacée
 //   remplacerLigne { ligneContenant, par }           remplace la ligne entière
 //   supprimerLigne { ligneContenant, marqueur }      retire la ligne (une image intégrée, p. ex.) ;
 //                                                      « marqueur » = son remplaçant, s'il y en a un
@@ -235,6 +237,20 @@ export function appliquerRetouches(texte, retouches, { resoudreLien = () => null
       return false;
     };
     if (dejaFait()) { rapport.statut = 'déjà faite'; continue; }
+    // « ancienApres » : une version antérieure de la même correction (la marque « (source à préciser) »
+    // remplacée depuis par une source, p. ex.) ; la note qui l'a reçue passe à la nouvelle version
+    if (r.type === 'remplacer' && r.ancienApres) {
+      const anciens = [].concat(r.ancienApres).map(a => motifSouple(resoudreLiens(a, resoudreLien, r)));
+      const avantL = motifSouple(r.avant);
+      const lignesAnciennes = (trouvees.length ? trouvees : lignes.map((l, i) => i)).filter(i => !avantL.test(lignes[i]) && anciens.some(a => a.test(lignes[i])));
+      if (lignesAnciennes.length === 1) {
+        const i = lignesAnciennes[0], a = anciens.find(a => a.test(lignes[i]));
+        lignes[i] = lignes[i].replace(a, () => resoudreLiens(r.apres, resoudreLien, r));
+        rapport.ligne = i + 1;
+        rapport.statut = 'appliquée';
+        continue;
+      }
+    }
     if (trouvees.length !== 1) {
       rapport.statut = trouvees.length ? `ambiguë (${trouvees.length} lignes)` : 'introuvable';
       ok = false; continue;

@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-regime-cnesst",
+ "portee": "Renvois aux lois de la page « Régime CNESST » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "Cellules sans autre texte que le libellé du lien : « ligneContenant » courte pour « Comités SST » (unique dans la page publiée) ; vérifier l'unicité dans la note. Le groupe droit-1 corrige d'autres rangées du même tableau (art-53-LSST, art-68-LSST) : si sa correction de la rangée art-68 écrit « Comités SST » et passe avant cette fiche, la première retouche trouvera deux cellules.",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Régime CNESST",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/theme/regime-cnesst.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Comités SST",
+   "avant": "Comités SST",
+   "apres": "Programmes de prévention, avis d'événement grave",
+   "motif": "Les art. 58 à 62 LSST portent sur le programme de prévention et l'avis d'événement grave, les comités étant aux art. 68 et suivants : « L’employeur doit élaborer et mettre en application un programme de prévention propre à chaque établissement groupant au moins 20 travailleurs au cours de l’année. » (LSST, art. 58, remplacé par LMRSST, art. 143) ; « L’employeur doit informer la Commission par le moyen de communication le plus rapide et, dans les 24 heures, lui faire un rapport écrit selon la forme et avec les renseignements exigés par règlement, de tout événement entraînant, selon le cas [...] » (LSST, art. 62)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Annexe I, maladies professionnelles",
+   "avant": "Annexe I, maladies professionnelles",
+   "apres": "Maladies professionnelles prévues par règlement (ancienne annexe I)",
+   "motif": "La présomption renvoie désormais à un règlement : « Un travailleur est présumé atteint d’une maladie professionnelle s’il est atteint d’une maladie prévue par règlement et si, au jour où il reçoit le diagnostic de cette maladie, il rencontre les conditions particulières en lien avec cette maladie prévues par règlement. » (LATMP, art. 29) ; « L’annexe I de cette loi est abrogée. » (LMRSST, art. 120)."
+  }
+ ]
+}

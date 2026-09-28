@@ -306,10 +306,13 @@ mark.surligne mark.surligne { padding: 0 1px; }
 .page-sub { font-size: 13px; color: var(--text-soft); margin-bottom: 18px; }
 .article-titre { display: grid; gap: .5rem; margin-bottom: 1rem; min-width: 0; }
 .article-titre .page-title, .article-titre .page-sub, .article-titre .lecture-outils { margin: 0; }
+/* Un titre fait d'un mot plus long que l'écran (« INSTITUTIONNELLES/COMPLÉMENTAIRES ») élargissait la grille
+   de l'en-tête, et toute la page défilait de côté au téléphone : il passe à la ligne. */
+.article-titre .page-title { overflow-wrap: anywhere; }
 .page-body { font-size: calc(15px * var(--echelle, 1)); max-width: 100%; }
 /* Un mot plus long que la colonne (adresse, flèche d'un schéma en caractères) passe à la ligne au lieu de faire
    défiler toute la page de côté ; les autres mots ne sont jamais coupés (break-word, et non anywhere). */
-.page-body p, .page-body li, .page-body dd, .page-body blockquote { overflow-wrap: break-word; }
+.page-body p, .page-body li, .page-body dd, .page-body blockquote, .chapo p, .chapo li { overflow-wrap: break-word; }
 /* Appels bibliographiques : discrets dans la phrase, sans modifier la bibliographie. */
 .page-body a[href^="#ref-"] {
   font-size: max(.75rem, .72em);

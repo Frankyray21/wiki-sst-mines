@@ -1,0 +1,71 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-gestion-des-risques",
+ "portee": "Renvois aux lois de la page « Gestion des risques en entreprise » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Gestion des risques en entreprise",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/gestion-des-risques.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "relibeller",
+   "ligneContenant": "et contrôle des énergies (",
+   "libelle": "RSST art. 188",
+   "nouveau": "RSST art. 195 à 207",
+   "motif": "L'art. 188 vise le mode de commande spécifique (« Mode de commande spécifique : Lorsque des travaux sur une machine […] nécessitent de déplacer ou de retirer un protecteur […] ») ; le cadenassage est la sous-section des art. 195 à 207 : RSST, art. 195 : « Dans la présente sous-section, on entend par: «cadenassage» : une méthode de contrôle des énergies […] ». Libellé corrigé, cible inchangée (note art-188-RSST)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Référence : norme CSA Z460-13",
+   "avant": " à 188.13",
+   "apres": " et suivants (aujourd'hui art. 195 à 207)",
+   "motif": "RSST, art. 188.1 à 188.13 : « (Remplacé). » Le cadenassage et le contrôle des énergies sont aux art. 195 à 207 (art. 195 : « Dans la présente sous-section, on entend par: «cadenassage» […] » ; art. 207 : « La présente sous-section s’applique, compte tenu des adaptations nécessaires, à tout travail sur une installation électrique. »). Le libellé « art. 188.1 (remplacé) » est produit par le générateur ; seul le texte qui suit est retouché."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "montage, ajustement, inspection, réglage, décoinçage, déblocage",
+   "libelle": "RSST art. 188.2",
+   "nouveau": "RSST art. 196",
+   "motif": "RSST, art. 188.2 : « (Remplacé). » Les travaux visés sont à l'art. 196 : « Avant d’entreprendre dans la zone dangereuse d’une machine tout travail, notamment de montage, d’installation, d’ajustement, d’inspection, de décoinçage, de réglage, de mise hors d’usage, d’entretien, de désassemblage, de nettoyage, de maintenance, de remise à neuf, de réparation, de modification ou de déblocage, le cadenassage ou, à défaut, toute autre méthode qui assure une sécurité équivalente doit être appliqué […] ». Libellé corrigé, cible inchangée."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "Un cadenas personnel avec cléage unique par personne autorisée",
+   "libelle": "RSST art. 188.3",
+   "nouveau": "RSST art. 197",
+   "motif": "RSST, art. 188.3 : « (Remplacé). » RSST, art. 197 : « Le cadenassage doit être effectué par chacune des personnes ayant accès à la zone dangereuse d’une machine. » Libellé corrigé, cible inchangée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Un cadenas personnel avec cléage unique par personne autorisée",
+   "avant": ", 188.11).",
+   "apres": ", 205).",
+   "motif": "RSST, art. 188.11 : « (Remplacé). » RSST, art. 205 : « L’employeur qui a autorité sur l’établissement doit fournir le matériel de cadenassage dont les cadenas à cléage unique […]. Le nom de la personne qui installe le cadenas à cléage unique doit clairement être indiqué sur celui-ci. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "une alternative exige une",
+   "avant": " démontrant une sécurité équivalente (",
+   "apres": " qui démontre une sécurité équivalente (RSST art. 198, anciennement ",
+   "motif": "RSST, art. 188.4 : « (Remplacé). » RSST, art. 198 : « Lorsqu’un employeur ayant autorité sur l’établissement prévoit appliquer une méthode de contrôle des énergies autre que le cadenassage, il doit, au préalable, s’assurer de la sécurité équivalente de cette méthode en analysant les éléments suivants: […] ». Le libellé « RSST art. 188.4 (remplacé) » est produit par le générateur ; le renvoi en vigueur est placé devant."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "présence d'un témoin",
+   "libelle": "RSST art. 188.12",
+   "nouveau": "RSST art. 206",
+   "motif": "RSST, art. 188.12 : « (Remplacé). » Le retrait d'un cadenas est à l'art. 206 : « En cas d’oubli d’un cadenas ou de la perte d’une clé, l’employeur qui a autorité sur l’établissement peut, avec l’accord de la personne qui a exécuté le cadenassage, autoriser le retrait du cadenas […] ». Libellé corrigé, cible inchangée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "présence d'un témoin",
+   "avant": "tentatives de communication documentées, présence d'un témoin, inspection, rapport écrit conservé un an",
+   "apres": "accord de la personne qui a posé le cadenas ou, à défaut, inspection de la zone dangereuse en présence d'un témoin (représentant syndical ou travailleur désigné) ; chaque retrait consigné dans un écrit conservé au moins 1 an après la modification de la méthode de contrôle des énergies",
+   "motif": "L'art. 206 n'exige pas de tentatives de communication et fixe la conservation à au moins 1 an après la modification de la méthode : « À défaut d’obtenir l’accord de la personne qui a exécuté le cadenassage, l’employeur qui a autorité sur l’établissement doit, avant d’autoriser le retrait du cadenas, inspecter la zone dangereuse de la machine accompagné d’un représentant de l’association accréditée dont la personne est membre s’il est disponible sur les lieux du travail ou, à défaut, d’un travailleur présent sur les lieux de travail désigné par cet employeur. Chaque retrait de cadenas doit être consigné dans un écrit conservé par l’employeur au moins 1 an suivant le jour où la méthode de contrôle des énergies applicable est modifiée. »"
+  }
+ ]
+}

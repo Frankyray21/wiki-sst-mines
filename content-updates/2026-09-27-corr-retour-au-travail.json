@@ -15,16 +15,18 @@
   {
    "type": "remplacer",
    "ligneContenant": "Plus de 50 % des travailleurs en invalidité psychologique rechutent dans les 12 mois",
-   "avant": "si le retour est mal accompagné. La prévention des rechutes repose sur",
-   "apres": "si le retour est mal accompagné (source à préciser). La prévention des rechutes repose sur",
-   "motif": "Chiffre de rechute sans source, repris de Prévenir les rechutes après retour : marqué comme dans cette page."
+   "avant": "Plus de 50 % des travailleurs en invalidité psychologique rechutent dans les 12 mois suivant leur retour si le retour est mal accompagné. La prévention des rechutes repose sur",
+   "apres": "Dans un essai néerlandais, 62 % des travailleurs revenus au travail après une absence pour trouble mental courant ont eu une nouvelle absence maladie (toutes causes) dans les 12 mois avec le suivi habituel, contre 39 % avec un accompagnement structuré de résolution de problèmes ([Arends et al., 2013](https://doi.org/10.1371/journal.pone.0071937)). La prévention des rechutes repose sur",
+   "ancienApres": "Plus de 50 % des travailleurs en invalidité psychologique rechutent dans les 12 mois suivant leur retour si le retour est mal accompagné (source à préciser). La prévention des rechutes repose sur",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Arends, I., Bültmann, U., van Rhenen, W., Groen, H., & van der Klink, J. J. L. (2013). Economic evaluation of a problem solving intervention to prevent recurrent sickness absence in workers with common mental disorders. PLOS ONE, 8(8), e71937. https://doi.org/10.1371/journal.pone.0071937. Appui (résultat de recherche du 27 septembre 2026) : « « The incidence of recurrent sickness absence during 12 months follow-up was 39% for the SHARP group and 62% for the CAU group. » (résultat pour PLOS ONE, Arends et al., 2013, obtenu deux fois ; second résultat : « The mean effect difference between the SHARP and CAU group was 24% (95% CI 3% to 45%) in favour of the SHARP group. »). Population : « The SHARP-at work intervention is a problem-solving intervention developed to prevent recurrent sickness absence in workers who returned to work after sickness absence due to common mental disorders (CMDs) ». Définition de l'issue dans cette cohorte  » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",
    "ligneContenant": "un retour mal planifié mène à la rechute dans plus de 50 % des cas",
-   "avant": "dans plus de 50 % des cas. Les étapes clés",
-   "apres": "dans plus de 50 % des cas (source à préciser). Les étapes clés",
-   "motif": "Chiffre de rechute sans source, repris d'Étapes d'un retour au travail réussi : marqué comme dans cette page."
+   "avant": "La recherche est claire : un retour mal planifié mène à la rechute dans plus de 50 % des cas. Les étapes clés",
+   "apres": "Dans un essai néerlandais, 62 % des travailleurs revenus au travail après une absence pour trouble mental courant ont eu une nouvelle absence maladie (toutes causes) dans les 12 mois avec le suivi habituel, contre 39 % avec un accompagnement structuré de résolution de problèmes ([Arends et al., 2013](https://doi.org/10.1371/journal.pone.0071937)). Les étapes clés",
+   "ancienApres": "La recherche est claire : un retour mal planifié mène à la rechute dans plus de 50 % des cas (source à préciser). Les étapes clés",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Arends, I., Bültmann, U., van Rhenen, W., Groen, H., & van der Klink, J. J. L. (2013). Economic evaluation of a problem solving intervention to prevent recurrent sickness absence in workers with common mental disorders. PLOS ONE, 8(8), e71937. https://doi.org/10.1371/journal.pone.0071937. Appui (résultat de recherche du 27 septembre 2026) : « « The incidence of recurrent sickness absence during 12 months follow-up was 39% for the SHARP group and 62% for the CAU group. » (résultat pour PLOS ONE, Arends et al., 2013, obtenu deux fois ; second résultat : « The mean effect difference between the SHARP and CAU group was 24% (95% CI 3% to 45%) in favour of the SHARP group. »). Population : « The SHARP-at work intervention is a problem-solving intervention developed to prevent recurrent sickness absence in workers who returned to work after sickness absence due to common mental disorders (CMDs) ». Définition de l'issue dans cette cohorte  » Reformulée pour dire ce que dit la source."
   }
  ]
 }

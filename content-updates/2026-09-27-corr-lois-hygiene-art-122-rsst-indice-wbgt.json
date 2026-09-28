@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-122-rsst-indice-wbgt",
+ "portee": "Renvois aux lois de la page « art-122-RSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-122-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-122-rsst-indice-wbgt.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "La méthode WBGT est la référence légale au Québec",
+   "avant": "Tous les établissements assujettis à l'",
+   "apres": "Toute mesure de l'indice de contrainte thermique prévue au RSST (« pour l'application du présent règlement »), et pas seulement dans les établissements visés à l'",
+   "motif": "Point relevé : la portée de l'art. 122 du RSST était limitée aux établissements visés par l'art. 121 ; la méthode vaut pour tout le règlement, donc aussi pour les art. 123 et 124, qui s'appliquent quel que soit l'effectif : « Pour l'application du présent règlement, l'indice de contrainte thermique est mesuré par l'indice de température au thermomètre à globe à boule humide (méthode WBGT) tel qu'établi à l'annexe V. » (RSST, art. 122)."
+  }
+ ]
+}

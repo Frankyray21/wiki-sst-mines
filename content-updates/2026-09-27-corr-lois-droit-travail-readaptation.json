@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-readaptation",
+ "portee": "Renvois aux lois de la page « Droit à la réadaptation » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "Le lien relibellé « art. 146 LATMP » mène toujours à la page du recueil de l'art. 145 (cible hors de cette vérification). Le libellé « LATMP art. 145 » de la liste « Cadre légal » figure aussi dans l'introduction : il n'est pas relibellé, seule la glose qui le suit est corrigée.",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Droit à la réadaptation",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/readaptation.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "(atteinte permanente physique ou psychique)",
+   "avant": "ouverture du droit à la réadaptation",
+   "apres": "mesures de réadaptation avant la consolidation ; art. 146 : droit à la réadaptation",
+   "motif": "L'art. 145 ne vise pas l'atteinte permanente : « La Commission peut, dès qu’elle accepte une réclamation pour une lésion professionnelle et avant la consolidation de cette lésion, accorder au travailleur des mesures de réadaptation adaptées à son état de santé et visant à favoriser sa réinsertion professionnelle, dans les cas et aux conditions prévus au présent chapitre et par règlement. » (LATMP, art. 145). Le droit lié à l'atteinte permanente est à l'art. 146 : « Le travailleur qui, en raison de la lésion professionnelle dont il a été victime, subit une atteinte permanente à son intégrité physique ou psychique a droit, dans les cas et aux conditions prévus à la présente section, à la réadaptation. » (LATMP, art. 146, al. 1)."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "prévoit que le travailleur ayant subi une atteinte permanente à son intégrité physique ou psychique a droit à la réadaptation",
+   "libelle": "art. 145 LATMP",
+   "nouveau": "art. 146 LATMP",
+   "motif": "Le droit à la réadaptation du travailleur qui a subi une atteinte permanente est prévu à l'art. 146, et non à l'art. 145 (mesures avant la consolidation) : « Le travailleur qui, en raison de la lésion professionnelle dont il a été victime, subit une atteinte permanente à son intégrité physique ou psychique a droit, dans les cas et aux conditions prévus à la présente section, à la réadaptation. » (LATMP, art. 146, al. 1)."
+  }
+ ]
+}

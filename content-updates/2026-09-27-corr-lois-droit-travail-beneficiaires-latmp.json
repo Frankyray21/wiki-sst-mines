@@ -1,0 +1,37 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-beneficiaires-latmp",
+ "portee": "Renvois aux lois de la page « Bénéficiaires de la LATMP » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Bénéficiaires de la LATMP",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/beneficiaires-latmp.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "relibeller",
+   "toutes": true,
+   "ligneContenant": "LATMP art. 1",
+   "libelle": "LATMP art. 1",
+   "nouveau": "LATMP art. 2",
+   "motif": "Mauvais article (deux liens de même libellé : l'introduction et la puce « bénéficiaire, prestation » du cadre légal) : les définitions du bénéficiaire et de la prestation sont à l'art. 2 de la LATMP ; l'art. 1 en énonce l'objet (« La présente loi a pour objet la réparation des lésions professionnelles et des conséquences qu’elles entraînent pour les bénéficiaires. »). LATMP, art. 2 : « « bénéficiaire » : une personne qui a droit à une prestation en vertu de la présente loi; » ; « « prestation » : une indemnité versée en argent, une assistance financière ou un service fourni en vertu de la présente loi; » Libellé corrigé, cible inchangée."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "Bénéficiaire et prestation",
+   "libelle": "art. 1",
+   "nouveau": "art. 2",
+   "motif": "Mauvais article : les deux définitions de cette section recopient l'art. 2 de la LATMP, non l'art. 1. LATMP, art. 2 : « « bénéficiaire » : une personne qui a droit à une prestation en vertu de la présente loi; » ; « « prestation » : une indemnité versée en argent, une assistance financière ou un service fourni en vertu de la présente loi; » Libellé corrigé, cible inchangée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Certaines personnes (élus, juges, etc.)",
+   "avant": "(élus, juges, etc.)",
+   "apres": "(travaux compensatoires ou communautaires, sécurité civile, personnes incarcérées, etc.)",
+   "motif": "Contenu infidèle : les art. 11 à 12.1 de la LATMP ne visent ni les élus ni les juges. LATMP, art. 11 : « Est considéré un travailleur à l’emploi du gouvernement: 1° la personne, autre qu’un enfant visé dans le paragraphe 3°, qui exécute des travaux compensatoires […] » ; art. 12 : « Toute personne qui, lors d’un événement visé à la Loi sur la sécurité civile (chapitre S-2.3), assiste bénévolement les effectifs déployés […] » ; art. 12.1 : « […] la personne incarcérée qui exécute un travail rémunéré dans le cadre d’un programme d’activités. »"
+  }
+ ]
+}

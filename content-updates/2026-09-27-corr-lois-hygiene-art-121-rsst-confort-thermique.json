@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-121-rsst-confort-thermique",
+ "portee": "Renvois aux lois de la page « art-121-RSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-121-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-121-rsst-confort-thermique.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Pour les établissements sous le seuil",
+   "avant": "où le seuil de 50 travailleurs exposés à la chaleur est atteint.",
+   "apres": "qui emploie 50 travailleurs ou plus et où l'indice de contrainte thermique atteint ou dépasse la courbe de travail continu de l'annexe V.",
+   "motif": "Point relevé : le seuil de l'art. 121 du RSST était « 50 travailleurs exposés à la chaleur » ; le texte vise l'effectif de l'établissement : « Dans tout établissement qui emploie 50 travailleurs ou plus et où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique atteint ou dépasse la courbe de travail continu indiquée au graphique de l'annexe V, un tel indice doit être mesuré deux fois par année [...] » (RSST, art. 121)."
+  }
+ ]
+}

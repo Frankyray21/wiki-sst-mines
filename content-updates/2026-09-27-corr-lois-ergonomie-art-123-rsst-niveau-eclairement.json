@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-ergonomie-art-123-rsst-niveau-eclairement",
+ "portee": "Renvois aux lois de la page « art-123-RSST » (Wiki Ergonomie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-123-RSST",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/art-123-rsst-niveau-eclairement.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "dépasse la courbe travail continu pour la charge métabolique du poste",
+   "avant": "La surveillance médicale relève typiquement du médecin responsable du programme de santé spécifique à l'établissement (",
+   "apres": "La surveillance médicale incombe à l'employeur ; le programme de santé spécifique à l'établissement, qu'élaborait le médecin responsable, a été abrogé par la {{lien:w/legislation/10-lois-principales/lmrsst/art-175-lmrsst-section-ii-chapitre-viii-loi-comprenant.html|LMRSST, art. 175}} (",
+   "motif": "Point relevé : la surveillance médicale était rattachée au « médecin responsable du programme de santé spécifique à l'établissement (LSST art. 112) » ; ce programme n'existe plus : « La section II du chapitre VIII de cette loi, comprenant les articles 112 à 115, est abrogée. » (LMRSST, art. 175, en vigueur au plus tard le 6 octobre 2025 selon l'art. 313, 7°). L'art. 123 du RSST met la surveillance à la charge de l'employeur : « une surveillance médicale des travailleurs ainsi exposés doit être assurée par l'employeur »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Un hygiéniste documente une situation d'exposition",
+   "avant": "-RSST sert de cadre normatif pour l'analyse, le suivi médical et la décision de gestion appropriée.",
+   "apres": " du RSST ne vise que la chaleur : au-delà de la courbe de travail continu, il impose une surveillance médicale, de l'eau entre 10 °C et 15 °C et une douche par 15 travailleurs exposés.",
+   "motif": "Point relevé : le cas type faisait de l'article le cadre normatif de l'analyse, du suivi médical et de la gestion d'expositions à la silice, aux gaz, au bruit, aux vibrations et aux contaminants chimiques ; l'art. 123 du RSST ne vise que la contrainte thermique : « Dans tout établissement où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique dépasse la courbe de travail continu indiquée au graphique de l'annexe V, une surveillance médicale des travailleurs ainsi exposés doit être assurée par l'employeur et celui-ci doit mettre à leur disposition de l'eau dont la température est comprise entre 10 °C et 15 °C, ainsi qu'une douche par 15 travailleurs exposés. » (RSST, art. 123). Forme « article 123-RSST » remplacée par « article 123 du RSST »."
+  }
+ ]
+}

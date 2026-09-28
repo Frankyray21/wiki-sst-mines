@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-ergonomie-art-122-rsst-indice-wbgt",
+ "portee": "Renvois aux lois de la page « art-122-RSST » (Wiki Ergonomie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-122-RSST",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/art-122-rsst-indice-wbgt.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "La méthode WBGT est la référence légale au Québec",
+   "avant": "Tous les établissements assujettis à l'",
+   "apres": "Toute mesure de l'indice de contrainte thermique prévue au RSST (« pour l'application du présent règlement »), et pas seulement dans les établissements visés à l'",
+   "motif": "Point relevé : la portée de l'art. 122 du RSST était limitée aux établissements visés par l'art. 121 ; la méthode vaut pour tout le règlement, donc aussi pour les art. 123 et 124, qui s'appliquent quel que soit l'effectif : « Pour l'application du présent règlement, l'indice de contrainte thermique est mesuré par l'indice de température au thermomètre à globe à boule humide (méthode WBGT) tel qu'établi à l'annexe V. » (RSST, art. 122)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Un hygiéniste documente une situation d'exposition",
+   "avant": "-RSST sert de cadre normatif pour l'analyse, le suivi médical et la décision de gestion appropriée.",
+   "apres": " du RSST ne vise que la chaleur : il impose la méthode WBGT (annexe V) pour mesurer l'indice de contrainte thermique.",
+   "motif": "Point relevé : le cas type faisait de l'article le cadre normatif de l'analyse, du suivi médical et de la gestion d'expositions à la silice, aux gaz, au bruit, aux vibrations et aux contaminants chimiques ; l'art. 122 du RSST ne fixe que la méthode de mesure de la contrainte thermique : « Pour l'application du présent règlement, l'indice de contrainte thermique est mesuré par l'indice de température au thermomètre à globe à boule humide (méthode WBGT) tel qu'établi à l'annexe V. » (RSST, art. 122). Forme « article 122-RSST » remplacée par « article 122 du RSST »."
+  }
+ ]
+}

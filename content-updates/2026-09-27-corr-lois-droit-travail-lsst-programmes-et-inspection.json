@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-lsst-programmes-et-inspection",
+ "portee": "Renvois aux lois de la page « LSST, programmes et inspecteur » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "LSST, programmes et inspecteur",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/lsst-programmes-et-inspection.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "L'inspecteur a deux types de mandats",
+   "avant": ", 165). L'inspecteur a deux types de mandats",
+   "apres": ", 65). L'inspecteur a deux types de mandats",
+   "motif": "Mauvais article : le pouvoir de faire effectuer une expertise est à l'art. 65 : « L’inspecteur peut faire effectuer une expertise sur un produit, un procédé, un équipement, un matériel, un contaminant ou une matière dangereuse afin de déterminer les dangers pour la santé ou la sécurité qu’il peut présenter pour un travailleur. » (LSST, art. 65) ; l'art. 165 porte sur autre chose : « Les livres et les comptes de la Commission sont vérifiés annuellement par le vérificateur général […] »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Aviser l'employeur, le syndicat, le représentant à la prévention",
+   "avant": "représentant à la prévention avant arrivée",
+   "apres": "représentant à la prévention à son arrivée, avant l'inspection",
+   "motif": "Délai inexact : l'avis se donne à l'arrivée, avant l'enquête ou l'inspection, et non avant l'arrivée : « À son arrivée sur un lieu de travail, l’inspecteur doit, avant d’entreprendre une enquête ou une inspection, prendre les mesures raisonnables pour aviser l’employeur, l’association accréditée et le représentant à la prévention. » (LSST, art. 181)."
+  }
+ ]
+}

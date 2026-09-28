@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-51-11-lsst-epi-gratuits",
+ "portee": "Renvois aux lois de la page « art-51-11-LSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-51-11-LSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-51-11-lsst-epi-gratuits.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les angles récurrents (Cour du Québec, chambre criminelle et pénale)",
+   "avant": "poursuites pénales du DPCP au nom de la",
+   "apres": "poursuites pénales, intentées ({{lien:w/legislation/10-lois-principales/lsst/art-242-lsst-recidive.html|LSST, art. 242, al. 1}}) non par le DPCP mais par la",
+   "motif": "Point relevé : les poursuites pénales fondées sur l'art. 51 étaient attribuées au DPCP « au nom de la CNESST » ; la LSST confie ces poursuites à la Commission elle-même : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. » (LSST, art. 242, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Lors d'une intervention de maintenance, une situation à risque",
+   "avant": "-11-LSST. L'analyse d'incident conclut",
+   "apres": ", 11°, de la LSST. L'analyse d'incident conclut",
+   "motif": "Il n'y a pas d'art. 51-11 (ni 51.11) dans la LSST : c'est le paragraphe 11° de l'art. 51, forme juridique « art. 51, 11° ». LSST, art. 51 : « Il doit notamment: […] 11° fournir gratuitement au travailleur tous les moyens et équipements de protection individuels choisis par le comité de santé et de sécurité conformément au paragraphe 4° de l’article 78 […] et s’assurer que le travailleur, à l’occasion de son travail, utilise ces moyens et équipements; »"
+  }
+ ]
+}

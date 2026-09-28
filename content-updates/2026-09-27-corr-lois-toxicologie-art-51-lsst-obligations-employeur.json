@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-toxicologie-art-51-lsst-obligations-employeur",
+ "portee": "Renvois aux lois de la page « art-51-LSST » (Wiki Toxicologie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-51-LSST",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/art-51-lsst-obligations-employeur.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les angles récurrents (Cour du Québec, chambre criminelle et pénale)",
+   "avant": "poursuites pénales du DPCP au nom de la",
+   "apres": "poursuites pénales, intentées ({{lien:w/legislation/10-lois-principales/lsst/art-242-lsst-recidive.html|LSST, art. 242, al. 1}}) non par le DPCP mais par la",
+   "motif": "Point relevé : les poursuites pénales fondées sur l'art. 51 étaient attribuées au DPCP « au nom de la CNESST » ; la LSST confie ces poursuites à la Commission elle-même : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. » (LSST, art. 242, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "(définitions)",
+   "avant": "(définitions)",
+   "apres": "(élimination des dangers à la source ; les définitions sont à l'{{lien:w/legislation/10-lois-principales/lsst/art-1-lsst-definitions-interpretation.html|art. 1}})",
+   "motif": "Point relevé : l'art. 2 de la LSST était décrit comme l'article des définitions ; il énonce l'objet de la loi : « La présente loi a pour objet l'élimination à la source même des dangers pour la santé, la sécurité et l'intégrité physique et psychique des travailleurs. » (LSST, art. 2). Les définitions sont à l'art. 1 : « Dans la présente loi et les règlements, à moins que le contexte n'indique un sens différent, on entend par: [...] »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "(programme de santé)",
+   "avant": "(programme de santé)",
+   "apres": "(comité SST)",
+   "motif": "Point relevé : l'art. 68 de la LSST était décrit comme portant sur le programme de santé ; il porte sur la formation du comité de santé et de sécurité : « Un comité de santé et de sécurité peut être formé au sein d'un établissement groupant plus de vingt travailleurs et appartenant à une catégorie identifiée à cette fin par règlement. » (LSST, art. 68 ; texte remplacé par la LMRSST, art. 150 : « Un comité de santé et de sécurité doit être formé au sein d'un établissement groupant au moins 20 travailleurs au cours de l'année. »). Le programme de santé spécifique était aux art. 112 et 113, abrogés par la LMRSST, art. 175."
+  }
+ ]
+}

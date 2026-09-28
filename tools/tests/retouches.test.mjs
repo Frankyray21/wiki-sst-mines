@@ -246,3 +246,17 @@ test('relibeller : un lien homonyme sur une autre ligne, non visée, ne bloque p
   assert.match(r.texte, /Ailleurs : \[\[Dolan\.pdf#page=159\|Dolan p\. 169\]\]/, 'la ligne non visée ne change pas');
   assert.equal(appliquerRetouches(r.texte, lot).rapports[0].statut, 'déjà faite');
 });
+
+test('remplacer « ancienApres » : une note qui a reçu la version antérieure de la correction passe à la nouvelle', () => {
+  const r = { type: 'remplacer', ligneContenant: 'Les méta-analyses sont sans ambiguïté', avant: 'mortalité prématurée.',
+    apres: 'mortalité prématurée ([Kivimäki et al., 2015](https://doi.org/10.1016/S0140-6736(15)60295-1)).', ancienApres: 'mortalité prématurée (source à préciser).' };
+  const neuve = 'Les méta-analyses sont sans ambiguïté : risque de mortalité prématurée.\n';
+  const marquee = 'Les méta-analyses sont sans ambiguïté : risque de mortalité prématurée (source à préciser).\n';
+  const a = appliquerRetouches(neuve, [r]);
+  const b = appliquerRetouches(marquee, [r]);
+  assert.ok(a.ok && b.ok, JSON.stringify([a.rapports, b.rapports]));
+  assert.equal(a.texte, b.texte, 'même résultat, que la note ait reçu la marque ou non');
+  assert.match(a.texte, /\(\[Kivimäki et al\., 2015\]/);
+  assert.equal(appliquerRetouches(a.texte, [r]).rapports[0].statut, 'déjà faite');
+  assert.equal(appliquerRetouches('Autre texte.\n', [r]).ok, false);
+});

@@ -1,0 +1,50 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-bem-evaluation-medicale",
+ "portee": "Renvois aux lois de la page « Évaluation médicale et BEM » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Évaluation médicale et BEM",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/bem-evaluation-medicale.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "relibeller",
+   "ligneContenant": "222, 224, 224.1 : BEM",
+   "libelle": "221.1",
+   "nouveau": "221",
+   "motif": "Numéro inexistant : la LATMP n'a pas d'art. 221.1 (le texte officiel passe de l'art. 221 à l'art. 222). L'avis du BEM est à l'art. 221 : « Le membre du Bureau d’évaluation médicale, par avis écrit motivé, infirme ou confirme le diagnostic et les autres conclusions du professionnel de la santé qui a charge du travailleur et du professionnel de la santé désigné par la Commission ou l’employeur, relativement aux sujets mentionnés aux paragraphes 1° à 5° du premier alinéa de l’article 212, et y substitue les siens, s’il y a lieu. » Libellé corrigé, cible inchangée."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "Confirme ou infirme le diagnostic",
+   "libelle": "art. 221.1",
+   "nouveau": "art. 221, al. 1",
+   "motif": "Numéro inexistant : la LATMP n'a pas d'art. 221.1. La confirmation ou l'infirmation du diagnostic par le BEM est au premier alinéa de l'art. 221 : « Le membre du Bureau d’évaluation médicale, par avis écrit motivé, infirme ou confirme le diagnostic et les autres conclusions du professionnel de la santé qui a charge du travailleur et du professionnel de la santé désigné par la Commission ou l’employeur, relativement aux sujets mentionnés aux paragraphes 1° à 5° du premier alinéa de l’article 212, et y substitue les siens, s’il y a lieu. » Libellé corrigé, cible inchangée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "le travailleur et l'employeur sont liés",
+   "avant": "sont liés par le rapport du MQAC sur",
+   "apres": "sont liés (art. 224 et 358, al. 2) par le rapport du MQAC sur",
+   "motif": "Mauvais article : l'art. 212 énumère les cinq sujets médicaux et permet à l'employeur de contester (« L’employeur qui a droit d’accès au dossier que la Commission possède au sujet d’une lésion professionnelle dont a été victime un travailleur peut contester l’attestation ou le rapport du professionnel de la santé qui a charge du travailleur […] ») ; l'effet liant vient des art. 224 (« Aux fins de rendre une décision en vertu de la présente loi, et sous réserve de l’article 224.1, la Commission est liée par le diagnostic et les autres conclusions établis par le professionnel de la santé qui a charge du travailleur relativement aux sujets mentionnés aux paragraphes 1° à 5° du premier alinéa de l’article 212. ») et 358, al. 2 (« Cependant, une personne ne peut demander la révision d’une question d’ordre médical sur laquelle la Commission est liée en vertu de l’article 224 […] »). Renvoi ajouté, le lien vers l'art. 212 reste pour la liste."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "la CNESST peut soumettre le rapport au MQAC pour demander son avis (délai 30 jours)",
+   "avant": "la CNESST peut soumettre le rapport au MQAC pour demander son avis (délai 30 jours)",
+   "apres": "si le rapport du médecin désigné infirme les conclusions du MQAC, celui-ci peut fournir à la CNESST un rapport complémentaire (délai 30 jours)",
+   "motif": "Personne erronée : c'est le MQAC qui peut produire un rapport complémentaire dans les 30 jours ; la CNESST peut ensuite soumettre les rapports au BEM. LATMP, art. 205.1 : « Si le rapport du professionnel de la santé désigné aux fins de l’application de l’article 204 infirme les conclusions du professionnel de la santé qui a charge du travailleur quant à l’un ou plusieurs des sujets mentionnés aux paragraphes 1° à 5° du premier alinéa de l’article 212, ce dernier peut, dans les 30 jours de la date de la réception de ce rapport, fournir à la Commission, sur le formulaire qu’elle prescrit, un rapport complémentaire en vue d’étayer ses conclusions […] » ; « La Commission peut soumettre ces rapports, incluant, le cas échéant, le rapport complémentaire au Bureau d’évaluation médicale prévu à l’article 216. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Avis du CSP lie les parties",
+   "avant": "Avis du CSP lie les parties",
+   "apres": "Avis du CSP lie la CNESST",
+   "motif": "Personne erronée : l'avis du comité spécial lie la Commission, non les parties (qui peuvent demander la révision puis contester devant le TAT). LATMP, art. 233 : « Aux fins de rendre une décision en vertu de la présente loi sur les droits du travailleur qui lui produit une réclamation alléguant qu’il est atteint d’une maladie professionnelle pulmonaire, la Commission est liée par le diagnostic et les autres constatations établis par le comité spécial en vertu du troisième alinéa de l’article 231. »"
+  }
+ ]
+}

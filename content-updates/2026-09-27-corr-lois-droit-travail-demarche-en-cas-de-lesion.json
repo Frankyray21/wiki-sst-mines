@@ -1,0 +1,64 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-demarche-en-cas-de-lesion",
+ "portee": "Renvois aux lois de la page « Démarche en cas de lésion » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "Le lien relibellé « art. 209 LATMP » mène toujours à la page du recueil de l'art. 204. Les cellules corrigées du tableau n'ont pas d'autre texte que le libellé du lien : leurs « ligneContenant » sont courtes (uniques dans la page publiée) ; vérifier l'unicité dans la note. Le groupe droit-1 corrige d'autres rangées du même tableau.",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Démarche en cas de lésion",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/theme/demarche-en-cas-de-lesion.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "relibeller",
+   "ligneContenant": "il peut demander un examen médical",
+   "libelle": "art. 204 LATMP",
+   "nouveau": "art. 209 LATMP",
+   "motif": "L'examen demandé par l'employeur est prévu à l'art. 209, l'art. 204 visant l'examen exigé par la Commission : « L’employeur qui a droit d’accès au dossier que la Commission possède au sujet d’une lésion professionnelle dont a été victime un travailleur peut exiger que celui-ci se soumette à l’examen du professionnel de la santé qu’il désigne, à chaque fois que le professionnel de la santé qui a charge de ce travailleur fournit à la Commission un rapport qu’il doit fournir et portant sur un ou plusieurs des sujets mentionnés aux paragraphes 1° à 5° du premier alinéa de l’article 212. » (LATMP, art. 209, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Annexe I",
+   "avant": "Annexe I",
+   "apres": "Maladies prévues par règlement (ancienne annexe I)",
+   "motif": "La présomption renvoie désormais à un règlement : « Un travailleur est présumé atteint d’une maladie professionnelle s’il est atteint d’une maladie prévue par règlement et si, au jour où il reçoit le diagnostic de cette maladie, il rencontre les conditions particulières en lien avec cette maladie prévues par règlement. » (LATMP, art. 29) ; « L’annexe I de cette loi est abrogée. » (LMRSST, art. 120)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "IRR, montant",
+   "avant": "IRR, montant",
+   "apres": "IRR, présomption d'incapacité",
+   "motif": "L'art. 46 ne fixe pas le montant : « Le travailleur est présumé incapable d’exercer son emploi tant que la lésion professionnelle dont il a été victime n’est pas consolidée. » (LATMP, art. 46) ; le montant est à l'art. 45 : « L’indemnité de remplacement du revenu est égale à 90% du revenu net retenu que le travailleur tire annuellement de son emploi. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Réintégration",
+   "avant": "Réintégration",
+   "apres": "Attestation médicale",
+   "motif": "L'art. 199 porte sur l'attestation médicale, non sur la réintégration : « Le professionnel de la santé qui, le premier, prend charge d’un travailleur victime d’une lésion professionnelle doit remettre sans délai à celui-ci, sur le formulaire prescrit par la Commission, une attestation comportant le diagnostic [...] » (LATMP, art. 199, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Examen médical employeur",
+   "avant": "Examen médical employeur",
+   "apres": "Examen médical exigé par la CNESST",
+   "motif": "L'examen de l'art. 204 est exigé par la Commission, non par l'employeur : « La Commission peut exiger d’un travailleur victime d’une lésion professionnelle qu’il se soumette à l’examen du professionnel de la santé qu’elle désigne, pour obtenir un rapport écrit de celui-ci sur toute question relative à la lésion. » (LATMP, art. 204, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Avis BEM",
+   "avant": "Avis BEM",
+   "apres": "Examen médical exigé par l'employeur",
+   "motif": "L'art. 209 porte sur l'examen demandé par l'employeur, non sur l'avis du BEM (art. 221) : « L’employeur qui a droit d’accès au dossier que la Commission possède au sujet d’une lésion professionnelle dont a été victime un travailleur peut exiger que celui-ci se soumette à l’examen du professionnel de la santé qu’il désigne [...] » (LATMP, art. 209, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Avis employeur",
+   "avant": "Avis employeur",
+   "apres": "Réclamation du travailleur, autres cas",
+   "motif": "L'art. 271 vise la réclamation du travailleur, l'avis de l'employeur étant à l'art. 268 : « Le travailleur victime d’une lésion professionnelle qui ne le rend pas incapable d’exercer son emploi au-delà de la journée au cours de laquelle s’est manifestée sa lésion ou celui à qui aucun employeur n’est tenu de verser un salaire en vertu de l’article 60, quelle que soit la durée de son incapacité, produit sa réclamation à la Commission, s’il y a lieu, sur le formulaire qu’elle prescrit, dans les six mois de sa lésion. » (LATMP, art. 271)."
+  }
+ ]
+}

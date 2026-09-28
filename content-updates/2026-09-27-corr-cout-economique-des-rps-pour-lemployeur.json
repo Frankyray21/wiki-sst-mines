@@ -99,8 +99,9 @@
    "type": "remplacer",
    "ligneContenant": "Estimé à 2-3 fois le coût d'absentéisme",
    "avant": "Estimé à 2-3 fois le coût d'absentéisme",
-   "apres": "Estimé entre 2 et 3 fois le coût d'absentéisme (source à préciser)",
-   "motif": "Ratio « 2-3 fois » sans source, marqué (« entre 2 et 3 » pour que le lot reste rejouable)."
+   "apres": "Pour la dépression, estimé de 5 à 10 fois le coût d'absentéisme dans huit pays, dont le Canada ([Evans-Lacko et Knapp, 2016](https://doi.org/10.1007/s00127-016-1278-4))",
+   "ancienApres": "Estimé entre 2 et 3 fois le coût d'absentéisme (source à préciser)",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Evans-Lacko, S. et Knapp, M. (2016). Global patterns of workplace productivity for people with depression: absenteeism and presenteeism costs across eight diverse countries. Social Psychiatry and Psychiatric Epidemiology, 51(11), 1525-1537. https://doi.org/10.1007/s00127-016-1278-4. Appui (résultat de recherche du 27 septembre 2026) : « The study found that costs associated with presenteeism are five to ten times greater than the costs incurred by absenteeism, and the research reported greater economic losses due to presenteeism than absenteeism in each of the investigated countries. [...] eight countries: Brazil, Canada, China, Japan, South Korea, Mexico, South Africa, and the USA. » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",
@@ -148,8 +149,15 @@
    "type": "remplacer",
    "ligneContenant": "est largement favorable à la prévention",
    "avant": "est largement favorable à la prévention.",
-   "apres": "est largement favorable à la prévention (source à préciser) ; un rendement se calcule toutefois sur les coûts évités, et non en comparant le coût total des cas au coût du programme.",
-   "motif": "Comparer le coût total des cas au coût d'un programme ne donne pas un rendement ; conclusion sans source, marquée, et précision ajoutée."
+   "apres": "est favorable à la prévention : s'attaquer aux RPS peut sembler trop coûteux, mais les ignorer coûte plus cher ([EU-OSHA, 2014](https://osha.europa.eu/sites/default/files/cost-of-work-related-stress.pdf)) ; un rendement se calcule toutefois sur les coûts évités, et non en comparant le coût total des cas au coût du programme.",
+   "ancienApres": "est largement favorable à la prévention (source à préciser) ; un rendement se calcule toutefois sur les coûts évités, et non en comparant le coût total des cas au coût du programme.",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Hassard, J., Teoh, K., Cox, T., Dewe, P., Cosmar, M., Gründler, R., Flemming, D., Cosemans, B. et Van den Broek, K. (2014). Calculating the cost of work-related stress and psychosocial risks (European Risk Observatory, Literature Review). Agence européenne pour la sécurité et la santé au travail (EU-OSHA). https://osha.europa.eu/sites/default/files/cost-of-work-related-stress.pdf. Appui (résultat de recherche du 27 septembre 2026) : « A new report published by the European Agency for Safety and Health at Work summarises studies focusing on calculating costs of work-related stress and psychosocial risks. The key finding related to your query is that \"tackling stress and psychosocial risks can be viewed as too costly, but the reality is that it costs more to ignore them.\" » Reformulée pour dire ce que dit la source."
+  },
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "Calculating the costs of work-related stress",
+   "par": "- EU-OSHA (2014). *Calculating the cost of work-related stress and psychosocial risks*. European Risk Observatory, revue de littérature de Hassard, J., Teoh, K., Cox, T. et al. ([EU-OSHA](https://osha.europa.eu/sites/default/files/cost-of-work-related-stress.pdf)).",
+   "motif": "Référence vague (« EU-OSHA. Calculating the costs of work-related stress. ») : le rapport de l'EU-OSHA qui porte ce titre, « Calculating the cost of work-related stress and psychosocial risks » (European Risk Observatory, Literature Review, 2014 ; Hassard, Teoh, Cox, Dewe, Cosmar, Gründler, Flemming, Cosemans et Van den Broek), retrouvé dans les résultats de recherche sur osha.europa.eu et à l'Office des publications de l'UE."
   }
  ]
 }

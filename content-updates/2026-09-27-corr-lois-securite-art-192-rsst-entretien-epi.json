@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-192-rsst-entretien-epi",
+ "portee": "Renvois aux lois de la page « art-192-RSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-192-RSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-192-rsst-entretien-epi.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "C'est la barrière de dernier recours quand tout le reste a échoué",
+   "avant": " impose l'arrêt d'urgence. C'est la barrière",
+   "apres": " impose d'annoncer par un appareil avertisseur la mise en marche d'une machine qui présente un risque pour les personnes à proximité ; l'arrêt d'urgence relève de l'article 193. C'est la barrière",
+   "motif": "RSST, art. 192 : « Appareil avertisseur : Lorsque la mise en marche d’une machine constitue un risque pour les personnes qui se trouvent à proximité, cette mise en marche doit être annoncée par un appareil avertisseur ou par tout autre moyen de communication efficace. » ; art. 193 : « Arrêt d’urgence : Une machine dont le fonctionnement nécessite la présence d’au moins un travailleur doit être pourvue d’un dispositif d’arrêt d’urgence. »"
+  }
+ ]
+}

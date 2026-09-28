@@ -1,0 +1,50 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-lsst-droits-et-obligations",
+ "portee": "Renvois aux lois de la page « LSST, droits et obligations » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "LSST, droits et obligations",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/lsst-droits-et-obligations.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Son objet principal est l'élimination à la source des dangers",
+   "avant": "Son objet principal est l'élimination à la source des dangers pour la santé, la sécurité et l'intégrité physique des travailleurs",
+   "apres": "Son objet principal est l'élimination à la source des dangers pour la santé, la sécurité et l'intégrité physique et psychique des travailleurs",
+   "motif": "Contenu infidèle : l'objet de la loi inclut l'intégrité psychique depuis la LMRSST (art. 233, 1°) : « La présente loi a pour objet l’élimination à la source même des dangers pour la santé, la sécurité et l’intégrité physique et psychique des travailleurs. » (LSST, art. 2)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "énonce l'objet : élimination à la source des dangers",
+   "avant": "énonce l'objet : élimination à la source des dangers pour la santé, la sécurité et l'intégrité physique des travailleurs",
+   "apres": "énonce l'objet : élimination à la source des dangers pour la santé, la sécurité et l'intégrité physique et psychique des travailleurs",
+   "motif": "Contenu infidèle : « La présente loi a pour objet l’élimination à la source même des dangers pour la santé, la sécurité et l’intégrité physique et psychique des travailleurs. » (LSST, art. 2, « et psychique » inséré par la LMRSST, art. 233, 1°)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "propriétaire d'un édifice utilisé par plusieurs employeurs",
+   "avant": "propriétaire d'un édifice utilisé par plusieurs employeurs",
+   "apres": "propriétaire d'un édifice utilisé par au moins un employeur",
+   "motif": "Seuil faux (texte antérieur à la LMRSST, dont l'art. 142 a remplacé « Lorsqu’un même édifice est utilisé par plusieurs employeurs, le propriétaire ») : « Le propriétaire d’un édifice qui est utilisé par au moins un employeur doit faire en sorte que, dans les parties qui ne sont pas sous l’autorité d’un employeur, les mesures nécessaires pour protéger la santé et assurer la sécurité des travailleurs soient prises. » (LSST, art. 56)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "avis écrit dans les 24 heures en cas de décès",
+   "avant": "dommages matériels de plus de 150 000 $",
+   "apres": "dommages matériels de 150 000 $ et plus",
+   "motif": "Seuil inexact : la loi vise les dommages de 150 000 $ et plus, pas seulement ceux qui dépassent ce montant : « 4° des dommages matériels de 150 000 $ et plus. » (LSST, art. 62, al. 1, 4°)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "utilisation de produits contrôlés (Règlement sur l'information)",
+   "avant": "utilisation de produits contrôlés",
+   "apres": "utilisation de produits dangereux",
+   "motif": "Terme erroné : l'art. 62.1 vise les produits dangereux (la notion de « produit contrôlé » n'y figure plus) : « Sauf dans les cas prévus par règlement, un employeur ne peut permettre l’utilisation, la manutention, le stockage ou l’entreposage d’un produit dangereux sur un lieu de travail, à moins qu’il ne soit pourvu d’une étiquette et d’une fiche de données de sécurité conformes […] » (LSST, art. 62.1)."
+  }
+ ]
+}

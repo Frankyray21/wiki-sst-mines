@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-communication-laterale",
+ "portee": "Corrections de la page « Communication latérale » : référence vague rendue vérifiable.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Communication latérale",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/communication-laterale.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "Recherches sur les communautés de pratique (Wenger)",
+   "par": "- Recherches sur les communautés de pratique : Wenger, E. (1998). *Communities of practice: Learning, meaning, and identity*. Cambridge University Press. ([doi.org/10.1017/CBO9780511803932](https://doi.org/10.1017/CBO9780511803932))",
+   "motif": "Référence vague (« Recherches sur les communautés de pratique (Wenger) : aucun titre ni année n'est consigné dans ce vault. ») : l'ouvrage de base d'Etienne Wenger sur les communautés de pratique, Cambridge University Press, 1998, DOI 10.1017/CBO9780511803932 (notice retrouvée dans les résultats de recherche). Deux autres ouvrages existent (Lave et Wenger, 1991 ; Wenger, McDermott et Snyder, 2002) : celui de 1998 est celui qui définit la notion."
+  }
+ ]
+}

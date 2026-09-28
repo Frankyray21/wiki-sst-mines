@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-131-rsst-securite-machines",
+ "portee": "Renvois aux lois de la page « art-131-RSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-131-RSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-131-rsst-securite-machines.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "action à la source, sur la propagation, puis sur la durée d'exposition, en priorité sur l'usage des protecteurs auditifs",
+   "avant": " institue la ",
+   "apres": " fixe les valeurs limites d'exposition au bruit (85 dBA ; 140 dBC en crête) ; ce sont les articles 135 et 136 qui instituent la ",
+   "motif": "L'art. 131 ne fixe que les valeurs limites : RSST, art. 131 : « Les valeurs limites d’exposition au bruit sont les suivantes: 1° pour le niveau d’exposition quotidienne au bruit: 85 dBA […] 2° pour le niveau de pression acoustique de crête […]: 140 dBC ». La hiérarchie est aux art. 135 et 136 : RSST, art. 135 : « l’employeur doit mettre en œuvre ceux qui permettent d’éliminer ou de réduire le bruit à la source […] Il peut également prendre les moyens raisonnables qui permettent, selon leur efficacité, de: 1° limiter la propagation du bruit […] » ; RSST, art. 136 : « L’employeur doit réduire le temps d’exposition quotidienne au bruit des travailleurs, conformément à l’article 137, ou leur fournir des protecteurs auditifs […] »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Un concasseur secondaire émet 102 dB(A) à 1 m.",
+   "avant": " impose d'évaluer l'action à la source",
+   "apres": " fixe les valeurs limites (85 dBA ; 140 dBC en crête) ; ce sont les art. 133, 135 et 136 qui imposent d'évaluer l'action à la source",
+   "motif": "L'art. 131 n'impose aucune évaluation : il fixe les valeurs limites (« Les valeurs limites d’exposition au bruit sont les suivantes: 1° […] 85 dBA […] »). L'évaluation et les moyens sont aux art. 133, 135 et 136 : RSST, art. 133 : « L’employeur doit, à tous les 5 ans, évaluer chaque situation de travail qui présente un dépassement des valeurs limites d’exposition afin de déterminer les moyens raisonnables qui permettent d’éliminer ou de réduire le bruit à la source, de respecter les valeurs établies à l’article 131 ou, à tout le moins, réduire l’exposition des travailleurs au bruit. » ; art. 135, 1° : « limiter la propagation du bruit, notamment par l’encoffrement d’une machine » ; art. 136 : « L’employeur doit réduire le temps d’exposition quotidienne au bruit des travailleurs […] »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "(mines : dispositions spécifiques bruit)",
+   "avant": "(mines : dispositions spécifiques bruit)",
+   "apres": "(champ d'application de la section sur les espaces clos ; aucune disposition sur le bruit)",
+   "motif": "L'art. 296.1 ne vise ni les mines ni le bruit : RSST, art. 296.1 : « Champ d’application : La présente section s’applique à tout espace clos et à tout travail effectué dans un espace clos. »"
+  }
+ ]
+}

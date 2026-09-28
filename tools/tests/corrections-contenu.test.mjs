@@ -38,18 +38,33 @@ test('lots de correction du 27 septembre : au moins un, chacun désigne une page
   }
 });
 
-// Note reconstituée : le titre, puis une ligne par fragment désigné, qui porte les textes à remplacer.
+// Note reconstituée : le titre, puis une ligne par fragment désigné, qui porte les textes à remplacer. Une
+// retouche qui désigne une ligne produite par une retouche précédente du même lot (titre renommé puis
+// paragraphe inséré dessous, bloc inséré puis complété, ligne remplacée puis suivie d'une autre) n'en
+// crée pas : l'outil trouve la ligne produite.
 function note(lot) {
   const lignes = ['# ' + lot.note.titre, ''];
-  const par = new Map(), doubles = new Set();
+  const par = new Map(), doubles = new Set(), produits = [];
   for (const r of lot.retouches) {
+    const deja = !par.has(r.ligneContenant) && produits.some(t => souple(t).includes(souple(r.ligneContenant))
+      && (r.type !== 'remplacer' || souple(t).includes(souple(r.avant))));
+    const produit = () => {
+      if (r.type === 'remplacer') produits.push(...[...par.values()].filter(l => l.includes(r.avant)).map(l => l.replace(r.avant, r.apres)));
+      else if (r.type === 'remplacerLigne') produits.push(r.par);
+      else if (r.type === 'insererApres') produits.push(r.bloc);
+    };
+    if (deja) { produit(); continue; }
     if (r.type === 'remplacer') {
       const l = par.get(r.ligneContenant) ?? (r.avant.includes(r.ligneContenant) ? '' : r.ligneContenant);
       par.set(r.ligneContenant, l.includes(r.avant) ? l : (l ? l + ' ' : '') + r.avant);
     } else if (r.type === 'recibler') {
-      // la ligne porte un lien de ce libellé vers une autre note (homonyme d'un autre wiki)
-      const l = r.ligneContenant === r.libelle ? '### ' + r.libelle : r.ligneContenant;
-      par.set(r.ligneContenant, l.replace(r.libelle, `[[Ancienne cible|${r.libelle}]]`));
+      // la ligne porte un lien de ce libellé vers une autre note (homonyme d'un autre wiki) ; si une retouche
+      // précédente de la ligne lui donne ce libellé (relibeller « article 256.2 » → « article 256.3 »), c'est lui
+      const relibelle = lot.retouches.some(x => x.type === 'relibeller' && x.ligneContenant === r.ligneContenant && x.nouveau === r.libelle);
+      if (!(relibelle && par.has(r.ligneContenant))) {
+        const l = r.ligneContenant === r.libelle ? '### ' + r.libelle : r.ligneContenant;
+        par.set(r.ligneContenant, l.replace(r.libelle, `[[Ancienne cible|${r.libelle}]]`));
+      }
     } else if (r.type === 'relibeller' || r.type === 'delier') {
       // la ligne porte un lien de ce libellé (vers un PDF à une page donnée, pour relibeller)
       const lib = [].concat(r.libelle)[0];
@@ -64,6 +79,7 @@ function note(lot) {
       par.set(r.ligneContenant, rangee.includes(r.avant.trim()) ? rangee : '| ' + r.ligneContenant + ' ' + r.avant.trim());
     }
     if (r.toutes) doubles.add(r.ligneContenant);
+    produit();
   }
   // « toutes » : la ligne revient deux fois (un en-tête identique dans deux tableaux, p. ex.)
   for (const [k, l] of par) { if (!lignes.includes(l)) lignes.push(l, ''); if (doubles.has(k)) lignes.push(l, ''); }
@@ -140,5 +156,39 @@ for (const nom of lots) {
         assert.ok(liens.length >= 1 && liens.every(m => m[1] === r.adresse), `${rel} : « ${r.libelle} » mène à ${r.adresse}`);
       }
     }
+  });
+}
+
+// Une note qui a déjà reçu la version antérieure d'une correction (la marque « (source à préciser) » posée par
+// un lot précédent, remplacée depuis par une source) passe à la nouvelle version, puis ne bouge plus.
+for (const nom of lots) {
+  const lot = JSON.parse(fs.readFileSync(path.join(dossier, nom), 'utf8'));
+  const anciennes = lot.retouches.filter(r => r.type === 'remplacer' && r.ancienApres);
+  if (!anciennes.length) continue;
+  test('lot ' + nom + ' : une note qui porte la version antérieure passe à la nouvelle', () => {
+    const v = fs.mkdtempSync(path.join(os.tmpdir(), 'vault-ancien-'));
+    const abs = path.join(v, lot.note.wiki, '20 - Articles internes', lot.note.titre + '.md');
+    fs.mkdirSync(path.dirname(abs), { recursive: true });
+    const lien = s => s.replace(/\{\{lien:([^|}]+)\|([^}]+)\}\}/g, (m, a, l) => `[[${path.basename(a.trim(), '.html')}|${l}]]`);
+    let texte = note(lot);
+    for (const r of anciennes) {
+      assert.ok(texte.includes(r.avant), nom + ' : « avant » dans la note reconstituée');
+      texte = texte.replace(r.avant, () => lien([].concat(r.ancienApres)[0]));
+    }
+    fs.writeFileSync(abs, texte);
+    const WIKI_DE = { legislation: 'Recueil législatif SST', securite: 'Wiki Sécurité industrielle', hygiene: 'Wiki Hygiène industrielle', toxicologie: 'Wiki Toxicologie', ergonomie: 'Wiki Ergonomie', 'droit-travail': 'Wiki Droit du travail', psychosocial: 'Wiki SST psychosociale' };
+    for (const [, a] of [...JSON.stringify(lot).matchAll(/\{\{lien:(w\/[^|}]+)\|/g), ...lot.retouches.filter(r => r.adresse).map(r => [null, r.adresse])]) {
+      const f = path.join(v, WIKI_DE[a.split('/')[1]], path.basename(a, '.html') + '.md');
+      if (!fs.existsSync(f)) { fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, '# ' + path.basename(a, '.html') + '\n'); }
+    }
+    const outil = () => execFileSync(process.execPath, [path.join(outils, 'appliquer_retouches.mjs'), '--lot', path.join(dossier, nom), '--vault', v, '--appliquer'], { cwd: v, encoding: 'utf8' });
+    assert.doesNotMatch(outil(), /✗/);
+    const apres = fs.readFileSync(abs, 'utf8');
+    for (const r of anciennes) {
+      assert.ok(apres.includes(lien(r.apres)), nom + ' : version nouvelle « ' + r.apres.slice(0, 50) + ' »');
+      assert.ok(!apres.includes(lien([].concat(r.ancienApres)[0])), nom + ' : version antérieure remplacée');
+    }
+    assert.match(outil(), /Rien à changer/);
+    assert.equal(fs.readFileSync(abs, 'utf8'), apres);
   });
 }

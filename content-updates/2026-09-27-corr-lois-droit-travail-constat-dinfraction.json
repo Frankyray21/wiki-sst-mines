@@ -1,0 +1,43 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-constat-dinfraction",
+ "portee": "Renvois aux lois de la page « Constat d'infraction » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Constat d'infraction",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/constat-dinfraction.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "L'inspecteur agit dans le cadre des pouvoirs prévus",
+   "avant": "dans le cadre des pouvoirs prévus à",
+   "apres": "dans le cadre des pouvoirs prévus aux",
+   "motif": "Accord avec le libellé corrigé du lien qui suit (« articles 179 et 180 de la LSST », retouche suivante) : les pouvoirs décrits sont ceux des art. 179 et 180 LSST, non de l'art. 238. LSST, art. 179 : « Un inspecteur peut, dans l’exercice de ses fonctions, pénétrer à toute heure raisonnable du jour ou de la nuit dans un lieu où sont exercées des activités dans les domaines visés dans la présente loi et les règlements, et l’inspecter. » ; art. 180 : « En outre des pouvoirs généraux qui lui sont dévolus, l’inspecteur peut: […] »"
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "L'inspecteur agit dans le cadre des pouvoirs prévus",
+   "libelle": "l'article 238 de la LSST",
+   "nouveau": "articles 179 et 180 de la LSST",
+   "motif": "Mauvais article : l'art. 238 LSST vise l'ordonnance du tribunal après condamnation (« Le tribunal peut, sur demande du poursuivant, ordonner à la personne déclarée coupable d’une infraction à une disposition de l’article 236 ou 237 de se conformer aux exigences de la loi ou des règlements […] ») ; les pouvoirs décrits sont aux art. 179 (« Un inspecteur peut, dans l’exercice de ses fonctions, pénétrer à toute heure raisonnable du jour ou de la nuit dans un lieu où sont exercées des activités dans les domaines visés dans la présente loi et les règlements, et l’inspecter. » ; « Un inspecteur a alors accès à tous les livres, registres et dossiers d’un employeur, d’un maître d’oeuvre, d’un fournisseur ou de toute autre personne […] ») et 180 (« 1° enquêter sur toute matière relevant de sa compétence; […] 3° prélever, sans frais, à des fins d’analyse, des échantillons de toute nature […] 4° faire des essais et prendre des photographies ou enregistrements sur un lieu de travail; »). Libellé corrigé, cible inchangée."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "absence ou inadéquation des équipements de protection individuelle",
+   "libelle": "art. 46 LSST",
+   "nouveau": "art. 51, 11° LSST",
+   "motif": "Mauvais article : l'art. 46 LSST vise la travailleuse qui allaite (« Une travailleuse qui fournit à l’employeur le certificat prescrit par la Commission qui atteste que les conditions de son travail comportent des dangers pour l’enfant qu’elle allaite […] ») ; les équipements de protection individuels sont à l'art. 51, 11° : « 11° fournir gratuitement au travailleur tous les moyens et équipements de protection individuels choisis par le comité de santé et de sécurité conformément au paragraphe 4° de l’article 78 ou, le cas échéant, les moyens et équipements de protection individuels ou collectifs déterminés par règlement et s’assurer que le travailleur, à l’occasion de son travail, utilise ces moyens et équipements; » Libellé corrigé, cible inchangée."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "crée un antécédent qui peut être invoqué en aggravation",
+   "avant": "en aggravation pour toute nouvelle infraction durant les deux années suivantes (",
+   "apres": "en aggravation (amendes de récidive : art. 236 et 237 LSST) pour toute nouvelle infraction durant les deux années suivantes (source à préciser) (poursuite pénale : ",
+   "motif": "Mauvais article : l'art. 242 LSST dit seulement qui peut poursuivre (« Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. ») ; l'aggravation en cas de récidive est aux art. 236 et 237, p. ex. art. 236, 1° : « dans le cas d’une personne physique, d’une amende d’au moins 600 $ et d’au plus 1 500 $ dans le cas d’une première infraction, d’une amende d’au moins 1 500 $ et d’au plus 3 000 $ dans le cas d’une récidive et d’une amende d’au moins 3 000 $ et d’au plus 6 000 $ pour toute récidive additionnelle ». Aucune disposition de la LSST ne fixe la période de deux ans : marquée (source à préciser) ; le lien vers l'art. 242 est gardé pour la poursuite pénale."
+  }
+ ]
+}

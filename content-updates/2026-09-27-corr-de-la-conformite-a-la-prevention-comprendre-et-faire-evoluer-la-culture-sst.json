@@ -1,0 +1,21 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-de-la-conformite-a-la-prevention-comprendre-et-faire-evoluer-la-culture-sst",
+ "portee": "Corrections de la page « De la conformité à la prévention - Comprendre et faire évoluer la culture SST » : la courbe de Bradley, dessinée en caractères sur une seule ligne, devient une phrase lisible.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "De la conformité à la prévention - Comprendre et faire évoluer la culture SST",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/de-la-conformite-a-la-prevention-comprendre-et-faire-evoluer-la-culture-sst.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "Accidents │ │ ██ Réactif",
+   "par": "Les quatre stades, du moins au plus mature : réactif (« Les accidents arrivent, c'est inévitable »), dépendant (« On suit les règles parce qu'on doit »), indépendant (« Je fais attention pour moi ») et interdépendant (« On se protège mutuellement »). La plupart des organisations en industrie lourde se situent entre les stades dépendant et indépendant (source à préciser).",
+   "motif": "Le schéma de la courbe de Bradley (barres ██ et flèche └──▶ en caractères) tient sur une seule ligne de la note : le lecteur voit une suite de symboles, et au téléphone la flèche faisait défiler la page. La ligne devient une phrase qui garde les quatre stades, leurs citations et le constat final ; ce constat (« La plupart des organisations en industrie lourde se situent ici ») n'a pas de source : marqué."
+  }
+ ]
+}

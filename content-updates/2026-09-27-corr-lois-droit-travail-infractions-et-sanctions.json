@@ -1,0 +1,50 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-infractions-et-sanctions",
+ "portee": "Renvois aux lois de la page « Infractions et sanctions SST » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Infractions et sanctions SST",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/infractions-et-sanctions.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "relibeller",
+   "ligneContenant": "qualité pour poursuivre",
+   "libelle": "242.1",
+   "nouveau": "al. 1",
+   "motif": "Numéro inexistant : la LSST n'a pas d'art. 242.1 ; la poursuite par la Commission est le 1er alinéa de l'art. 242 : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. » (LSST, art. 242, al. 1). La cible du lien (premier alinéa de l'art. 242) ne change pas."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "qualité pour poursuivre",
+   "libelle": "242.2",
+   "nouveau": "al. 2",
+   "motif": "Numéro inexistant : la LSST n'a pas d'art. 242.2 ; la poursuite par une association accréditée est le 2e alinéa de l'art. 242 : « Une association accréditée peut, conformément à l’article 10 du Code de procédure pénale (chapitre C‐ 25.1), intenter une poursuite pénale pour une infraction à une disposition de la présente loi. » (LSST, art. 242, al. 2)."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "CNESST (art. 242.1) ;",
+   "libelle": "art. 242.1",
+   "nouveau": "art. 242, al. 1",
+   "motif": "Numéro inexistant : il n'y a pas d'art. 242.1 dans la LSST ; c'est l'art. 242, al. 1 : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. »"
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "Association accréditée selon certaines formalités",
+   "libelle": "art. 242.2",
+   "nouveau": "art. 242, al. 2",
+   "motif": "Numéro inexistant : il n'y a pas d'art. 242.2 dans la LSST ; c'est l'art. 242, al. 2 : « Une association accréditée peut, conformément à l’article 10 du Code de procédure pénale (chapitre C‐ 25.1), intenter une poursuite pénale pour une infraction à une disposition de la présente loi. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "actes compromettant directement et sérieusement la santé",
+   "avant": "la sécurité ou l'intégrité physique d'un travailleur",
+   "apres": "la sécurité ou l'intégrité physique ou psychique d'un travailleur",
+   "motif": "Contenu infidèle : depuis la LMRSST (art. 233, 2°), l'infraction vise aussi l'intégrité psychique : « Quiconque, par action ou par omission, agit de manière à compromettre directement et sérieusement la santé, la sécurité ou l’intégrité physique ou psychique d’un travailleur commet une infraction […] » (LSST, art. 237)."
+  }
+ ]
+}

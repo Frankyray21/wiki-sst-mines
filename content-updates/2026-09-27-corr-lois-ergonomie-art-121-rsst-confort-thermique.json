@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-ergonomie-art-121-rsst-confort-thermique",
+ "portee": "Renvois aux lois de la page « art-121-RSST » (Wiki Ergonomie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-121-RSST",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/art-121-rsst-confort-thermique.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "(méthode WBGT, surveillance, mesures particulières)",
+   "avant": "Dans tout établissement où au moins 50 travailleurs peuvent être exposés simultanément à une contrainte thermique due à la chaleur, l'employeur doit appliquer les mesures de prévention prévues aux",
+   "apres": "Dans tout établissement qui emploie 50 travailleurs ou plus et où l'indice de contrainte thermique atteint ou dépasse la courbe de travail continu de l'annexe V, cet indice doit être mesuré deux fois par année, dont une fois pendant l'été, à chaque poste de travail où il est atteint ou dépassé ; les résultats sont consignés dans un registre conservé au moins 5 ans. La méthode de mesure et les mesures de prévention relèvent des",
+   "motif": "Point relevé : la citation d'ouverture faisait de l'art. 121 un seuil de « 50 travailleurs exposés simultanément » déclenchant les articles 122 à 124 ; le texte vise l'établissement qui emploie 50 travailleurs ou plus et impose une mesure : « Dans tout établissement qui emploie 50 travailleurs ou plus et où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique atteint ou dépasse la courbe de travail continu indiquée au graphique de l'annexe V, un tel indice doit être mesuré deux fois par année, dont une fois pendant l'été, à chaque poste de travail où il est atteint ou dépassé. Les résultats des mesures effectuées conformément au premier alinéa doivent être consignés par l'employeur dans un registre que celui-ci doit conserver pendant au moins 5 ans. » (RSST, art. 121)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Pour les établissements sous le seuil",
+   "avant": "où le seuil de 50 travailleurs exposés à la chaleur est atteint.",
+   "apres": "qui emploie 50 travailleurs ou plus et où l'indice de contrainte thermique atteint ou dépasse la courbe de travail continu de l'annexe V.",
+   "motif": "Point relevé : le seuil de l'art. 121 du RSST était « 50 travailleurs exposés à la chaleur » ; le texte vise l'effectif de l'établissement : « Dans tout établissement qui emploie 50 travailleurs ou plus et où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique atteint ou dépasse la courbe de travail continu indiquée au graphique de l'annexe V, un tel indice doit être mesuré deux fois par année [...] » (RSST, art. 121)."
+  }
+ ]
+}

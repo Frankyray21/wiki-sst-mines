@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-risques-machines",
+ "portee": "Renvois aux lois de la page « Programme de gestion des risques machines » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Programme de gestion des risques machines",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/risques-machines.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "relibeller",
+   "ligneContenant": "Procédures de cadenassage par équipement",
+   "libelle": "RSST art. 188.6",
+   "nouveau": "RSST art. 199 et 200",
+   "motif": "RSST, art. 188.6 : « (Remplacé). » RSST, art. 199 : « L’employeur doit, pour chaque machine située dans un établissement sur lequel il a autorité, s’assurer qu’une ou plusieurs procédures décrivant la méthode de contrôle des énergies soient élaborées et appliquées. » ; art. 200 : « Une procédure décrivant la méthode de contrôle des énergies doit comprendre les éléments suivants: […] ». Libellé corrigé, cible inchangée (note art-188.6-RSST, qui traite de ces procédures)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "EPI fournis gratuitement",
+   "avant": "art. 51.11 : EPI fournis gratuitement.",
+   "apres": "art. 51, 11° : EPI fournis gratuitement.",
+   "motif": "Il n'y a pas d'art. 51.11 dans la LSST : c'est le paragraphe 11° de l'art. 51. LSST, art. 51 : « Il doit notamment: […] 11° fournir gratuitement au travailleur tous les moyens et équipements de protection individuels choisis par le comité de santé et de sécurité conformément au paragraphe 4° de l’article 78 ou, le cas échéant, les moyens et équipements de protection individuels ou collectifs déterminés par règlement et s’assurer que le travailleur, à l’occasion de son travail, utilise ces moyens et équipements; »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "cadenassage et contrôle des énergies",
+   "avant": ".1 à 188.13 : cadenassage et contrôle des énergies.",
+   "apres": ".1 à 188.13 (remplacés ; aujourd'hui art. 195 à 207) : cadenassage et contrôle des énergies.",
+   "motif": "RSST, art. 188.1 à 188.13 : « (Remplacé). » La sous-section du cadenassage est aux art. 195 à 207 : art. 195 : « Dans la présente sous-section, on entend par: «cadenassage» : une méthode de contrôle des énergies […] » ; art. 207 : « La présente sous-section s’applique, compte tenu des adaptations nécessaires, à tout travail sur une installation électrique. »"
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-ergonomie-art-130-rsst-bruit-limite",
+ "portee": "Renvois aux lois de la page « art-130-RSST » (Wiki Ergonomie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-130-RSST",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/art-130-rsst-bruit-limite.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "ouvre la section bruit. Il oblige à réduire le bruit à la source d'abord",
+   "avant": "les contrôles techniques, l'audiométrie et les EPI.",
+   "apres": "les contrôles techniques et les protecteurs auditifs.",
+   "motif": "Point relevé : la section bruit du RSST (art. 130 à 141) détaillerait l'audiométrie ; aucun de ces articles n'en traite. L'art. 130 annonce leur contenu : « La présente section établit les valeurs limites d'exposition au bruit, les moyens pour évaluer le niveau d'exposition quotidienne au bruit et celui de la pression acoustique de crête dans un établissement, ainsi que les normes applicables. [...] Elles précisent les situations de travail pour lesquelles le port des protecteurs auditifs est nécessaire. » (RSST, art. 130)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Un hygiéniste documente une situation d'exposition",
+   "avant": "-RSST sert de cadre normatif pour l'analyse, le suivi médical et la décision de gestion appropriée.",
+   "apres": " du RSST ne vise que le bruit : il ouvre la section qui fixe les valeurs limites d'exposition au bruit et les moyens de l'évaluer et de le réduire.",
+   "motif": "Point relevé : le cas type faisait de l'article le cadre normatif de l'analyse, du suivi médical et de la gestion d'expositions à la silice, aux gaz, au bruit, aux vibrations et aux contaminants chimiques ; l'art. 130 du RSST ne vise que le bruit : « La présente section établit les valeurs limites d'exposition au bruit, les moyens pour évaluer le niveau d'exposition quotidienne au bruit et celui de la pression acoustique de crête dans un établissement, ainsi que les normes applicables. » (RSST, art. 130). Forme « article 130-RSST » remplacée par « article 130 du RSST »."
+  }
+ ]
+}

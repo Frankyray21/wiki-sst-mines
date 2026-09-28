@@ -15,22 +15,32 @@
    "type": "remplacer",
    "ligneContenant": "réduit significativement le risque de",
    "avant": "et de chronicisation. La démarche",
-   "apres": "et de chronicisation (source à préciser). La démarche",
-   "motif": "Point relevé : « réduit significativement le risque de TSPT » n'a pas de source ; la seule référence de la page, Rose et al. (2002), porte sur le debriefing. Marqué à la fin de l'affirmation."
+   "apres": "et de chronicisation, surtout par une thérapie cognitivo-comportementale centrée sur le trauma offerte aux personnes qui gardent des symptômes ; les interventions préventives offertes à tous, symptomatiques ou non, n'ont pas fait leurs preuves ([Roberts et al., 2019](https://doi.org/10.1080/20008198.2019.1695486)). La démarche",
+   "ancienApres": "et de chronicisation (source à préciser). La démarche",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Roberts, N. P., Kitchiner, N. J., Kenardy, J., Lewis, C. E., & Bisson, J. I. (2019). Early psychological intervention following recent trauma: A systematic review and meta-analysis. European Journal of Psychotraumatology, 10(1), 1695486. https://doi.org/10.1080/20008198.2019.1695486. Appui (résultat de recherche du 27 septembre 2026) : « « The review found no evidence to support the use of preventative interventions offered to individuals irrespective of whether they were symptomatic or not » ; « the review did find evidence to support the use of trauma focused cognitive behavioural therapy (CBT-T) in studies targeting individuals with early traumatic stress symptoms, with effects strongest for treatment of acute stress disorder and posttraumatic stress disorder ». » Reformulée pour dire ce que dit la source."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Sans soutien structuré, après un événement traumatique",
+   "avant": "Sans soutien structuré, après un événement traumatique",
+   "apres": "Après un événement traumatique",
+   "motif": "Les taux de la liste qui suit, désormais sourcés (Geoffrion et al., 2022 ; Santiago et al., 2013), portent sur les personnes exposées en général et non sur celles qui n'ont pas reçu de soutien structuré : l'amorce « Sans soutien structuré » ne leur convient plus."
   },
   {
    "type": "remplacer",
    "ligneContenant": "présentent des symptômes aigus dans les premiers jours",
-   "avant": "30 à 50 % des personnes exposées",
-   "apres": "30 à 50 % (source à préciser) des personnes exposées",
-   "motif": "Point relevé : « 30 à 50 % » des personnes exposées avec des symptômes aigus, chiffre sans source. Marqué après le chiffre."
+   "avant": "30 à 50 % des personnes exposées présentent des symptômes aigus dans les premiers jours",
+   "apres": "Selon le type d'événement, 14 à 36 % des personnes exposées présentent un trouble de stress aigu dans le mois qui suit ([Geoffrion et al., 2022](https://doi.org/10.1177/1524838020933844))",
+   "ancienApres": "30 à 50 % (source à préciser) des personnes exposées présentent des symptômes aigus dans les premiers jours",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Geoffrion, S., Goncalves, J., Robichaud, I., Sader, J., Giguère, C.-É., Fortin, M., Lamothe, J., Bernard, P., & Guay, S. (2022). Systematic review and meta-analysis on acute stress disorder: Rates following different types of traumatic events. Trauma, Violence, & Abuse, 23(1), 213-223. https://doi.org/10.1177/1524838020933844. Appui (résultat de recherche du 27 septembre 2026) : « « The Geoffrion et al. study found acute stress disorder prevalence rates between 14.1% and 36.0% within the first month post-trauma. » ; « Rates of acute stress disorder ranged from 14.1% for war-related trauma to 36.0% for interpersonal trauma. » ; « seventy-three samples from 70 studies totaling 20,065 participants ». » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",
    "ligneContenant": "développeront un TSPT durable selon la nature",
-   "avant": "5 à 30 % développeront",
-   "apres": "5 à 30 % (source à préciser) développeront",
-   "motif": "Point relevé : « 5 à 30 % » développant un TSPT durable, chiffre sans source. Marqué après le chiffre."
+   "avant": "5 à 30 % développeront un TSPT durable selon la nature de l'événement",
+   "apres": "En moyenne, 17 % des personnes exposées ont encore un TSPT 12 mois après l'événement, avec de fortes variations selon les études (de 0,6 à 43,8 %) et selon la nature, intentionnelle ou non, de l'événement ([Santiago et al., 2013](https://doi.org/10.1371/journal.pone.0059236))",
+   "ancienApres": "5 à 30 % (source à préciser) développeront un TSPT durable selon la nature de l'événement",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Santiago, P. N., Ursano, R. J., Gray, C. L., Pynoos, R. S., Spiegel, D., Lewis-Fernandez, R., Friedman, M. J., & Fullerton, C. S. (2013). A systematic review of PTSD prevalence and trajectories in DSM-5 defined trauma exposed populations: Intentional and non-intentional traumatic events. PLOS ONE, 8(4), e59236. https://doi.org/10.1371/journal.pone.0059236. Appui (résultat de recherche du 27 septembre 2026) : « « The mean prevalence of PTSD across all studies decreases from 28.8% (range = 3.1–87.5%) at 1 month to 17.0% (range = 0.6–43.8%) at 12 months. » (obtenu deux fois) ; « When traumatic events are classified into intentional and non-intentional, the median prevalences trend down for the non-intentional trauma exposed populations, while the median prevalences in the intentional trauma category steadily increase from 11.8% to 23.3%. » » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",

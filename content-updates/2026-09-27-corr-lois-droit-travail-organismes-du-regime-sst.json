@@ -1,0 +1,57 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-organismes-du-regime-sst",
+ "portee": "Renvois aux lois de la page « Organismes du régime SST » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Organismes du régime SST",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/organismes-du-regime-sst.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "mandat général de la CNESST.",
+   "avant": "mandat général de la CNESST.",
+   "apres": "institution de la CNESST (fonctions : art. 166 et 167).",
+   "motif": "Mauvais article : l'art. 137 institue la Commission (« Un organisme est institué sous le nom de «Commission des normes, de l’équité, de la santé et de la sécurité du travail». », LSST, art. 137) ; ses fonctions sont aux art. 166 (« La Commission a pour fonctions d’élaborer, de proposer et de mettre en oeuvre des politiques relatives à la santé et à la sécurité des travailleurs […] ») et 167."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Modification : l'employeur est considéré personne désignée.",
+   "avant": "Modification : l'employeur est considéré personne désignée.",
+   "apres": "Modification : l'employeur peut désigner une personne pour recevoir la décision en son nom.",
+   "motif": "Personne erronée : c'est l'employeur qui peut désigner une personne, et non lui qui est « personne désignée » : « Si l’intéressé est un employeur, celui-ci peut désigner expressément une personne pour recevoir la décision en son nom. Une décision transmise par la Commission à cette personne est réputée avoir été transmise à l’employeur. » (LATMP, art. 354, al. 2, ajouté par la LMRSST, art. 97)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "délai maximal de 30 jours pour déposer.",
+   "avant": "délai maximal de 30 jours pour déposer.",
+   "apres": "délai maximal de 30 jours pour déposer (LATMP art. 358).",
+   "motif": "Mauvais article : le délai de 30 jours est à l'art. 358 (« Une personne qui se croit lésée par une décision rendue par la Commission en vertu de la présente loi peut, dans les 30 jours de sa notification, en demander la révision. ») ; l'art. 358.1 porte sur la forme de la demande (« La demande de révision doit être faite par écrit. ») et l'art. 358.3 sur la décision rendue sur dossier."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Interdiction de réviser une question d'ordre médical",
+   "avant": "CNESST liée par l'avis du BEM, art. 224",
+   "apres": "CNESST liée par les conclusions du professionnel de la santé qui a charge, art. 224",
+   "motif": "Contenu infidèle : sous l'art. 224, la Commission est liée par le professionnel de la santé qui a charge, et non par le BEM (art. 224.1) : « […] la Commission est liée par le diagnostic et les autres conclusions établis par le professionnel de la santé qui a charge du travailleur relativement aux sujets mentionnés aux paragraphes 1° à 5° du premier alinéa de l’article 212. » (LATMP, art. 224) ; c'est ce cas que vise l'interdiction : « une personne ne peut demander la révision d’une question d’ordre médical sur laquelle la Commission est liée en vertu de l’article 224 […] » (art. 358, al. 2)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Rend un avis envoyé au CSP",
+   "avant": "Rend un avis envoyé au CSP (",
+   "apres": "Rend un avis, que la CNESST soumet au CSP (art. 231 ; renvoi au CMPP : ",
+   "motif": "Mauvais article : l'art. 226 vise le renvoi du dossier au CMPP (« […] la Commission soumet le dossier de celui-ci, dans les 10 jours, à un comité des maladies professionnelles pulmonaires. ») ; l'envoi au CSP est à l'art. 231 : « Sur réception de ce rapport, la Commission soumet le dossier du travailleur à un comité spécial composé de trois personnes qu’elle désigne parmi les présidents des comités des maladies professionnelles pulmonaires […] » (LATMP)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Son avis lie les parties",
+   "avant": "Son avis lie les parties",
+   "apres": "Son avis lie la CNESST",
+   "motif": "Personne erronée : l'avis du comité spécial lie la Commission, pas les parties (qui peuvent contester devant le TAT) : « […] la Commission est liée par le diagnostic et les autres constatations établis par le comité spécial en vertu du troisième alinéa de l’article 231. » (LATMP, art. 233)."
+  }
+ ]
+}

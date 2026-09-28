@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-ergonomie-demarrage-rapide-conseiller-sst",
+ "portee": "Renvois aux lois de la page « 🚀 Démarrage rapide - Conseiller SST, ergonome » (Wiki Ergonomie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "🚀 Démarrage rapide - Conseiller SST, ergonome",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/demarrage-rapide-conseiller-sst.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "(vibrations)",
+   "avant": "(vibrations)",
+   "apres": "(travail dans des piles, et non les vibrations)",
+   "motif": "Point relevé : l'art. 167 du RSST était présenté comme l'article des vibrations ; il porte sur le travail dans des piles : « Travail dans des piles : Le travailleur doit disposer de l'équipement nécessaire pour lui permettre d'atteindre le haut des piles de matériel en sécurité, tels des escabeaux, des échelles portatives, des poignées ou tout autre équipement conçu à cette fin. » (RSST, art. 167). Aucun article du RSST ne fixe de règle générale sur l'exposition aux vibrations (seul l'art. 241 exige un système anti-vibratoire sur les tronçonneuses) : la description suit l'article, le lien est conservé."
+  }
+ ]
+}

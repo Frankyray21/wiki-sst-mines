@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-20-articles-internes",
+ "portee": "Renvois aux lois de la page « Articles internes » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Articles internes",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/20-articles-internes.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "définit qui est admissible à ses prestations",
+   "avant": "art. 1) : toute personne qui a droit à une prestation",
+   "apres": "art. 2) : toute personne qui a droit à une prestation",
+   "motif": "Mauvais article : la définition du bénéficiaire est à l'art. 2 de la LATMP, l'art. 1 n'énonçant que l'objet de la loi (« La présente loi a pour objet la réparation des lésions professionnelles et des conséquences qu’elles entraînent pour les bénéficiaires. »). LATMP, art. 2 : « « bénéficiaire » : une personne qui a droit à une prestation en vertu de la présente loi; »"
+  }
+ ]
+}

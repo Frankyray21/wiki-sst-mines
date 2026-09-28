@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-enquete-daccidents",
+ "portee": "Renvois aux lois de la page « Programme d'enquête d'accidents » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Programme d'enquête d'accidents",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/enquete-daccidents.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "rôle du CSS et du représentant à la prévention dans les enquêtes",
+   "avant": " : rôle du CSS et du représentant à la prévention dans les enquêtes.",
+   "apres": " : rôle du CSS dans les enquêtes ; celui du représentant à la prévention relève de l'art. 90.",
+   "motif": "LSST, art. 78 : « Les fonctions du comité de santé et de sécurité sont: […] 9° de recevoir copie des avis d’accidents et d’enquêter sur les événements qui ont causé ou qui auraient été susceptibles de causer un accident du travail ou une maladie professionnelle […] » ; le représentant est à l'art. 90 : « Le représentant à la prévention a pour fonctions: […] 2° de recevoir copie des avis d’accidents et d’enquêter sur les événements qui ont causé ou auraient été susceptibles de causer un accident; »"
+  }
+ ]
+}

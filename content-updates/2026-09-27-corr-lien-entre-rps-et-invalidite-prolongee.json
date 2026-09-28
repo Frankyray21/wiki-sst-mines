@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lien-entre-rps-et-invalidite-prolongee",
+ "portee": "Corrections de la page « Lien entre RPS et invalidité prolongée » : coût d'un programme de prévention sans source et contredit ailleurs.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Lien entre RPS et invalidité prolongée",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/lien-entre-rps-et-invalidite-prolongee.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "ajouterFin",
+   "ligneContenant": "Coût typique d'un programme de prévention primaire RPS structuré",
+   "texte": " (source à préciser)",
+   "avantPoint": true,
+   "motif": "Estimation sans source, en contradiction avec la page « Coût économique des RPS pour l'employeur », qui avance « de 50 000 à 200 000 $ par année (source à préciser) selon la taille du site (conseiller SST, formations, outils, suivi) » pour le même programme. Aucune des deux estimations n'a de source : la marque signale l'affirmation au lecteur, et la note de livraison du 27 septembre laisse à Frank le choix de l'ordre de grandeur et de sa source."
+  }
+ ]
+}

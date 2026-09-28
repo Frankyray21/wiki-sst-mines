@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-visite-dinspecteur",
+ "portee": "Renvois aux lois de la page « Préparer une visite d'inspecteur CNESST » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "Le lien relibellé « LSST art. 179 et 180 » mène toujours à la page du recueil de l'art. 180.",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Préparer une visite d'inspecteur CNESST",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/visite-dinspecteur.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "pour intervention de routine, suite à plainte, après accident, ou par programme thématique",
+   "avant": "peut visiter une mine en tout temps",
+   "apres": "peut visiter une mine à toute heure raisonnable du jour ou de la nuit",
+   "motif": "La loi ne permet pas l'entrée « en tout temps » : « Un inspecteur peut, dans l’exercice de ses fonctions, pénétrer à toute heure raisonnable du jour ou de la nuit dans un lieu où sont exercées des activités dans les domaines visés dans la présente loi et les règlements, et l’inspecter. » (LSST, art. 179, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "L'inspecteur a des pouvoirs étendus",
+   "avant": "pénétrer en tout temps",
+   "apres": "pénétrer à toute heure raisonnable",
+   "motif": "Même correction : « Un inspecteur peut, dans l’exercice de ses fonctions, pénétrer à toute heure raisonnable du jour ou de la nuit dans un lieu où sont exercées des activités dans les domaines visés dans la présente loi et les règlements, et l’inspecter. » (LSST, art. 179, al. 1)."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "L'inspecteur a des pouvoirs étendus",
+   "libelle": "LSST art. 180",
+   "nouveau": "LSST art. 179 et 180",
+   "motif": "Pénétrer, inspecter et examiner les documents relèvent de l'art. 179 : « Un inspecteur a alors accès à tous les livres, registres et dossiers d’un employeur, d’un maître d’oeuvre, d’un fournisseur ou de toute autre personne qui exerce une activité dans les domaines visés dans la présente loi et les règlements. » (LSST, art. 179, al. 2) ; l'art. 180 ajoute notamment « 3° prélever, sans frais, à des fins d’analyse, des échantillons de toute nature » et « 4° faire des essais et prendre des photographies ou enregistrements sur un lieu de travail »."
+  }
+ ]
+}
