@@ -16,14 +16,16 @@
    "ligneContenant": "222, 224, 224.1 : BEM",
    "libelle": "221.1",
    "nouveau": "221",
-   "motif": "Numéro inexistant : la LATMP n'a pas d'art. 221.1 (le texte officiel passe de l'art. 221 à l'art. 222). L'avis du BEM est à l'art. 221 : « Le membre du Bureau d’évaluation médicale, par avis écrit motivé, infirme ou confirme le diagnostic et les autres conclusions du professionnel de la santé qui a charge du travailleur et du professionnel de la santé désigné par la Commission ou l’employeur, relativement aux sujets mentionnés aux paragraphes 1° à 5° du premier alinéa de l’article 212, et y substitue les siens, s’il y a lieu. » Libellé corrigé, cible inchangée."
+   "motif": "Numéro inexistant : la LATMP n'a pas d'art. 221.1 (le texte officiel passe de l'art. 221 à l'art. 222). L'avis du BEM est à l'art. 221 : « Le membre du Bureau d’évaluation médicale, par avis écrit motivé, infirme ou confirme le diagnostic et les autres conclusions du professionnel de la santé qui a charge du travailleur et du professionnel de la santé désigné par la Commission ou l’employeur, relativement aux sujets mentionnés aux paragraphes 1° à 5° du premier alinéa de l’article 212, et y substitue les siens, s’il y a lieu. » Libellé corrigé, cible inchangée. Le lien mène désormais à la page de l'article nommé (art-221-latmp-membre-bureau-evaluation-medicale), et non plus à l'ancien article.",
+   "adresse": "w/legislation/10-lois-principales/latmp/art-221-latmp-membre-bureau-evaluation-medicale.html"
   },
   {
    "type": "relibeller",
    "ligneContenant": "Confirme ou infirme le diagnostic",
    "libelle": "art. 221.1",
    "nouveau": "art. 221, al. 1",
-   "motif": "Numéro inexistant : la LATMP n'a pas d'art. 221.1. La confirmation ou l'infirmation du diagnostic par le BEM est au premier alinéa de l'art. 221 : « Le membre du Bureau d’évaluation médicale, par avis écrit motivé, infirme ou confirme le diagnostic et les autres conclusions du professionnel de la santé qui a charge du travailleur et du professionnel de la santé désigné par la Commission ou l’employeur, relativement aux sujets mentionnés aux paragraphes 1° à 5° du premier alinéa de l’article 212, et y substitue les siens, s’il y a lieu. » Libellé corrigé, cible inchangée."
+   "motif": "Numéro inexistant : la LATMP n'a pas d'art. 221.1. La confirmation ou l'infirmation du diagnostic par le BEM est au premier alinéa de l'art. 221 : « Le membre du Bureau d’évaluation médicale, par avis écrit motivé, infirme ou confirme le diagnostic et les autres conclusions du professionnel de la santé qui a charge du travailleur et du professionnel de la santé désigné par la Commission ou l’employeur, relativement aux sujets mentionnés aux paragraphes 1° à 5° du premier alinéa de l’article 212, et y substitue les siens, s’il y a lieu. » Libellé corrigé, cible inchangée. Le lien mène désormais à la page de l'article nommé (art-221-latmp-membre-bureau-evaluation-medicale), et non plus à l'ancien article.",
+   "adresse": "w/legislation/10-lois-principales/latmp/art-221-latmp-membre-bureau-evaluation-medicale.html"
   },
   {
    "type": "remplacer",

@@ -66,6 +66,10 @@ recopie la phrase de loi qui la fonde ; un contrôle automatique a retrouvé cha
 **Chiffres :**
 - 815 passages et 1 046 renvois vus.
 - 172 erreurs corrigées par 220 retouches : 189 remplacements de texte, 29 libellés de liens et 2 liens reciblés.
+- Un lien renommé mène à l'article qu'il nomme. Pour 19 des 29 libellés, le lien visait un autre article (« articles
+  179 et 180 » menait à l'art. 238) : la retouche le redirige aussi vers la page de l'article nommé (champ `adresse`
+  de `relibeller`). Les 10 autres menaient déjà à la bonne page (par exemple « art. 242, al. 1 » vers la page du
+  premier alinéa de l'art. 242). Les « Pages qui pointent ici » et le graphe suivent : 15 renvois ajoutés, 12 retirés.
 - 81 pages touchées : Hygiène 25, Sécurité 21, Droit du travail 17, Ergonomie 12, Toxicologie 6.
 - Par nature d'erreur :
   - mauvais article : 73 ;

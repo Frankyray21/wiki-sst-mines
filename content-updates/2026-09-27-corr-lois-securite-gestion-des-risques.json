@@ -16,7 +16,8 @@
    "ligneContenant": "et contrôle des énergies (",
    "libelle": "RSST art. 188",
    "nouveau": "RSST art. 195 à 207",
-   "motif": "L'art. 188 vise le mode de commande spécifique (« Mode de commande spécifique : Lorsque des travaux sur une machine […] nécessitent de déplacer ou de retirer un protecteur […] ») ; le cadenassage est la sous-section des art. 195 à 207 : RSST, art. 195 : « Dans la présente sous-section, on entend par: «cadenassage» : une méthode de contrôle des énergies […] ». Libellé corrigé, cible inchangée (note art-188-RSST)."
+   "motif": "L'art. 188 vise le mode de commande spécifique (« Mode de commande spécifique : Lorsque des travaux sur une machine […] nécessitent de déplacer ou de retirer un protecteur […] ») ; le cadenassage est la sous-section des art. 195 à 207 : RSST, art. 195 : « Dans la présente sous-section, on entend par: «cadenassage» : une méthode de contrôle des énergies […] ». Libellé corrigé, cible inchangée (note art-188-RSST). Le lien mène désormais à la page de l'article nommé (art-195-rsst-dans-la-presente-sous-section-on-entend-par), et non plus à l'ancien article.",
+   "adresse": "w/legislation/20-reglements/rsst/art-195-rsst-dans-la-presente-sous-section-on-entend-par.html"
   },
   {
    "type": "remplacer",
@@ -30,14 +31,16 @@
    "ligneContenant": "montage, ajustement, inspection, réglage, décoinçage, déblocage",
    "libelle": "RSST art. 188.2",
    "nouveau": "RSST art. 196",
-   "motif": "RSST, art. 188.2 : « (Remplacé). » Les travaux visés sont à l'art. 196 : « Avant d’entreprendre dans la zone dangereuse d’une machine tout travail, notamment de montage, d’installation, d’ajustement, d’inspection, de décoinçage, de réglage, de mise hors d’usage, d’entretien, de désassemblage, de nettoyage, de maintenance, de remise à neuf, de réparation, de modification ou de déblocage, le cadenassage ou, à défaut, toute autre méthode qui assure une sécurité équivalente doit être appliqué […] ». Libellé corrigé, cible inchangée."
+   "motif": "RSST, art. 188.2 : « (Remplacé). » Les travaux visés sont à l'art. 196 : « Avant d’entreprendre dans la zone dangereuse d’une machine tout travail, notamment de montage, d’installation, d’ajustement, d’inspection, de décoinçage, de réglage, de mise hors d’usage, d’entretien, de désassemblage, de nettoyage, de maintenance, de remise à neuf, de réparation, de modification ou de déblocage, le cadenassage ou, à défaut, toute autre méthode qui assure une sécurité équivalente doit être appliqué […] ». Libellé corrigé, cible inchangée. Le lien mène désormais à la page de l'article nommé (art-196-rsst-avant-dentreprendre-dans-la-zone-dangereuse-dune-machine), et non plus à l'ancien article.",
+   "adresse": "w/legislation/20-reglements/rsst/art-196-rsst-avant-dentreprendre-dans-la-zone-dangereuse-dune-machine.html"
   },
   {
    "type": "relibeller",
    "ligneContenant": "Un cadenas personnel avec cléage unique par personne autorisée",
    "libelle": "RSST art. 188.3",
    "nouveau": "RSST art. 197",
-   "motif": "RSST, art. 188.3 : « (Remplacé). » RSST, art. 197 : « Le cadenassage doit être effectué par chacune des personnes ayant accès à la zone dangereuse d’une machine. » Libellé corrigé, cible inchangée."
+   "motif": "RSST, art. 188.3 : « (Remplacé). » RSST, art. 197 : « Le cadenassage doit être effectué par chacune des personnes ayant accès à la zone dangereuse d’une machine. » Libellé corrigé, cible inchangée. Le lien mène désormais à la page de l'article nommé (art-197-rsst-le-cadenassage-doit-etre-effectue-par-chacune-des), et non plus à l'ancien article.",
+   "adresse": "w/legislation/20-reglements/rsst/art-197-rsst-le-cadenassage-doit-etre-effectue-par-chacune-des.html"
   },
   {
    "type": "remplacer",
@@ -58,7 +61,8 @@
    "ligneContenant": "présence d'un témoin",
    "libelle": "RSST art. 188.12",
    "nouveau": "RSST art. 206",
-   "motif": "RSST, art. 188.12 : « (Remplacé). » Le retrait d'un cadenas est à l'art. 206 : « En cas d’oubli d’un cadenas ou de la perte d’une clé, l’employeur qui a autorité sur l’établissement peut, avec l’accord de la personne qui a exécuté le cadenassage, autoriser le retrait du cadenas […] ». Libellé corrigé, cible inchangée."
+   "motif": "RSST, art. 188.12 : « (Remplacé). » Le retrait d'un cadenas est à l'art. 206 : « En cas d’oubli d’un cadenas ou de la perte d’une clé, l’employeur qui a autorité sur l’établissement peut, avec l’accord de la personne qui a exécuté le cadenassage, autoriser le retrait du cadenas […] ». Libellé corrigé, cible inchangée. Le lien mène désormais à la page de l'article nommé (art-206-rsst-en-cas-doubli-dun-cadenas-ou-de-la), et non plus à l'ancien article.",
+   "adresse": "w/legislation/20-reglements/rsst/art-206-rsst-en-cas-doubli-dun-cadenas-ou-de-la.html"
   },
   {
    "type": "remplacer",
