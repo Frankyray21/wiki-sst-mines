@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-2-latmp-termes-utilises",
+ "portee": "Renvois aux lois de la page « art-2-LATMP » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-2-LATMP",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-2-latmp-termes-utilises.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "(présomption de lésion professionnelle)",
+   "avant": "(présomption de lésion professionnelle)",
+   "apres": "(régime d'indemnisation sans égard à la faute)",
+   "motif": "LATMP, art. 25 : « Les droits conférés par la présente loi le sont sans égard à la responsabilité de quiconque. » La présomption de lésion professionnelle est à l'art. 28 : « Une blessure qui arrive sur les lieux du travail alors que le travailleur est à son travail est présumée une lésion professionnelle. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "(annexe I des maladies professionnelles)",
+   "avant": "(annexe I des maladies professionnelles)",
+   "apres": "(présomption : Règlement sur les maladies professionnelles, qui remplace l'annexe I abrogée)",
+   "motif": "L'annexe I de la LATMP est abrogée (LMRSST, art. 120 : « L’annexe I de cette loi est abrogée. ») ; la présomption vise une « maladie prévue par règlement » (LATMP, art. 29) et le Règlement sur les maladies professionnelles « détermine, à l’annexe A, des maladies [...] aux fins de l’application de la présomption de maladie professionnelle prévue à l’article 29 » (LMRSST, art. 242)."
+  }
+ ]
+}

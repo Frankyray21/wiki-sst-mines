@@ -1,0 +1,57 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-135-rsst-cadenassage",
+ "portee": "Renvois aux lois de la page « art-135-RSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-135-RSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-135-rsst-cadenassage.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "s'assurer qu'ils sont portés et entretenus",
+   "avant": "Lorsque les mesures prévues à l'",
+   "apres": "Lorsque les moyens de réduction du bruit (art. 135) ne permettent pas de respecter les valeurs limites de l'",
+   "motif": "L'art. 131 ne prévoit pas de mesures, il fixe les valeurs limites : RSST, art. 131 : « Les valeurs limites d’exposition au bruit sont les suivantes: 1° pour le niveau d’exposition quotidienne au bruit: 85 dBA […] ». Les moyens sont à l'art. 135 : « Parmi les moyens raisonnables lui permettant de respecter les objectifs définis à la sous-section 1, l’employeur doit mettre en œuvre ceux qui permettent d’éliminer ou de réduire le bruit à la source […] »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "s'assurer qu'ils sont portés et entretenus",
+   "avant": " ne permettent pas de ramener le bruit en-deçà des valeurs prévues, l'employeur",
+   "apres": ", l'employeur",
+   "motif": "Suite de la retouche précédente (la phrase dit désormais « ne permettent pas de respecter les valeurs limites de l'article 131 ») : RSST, art. 136 : « L’employeur doit réduire le temps d’exposition quotidienne au bruit des travailleurs, conformément à l’article 137, ou leur fournir des protecteurs auditifs […] dans les situations suivantes: […] 3° lorsqu’il n’est pas possible de respecter les valeurs limites d’exposition. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "s'assurer qu'ils sont portés et entretenus",
+   "avant": "protecteurs auditifs conformes à la norme et s'assurer",
+   "apres": "protecteurs auditifs conformes à la norme (art. 136, 141 et 338) et s'assurer",
+   "motif": "La fourniture des protecteurs auditifs n'est pas à l'art. 135 : RSST, art. 141 : « L’employeur doit fournir des protecteurs auditifs répondant aux exigences de performance et de sélection prévues aux articles suivants de la norme Protecteurs auditifs: performances, sélection, entretien et utilisation, CSA Z94.2-2014 » ; art. 338 : « L’employeur doit fournir gratuitement au travailleur les moyens et les équipements de protection individuels ou collectifs requis en application du présent règlement […] »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "lorsque l'action à la source et sur la propagation s'est révélée insuffisante",
+   "avant": " encadre la fourniture des ",
+   "apres": " exige d'abord la réduction du bruit à la source ; ce sont les articles 136 et 141 qui encadrent la fourniture des ",
+   "motif": "L'art. 135 ne traite pas des protecteurs auditifs : RSST, art. 135 : « l’employeur doit mettre en œuvre ceux qui permettent d’éliminer ou de réduire le bruit à la source, notamment le remplacement d’une machine ou d’un équipement par des moins bruyants […] ». Les protecteurs sont aux art. 136 (« L’employeur doit réduire le temps d’exposition quotidienne au bruit des travailleurs, conformément à l’article 137, ou leur fournir des protecteurs auditifs […] ») et 141 (« L’employeur doit fournir des protecteurs auditifs répondant aux exigences de performance et de sélection […] CSA Z94.2-2014 »)."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "Un opérateur réfractaire au port des PA est rappelé à ses obligations",
+   "libelle": "art. 49",
+   "nouveau": "art. 49 LSST",
+   "motif": "Sur cette page du RSST, « art. 49 » (lien vers l'art. 49 RSST) renvoie à la limite d'explosivité : RSST, art. 49 : « Limite inférieure d’explosivité : La concentration de vapeurs ou de gaz inflammables dans un bâtiment ou dans un autre lieu de travail, qui n’est pas un espace clos, doit être maintenue en dessous de 25% de la limite inférieure d’explosivité. » Les obligations du travailleur sont à l'art. 49 LSST : « Le travailleur doit: […] 2° prendre les mesures nécessaires pour protéger sa santé, sa sécurité ou son intégrité physique ou psychique; […] »."
+  },
+  {
+   "type": "recibler",
+   "ligneContenant": "Un opérateur réfractaire au port des PA est rappelé à ses obligations",
+   "libelle": "art. 49 LSST",
+   "adresse": "w/legislation/10-lois-principales/lsst/art-49-lsst-obligations-travailleur.html",
+   "motif": "Le lien relibellé à la retouche précédente menait encore à l'art. 49 RSST (limite inférieure d'explosivité) ; il mène à l'art. 49 LSST (« Le travailleur doit: […] »)."
+  }
+ ]
+}

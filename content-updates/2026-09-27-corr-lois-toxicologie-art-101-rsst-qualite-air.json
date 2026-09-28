@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-toxicologie-art-101-rsst-qualite-air",
+ "portee": "Renvois aux lois de la page « art-101-RSST » (Wiki Toxicologie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-101-RSST",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/art-101-rsst-qualite-air.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "dans tout établissement, en complément des obligations spécifiques de captage à la source",
+   "avant": "ouvre le chapitre III (Qualité de l'air) du",
+   "apres": "ouvre la section XI (Ventilation et chauffage) du",
+   "motif": "Table des matières du RSST : « SECTION XI VENTILATION ET CHAUFFAGE » commence à l'art. 101 ; la « SECTION V QUALITÉ DE L’AIR » commence à l'art. 39. RSST, art. 101 : « Les établissements doivent être adéquatement ventilés, soit par des moyens naturels, soit par des moyens mécaniques »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "La ventilation auxiliaire (gaines, ventilateurs secondaires) sert les chantiers",
+   "avant": "se combine avec les valeurs limites de l'",
+   "apres": "se combine avec les limites d'exposition de l'{{lien:w/legislation/20-reglements/rsst/art-40-rsst-aucun-travailleur-ne-doit-etre-expose.html|art. 40}} et de l'annexe I, avec l'",
+   "motif": "RSST, art. 40 : « Aucun travailleur ne doit être exposé: [...] 2° à des gaz, des fumées, des vapeurs, des poussières ou des brouillards, au-delà des limites prévues à l’annexe I. » L'art. 39 vise le remplacement : « Autant que possible, les matières dangereuses qui sont sources de gaz, de fumées, de vapeurs, de poussières ou de brouillards doivent être remplacées par des matières qui ne le sont pas ou, encore, qui le sont moins. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "La ventilation générale est dimensionnée pour permettre 6 changements d'air",
+   "avant": "fixe les limites par contaminant",
+   "apres": "vise le remplacement, tandis que l'{{lien:w/legislation/20-reglements/rsst/art-40-rsst-aucun-travailleur-ne-doit-etre-expose.html|art. 40}} et l'annexe I fixent les limites par contaminant",
+   "motif": "RSST, art. 40 : « Aucun travailleur ne doit être exposé: [...] 2° à des gaz, des fumées, des vapeurs, des poussières ou des brouillards, au-delà des limites prévues à l’annexe I. » L'art. 39 vise le remplacement : « Autant que possible, les matières dangereuses qui sont sources de gaz, de fumées, de vapeurs, de poussières ou de brouillards doivent être remplacées par des matières qui ne le sont pas ou, encore, qui le sont moins. »"
+  }
+ ]
+}

@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-174-rsst-epi-obligatoires",
+ "portee": "Renvois aux lois de la page « art-174-RSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-174-RSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-174-rsst-epi-obligatoires.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "doit être munie de protecteurs fixes ou mobiles",
+   "avant": " à 182). Toute machine présentant",
+   "apres": " à 182) ; l'article 174 exige, lui, un manuel d'instruction du fabricant pour toute machine. Selon l'article 177, toute machine présentant",
+   "motif": "La règle des protecteurs est à l'art. 177, pas à l'art. 174. RSST, art. 174 : « Manuel d’instruction du fabricant : Toute machine doit être accompagnée d’un manuel d’instruction du fabricant comportant minimalement les éléments suivants: […] » ; art. 177 : « Choix des moyens de protection : Une machine doit être conçue et fabriquée de manière à rendre ses zones dangereuses inaccessibles. À défaut, les risques en découlant doivent être éliminés ou réduits au niveau le plus bas possible par l’installation d’au moins un des moyens de protection suivants, selon le cas: […] »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "pièces en mouvement, points rentrants, projections, contacts électriques, surfaces chaudes",
+   "avant": " est central en sécurité machine. Il impose la mise en place de protecteurs pour toute zone dangereuse accessible",
+   "apres": " exige un manuel d'instruction du fabricant pour toute machine (description de la machine et de ses moyens de protection, utilisations, inspections, risques résiduels). C'est l'article 177 qui impose la mise en place de moyens de protection pour toute zone dangereuse accessible",
+   "motif": "RSST, art. 174 : « Toute machine doit être accompagnée d’un manuel d’instruction du fabricant comportant minimalement les éléments suivants: […] 2° la description détaillée de la machine, de ses organes de service, de ses accessoires, de ses moyens de protection […] 8° les risques n’ayant pu être éliminés par la mise en place des moyens de protection. » ; l'obligation de protection est à l'art. 177 : « Une machine doit être conçue et fabriquée de manière à rendre ses zones dangereuses inaccessibles. À défaut, les risques en découlant doivent être éliminés ou réduits au niveau le plus bas possible par l’installation d’au moins un des moyens de protection suivants […] »."
+  }
+ ]
+}

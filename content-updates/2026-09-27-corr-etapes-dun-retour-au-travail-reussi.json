@@ -14,16 +14,18 @@
   {
    "type": "remplacer",
    "ligneContenant": "La recherche est claire : un retour mal planifié mène à la rechute dans plus de 50 % des cas",
-   "avant": "mène à la rechute dans plus de 50 % des cas.",
-   "apres": "mène à la rechute dans plus de 50 % des cas (source à préciser).",
-   "motif": "Chiffre de rechute sans source, ni dans la page ni dans une note d'analyse du wiki : marqué, pas supprimé."
+   "avant": "La recherche est claire : un retour mal planifié mène à la rechute dans plus de 50 % des cas.",
+   "apres": "Dans un essai néerlandais, 62 % des travailleurs revenus au travail après une absence pour trouble mental courant ont eu une nouvelle absence maladie (toutes causes) dans les 12 mois avec le suivi habituel, contre 39 % avec un accompagnement structuré de résolution de problèmes ([Arends et al., 2013](https://doi.org/10.1371/journal.pone.0071937)).",
+   "ancienApres": "La recherche est claire : un retour mal planifié mène à la rechute dans plus de 50 % des cas (source à préciser).",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Arends, I., Bültmann, U., van Rhenen, W., Groen, H., & van der Klink, J. J. L. (2013). Economic evaluation of a problem solving intervention to prevent recurrent sickness absence in workers with common mental disorders. PLOS ONE, 8(8), e71937. https://doi.org/10.1371/journal.pone.0071937. Appui (résultat de recherche du 27 septembre 2026) : « « The incidence of recurrent sickness absence during 12 months follow-up was 39% for the SHARP group and 62% for the CAU group. » (résultat pour PLOS ONE, Arends et al., 2013, obtenu deux fois ; second résultat : « The mean effect difference between the SHARP and CAU group was 24% (95% CI 3% to 45%) in favour of the SHARP group. »). Population : « The SHARP-at work intervention is a problem-solving intervention developed to prevent recurrent sickness absence in workers who returned to work after sickness absence due to common mental disorders (CMDs) ». Définition de l'issue dans cette cohorte  » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",
    "ligneContenant": "Plus de 50 % des travailleurs rechutent dans les 12 mois si le retour est mal planifié",
-   "avant": "Plus de 50 % des travailleurs rechutent",
-   "apres": "Plus de 50 % (source à préciser) des travailleurs rechutent",
-   "motif": "Chiffre de rechute sans source : marqué juste après le chiffre (la puce se termine sur l'affirmation)."
+   "avant": "Plus de 50 % des travailleurs rechutent dans les 12 mois si le retour est mal planifié",
+   "apres": "Dans un essai néerlandais, 62 % des travailleurs revenus après une absence pour trouble mental courant ont eu une nouvelle absence maladie (toutes causes) dans les 12 mois avec le suivi habituel ([Arends et al., 2013](https://doi.org/10.1371/journal.pone.0071937))",
+   "ancienApres": "Plus de 50 % (source à préciser) des travailleurs rechutent dans les 12 mois si le retour est mal planifié",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Arends, I., Bültmann, U., van Rhenen, W., Groen, H., & van der Klink, J. J. L. (2013). Economic evaluation of a problem solving intervention to prevent recurrent sickness absence in workers with common mental disorders. PLOS ONE, 8(8), e71937. https://doi.org/10.1371/journal.pone.0071937. Appui (résultat de recherche du 27 septembre 2026) : « « The incidence of recurrent sickness absence during 12 months follow-up was 39% for the SHARP group and 62% for the CAU group. » (résultat pour PLOS ONE, Arends et al., 2013, obtenu deux fois ; second résultat : « The mean effect difference between the SHARP and CAU group was 24% (95% CI 3% to 45%) in favour of the SHARP group. »). Population : « The SHARP-at work intervention is a problem-solving intervention developed to prevent recurrent sickness absence in workers who returned to work after sickness absence due to common mental disorders (CMDs) ». Définition de l'issue dans cette cohorte  » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",
@@ -35,9 +37,10 @@
   {
    "type": "remplacer",
    "ligneContenant": "Un retour structuré coûte du temps mais réduit drastiquement le risque de rechute",
-   "avant": "réduit drastiquement le risque de rechute.",
-   "apres": "réduit drastiquement le risque de rechute (source à préciser).",
-   "motif": "Affirmation d'efficacité sans source : marquée, pas supprimée."
+   "avant": "Un retour structuré coûte du temps mais réduit drastiquement le risque de rechute.",
+   "apres": "Un retour structuré coûte du temps mais peut réduire nettement le risque de rechute : dans un essai randomisé néerlandais, une intervention structurée de résolution de problèmes, menée par le médecin du travail avec la participation du superviseur, a réduit de 60 % la cote (odds) d'une nouvelle absence maladie sur 12 mois ([Arends et al., 2014](https://doi.org/10.1136/oemed-2013-101412)).",
+   "ancienApres": "Un retour structuré coûte du temps mais réduit drastiquement le risque de rechute (source à préciser).",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Arends, I., van der Klink, J. J. L., van Rhenen, W., de Boer, M. R., & Bültmann, U. (2014). Prevention of recurrent sickness absence in workers with common mental disorders: Results of a cluster-randomised controlled trial. Occupational and Environmental Medicine, 71(1), 21-29. https://doi.org/10.1136/oemed-2013-101412. Appui (résultat de recherche du 27 septembre 2026) : « « The adjusted OR for the incidence of recurrent sickness absence was 0.40 (95% CI 0.20 to 0.81) and the adjusted HR for time to recurrent sickness absence was 0.53 (95% CI 0.33 to 0.86) for the intervention group compared with care as usual. » ; « Over 12 months follow-up, the odds of recurrent sickness absence was 60% lower for the SHARP group compared with the care as usual group. » ; « consists of problem-solving treatment provided by occupational physicians » ; « consultations between the worker and the supervisor are stimulated by the OP ». Référence : « Occupational and Environmental Me » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",

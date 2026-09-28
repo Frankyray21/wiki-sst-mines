@@ -206,6 +206,24 @@ test('relibeller : libellé d’un lien corrigé, cible gardée ou ancre de page
   assert.equal(appliquerRetouches('# Rien\n', [lot[0]]).ok, false, 'lien absent : rien n’est écrit');
 });
 
+test('relibeller avec adresse : le lien prend le nouveau libellé et la nouvelle cible ; un homonyme juste reste', () => {
+  // « LATMP art. 1 » corrigé en « LATMP art. 2 » : le lien doit mener à l'article 2, et non plus à l'article 1
+  const note = '# Bénéficiaires\n\nLe bénéficiaire est défini par la loi ([[art-1-LATMP|LATMP art. 1]]) ; voir aussi [[art-2-LATMP|LATMP art. 2]].\n\n'
+    + '## Cadre légal\n\n- Définitions : [[art-1-LATMP|LATMP art. 1]].\n';
+  const resoudreLien = a => (a === 'w/legislation/10-lois-principales/latmp/art-2-latmp-termes-utilises.html' ? 'art-2-LATMP' : null);
+  const lot = [{ type: 'relibeller', toutes: true, ligneContenant: 'LATMP art. 1', libelle: 'LATMP art. 1', nouveau: 'LATMP art. 2',
+    adresse: 'w/legislation/10-lois-principales/latmp/art-2-latmp-termes-utilises.html' }];
+  const r = appliquerRetouches(note, lot, { resoudreLien });
+  assert.ok(r.ok, JSON.stringify(r.rapports));
+  assert.ok(!r.texte.includes('art-1-LATMP') && !r.texte.includes('LATMP art. 1'), 'plus aucun lien vers l’article 1');
+  assert.equal((r.texte.match(/\[\[art-2-LATMP\|LATMP art\. 2\]\]/g) || []).length, 3, 'les deux liens corrigés et l’homonyme juste');
+  const r2 = appliquerRetouches(r.texte, lot, { resoudreLien });
+  assert.deepEqual(r2.rapports.map(x => x.statut), ['déjà faite']);
+  assert.equal(r2.texte, r.texte);
+  // adresse sans note dans le vault : rien n'est écrit
+  assert.equal(appliquerRetouches(note, lot, { resoudreLien: () => null }).ok, false);
+});
+
 test('delier : un lien devient du texte simple (libellé ou texte donné), une image intégrée n’est pas touchée', () => {
   const note = '# PAE\n\n**L\'essentiel** : [[Programme d\'aide aux employés (PAE)|Le PAE]] est un service confidentiel. ![[Le PAE]]\n\n| 3-5 | [[Réadaptation]] | Reprise progressive du rôle familial |\n';
   const lot = [
@@ -245,4 +263,18 @@ test('relibeller : un lien homonyme sur une autre ligne, non visée, ne bloque p
   assert.match(r.texte, /Typologie de Friedman : \[\[Dolan\.pdf#page=158\|Dolan, p\. 138-140\]\]/);
   assert.match(r.texte, /Ailleurs : \[\[Dolan\.pdf#page=159\|Dolan p\. 169\]\]/, 'la ligne non visée ne change pas');
   assert.equal(appliquerRetouches(r.texte, lot).rapports[0].statut, 'déjà faite');
+});
+
+test('remplacer « ancienApres » : une note qui a reçu la version antérieure de la correction passe à la nouvelle', () => {
+  const r = { type: 'remplacer', ligneContenant: 'Les méta-analyses sont sans ambiguïté', avant: 'mortalité prématurée.',
+    apres: 'mortalité prématurée ([Kivimäki et al., 2015](https://doi.org/10.1016/S0140-6736(15)60295-1)).', ancienApres: 'mortalité prématurée (source à préciser).' };
+  const neuve = 'Les méta-analyses sont sans ambiguïté : risque de mortalité prématurée.\n';
+  const marquee = 'Les méta-analyses sont sans ambiguïté : risque de mortalité prématurée (source à préciser).\n';
+  const a = appliquerRetouches(neuve, [r]);
+  const b = appliquerRetouches(marquee, [r]);
+  assert.ok(a.ok && b.ok, JSON.stringify([a.rapports, b.rapports]));
+  assert.equal(a.texte, b.texte, 'même résultat, que la note ait reçu la marque ou non');
+  assert.match(a.texte, /\(\[Kivimäki et al\., 2015\]/);
+  assert.equal(appliquerRetouches(a.texte, [r]).rapports[0].statut, 'déjà faite');
+  assert.equal(appliquerRetouches('Autre texte.\n', [r]).ok, false);
 });

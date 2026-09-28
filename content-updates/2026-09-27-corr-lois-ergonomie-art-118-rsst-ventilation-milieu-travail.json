@@ -1,0 +1,50 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-ergonomie-art-118-rsst-ventilation-milieu-travail",
+ "portee": "Renvois aux lois de la page « art-118-RSST, ventilation milieu travail » (Wiki Ergonomie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-118-RSST, ventilation milieu travail",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/art-118-rsst-ventilation-milieu-travail.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "en imposant une exigence spécifique",
+   "avant": ", propre, sec et protégé des intempéries. La dérogation est possible uniquement si les travailleurs ont accès à une habitation appropriée à portée du lieu de travail.",
+   "apres": ", lorsqu'une salle à manger est mise à la disposition des travailleurs pour qu'ils y prennent leur repas. L'article ne s'applique pas aux locaux utilisés à des fins de bureaux ; la propreté de la salle à manger et son isolement des lieux de travail relèvent de l'{{lien:w/legislation/20-reglements/rsst/art-153-rsst-salle-a-manger.html|art. 153}}.",
+   "motif": "Point relevé : l'art. 118 du RSST exigerait un local-repas « propre, sec et protégé des intempéries », avec une dérogation si une habitation est à portée ; le texte ne dit rien de tel : « Lorsqu'une salle à manger est mise à la disposition des travailleurs pour que ceux-ci y prennent leur repas, celle-ci doit être maintenue à une température minimale de 20 °C. Le présent article ne s'applique pas aux locaux utilisés à des fins de bureaux. » (RSST, art. 118). La propreté et l'isolement relèvent de l'art. 153 du RSST : « Cette salle à manger doit : [...] 3° être isolée des lieux de travail; 4° être nettoyée après chaque période de repas [...]; 5° être désinfectée quotidiennement »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "qualité de l'air et local chauffé (obligation générale)",
+   "avant": "qualité de l'air et local chauffé (obligation générale)",
+   "apres": "température convenable et, à défaut, endroit chauffé (obligation générale)",
+   "motif": "Point relevé : l'art. 116 du RSST était décrit comme portant sur la qualité de l'air ; il porte sur la température : « Sous réserve des articles 117 et 118, dans tout local fermé, une température convenable doit être maintenue, compte tenu de la nature des travaux qui y sont exécutés ainsi que des conditions climatiques extérieures; si une telle température ne peut être raisonnablement maintenue, un endroit chauffé doit être mis à la disposition des travailleurs. » (RSST, art. 116)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Des travailleurs du concentrateur mangent dans une salle adjacente",
+   "avant": "la présence de contenants. Infraction à l'",
+   "apres": "la présence de contenants. Il y a infraction à l'{{lien:w/legislation/20-reglements/rsst/art-153-rsst-salle-a-manger.html|art. 153}} (salle à manger non isolée des lieux de travail et servant d'entreposage), et non à l'",
+   "motif": "Point relevé : le cas attribuait à l'art. 118 un local-repas propre et isolé des contaminants, et à l'art. 116 la qualité de l'air ; ces deux articles ne visent que la température (art. 118 : « celle-ci doit être maintenue à une température minimale de 20 °C » ; art. 116 : « dans tout local fermé, une température convenable doit être maintenue »). Une salle à manger voisine d'un stockage de réactifs et encombrée de contenants relève de l'art. 153 du RSST : « Cette salle à manger doit : [...] 3° être isolée des lieux de travail; [...] 8° ne pas servir à des fins d'entreposage. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Des travailleurs du concentrateur mangent dans une salle adjacente",
+   "avant": "(local non propre et non isolé des contaminants) et à l'",
+   "apres": "(température de 20 °C) ni à l'",
+   "motif": "Suite de la retouche précédente (même phrase) : l'art. 118 du RSST exige que la salle à manger soit « maintenue à une température minimale de 20 °C »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Des travailleurs du concentrateur mangent dans une salle adjacente",
+   "avant": "(qualité de l'air). Avis de correction",
+   "apres": "(température des locaux fermés). Avis de correction",
+   "motif": "Suite de la retouche précédente (même phrase) : l'art. 116 du RSST porte sur la température (« dans tout local fermé, une température convenable doit être maintenue »), pas sur la qualité de l'air."
+  }
+ ]
+}

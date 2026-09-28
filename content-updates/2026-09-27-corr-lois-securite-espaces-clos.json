@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-espaces-clos",
+ "portee": "Renvois aux lois de la page « Espaces clos » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Espaces clos",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/espaces-clos.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "certains chantiers borgnes sont des espaces clos typiques",
+   "avant": "encadrent la gestion : permis d'entrée, surveillance, plan de sauvetage et programme d'intervention obligatoires.",
+   "apres": "encadrent la gestion : renseignements et moyens de prévention écrits avant tout travail (art. 300), ventilation (art. 302), surveillant (art. 308) et plan de sauvetage (art. 309).",
+   "motif": "La section ne prévoit ni permis d'entrée ni programme d'intervention. RSST, art. 300 : « Avant que ne soit entrepris un travail dans un espace clos, les renseignements et les moyens de prévention suivants doivent être disponibles, par écrit, sur les lieux mêmes du travail: […] » ; art. 302 : « aucun travailleur ne peut pénétrer ou être présent dans un espace clos à moins que celui-ci ne soit ventilé […] » ; art. 308 : « Lorsqu’un travailleur est présent dans un espace clos, une personne désignée par l’employeur à titre de surveillant doit être positionnée à l’extérieur et à proximité de l’entrée […] » ; art. 309 : « Un plan de sauvetage, lequel inclut les équipements et les moyens pour secourir rapidement tout travailleur effectuant un travail dans un espace clos, doit être élaboré. »"
+  }
+ ]
+}

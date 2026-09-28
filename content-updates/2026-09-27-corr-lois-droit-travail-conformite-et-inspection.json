@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-conformite-et-inspection",
+ "portee": "Renvois aux lois de la page « Conformité et inspection » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Conformité et inspection",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/conformite-et-inspection.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "L'inspecteur CNESST peut visiter une mine",
+   "avant": "peut visiter une mine en tout temps",
+   "apres": "peut visiter une mine à toute heure raisonnable du jour ou de la nuit",
+   "motif": "Contenu infidèle : la loi limite l'accès à une heure raisonnable. LSST, art. 179 : « Un inspecteur peut, dans l’exercice de ses fonctions, pénétrer à toute heure raisonnable du jour ou de la nuit dans un lieu où sont exercées des activités dans les domaines visés dans la présente loi et les règlements, et l’inspecter. »"
+  }
+ ]
+}

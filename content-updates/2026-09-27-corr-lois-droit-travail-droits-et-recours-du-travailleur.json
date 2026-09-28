@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-droits-et-recours-du-travailleur",
+ "portee": "Renvois aux lois de la page « Droits et recours du travailleur » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "Deux rangées fautives du même tableau ne sont pas corrigées faute de texte unique : art-30-LSST (« Retrait préventif », quatre cellules commencent ainsi) et art-27-LATMP (« Présomption », identique à la rangée art-25-LATMP). Le groupe droit-1 corrige d'autres rangées du même tableau.",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Droits et recours du travailleur",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/theme/droits-et-recours-du-travailleur.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "refus d'exécuter un travail jugé dangereux pour soi ou autrui",
+   "avant": " al. 9 par l'employeur",
+   "apres": ", 9°, par l'employeur",
+   "motif": "L'art. 51 n'a pas de neuvième alinéa : la formation est au paragraphe 9° de son premier alinéa, l'employeur devant « 9° informer adéquatement le travailleur sur les risques reliés à son travail et lui assurer la formation, l’entraînement et la supervision appropriés afin de faire en sorte que le travailleur ait l’habileté et les connaissances requises pour accomplir de façon sécuritaire le travail qui lui est confié » (LSST, art. 51, 9°)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Travailleuse enceinte ou qui allaite",
+   "avant": "Travailleuse enceinte ou qui allaite",
+   "apres": "Travailleuse enceinte",
+   "motif": "L'art. 40 ne vise que la travailleuse enceinte (l'allaitement est à l'art. 46) : « Une travailleuse enceinte qui fournit à l’employeur le certificat prescrit par la Commission qui atteste que les conditions de son travail comportent des dangers physiques pour l’enfant à naître ou, à cause de son état de grossesse, pour elle-même, peut demander d’être affectée à des tâches ne comportant pas de tels dangers et qu’elle est raisonnablement en mesure d’accomplir. » (LSST, art. 40)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Retrait préventif, indemnité",
+   "avant": "Retrait préventif, indemnité",
+   "apres": "Travailleuse qui allaite",
+   "motif": "L'art. 46 porte sur l'affectation de la travailleuse qui allaite, non sur l'indemnité (art. 36, rendu applicable par l'art. 48) : « Une travailleuse qui fournit à l’employeur le certificat prescrit par la Commission qui atteste que les conditions de son travail comportent des dangers pour l’enfant qu’elle allaite peut demander d’être affectée à des tâches ne comportant pas de tels dangers et qu’elle est raisonnablement en mesure d’accomplir. » (LSST, art. 46, al. 1)."
+  }
+ ]
+}

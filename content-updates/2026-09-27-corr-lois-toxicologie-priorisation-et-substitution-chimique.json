@@ -1,0 +1,30 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-toxicologie-priorisation-et-substitution-chimique",
+ "portee": "Renvois aux lois de la page « Priorisation et substitution chimique » (Wiki Toxicologie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Priorisation et substitution chimique",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/priorisation-et-substitution-chimique.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "relibeller",
+   "ligneContenant": "substitution prioritaire pour C1 et C2",
+   "libelle": "RSST art. 30",
+   "nouveau": "RSST art. 39",
+   "motif": "L'art. 30 du RSST vise les échelles (« Le travailleur doit: 1° faire face à l’échelle portative ou à l’escabeau en tout temps; ») et l'art. 32 les échafaudages. Le remplacement relève de l'art. 39 (« Autant que possible, les matières dangereuses [...] doivent être remplacées par des matières qui ne le sont pas ou, encore, qui le sont moins. ») et les cancérogènes C1 et C2 de l'art. 42 (« une telle exposition doit être réduite au minimum, même lorsqu’elle demeure à l’intérieur des normes prévues à cette annexe »). Le lien mène désormais à la page de l'article nommé (rsst-section-05-qualite-de-lair-art-39-44), et non plus à l'ancien article.",
+   "adresse": "w/legislation/20-reglements/rsst/rsst-section-05-qualite-de-lair-art-39-44.html"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "substitution prioritaire pour C1 et C2",
+   "avant": "et 32",
+   "apres": "et 42",
+   "motif": "L'art. 30 du RSST vise les échelles (« Le travailleur doit: 1° faire face à l’échelle portative ou à l’escabeau en tout temps; ») et l'art. 32 les échafaudages. Le remplacement relève de l'art. 39 (« Autant que possible, les matières dangereuses [...] doivent être remplacées par des matières qui ne le sont pas ou, encore, qui le sont moins. ») et les cancérogènes C1 et C2 de l'art. 42 (« une telle exposition doit être réduite au minimum, même lorsqu’elle demeure à l’intérieur des normes prévues à cette annexe »)."
+  }
+ ]
+}

@@ -1,0 +1,64 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-toxicologie-amiante-articles-internes",
+ "portee": "Renvois aux lois de la page « Amiante » (Wiki Toxicologie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Amiante",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/amiante-articles-internes.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Toutes ces maladies figurent à l'",
+   "avant": "Annexe I de la",
+   "apres": "annexe A du Règlement sur les maladies professionnelles, qui remplace l'annexe I abrogée de la",
+   "motif": "L'annexe I de la LATMP est abrogée (LMRSST, art. 120 : « L’annexe I de cette loi est abrogée. »). Le Règlement sur les maladies professionnelles « détermine, à l’annexe A, des maladies et les conditions particulières en lien avec celles-ci aux fins de l’application de la présomption de maladie professionnelle prévue à l’article 29 » (LMRSST, art. 242)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Toutes ces maladies figurent à l'",
+   "avant": " (Règlement sur les maladies professionnelles), ce qui ouvre la",
+   "apres": ", ce qui ouvre la",
+   "motif": "Suite de la même phrase (le règlement est désormais nommé). L'annexe I de la LATMP est abrogée (LMRSST, art. 120 : « L’annexe I de cette loi est abrogée. »). Le Règlement sur les maladies professionnelles « détermine, à l’annexe A, des maladies et les conditions particulières en lien avec celles-ci aux fins de l’application de la présomption de maladie professionnelle prévue à l’article 29 » (LMRSST, art. 242)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "amiante : 0,1 f/cm³ (toutes formes)",
+   "avant": "art. 39 et annexe I",
+   "apres": "art. 40 et annexe I",
+   "motif": "RSST, art. 40 : « Aucun travailleur ne doit être exposé: [...] 2° à des gaz, des fumées, des vapeurs, des poussières ou des brouillards, au-delà des limites prévues à l’annexe I. » L'art. 39 vise le remplacement des matières dangereuses."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "amiante : 0,1 f/cm³ (toutes formes)",
+   "avant": "mention C (cancérogène)",
+   "apres": "notations C1 (effet cancérogène démontré chez l'humain) et EM",
+   "motif": "Annexe I du RSST : « Amiante – Toutes les formes [1332-21-4] 0,1 fibre/cm³ C1,EM » ; « C1: un effet cancérogène démontré chez l’humain » ; « EM: une substance dont l’exposition doit être réduite au minimum conformément à l’article 42 »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "art. 39, annexe I, art. 69 et suiv.",
+   "avant": "art. 39, annexe I, art. 69 et suiv.",
+   "apres": "art. 40, annexe I, art. 69.1 à 69.17",
+   "motif": "RSST, art. 40 : « Aucun travailleur ne doit être exposé: [...] 2° à des gaz, des fumées, des vapeurs, des poussières ou des brouillards, au-delà des limites prévues à l’annexe I. » L'art. 39 vise le remplacement des matières dangereuses. L'art. 69 du RSST vise le nettoyage par jet d'abrasif (« Outre les exigences prévues à l’article 68, l’employeur doit s’assurer que tout travailleur exposé à la poussière du nettoyage par jet d’abrasif porte une cagoule de sablage »). L'amiante est à la section IX.I, « Dispositions sur la gestion sécuritaire de l’amiante » (art. 69.1 à 69.17) : inspection des flocages et calorifuges (69.3), vérification avant travaux (69.11), contrôle de l'émission de poussière (69.14), formation (« l’employeur doit former et informer le travailleur », 69.15), registre (69.16), divulgation (69.17) ; ni programme particulier ni surveillance médicale."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Travaux exposant à l'amiante",
+   "avant": "art. 69 et suiv.",
+   "apres": "art. 69.1 à 69.17",
+   "motif": "L'art. 69 du RSST vise le nettoyage par jet d'abrasif (« Outre les exigences prévues à l’article 68, l’employeur doit s’assurer que tout travailleur exposé à la poussière du nettoyage par jet d’abrasif porte une cagoule de sablage »). L'amiante est à la section IX.I, « Dispositions sur la gestion sécuritaire de l’amiante » (art. 69.1 à 69.17) : inspection des flocages et calorifuges (69.3), vérification avant travaux (69.11), contrôle de l'émission de poussière (69.14), formation (« l’employeur doit former et informer le travailleur », 69.15), registre (69.16), divulgation (69.17) ; ni programme particulier ni surveillance médicale."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Travaux exposant à l'amiante",
+   "avant": "programme particulier, formation, surveillance médicale",
+   "apres": "inspection des flocages et calorifuges, vérification avant travaux, contrôle de la poussière, formation, registre et divulgation",
+   "motif": "L'art. 69 du RSST vise le nettoyage par jet d'abrasif (« Outre les exigences prévues à l’article 68, l’employeur doit s’assurer que tout travailleur exposé à la poussière du nettoyage par jet d’abrasif porte une cagoule de sablage »). L'amiante est à la section IX.I, « Dispositions sur la gestion sécuritaire de l’amiante » (art. 69.1 à 69.17) : inspection des flocages et calorifuges (69.3), vérification avant travaux (69.11), contrôle de l'émission de poussière (69.14), formation (« l’employeur doit former et informer le travailleur », 69.15), registre (69.16), divulgation (69.17) ; ni programme particulier ni surveillance médicale."
+  }
+ ]
+}

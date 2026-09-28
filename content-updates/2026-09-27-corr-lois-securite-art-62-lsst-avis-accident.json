@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-62-lsst-avis-accident",
+ "portee": "Renvois aux lois de la page « art-62-LSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-62-LSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-62-lsst-avis-accident.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "(preuves et photographies)",
+   "avant": "(preuves et photographies)",
+   "apres": "(produits dangereux : étiquette, fiche de données de sécurité et formation)",
+   "motif": "LSST, art. 62.1 : « Sauf dans les cas prévus par règlement, un employeur ne peut permettre l’utilisation, la manutention, le stockage ou l’entreposage d’un produit dangereux sur un lieu de travail, à moins qu’il ne soit pourvu d’une étiquette et d’une fiche de données de sécurité conformes aux dispositions de la présente sous-section et des règlements et que le travailleur exposé à ce produit, ou susceptible de l’être, n’ait reçu la formation et l’information requises pour accomplir de façon sécuritaire le travail qui lui est confié. »"
+  }
+ ]
+}

@@ -56,9 +56,10 @@
   {
    "type": "remplacer",
    "ligneContenant": "Taux d'utilisation typique de 5 % à 15 %",
-   "avant": "15 %; les plus à risque",
-   "apres": "15 % (source à préciser) ; les plus à risque",
-   "motif": "Point relevé : le taux d'utilisation « 5 % à 15 % » n'a pas de source ; marqué (source à préciser)."
+   "avant": "Taux d'utilisation typique de 5 % à 15 %; les plus à risque",
+   "apres": "Taux d'utilisation moyen de 9,2 % dans une étude de 102 organisations canadiennes, calculé de façon très variable d'une organisation à l'autre ([Csiernik, 2003](https://doi.org/10.1300/J022v18n03_04)) ; les plus à risque",
+   "ancienApres": "Taux d'utilisation typique de 5 % à 15 % (source à préciser) ; les plus à risque",
+   "motif": "Marque du lot précédent remplacée par une source vérifiée : Csiernik, R. (2003). Employee assistance program utilization: Developing a comprehensive scorecard. Employee Assistance Quarterly, 18(3) (pages à compléter). https://doi.org/10.1300/J022v18n03_04. Appui (résultat de recherche du 27 septembre 2026) : « « In a study of 154 Canadian EAPs where 102 organizations reported their utilization rates, the mean utilization rate was 9.2%. » « there was a lack of consistency in how utilization rates were calculated by various organizations, nor was there any agreement on what even constituted a case. » » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",

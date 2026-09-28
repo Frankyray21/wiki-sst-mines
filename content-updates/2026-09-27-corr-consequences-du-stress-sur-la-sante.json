@@ -14,9 +14,10 @@
   {
    "type": "remplacer",
    "ligneContenant": "Les méta-analyses sont sans ambiguïté",
-   "avant": "le risque de maladies majeures et de mortalité prématurée.",
-   "apres": "le risque de maladies majeures et de mortalité prématurée (source à préciser).",
-   "motif": "Affirmation sans source : aucune des trois références de la page (Stansfeld et Candy, 2006 ; Kivimäki et al., 2012 ; Theorell et al., 2015) ne porte sur la mortalité prématurée. Marquée (source à préciser)."
+   "avant": "Les méta-analyses sont sans ambiguïté : un environnement de travail dégradé augmente significativement le risque de maladies majeures et de mortalité prématurée.",
+   "apres": "Les méta-analyses vont dans le même sens : un environnement de travail dégradé augmente le risque de maladie et de mortalité ; dans l'une d'elles (228 études), des exigences élevées accroissent de 35 % le risque d'une maladie diagnostiquée par un médecin, et de longues heures de travail, de près de 20 % celui de mortalité, en rapports de cotes ([Goh et al., 2016](https://doi.org/10.1287/mnsc.2014.2115)).",
+   "ancienApres": "Les méta-analyses sont sans ambiguïté : un environnement de travail dégradé augmente significativement le risque de maladies majeures et de mortalité prématurée (source à préciser).",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Goh, J., Pfeffer, J. et Zenios, S. A. (2016). The relationship between workplace stressors and mortality and health costs in the United States. Management Science, 62(2), 608-628. https://doi.org/10.1287/mnsc.2014.2115. Appui (résultat de recherche du 27 septembre 2026) : « The meta-analysis examined 228 studies assessing the effects of ten workplace stressors on four health outcomes. [...] job insecurity increases the odds of reporting poor health by about 50%, high job demands raise the odds of having a physician-diagnosed illness by 35%, and long work hours increase mortality by almost 20%. The study attributes approximately 120,000 annual deaths and 5% to 8% of annual healthcare costs to workplace stress. » Reformulée pour dire ce que dit la source. « probabilité » de l'agent remplacé : l'article donne des rapports de cotes (odds)."
   },
   {
    "type": "remplacer",
@@ -36,36 +37,41 @@
    "type": "remplacer",
    "ligneContenant": "Le risque cumulatif sur 20 ans est substantiel.",
    "avant": "Le risque cumulatif sur 20 ans est substantiel.",
-   "apres": "Le risque cumulatif sur 20 ans est substantiel (source à préciser).",
-   "motif": "Affirmation sans source : le suivi de l'étude citée ne va pas jusqu'à 20 ans (note Kivimäki et al. (2012) : « Suivi prospectif : 2 à 14 ans (médiane 7 ans) »). Marquée (source à préciser)."
+   "apres": "Sur 18 ans de suivi de près de 6 500 employés de bureau au Canada, les hommes exposés à la fois au job strain et au déséquilibre efforts récompenses avaient un risque de maladie coronarienne deux fois plus élevé ([Lavigne-Robichaud et al., 2023](https://doi.org/10.1161/CIRCOUTCOMES.122.009700)).",
+   "ancienApres": "Le risque cumulatif sur 20 ans est substantiel (source à préciser).",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Lavigne-Robichaud, M., Trudel, X., Talbot, D., Milot, A., Gilbert-Ouimet, M., Vézina, M., Laurin, D., Dionne, C. E., Pearce, N., Dagenais, G. R. et Brisson, C. (2023). Psychosocial stressors at work and coronary heart disease risk in men and women: 18-year prospective cohort study of combined exposures. Circulation: Cardiovascular Quality and Outcomes, 16(10), e009700. https://doi.org/10.1161/CIRCOUTCOMES.122.009700. Appui (résultat de recherche du 27 septembre 2026) : « The Lavigne-Robichaud et al. study examined psychosocial stressors at work and coronary heart disease risk in men and women through an 18-year prospective cohort study of combined exposures. [...] The study examined data from nearly 6,500 white-collar workers in Canada. Men reporting both job strain and effort-reward imbalance were at twice the risk of heart disease compared with men who did not report these stressors. [...] Results on how work stress affects women's heart health were inconclusive. » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",
    "ligneContenant": "Risque doublé en cas de job strain",
-   "avant": "Risque doublé en cas de job strain",
-   "apres": "Risque doublé (source à préciser) en cas de job strain",
-   "motif": "Le wiki n'a pas de note sur Stansfeld et Candy (2006), et la note Theorell et al. (2015) donne l'OR 1,74 pour les symptômes dépressifs (« Interprétation : +74 % d'augmentation du risque de symptômes dépressifs »), pas pour la dépression majeure de la rangée. « Risque doublé » marqué (source à préciser)."
+   "avant": "Risque doublé en cas de job strain (Stansfeld & Candy, 2006)",
+   "apres": "Risque accru en cas de job strain : de 77 % dans les études publiées, de 27 % pour la dépression traitée à l'hôpital ([Madsen et al., 2017](https://doi.org/10.1017/S003329171600355X) ; Stansfeld & Candy, 2006)",
+   "ancienApres": "Risque doublé (source à préciser) en cas de job strain (Stansfeld & Candy, 2006)",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Madsen, I. E. H., Nyberg, S. T., Magnusson Hanson, L. L. et al. (2017). Job strain as a risk factor for clinical depression: systematic review and meta-analysis with additional individual participant data. Psychological Medicine, 47(8), 1342-1356. https://doi.org/10.1017/S003329171600355X. Appui (résultat de recherche du 27 septembre 2026) : « The Madsen IPD-Work meta-analysis included six published studies with 27,461 individuals and 914 incident cases of clinical depression, plus unpublished datasets with 120,221 individuals and 982 first episodes of hospital-treated clinical depression. Job strain was associated with an increased risk of clinical depression in published studies (relative risk = 1.77, 95% CI 1.47–2.13) and unpublished datasets (RR = 1.27, 95% CI 1.04–1.55). » Reformulée pour dire ce que dit la source. La citation Stansfeld et Candy (2006) de la cellule est gardée, dans la même parenthèse."
   },
   {
    "type": "remplacer",
    "ligneContenant": "Risque 1,5 à 2 fois supérieur",
    "avant": "Risque 1,5 à 2 fois supérieur",
-   "apres": "Risque 1,5 à 2 fois (source à préciser) supérieur",
-   "motif": "Chiffre sans source ; marqué (source à préciser) juste après le chiffre, la cellule finissant sur l'affirmation."
+   "apres": "Risque environ doublé en cas d'exigences psychologiques élevées ([Melchior et al., 2007](https://doi.org/10.1017/S0033291707000414))",
+   "ancienApres": "Risque 1,5 à 2 fois (source à préciser) supérieur",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Melchior, M., Caspi, A., Milne, B. J., Danese, A., Poulton, R. et Moffitt, T. E. (2007). Work stress precipitates depression and anxiety in young, working women and men. Psychological Medicine, 37(8), 1119-1129. https://doi.org/10.1017/S0033291707000414. Appui (résultat de recherche du 27 septembre 2026) : « Participants exposed to high psychological job demands (excessive workload, extreme time pressures) had a twofold risk of MDD or GAD compared to those with low job demands. Relative risks (RRs) adjusting for all work characteristics were: 1.90 [95% confidence interval (CI) 1.22-2.98] in women, and 2.00 (95% CI 1.13-3.56) in men. » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",
    "ligneContenant": "Conséquence directe de l'exposition prolongée",
    "avant": "Conséquence directe de l'exposition prolongée",
-   "apres": "Conséquence directe (source à préciser) de l'exposition prolongée",
-   "motif": "Affirmation sans source ; marquée (source à préciser)."
+   "apres": "Conséquence directe d'un stress chronique au travail qui n'a pas été géré avec succès ([OMS, 2019](https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases))",
+   "ancienApres": "Conséquence directe (source à préciser) de l'exposition prolongée",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Organisation mondiale de la Santé. (2019, 28 mai). Burn-out an \"occupational phenomenon\": International Classification of Diseases [communiqué]. https://www.who.int/news/item/28-05-2019-burn-out-an-occupational-phenomenon-international-classification-of-diseases. Appui (résultat de recherche du 27 septembre 2026) : « The 11th revision of the World Health Organization's International Classification of Diseases, ICD-11, defines \"burn-out\" as \"a syndrome conceptualized as resulting from chronic workplace stress that has not been successfully managed.\" » Reprend la définition de la CIM-11 (« resulting from chronic workplace stress that has not been successfully managed ») ; la citation va en fin de cellule."
   },
   {
    "type": "remplacer",
    "ligneContenant": "Augmentation significative en contextes",
    "avant": "Augmentation significative en contextes",
-   "apres": "Augmentation significative (source à préciser) en contextes",
-   "motif": "Affirmation sans source ; marquée (source à préciser)."
+   "apres": "Augmentation significative ([Milner et al., 2018](https://pubmed.ncbi.nlm.nih.gov/28851757/)) en contextes",
+   "ancienApres": "Augmentation significative (source à préciser) en contextes",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Milner, A., Witt, K., LaMontagne, A. D. et Niedhammer, I. (2018). Psychosocial job stressors and suicidality: a meta-analysis and systematic review. Occupational and Environmental Medicine, 75(4), 245-253. https://doi.org/10.1136/oemed-2017-104531. Appui (résultat de recherche du 27 septembre 2026) : « The odds ratio for suicide ideation (14 studies) ranged from 1.29 (95% CI 1.15 to 1.44) for poor supervisor and colleague support to 1.96 (95% CI 1.33 to 2.90) for job insecurity. » Adresse PubMed (présente dans les résultats avec le titre exact) plutôt que le DOI, qui n'y apparaît pas avec le titre."
   },
   {
    "type": "remplacer",

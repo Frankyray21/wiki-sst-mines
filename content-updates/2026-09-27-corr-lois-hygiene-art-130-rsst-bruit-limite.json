@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-130-rsst-bruit-limite",
+ "portee": "Renvois aux lois de la page « art-130-RSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-130-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-130-rsst-bruit-limite.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les articles suivants détaillent les méthodes de mesure",
+   "avant": "les contrôles techniques, l'audiométrie et les EPI.",
+   "apres": "les contrôles techniques et les EPI.",
+   "motif": "Les art. 131 à 141.5 du RSST portent sur les valeurs limites, les moyens raisonnables, le mesurage, les protecteurs auditifs, l'affichage et le registre ; aucun ne vise l'audiométrie. RSST, art. 130 : « Elles précisent les situations de travail pour lesquelles le port des protecteurs auditifs est nécessaire. »"
+  }
+ ]
+}

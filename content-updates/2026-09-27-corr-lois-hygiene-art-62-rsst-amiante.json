@@ -1,0 +1,50 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-62-rsst-amiante",
+ "portee": "Renvois aux lois de la page « art-62-RSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-62-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-62-rsst-amiante.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "et la divulgation des matériaux contenant de l'amiante (MCA)",
+   "avant": "Premier article de la section gestion sécuritaire de l'",
+   "apres": "Article qui précède la section sur la gestion sécuritaire de l'",
+   "motif": "La section IX.I du RSST, « Dispositions sur la gestion sécuritaire de l’amiante », comprend les art. 69.1 à 69.17 : « Tout bâtiment construit avant le 15 février 1990 doit être inspecté afin de localiser les flocages contenant de l’amiante » (art. 69.3) ; « L’employeur doit dresser et maintenir à jour un registre » (art. 69.16). L'art. 62 vise les contenants : « Toute poussière d’amiante ou rebut de matériau friable dont la concentration en amiante est d’au moins 0,1% doit être entreposé et transporté dans un contenant étanche. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "et la divulgation des matériaux contenant de l'amiante (MCA)",
+   "avant": "à 67, en vigueur depuis 2013). Impose l'inventaire",
+   "apres": "à 67 : dispositions particulières sur certaines matières dangereuses ; la section, art. 69.1 à 69.17, est en vigueur depuis 2013). Elle impose l'inventaire",
+   "motif": "La section IX.I du RSST, « Dispositions sur la gestion sécuritaire de l’amiante », comprend les art. 69.1 à 69.17 : « Tout bâtiment construit avant le 15 février 1990 doit être inspecté afin de localiser les flocages contenant de l’amiante » (art. 69.3) ; « L’employeur doit dresser et maintenir à jour un registre » (art. 69.16). L'art. 62 vise les contenants : « Toute poussière d’amiante ou rebut de matériau friable dont la concentration en amiante est d’au moins 0,1% doit être entreposé et transporté dans un contenant étanche. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "La gestion repose sur trois piliers",
+   "avant": "ouvre la section ",
+   "apres": "précède la section (art. 69.1 à 69.17) sur la gestion sécuritaire de l'",
+   "motif": "La section IX.I du RSST, « Dispositions sur la gestion sécuritaire de l’amiante », comprend les art. 69.1 à 69.17 : « Tout bâtiment construit avant le 15 février 1990 doit être inspecté afin de localiser les flocages contenant de l’amiante » (art. 69.3) ; « L’employeur doit dresser et maintenir à jour un registre » (art. 69.16). L'art. 62 vise les contenants : « Toute poussière d’amiante ou rebut de matériau friable dont la concentration en amiante est d’au moins 0,1% doit être entreposé et transporté dans un contenant étanche. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "à 67 pour la formation, les méthodes de travail",
+   "avant": "Renvoi aux",
+   "apres": "Renvoi : {{lien:w/legislation/20-reglements/rsst/art-69-14-rsst-controle-demission-de-poussieres.html|art. 69.14}} et {{lien:w/legislation/20-reglements/rsst/art-69-15-rsst-formation-et-information.html|69.15}} pour les méthodes de travail et la formation ;",
+   "motif": "Art. 63 (survêtement), 66 (vêtements de travail) et 67 (vestiaire double et douches) ; les art. 64 et 65 visent le plomb et le mercure. La formation et les méthodes relèvent de l'art. 69.15 (« l’employeur doit former et informer le travailleur sur les risques, les méthodes de prévention et les méthodes de travail sécuritaires ») et de l'art. 69.14 (« L’employeur doit prendre les mesures requises pour contrôler l’émission de la poussière d’amiante avant d’entreprendre un travail »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "à 67 pour la formation, les méthodes de travail",
+   "avant": "à 67 pour la formation, les méthodes de travail, la décontamination et les",
+   "apres": "à 67 pour la décontamination (survêtement, vêtements de travail, vestiaire double) et les",
+   "motif": "Art. 63 (survêtement), 66 (vêtements de travail) et 67 (vestiaire double et douches) ; les art. 64 et 65 visent le plomb et le mercure. La formation et les méthodes relèvent de l'art. 69.15 (« l’employeur doit former et informer le travailleur sur les risques, les méthodes de prévention et les méthodes de travail sécuritaires ») et de l'art. 69.14 (« L’employeur doit prendre les mesures requises pour contrôler l’émission de la poussière d’amiante avant d’entreprendre un travail »)."
+  }
+ ]
+}

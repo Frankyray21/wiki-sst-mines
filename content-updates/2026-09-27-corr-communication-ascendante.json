@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-communication-ascendante",
+ "portee": "Corrections de la page « Communication ascendante » : référence vague rendue vérifiable.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Communication ascendante",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/communication-ascendante.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacerLigne",
+   "ligneContenant": "Études en communication organisationnelle (Tourish",
+   "par": "- Tourish, D. et Robson, P. (2006). Sensemaking and the distortion of critical upward communication in organizations. *Journal of Management Studies*, 43(4), 711-730. ([doi.org/10.1111/j.1467-6486.2006.00608.x](https://doi.org/10.1111/j.1467-6486.2006.00608.x))",
+   "motif": "Référence vague (« Études en communication organisationnelle (Tourish & Robson, Detert & Edmondson). ») : les deux articles de ces auteurs sur la communication ascendante et la prise de parole, retrouvés dans les résultats de recherche avec leur DOI (Wiley Online Library ; Academy of Management Journal) : Tourish et Robson (2006), Journal of Management Studies, 43(4), 711-730 ; Detert et Edmondson (2011), Academy of Management Journal, 54(3), 461-488."
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Sensemaking and the distortion of critical upward communication",
+   "bloc": "- Detert, J. R. et Edmondson, A. C. (2011). Implicit voice theories: Taken-for-granted rules of self-censorship at work. *Academy of Management Journal*, 54(3), 461-488. ([doi.org/10.5465/amj.2011.61967925](https://doi.org/10.5465/amj.2011.61967925))",
+   "marqueur": "10.5465/amj.2011.61967925",
+   "colle": true,
+   "motif": "Référence vague (« Études en communication organisationnelle (Tourish & Robson, Detert & Edmondson). ») : les deux articles de ces auteurs sur la communication ascendante et la prise de parole, retrouvés dans les résultats de recherche avec leur DOI (Wiley Online Library ; Academy of Management Journal) : Tourish et Robson (2006), Journal of Management Studies, 43(4), 711-730 ; Detert et Edmondson (2011), Academy of Management Journal, 54(3), 461-488."
+  }
+ ]
+}

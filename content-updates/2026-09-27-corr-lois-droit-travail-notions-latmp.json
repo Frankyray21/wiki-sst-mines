@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-notions-latmp",
+ "portee": "Renvois aux lois de la page « Notions de la LATMP (lésion, accident, maladie) » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Notions de la LATMP (lésion, accident, maladie)",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/notions-latmp.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "notion d'accident à l'occasion du travail.",
+   "avant": "notion d'accident à l'occasion du travail.",
+   "apres": "champ d'application territorial (accident survenu au Québec) ; la notion « à l'occasion du travail » relève de la définition de l'art. 2.",
+   "motif": "Mauvais article : l'art. 7 ne définit pas l'accident, il fixe l'application territoriale : « La présente loi s’applique au travailleur victime d’un accident du travail survenu au Québec ou d’une maladie professionnelle contractée au Québec et dont l’employeur a un établissement au Québec […] » (LATMP, art. 7) ; la notion est à l'art. 2 : « « accident du travail » : un événement imprévu et soudain attribuable à toute cause, survenant à une personne par le fait ou à l’occasion de son travail et qui entraîne pour elle une lésion professionnelle; »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "attribuable à toute cause, par le fait ou à l'occasion du travail, qui entraîne une lésion professionnelle",
+   "avant": "qui entraîne une lésion professionnelle.",
+   "apres": "qui entraîne une lésion professionnelle (définition de l'art. 2 ; l'art. 7 fixe le champ territorial de la loi).",
+   "motif": "Mauvais article : la définition citée est celle de l'art. 2 (« « accident du travail » : un événement imprévu et soudain attribuable à toute cause, survenant à une personne par le fait ou à l’occasion de son travail et qui entraîne pour elle une lésion professionnelle; ») ; l'art. 7 ne fait que fixer l'application de la loi à l'« accident du travail survenu au Québec » (LATMP, art. 7). Le lien vers l'art. 7 est gardé, son rôle est précisé."
+  }
+ ]
+}

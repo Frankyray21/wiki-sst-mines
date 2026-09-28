@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-contrainte-thermique-encadrement",
+ "portee": "Corrections de la page « Prévention de la contrainte thermique en mine » (Wiki Hygiène industrielle) : lien tronqué de la section « Pour aller plus loin ».",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Prévention de la contrainte thermique en mine",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/contrainte-thermique-encadrement.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "60 - Prévention et programmes/Hiérarchie des moyens de prévent",
+   "avant": "[[Wiki SST/20 - Articles internes/60 - Prévention et programmes/Hiérarchie des moyens de prévent",
+   "apres": "{{lien:w/hygiene/hierarchie-des-moyens-de-prevention.html|Hiérarchie des moyens de prévention}}",
+   "motif": "Lien tronqué : la note affiche au lecteur le chemin brut « [[Wiki SST/20 - Articles internes/60 - Prévention et programmes/Hiérarchie des moyens de prévent », sans crochets fermants. Il devient le lien vers la page « Hiérarchie des moyens de prévention » du même wiki."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "mesures obligatoires pour",
+   "avant": ">= 50 travailleurs exposés.",
+   "apres": "les établissements de 50 travailleurs ou plus où l'indice de contrainte thermique atteint ou dépasse la courbe de travail continu (mesure deux fois par année, dont une fois l'été).",
+   "motif": "RSST, art. 121 : « Dans tout établissement qui emploie 50 travailleurs ou plus et où des travailleurs sont soumis à des conditions thermiques telles que l’indice de contrainte thermique atteint ou dépasse la courbe de travail continu indiquée au graphique de l’annexe V, un tel indice doit être mesuré deux fois par année, dont une fois pendant l’été ». Le seuil vise les travailleurs de l'établissement, pas les seuls exposés."
+  }
+ ]
+}

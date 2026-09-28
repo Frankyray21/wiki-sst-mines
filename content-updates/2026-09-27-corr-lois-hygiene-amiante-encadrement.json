@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-amiante-encadrement",
+ "portee": "Renvois aux lois de la page « Programme amiante en mine » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Programme amiante en mine",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/amiante-encadrement.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "section 3.23 (travaux de construction).",
+   "avant": "-67 (gestion amiante)",
+   "apres": "-67 et 69.1-69.17 (gestion amiante)",
+   "motif": "La gestion de l'amiante (inventaire, registre, divulgation) est à la section IX.I du RSST, « Dispositions sur la gestion sécuritaire de l’amiante » (art. 69.1 à 69.17) : « Tout bâtiment construit avant le 15 février 1990 doit être inspecté afin de localiser les flocages contenant de l’amiante » (RSST, art. 69.3) ; « L’employeur doit dresser et maintenir à jour un registre » (art. 69.16). Les art. 62 à 67 sont des dispositions particulières (art. 64 et 65 : plomb et mercure)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": ": gestion amiante en milieu de travail",
+   "avant": ": gestion amiante en milieu de travail.",
+   "apres": "et 69.1-69.17 : gestion sécuritaire de l'amiante en milieu de travail.",
+   "motif": "Même correction : la section IX.I du RSST, « Dispositions sur la gestion sécuritaire de l’amiante », comprend les art. 69.1 à 69.17 (« L’employeur doit dresser et maintenir à jour un registre », art. 69.16 ; « L’employeur doit divulguer à toute personne qui planifie ou qui va effectuer un travail susceptible d’émettre de la poussière d’amiante les inscriptions pertinentes », art. 69.17)."
+  }
+ ]
+}

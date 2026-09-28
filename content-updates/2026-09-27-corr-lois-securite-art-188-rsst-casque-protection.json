@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-188-rsst-casque-protection",
+ "portee": "Renvois aux lois de la page « art-188-RSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-188-RSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-188-rsst-casque-protection.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "est la disposition pivot. Il interdit toute intervention sur une machine sans contrôle des énergies",
+   "avant": " est la disposition pivot. Il interdit toute intervention sur une machine sans contrôle des énergies. Il renvoie à la section spécifique 188.1 à 188.13 pour les modalités.",
+   "apres": " impose un mode de commande spécifique lorsqu'un réglage, une maintenance ou une inspection exige de retirer un protecteur ou de neutraliser un dispositif de protection alors que la machine doit pouvoir être mise en marche. L'obligation d'appliquer le cadenassage, ou une autre méthode assurant une sécurité équivalente, avant tout travail dans la zone dangereuse d'une machine est à l'article 196 (sous-section des articles 195 à 207) ; les articles 188.1 à 188.13 sont remplacés.",
+   "motif": "RSST, art. 188 : « Mode de commande spécifique : Lorsque des travaux sur une machine, notamment pour son réglage, sa maintenance ou son inspection, nécessitent de déplacer ou de retirer un protecteur ou de neutraliser un dispositif de protection et que la machine ou une partie de celle-ci doit pouvoir être mise en marche à cette fin, la sécurité des travailleurs doit être assurée en utilisant un mode de commande spécifique qui: […] » ; art. 196 : « Avant d’entreprendre dans la zone dangereuse d’une machine tout travail […] le cadenassage ou, à défaut, toute autre méthode qui assure une sécurité équivalente doit être appliqué conformément à la présente sous-section. » ; art. 188.1 à 188.13 : « (Remplacé). »"
+  }
+ ]
+}

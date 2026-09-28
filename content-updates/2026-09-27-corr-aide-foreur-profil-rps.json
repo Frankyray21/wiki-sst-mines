@@ -64,8 +64,9 @@
    "type": "remplacer",
    "ligneContenant": "Études internationales sur les profils RPS en industrie minière",
    "avant": "Études internationales sur les profils RPS en industrie minière.",
-   "apres": "Études internationales sur les profils RPS en industrie minière (référence à préciser).",
-   "motif": "Référence sans titre ni année : marquée."
+   "apres": "Études internationales, surtout australiennes, sur le fly-in/fly-out et la santé psychologique dans les mines, recensées par l'INSPQ ([Pelletier et al., 2018](https://www.inspq.qc.ca/publications/2342)).",
+   "ancienApres": "Études internationales sur les profils RPS en industrie minière (référence à préciser).",
+   "motif": "Marque du lot précédent remplacée par une source vérifiée : Pelletier, M., Vézina, M., & Mantha-Bélisle, M.-M. (2018). Fly-in/fly-out et santé psychologique au travail dans les mines : une recension des écrits (synthèse). Institut national de santé publique du Québec. https://www.inspq.qc.ca/publications/2342. Appui (résultat de recherche du 27 septembre 2026) : « « This publication aims to better understand the relationship between working conditions associated with fly-in/fly-out (FIFO) and the psychological health of workers in the mining industry. » « A key limitation is noted: since virtually all reviewed studies were conducted in Australia, transposing results to the Quebec context may be subject to significant bias. » (Auteurs, titre et date vérifiés aussi dans la copie PDF du wiki : synthèse, janvier 2018.) » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "ajouterFin",

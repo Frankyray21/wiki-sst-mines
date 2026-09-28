@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-141-rsst-signalisation",
+ "portee": "Renvois aux lois de la page « art-141-RSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-141-RSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-141-rsst-signalisation.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "de la conservation de l'audition",
+   "avant": " structure l'",
+   "apres": " fixe les exigences de performance et de sélection des protecteurs auditifs (norme CSA Z94.2-2014) ; il ne structure pas l'",
+   "motif": "RSST, art. 141 : « L’employeur doit fournir des protecteurs auditifs répondant aux exigences de performance et de sélection prévues aux articles suivants de la norme Protecteurs auditifs: performances, sélection, entretien et utilisation, CSA Z94.2-2014: […] ». L'article ne parle d'aucun programme."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "de la conservation de l'audition",
+   "avant": " de la conservation de l'audition. C'est l'article qui articule l'ensemble des mesures (130, 131, 135) sous forme de programme cohérent.",
+   "apres": " de la conservation de l'audition : c'est l'art. 141.5 qui exige d'inscrire au programme de prévention, ou à défaut dans un registre, les situations à risque, les moyens réalisés et les rapports de mesurage.",
+   "motif": "L'art. 141 n'articule aucun programme ; dans la section sur le bruit, le lien avec le programme de prévention est fait par l'art. 141.5 : « L’employeur doit inclure et maintenir à jour dans le programme de prévention, ou à défaut dans un registre, les inscriptions et les documents suivants: 1° les situations de travail à risque de dépassement des valeurs limites d’exposition au bruit et la date à laquelle elles ont été identifiées; 2° les moyens raisonnables réalisés et la date du début et de la fin de leur mise en œuvre; 3° les rapports de mesurage. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Un opérateur présente un glissement audiométrique de 20 dB à 4 kHz",
+   "avant": " par. médecin/registres encadre la démarche.",
+   "apres": " (choix des protecteurs), avec les art. 141.1 (atténuation), 141.2 (formation) et 141.5 (registre), encadre la démarche.",
+   "motif": "L'art. 141 n'a pas de paragraphe sur le médecin ou les registres (il énumère des articles de la norme CSA Z94.2-2014). RSST, art. 141.1 : « Les protecteurs auditifs fournis à un travailleur doivent atténuer le bruit de telle sorte que celui-ci ne soit pas exposé à des valeurs qui excèdent celles établies à l’article 131. » ; art. 141.2 : « Dans tous les cas où l’employeur doit fournir des protecteurs auditifs, il doit fournir aux travailleurs une formation théorique et pratique […] » ; art. 141.5 : « L’employeur doit inclure et maintenir à jour dans le programme de prévention, ou à défaut dans un registre, les inscriptions et les documents suivants […] »."
+  }
+ ]
+}

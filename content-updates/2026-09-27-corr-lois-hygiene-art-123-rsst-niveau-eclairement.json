@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-123-rsst-niveau-eclairement",
+ "portee": "Renvois aux lois de la page « art-123-RSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-123-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-123-rsst-niveau-eclairement.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "dépasse la courbe travail continu pour la charge métabolique du poste",
+   "avant": "La surveillance médicale relève typiquement du médecin responsable du programme de santé spécifique à l'établissement (",
+   "apres": "La surveillance médicale incombe à l'employeur ; le programme de santé spécifique à l'établissement, qu'élaborait le médecin responsable, a été abrogé par la {{lien:w/legislation/10-lois-principales/lmrsst/art-175-lmrsst-section-ii-chapitre-viii-loi-comprenant.html|LMRSST, art. 175}} (",
+   "motif": "Point relevé : la surveillance médicale était rattachée au « médecin responsable du programme de santé spécifique à l'établissement (LSST art. 112) » ; ce programme n'existe plus : « La section II du chapitre VIII de cette loi, comprenant les articles 112 à 115, est abrogée. » (LMRSST, art. 175, en vigueur au plus tard le 6 octobre 2025 selon l'art. 313, 7°). L'art. 123 du RSST met la surveillance à la charge de l'employeur : « une surveillance médicale des travailleurs ainsi exposés doit être assurée par l'employeur »."
+  }
+ ]
+}

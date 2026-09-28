@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-256-2-rsst-surveillance-externe",
+ "portee": "Renvois aux lois de la page « art-256.2-RSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-256.2-RSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-256-2-rsst-surveillance-externe.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "relibeller",
+   "ligneContenant": "se voit confier la conduite d'un chariot élévateur sans avoir suivi de formation complète",
+   "libelle": "article 256.2",
+   "nouveau": "article 256.3",
+   "motif": "L'art. 256.2 ne vise que l'âge : RSST, art. 256.2 : « Âge minimum du cariste: Tout cariste doit avoir au moins 16 ans pour conduire un chariot élévateur. » ; la formation est à l'art. 256.3 : « Formation du cariste: Un chariot élévateur doit être utilisé uniquement par un cariste ayant reçu: 1° une formation qui porte notamment sur: […] 2° une formation pratique, effectuée sous la supervision d’un instructeur […] »."
+  },
+  {
+   "type": "recibler",
+   "ligneContenant": "se voit confier la conduite d'un chariot élévateur sans avoir suivi de formation complète",
+   "libelle": "article 256.3",
+   "adresse": "w/legislation/20-reglements/rsst/art-256-3-rsst-formation-du-cariste.html",
+   "motif": "Le lien relibellé à la retouche précédente menait encore à la page de l'art. 256.2 (âge minimum) ; il mène à celle de l'art. 256.3 (« Formation du cariste: Un chariot élévateur doit être utilisé uniquement par un cariste ayant reçu […] »)."
+  }
+ ]
+}

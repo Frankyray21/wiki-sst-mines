@@ -15,8 +15,9 @@
    "type": "remplacer",
    "ligneContenant": "C'est l'un des postes les plus exposés au burnout en mine",
    "avant": "au burnout en mine, mais aussi celui qui a le plus d'effet sur la santé psychologique de l'équipe.",
-   "apres": "au burnout en mine (source à préciser), mais aussi celui qui a le plus d'effet sur la santé psychologique de l'équipe (source à préciser).",
-   "motif": "Deux classements sans source (la page ne consigne « aucune référence précise ») : chacun est marqué."
+   "apres": "au burnout en mine (source à préciser), mais son soutien compte aussi pour l'équipe : chez les travailleurs miniers en FIFO, un faible soutien du supérieur immédiat est associé à un risque accru de problèmes de santé psychologique ([Pelletier et al., 2018](https://www.inspq.qc.ca/publications/2342)).",
+   "ancienApres": "au burnout en mine (source à préciser), mais aussi celui qui a le plus d'effet sur la santé psychologique de l'équipe (source à préciser).",
+   "motif": "Marque du lot précédent remplacée par une source vérifiée : Pelletier, M., Vézina, M., & Mantha-Bélisle, M.-M. (2018). Fly-in/fly-out et santé psychologique au travail dans les mines : une recension des écrits (synthèse). Institut national de santé publique du Québec. https://www.inspq.qc.ca/publications/2342. Appui (résultat de recherche du 27 septembre 2026) : « Résultat de recherche : « FIFO workers' exposure to psychosocial occupational risks, such as high workload, low decision-making autonomy, and low support from immediate supervisors, has been associated with greater risks of developing psychological health problems. » Original vérifié dans la copie du PDF déposée dans le wiki (docs/files/wiki-sst-psychosociale/70-documents-et-outils/document-references/inspq-2018-flyin-flyout-sante-psychologique-travail-mines.pdf, p. 2) : « l'exposition des travailleurs FIFO à des risques psychosociaux du travail, tels qu'une charge de travail élevée, une faibl » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",

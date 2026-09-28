@@ -21,13 +21,14 @@
   {
    "type": "remplacer",
    "ligneContenant": "consultent moins pour des raisons de santé mentale",
-   "avant": "attendent plus longtemps avant de signaler des symptômes.",
-   "apres": "attendent plus longtemps avant de signaler des symptômes (source à préciser).",
-   "motif": "Affirmation sans source (les hommes consultent moins, demandent moins d'aide, signalent plus tard) ; marquée (source à préciser)."
+   "avant": "les hommes (majoritaires en mine) consultent moins pour des raisons de santé mentale, demandent moins d'aide, attendent plus longtemps avant de signaler des symptômes.",
+   "apres": "les hommes (majoritaires en mine) consultent moins que les femmes les professionnels de la santé, notamment pour la dépression, l'abus de substances et les événements de vie stressants, selon des études américaines et britanniques ([Galdas et al., 2005](https://doi.org/10.1111/j.1365-2648.2004.03331.x)), et attendent plus longtemps avant de signaler des symptômes (source à préciser).",
+   "ancienApres": "les hommes (majoritaires en mine) consultent moins pour des raisons de santé mentale, demandent moins d'aide, attendent plus longtemps avant de signaler des symptômes (source à préciser).",
+   "motif": "Marque « (source à préciser) » du lot précédent remplacée par une source vérifiée : Galdas, P. M., Cheater, F. et Marshall, P. (2005). Men and health help-seeking behaviour: literature review. Journal of Advanced Nursing, 49(6), 616-623. https://doi.org/10.1111/j.1365-2648.2004.03331.x. Appui (résultat de recherche du 27 septembre 2026) : « Research in the United States suggests that men are less likely than women to seek help from health professionals for problems as diverse as depression, substance abuse, physical disabilities and stressful life events. Previous research has revealed that the principle health related issue facing men in the UK is their reluctance to seek access to health services. » Reformulée pour dire ce que dit la source. La partie « attendent plus longtemps » est gardée avec sa marque (l'agent la retirait faute de preuve : on ne supprime pas une affirmation non sourcée)."
   },
   {
    "type": "remplacer",
-   "ligneContenant": "consultent moins pour des raisons de santé mentale",
+   "ligneContenant": "Les taux de suicide en milieu minier",
    "avant": "sont significativement plus élevés que la population générale.",
    "apres": "sont significativement plus élevés que la population générale (source à préciser).",
    "motif": "Affirmation sans source sur les taux de suicide ; la note Bowers et al. (2018) du wiki porte sur la détresse psychologique, pas sur le suicide. Marquée (source à préciser)."

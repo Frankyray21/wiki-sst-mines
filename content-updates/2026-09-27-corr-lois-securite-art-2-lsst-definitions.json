@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-art-2-lsst-definitions",
+ "portee": "Renvois aux lois de la page « art-2-LSST » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-2-LSST",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/art-2-lsst-definitions.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les tribunaux (TAT division SST, Cour du Québec en matière pénale)",
+   "avant": "situé dans les dispositions définitoires, est largement interprétative",
+   "apres": "qui énonce l'objet de la loi (l'élimination à la source des dangers), et sur l'{{lien:w/legislation/10-lois-principales/lsst/art-1-lsst-definitions-interpretation.html|art. 1}}, qui regroupe les définitions, est largement interprétative",
+   "motif": "LSST, art. 2 : « La présente loi a pour objet l’élimination à la source même des dangers pour la santé, la sécurité et l’intégrité physique et psychique des travailleurs. » Les définitions (employeur, établissement, lieu de travail, travailleur) sont à l'art. 1 : « Dans la présente loi et les règlements, à moins que le contexte n’indique un sens différent, on entend par: »."
+  }
+ ]
+}

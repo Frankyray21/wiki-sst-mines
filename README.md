@@ -73,8 +73,9 @@ adresses n'ont pas changé.
   essai par défaut, sauvegarde avant écriture
 - `tools/retouches.mjs` + `tools/appliquer_retouches.mjs` — pose dans le vault un lot de retouches préparé
   sans accès au vault (médias à copier, lignes désignées par leur texte visible, liens vers une adresse
-  publiée ; nouvelle version d'un schéma à la place de l'ancienne ; lien redirigé, relibellé ou délié, `recibler`,
-  `relibeller`, `delier` ; point ou marque en fin de ligne, `ajouterFin` ; même correction sur plusieurs lignes,
+  publiée ; nouvelle version d'un schéma à la place de l'ancienne ; lien redirigé, relibellé (avec au besoin sa
+  nouvelle cible, `adresse`) ou délié, `recibler`, `relibeller`, `delier` ; correction qui remplace une version déjà
+  posée, `ancienApres` ; point ou marque en fin de ligne, `ajouterFin` ; même correction sur plusieurs lignes,
   `toutes`) ; essai par défaut, tout ou rien, rejouable, sauvegarde avant écriture
 - `tools/rejouer_lots.mjs` — rejoue dans le vault, en une commande, tous les lots préparés depuis le 25 septembre
   2026 (`content-updates/*.json`) : essai de tous les lots, puis, si aucun n'échoue, application dans l'ordre
@@ -278,6 +279,18 @@ node tools/serve.mjs
   **À faire dans le vault** : `node tools/rejouer_lots.mjs` (essai), puis `--appliquer`, puis trois retouches à
   la main. Détail, liste des retouches manuelles et points non traités :
   `content-updates/2026-09-27-choix-contenu-et-ameliorations.md`
+- **Bloc 2 : sources, renvois aux lois et forme (27 septembre 2026)** : 33 marques « (source à préciser) » des pages
+  RPS remplacées par une source vérifiée (DOI ou adresse retrouvés tels quels dans les résultats de recherche, contrôle
+  automatique) ; 87 marques restent, dont 44 jamais cherchées faute de quota de recherche. Renvois aux lois de
+  cinq wikis vérifiés contre le texte officiel du recueil : 172 erreurs corrigées (220 retouches, 81 pages, un lot
+  par page), chaque motif citant la loi mot pour mot ; un lien renommé mène à l'article qu'il nomme (19 liens
+  redirigés, `relibeller` avec `adresse`).
+  Grille INSPQ : 12 indicateurs, et non « huit dimensions » (4 pages). Coût d'un programme de prévention : estimations
+  contradictoires marquées, à trancher. Courbe de Bradley lisible. Références précisées (Tourish et Robson, Detert et
+  Edmondson, Wenger, EU-OSHA) et lien tronqué réparé. Une phrase d'ouverture (résumé Theorell) ; les 133 pages du
+  rapport de qualité publié datent d'avant le 21 septembre. Deux débordements au téléphone corrigés après balayage des
+  4 272 pages. Les lots gardent la trace des versions déjà posées (`ancienApres`) : une note du vault marquée passe à
+  la version sourcée. Détail, sources posées et décisions à prendre : `content-updates/2026-09-27-bloc-2-sources-lois-forme.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma
   en texte » (127 schémas, 65 pages), puis toutes les autres (« Lire la version texte — … », « Lire les voies en
   texte », « Lire l’illustration en texte » : 16 sections, 10 pages) disparaissent. Chaque image garde son texte

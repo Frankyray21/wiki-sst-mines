@@ -15,15 +15,17 @@
    "type": "remplacer",
    "ligneContenant": "Risque cardiovasculaire confirmé par études récentes",
    "avant": "Risque cardiovasculaire confirmé par études récentes",
-   "apres": "Risque cardiovasculaire confirmé par des études récentes (source à préciser)",
-   "motif": "Point relevé : le risque cardiovasculaire du type D « confirmé par études récentes » n'a pas de source ; marqué (source à préciser), l'article « des » ajouté pour que la retouche reste rejouable."
+   "apres": "Associé à un moins bon pronostic chez les patients cardiaques (rapport de cotes 2,28), mais l'effet diminue avec l'année de publication des études (de 5,02 à 1,54) ([Grande et al., 2012](https://doi.org/10.1007/s12160-011-9339-0))",
+   "ancienApres": "Risque cardiovasculaire confirmé par des études récentes (source à préciser)",
+   "motif": "Marque du lot précédent remplacée par une source vérifiée : Grande, G., Romppel, M., & Barth, J. (2012). Association between type D personality and prognosis in patients with cardiovascular diseases: A systematic review and meta-analysis. Annals of Behavioral Medicine (volume et pages à compléter depuis la page du DOI). https://doi.org/10.1007/s12160-011-9339-0. Appui (résultat de recherche du 27 septembre 2026) : « « Twelve studies on patients with cardiovascular diseases (N = 5,341) were included. » « Pooled crude and adjusted effects demonstrated a significant association of type D personality and hard endpoints (odds ratio (OR) of 2.28 (95% CI [1.43-3.62]), adjusted hazard ratio (HR) of 2.24 (95% CI [1.37-3.66])). » « The OR decreased over time (OR 5.02 to OR 1.54). » » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",
    "ligneContenant": "illégal et inefficace pour la santé psychologique",
    "avant": "illégal et inefficace",
-   "apres": "illégal (source à préciser) et inefficace",
-   "motif": "Point relevé : l'illégalité d'une sélection à l'embauche basée sur la personnalité est affirmée sans source ; marquée (source à préciser)."
+   "apres": "juridiquement suspecte au regard du droit à l'égalité, du droit à l'intégrité et du droit au respect de la vie privée ([CDPDJ, 1998](https://www.cdpdj.qc.ca/storage/app/media/publications/tests.pdf)) et inefficace",
+   "ancienApres": "illégal (source à préciser) et inefficace",
+   "motif": "Marque du lot précédent remplacée par une source vérifiée : Commission des droits de la personne et des droits de la jeunesse. (1998, juin). Les tests psychologiques et psychométriques en emploi (Cat. 2.115.9.6 ; recherche et rédaction : D. Carpentier). https://www.cdpdj.qc.ca/storage/app/media/publications/tests.pdf. Appui (résultat de recherche du 27 septembre 2026) : « « According to the CDPDJ, the use of personality tests in the workplace appears, at minimum, suspect in regard to both the right to equality and fundamental rights: the right to the integrity of the person and the right to respect for privacy. » (résumé en anglais du document de juin 1998) ; autre résultat : « Article 18.1 applies to psychometric tests and personality tests as part of recruitment processes. » » Reformulée pour dire ce que dit la source."
   },
   {
    "type": "remplacer",
@@ -39,6 +41,13 @@
    "marqueur": "Rotter, J. B. (1966)",
    "bloc": "- Rotter, J. B. (1966). Generalized expectancies for internal versus external control of reinforcement. *Psychological Monographs: General and Applied*, 80(1), 1-28.\n- Denollet (référence à préciser).",
    "motif": "Points relevés : les références de Rotter (1966), dont la page présente le concept, et de Denollet (type D) manquaient. Rotter ajoutée d'après la référence fournie par la relecture (elle concorde avec Dolan et Arsenault, 2009, p. 140, note 4 : « Psychological Monographs, vol. 80, tout le n° 609 ») ; Denollet signalé à préciser."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Denollet (référence à préciser)",
+   "avant": "Denollet (référence à préciser).",
+   "apres": "Denollet, J. (2005). DS14: Standard assessment of negative affectivity, social inhibition, and Type D personality. *Psychosomatic Medicine*, 67(1), 89-97. ([doi.org/10.1097/01.psy.0000149256.81953.49](https://doi.org/10.1097/01.psy.0000149256.81953.49))",
+   "motif": "La référence Denollet, insérée avec la marque « (référence à préciser) » par ce lot (retouche précédente), est complétée : Denollet, J. (2005), DS14, Psychosomatic Medicine, 67(1), 89-97, DOI 10.1097/01.psy.0000149256.81953.49, retrouvé tel quel dans les résultats de recherche du 27 septembre 2026 (« Denollet J. DS14: Standard assessment of negative affectivity, social inhibition, and Type D personality. Psychosomatic Medicine. 2005;67(1):89-97 »). Article de référence du type D (mesure DS14). L'insertion garde sa forme d'origine : une note qui l'a déjà reçue passe à la référence complète par ce remplacement."
   },
   {
    "type": "relibeller",

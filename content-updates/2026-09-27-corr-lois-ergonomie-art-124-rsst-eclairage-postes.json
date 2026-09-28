@@ -1,0 +1,57 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-ergonomie-art-124-rsst-eclairage-postes",
+ "portee": "Renvois aux lois de la page « art-124-RSST » (Wiki Ergonomie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-124-RSST",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/art-124-rsst-eclairage-postes.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "réaménagement du poste, alternance travail-repos, climatisation",
+   "avant": "Si les mesures de l'",
+   "apres": "En plus des mesures de l'",
+   "motif": "Point relevé : l'art. 124 du RSST ne jouerait que si les mesures de l'art. 123 sont insuffisantes. Les deux articles ont le même déclencheur et s'appliquent ensemble. RSST, art. 124 : « Dans tout établissement où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique dépasse la courbe de travail continu indiquée au graphique de l'annexe V, les mesures suivantes doivent être prises » ; l'art. 123 s'ouvre sur la même condition (« Dans tout établissement où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique dépasse la courbe de travail continu [...] »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "réaménagement du poste, alternance travail-repos, climatisation",
+   "avant": " sont insuffisantes pour ramener l'exposition sous la courbe travail continu, l'employeur",
+   "apres": ", dès que l'indice dépasse la courbe travail continu, l'employeur",
+   "motif": "Suite de la retouche précédente (même phrase). Les deux articles ont le même déclencheur et s'appliquent ensemble. RSST, art. 124 : « Dans tout établissement où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique dépasse la courbe de travail continu indiquée au graphique de l'annexe V, les mesures suivantes doivent être prises » ; l'art. 123 s'ouvre sur la même condition (« Dans tout établissement où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique dépasse la courbe de travail continu [...] »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Il oblige l'employeur à ne pas se limiter aux pauses et à l'hydratation",
+   "avant": "est le palier supérieur : quand la surveillance et l'eau ne suffisent pas, il faut transformer le travail",
+   "apres": "s'applique en même temps que l'{{lien:w/legislation/20-reglements/rsst/art-123-rsst-indice-superieur-a-la-courbe-de-travail-continu.html|article 123}}, dès que la courbe travail continu est dépassée : il faut transformer le travail",
+   "motif": "Point relevé : l'art. 124 du RSST était présenté comme un palier qui ne joue que si la surveillance et l'eau de l'art. 123 ne suffisent pas. Les deux articles ont le même déclencheur et s'appliquent ensemble. RSST, art. 124 : « Dans tout établissement où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique dépasse la courbe de travail continu indiquée au graphique de l'annexe V, les mesures suivantes doivent être prises » ; l'art. 123 s'ouvre sur la même condition (« Dans tout établissement où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique dépasse la courbe de travail continu [...] »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "C'est la traduction concrète de la hiérarchie des moyens de prévention pour la chaleur",
+   "avant": "S'applique en cascade après l'",
+   "apres": "S'applique en même temps que l'",
+   "motif": "Point relevé : l'art. 124 du RSST s'appliquerait « en cascade après l'article 123 si l'exposition reste excessive ». Les deux articles ont le même déclencheur et s'appliquent ensemble. RSST, art. 124 : « Dans tout établissement où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique dépasse la courbe de travail continu indiquée au graphique de l'annexe V, les mesures suivantes doivent être prises » ; l'art. 123 s'ouvre sur la même condition (« Dans tout établissement où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique dépasse la courbe de travail continu [...] »)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "C'est la traduction concrète de la hiérarchie des moyens de prévention pour la chaleur",
+   "avant": " si l'exposition reste excessive.",
+   "apres": ", dès que l'indice dépasse la courbe travail continu ; ses trois paliers (réaménagement du poste, alternance travail-repos, EPI) s'appliquent en cascade.",
+   "motif": "Suite de la retouche précédente (même phrase) : la cascade est interne à l'art. 124 du RSST : « 1° réaménager le poste de travail exposé [...]; 2° si l'application du paragraphe 1 s'avère impossible ou ne permet pas d'atteindre la courbe de travail continu, contrôler la charge de travail, le temps d'exposition et le temps de récupération conformément au régime d'alternance travail et repos prévu à cette fin à l'annexe V; 3° si l'application des paragraphes 1 et 2 se révèle impossible [...], s'assurer que les travailleurs portent des équipements de protection individuels appropriés, selon la nature de la contrainte thermique. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Un hygiéniste documente une situation d'exposition",
+   "avant": "-RSST sert de cadre normatif pour l'analyse, le suivi médical et la décision de gestion appropriée.",
+   "apres": " du RSST ne vise que la chaleur : au-delà de la courbe de travail continu, il impose de réaménager le poste, sinon d'alterner travail et repos (annexe V), sinon de fournir des équipements de protection individuels appropriés.",
+   "motif": "Point relevé : le cas type faisait de l'article le cadre normatif de l'analyse, du suivi médical et de la gestion d'expositions à la silice, aux gaz, au bruit, aux vibrations et aux contaminants chimiques ; l'art. 124 du RSST ne vise que la contrainte thermique : « Dans tout établissement où des travailleurs sont soumis à des conditions thermiques telles que l'indice de contrainte thermique dépasse la courbe de travail continu indiquée au graphique de l'annexe V, les mesures suivantes doivent être prises: 1° réaménager le poste de travail exposé [...]; 2° [...] contrôler la charge de travail, le temps d'exposition et le temps de récupération conformément au régime d'alternance travail et repos prévu à cette fin à l'annexe V; 3° [...] s'assurer que les travailleurs portent des équipements de protection individuels appropriés » (RSST, art. 124). Forme « article 124-RSST » remplacée par « article 124 du RSST »."
+  }
+ ]
+}

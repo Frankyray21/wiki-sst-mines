@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-lsst-partie-2",
+ "portee": "Renvois aux lois de la page « LSST partie 2 » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "LSST partie 2",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/lsst-partie-2.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Voir l'article principal",
+   "avant": " pour les pénalités.",
+   "apres": " ; les pénalités (amendes) sont aux articles 236 et 237.",
+   "motif": "LSST, art. 227 : « Le travailleur qui croit avoir été l’objet d’un congédiement, d’une suspension, d’un déplacement, de mesures discriminatoires ou de représailles […] peut recourir à la procédure de griefs […] ou, à son choix, soumettre une plainte par écrit à la Commission dans les 30 jours de la sanction ou de la mesure dont il se plaint. » ; les amendes : art. 236 : « Quiconque contrevient à la présente loi ou aux règlements […] commet une infraction et est passible: […] » ; art. 237 : « Quiconque, par action ou par omission, agit de manière à compromettre directement et sérieusement la santé, la sécurité ou l’intégrité physique ou psychique d’un travailleur commet une infraction et est passible: […] »."
+  }
+ ]
+}

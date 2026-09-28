@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-ergonomie-art-117-rsst-chauffage-local",
+ "portee": "Renvois aux lois de la page « art-117-RSST » (Wiki Ergonomie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-117-RSST",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/art-117-rsst-chauffage-local.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Salle à manger (séchoir, cafétéria) : minimum 20 °C",
+   "avant": "(séchoir, cafétéria)",
+   "apres": "(cafétéria ; le vestiaire-séchoir, lui, relève du {{lien:w/legislation/20-reglements/rssm/art-114-rssm-temperature-eclairement-vestiaire-sechoir.html|RSSM, art. 114}} : au moins 22 °C)",
+   "motif": "Point relevé : le séchoir était rangé parmi les salles à manger soumises au minimum de 20 °C de l'art. 118 du RSST ; dans une mine, le vestiaire-séchoir a sa propre règle : « Un vestiaire-séchoir doit être maintenu à une température minimale de 22 °C (71,6 °F) et pourvu d'un niveau d'éclairement minimal de 250 lux, mesuré conformément à l'article 110. » (RSSM, art. 114), article que l'art. 2 du RSSM rend applicable aussi aux usines de traitement et aux bâtiments de surface."
+  }
+ ]
+}

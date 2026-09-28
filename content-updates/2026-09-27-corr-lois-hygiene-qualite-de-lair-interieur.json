@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-qualite-de-lair-interieur",
+ "portee": "Renvois aux lois de la page « Qualité de l'air intérieur » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Qualité de l'air intérieur",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/qualite-de-lair-interieur.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "relibeller",
+   "ligneContenant": "aération et chauffage convenables. Voir",
+   "libelle": "LSST art. 51.4",
+   "nouveau": "LSST art. 51, 4°",
+   "motif": "Il n'existe pas d'art. 51.4 : c'est le paragraphe 4° de l'art. 51 de la LSST (« 4° contrôler la tenue des lieux de travail, fournir des installations sanitaires, l’eau potable, un éclairage, une aération et un chauffage convenable [...] »)."
+  }
+ ]
+}

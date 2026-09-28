@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-analyse-inspq-2021",
+ "portee": "Corrections de la note d'analyse « INSPQ (2021) - Grille d'identification des risques psychosociaux du travail » : la grille compte 12 indicateurs en deux parties, et non huit dimensions.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "INSPQ (2021) - Grille d'identification des risques psychosociaux du travail",
+  "wiki": "Wiki SST psychosociale",
+  "page": "w/psychosocial/analyse-inspq-2021.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "opérationnalisant les modèles théoriques (Karasek, Siegrist)",
+   "avant": "organisée autour de huit dimensions reconnues dans la littérature scientifique",
+   "apres": "organisée autour de 12 indicateurs en deux parties ([Recueil de fiches de l'INSPQ](https://www.inspq.qc.ca/recueil-de-fiches-portant-sur-les-indicateurs-de-la-grille-d-identification-de-risques-psychosociaux-du-travail)), appuyés sur la littérature scientifique",
+   "motif": "La Grille compte 12 indicateurs en deux parties : partie 1 « Contexte de travail et mesures de prévention en place » (1-A Contexte de travail et d'emploi ; 1-B Absentéisme maladie et présentéisme ; 1-C Activités ou politique de santé au travail ; 1-D Activités ou politique contre la violence et le harcèlement ; 1-E Activités ou politique de retour au travail ; 1-F Activités ou politique de conciliation travail et vie personnelle) et partie 2 « Composantes clés de l'organisation du travail » (2-A Charge de travail ; 2-B Reconnaissance au travail ; 2-C Soutien social du supérieur ; 2-D Soutien social des collègues ; 2-E Autonomie décisionnelle ; 2-F Information et communication) : INSPQ, Recueil de fiches portant sur les indicateurs de la Grille d'identification de risques psychosociaux du travail (publication 2371), source déjà vérifiée pour la page Grille INSPQ (lot 2026-09-27-corr-grille-inspq-didentification-des-rps). « Relations interpersonnelles » et « justice organisationnelle » ne sont pas des indicateurs de la grille ; la page Justice organisationnelle le dit déjà : « Il ne faut pas la présenter comme une liste de huit dimensions comprenant automatiquement la justice organisationnelle. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Concept-clé : les huit dimensions des RPS",
+   "avant": "les huit dimensions des RPS",
+   "apres": "les dimensions des RPS",
+   "motif": "Le titre annonçait « huit dimensions » : la grille compte 12 indicateurs (voir le paragraphe posé sous ce titre). La liste de la note, gardée, en reprend une partie."
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Concept-clé : les dimensions des RPS",
+   "bloc": "La grille compte 12 indicateurs en deux parties ([Recueil de fiches de l'INSPQ](https://www.inspq.qc.ca/recueil-de-fiches-portant-sur-les-indicateurs-de-la-grille-d-identification-de-risques-psychosociaux-du-travail)). Partie 1, contexte de travail et mesures de prévention en place : contexte de travail et d'emploi ; absentéisme maladie et présentéisme ; activités ou politique de santé au travail, contre la violence et le harcèlement, de retour au travail, de conciliation travail et vie personnelle. Partie 2, composantes clés de l'organisation du travail : charge de travail ; reconnaissance au travail ; soutien social du supérieur ; soutien social des collègues ; autonomie décisionnelle ; information et communication. Dans la liste ci-dessous, les relations interpersonnelles et la justice organisationnelle ne sont pas des indicateurs de la grille.",
+   "marqueur": "La grille compte 12 indicateurs en deux parties",
+   "motif": "La Grille compte 12 indicateurs en deux parties : partie 1 « Contexte de travail et mesures de prévention en place » (1-A Contexte de travail et d'emploi ; 1-B Absentéisme maladie et présentéisme ; 1-C Activités ou politique de santé au travail ; 1-D Activités ou politique contre la violence et le harcèlement ; 1-E Activités ou politique de retour au travail ; 1-F Activités ou politique de conciliation travail et vie personnelle) et partie 2 « Composantes clés de l'organisation du travail » (2-A Charge de travail ; 2-B Reconnaissance au travail ; 2-C Soutien social du supérieur ; 2-D Soutien social des collègues ; 2-E Autonomie décisionnelle ; 2-F Information et communication) : INSPQ, Recueil de fiches portant sur les indicateurs de la Grille d'identification de risques psychosociaux du travail (publication 2371), source déjà vérifiée pour la page Grille INSPQ (lot 2026-09-27-corr-grille-inspq-didentification-des-rps). « Relations interpersonnelles » et « justice organisationnelle » ne sont pas des indicateurs de la grille ; la page Justice organisationnelle le dit déjà : « Il ne faut pas la présenter comme une liste de huit dimensions comprenant automatiquement la justice organisationnelle. »"
+  }
+ ]
+}

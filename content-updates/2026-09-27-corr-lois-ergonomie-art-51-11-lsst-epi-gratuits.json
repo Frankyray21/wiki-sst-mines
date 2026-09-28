@@ -1,0 +1,36 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-ergonomie-art-51-11-lsst-epi-gratuits",
+ "portee": "Renvois aux lois de la page « art-51-11-LSST » (Wiki Ergonomie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-51-11-LSST",
+  "wiki": "Wiki Ergonomie",
+  "page": "w/ergonomie/art-51-11-lsst-epi-gratuits.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les angles récurrents (Cour du Québec, chambre criminelle et pénale)",
+   "avant": "quasi-totalité des poursuites pénales du",
+   "apres": "quasi-totalité des poursuites pénales, intentées ({{lien:w/legislation/10-lois-principales/lsst/art-242-lsst-recidive.html|LSST, art. 242, al. 1}}) non par le",
+   "motif": "Point relevé : les poursuites pénales fondées sur l'art. 51 étaient attribuées au DPCP « au nom de la CNESST » ; la LSST confie ces poursuites à la Commission elle-même : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. » (LSST, art. 242, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les angles récurrents (Cour du Québec, chambre criminelle et pénale)",
+   "avant": " au nom de la",
+   "apres": " mais par la",
+   "motif": "Suite de la retouche précédente (même phrase, de part et d'autre du lien « DPCP »). Point relevé : les poursuites pénales fondées sur l'art. 51 étaient attribuées au DPCP « au nom de la CNESST » ; la LSST confie ces poursuites à la Commission elle-même : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. » (LSST, art. 242, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Un hygiéniste documente une situation d'exposition",
+   "avant": "-11-LSST sert de cadre normatif pour l'analyse, le suivi médical et la décision de gestion appropriée.",
+   "apres": ", 11°, de la LSST ne vise que les moyens et équipements de protection : l'employeur doit fournir gratuitement ceux choisis par le comité de santé et de sécurité (ou déterminés par règlement) et s'assurer que le travailleur les utilise.",
+   "motif": "Point relevé : le cas type faisait de l'article le cadre normatif de l'analyse, du suivi médical et de la gestion d'expositions à la silice, aux gaz, au bruit, aux vibrations et aux contaminants chimiques ; ce paragraphe ne vise que les moyens et équipements de protection : « fournir gratuitement au travailleur tous les moyens et équipements de protection individuels choisis par le comité de santé et de sécurité conformément au paragraphe 4° de l'article 78 ou, le cas échéant, les moyens et équipements de protection individuels ou collectifs déterminés par règlement et s'assurer que le travailleur, à l'occasion de son travail, utilise ces moyens et équipements » (LSST, art. 51, 11°). Forme « article 51-11-LSST » remplacée par la forme juridique « article 51, 11°, de la LSST »."
+  }
+ ]
+}

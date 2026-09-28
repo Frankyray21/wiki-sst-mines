@@ -1,0 +1,16 @@
+{
+ "date": "2026-09-27",
+ "lot": "phrases-introduction",
+ "portee": "La seule page que le contrôle de forme signale encore sans phrase d'ouverture (règle de tools/qualite.mjs reproduite sur les 613 pages publiées hors Recueil, le 27 septembre 2026). Les 133 pages du rapport de qualité publié datent d'avant le correctif du 21 septembre (table des matières manuelle sautée, notes d'analyse exemptées) : 113 s'ouvrent en fait sur « L'essentiel : … », 18 sont des notes d'analyse, 2 ouvrent sur une image suivie d'un texte. Les sept vraies du lot du 21 septembre ont déjà leur phrase.",
+ "methode": "Phrase rédigée à partir de la page seule (titre, rubriques Référence de la source et Sujet, titres de section), puis soumise à un réfuteur (appui de chaque élément dans la page ; forme : 40-220 caractères, ton encyclopédique). Première formulation réfutée : 252 caractères, et « apparition » absent de la page (qui dit « développement ») ; formulation corrigée par le réfuteur sans rien ajouter. Aucun contenu SST nouveau.",
+ "pose": "node tools/appliquer_intros.mjs --lot content-updates/2026-09-27-phrases-introduction.json (essai), puis --appliquer : la phrase est posée juste après le titre H1 de la note ; sauvegarde de la note.",
+ "phrases": [
+  {
+   "page": "w/psychosocial/resume-theorell-t-a-systematic-review-including-meta-analysis-of-work-environment-and-depressive-symptoms.html",
+   "titre": "Résumé Theorell, T. A systematic review including meta-analysis of work environment and depressive symptoms",
+   "phrase": "Résumé de la revue systématique avec méta-analyse de Theorell et al. (2015) sur l'environnement de travail et le développement de symptômes dépressifs : méthode, résultats, citations commentées et limites.",
+   "reserve": "Note de lecture au tutoiement (« Comment elle peut renforcer MON travail », « Correspondance avec mon travail actuel ») : à reformuler un jour pour un lecteur du wiki, indépendamment de la phrase.",
+   "verdict": "première formulation réfutée (252 caractères ; « apparition » sans appui, la page dit « développement ») ; corrigée par le réfuteur sans rien ajouter"
+  }
+ ]
+}

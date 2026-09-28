@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-droit-travail-retour-au-travail-et-assignation",
+ "portee": "Renvois aux lois de la page « Programme de retour au travail et assignation temporaire » (Wiki Droit du travail) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Programme de retour au travail et assignation temporaire",
+  "wiki": "Wiki Droit du travail",
+  "page": "w/droit-travail/retour-au-travail-et-assignation.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "à 247 : droit de retour au travail (1 ou 2 ans",
+   "avant": "selon la taille de l'entreprise",
+   "apres": "selon le nombre de travailleurs de l'établissement",
+   "motif": "Le seuil vise l'établissement, non l'entreprise : les droits de retour peuvent être exercés « 1° dans l’année suivant le début de la période d’absence continue du travailleur en raison de sa lésion professionnelle, s’il occupait un emploi dans un établissement comptant 20 travailleurs ou moins au début de cette période; 2° dans les deux ans suivant le début de la période d’absence continue du travailleur en raison de sa lésion professionnelle, s’il occupait un emploi dans un établissement comptant plus de 20 travailleurs au début de cette période » (LATMP, art. 240)."
+  }
+ ]
+}

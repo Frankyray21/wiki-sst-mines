@@ -1,0 +1,37 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-cadenassage-encadrement",
+ "portee": "Renvois aux lois de la page « Programme de cadenassage CSA Z460 » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Programme de cadenassage CSA Z460",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/cadenassage-encadrement.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "programme et exigences spécifiques",
+   "avant": ".1 à 188.13 : programme et exigences spécifiques.",
+   "apres": ".1 à 188.13 (remplacés ; cadenassage aujourd'hui aux art. 195 à 207) : programme et exigences spécifiques.",
+   "motif": "RSST, art. 188.1 à 188.13 : « (Remplacé). » La sous-section du cadenassage est aux art. 195 à 207 : art. 195 : « Dans la présente sous-section, on entend par: «cadenassage» : une méthode de contrôle des énergies visant l’installation d’un cadenas à cléage unique sur un dispositif d’isolement d’une source d’énergie […] » ; art. 207 : « La présente sous-section s’applique, compte tenu des adaptations nécessaires, à tout travail sur une installation électrique. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "conditions des méthodes alternatives",
+   "avant": " : conditions des méthodes alternatives.",
+   "apres": ", aujourd'hui art. 198 : conditions d'une méthode autre que le cadenassage.",
+   "motif": "RSST, art. 188.4 : « (Remplacé). » La règle est à l'art. 198 : « Lorsqu’un employeur ayant autorité sur l’établissement prévoit appliquer une méthode de contrôle des énergies autre que le cadenassage, il doit, au préalable, s’assurer de la sécurité équivalente de cette méthode en analysant les éléments suivants: […] »."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "procédure de retrait en absence",
+   "libelle": "art. 188.12",
+   "nouveau": "art. 206 (ancien art. 188.12)",
+   "motif": "RSST, art. 188.12 : « (Remplacé). » Le retrait d'un cadenas est à l'art. 206 : « En cas d’oubli d’un cadenas ou de la perte d’une clé, l’employeur qui a autorité sur l’établissement peut, avec l’accord de la personne qui a exécuté le cadenassage, autoriser le retrait du cadenas […] ». Libellé corrigé, cible inchangée (note art-188.12-RSST, qui traite de ce retrait). Le lien mène désormais à la page de l'article nommé (art-206-rsst-en-cas-doubli-dun-cadenas-ou-de-la), et non plus à l'ancien article.",
+   "adresse": "w/legislation/20-reglements/rsst/art-206-rsst-en-cas-doubli-dun-cadenas-ou-de-la.html"
+  }
+ ]
+}

@@ -56,6 +56,9 @@ test('un mot plus long que la colonne passe à la ligne au lieu de faire défile
   const css = fs.readFileSync(path.join(R, 'tools/style.css'), 'utf8');
   // « De la conformité à la prévention » : la flèche d'un schéma en caractères (« └────▶ », 500 px) faisait
   // défiler la page de 126 px au téléphone
-  assert.match(css, /\.page-body p, \.page-body li, \.page-body dd, \.page-body blockquote \{ overflow-wrap: break-word; \}/);
+  // L'encadré « En bref » de l'art. 5.2.1 CSTC reprenait une ligne de soulignés du tableau du PDF (+88 px)
+  assert.match(css, /\.page-body p, \.page-body li, \.page-body dd, \.page-body blockquote, \.chapo p, \.chapo li \{ overflow-wrap: break-word; \}/);
   assert.ok(!/\.page-body p[^{]*\{[^}]*overflow-wrap: anywhere/.test(css), 'break-word : la largeur minimale des tableaux ne change pas');
+  // « LOT 3 - NOTES INSTITUTIONNELLES/COMPLÉMENTAIRES » élargissait la grille de l'en-tête (+105 px au téléphone)
+  assert.match(css, /\.article-titre \.page-title \{ overflow-wrap: anywhere; \}/);
 });

@@ -179,7 +179,20 @@ test('équivalence : Espaces clos reposée par l’outil, à l’octet près', {
   const titreDe = a => fs.readFileSync(path.join(docs, a), 'utf8').match(/<h1 class="page-title">([\s\S]*?)<\/h1>/)[1].replace(/&#39;/g, "'").trim();
   const dimsDe = f => verifierSvg(fs.readFileSync(path.join(docs, 'files/infographies', f), 'utf8'), f);
   const obtenu = poserDansPage(pageAvant, { page: 'w/securite/espaces-clos.html', schemas }, { racine: '../../', dimsDe, titreDe });
-  assert.equal(obtenu, fs.readFileSync(path.join(docs, 'w/securite/espaces-clos.html'), 'utf8'));
+  // La page publiée porte aussi les lots venus après les schémas (renvois aux lois du 27 septembre) : on les défait
+  // sur la page publiée pour ne comparer que ce que l'outil pose. Seul un remplacement de texte simple se défait ici.
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  let attendu = fs.readFileSync(path.join(docs, 'w/securite/espaces-clos.html'), 'utf8');
+  for (const f of fs.readdirSync(path.join(racine, 'content-updates')).filter(f => f.endsWith('.json') && f !== '2026-09-25-espaces-clos-schemas.json')) {
+    let l; try { l = JSON.parse(fs.readFileSync(path.join(racine, 'content-updates', f), 'utf8')); } catch { continue; }
+    if (l?.note?.page !== 'w/securite/espaces-clos.html') continue;
+    for (const r of l.retouches) {
+      assert.ok(r.type === 'remplacer' && !/\{\{lien:|\[\[|\]\(/.test(r.avant + r.apres), f + ' : retouche à défaire à la main dans ce test');
+      assert.equal(attendu.split(esc(r.apres)).length, 2, f + ' : texte corrigé présent une fois');
+      attendu = attendu.replace(esc(r.apres), () => esc(r.avant));
+    }
+  }
+  assert.equal(obtenu, attendu);
 });
 
 test('sans ancre : le schéma prend la place exacte de la capture, dans la page et dans la note', () => {
