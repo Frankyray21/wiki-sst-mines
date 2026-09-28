@@ -1,0 +1,50 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-hierarchie-des-moyens-de-prevention",
+ "portee": "Renvois aux lois de la page « Hiérarchie des moyens de prévention » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Hiérarchie des moyens de prévention",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/hierarchie-des-moyens-de-prevention.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "La ventilation reste l'outil d'ingénierie le plus utilisé",
+   "avant": "(art. 51 et 59) rend cette hiérarchie",
+   "apres": "(art. 59 et 61.2) rend cette hiérarchie",
+   "motif": "LMRSST, art. 144 (LSST, art. 59, al. 2, 2°) : « les mesures et les priorités d’action permettant d’éliminer ou, à défaut, de contrôler les risques identifiés en privilégiant la hiérarchie des mesures de prévention établie par règlement » ; même texte pour le plan d'action (LMRSST, art. 147 : LSST, art. 61.2, 2°). La modification de l'art. 51 (LMRSST, art. 139) ne touche pas la hiérarchie."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "(élimination à la source) et art. 3 (les EPI",
+   "avant": "(art. 51 et 59) rend la hiérarchie des mesures de prévention",
+   "apres": "(art. 59 et 61.2) rend la hiérarchie des mesures de prévention",
+   "motif": "LMRSST, art. 144 (LSST, art. 59, al. 2, 2°) : « les mesures et les priorités d’action permettant d’éliminer ou, à défaut, de contrôler les risques identifiés en privilégiant la hiérarchie des mesures de prévention établie par règlement » ; même texte pour le plan d'action (LMRSST, art. 147 : LSST, art. 61.2, 2°). La modification de l'art. 51 (LMRSST, art. 139) ne touche pas la hiérarchie."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "accessible, identifiable, sans rétention",
+   "libelle": "RSST art. 192",
+   "nouveau": "RSST art. 193",
+   "motif": "RSST, art. 193 : « Une machine dont le fonctionnement nécessite la présence d’au moins un travailleur doit être pourvue d’un dispositif d’arrêt d’urgence. [...] 1° il est situé bien en vue et à la portée du travailleur; [...] 3° il est clairement identifié ». L'art. 192 vise l'appareil avertisseur de mise en marche."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "(mise en marche intempestive)",
+   "avant": "-188.13",
+   "apres": " à 188.13, remplacés par les {{lien:w/legislation/20-reglements/rsst/art-195-rsst-dans-la-presente-sous-section-on-entend-par.html|art. 195}} à 207 (autre méthode que le cadenassage : {{lien:w/legislation/20-reglements/rsst/art-198-rsst-lorsquun-employeur-ayant-autorite-sur-letablissement-prevo.html|art. 198}})",
+   "motif": "Les art. 188.1 à 188.13 du RSST portent la mention « (Remplacé) » ; le cadenassage est à la sous-section « § 4. — Cadenassage et autres méthodes de contrôle des énergies » (art. 195 à 207) : « le cadenassage ou, à défaut, toute autre méthode qui assure une sécurité équivalente doit être appliqué conformément à la présente sous-section » (art. 196) ; « Lorsqu’un employeur ayant autorité sur l’établissement prévoit appliquer une méthode de contrôle des énergies autre que le cadenassage, il doit, au préalable, s’assurer de la sécurité équivalente de cette méthode » (art. 198)."
+  },
+  {
+   "type": "relibeller",
+   "ligneContenant": "les EPI choisis par le CSS, et s'assure de leur utilisation",
+   "libelle": "LSST art. 51.11",
+   "nouveau": "LSST art. 51, 11°",
+   "motif": "Il n'existe pas d'art. 51.11 : c'est le paragraphe 11° de l'art. 51 de la LSST (« 11° fournir gratuitement au travailleur tous les moyens et équipements de protection individuels choisis par le comité de santé et de sécurité [...] et s’assurer que le travailleur, à l’occasion de son travail, utilise ces moyens et équipements »)."
+  }
+ ]
+}

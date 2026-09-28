@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-174-rsst-epi-obligatoires",
+ "portee": "Renvois aux lois de la page « art-174-RSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-174-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-174-rsst-epi-obligatoires.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "En hygiène industrielle, ces protecteurs ont un effet collatéral important",
+   "avant": "ouvre la section protecteurs.",
+   "apres": "exige que toute machine soit accompagnée d'un manuel d'instruction du fabricant ; les protecteurs relèvent des {{lien:w/legislation/20-reglements/rsst/art-177-rsst-choix-des-moyens-de-protection.html|art. 177}} (choix des moyens de protection) et {{lien:w/legislation/20-reglements/rsst/art-181-rsst-attributs-des-moyens-de-protection.html|181}} (attributs des moyens de protection).",
+   "motif": "RSST, art. 174 : « Toute machine doit être accompagnée d’un manuel d’instruction du fabricant comportant minimalement les éléments suivants ». Les protecteurs : art. 177 (« Une machine doit être conçue et fabriquée de manière à rendre ses zones dangereuses inaccessibles. À défaut, [...] au moins un des moyens de protection suivants [...] a) un protecteur fixe ») et art. 181 (« Un protecteur ou un dispositif de protection doit être conçu et installé selon les règles de l’art »)."
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-securite-espaces-clos-encadrement",
+ "portee": "Renvois aux lois de la page « Programme espaces clos en mine » (Wiki Sécurité industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Programme espaces clos en mine",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/espaces-clos-encadrement.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "champ d'application, définitions",
+   "avant": "définitions, permis, ventilation",
+   "apres": "définitions, renseignements préalables écrits ({{lien:w/legislation/20-reglements/rsst/art-300-rsst-cueillette-de-renseignements-et-moyens-de-prevention-prealab.html|art. 300}}), ventilation",
+   "motif": "Les art. 296.1 à 312 du RSST n'exigent pas de permis d'entrée ; ils exigent des renseignements écrits : « Avant que ne soit entrepris un travail dans un espace clos, les renseignements et les moyens de prévention suivants doivent être disponibles, par écrit, sur les lieux mêmes du travail » (RSST, art. 300)."
+  }
+ ]
+}

@@ -280,7 +280,9 @@ node tools/serve.mjs
   `content-updates/2026-09-27-choix-contenu-et-ameliorations.md`
 - **Bloc 2 : sources, renvois aux lois et forme (27 septembre 2026)** : 33 marques « (source à préciser) » des pages
   RPS remplacées par une source vérifiée (DOI ou adresse retrouvés tels quels dans les résultats de recherche, contrôle
-  automatique) ; 87 marques restent, dont 44 jamais cherchées faute de quota de recherche. LOIS_CHIFFRES
+  automatique) ; 87 marques restent, dont 44 jamais cherchées faute de quota de recherche. Renvois aux lois de
+  cinq wikis vérifiés contre le texte officiel du recueil : 172 erreurs corrigées (220 retouches, 81 pages, un lot
+  par page), chaque motif citant la loi mot pour mot.
   Grille INSPQ : 12 indicateurs, et non « huit dimensions » (4 pages). Coût d'un programme de prévention : estimations
   contradictoires marquées, à trancher. Courbe de Bradley lisible. Références précisées (Tourish et Robson, Detert et
   Edmondson, Wenger, EU-OSHA) et lien tronqué réparé. Une phrase d'ouverture (résumé Theorell) ; les 133 pages du

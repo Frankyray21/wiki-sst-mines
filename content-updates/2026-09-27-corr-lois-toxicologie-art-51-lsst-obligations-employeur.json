@@ -31,6 +31,20 @@
    "avant": "(programme de santé)",
    "apres": "(comité SST)",
    "motif": "Point relevé : l'art. 68 de la LSST était décrit comme portant sur le programme de santé ; il porte sur la formation du comité de santé et de sécurité : « Un comité de santé et de sécurité peut être formé au sein d'un établissement groupant plus de vingt travailleurs et appartenant à une catégorie identifiée à cette fin par règlement. » (LSST, art. 68 ; texte remplacé par la LMRSST, art. 150 : « Un comité de santé et de sécurité doit être formé au sein d'un établissement groupant au moins 20 travailleurs au cours de l'année. »). Le programme de santé spécifique était aux art. 112 et 113, abrogés par la LMRSST, art. 175."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "est le levier juridique de la",
+   "avant": "par. 7 (EPI gratuits), par. 8 (information sur les risques toxiques), par. 10 (examens de santé",
+   "apres": "par. 9 (information sur les risques toxiques), par. 11 (EPI gratuits), par. 12 (examens de santé",
+   "motif": "LSST, art. 51 : « 9° informer adéquatement le travailleur sur les risques reliés à son travail [...] » ; « 11° fournir gratuitement au travailleur tous les moyens et équipements de protection individuels [...] » ; « 12° permettre aux travailleurs de se soumettre aux examens de santé en cours d’emploi exigés pour l’application de la présente loi et des règlements ». Le 7° vise le matériel sécuritaire, le 8° l'émission d'un contaminant, le 10° l'affichage."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "est le levier juridique de la",
+   "avant": "et par. 11 (communication de la liste des matières dangereuses",
+   "apres": "et par. 13 (communication de la liste des matières dangereuses",
+   "motif": "LSST, art. 51 : « 13° communiquer aux travailleurs, au comité de santé et de sécurité, à l’association accréditée, au directeur de santé publique et à la Commission, la liste des matières dangereuses utilisées dans l’établissement et des contaminants qui peuvent y être émis »."
   }
  ]
 }

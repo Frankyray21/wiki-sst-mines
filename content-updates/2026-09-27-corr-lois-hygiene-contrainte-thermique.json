@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-contrainte-thermique",
+ "portee": "Renvois aux lois de la page « Contrainte thermique » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Contrainte thermique",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/contrainte-thermique.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "L'hydratation doit remplacer environ 80 %",
+   "avant": "environ 80 % de l'eau perdue (",
+   "apres": "environ 80 % (source à préciser) de l'eau perdue ; l'eau potable mise à la disposition des travailleurs doit être en quantité suffisante, compte tenu notamment des conditions climatiques (",
+   "motif": "RSST, art. 145 : « La quantité d’eau potable mise à la disposition des travailleurs doit être suffisante pour satisfaire à leurs besoins physiologiques et d’hygiène personnelle quotidiens en tenant compte, notamment, de la situation de travail ainsi que des conditions environnementales et climatiques. » L'article ne fixe aucune part d'eau perdue à remplacer : le chiffre de 80 % reste sans source."
+  }
+ ]
+}

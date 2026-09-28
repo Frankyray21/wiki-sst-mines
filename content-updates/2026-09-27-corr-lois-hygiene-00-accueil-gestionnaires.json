@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-00-accueil-gestionnaires",
+ "portee": "Renvois aux lois de la page « Bienvenue, gestionnaire » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Bienvenue, gestionnaire",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/00-accueil-gestionnaires.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "relibeller",
+   "ligneContenant": "substitution des cancérogènes",
+   "libelle": "RSST art. 30",
+   "nouveau": "RSST art. 39, 41 et 42",
+   "motif": "L'art. 30 du RSST vise les échelles (« Le travailleur doit: 1° faire face à l’échelle portative ou à l’escabeau en tout temps; »). La substitution relève de l'art. 39 (« Autant que possible, les matières dangereuses qui sont sources de gaz, de fumées, de vapeurs, de poussières ou de brouillards doivent être remplacées par des matières qui ne le sont pas ou, encore, qui le sont moins. »), de l'art. 41 et de l'art. 42 (« une telle exposition doit être réduite au minimum »), comme le dit la page visée."
+  }
+ ]
+}

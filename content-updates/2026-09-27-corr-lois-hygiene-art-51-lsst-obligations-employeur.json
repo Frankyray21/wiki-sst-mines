@@ -1,0 +1,43 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-51-lsst-obligations-employeur",
+ "portee": "Renvois aux lois de la page « art-51-LSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-51-LSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-51-lsst-obligations-employeur.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les angles récurrents (Cour du Québec, chambre criminelle et pénale)",
+   "avant": "poursuites pénales du DPCP au nom de la",
+   "apres": "poursuites pénales, intentées ({{lien:w/legislation/10-lois-principales/lsst/art-242-lsst-recidive.html|LSST, art. 242, al. 1}}) non par le DPCP mais par la",
+   "motif": "Point relevé : les poursuites pénales fondées sur l'art. 51 étaient attribuées au DPCP « au nom de la CNESST » ; la LSST confie ces poursuites à la Commission elle-même : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. » (LSST, art. 242, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "(programme de santé)",
+   "avant": "(programme de santé)",
+   "apres": "(comité SST)",
+   "motif": "Point relevé : l'art. 68 de la LSST était décrit comme portant sur le programme de santé ; il porte sur la formation du comité de santé et de sécurité : « Un comité de santé et de sécurité peut être formé au sein d'un établissement groupant plus de vingt travailleurs et appartenant à une catégorie identifiée à cette fin par règlement. » (LSST, art. 68 ; texte remplacé par la LMRSST, art. 150 : « Un comité de santé et de sécurité doit être formé au sein d'un établissement groupant au moins 20 travailleurs au cours de l'année. »). Le programme de santé spécifique était aux art. 112 et 113, abrogés par la LMRSST, art. 175."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "conception de la ventilation pour les contaminants gazeux",
+   "avant": "Les paragraphes 5 et 7 sont les plus mobilisés",
+   "apres": "Les paragraphes 5, 7 et 11 sont les plus mobilisés",
+   "motif": "La fourniture gratuite des APR relève du par. 11° : « 11° fournir gratuitement au travailleur tous les moyens et équipements de protection individuels choisis par le comité de santé et de sécurité [...] » (LSST, art. 51) ; le par. 7° vise le matériel : « 7° fournir un matériel sécuritaire et assurer son maintien en bon état »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "conception de la ventilation pour les contaminants gazeux",
+   "avant": "Le paragraphe 11 oblige à transmettre la liste des matières dangereuses",
+   "apres": "Le paragraphe 13 oblige à communiquer la liste des matières dangereuses",
+   "motif": "LSST, art. 51 : « 13° communiquer aux travailleurs, au comité de santé et de sécurité, à l’association accréditée, au directeur de santé publique et à la Commission, la liste des matières dangereuses utilisées dans l’établissement et des contaminants qui peuvent y être émis »."
+  }
+ ]
+}

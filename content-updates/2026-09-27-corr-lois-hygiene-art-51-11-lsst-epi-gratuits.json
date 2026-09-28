@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-51-11-lsst-epi-gratuits",
+ "portee": "Renvois aux lois de la page « art-51-11-LSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-51-11-LSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-51-11-lsst-epi-gratuits.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les angles récurrents (Cour du Québec, chambre criminelle et pénale)",
+   "avant": "poursuites pénales du DPCP au nom de la",
+   "apres": "poursuites pénales, intentées ({{lien:w/legislation/10-lois-principales/lsst/art-242-lsst-recidive.html|LSST, art. 242, al. 1}}) non par le DPCP mais par la",
+   "motif": "Point relevé : les poursuites pénales fondées sur l'art. 51 étaient attribuées au DPCP « au nom de la CNESST » ; la LSST confie ces poursuites à la Commission elle-même : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. » (LSST, art. 242, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "sert de cadre normatif pour l'analyse, le suivi médical",
+   "avant": "-11-LSST sert de cadre normatif",
+   "apres": ", 11°, de la LSST sert de cadre normatif",
+   "motif": "Il n'existe pas d'art. 51-11 : c'est le paragraphe 11° de l'art. 51 de la LSST (« Il doit notamment: [...] 11° fournir gratuitement au travailleur tous les moyens et équipements de protection individuels choisis par le comité de santé et de sécurité [...] »)."
+  }
+ ]
+}

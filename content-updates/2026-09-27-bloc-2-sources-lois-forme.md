@@ -63,7 +63,20 @@ Six agents ont vérifié chaque renvoi « art. X » de ces wikis contre le texte
 (`tools/textes-loi/*.json`, LMRSST comprise). Seules les erreurs certaines sont corrigées. Le motif de chaque retouche
 recopie la phrase de loi qui la fonde ; un contrôle automatique a retrouvé chaque citation mot pour mot.
 
-HYGIENE_TOXICOLOGIE_CHIFFRES
+**Chiffres :**
+- 815 passages et 1 046 renvois vus.
+- 172 erreurs corrigées par 220 retouches : 189 remplacements de texte, 29 libellés de liens et 2 liens reciblés.
+- 81 pages touchées : Hygiène 25, Sécurité 21, Droit du travail 17, Ergonomie 12, Toxicologie 6.
+- Par nature d'erreur :
+  - mauvais article : 73 ;
+  - renvoi à un article remplacé : 10 ;
+  - contenu infidèle à la loi : 67 ;
+  - numéro inexistant : 16 ;
+  - mauvaise loi ou texte abrogé : 6.
+- Un lot par page : 79 lots `2026-09-27-corr-lois-<wiki>-<page>.json`. Les deux pages qui avaient déjà un lot du jour
+  (Aménagement des horaires ; Contrainte thermique, encadrement) voient ce lot complété.
+- Les lots sont indépendants des autres lots. Seule la page Espaces clos (Sécurité) a aussi un lot plus ancien (ses
+  schémas), qui ne touche pas la phrase corrigée.
 
 **Exemples de corrections :**
 - **Cadenassage** : les articles 188.1 à 188.13 du RSST portent « (Remplacé). » ; la sous-section est aujourd'hui aux
@@ -85,9 +98,18 @@ HYGIENE_TOXICOLOGIE_CHIFFRES
   obligations » (comités SST, art. 68 à 86) le décrivent encore : il faut une réécriture de fond.
 - **Page art-167 du RSST (siège ergonomique)** : toute la page repose sur un faux texte de l'art. 167, qui porte en
   réalité sur le travail dans des piles.
-- **Wiki Sécurité** :
-  - un « Cas type 1 » générique (maintenance, énergie résiduelle) revient sur 13 pages d'articles qu'il n'illustre pas ;
-  - un paragraphe de jurisprudence sur l'exposition chimique figure sur les pages de cadenassage.
+- **Gabarits hors sujet** :
+  - un « Cas type 1 » générique revient sur une trentaine de pages d'articles qu'il n'illustre pas : 13 en Sécurité
+    (maintenance, énergie résiduelle) et 14 en Hygiène et Toxicologie (« cadre normatif pour l'analyse, le suivi
+    médical… ») ;
+  - des paragraphes « Jurisprudence marquante » parlent d'un autre sujet : exposition chimique sur les pages de
+    cadenassage, vibrations sur l'art. 145, éclairage sur l'art. 62.
+
+  Ces textes sont à retirer ou à réécrire, comme la page art-30 le 25 septembre.
+- **Toxicologie, pages art-188.1 et art-188.4** : elles sont consacrées à une « silice » absente de ces articles.
+- **Tableaux « Articles de loi à connaître / Couvre »** (démarrages rapides et pages thème d'Hygiène et de Sécurité) :
+  l'article affiché ne correspond pas au thème. Par exemple, 51.4 ↔ contrôle des contaminants, alors que c'est l'art.
+  51, 8°. Le libellé est le titre de la page du recueil : il faut changer le lien dans la note.
 - **Libellés égaux au titre d'une page du recueil** : la page Conciliation travail-famille renvoie aux art. 79.1, 80
   et 81 de la LNT pour de mauvais congés. D'autres cas sont dans les rapports des agents. Seul un changement de lien
   dans la note peut les corriger.
@@ -148,4 +170,5 @@ node tools/rejouer_lots.mjs --vault "C:/…/WIKI SST - Mines" --appliquer --cons
 node tools/appliquer_intros.mjs --lot content-updates/2026-09-27-phrases-introduction.json --appliquer
 ```
 
-`rejouer_lots.mjs` prend tous les lots, dont les nouveaux lots `2026-09-27-corr-lois-*.json` et `2026-09-27-corr-*.json`.
+`rejouer_lots.mjs` prend tous les lots, dont les nouveaux lots `2026-09-27-corr-lois-*.json` et
+`2026-09-27-corr-*.json`.

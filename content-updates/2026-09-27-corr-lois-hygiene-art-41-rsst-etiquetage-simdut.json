@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-41-rsst-etiquetage-simdut",
+ "portee": "Renvois aux lois de la page « art-41-RSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-41-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-41-rsst-etiquetage-simdut.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "les FDS sont souvent rédigées avec des valeurs",
+   "avant": "règle un problème pratique fréquent :",
+   "apres": "fixe l'ordre des mesures de contrôle de la qualité de l'air et ne traite pas des FDS. Problème pratique fréquent :",
+   "motif": "RSST, art. 41 : « Afin de respecter les valeurs prévues à l’article 40, l’employeur doit contrôler ou améliorer la qualité de l’air en éliminant un contaminant de l’air ou en remplaçant une matière dangereuse, tel que prévu à l’article 39. » L'article ne traite pas des FDS. Il prévoit l'élimination ou le remplacement, puis « 1° le confinement [...]; 2° le contrôle des procédés tel que l’abattement de la poussière ainsi que l’installation ou l’amélioration de la ventilation locale et ensuite, de la ventilation générale de l’établissement »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "les FDS sont souvent rédigées avec des valeurs",
+   "avant": "C'est toujours la valeur québécoise qui prime pour la conformité.",
+   "apres": "C'est toujours la valeur québécoise qui prime pour la conformité ({{lien:w/legislation/20-reglements/rsst/art-40-rsst-aucun-travailleur-ne-doit-etre-expose.html|art. 40}} et annexe I).",
+   "motif": "RSST, art. 40 : « Aucun travailleur ne doit être exposé: [...] 2° à des gaz, des fumées, des vapeurs, des poussières ou des brouillards, au-delà des limites prévues à l’annexe I. »"
+  }
+ ]
+}

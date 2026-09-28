@@ -1,0 +1,29 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-demarche-arec",
+ "portee": "Renvois aux lois de la page « Démarche AREC » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Démarche AREC",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/demarche-arec.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les schémas suivants synthétisent les durées, supports et accès",
+   "avant": "encadre la conservation des dossiers d'hygiène.",
+   "apres": "fixe les méthodes de mesure des contaminants ; la conservation des résultats relève notamment de l'{{lien:w/legislation/20-reglements/rsst/art-43-rsst-controle.html|art. 43}} (registre des mesures de la qualité de l'air, conservé au moins 5 ans).",
+   "motif": "RSST, art. 44 : « Les gaz, les fumées, les vapeurs, les poussières et les brouillards présents dans le milieu de travail doivent être mesurés au niveau de la zone respiratoire des travailleurs [...] ». La conservation est à l'art. 43 : « Les résultats de toute mesure de la qualité de l’air effectuée dans le milieu de travail par l’employeur doivent être consignés dans un registre que celui-ci doit conserver pendant une période d’au moins 5 ans. »"
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "Conception de la ventilation souterraine principale et auxiliaire",
+   "avant": "art. 100 et suivants",
+   "apres": "art. 86 à 107, dont l'art. 99 : plans et devis d'un ingénieur",
+   "motif": "Au RSSM, la ventilation est à la sous-section « Qualité de l’air » (art. 85 à 107) : « La ventilation d’une mine souterraine doit être faite mécaniquement » (art. 86) ; « toute nouvelle installation de ventilation ou toute modification à une installation existante ne peut être entreprise sans l’obtention de plans et devis d’un ingénieur » (art. 99). L'art. 100 vise l'échappement d'un moteur installé dans un bâtiment."
+  }
+ ]
+}

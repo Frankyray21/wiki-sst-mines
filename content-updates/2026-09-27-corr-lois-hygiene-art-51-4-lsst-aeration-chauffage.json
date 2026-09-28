@@ -1,0 +1,57 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-51-4-lsst-aeration-chauffage",
+ "portee": "Renvois aux lois de la page « art-51-4-LSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-51-4-LSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-51-4-lsst-aeration-chauffage.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "Les angles récurrents (Cour du Québec, chambre criminelle et pénale)",
+   "avant": "poursuites pénales du DPCP au nom de la",
+   "apres": "poursuites pénales, intentées ({{lien:w/legislation/10-lois-principales/lsst/art-242-lsst-recidive.html|LSST, art. 242, al. 1}}) non par le DPCP mais par la",
+   "motif": "Point relevé : les poursuites pénales fondées sur l'art. 51 étaient attribuées au DPCP « au nom de la CNESST » ; la LSST confie ces poursuites à la Commission elle-même : « Une poursuite pénale pour une infraction à une disposition de la présente loi peut être intentée par la Commission. » (LSST, art. 242, al. 1)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "température adaptée au type d'activité",
+   "avant": "et annexe V).",
+   "apres": "et annexe IV).",
+   "motif": "Point relevé : les températures minimales de l'art. 117 du RSST sont à l'annexe IV, et non à l'annexe V (contrainte thermique, méthode WBGT) : « Dans tout établissement, la température minimale prévue à l'annexe IV doit être maintenue à tout poste de travail fixe situé à l'intérieur d'un bâtiment, selon la nature du travail qui y est effectué [...] » (RSST, art. 117)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": ": > 20 % (",
+   "avant": ": > 20 % (",
+   "apres": ": au moins 20 % dans les édifices à bureaux et établissements commerciaux, sinon un taux convenable (",
+   "motif": "Point relevé : un taux « > 20 % » était donné comme règle générale ; le seuil est « au moins 20 % » et ne vise que les édifices à bureaux et établissements commerciaux, les autres locaux fermés devant avoir un taux convenable : « Dans tout local fermé, un pourcentage d'humidité relative convenable doit être maintenu, compte tenu de la nature des travaux qui y sont exécutés ainsi que des conditions climatiques extérieures. Un pourcentage d'humidité relative d'au moins 20% doit être maintenu, pendant les heures d'ouverture, dans tout édifice à bureaux ou établissement commercial construit ou mis en exploitation après le 19 décembre 1979. » (RSST, art. 119)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "qui prévoit un débit minimal par travailleur et par puissance diesel",
+   "avant": "à 137 : ventilation principale et auxiliaire",
+   "apres": "et, plus largement, {{lien:w/legislation/20-reglements/rssm/art-85-rssm-verification-air-sauveteurs-mine-delaissee.html|art. 85}} à 107 : qualité de l'air, dont la ventilation principale et auxiliaire",
+   "motif": "Point relevé : la ventilation du RSSM était située aux art. 105 à 137 ; dans la section IV du RSSM (qualité du milieu de travail), la sous-section « Qualité de l'air » couvre les art. 85 à 107 (art. 86 : « La ventilation d'une mine souterraine doit être faite mécaniquement. » ; art. 101 : « Une mine souterraine doit être alimentée en air frais provenant de l'atmosphère à raison d'un débit minimal d'air [...] »), les art. 108 à 110 portant sur l'éclairage, 111 à 115 sur les normes sanitaires et 116 et suivants sur les incendies, l'alarme et les salles de refuge. L'art. 105, conservé, vise l'arrêt des moteurs diesel : « tout moteur diesel se trouvant dans la zone affectée par l'arrêt d'un ventilateur doit être arrêté dans un délai de 15 minutes »."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "qui prévoit un débit minimal par travailleur et par puissance diesel",
+   "avant": "(T°, HR > 20 %, contaminants gazeux)",
+   "apres": "(T°, humidité relative convenable, contaminants gazeux)",
+   "motif": "Point relevé : « HR > 20 % » était donné pour le concentrateur et les ateliers de surface ; le seuil de 20 % ne vise que les édifices à bureaux et établissements commerciaux, les autres locaux fermés devant avoir un taux convenable : « Dans tout local fermé, un pourcentage d'humidité relative convenable doit être maintenu, compte tenu de la nature des travaux qui y sont exécutés ainsi que des conditions climatiques extérieures. Un pourcentage d'humidité relative d'au moins 20% doit être maintenu, pendant les heures d'ouverture, dans tout édifice à bureaux ou établissement commercial construit ou mis en exploitation après le 19 décembre 1979. » (RSST, art. 119)."
+  },
+  {
+   "type": "remplacer",
+   "ligneContenant": "sert de cadre normatif pour l'analyse, le suivi médical",
+   "avant": "-4-LSST sert de cadre normatif",
+   "apres": ", 4°, de la LSST sert de cadre normatif",
+   "motif": "Il n'existe pas d'art. 51-4 : c'est le paragraphe 4° de l'art. 51 de la LSST (« 4° contrôler la tenue des lieux de travail, fournir des installations sanitaires, l’eau potable, un éclairage, une aération et un chauffage convenable [...] »)."
+  }
+ ]
+}

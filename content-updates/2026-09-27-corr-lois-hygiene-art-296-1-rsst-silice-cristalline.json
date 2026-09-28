@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-hygiene-art-296-1-rsst-silice-cristalline",
+ "portee": "Renvois aux lois de la page « art-296.1-RSST » (Wiki Hygiène industrielle) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-296.1-RSST",
+  "wiki": "Wiki Hygiène industrielle",
+  "page": "w/hygiene/art-296-1-rsst-silice-cristalline.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "(réservoir, silo, cuve, fosse, égout, citerne, pale d'éolienne)",
+   "avant": "présentant au moins un risque atmosphérique, d'engloutissement, de coincement ou d'accès difficile en raison du confinement.",
+   "apres": "présentant, en raison du confinement, un risque d'asphyxie, d'intoxication, de perte de conscience ou de jugement, d'incendie ou d'explosion (atmosphère ou température interne), d'ensevelissement, ou de noyade ou d'entraînement par un liquide (définition de l'{{lien:w/legislation/20-reglements/rsst/art-1-rsst-definitions.html|art. 1}}).",
+   "motif": "RSST, art. 1 : « «espace clos» : tout espace qui est totalement ou partiellement fermé, [...] et qui présente un ou plusieurs des risques suivants en raison du confinement: 1° un risque d’asphyxie, d’intoxication, de perte de conscience ou de jugement, d’incendie ou d’explosion associé à l’atmosphère ou à la température interne; 2° un risque d’ensevelissement; 3° un risque de noyade ou d’entrainement en raison du niveau ou du débit d’un liquide; ». Le coincement et l'accès difficile n'y figurent pas."
+  }
+ ]
+}

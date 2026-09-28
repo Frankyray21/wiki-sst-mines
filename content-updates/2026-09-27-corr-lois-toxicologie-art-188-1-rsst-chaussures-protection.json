@@ -1,0 +1,22 @@
+{
+ "date": "2026-09-27",
+ "revision": "2026-09-27-corr-lois-toxicologie-art-188-1-rsst-chaussures-protection",
+ "portee": "Renvois aux lois de la page « art-188.1-RSST » (Wiki Toxicologie) vérifiés contre le texte officiel du recueil (tools/textes-loi) ; seules les erreurs certaines sont corrigées.",
+ "precautions": "",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "art-188.1-RSST",
+  "wiki": "Wiki Toxicologie",
+  "page": "w/toxicologie/art-188-1-rsst-chaussures-protection.html"
+ },
+ "medias": [],
+ "retouches": [
+  {
+   "type": "remplacer",
+   "ligneContenant": "(bruit (autre contaminant prioritaire))",
+   "avant": "(bruit (autre contaminant prioritaire))",
+   "apres": "(ne vise pas le bruit, autre contaminant prioritaire, qui relève des art. 130 à 141.5)",
+   "motif": "RSST, art. 296.1 : « La présente section s’applique à tout espace clos et à tout travail effectué dans un espace clos. » Le bruit relève de la section XV (art. 130 : « La présente section établit les valeurs limites d’exposition au bruit »)."
+  }
+ ]
+}
