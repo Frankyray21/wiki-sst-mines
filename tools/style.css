@@ -63,14 +63,16 @@
 /* ---------- thème ---------- */
 /* Le wiki s'affiche en sombre par défaut : il se lit sous terre, sur tablette, souvent de
    nuit — et la tablette de chantier arrive réglée en clair d'usine. Trois états, portés par
-   data-theme : absent (ou « dark ») = sombre, « light » = clair, « auto » = comme l'appareil. */
+   data-theme : absent (ou « dark ») = sombre, « light » = clair, « auto » = comme l'appareil.
+   Fonds, surfaces et bordures sombres : noir neutre. Le bleu-noir de la maquette du 26 septembre
+   a été retiré le 28 septembre 2026 à la demande de Frank ; textes, liens et teintes restent. */
 @media screen and (prefers-color-scheme: dark) {
   :root[data-theme="auto"] {
-    --bg: #0b151f;
-    --content-bg: #0c1620;
-    --border: #4a5f7a;
-    --border-light: #364c64;
-    --border-soft: #1e3249;
+    --bg: #16181d;
+    --content-bg: #1d2026;
+    --border: #4d545e;
+    --border-light: #3a404a;
+    --border-soft: #2b3038;
     --text: #f2f6fa;
     --text-soft: #b6c2d1;
     --text-faint: #8fa0b3;
@@ -79,7 +81,7 @@
     --link-new: #ff8b82;
     --accent: #ff9a9a;
     --focus: #7cc0ff;
-    --hover: #1b2b3f;
+    --hover: #253247;
     --hover-bd: #3f5f8f;
 
     --code-bg: #262a31;
@@ -113,7 +115,7 @@
     --carte-public-grad: #212936;
     --carte-public-hover: #7ab0ff;
     --ombre: rgba(0,0,0,.5);
-    --bg-surface: #132233; --bg-surface-2: #17293c; --bg-surface-hover: #1c3044; --bg-surface-creux: #101b27; --bg-entete: #111d29;
+    --bg-surface: #1d2026; --bg-surface-2: #23262d; --bg-surface-hover: #2a2e36; --bg-surface-creux: #191b20; --bg-entete: #1d2026;
     --accent-ui: #2d6fc4; --accent-ui-hover: #2662b0; --accent-ui-text: #7cc0ff;
     --teinte-rose: #f9a1a5; --teinte-bleu: #7ecdff; --teinte-vert: #75fcc6; --teinte-violet: #cf9fff; --teinte-ambre: #fbb843; --teinte-turquoise: #45f1b9;
     --ombre-legere: 0 1px 2px rgba(0,0,0,.35);
@@ -127,11 +129,11 @@
      Hors écran (impression), aucun de ces blocs ne s’applique : la palette claire de
      :root reste seule, et une page imprimée l’est en noir sur blanc. */
   :root:not([data-theme="light"]):not([data-theme="auto"]) {
-    --bg: #0b151f;
-    --content-bg: #0c1620;
-    --border: #4a5f7a;
-    --border-light: #364c64;
-    --border-soft: #1e3249;
+    --bg: #16181d;
+    --content-bg: #1d2026;
+    --border: #4d545e;
+    --border-light: #3a404a;
+    --border-soft: #2b3038;
     --text: #f2f6fa;
     --text-soft: #b6c2d1;
     --text-faint: #8fa0b3;
@@ -140,7 +142,7 @@
     --link-new: #ff8b82;
     --accent: #ff9a9a;
     --focus: #7cc0ff;
-    --hover: #1b2b3f;
+    --hover: #253247;
     --hover-bd: #3f5f8f;
 
     --code-bg: #262a31;
@@ -173,7 +175,7 @@
     --carte-public-grad: #212936;
     --carte-public-hover: #7ab0ff;
     --ombre: rgba(0,0,0,.5);
-    --bg-surface: #132233; --bg-surface-2: #17293c; --bg-surface-hover: #1c3044; --bg-surface-creux: #101b27; --bg-entete: #111d29;
+    --bg-surface: #1d2026; --bg-surface-2: #23262d; --bg-surface-hover: #2a2e36; --bg-surface-creux: #191b20; --bg-entete: #1d2026;
     --accent-ui: #2d6fc4; --accent-ui-hover: #2662b0; --accent-ui-text: #7cc0ff;
     --teinte-rose: #f9a1a5; --teinte-bleu: #7ecdff; --teinte-vert: #75fcc6; --teinte-violet: #cf9fff; --teinte-ambre: #fbb843; --teinte-turquoise: #45f1b9;
     --ombre-legere: 0 1px 2px rgba(0,0,0,.35);
