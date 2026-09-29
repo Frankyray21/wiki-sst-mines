@@ -32,6 +32,18 @@ orange de la référence sont devenus neutres (lot 10, version 3).
   de refuge ne sont pas des zones de pause).
 - `grille_inspq.py` : le schéma « Grille INSPQ : 12 indicateurs » (27 septembre 2026), sur les mêmes règles ; les
   indicateurs y sont des éléments neutres (points gris).
+- `diagrammes.py` (29 septembre 2026) : une boîte à outils pour redessiner les figures des captures de cours, que le
+  gabarit ne sait pas tracer : pyramides, arêtes de poisson, barrières, logigrammes, escaliers d'étapes. Même
+  police, même largeur (480) et mêmes règles de fond que le gabarit. Le fond est le noir du wiki (#16181d), choisi
+  par Frank le 29 septembre 2026 ; le gabarit garde son fond marine. On y trouve :
+  - la palette (les jetons du thème sombre de `tools/style.css`, plus trois teintes à justifier) ;
+  - des formes (cartes, polygones, traits, flèches) ;
+  - le texte coupé à la largeur, avec exposants (`t_riche`, `10^{–5}`) ;
+  - l'en-tête, la légende des couleurs et le bandeau « repère ».
+- `securite.py` : le pilote du bloc 3, soit dix schémas du wiki Sécurité industrielle sur trois pages (Accidents et
+  incidents, théorie causale ; Hiérarchie des moyens de prévention ; Appréciation du risque, méthodes). Chaque
+  schéma dit où il se pose : `remplace` (la capture de cours qui montre la même chose ; sans ancre, il prend sa
+  place exacte), `ancre` (le texte après lequel il se pose). Le script écrit, par page, les SVG et un `spec.json`.
 - `figtree-500.woff2` à `figtree-900.woff2` : la police Figtree (`LICENCE-figtree.txt`, SIL Open Font License 1.1).
 - `icones.json` : un extrait de Material Design Icons (`@mdi/js`), avec sa licence dans `LICENCE-icones.txt`
   (Pictogrammers Free License, Apache 2.0). Pour ajouter une icône : `npm pack @mdi/js`, puis copier son tracé
@@ -47,9 +59,14 @@ node tools/poser_schemas.mjs --spec /tmp/lot10v3/<page>/spec.json --medias /tmp/
 node tools/poser_schemas.mjs … --ecrire
 ```
 
+Même chose pour le pilote Sécurité : `SORTIE=/tmp/securite python3 tools/schemas-sombres/securite.py`, puis
+`--spec /tmp/securite/<page>/spec.json --medias /tmp/securite/<page>`.
+
 Lancée sans `--ecrire`, la commande fait un essai. Avec `--ecrire`, elle pose le schéma dans la page, copie les SVG
 et écrit le lot du vault. Le fichier d'une version remplacée quitte le site quand plus aucune page ne l'affiche et
-qu'aucun autre lot ne le fournit.
+qu'aucun autre lot ne le fournit. Il en va de même, depuis le 29 septembre 2026, pour la capture de cours qu'un
+schéma remplace : le générateur ne copie que les fichiers cités, et une reconstruction ne la recopierait pas. Une
+capture qu'une autre page affiche encore reste en place.
 
 ## Règles de fond (wiki SST psychosociale)
 
@@ -67,6 +84,16 @@ qu'aucun autre lot ne le fournit.
   - chaque couleur employée est nommée dans la légende sous le titre (`genres_legende`, même règle pour le dessin,
     le texte alternatif et la description du SVG) ;
   - une seule couleur par schéma, autant que possible.
+
+## Règles de fond des captures redessinées (pilote Sécurité, 29 septembre 2026)
+
+- Le schéma suit le texte de la page, pas la capture. Quand la capture en montrait plus que la page n'en dit
+  (des barrières nommées autrement, d'autres rubriques, des étapes absentes du texte), ce surplus n'est pas repris.
+- La structure reste neutre (gris du thème). Une couleur ne marque qu'une chose, nommée dans la légende sous le
+  titre : l'ambre marque le danger jusqu'à l'accident (Reason) et l'événement redouté (nœud papillon). Les trois
+  zones ALARP portent chacune leur couleur, avec leur nom écrit sur la bande.
+- Rien d'inventé : pas de chiffre, de seuil ni de table de combinaison que la page ne donne pas. La légende sous
+  l'image dit ce qui est de principe (le nombre de trous, de causes, la largeur des bandes).
 
 ## Affichage
 

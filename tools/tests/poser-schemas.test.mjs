@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { poserDansPage, lotDepuisSpec, trouverAncre, repereCapture, verifierSvg, verifierImage, blocMd } from '../poser_schemas.mjs';
+import { poserDansPage, lotDepuisSpec, trouverAncre, repereCapture, verifierSvg, verifierImage, blocMd, fichierCapture, fichiersCites, nonCites } from '../poser_schemas.mjs';
 import { appliquerRetouches } from '../retouches.mjs';
 
 const outils = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -209,6 +209,25 @@ test('sans ancre : le schéma prend la place exacte de la capture, dans la page 
   assert.match(r.texte, /\| x \|\n\n<div class="infographie[^\n]*\n\n!\[\[Infographies\/wiki-x-sur-place-v1\.svg\|/, 'bloc à la place de la capture');
   assert.ok(!r.texte.includes('Pasted image') && r.texte.includes('</div>\n\nSuite.'));
   assert.deepEqual(appliquerRetouches(r.texte, lot.retouches, { resoudreLien: () => 'Cible' }).rapports.map(x => x.statut), ['déjà faite', 'déjà faite', 'déjà faite']);
+});
+
+test('capture remplacée : son fichier est retrouvé depuis la page, et retiré seulement si plus aucune page ne l’affiche', () => {
+  const f = fichierCapture(PAGE, 'pasted-image-20240101000000', 'w/securite/p.html');
+  assert.equal(f, 'files/images-wiki/pasted-image-20240101000000.png');
+  // copie encadrement (g/) : racine plus profonde, même fichier
+  assert.equal(fichierCapture(PAGE.replaceAll('../../files/', '../../../files/'), 'pasted-image-20240101000000', 'g/w/securite/p.html'), f);
+  assert.equal(fichierCapture(PAGE, 'pasted-image-20991231000000', 'w/securite/p.html'), null, 'absente : rien à retirer');
+  const posee = poserDansPage(PAGE, { page: 'w/securite/p.html', schemas: [schema('wiki-x-a-v1.svg', null, { remplace: 'pasted-image-20240101000000' })] }, OPTS);
+  const autre = { rel: 'w/y/q.html', html: '<p>Autre page.</p>' };
+  assert.deepEqual(nonCites([f, f], [{ rel: 'w/securite/p.html', html: posee }, autre]), [f], 'plus citée : retirée, une fois');
+  assert.deepEqual(nonCites([f], [{ rel: 'w/securite/p.html', html: posee }, { rel: 'w/y/q.html', html: PAGE }]), [], 'une autre page l’affiche encore : gardée');
+  assert.deepEqual(nonCites([f], [{ rel: 'g/w/y/q.html', html: PAGE.replaceAll('../../files/', '../../../files/') }]), [], 'sa copie encadrement aussi');
+  // même nom de fichier dans un autre dossier : ce n'est pas la capture, elle part quand même
+  const homonyme = { rel: 'w/y/q.html', html: '<img src="../../files/autre-dossier/pasted-image-20240101000000.png">' };
+  assert.deepEqual(nonCites([f], [homonyme]), [f], 'homonyme d’un autre dossier : sans effet');
+  assert.deepEqual(nonCites(['files/a/img-001.png'], [{ rel: 'w/y/q.html', html: '<a href="../../files/b/img-001.png">x</a>' }]), ['files/a/img-001.png']);
+  // un lien externe ou une ancre ne cite aucun fichier du site
+  assert.deepEqual([...fichiersCites('<a href="https://ex.org/files/a/img-001.png">x</a><a href="#s">y</a><img src="data:image/png;base64,AA">', 'w/y/q.html')], []);
 });
 
 test('correction de texte : un {{lien:…}} devient un lien avec la racine de la page, repassage sans effet', () => {

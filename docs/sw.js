@@ -1,5 +1,5 @@
 // Service worker du WIKI SST — généré à la construction
-// Manifeste hors ligne réécrit sans reconstruction : 387c76b480
+// Manifeste hors ligne réécrit sans reconstruction : 8f2637f56e
 const VERSION = '20260923190431';
 const P = 'wiki-sst-pages';
 const M = 'wiki-sst-medias';
