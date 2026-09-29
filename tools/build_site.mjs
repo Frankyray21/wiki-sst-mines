@@ -8,7 +8,7 @@ import * as yaml from 'js-yaml';
 import { optimiserPng, estDocumentTexte } from './png_palette.mjs';
 import { dimensionsSvg, dimensionsImage } from './dimensions_svg.mjs';
 import { choisirImage } from './resoudre_image.mjs';
-import { surlignagesColores } from './surlignage.mjs';
+import { surlignagesColores, horsCode, sansMarqueursSurlignage } from './surlignage.mjs';
 import { sansVersionsTexte, sansVersionsTexteMd } from './versions_texte.mjs';
 import { libelleLien, contexteDuLien } from './libelle_lien.mjs';
 import { rendrePortailEncadrement } from './portail_encadrement.mjs';
@@ -108,7 +108,7 @@ function libelleTdm(texte) {
 }
 
 function stripMd(s) {
-  return s
+  return sansMarqueursSurlignage(s)
     .replace(/!?\[\[([^\]]+)\]\]/g, (m, t) => { const p = t.replace(/\\\|/g, '|').split('|'); return p[p.length - 1].split('#')[0]; })
     .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
     // boilerplate qui rendait 1838 extraits indiscernables les uns des autres
@@ -766,8 +766,9 @@ function renderBody(md, nested = false) {
   let s = md.replace(/%%[\s\S]*?%%/g, '');
   s = renderCallouts(s);
   s = renderWikilinks(s);
+  // surlignages d'Obsidian, hors du code (blocs clôturés et code en ligne restent tels quels)
   s = surlignagesColores(s);
-  s = s.replace(/==([^=\n][^=]*?)==/g, '<mark>$1</mark>');
+  s = horsCode(s, t => t.replace(/==([^=\n][^=]*?)==/g, '<mark>$1</mark>'));
   // par sécurité, la même règle sur le HTML rendu (bloc écrit autrement dans la note)
   let html = sansVersionsTexte(marked.parse(s));
   if (!nested) {
