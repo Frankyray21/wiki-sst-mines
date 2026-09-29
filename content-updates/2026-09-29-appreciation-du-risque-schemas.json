@@ -1,0 +1,111 @@
+{
+ "date": "2026-09-29",
+ "revision": "2026-09-29-appreciation-du-risque-schemas",
+ "portee": "Page « Appréciation du risque, méthodes » (Sécurité industrielle) : cinq schémas sur fond noir (démarche ISO 12100, chaîne accidentelle, estimation IRSST/CNESST, appréciation et traitement du risque, zones ALARP) ; quatre remplacent des captures de cours, et deux de ces schémas se posent dans la section qu’ils illustrent (démarche, chaîne accidentelle).",
+ "precautions": "Schémas dessinés d’après le texte de la page seulement (aucun mot, aucun chiffre d’ailleurs) ; pas de validation spécialisée. Les captures remplacées restent dans le vault : seule leur ligne quitte la note.",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Appréciation du risque, méthodes",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/appreciation-du-risque.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-appreciation-du-risque-demarche-iso12100-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-appreciation-du-risque-chaine-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-appreciation-du-risque-estimation-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-appreciation-du-risque-appreciation-traitement-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-appreciation-du-risque-alarp-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "Si non : appliquer la hiérarchie de réduction puis recommencer.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-appreciation-du-risque-demarche-iso12100-v1.svg|Logigramme de la démarche ISO 12100 : déterminer les limites, identifier les phénomènes dangereux, estimer le risque, évaluer s’il est tolérable ; sinon, appliquer la hiérarchie de réduction puis recommencer.]]\n\n<p class=\"infographie-legende\">La démarche ISO 12100 est itérative : déterminer les limites, identifier les phénomènes dangereux, estimer le risque par scénario, puis évaluer s’il est tolérable ; sinon, appliquer la hiérarchie de réduction et recommencer.</p>\n\n<p class=\"infographie-sources\">D’après la section « Démarche ISO 12100 » de cette page. Hiérarchie de réduction : {{lien:w/securite/hierarchie-des-moyens-de-prevention.html|Hiérarchie des moyens de prévention}}. Schéma de principe.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-demarche-iso12100-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "20250119002441",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-demarche-iso12100-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Chaîne accidentelle",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-appreciation-du-risque-chaine-v1.svg|Chaîne accidentelle : phénomène dangereux, situation dangereuse, événement dangereux, dommage, avec la possibilité d’évitement entre l’événement et le dommage.]]\n\n<p class=\"infographie-legende\">Les quatre maillons de la chaîne accidentelle, pour chaque scénario, du phénomène dangereux au dommage ; la possibilité d’évitement est celle d’éviter le dommage. Certains phénomènes ne laissent aucune chance (électricité, explosion).</p>\n\n<p class=\"infographie-sources\">D’après la section « Chaîne accidentelle » de cette page (définitions et possibilité d’évitement). Schéma de principe.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-chaine-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "20250127212816",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-chaine-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "20250127205551",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-appreciation-du-risque-estimation-v1.svg|Les quatre facteurs de l’outil IRSST/CNESST, combinés en indice : gravité (G1, G2), fréquence d’exposition (F1, F2), probabilité d’occurrence (O1 à O3), possibilité d’éviter (P1, P2) ; exemple : G2 + F2 + O2 + P2 = indice 5.]]\n\n<p class=\"infographie-legende\">Les quatre facteurs de l’outil IRSST/CNESST et leurs niveaux, tels que la page les donne ; combinés, ils forment un indice de risque, dont la page donne un exemple. O porte sur l’occurrence de l’événement, pas du dommage.</p>\n\n<p class=\"infographie-sources\">D’après la section « Estimation du risque (outil IRSST/CNESST) » de cette page. Schéma de principe : la table qui combine les facteurs en indice n’est pas reproduite.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-estimation-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "20250127205551",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-estimation-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "20250125150328",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-appreciation-du-risque-appreciation-traitement-v1.svg|L’appréciation du risque (identification, analyse, évaluation) précède le traitement du risque, qui le modifie ou le réduit.]]\n\n<p class=\"infographie-legende\">Dans la terminologie de la page, l’appréciation du risque, plus large, regroupe identification, analyse (descriptive) et évaluation (décisionnelle) ; le traitement du risque le modifie (le réduit). Les techniques de l’IEC/ISO 31010 se rangent selon l’étape ciblée.</p>\n\n<p class=\"infographie-sources\">D’après le tableau de la section « Cadre normatif et terminologie » et la section « Catalogue d’outils IEC 31010 » de cette page. Pour le traitement : {{lien:w/securite/gestion-des-risques.html|Gestion des risques en entreprise}}. Schéma de principe.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-appreciation-traitement-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "20250125150328",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-appreciation-traitement-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Largement acceptable : pas d’action requise.",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-appreciation-du-risque-alarp-v1.svg|Les trois zones ALARP : intolérable (à corriger sauf circonstances exceptionnelles), zone ALARP (réduire si raisonnablement possible), largement acceptable (pas d’action requise).]]\n\n<p class=\"infographie-legende\">Les trois zones ALARP et l’action que la page associe à chacune ; évaluer, c’est juger si le risque est tolérable. Les couleurs distinguent les zones ; la largeur des bandes est de principe.</p>\n\n<p class=\"infographie-sources\">D’après la section « Évaluation du risque, ALARP et SFAIRP » de cette page. Schéma de principe : aucun seuil entre les zones.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-alarp-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-appreciation-du-risque-demarche-iso12100-v1.svg",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-demarche-iso12100-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-appreciation-du-risque-chaine-v1.svg",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-chaine-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-appreciation-du-risque-estimation-v1.svg",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-estimation-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-appreciation-du-risque-appreciation-traitement-v1.svg",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-appreciation-traitement-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-appreciation-du-risque-alarp-v1.svg",
+   "marqueur": "Infographies/wiki-appreciation-du-risque-alarp-v1.svg"
+  }
+ ]
+}

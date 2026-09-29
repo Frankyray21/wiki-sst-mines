@@ -1,0 +1,71 @@
+{
+ "date": "2026-09-29",
+ "revision": "2026-09-29-theorie-causale-des-accidents-schemas",
+ "portee": "Page « Accidents et incidents, théorie causale » (Sécurité industrielle) : trois schémas sur fond noir (lignes de défense de Reason, diagramme d’Ishikawa, nœud papillon) ; les deux premiers remplacent des captures de cours (figure adaptée de Reason, diapositive UQAT).",
+ "precautions": "Schémas dessinés d’après le texte de la page seulement (aucun mot, aucun chiffre d’ailleurs) ; pas de validation spécialisée. Les captures remplacées restent dans le vault : seule leur ligne quitte la note.",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Accidents et incidents, théorie causale",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/theorie-causale-des-accidents.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-theorie-causale-des-accidents-reason-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-theorie-causale-des-accidents-ishikawa-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-theorie-causale-des-accidents-noeud-papillon-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "20250112231542",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-theorie-causale-des-accidents-reason-v1.svg|Lignes de défense de Reason : le danger traverse les trous alignés de trois barrières (technique, individuel, organisationnel) jusqu’à l’accident.]]\n\n<p class=\"infographie-legende\">Selon la page, le modèle de Reason est aujourd’hui la référence : plusieurs barrières percées s’alignent pour laisser passer le danger, et l’accident résulte de défaillances combinées au niveau technique, individuel et organisationnel. Une barrière par niveau ; les trous sont de principe.</p>\n\n<p class=\"infographie-sources\">D’après le tableau « Modèles causaux » (ligne « Lignes de défense ») et le paragraphe qui le suit, dans cette page ; cadre conceptuel : Reason, 1990 (tableau « Ressources »). Schéma de principe.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-theorie-causale-des-accidents-reason-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "20250112231542",
+   "marqueur": "Infographies/wiki-theorie-causale-des-accidents-reason-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "20250112233919",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-theorie-causale-des-accidents-ishikawa-v1.svg|Diagramme d’Ishikawa en arête de poisson : six rubriques (matériel, méthode, main-d’œuvre, milieu, matière, management) mènent à l’effet.]]\n\n<p class=\"infographie-legende\">Le diagramme d’Ishikawa, en arête de poisson, classe les causes possibles d’un effet par rubriques ; ici, les six rubriques (6M) que la page énumère. Outil collectif, complémentaire de l’arbre des causes.</p>\n\n<p class=\"infographie-sources\">D’après la section « Diagramme d’Ishikawa » de cette page. Schéma de principe.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-theorie-causale-des-accidents-ishikawa-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "20250112233919",
+   "marqueur": "Infographies/wiki-theorie-causale-des-accidents-ishikawa-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "Nœud papillon : combine arbre de défaillance (en amont, causes)",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-theorie-causale-des-accidents-noeud-papillon-v1.svg|Nœud papillon : en amont, les causes (arbre de défaillance) convergent vers l’événement redouté central ; en aval, les conséquences (arbre d’événements) en partent.]]\n\n<p class=\"infographie-legende\">Le nœud papillon combine, autour d’un événement redouté central, l’arbre de défaillance en amont (les causes) et l’arbre d’événements en aval (les conséquences). Trois causes et trois conséquences, pour le principe.</p>\n\n<p class=\"infographie-sources\">D’après la section « Arbre de défaillance et nœud papillon » de cette page. Schéma de principe.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-theorie-causale-des-accidents-noeud-papillon-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-theorie-causale-des-accidents-reason-v1.svg",
+   "marqueur": "Infographies/wiki-theorie-causale-des-accidents-reason-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-theorie-causale-des-accidents-ishikawa-v1.svg",
+   "marqueur": "Infographies/wiki-theorie-causale-des-accidents-ishikawa-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-theorie-causale-des-accidents-noeud-papillon-v1.svg",
+   "marqueur": "Infographies/wiki-theorie-causale-des-accidents-noeud-papillon-v1.svg"
+  }
+ ]
+}

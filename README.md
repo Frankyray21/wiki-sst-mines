@@ -320,6 +320,16 @@ node tools/serve.mjs
   pages de contenu (185 rendus, 0 défaut). Images : les PNG en vraies couleurs (captures de cours, photos) sont
   recompressés sans perte par le générateur ; 425 images publiées passent de 169,7 à 137,4 Mo, et le
   téléchargement hors ligne de 394 à 362 Mo, pixels identiques. Détail : `content-updates/2026-09-29-outils-et-poids.md`
+- **Illustrations redessinées, pilote Sécurité (29 septembre 2026)** : dix schémas sur fond noir, sur trois pages du
+  wiki Sécurité industrielle (Accidents et incidents, théorie causale ; Hiérarchie des moyens de prévention ;
+  Appréciation du risque, méthodes). Huit remplacent une capture de cours qui montrait la même chose, deux
+  s'ajoutent (nœud papillon, zones ALARP). Chaque mot vient de la page ; la structure est neutre, et les deux seules
+  couleurs employées sont nommées sur le schéma. Boîte à outils `tools/schemas-sombres/diagrammes.py`, schémas
+  `securite.py`. `tools/poser_schemas.mjs` retire du site une capture remplacée dès que plus aucune page ne
+  l'affiche, comme le ferait une reconstruction : 6 captures du pilote et 11 restes de lots précédents (2,6 Mo).
+  **À faire dans le vault** : appliquer les trois lots `content-updates/2026-09-29-*-schemas.json`, puis
+  reconstruire. Détail et points à trancher (droits des captures, suite du bloc) :
+  `content-updates/2026-09-29-illustrations-pilote-securite.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma
   en texte » (127 schémas, 65 pages), puis toutes les autres (« Lire la version texte — … », « Lire les voies en
   texte », « Lire l’illustration en texte » : 16 sections, 10 pages) disparaissent. Chaque image garde son texte

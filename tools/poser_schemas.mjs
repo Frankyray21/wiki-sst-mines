@@ -17,7 +17,9 @@
 //               thème sombre du site ne l'inverse pas (classe « infographie-sombre »)
 //     ancre     texte visible d'un paragraphe, d'un titre ou d'une dernière puce, unique : le schéma se pose
 //               juste après ; sans ancre, il prend la place exacte de la capture qu'il remplace
-//     remplace  capture de cours que le schéma remplace (« pasted-image-AAAAMMJJhhmmss » ou nom de fichier)
+//     remplace  capture de cours que le schéma remplace (« pasted-image-AAAAMMJJhhmmss » ou nom de fichier) ;
+//               son fichier quitte le site quand plus aucune page ne l'affiche (le générateur ne copie que
+//               les fichiers cités : une reconstruction ne le recopierait pas)
 //     remplaceSchema  fichier de la version publiée avant (« …-v1.svg »), ou liste des versions antérieures
 //               (la plus récente d'abord : la note a pu recevoir l'une ou l'autre) : le nouveau bloc prend sa
 //               place, dans la page comme dans la note (retouche remplacerBloc) ; un ancien fichier qui n'est
@@ -100,12 +102,21 @@ export function trouverAncre(html, ancre) {
 }
 
 // Capture de cours insérée par le générateur (<span class="page-img">…</span></span>).
+const motifCapture = nom => new RegExp('<span class="page-img"><a class="img-lien" href="([^"]*' + nom.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[^"]*)">[\\s\\S]*?</span></span>\\n?', 'g');
 function trouverCapture(html, nom) {
-  const motif = new RegExp('<span class="page-img"><a class="img-lien" href="[^"]*' + nom.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[^"]*">[\\s\\S]*?</span></span>\\n?', 'g');
-  const r = [...html.matchAll(motif)];
+  const r = [...html.matchAll(motifCapture(nom))];
   if (r.length !== 1) throw new Error(`capture ${r.length ? 'ambiguë' : 'introuvable'} : ${nom}`);
   return r[0];
 }
+
+// Fichier (adresse sous docs/) de la capture « nom » dans la page « rel », ou null si la page ne l'affiche pas.
+export function fichierCapture(html, nom, rel) {
+  const r = [...html.matchAll(motifCapture(nom))];
+  return r.length === 1 ? path.posix.normalize(path.posix.join(path.posix.dirname(rel), r[0][1])) : null;
+}
+
+// Fichiers qu'aucune page n'affiche plus (pagesHtml : le texte de toutes les pages publiées).
+export const nonCites = (fichiers, pagesHtml) => [...new Set(fichiers)].filter(f => !pagesHtml.some(h => h.includes(path.posix.basename(f))));
 
 // Ligne de la note qui intègre la capture : les images collées s'appellent « Pasted image AAAAMMJJhhmmss ».
 export function repereCapture(nom) {
@@ -250,7 +261,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const dansG = p.startsWith('g/');
     const hrefDe = a => racine + (dansG && fs.existsSync(path.join(docs, 'g', a)) ? 'g/' + a : a);
     const avant = fs.readFileSync(path.join(docs, p), 'utf8');
-    return { p, apres: poserDansPage(avant, spec, { racine, hrefDe, dimsDe: f => dims[f], titreDe }) };
+    return { p, avant, apres: poserDansPage(avant, spec, { racine, hrefDe, dimsDe: f => dims[f], titreDe }) };
   });
   const lot = lotDepuisSpec(spec, { date: new Date().toISOString().slice(0, 10), revision: path.basename(lotChemin, '.json'), portee: 'Schémas de la page ' + spec.page, precautions: '' });
   console.log(`${pages.join(' + ')} : ${spec.schemas.length} schéma(s), ${(spec.remplacementsHtml || []).length} correction(s), ${lot.retouches.length} retouche(s) pour le vault`);
@@ -258,6 +269,16 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     for (const s of spec.schemas) fs.copyFileSync(path.join(medias, s.fichier), path.join(docs, 'files', 'infographies', s.fichier));
     for (const { p, apres } of poses) fs.writeFileSync(path.join(docs, p), apres);
     fs.writeFileSync(lotChemin, JSON.stringify(lot, null, 1) + '\n');
+    const toutesLesPages = () => fs.readdirSync(docs, { recursive: true }).filter(f => String(f).endsWith('.html')).map(x => fs.readFileSync(path.join(docs, x), 'utf8'));
+    // captures remplacées : leur fichier quitte le site quand plus aucune page ne l'affiche
+    const captures = poses.flatMap(({ p, avant }) => spec.schemas.filter(s => s.remplace).map(s => fichierCapture(avant, s.remplace, p))).filter(Boolean);
+    if (captures.length) {
+      for (const f of nonCites(captures, toutesLesPages())) {
+        if (!fs.existsSync(path.join(docs, f))) continue;
+        fs.rmSync(path.join(docs, f));
+        console.log('Retiré du site (capture remplacée, plus citée) : ' + f);
+      }
+    }
     // version remplacée : son fichier quitte le site quand plus aucune page ne l'affiche et qu'aucun autre
     // lot du vault ne le fournit encore (medias.depuis), sinon ce lot ne s'appliquerait plus
     const anciens = spec.schemas.flatMap(precedents);

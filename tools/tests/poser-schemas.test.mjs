@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { poserDansPage, lotDepuisSpec, trouverAncre, repereCapture, verifierSvg, verifierImage, blocMd } from '../poser_schemas.mjs';
+import { poserDansPage, lotDepuisSpec, trouverAncre, repereCapture, verifierSvg, verifierImage, blocMd, fichierCapture, nonCites } from '../poser_schemas.mjs';
 import { appliquerRetouches } from '../retouches.mjs';
 
 const outils = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -209,6 +209,17 @@ test('sans ancre : le schéma prend la place exacte de la capture, dans la page 
   assert.match(r.texte, /\| x \|\n\n<div class="infographie[^\n]*\n\n!\[\[Infographies\/wiki-x-sur-place-v1\.svg\|/, 'bloc à la place de la capture');
   assert.ok(!r.texte.includes('Pasted image') && r.texte.includes('</div>\n\nSuite.'));
   assert.deepEqual(appliquerRetouches(r.texte, lot.retouches, { resoudreLien: () => 'Cible' }).rapports.map(x => x.statut), ['déjà faite', 'déjà faite', 'déjà faite']);
+});
+
+test('capture remplacée : son fichier est retrouvé depuis la page, et retiré seulement si plus aucune page ne l’affiche', () => {
+  const f = fichierCapture(PAGE, 'pasted-image-20240101000000', 'w/securite/p.html');
+  assert.equal(f, 'files/images-wiki/pasted-image-20240101000000.png');
+  // copie encadrement (g/) : racine plus profonde, même fichier
+  assert.equal(fichierCapture(PAGE.replaceAll('../../files/', '../../../files/'), 'pasted-image-20240101000000', 'g/w/securite/p.html'), f);
+  assert.equal(fichierCapture(PAGE, 'pasted-image-20991231000000', 'w/securite/p.html'), null, 'absente : rien à retirer');
+  const posee = poserDansPage(PAGE, { page: 'w/securite/p.html', schemas: [schema('wiki-x-a-v1.svg', null, { remplace: 'pasted-image-20240101000000' })] }, OPTS);
+  assert.deepEqual(nonCites([f, f], [posee, '<p>Autre page.</p>']), [f], 'plus citée : retirée, une fois');
+  assert.deepEqual(nonCites([f], [posee, PAGE]), [], 'une autre page l’affiche encore : gardée');
 });
 
 test('correction de texte : un {{lien:…}} devient un lien avec la racine de la page, repassage sans effet', () => {

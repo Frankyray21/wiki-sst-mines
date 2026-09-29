@@ -1,0 +1,56 @@
+{
+ "date": "2026-09-29",
+ "revision": "2026-09-29-hierarchie-des-moyens-de-prevention-schemas",
+ "portee": "Page « Hiérarchie des moyens de prévention » (Sécurité industrielle) : deux schémas sur fond noir (hiérarchie des moyens de prévention, méthode en trois étapes de l’ISO 12100), qui remplacent deux captures de cours (figure de manuel, « Vue améliorée de la méthode »).",
+ "precautions": "Schémas dessinés d’après le texte de la page seulement (aucun mot, aucun chiffre d’ailleurs) ; pas de validation spécialisée. Les captures remplacées restent dans le vault : seule leur ligne quitte la note.",
+ "application": "node tools/appliquer_retouches.mjs --lot <ce fichier> (essai), puis --appliquer ; ensuite node tools/build_site.mjs",
+ "note": {
+  "titre": "Hiérarchie des moyens de prévention",
+  "wiki": "Wiki Sécurité industrielle",
+  "page": "w/securite/hierarchie-des-moyens-de-prevention.html"
+ },
+ "medias": [
+  {
+   "depuis": "docs/files/infographies/wiki-hierarchie-des-moyens-de-prevention-hierarchie-v1.svg",
+   "dossierVault": "Infographies"
+  },
+  {
+   "depuis": "docs/files/infographies/wiki-hierarchie-des-moyens-de-prevention-iso12100-etapes-v1.svg",
+   "dossierVault": "Infographies"
+  }
+ ],
+ "retouches": [
+  {
+   "type": "insererApres",
+   "ligneContenant": "20240923184314",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-hierarchie-des-moyens-de-prevention-hierarchie-v1.svg|Pyramide inversée de la hiérarchie des moyens de prévention, du plus efficace au moins efficace : élimination du danger, substitution, ingénierie, administratif, EPI (dernière barrière) ; principe directeur : LSST art. 2 et 3.]]\n\n<p class=\"infographie-legende\">Les cinq niveaux de la hiérarchie, du plus efficace au moins efficace, avec les exemples de la page ; l’EPI est la dernière barrière. Le principe directeur de la LSST : éliminer à la source.</p>\n\n<p class=\"infographie-sources\">D’après la section « Logique générale de la hiérarchie » de cette page (liste et principe directeur). Schéma de principe.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-hierarchie-des-moyens-de-prevention-hierarchie-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "20240923184314",
+   "marqueur": "Infographies/wiki-hierarchie-des-moyens-de-prevention-hierarchie-v1.svg"
+  },
+  {
+   "type": "insererApres",
+   "ligneContenant": "20250301155751",
+   "bloc": "<div class=\"infographie infographie-compacte infographie-schema infographie-sombre\">\n\n![[Infographies/wiki-hierarchie-des-moyens-de-prevention-iso12100-etapes-v1.svg|Méthode en trois étapes de l’ISO 12100 : prévention intrinsèque à la conception, puis protection et mesures complémentaires, puis informations pour l’utilisation.]]\n\n<p class=\"infographie-legende\">La méthode en trois étapes de l’ISO 12100 (art. 6.1) en sécurité machine : la prévention intrinsèque d’abord, puis la protection, et l’information quand les étapes précédentes n’épuisent pas le risque.</p>\n\n<p class=\"infographie-sources\">D’après l’introduction et les sections « Logique générale de la hiérarchie », « Étape 1 » et « Étape 3 » de cette page. Schéma de principe.</p>\n\n</div>",
+   "marqueur": "Infographies/wiki-hierarchie-des-moyens-de-prevention-iso12100-etapes-v1.svg"
+  },
+  {
+   "type": "supprimerLigne",
+   "ligneContenant": "20250301155751",
+   "marqueur": "Infographies/wiki-hierarchie-des-moyens-de-prevention-iso12100-etapes-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-hierarchie-des-moyens-de-prevention-hierarchie-v1.svg",
+   "marqueur": "Infographies/wiki-hierarchie-des-moyens-de-prevention-hierarchie-v1.svg"
+  },
+  {
+   "type": "retirerVersionTexte",
+   "ligneContenant": "wiki-hierarchie-des-moyens-de-prevention-iso12100-etapes-v1.svg",
+   "marqueur": "Infographies/wiki-hierarchie-des-moyens-de-prevention-iso12100-etapes-v1.svg"
+  }
+ ]
+}
