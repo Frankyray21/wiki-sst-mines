@@ -1,8 +1,11 @@
 // Recompression PNG SANS PERTE : truecolor 24 bits → palette 8 bits.
 // Les captures d'articles de loi sont du texte noir sur blanc : elles tiennent
 // largement sous 256 couleurs, mais sont stockées en 3 octets par pixel.
+// Au-delà de 256 couleurs (captures de cours, photos), l'image garde ses vraies couleurs
+// mais perd un canal alpha entièrement opaque et est refiltrée (29 septembre 2026) :
+// −22 % sur 517 images du site, soit 36 Mo. Dans les deux cas, le résultat est relu et
+// doit donner exactement les mêmes pixels, sinon l'original est recopié tel quel.
 // Aucune dépendance externe : décodage et encodage via zlib natif.
-// Garde-fou : au-delà de 256 couleurs distinctes, on recopie l'original tel quel.
 import fs from 'node:fs';
 import zlib from 'node:zlib';
 
@@ -28,7 +31,7 @@ function chunk(type, data) {
 }
 
 // ---------- décodage ----------
-function lirePng(buf) {
+export function lirePng(buf) {
   if (!buf.subarray(0, 8).equals(SIG)) return null;
   let pos = 8, ihdr = null, idat = [], plte = null, trns = null, interlace = 0;
   while (pos + 8 <= buf.length) {
@@ -154,12 +157,60 @@ export function encoderPixels(largeur, hauteur, px) {
   return encoderPalette({ width: largeur, height: hauteur, canaux: 4, px });
 }
 
+// ---------- encodage en vraies couleurs ----------
+// Canal alpha retiré s'il est partout à 255 ; filtre Paeth sur chaque ligne (presque aussi bon que le meilleur
+// des cinq filtres ligne à ligne, en un cinquième du calcul) ; deflate niveau 6.
+function encoderVraiesCouleurs(img) {
+  const { width: W, height: H, canaux, px } = img;
+  let c = canaux, data = px;
+  if (canaux === 4) {
+    let opaque = true;
+    for (let i = 3; i < px.length; i += 4) if (px[i] !== 255) { opaque = false; break; }
+    if (opaque) {
+      c = 3; data = Buffer.alloc(W * H * 3);
+      for (let i = 0, j = 0; i < px.length; i += 4, j += 3) { data[j] = px[i]; data[j + 1] = px[i + 1]; data[j + 2] = px[i + 2]; }
+    }
+  }
+  const L = W * c;
+  const brut = Buffer.alloc(H * (L + 1));
+  for (let y = 0; y < H; y++) {
+    const o = y * (L + 1), cur = y * L, prev = (y - 1) * L;
+    brut[o] = 4;
+    for (let i = 0; i < L; i++) {
+      const a = i >= c ? data[cur + i - c] : 0, b = y ? data[prev + i] : 0, cc = y && i >= c ? data[prev + i - c] : 0;
+      const p = a + b - cc, pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - cc);
+      brut[o + 1 + i] = (data[cur + i] - (pa <= pb && pa <= pc ? a : pb <= pc ? b : cc)) & 0xff;
+    }
+  }
+  const ihdr = Buffer.alloc(13);
+  ihdr.writeUInt32BE(W, 0); ihdr.writeUInt32BE(H, 4);
+  ihdr[8] = 8; ihdr[9] = c === 3 ? 2 : 6; ihdr[10] = 0; ihdr[11] = 0; ihdr[12] = 0;
+  return Buffer.concat([SIG, chunk('IHDR', ihdr), chunk('IDAT', zlib.deflateSync(brut, { level: 6 })), chunk('IEND', Buffer.alloc(0))]);
+}
+
+// Mêmes pixels ? (un canal alpha opaque retiré compte comme identique)
+function memesPixels(a, b) {
+  if (!b || a.width !== b.width || a.height !== b.height) return false;
+  for (let i = 0, j = 0; i < a.px.length; i += a.canaux, j += b.canaux) {
+    if (a.px[i] !== b.px[j] || a.px[i + 1] !== b.px[j + 1] || a.px[i + 2] !== b.px[j + 2]) return false;
+    const aa = a.canaux === 4 ? a.px[i + 3] : 255, ab = b.canaux === 4 ? b.px[j + 3] : 255;
+    if (aa !== ab) return false;
+  }
+  return true;
+}
+
 // Recompresse si possible ; retourne le buffer optimisé ou null si aucun gain / non applicable.
 export function optimiserPng(buf) {
   const img = lirePng(buf);
   if (!img) return null;
   const out = encoderPalette(img);
-  if (!out || out.length >= buf.length) return null;
+  if (!out) {
+    // plus de 256 couleurs : vraies couleurs, recompressées
+    const vc = encoderVraiesCouleurs(img);
+    if (vc.length >= buf.length || !memesPixels(img, lirePng(vc))) return null;
+    return vc;
+  }
+  if (out.length >= buf.length) return null;
   // vérification : le résultat doit se relire et donner exactement les mêmes pixels
   const relu = lirePngPalette(out);
   if (!relu) return null;

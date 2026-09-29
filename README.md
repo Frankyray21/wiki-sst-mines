@@ -45,7 +45,8 @@ adresses n'ont pas changé.
 
 - `docs/` — le site statique généré (HTML pur, aucune dépendance serveur) — c'est ce dossier que GitHub Pages publie
 - `tools/build_site.mjs` — générateur : markdown Obsidian → HTML type Wikipédia
-- `tools/png_palette.mjs` — recompression PNG sans perte (palette 8 bits, zlib natif)
+- `tools/png_palette.mjs` — recompression PNG sans perte (zlib natif) : palette 8 bits quand l'image tient en 256
+  couleurs, sinon vraies couleurs refiltrées, canal alpha entièrement opaque retiré ; pixels relus et comparés
 - `tools/portail_encadrement.mjs` — portail `/g/` en tableau de bord : contenu des cartes, icônes SVG.
   Les cibles sont vérifiées à la construction ; le build avertit si l'une disparaît du site.
 - `tools/portail_racine.mjs` — contenu du portail racine (`index.html`)
@@ -313,6 +314,12 @@ node tools/serve.mjs
   Teintes : contraste d'au moins 6,2:1 en sombre et 10,1:1 en clair, vérifié par un test. **À faire** : aucune note
   à modifier ; reconstruire le site (`node tools/build_site.mjs`), ce qui refait l'index de recherche. Détail :
   `content-updates/2026-09-29-surlignage-restes.md`
+- **Outils et contrôles (29 septembre 2026)** : les outils de pose des corrections sur le site publié passent dans
+  `tools/` (`poser_corrections.mjs`, `renvois_modifies.mjs`), testés et rejouables : ils vivaient dans l'espace
+  temporaire des sessions. `verif_rendu.mjs` contrôle par défaut, en plus des accueils, un échantillon fixe de 20
+  pages de contenu (185 rendus, 0 défaut). Images : les PNG en vraies couleurs (captures de cours, photos) sont
+  recompressés sans perte par le générateur ; 425 images publiées passent de 169,7 à 137,4 Mo, et le
+  téléchargement hors ligne de 394 à 362 Mo, pixels identiques. Détail : `content-updates/2026-09-29-outils-et-poids.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma
   en texte » (127 schémas, 65 pages), puis toutes les autres (« Lire la version texte — … », « Lire les voies en
   texte », « Lire l’illustration en texte » : 16 sections, 10 pages) disparaissent. Chaque image garde son texte
