@@ -327,7 +327,9 @@ node tools/serve.mjs
   couleurs employées sont nommées sur le schéma. Boîte à outils `tools/schemas-sombres/diagrammes.py`, schémas
   `securite.py`. `tools/poser_schemas.mjs` retire du site une capture remplacée dès que plus aucune page ne
   l'affiche, comme le ferait une reconstruction : 6 captures du pilote et 11 restes de lots précédents (2,6 Mo).
-  **À faire dans le vault** : appliquer les trois lots `content-updates/2026-09-29-*-schemas.json`, puis
+  Même jour, avec l'accord de Frank : la page « Hiérarchie des moyens de prévention » du wiki Hygiène industrielle,
+  au même texte, reprend les deux schémas de sa jumelle Sécurité (mêmes fichiers). Ses deux captures quittent le site.
+  **À faire dans le vault** : appliquer les quatre lots `content-updates/2026-09-29-*-schemas.json`, puis
   reconstruire. Détail et points à trancher (droits des captures, suite du bloc) :
   `content-updates/2026-09-29-illustrations-pilote-securite.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma

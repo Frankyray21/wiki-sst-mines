@@ -44,6 +44,8 @@ orange de la référence sont devenus neutres (lot 10, version 3).
   incidents, théorie causale ; Hiérarchie des moyens de prévention ; Appréciation du risque, méthodes). Chaque
   schéma dit où il se pose : `remplace` (la capture de cours qui montre la même chose ; sans ancre, il prend sa
   place exacte), `ancre` (le texte après lequel il se pose). Le script écrit, par page, les SVG et un `spec.json`.
+  La page « Hiérarchie des moyens de prévention » du wiki Hygiène industrielle, au même texte, reprend les deux schémas
+  de sa jumelle Sécurité, sous les mêmes fichiers (nommés d'après la page seule).
 - `figtree-500.woff2` à `figtree-900.woff2` : la police Figtree (`LICENCE-figtree.txt`, SIL Open Font License 1.1).
 - `icones.json` : un extrait de Material Design Icons (`@mdi/js`), avec sa licence dans `LICENCE-icones.txt`
   (Pictogrammers Free License, Apache 2.0). Pour ajouter une icône : `npm pack @mdi/js`, puis copier son tracé
@@ -60,7 +62,7 @@ node tools/poser_schemas.mjs … --ecrire
 ```
 
 Même chose pour le pilote Sécurité : `SORTIE=/tmp/securite python3 tools/schemas-sombres/securite.py`, puis
-`--spec /tmp/securite/<page>/spec.json --medias /tmp/securite/<page>`.
+`--spec /tmp/securite/<wiki>/<page>/spec.json --medias /tmp/securite/<wiki>/<page>`.
 
 Lancée sans `--ecrire`, la commande fait un essai. Avec `--ecrire`, elle pose le schéma dans la page, copie les SVG
 et écrit le lot du vault. Le fichier d'une version remplacée quitte le site quand plus aucune page ne l'affiche et
