@@ -49,13 +49,15 @@ Captures gardées sur ces pages :
 
 Le générateur ne copie que les fichiers qu'une page cite : après reconstruction, une capture remplacée
 disparaîtrait du site. `tools/poser_schemas.mjs` la retire donc dès la pose, quand plus aucune page ne l'affiche
-(test ajouté).
+(test ajouté). Le chemin entier compte, résolu depuis chaque page, et pas seulement le nom : des images de dossiers
+différents portent le même nom (`img-001.png`), relevé par la relecture Codex.
 
 - Retirées : 6 captures de ce pilote.
 - Gardées : la figure de Blundell et la « Vue améliorée ». La page « Hiérarchie des moyens de prévention » du wiki
   Hygiène industrielle (et sa copie encadrement) les affiche aussi.
 - Retirés aussi : 11 restes de lots précédents (2,6 Mo). Ce sont des captures déjà remplacées par des schémas (Espaces
   clos, Aérosols, pages RPS), que plus aucune page ne citait mais que le téléchargement hors ligne emportait encore.
+  Un recensement au chemin exact des 3 521 fichiers publiés n'en trouve plus aucun.
 
 Les captures restent dans le vault ; seule leur ligne quitte la note.
 

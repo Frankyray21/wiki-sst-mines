@@ -115,8 +115,26 @@ export function fichierCapture(html, nom, rel) {
   return r.length === 1 ? path.posix.normalize(path.posix.join(path.posix.dirname(rel), r[0][1])) : null;
 }
 
-// Fichiers qu'aucune page n'affiche plus (pagesHtml : le texte de toutes les pages publiées).
-export const nonCites = (fichiers, pagesHtml) => [...new Set(fichiers)].filter(f => !pagesHtml.some(h => h.includes(path.posix.basename(f))));
+// Fichiers (adresses sous docs/) que cite la page « rel » : ses href et src relatifs, résolus depuis son dossier.
+// Le chemin entier compte : des images de dossiers différents portent le même nom (« img-001.png »).
+export function fichiersCites(html, rel) {
+  const out = new Set();
+  for (const m of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
+    const u = m[1].split(/[?#]/)[0];
+    if (!u || /^[a-z][a-z0-9+.-]*:/i.test(u) || u.startsWith('//')) continue;   // lien externe, mailto:, data:…
+    let c = u;
+    try { c = decodeURI(u); } catch { /* adresse mal encodée : prise telle quelle */ }
+    out.add(c.startsWith('/') ? c.slice(1) : path.posix.normalize(path.posix.join(path.posix.dirname(rel), c)));
+  }
+  return out;
+}
+
+// Fichiers qu'aucune page n'affiche plus. pages : [{ rel, html }], toutes les pages publiées.
+export function nonCites(fichiers, pages) {
+  const cites = new Set();
+  for (const { rel, html } of pages) for (const f of fichiersCites(html, rel)) cites.add(f);
+  return [...new Set(fichiers)].filter(f => !cites.has(f));
+}
 
 // Ligne de la note qui intègre la capture : les images collées s'appellent « Pasted image AAAAMMJJhhmmss ».
 export function repereCapture(nom) {
@@ -269,7 +287,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     for (const s of spec.schemas) fs.copyFileSync(path.join(medias, s.fichier), path.join(docs, 'files', 'infographies', s.fichier));
     for (const { p, apres } of poses) fs.writeFileSync(path.join(docs, p), apres);
     fs.writeFileSync(lotChemin, JSON.stringify(lot, null, 1) + '\n');
-    const toutesLesPages = () => fs.readdirSync(docs, { recursive: true }).filter(f => String(f).endsWith('.html')).map(x => fs.readFileSync(path.join(docs, x), 'utf8'));
+    const toutesLesPages = () => fs.readdirSync(docs, { recursive: true }).filter(f => String(f).endsWith('.html'))
+      .map(x => ({ rel: String(x).split(path.sep).join('/'), html: fs.readFileSync(path.join(docs, x), 'utf8') }));
     // captures remplacées : leur fichier quitte le site quand plus aucune page ne l'affiche
     const captures = poses.flatMap(({ p, avant }) => spec.schemas.filter(s => s.remplace).map(s => fichierCapture(avant, s.remplace, p))).filter(Boolean);
     if (captures.length) {
