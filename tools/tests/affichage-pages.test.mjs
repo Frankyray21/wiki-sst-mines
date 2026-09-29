@@ -62,3 +62,14 @@ test('un mot plus long que la colonne passe à la ligne au lieu de faire défile
   // « LOT 3 - NOTES INSTITUTIONNELLES/COMPLÉMENTAIRES » élargissait la grille de l'en-tête (+105 px au téléphone)
   assert.match(css, /\.article-titre \.page-title \{ overflow-wrap: anywhere; \}/);
 });
+
+test('contrôle de rendu : l’échantillon de pages de contenu existe et couvre chaque wiki', async () => {
+  const { ECHANTILLON, ACCUEILS } = await import('../verif_rendu.mjs');
+  for (const rel of [...ACCUEILS, ...ECHANTILLON]) assert.ok(fs.existsSync(path.join(R, 'docs', rel)), rel);
+  for (const w of ['ergonomie', 'hygiene', 'toxicologie', 'securite', 'droit-travail', 'psychosocial', 'legislation']) {
+    assert.ok(ECHANTILLON.some(p => p.startsWith(`w/${w}/`) && !p.endsWith('/index.html')), 'page de contenu du wiki ' + w);
+  }
+  assert.ok(ECHANTILLON.some(p => p.startsWith('g/w/')), 'une copie encadrement');
+  const gen = fs.readFileSync(path.join(R, 'tools/verif_rendu.mjs'), 'utf8');
+  assert.match(gen, /: \[\.\.\.ACCUEILS, \.\.\.ECHANTILLON\];/, 'l’échantillon fait partie du contrôle par défaut');
+});

@@ -66,7 +66,8 @@ adresses n'ont pas changé.
 - `tools/verif_rendu.mjs` — contrôle du rendu réel dans Chromium (playwright-core, dépendance de développement) :
   ce que les tests de structure ne voient pas. Cinq modes : téléphone (clair et sombre), tablette de chantier
   en paysage et en portrait, bureau ; échec sur défilement horizontal, cible tactile sous 24 px, sommaire ou
-  infobox sur un accueil, titre à plusieurs h1
+  infobox sur un accueil, titre à plusieurs h1 ; par défaut, les accueils et un échantillon fixe de 20 pages de
+  contenu (chaque wiki, chaque gabarit, pages qui ont déjà fait défaut), `--accueils` pour les accueils seuls
 - `tools/android/construire_apk.mjs` — construit l'APK (coquille WebView sur le site publié) ; `tools/android/binaire.mjs`
   écrit le manifeste compilé, la table de ressources et l'archive alignée
 - `tools/appliquer_intros.mjs` — pose dans les notes du vault les phrases d'ouverture d'un lot (`tools/intros.mjs`) ;
@@ -167,7 +168,7 @@ node tools/appliquer_renvois.mjs --appliquer
 npm --prefix tools run check:site
 
 # Vérifier le rendu réel dans Chromium (390 px clair et sombre, 1200 px) : défilement horizontal,
-# cibles tactiles, tuiles, infobox ou sommaire sur un accueil — les 22 accueils par défaut
+# cibles tactiles, tuiles, infobox ou sommaire sur un accueil — accueils et échantillon de pages de contenu par défaut
 CHROME=/chemin/vers/chrome node tools/verif_rendu.mjs --captures   # captures et mesures dans rendu/
 
 # Prévisualiser en local

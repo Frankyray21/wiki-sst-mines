@@ -5,8 +5,9 @@
 // infobox ou sommaire sur une page d'accueil, plus d'un h1. Il écrit aussi les captures et les
 // mesures, pour les regarder.
 //
-// Usage : node tools/verif_rendu.mjs [--pages a.html,b.html] [--sortie dossier] [--captures]
-//   Par défaut : les 22 pages d'accueil. Chromium : variable CHROME (chemin de l'exécutable),
+// Usage : node tools/verif_rendu.mjs [--pages a.html,b.html | --accueils] [--sortie dossier] [--captures]
+//   Par défaut : les pages d'accueil et un échantillon fixe de pages de contenu (ECHANTILLON) ; --accueils : les
+//   accueils seulement ; --pages : la liste donnée. Chromium : variable CHROME (chemin de l'exécutable),
 //   sinon celui que playwright-core connaît (npx playwright install chromium). Variable PLAYWRIGHT :
 //   chemin d'un playwright-core installé ailleurs (sinon celui de tools/node_modules).
 import fs from 'node:fs';
@@ -33,6 +34,23 @@ export const ACCUEILS = [
   'w/securite/index.html', 'w/securite/00-accueil-gestionnaires.html',
   'w/toxicologie/index.html', 'w/toxicologie/00-accueil-gestionnaires.html',
   'g/w/droit-travail/27-articles-gestionnaires.html', 'g/w/ergonomie/27-articles-gestionnaires.html', 'g/w/hygiene/00-accueil-gestionnaires.html', 'g/w/securite/00-accueil-gestionnaires.html', 'g/w/toxicologie/00-accueil-gestionnaires.html',
+];
+// Pages de contenu contrôlées par défaut (29 septembre 2026) : chaque wiki, chaque gabarit (portail, thème, article,
+// note d'analyse, article de loi, copie encadrement) et les pages qui ont déjà fait défaut. Les accueils seuls
+// laissaient passer les débordements trouvés plus tard sur des pages de contenu (Soutien social, art. 5.2.1 du CSTC,
+// « De la conformité à la prévention »).
+export const ECHANTILLON = [
+  'index.html', 'g/index.html', 'themes.html', 'recherche.html',
+  'w/ergonomie/theme/anatomie-et-biomecanique.html', 'w/ergonomie/travail-sedentaire.html',
+  'w/hygiene/aerosols.html', 'w/hygiene/amiante-encadrement.html',
+  'w/toxicologie/cstc.html', 'w/toxicologie/priorisation-et-substitution-chimique.html',
+  'w/securite/espaces-clos.html', 'g/w/securite/cadenassage-encadrement.html',
+  'w/droit-travail/constat-dinfraction.html',
+  'w/psychosocial/soutien-social-au-travail.html', 'w/psychosocial/mbi-epuisement-professionnel.html',
+  'w/psychosocial/analyse-palinkas-et-suedfeld-2021.html', 'w/psychosocial/analyse-inspq-2018.html',
+  'w/psychosocial/de-la-conformite-a-la-prevention-comprendre-et-faire-evoluer-la-culture-sst.html',
+  'w/legislation/10-lois-principales/lsst/art-179-lsst-decision-cnesst.html',
+  'w/legislation/20-reglements/cstc/art-5-2-1-cstc-lemployeur-doit-veiller-a-ce-que-personne.html',
 ];
 // Le téléphone, la tablette de chantier (Galaxy Tab Active4 Pro : 1 920 × 1 200 à densité 1,5,
 // soit 1 280 × 800 px CSS en paysage et 800 × 1 280 en portrait) et le bureau. Sur les trois
@@ -75,7 +93,7 @@ export function anomalies(m) {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const pw = await import(process.env.PLAYWRIGHT || 'playwright-core');
   const chromium = pw.chromium || pw.default.chromium;   // module CommonJS : export par défaut
-  const pages = opt('--pages', '') ? opt('--pages', '').split(',') : ACCUEILS;
+  const pages = opt('--pages', '') ? opt('--pages', '').split(',') : args.includes('--accueils') ? ACCUEILS : [...ACCUEILS, ...ECHANTILLON];
   fs.mkdirSync(SORTIE, { recursive: true });
   const navigateur = await chromium.launch({ executablePath: process.env.CHROME || undefined, args: ['--no-sandbox'] });
   const mesures = [];
