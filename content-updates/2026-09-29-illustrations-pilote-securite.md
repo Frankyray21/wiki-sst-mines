@@ -53,13 +53,31 @@ disparaîtrait du site. `tools/poser_schemas.mjs` la retire donc dès la pose, q
 différents portent le même nom (`img-001.png`), relevé par la relecture Codex.
 
 - Retirées : 6 captures de ce pilote.
-- Gardées : la figure de Blundell et la « Vue améliorée ». La page « Hiérarchie des moyens de prévention » du wiki
-  Hygiène industrielle (et sa copie encadrement) les affiche aussi.
+- La figure de Blundell et la « Vue améliorée » sont restées un temps : la page Hygiène du même nom les affichait
+  aussi. Elles sont parties avec son extension (section suivante).
 - Retirés aussi : 11 restes de lots précédents (2,6 Mo). Ce sont des captures déjà remplacées par des schémas (Espaces
   clos, Aérosols, pages RPS), que plus aucune page ne citait mais que le téléchargement hors ligne emportait encore.
   Un recensement au chemin exact des 3 521 fichiers publiés n'en trouve plus aucun.
 
 Les captures restent dans le vault ; seule leur ligne quitte la note.
+
+## Extension : page Hygiène (29 septembre 2026)
+
+Frank a validé le pilote pour la page « Hiérarchie des moyens de prévention » du wiki Hygiène industrielle. Son texte
+est celui de la page Sécurité du même nom dans toutes les parties que les schémas reprennent :
+
+- l'introduction ;
+- « Logique générale de la hiérarchie » ;
+- les étapes 1 et 3.
+
+Seuls diffèrent des libellés de liens, plus bas. Les deux mêmes captures y sont remplacées par les deux mêmes
+schémas, avec la même légende et les mêmes sources, dans la page et dans sa copie encadrement (`g/`).
+
+- Mêmes fichiers SVG : ils sont nommés d'après la page seule. Le vault n'en garde qu'un exemplaire dans
+  `Infographies/`, et `appliquer_retouches.mjs` reconnaît un fichier identique déjà en place.
+- Plus aucune page n'affiche la figure de Blundell ni la « Vue améliorée » : elles quittent le site.
+- `securite.py` range désormais ses pages par wiki (`SORTIE/<wiki>/<page>/`). Les dix SVG et les lots déjà publiés
+  sont inchangés, à l'octet près.
 
 ## À faire dans le vault
 
@@ -69,6 +87,7 @@ Pour chaque lot, faire un essai, puis appliquer avec `--appliquer` :
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-29-theorie-causale-des-accidents-schemas.json
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-29-hierarchie-des-moyens-de-prevention-schemas.json
 node tools/appliquer_retouches.mjs --lot content-updates/2026-09-29-appreciation-du-risque-schemas.json
+node tools/appliquer_retouches.mjs --lot content-updates/2026-09-29-hygiene-hierarchie-des-moyens-de-prevention-schemas.json
 ```
 
 Ensuite, reconstruire : `node tools/build_site.mjs`. Les SVG sont copiés dans `Infographies/` du vault par les lots
@@ -81,14 +100,15 @@ Ensuite, reconstruire : `node tools/build_site.mjs`. Les SVG sont copiés dans `
 - `npm --prefix tools test` : 516 sur 517 ; l'échec connu est celui des textes de loi du recueil.
 - `verif_site.mjs` : OK.
 - `verif_liens.mjs` : 0 erreur.
-- `verif_rendu.mjs` : aucun défaut sur les trois pages (5 modes chacune).
+- `verif_rendu.mjs` : aucun défaut sur les trois pages (5 modes chacune), ni sur la page Hygiène et sa copie
+  encadrement.
 - Les dix schémas ont été regardés un à un, puis dans leur page au téléphone.
 
 ## Points pour Frank
 
 - **Droits.** Beaucoup des captures qui restent sont des pages de manuel scannées ou des diapositives de cours
   (UQAT), publiées sur un site public. Le pilote en retire 6 ; le reste est à décider.
-- **Hygiène industrielle.** Sa page « Hiérarchie des moyens de prévention » montre les deux mêmes captures. Elle
-  pourrait recevoir les deux mêmes schémas.
+- **Hygiène industrielle.** Sa page « Hiérarchie des moyens de prévention » montrait les deux mêmes captures. Elle a
+  reçu les deux mêmes schémas (voir « Extension »).
 - **Suite.** Étendre, ou non, aux autres pages Sécurité (risques sectoriels, gestion des risques), puis aux autres
   wikis, avec les mêmes règles.

@@ -2,7 +2,7 @@
 # sur fond noir (diagrammes.py). Chaque mot vient de la page où le schéma se pose, au plus raccourci ; un schéma qui
 # montre la même chose qu'une capture la remplace (« remplace ») ; sinon il s'ajoute après un repère (« ancre »).
 #   SORTIE=/tmp/securite python3 tools/schemas-sombres/securite.py [filtre]
-# écrit, par page (SORTIE/<page>/), les SVG et un spec.json pour tools/poser_schemas.mjs.
+# écrit, par page (SORTIE/<wiki>/<page>/), les SVG et un spec.json pour tools/poser_schemas.mjs.
 import json, math, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import diagrammes as d
@@ -430,8 +430,25 @@ SCHEMAS = {
 # sa place exacte), « ancre » (texte visible après lequel le schéma se pose).
 PRECAUTIONS = ('Schémas dessinés d’après le texte de la page seulement (aucun mot, aucun chiffre d’ailleurs) ; pas de '
                'validation spécialisée. Les captures remplacées restent dans le vault : seule leur ligne quitte la note.')
+# Les deux schémas de « Hiérarchie des moyens de prévention », que la page du même nom du wiki Hygiène industrielle,
+# au même texte et aux mêmes captures, reprend aussi (29 septembre 2026, accord de Frank).
+HIERARCHIE = [
+    dict(sujet='hierarchie', remplace='pasted-image-20240923184314',
+         legende='Les cinq niveaux de la hiérarchie, du plus efficace au moins efficace, avec les exemples de la '
+                 'page ; l’EPI est la dernière barrière. Le principe directeur de la LSST : éliminer à la source.',
+         sources='D’après la section « Logique générale de la hiérarchie » de cette page (liste et principe '
+                 'directeur). Schéma de principe.'),
+    dict(sujet='iso12100-etapes', remplace='pasted-image-20250301155751',
+         legende='La méthode en trois étapes de l’ISO 12100 (art. 6.1) en sécurité machine : la prévention '
+                 'intrinsèque d’abord, puis la protection, et l’information quand les étapes précédentes '
+                 'n’épuisent pas le risque.',
+         sources='D’après l’introduction et les sections « Logique générale de la hiérarchie », « Étape 1 » et '
+                 '« Étape 3 » de cette page. Schéma de principe.'),
+]
+WIKIS = {'securite': ('Wiki Sécurité industrielle', 'Sécurité industrielle'),
+         'hygiene': ('Wiki Hygiène industrielle', 'Hygiène industrielle')}
 PAGES = {
-    'theorie-causale-des-accidents': dict(
+    'securite/theorie-causale-des-accidents': dict(
         titre='Accidents et incidents, théorie causale',
         portee='trois schémas sur fond noir (lignes de défense de Reason, diagramme d’Ishikawa, nœud papillon) ; les deux '
                'premiers remplacent des captures de cours (figure adaptée de Reason, diapositive UQAT).',
@@ -453,24 +470,12 @@ PAGES = {
                          'conséquences, pour le principe.',
                  sources='D’après la section « Arbre de défaillance et nœud papillon » de cette page. Schéma de principe.'),
         ]),
-    'hierarchie-des-moyens-de-prevention': dict(
+    'securite/hierarchie-des-moyens-de-prevention': dict(
         titre='Hiérarchie des moyens de prévention',
         portee='deux schémas sur fond noir (hiérarchie des moyens de prévention, méthode en trois étapes de l’ISO 12100), '
                'qui remplacent deux captures de cours (figure de manuel, « Vue améliorée de la méthode »).',
-        schemas=[
-            dict(sujet='hierarchie', remplace='pasted-image-20240923184314',
-                 legende='Les cinq niveaux de la hiérarchie, du plus efficace au moins efficace, avec les exemples de la '
-                         'page ; l’EPI est la dernière barrière. Le principe directeur de la LSST : éliminer à la source.',
-                 sources='D’après la section « Logique générale de la hiérarchie » de cette page (liste et principe '
-                         'directeur). Schéma de principe.'),
-            dict(sujet='iso12100-etapes', remplace='pasted-image-20250301155751',
-                 legende='La méthode en trois étapes de l’ISO 12100 (art. 6.1) en sécurité machine : la prévention '
-                         'intrinsèque d’abord, puis la protection, et l’information quand les étapes précédentes '
-                         'n’épuisent pas le risque.',
-                 sources='D’après l’introduction et les sections « Logique générale de la hiérarchie », « Étape 1 » et '
-                         '« Étape 3 » de cette page. Schéma de principe.'),
-        ]),
-    'appreciation-du-risque': dict(
+        schemas=HIERARCHIE),
+    'securite/appreciation-du-risque': dict(
         titre='Appréciation du risque, méthodes',
         portee='cinq schémas sur fond noir (démarche ISO 12100, chaîne accidentelle, estimation IRSST/CNESST, appréciation '
                'et traitement du risque, zones ALARP) ; quatre remplacent des captures de cours, et deux de ces schémas '
@@ -509,21 +514,31 @@ PAGES = {
                  sources='D’après la section « Évaluation du risque, ALARP et SFAIRP » de cette page. Schéma de principe : '
                          'aucun seuil entre les zones.'),
         ]),
+    'hygiene/hierarchie-des-moyens-de-prevention': dict(
+        titre='Hiérarchie des moyens de prévention',
+        portee='les deux schémas sur fond noir de la page Sécurité du même nom, au même texte (hiérarchie des moyens de '
+               'prévention, méthode en trois étapes de l’ISO 12100), qui remplacent les deux mêmes captures de cours '
+               '(figure de manuel, « Vue améliorée de la méthode ») ; mêmes fichiers.',
+        schemas=HIERARCHIE),
 }
 
 
 def construire(filtre=''):
-    """Écrit, dans SORTIE/<page>/, les SVG et le spec.json de tools/poser_schemas.mjs."""
-    for page, p in PAGES.items():
-        spec = {'page': f'w/securite/{page}.html', 'note': {'titre': p['titre'], 'wiki': 'Wiki Sécurité industrielle'},
-                'lot': {'portee': ty(f'Page « {p["titre"]} » (Sécurité industrielle) : ') + ty(p['portee']), 'precautions': ty(PRECAUTIONS)},
+    """Écrit, dans SORTIE/<wiki>/<page>/, les SVG et le spec.json de tools/poser_schemas.mjs."""
+    for cle, p in PAGES.items():
+        wiki, page = cle.split('/')
+        nom_wiki, nom_court = WIKIS[wiki]
+        spec = {'page': f'w/{cle}.html', 'note': {'titre': p['titre'], 'wiki': nom_wiki},
+                'lot': {'portee': ty(f'Page « {p["titre"]} » ({nom_court}) : ') + ty(p['portee']), 'precautions': ty(PRECAUTIONS)},
                 'schemas': []}
+        dossier = os.path.join(SORTIE, wiki, page)
         for x in p['schemas']:
-            if filtre and filtre not in page + '-' + x['sujet']:
+            if filtre and filtre not in cle + '-' + x['sujet']:
                 continue
             (svg, H), alt = SCHEMAS[x['sujet']]()
+            # nommé d'après la page seule : deux pages du même nom et au même texte partagent le fichier, et le vault
+            # n'en garde qu'un (Infographies/)
             fichier = f'wiki-{page}-{x["sujet"]}-v1.svg'
-            dossier = os.path.join(SORTIE, page)
             os.makedirs(dossier, exist_ok=True)
             open(os.path.join(dossier, fichier), 'w', encoding='utf-8').write(svg)
             s = {'fichier': fichier, 'sombre': True, 'alt': alt, 'legende': ty(x['legende']), 'sources': ty(x['sources'])}
@@ -534,7 +549,7 @@ def construire(filtre=''):
             spec['schemas'].append(s)
             print(f'{fichier} : {H} de haut, {len(svg.encode()) // 1024} Ko')
         if spec['schemas']:
-            json.dump(spec, open(os.path.join(SORTIE, page, 'spec.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+            json.dump(spec, open(os.path.join(dossier, 'spec.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
 
 if __name__ == '__main__':
