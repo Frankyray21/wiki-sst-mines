@@ -93,6 +93,13 @@ adresses n'ont pas changé.
   version antérieure remplacée, texte alternatif, légende, sources, corrections du texte), dans la
   page publiée et sa copie encadrement, et écrit le lot du vault correspondant ; essai par défaut, `--ecrire` pour
   écrire
+- `tools/poser_corrections.mjs` — pose une fiche de corrections de texte (retouches au format de `retouches.mjs`)
+  dans la page publiée et sa copie encadrement, et écrit le lot du vault correspondant (`content-updates/<date>-corr-
+  <nom>.json`) ; rejouable (une retouche déjà posée est reconnue, même complétée plus loin dans la fiche) ; essai par
+  défaut, `--ecrire` pour écrire, rien n'est écrit si une retouche échoue
+- `tools/renvois_modifies.mjs` — après une correction qui ajoute, retire ou redirige des liens : met à jour les « Pages
+  qui pointent ici » des pages visées et le graphe, comme le générateur ; essai par défaut, `--ecrire`, puis
+  `node tools/regenerer_hors_ligne.mjs`
 - `tools/dimensions_svg.mjs` — largeur et hauteur d'un schéma SVG, posées par le générateur sur son `<img>`
 - `tools/resoudre_image.mjs` — choisit le fichier d'un renvoi d'image `![[…]]` ; un nom que portent plusieurs
   fichiers est listé en fin de construction (« ⚠ Images ambiguës »), avec le fichier retenu
