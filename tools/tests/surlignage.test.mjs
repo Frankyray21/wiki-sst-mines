@@ -70,6 +70,8 @@ test('code : rien ne change dans les blocs de code ni dans le code en ligne', ()
     '~~~\n~={purple}b=~\n~~~',
     '````md\n```\n~={red}c=~\n```\n````',
     '```\r\n~={red}crlf=~\r\n```\r',
+    '- étape :\n    ```\n    ~={red}dans une liste=~\n    ```',
+    '> ```\n> ~={red}dans une citation=~\n> ```',
   ];
   for (const b of blocs) assert.equal(surlignagesColores(b), b, b);
   assert.equal(surlignagesColores('avant\n```\n~={red}x=~\n```\n~={red}après=~'), 'avant\n```\n~={red}x=~\n```\n' + m('red', 'après'));
@@ -78,8 +80,22 @@ test('code : rien ne change dans les blocs de code ni dans le code en ligne', ()
   assert.equal(surlignagesColores('``a ` ~={red}x=~`` puis ``b``'), '``a ` ~={red}x=~`` puis ``b``');
   assert.equal(surlignagesColores('~={red}voir `x = 1` ici=~'), m('red', 'voir `x = 1` ici'), 'du code en ligne dans un surlignage');
   assert.equal(surlignagesColores('un \\` seul, ~={red}x=~'), 'un \\` seul, ' + m('red', 'x'), 'un accent grave échappé n’ouvre pas de code');
+  // code écrit en HTML (relecture Codex, PR #53) : marked recopie un bloc <pre> tel quel, on n'y touche pas non plus
+  const html1 = [
+    '<pre>\n~={red}x=~ et ==y==\n</pre>',
+    '<PRE class="a">~={red}x=~</PRE>',
+    '<pre><code>~={red}x=~</code></pre>',
+    '<script>const a = "~={red}x=~";</script>',
+    '<code>a `b` ~={red}c=~</code>',
+  ];
+  for (const b of html1) assert.equal(surlignagesColores(b), b, b);
+  assert.equal(surlignagesColores('Texte <code>~={red}x=~</code> puis ~={red}y=~'), 'Texte <code>~={red}x=~</code> puis ' + m('red', 'y'));
+  assert.equal(surlignagesColores('`<code>` est une balise ; ~={red}ici=~ ; <code>z</code>'), '`<code>` est une balise ; ' + m('red', 'ici') + ' ; <code>z</code>',
+    'une balise citée dans du code en ligne n’ouvre pas d’élément');
+  assert.equal(rendre('<pre>\n~={red}x=~ et ==y==\n</pre>'), '<pre>\n~={red}x=~ et ==y==\n</pre>');
   // la règle « ==…== » du générateur passe par le même garde-fou
   assert.equal(horsCode('a ==b== `c ==d==`', t => t.replace(/==([^=\n][^=]*?)==/g, '<mark>$1</mark>')), 'a <mark>b</mark> `c ==d==`');
+  assert.equal(horsCode('<pre>==d==</pre> ==e==', t => t.replace(/==([^=\n][^=]*?)==/g, '<mark>$1</mark>')), '<pre>==d==</pre> <mark>e</mark>');
   assert.match(gen, /s = surlignagesColores\(s\);\n {2}s = horsCode\(s, t => t\.replace\(\/==/);
   // rendu complet : le code affiche la syntaxe telle quelle
   const html = rendre('Texte ~={red}rouge=~.\n\n```\n~={red}x=~\n```\n\nEn ligne : `~={green}y=~`.');

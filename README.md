@@ -81,8 +81,8 @@ adresses n'ont pas changé.
   2026 (`content-updates/*.json`) : essai de tous les lots, puis, si aucun n'échoue, application dans l'ordre
   (corrections, schémas, corrections du 27), retrait des versions texte et libellés de liens courts
 - `tools/surlignage.mjs` — surlignages colorés du greffon Obsidian (`~={red}texte=~`), rendus en `<mark>` lisible
-  en clair et en sombre (générateur, et repose des pages publiées) ; le code (blocs et code en ligne) reste tel quel,
-  une couleur inconnue prend le surlignage par défaut, les marqueurs sortent du texte indexé
+  en clair et en sombre (générateur, et repose des pages publiées) ; le code (blocs, code en ligne, code HTML) reste
+  tel quel, une couleur inconnue prend le surlignage par défaut, les marqueurs sortent du texte indexé
 - `tools/habillage_pages.mjs` — style du portail, de la page Thèmes et des pages de thème (rangées à pictogramme,
   nombre d'articles, chevron), le même que produit le générateur ; `tools/illustrations/` — un dessin par wiki,
   sur la carte d'entrée de son accueil et sur le portail
@@ -300,10 +300,11 @@ node tools/serve.mjs
   septembre. Restaient le sommaire et l'ancre d'un titre surligné (Palinkas et Suedfeld, « ={purple}dyade = »), un
   extrait de recherche (« {purple}FIFO ») et 97 entrées de l'index plein texte : « red », « purple », « green »…,
   venus des seuls marqueurs, renvoyaient des notes qui ne contiennent pas ces mots. Le générateur ne touche plus au
-  code (blocs clôturés et code en ligne), rend une couleur inconnue en surlignage par défaut et retire les marqueurs
-  du texte indexé (`tools/surlignage.mjs`). Teintes : contraste d'au moins 6,2:1 en sombre et 10,1:1 en clair, vérifié
-  par un test. **À faire** : aucune note à modifier ; reconstruire le site (`node tools/build_site.mjs`), ce qui
-  refait l'index de recherche. Détail : `content-updates/2026-09-29-surlignage-restes.md`
+  code (blocs clôturés, même dans une liste ou une citation, code en ligne, code écrit en HTML comme `<pre>`), rend
+  une couleur inconnue en surlignage par défaut et retire les marqueurs du texte indexé (`tools/surlignage.mjs`).
+  Teintes : contraste d'au moins 6,2:1 en sombre et 10,1:1 en clair, vérifié par un test. **À faire** : aucune note
+  à modifier ; reconstruire le site (`node tools/build_site.mjs`), ce qui refait l'index de recherche. Détail :
+  `content-updates/2026-09-29-surlignage-restes.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma
   en texte » (127 schémas, 65 pages), puis toutes les autres (« Lire la version texte — … », « Lire les voies en
   texte », « Lire l’illustration en texte » : 16 sections, 10 pages) disparaissent. Chaque image garde son texte

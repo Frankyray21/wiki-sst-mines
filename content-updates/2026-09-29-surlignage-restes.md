@@ -28,11 +28,20 @@ résultat que le générateur corrigé. Le manifeste hors ligne est régénéré
 
 ## Générateur (`tools/surlignage.mjs`, `tools/build_site.mjs`)
 
-- **Le code n'est plus touché.**
-  - Les blocs clôturés (``` ou ~~~) et le code en ligne (`…`, ``…``) gardent la syntaxe telle quelle (`horsCode`).
-  - La règle `==texte==` du générateur passe par le même garde-fou.
-  - Un bloc indenté de quatre espaces n'est pas pris pour du code : dans les notes, cette indentation est celle des
-    listes imbriquées.
+- **Le code n'est plus touché** (`horsCode`). Gardent la syntaxe telle quelle :
+  - les blocs clôturés (``` ou ~~~), y compris indentés dans une liste ou précédés de « > » dans une citation ;
+  - le code en ligne (`…`, ``…``) ;
+  - le code écrit en HTML : `<pre>`, `<code>`, `<script>`, `<style>` et `<textarea>`, avec leur balise fermante.
+    Cette protection répond à la relecture de Codex (PR #53).
+
+  La règle `==texte==` du générateur passe par le même garde-fou.
+
+  Deux limites :
+  - un bloc indenté de quatre espaces n'est pas pris pour du code : dans les notes, cette indentation est celle
+    des listes imbriquées ;
+  - une balise `<code>` au milieu d'un paragraphe reste telle quelle pour le générateur, mais marked y lit le
+    Markdown, comme dans tout HTML en ligne : un surlignage écrit là s'affiche barré. Pour montrer la syntaxe,
+    écrire le code entre accents graves.
 - **Couleur inconnue.** Une couleur que la feuille de style ne teinte pas (par exemple `teal`) donne le surlignage par
   défaut, et non une classe sans teinte. La couleur peut s'écrire en majuscules.
 - **Texte brut.** Le texte tiré de la note (index de recherche, extraits, sous-titres de thème) perd les marqueurs de
@@ -42,7 +51,8 @@ résultat que le générateur corrigé. Le manifeste hors ligne est régénéré
   - gras, ponctuation, deux surlignages sur une ligne ;
   - couleur inconnue, forme sans couleur, `==texte==` ;
   - vrai texte barré ;
-  - code en ligne, bloc de code, encadré.
+  - code en ligne, bloc de code (seul ou dans une liste), bloc `<pre>` en HTML ;
+  - encadré.
 
   L'index de recherche produit ne contient aucun mot de couleur venu d'un marqueur.
 
@@ -58,14 +68,19 @@ dans les deux thèmes :
 
 - **Syntaxe** : couleur connue (les huit), couleur inconnue, ponctuation, deux surlignages sur une ligne, surlignage
   dans un surlignage.
-- **Code** : blocs ``` et ~~~, code en ligne, bloc non fermé, fins de ligne CRLF, accent grave échappé.
+- **Code** :
+  - blocs ``` et ~~~, y compris dans une liste ou une citation ;
+  - bloc non fermé, fins de ligne CRLF ;
+  - code en ligne, accent grave échappé ;
+  - code écrit en HTML (`<pre>`, `<code>`, `<script>`).
 - **Vrai barré** : `~~…~~` reste barré, y compris une fois rendu par marked.
 - **Titre, texte brut et index** : le sommaire, l'ancre et l'index de recherche ne gardent aucun marqueur.
 - **Pages publiées** : la règle s'applique aussi au HTML déjà produit par marked.
 - **Contraste** des teintes, dans les deux thèmes.
 - **Contrôle du site entier** : page complète (sommaire compris, code exclu), extraits et index de recherche.
 
-Si on désactive la protection du code, le test du code échoue : il détecte bien la régression.
+Si on désactive la protection du code, ou seulement celle du code écrit en HTML, le test du code échoue : il
+détecte bien ces régressions.
 
 ## À faire par l'auteur
 

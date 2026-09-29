@@ -13,29 +13,36 @@ function marque(c, t) {
 }
 
 // Applique f au Markdown hors du code, que f ne voit pas : blocs clôturés (``` ou ~~~, jusqu'à une clôture du même
-// signe au moins aussi longue, ou jusqu'à la fin de la note, comme marked) et code en ligne (`…`, ``…``). Le code est
-// mis de côté puis remis tel quel ; un surlignage peut donc contenir du code en ligne. Un bloc indenté de quatre
-// espaces n'est pas reconnu : dans les notes, cette indentation est celle des listes imbriquées.
+// signe au moins aussi longue, ou jusqu'à la fin de la note, comme marked ; indentés dans une liste ou précédés de
+// « > » dans une citation), code en ligne (`…`, ``…``) et code écrit
+// en HTML (<pre>, <code>, <script>, <style>, <textarea>, avec leur balise fermante ; marked recopie tel quel un bloc
+// <pre>). Le code est mis de côté puis remis tel quel ; un surlignage peut donc contenir du code en ligne. Un bloc
+// indenté de quatre espaces n'est pas reconnu : dans les notes, cette indentation est celle des listes imbriquées.
 export function horsCode(md, f) {
   const mis = [];
-  const garde = t => `${mis.push(t) - 1}`;
+  const garde = t => `\uE000${mis.push(t) - 1}\uE001`;
   const lignes = String(md).split('\n'), out = [];
   let bloc = null;
   for (const l of lignes) {
     const nue = l.replace(/\r$/, '');
     if (bloc) {
       bloc.push(l);
-      const m = nue.match(/^ {0,3}(`{3,}|~{3,})[ \t]*$/);
+      const m = nue.match(/^[ \t>]*(`{3,}|~{3,})[ \t]*$/);
       if (m && m[1][0] === bloc.signe && m[1].length >= bloc.long) { out.push(garde(bloc.join('\n'))); bloc = null; }
       continue;
     }
-    const m = nue.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+    const m = nue.match(/^[ \t>]*(`{3,}|~{3,})(.*)$/);
     if (m && !(m[1][0] === '`' && m[2].includes('`'))) { bloc = Object.assign([l], { signe: m[1][0], long: m[1].length }); continue; }
     out.push(l);
   }
   if (bloc) out.push(garde(bloc.join('\n')));
-  const s = out.join('\n').replace(/(?<![`\\])(`+)(?!`)((?:(?!\n[ \t]*\r?\n)[\s\S])*?[^`])\1(?!`)/g, m => garde(m));
-  return f(s).replace(/(\d+)/g, (m, i) => mis[+i]);
+  const s = out.join('\n')
+    .replace(/(?<![`\\])(`+)(?!`)((?:(?!\n[ \t]*\r?\n)[\s\S])*?[^`])\1(?!`)/g, m => garde(m))
+    .replace(/<(pre|code|script|style|textarea)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, m => garde(m));
+  // un élément HTML de code peut contenir du code en ligne déjà mis de côté : on remet jusqu'au bout
+  let r = f(s);
+  while (/\uE000\d+\uE001/.test(r)) r = r.replace(/\uE000(\d+)\uE001/g, (m, i) => mis[+i]);
+  return r;
 }
 
 export function surlignagesColores(s) {
