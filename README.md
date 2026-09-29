@@ -45,7 +45,8 @@ adresses n'ont pas changé.
 
 - `docs/` — le site statique généré (HTML pur, aucune dépendance serveur) — c'est ce dossier que GitHub Pages publie
 - `tools/build_site.mjs` — générateur : markdown Obsidian → HTML type Wikipédia
-- `tools/png_palette.mjs` — recompression PNG sans perte (palette 8 bits, zlib natif)
+- `tools/png_palette.mjs` — recompression PNG sans perte (zlib natif) : palette 8 bits quand l'image tient en 256
+  couleurs, sinon vraies couleurs refiltrées, canal alpha entièrement opaque retiré ; pixels relus et comparés
 - `tools/portail_encadrement.mjs` — portail `/g/` en tableau de bord : contenu des cartes, icônes SVG.
   Les cibles sont vérifiées à la construction ; le build avertit si l'une disparaît du site.
 - `tools/portail_racine.mjs` — contenu du portail racine (`index.html`)
@@ -66,7 +67,8 @@ adresses n'ont pas changé.
 - `tools/verif_rendu.mjs` — contrôle du rendu réel dans Chromium (playwright-core, dépendance de développement) :
   ce que les tests de structure ne voient pas. Cinq modes : téléphone (clair et sombre), tablette de chantier
   en paysage et en portrait, bureau ; échec sur défilement horizontal, cible tactile sous 24 px, sommaire ou
-  infobox sur un accueil, titre à plusieurs h1
+  infobox sur un accueil, titre à plusieurs h1 ; par défaut, les accueils et un échantillon fixe de 20 pages de
+  contenu (chaque wiki, chaque gabarit, pages qui ont déjà fait défaut), `--accueils` pour les accueils seuls
 - `tools/android/construire_apk.mjs` — construit l'APK (coquille WebView sur le site publié) ; `tools/android/binaire.mjs`
   écrit le manifeste compilé, la table de ressources et l'archive alignée
 - `tools/appliquer_intros.mjs` — pose dans les notes du vault les phrases d'ouverture d'un lot (`tools/intros.mjs`) ;
@@ -93,6 +95,13 @@ adresses n'ont pas changé.
   version antérieure remplacée, texte alternatif, légende, sources, corrections du texte), dans la
   page publiée et sa copie encadrement, et écrit le lot du vault correspondant ; essai par défaut, `--ecrire` pour
   écrire
+- `tools/poser_corrections.mjs` — pose une fiche de corrections de texte (retouches au format de `retouches.mjs`)
+  dans la page publiée et sa copie encadrement, et écrit le lot du vault correspondant (`content-updates/<date>-corr-
+  <nom>.json`) ; rejouable (une retouche déjà posée est reconnue, même complétée plus loin dans la fiche) ; essai par
+  défaut, `--ecrire` pour écrire, rien n'est écrit si une retouche échoue
+- `tools/renvois_modifies.mjs` — après une correction qui ajoute, retire ou redirige des liens : met à jour les « Pages
+  qui pointent ici » des pages visées et le graphe, comme le générateur ; essai par défaut, `--ecrire`, puis
+  `node tools/regenerer_hors_ligne.mjs`
 - `tools/dimensions_svg.mjs` — largeur et hauteur d'un schéma SVG, posées par le générateur sur son `<img>`
 - `tools/resoudre_image.mjs` — choisit le fichier d'un renvoi d'image `![[…]]` ; un nom que portent plusieurs
   fichiers est listé en fin de construction (« ⚠ Images ambiguës »), avec le fichier retenu
@@ -160,7 +169,7 @@ node tools/appliquer_renvois.mjs --appliquer
 npm --prefix tools run check:site
 
 # Vérifier le rendu réel dans Chromium (390 px clair et sombre, 1200 px) : défilement horizontal,
-# cibles tactiles, tuiles, infobox ou sommaire sur un accueil — les 22 accueils par défaut
+# cibles tactiles, tuiles, infobox ou sommaire sur un accueil — accueils et échantillon de pages de contenu par défaut
 CHROME=/chemin/vers/chrome node tools/verif_rendu.mjs --captures   # captures et mesures dans rendu/
 
 # Prévisualiser en local
@@ -305,6 +314,12 @@ node tools/serve.mjs
   Teintes : contraste d'au moins 6,2:1 en sombre et 10,1:1 en clair, vérifié par un test. **À faire** : aucune note
   à modifier ; reconstruire le site (`node tools/build_site.mjs`), ce qui refait l'index de recherche. Détail :
   `content-updates/2026-09-29-surlignage-restes.md`
+- **Outils et contrôles (29 septembre 2026)** : les outils de pose des corrections sur le site publié passent dans
+  `tools/` (`poser_corrections.mjs`, `renvois_modifies.mjs`), testés et rejouables : ils vivaient dans l'espace
+  temporaire des sessions. `verif_rendu.mjs` contrôle par défaut, en plus des accueils, un échantillon fixe de 20
+  pages de contenu (185 rendus, 0 défaut). Images : les PNG en vraies couleurs (captures de cours, photos) sont
+  recompressés sans perte par le générateur ; 425 images publiées passent de 169,7 à 137,4 Mo, et le
+  téléchargement hors ligne de 394 à 362 Mo, pixels identiques. Détail : `content-updates/2026-09-29-outils-et-poids.md`
 - **Versions texte dépliables retirées (26 septembre 2026)** : à la demande de Frank, les sections « Lire le schéma
   en texte » (127 schémas, 65 pages), puis toutes les autres (« Lire la version texte — … », « Lire les voies en
   texte », « Lire l’illustration en texte » : 16 sections, 10 pages) disparaissent. Chaque image garde son texte
