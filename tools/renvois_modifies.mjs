@@ -15,12 +15,15 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(
 const texteDe = s => s.replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&');
 export const LIMITE = 60; // le générateur n'affiche que les 60 premiers renvois
 
-// Pages du wiki (w/…) vers lesquelles pointe le corps d'une page (chapô et corps, sans ses propres renvois).
+// Pages du wiki (w/…) vers lesquelles pointe une page, comme les compte le générateur : chapô et corps de la note,
+// sans « Voir aussi », « Voisins », renvois ni les listes qu'il ajoute aux pages de thème.
+const FINS = ['\n<nav class="voir-aussi"', '\n<nav class="voisins"', '\n<details class="backlinks"', '\n<section class="avis"', '</main>', '<h2>Articles de ce thème'];
 export function liensDuCorps(html, rel) {
   const c = html.indexOf('<div class="chapo">');
   const d = c >= 0 ? c : html.indexOf('<div class="page-body');
-  let f = html.indexOf('<details class="backlinks"');
-  if (f < 0) f = html.indexOf('</main>');
+  if (d < 0) return new Set();
+  let f = html.length;
+  for (const m of FINS) { const k = html.indexOf(m, d); if (k >= 0 && k < f) f = k; }
   const corps = html.slice(d, f);
   const out = new Set();
   for (const m of corps.matchAll(/<a href="([^"#]+\.html)(?:#[^"]*)?"/g)) {
@@ -36,33 +39,57 @@ export function differenceLiens(avant, apres, rel) {
   return { ajouts: [...B].filter(c => !A.has(c)), retraits: [...A].filter(c => !B.has(c)) };
 }
 
-// Bloc « Pages qui pointent ici » d'une page visée : ajoute et retire des pages sources.
-// source(s) → { titre, wiki } (null : page inconnue du graphe, ignorée). Rend { html, ajoutes, retires }.
-export function majRenvois(html, cible, { ajouts = [], retraits = [] }, source) {
-  const m = html.match(/<details class="backlinks"><summary>Pages qui pointent ici \((\d+)\)<\/summary><ul>([\s\S]*?)<\/ul><\/details>/);
-  if (!m) return { html, ajoutes: [], retires: [] };
+// Le générateur ne pose le bloc « Pages qui pointent ici » que sur un article, entre « Voir aussi » et le bloc d'avis :
+// à vide, cet emplacement laisse une ligne vide juste avant le bloc d'avis.
+const EMPLACEMENT = '\n\n<section class="avis"';
+const estArticle = html => !html.includes('accueil-banniere') && !html.includes('Un thème du wiki') && html.includes(EMPLACEMENT);
+const RE_BLOC = /<details class="backlinks"><summary>Pages qui pointent ici \((\d+)\)<\/summary><ul>([\s\S]*?)<\/ul><\/details>/;
+
+// Bloc « Pages qui pointent ici » d'une page visée, mis à jour pour des pages sources qui y pointent désormais
+// (ajouts) ou plus (retraits). source(s) → { titre, wiki } (null : page inconnue du graphe, ignorée).
+// Le compte suit les liens, que la source soit visible ou non dans la liste. Au-delà de 60 renvois, le générateur
+// n'affiche que les 60 premiers par titre : « caches » donne les autres sources connues, pour faire remonter la
+// suivante quand une source visible s'en va. Rend { html, ajoutes, retires, incomplet } ; incomplet : la liste
+// affichée compte moins d'entrées qu'elle ne devrait (source suivante inconnue).
+export function majRenvois(html, cible, { ajouts = [], retraits = [] }, source, { caches = [] } = {}) {
   const racine = '../'.repeat(cible.split('/').length - 1);
-  let items = [...m[2].matchAll(/<li>[\s\S]*?<\/li>/g)].map(x => x[0]);
-  const tronque = items.includes('<li>…</li>');
+  const li = (s, src) => `<li><a href="${racine}${s}">${esc(src.titre)}</a> <small class="bl-wiki">${src.wiki}</small></li>`;
+  const titre = x => texteDe((x.match(/<a [^>]*>([\s\S]*?)<\/a>/) || [, '…'])[1]);
+  const trier = l => l.sort((x, y) => titre(x).localeCompare(titre(y), 'fr'));
+  const bloc = (n, items) => `<details class="backlinks"><summary>Pages qui pointent ici (${n})</summary><ul>${items.slice(0, LIMITE).join('')}${n > LIMITE ? '<li>…</li>' : ''}</ul></details>`;
+  const m = html.match(RE_BLOC);
+  if (!m) {
+    // première page qui pointe ici
+    const nouveaux = [...new Set(ajouts)].filter(s => source(s));
+    if (!nouveaux.length || !estArticle(html)) return { html, ajoutes: [], retires: [], incomplet: false };
+    const items = trier(nouveaux.map(s => li(s, source(s))));
+    const k = html.indexOf(EMPLACEMENT);
+    return { html: html.slice(0, k) + '\n' + bloc(nouveaux.length, items) + EMPLACEMENT.slice(1) + html.slice(k + EMPLACEMENT.length), ajoutes: nouveaux, retires: [], incomplet: false };
+  }
+  let items = [...m[2].matchAll(/<li>[\s\S]*?<\/li>/g)].map(x => x[0]).filter(x => x !== '<li>…</li>');
+  const present = s => items.some(x => x.includes(`href="${racine}${s}"`));
   let n = Number(m[1]);
   const ajoutes = [], retires = [];
   for (const s of ajouts) {
-    if (items.some(li => li.includes(`href="${racine}${s}"`))) continue;
+    if (present(s)) continue;
     const src = source(s);
     if (!src) continue;
-    items.push(`<li><a href="${racine}${s}">${esc(src.titre)}</a> <small class="bl-wiki">${src.wiki}</small></li>`);
-    n++; ajoutes.push(s);
+    items.push(li(s, src)); n++; ajoutes.push(s);
   }
   for (const s of retraits) {
-    const avant = items.length;
-    items = items.filter(li => !li.includes(`href="${racine}${s}"`));
-    if (items.length < avant) { n--; retires.push(s); }
+    // la source pointait ici : elle était comptée, visible ou non
+    items = items.filter(x => !x.includes(`href="${racine}${s}"`));
+    n--; retires.push(s);
   }
-  const titre = li => texteDe((li.match(/<a [^>]*>([\s\S]*?)<\/a>/) || [, '…'])[1]);
-  const corps = items.filter(li => li !== '<li>…</li>').sort((x, y) => titre(x).localeCompare(titre(y), 'fr'));
-  const liste = corps.slice(0, LIMITE).join('') + (n > LIMITE || tronque ? '<li>…</li>' : '');
-  const bloc = `<details class="backlinks"><summary>Pages qui pointent ici (${n})</summary><ul>${liste}</ul></details>`;
-  return { html: html.replace(m[0], () => bloc), ajoutes, retires };
+  // sources cachées au-delà de la 60e, pour combler la liste
+  for (const s of caches) {
+    if (present(s) || retraits.includes(s)) continue;
+    const src = source(s);
+    if (src) items.push(li(s, src));
+  }
+  items = trier(items);
+  const incomplet = Math.min(n, LIMITE) > Math.min(items.length, LIMITE);
+  return { html: html.replace(m[0], () => bloc(n, items)), ajoutes, retires, incomplet };
 }
 
 // Arêtes du graphe (non orienté, [petit indice, grand indice]) : un lien ajouté crée l'arête ; un lien retiré
@@ -102,12 +129,39 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     for (const c of ajouts) (parCible.get(c) || parCible.set(c, { ajouts: [], retraits: [] }).get(c)).ajouts.push(rel);
     for (const c of retraits) (parCible.get(c) || parCible.set(c, { ajouts: [], retraits: [] }).get(c)).retraits.push(rel);
   }
+  // Listes tronquées (plus de 60 renvois) : les sources cachées se retrouvent dans les liens de toutes les pages
+  // publiées, à condition que cette reconstruction redonne la liste et le compte publiés (sinon : avertissement).
+  let index = null;
+  const indexDesLiens = () => {
+    if (index) return index;
+    index = new Map();
+    (function walk(d, rel) {
+      for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+        const r = rel + e.name;
+        if (e.isDirectory()) walk(path.join(d, e.name), r + '/');
+        else if (e.name.endsWith('.html')) for (const c of liensDuCorps(fs.readFileSync(path.join(d, e.name), 'utf8'), r)) (index.get(c) || index.set(c, new Set()).get(c)).add(r);
+      }
+    })(path.join(D, 'w'), 'w/');
+    return index;
+  };
   let nA = 0, nR = 0;
   for (const [cible, diff] of parCible) {
     const f = path.join(D, cible);
     if (!fs.existsSync(f)) { console.log('? page visée absente : ' + cible); continue; }
     const html = fs.readFileSync(f, 'utf8');
-    const res = majRenvois(html, cible, diff, source);
+    let caches = [];
+    const bloc = html.match(/Pages qui pointent ici \((\d+)\)<\/summary><ul>([\s\S]*?)<\/ul>/);
+    if (bloc && Number(bloc[1]) > LIMITE) {
+      const racine = '../'.repeat(cible.split('/').length - 1);
+      const visibles = [...bloc[2].matchAll(/<li><a href="([^"]+)"/g)].map(x => x[1].slice(racine.length));
+      const maintenant = indexDesLiens().get(cible) || new Set();
+      // état publié : les sources d'aujourd'hui, moins les liens ajoutés, plus les liens retirés
+      const avant = new Set([...maintenant].filter(s => !diff.ajouts.includes(s)).concat(diff.retraits));
+      if (avant.size === Number(bloc[1]) && visibles.every(s => avant.has(s))) caches = [...maintenant].filter(s => !visibles.includes(s));
+      else console.log(`! ${cible} : liste tronquée non reconstructible (${avant.size} sources trouvées pour ${bloc[1]} publiées)`);
+    }
+    const res = majRenvois(html, cible, diff, source, { caches });
+    if (res.incomplet) console.log(`! ${cible} : liste incomplète, la source suivante est inconnue ; la prochaine construction la complétera`);
     majGraphe(g, cible, diff, s => liensDuCorps(html, cible).has(s));
     for (const s of res.ajoutes) console.log(`+ ${s} → ${cible}`);
     for (const s of res.retires) console.log(`- ${s} ↛ ${cible}`);

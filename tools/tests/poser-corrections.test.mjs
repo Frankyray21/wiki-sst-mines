@@ -139,3 +139,37 @@ test('renvois : liens du corps, différence, bloc « Pages qui pointent ici » t
   majGraphe(g, cible, { retraits: [REL] });
   assert.deepEqual(g.e, [[0, 2]]);
 });
+
+test('renvois : le premier renvoi d’un article crée le bloc, à la place exacte du générateur ; jamais sur un thème', () => {
+  const cible = 'w/securite/cadenassage.html';
+  const source = s => ({ [REL]: { titre: 'Constat', wiki: 'Droit du travail' } })[s] || null;
+  const article = '<main><div class="page-body">\n<p>x</p>\n</div>\n\n\n<section class="avis" hidden>…</section></main>';
+  const r = majRenvois(article, cible, { ajouts: [REL] }, source);
+  assert.deepEqual(r.ajoutes, [REL]);
+  assert.equal(r.html, '<main><div class="page-body">\n<p>x</p>\n</div>\n\n<details class="backlinks"><summary>Pages qui pointent ici (1)</summary><ul><li><a href="../../w/droit-travail/constat.html">Constat</a> <small class="bl-wiki">Droit du travail</small></li></ul></details>\n<section class="avis" hidden>…</section></main>');
+  const theme = '<main><p>Un thème du wiki</p><div class="page-body">\n</div>\n<section class="avis" hidden>…</section></main>';
+  assert.equal(majRenvois(theme, cible, { ajouts: [REL] }, source).html, theme);
+  const accueil = '<main><div class="accueil-banniere"></div>\n\n<section class="avis" hidden>…</section></main>';
+  assert.equal(majRenvois(accueil, cible, { ajouts: [REL] }, source).html, accueil);
+});
+
+test('renvois : liste tronquée à 60, le compte suit les liens et la source suivante remonte', () => {
+  const cible = 'w/legislation/10-lois-principales/lsst/art-179.html';
+  const racine = '../../../../';
+  const nom = i => `w/x/p${String(i).padStart(2, '0')}.html`;
+  const source = s => /^w\/x\/p\d\d\.html$/.test(s) ? { titre: 'P' + s.slice(5, 7), wiki: 'W' } : null;
+  const li = i => `<li><a href="${racine}${nom(i)}">P${String(i).padStart(2, '0')}</a> <small class="bl-wiki">W</small></li>`;
+  const html = `<main><details class="backlinks"><summary>Pages qui pointent ici (61)</summary><ul>${Array.from({ length: 60 }, (_, i) => li(i)).join('')}<li>…</li></ul></details></main>`;
+  // une source visible s'en va : la 61e (cachée, connue) prend sa place, plus de « … »
+  const a = majRenvois(html, cible, { retraits: [nom(3)] }, source, { caches: [nom(60)] });
+  assert.ok(a.html.includes('(60)') && a.html.includes(li(60)) && !a.html.includes(li(3)) && !a.html.includes('<li>…</li>'));
+  assert.equal(a.incomplet, false);
+  // une source cachée s'en va : le compte baisse quand même, la liste visible ne change pas
+  const b = majRenvois(html, cible, { retraits: [nom(60)] }, source);
+  assert.ok(b.html.includes('(60)') && !b.html.includes('<li>…</li>'));
+  assert.equal((b.html.match(/<li><a /g) || []).length, 60);
+  // source suivante inconnue : signalé
+  const c = majRenvois(html, cible, { retraits: [nom(3)] }, source);
+  assert.ok(c.html.includes('(60)'));
+  assert.equal(c.incomplet, true);
+});
