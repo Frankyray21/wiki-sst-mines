@@ -182,7 +182,7 @@ test('l’état du service répond sans origine et ne dit rien des données', as
   simuler();
   const r = await worker.fetch(new Request('https://relais.test/'), ENV);
   assert.equal(r.status, 200);
-  assert.deepEqual(await r.json(), { ok: true, service: 'attestations-travailleurs', configure: true });
+  assert.deepEqual(await r.json(), { ok: true, service: 'attestations-wiki-travailleurs', configure: true });
   assert.equal(r.headers.get('Access-Control-Allow-Origin'), null);
 });
 

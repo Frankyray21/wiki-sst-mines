@@ -1,4 +1,4 @@
-# Relais des attestations — `attestations-travailleurs`
+# Relais des attestations — `attestations-wiki-travailleurs`
 
 L'Espace travailleurs (`docs/travailleurs/`) est publié par GitHub Pages : il n'a pas de serveur.
 Un jeton Airtable posé dans une page publique serait lisible, et utilisable, par n'importe qui.
@@ -11,7 +11,7 @@ Même mécanique que vos Workers `attestations-procedures`, `attestations-tms` e
 
 | Requête | Rôle |
 | --- | --- |
-| `GET /` | État du service : `{ "ok": true, "service": "attestations-travailleurs", "configure": true }` |
+| `GET /` | État du service : `{ "ok": true, "service": "attestations-wiki-travailleurs", "configure": true }` |
 | `GET /?q=<texte>` | Noms de la **Liste employé (registre formation)** qui contiennent le texte (2 lettres minimum, 8 noms au plus, accents et majuscules ignorés). Le travailleur choisit **son** nom dans cette liste. |
 | `POST /` | Enregistre une attestation de lecture dans **Attestations Wiki SST travailleurs (web)** |
 
@@ -53,12 +53,12 @@ sur `main` redéploie le relais.
 1. **dash.cloudflare.com** → **Workers & Pages** → **Create** → onglet **Workers** →
    **Import a repository** (« Connect to Git »).
 2. Choisir le dépôt **Frankyray21/wiki-sst-mines**, branche **main**.
-3. **Project name** : `attestations-travailleurs` (le même nom que dans `wrangler.toml`).
+3. **Project name** : `attestations-wiki-travailleurs` (le même nom que dans `wrangler.toml`).
 4. **Advanced settings → Root directory** (ou *Path*) : `tools/attestations-worker`.
    Commande de déploiement : `npx wrangler deploy` (la valeur proposée).
 5. **Deploy**. Les variables (`AIRTABLE_BASE`, `AIRTABLE_TABLE`, `EMP_TABLE`, `EMP_NAME_FIELD`,
    `ORIGINES`, `SEUIL`) et les deux limites de débit viennent de `wrangler.toml` : rien à saisir.
-6. Le jeton : Worker **attestations-travailleurs** → **Settings** → **Variables and Secrets** →
+6. Le jeton : Worker **attestations-wiki-travailleurs** → **Settings** → **Variables and Secrets** →
    **Add** → Type **Secret**, nom **`AIRTABLE_TOKEN`**, valeur : le jeton Airtable. Celui du
    Worker `attestations-procedures` convient tel quel (il a déjà `data.records:read`,
    `data.records:write` et l'accès à la base Formations). **Deploy**.
@@ -68,7 +68,7 @@ sur `main` redéploie le relais.
 
 ### Option B — coller le code dans le tableau de bord
 
-1. **Workers & Pages** → **Create** → **Create Worker** → nom `attestations-travailleurs` →
+1. **Workers & Pages** → **Create** → **Create Worker** → nom `attestations-wiki-travailleurs` →
    **Deploy**, puis **Edit code** : tout effacer, coller [`worker.js`](./worker.js), **Deploy**.
 2. **Settings → Variables and Secrets** → ajouter en **Text** : `AIRTABLE_BASE` =
    `appmq82YjvEUglYZU`, `AIRTABLE_TABLE` = `tblh6H7GOXZUwgXor`, `EMP_TABLE` =
@@ -88,7 +88,7 @@ npx wrangler deploy
 
 ### Brancher le site
 
-L'adresse attendue est `https://attestations-travailleurs.frankyray-21.workers.dev` (même
+L'adresse attendue est `https://attestations-wiki-travailleurs.frankyray-21.workers.dev` (même
 sous-domaine que `attestations-procedures`). Elle est déjà écrite dans
 `tools/travailleurs/pages.json` (`"relais"`). Si Cloudflare affiche une autre adresse, la
 corriger là, puis :
@@ -105,15 +105,15 @@ transmise »).
 
 ```bash
 # 1. le service répond
-curl https://attestations-travailleurs.frankyray-21.workers.dev
-# → {"ok":true,"service":"attestations-travailleurs","configure":true}
+curl https://attestations-wiki-travailleurs.frankyray-21.workers.dev
+# → {"ok":true,"service":"attestations-wiki-travailleurs","configure":true}
 
 # 2. la recherche de nom (remplacer « tr » par deux lettres d'un nom réel)
-curl -H 'Origin: https://frankyray21.github.io' 'https://attestations-travailleurs.frankyray-21.workers.dev/?q=tr'
+curl -H 'Origin: https://frankyray21.github.io' 'https://attestations-wiki-travailleurs.frankyray-21.workers.dev/?q=tr'
 # → {"ok":true,"resultats":[{"id":"rec…","nom":"…"}, …]}
 
 # 3. une attestation d'essai (à supprimer ensuite dans Airtable)
-curl -i -X POST https://attestations-travailleurs.frankyray-21.workers.dev \
+curl -i -X POST https://attestations-wiki-travailleurs.frankyray-21.workers.dev \
   -H 'Content-Type: application/json' -H 'Origin: https://frankyray21.github.io' \
   -d '{"nom":"Essai Branchement","adresse":"travailleurs/premieres-demarches.html","page":"Essai","section":"Après ta blessure","score":"5/5 — 100 %","pourcentage":100,"essais":1,"tempsLecture":"4 min 00 s","secondesLecture":240}'
 # → {"ok":true,"id":"rec…","relie":false,"mis_a_jour":false,"date":"…"} et une ligne « À relier »

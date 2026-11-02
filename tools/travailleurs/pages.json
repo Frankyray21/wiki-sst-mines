@@ -2,7 +2,7 @@
   "titre": "Espace travailleurs",
   "sousTitre": "Lectures pendant ton arrêt de travail",
   "seuil": 80,
-  "relais": "https://attestations-travailleurs.frankyray-21.workers.dev",
+  "relais": "https://attestations-wiki-travailleurs.frankyray-21.workers.dev",
   "sections": [
     {
       "id": "blessure",

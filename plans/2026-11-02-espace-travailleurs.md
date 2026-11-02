@@ -28,7 +28,7 @@ sujets pertinents pour le travailleur, vérifier s'ils existent, et créer les p
   confirmation) et s'imprime ou s'enregistre en PDF. Hors réseau, elle attend sur l'appareil et repart seule.
 - **Airtable** : table **Attestations Wiki SST travailleurs (web)** (`tblh6H7GOXZUwgXor`) créée dans la base
   **Formations**, champ **Employé** relié à la Liste employé. Colonnes et statuts : `tools/attestations-worker/README.md`.
-- **Cloudflare** : relais `attestations-travailleurs` (`tools/attestations-worker/`) — recherche de nom (8 noms
+- **Cloudflare** : relais `attestations-wiki-travailleurs` (`tools/attestations-worker/`) — recherche de nom (8 noms
   au plus) et écriture des attestations, rien d'autre ; employé vérifié par son nom ; une ligne par personne,
   page et jour.
 
