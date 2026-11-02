@@ -136,7 +136,8 @@ test('site publié : le bloc est sur chaque page issue d’une note, et nulle pa
   (function walk(d, rel = '') {
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {
       const r = rel ? rel + '/' + e.name : e.name;
-      if (e.isDirectory()) { if (r !== 'files') walk(path.join(d, e.name), r); continue; }
+      // le Wiki prévention des travailleurs (travailleurs/) est un espace à part, sans bloc d'avis
+      if (e.isDirectory()) { if (r !== 'files' && r !== 'travailleurs') walk(path.join(d, e.name), r); continue; }
       if (!e.name.endsWith('.html')) continue;
       const html = fs.readFileSync(path.join(d, e.name), 'utf8');
       const note = html.includes('<div class="page-meta">');
