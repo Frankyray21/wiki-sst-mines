@@ -3,6 +3,10 @@
 name = "attestations-wiki-travailleurs"
 main = "worker.js"
 compatibility_date = "2026-09-15"
+# Adresse publique en *.workers.dev : c'est elle que les pages de l'espace appellent. Pas d'adresses
+# de prévisualisation par version : une seule adresse à surveiller.
+workers_dev = true
+preview_urls = false
 
 [vars]
 AIRTABLE_BASE = "appmq82YjvEUglYZU"      # base « Formations »
