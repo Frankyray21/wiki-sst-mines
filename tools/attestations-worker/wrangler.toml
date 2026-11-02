@@ -1,6 +1,6 @@
 # Relais des attestations de lecture de l'Espace travailleurs vers Airtable.
 # Déploiement : voir README.md, à côté.
-name = "attestations-travailleurs"
+name = "attestations-wiki-travailleurs"
 main = "worker.js"
 compatibility_date = "2026-09-15"
 

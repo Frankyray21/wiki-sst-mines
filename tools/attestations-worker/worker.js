@@ -171,7 +171,7 @@ export default {
     if (requete.method === 'OPTIONS') return new Response(null, { status: 204, headers: entetes(origine) });
     // État du service : sans données, ouvert à tous (vérification avec curl ou un navigateur).
     if (requete.method === 'GET' && !url.searchParams.has('q')) {
-      return reponse({ ok: true, service: 'attestations-travailleurs', configure: Boolean(env.AIRTABLE_TOKEN && permises.length) }, 200, permise ? origine : '');
+      return reponse({ ok: true, service: 'attestations-wiki-travailleurs', configure: Boolean(env.AIRTABLE_TOKEN && permises.length) }, 200, permise ? origine : '');
     }
     if (!permises.length) return reponse({ erreur: 'relais non configuré : variable ORIGINES absente', definitif: true }, 503, origine);
     if (!permise) return reponse({ erreur: 'origine non permise', definitif: true }, 403, origine);

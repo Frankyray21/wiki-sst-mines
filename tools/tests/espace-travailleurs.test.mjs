@@ -162,7 +162,7 @@ test('une page de lecture embarque ses questions, son temps estimé et l’adres
   const donnees = JSON.parse(html.match(/<script type="application\/json" id="donnees-questions">([\s\S]*?)<\/script>/)[1]);
   assert.equal(donnees.slug, 'reclamation-cnesst');
   assert.ok(donnees.questions.length >= 5);
-  assert.match(html, /data-relais="https:\/\/attestations-travailleurs\.frankyray-21\.workers\.dev"/);
+  assert.match(html, /data-relais="https:\/\/attestations-wiki-travailleurs\.frankyray-21\.workers\.dev"/);
   assert.match(html, /data-seuil="80"/);
   assert.match(html, /data-section="Après ta blessure"/);
   const minutes = Number(html.match(/data-minutes="(\d+)"/)[1]);
