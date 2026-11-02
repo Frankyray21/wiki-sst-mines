@@ -1,0 +1,30 @@
+# Relais des attestations de lecture de l'Espace travailleurs vers Airtable.
+# Déploiement : voir README.md, à côté.
+name = "attestations-travailleurs"
+main = "worker.js"
+compatibility_date = "2026-09-15"
+
+[vars]
+AIRTABLE_BASE = "appmq82YjvEUglYZU"      # base « Formations »
+AIRTABLE_TABLE = "tblh6H7GOXZUwgXor"     # table « Attestations lecture travailleurs (web) »
+EMP_TABLE = "tbllKuNePDWZMr1cz"          # table « Liste employé (registre formation) »
+EMP_NAME_FIELD = "Name"                  # champ du nom complet dans la liste des employés
+ORIGINES = "https://frankyray21.github.io"
+SEUIL = "80"                             # note de passage des questions, en pour cent
+
+# Débit borné par adresse IP : l'adresse du relais est publique, et la base Formations est
+# partagée avec les tables d'attestations et de retours de quiz des autres sites.
+# Attestations : 10 par minute et par IP, bien au-delà d'une lecture normale.
+[[ratelimits]]
+name = "LIMITE"
+namespace_id = "1002"
+simple = { limit = 10, period = 60 }
+
+# Recherche de nom au fil de la frappe : 60 par minute et par IP.
+[[ratelimits]]
+name = "LIMITE_RECHERCHE"
+namespace_id = "1003"
+simple = { limit = 60, period = 60 }
+
+# AIRTABLE_TOKEN n'est pas ici : c'est un secret.
+#   npx wrangler secret put AIRTABLE_TOKEN
