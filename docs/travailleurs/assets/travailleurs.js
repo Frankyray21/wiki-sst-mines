@@ -97,6 +97,7 @@
     });
     doc.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && media.matches && sidebar.classList.contains('open')) { etat(false, true); ev.preventDefault(); } });
     doc.addEventListener('click', function (ev) { if (media.matches && sidebar.classList.contains('open') && !sidebar.contains(ev.target) && !burger.contains(ev.target)) etat(false, false); });
+    sidebar.addEventListener('focusout', function (ev) { if (media.matches && sidebar.classList.contains('open') && ev.relatedTarget && !sidebar.contains(ev.relatedTarget) && ev.relatedTarget !== burger) etat(false, false); });
     var sync = function () { etat(sidebar.classList.contains('open'), false); };
     if (media.addEventListener) media.addEventListener('change', sync); else window.addEventListener('resize', sync);
   })();
@@ -104,7 +105,10 @@
   // ---------- confort de lecture : taille du texte et mode lecture (mêmes réglages que le wiki) ----------
   (function () {
     var PALIERS = [0.85, 0.92, 1, 1.1, 1.2, 1.32, 1.45];
-    var moins = $$('[data-moins]'), plus = $$('[data-plus]'), lect = $$('[data-lecture]');
+    var moins = $$('button[data-moins]'), plus = $$('button[data-plus]'), lect = $$('button[data-lecture]');
+    // une page sans bouton « Lecture » (accueil, thème, recherche, mes lectures) ne se lit jamais en mode lecture :
+    // le réglage mémorisé attend l'article suivant
+    if (!lect.length) doc.documentElement.removeAttribute('data-lecture');
     if (!moins.length && !lect.length) return;
     function echelle() { try { var v = parseFloat(localStorage.getItem('echelle')); return PALIERS.indexOf(v) >= 0 ? v : 1; } catch (e) { return 1; } }
     function poser(v) {
@@ -159,26 +163,25 @@
 
   // ---------- recherche interne (index : assets/index-recherche.json) ----------
   var index = null, indexPromesse = null;
+  // sans réseau : les titres embarqués dans la page suffisent pour retrouver un article ; l'index complet est
+  // redemandé à la prochaine recherche, et au retour du réseau
+  var replis = WIKI.pages.map(function (p) { var k = WIKI.sections.filter(function (s) { return s.id === p.k; })[0]; return { s: p.s, t: p.t, r: '', k: k ? k.titre : '', m: '', x: '', _t: plat(p.t), _r: '', _x: '', titresSeulement: true }; });
   function chargerIndex() {
     if (index) return Promise.resolve(index);
     if (!indexPromesse) {
       indexPromesse = fetch('assets/index-recherche.json', { cache: 'no-cache', credentials: 'omit' }).then(function (r) { return r.json(); }).then(function (j) {
         index = j.map(function (e) { e._t = plat(e.t); e._r = plat(e.r); e._x = plat(e.x); return e; });
         return index;
-      }).catch(function () {
-        // sans réseau : les titres embarqués dans la page suffisent pour retrouver un article
-        indexPromesse = null;
-        index = WIKI.pages.map(function (p) { var k = WIKI.sections.filter(function (s) { return s.id === p.k; })[0]; return { s: p.s, t: p.t, r: '', k: k ? k.titre : '', m: '', x: '', _t: plat(p.t), _r: '', _x: '', titresSeulement: true }; });
-        return index;
-      });
+      }).catch(function () { indexPromesse = null; return replis; });
     }
     return indexPromesse;
   }
   function motsDe(q) { return plat(q).split(/[^a-z0-9]+/).filter(function (m) { return m.length >= 2; }).slice(0, 8); }
-  function chercher(q) {
+  function chercher(q, source) {
     var mots = motsDe(q);
-    if (!mots.length || !index) return [];
-    return index.map(function (e) {
+    source = source || index || replis;
+    if (!mots.length || !source) return [];
+    return source.map(function (e) {
       var score = 0, tous = true;
       mots.forEach(function (m) {
         var s = 0;
@@ -247,7 +250,7 @@
     champ.addEventListener('input', function () {
       var q = champ.value.trim(), demande = ++derniere;
       if (q.length < 2) { fermer(); return; }
-      chargerIndex().then(function () { if (demande !== derniere || champ.value.trim() !== q) return; montrer(chercher(q), q); });
+      chargerIndex().then(function (src) { if (demande !== derniere || champ.value.trim() !== q) return; montrer(chercher(q, src), q); });
     });
     champ.addEventListener('keydown', function (ev) {
       if (ev.key === 'ArrowDown') { ev.preventDefault(); if (boite.hidden && champ.value.trim().length >= 2) champ.dispatchEvent(new Event('input')); else selectionner(sel + 1); }
@@ -276,16 +279,16 @@
       zone.innerHTML = '';
       if (q.length < 2) { zone.appendChild(el('p', { 'class': 'page-sub', texte: 'Tape au moins deux lettres, puis « Chercher ».' })); return; }
       zone.appendChild(el('p', { 'class': 'page-sub', texte: 'Recherche en cours…' }));
-      chargerIndex().then(function () {
-        var resultats = chercher(q), mots = motsDe(q);
+      chargerIndex().then(function (src) {
+        var resultats = chercher(q, src), mots = motsDe(q);
         zone.innerHTML = '';
-        if (!index || !index.length) { zone.appendChild(el('p', { 'class': 'page-sub', texte: 'La recherche n’est pas disponible pour le moment. Les thèmes du menu restent accessibles.' })); return; }
+        if (!src || !src.length) { zone.appendChild(el('p', { 'class': 'page-sub', texte: 'La recherche n’est pas disponible pour le moment. Les thèmes du menu restent accessibles.' })); return; }
         if (!resultats.length) {
           zone.appendChild(el('h2', { texte: 'Aucun résultat pour « ' + q + ' »' }));
           zone.appendChild(el('p', { html: 'Essaie un autre mot, ou parcours les thèmes : ' + WIKI.sections.map(function (s) { return '<a href="section-' + s.id + '.html">' + esc(s.icone + ' ' + s.titre) + '</a>'; }).join(', ') + '.' }));
           return;
         }
-        zone.appendChild(el('h2', { texte: resultats.length + ' résultat' + (resultats.length > 1 ? 's' : '') + ' pour « ' + q + ' »' + (index[0].titresSeulement ? ' (titres seulement, sans réseau)' : '') }));
+        zone.appendChild(el('h2', { texte: resultats.length + ' résultat' + (resultats.length > 1 ? 's' : '') + ' pour « ' + q + ' »' + (src[0].titresSeulement ? ' (titres seulement, sans réseau)' : '') }));
         resultats.forEach(function (r) {
           zone.appendChild(el('div', { 'class': 'sr-item' }, [
             el('a', { 'class': 'sr-title', href: r.e.s + '.html', html: surligner(r.e.t, mots, 'b') }),
@@ -373,6 +376,7 @@
     ls.ecrire('file', file);
   }
   var enCours = false;
+  var surChangementEtat = [];   // la page de lecture ouverte relit son état quand la file a écrit
   function viderFile(apres) {
     var file = ls.lire('file') || [];
     if (enCours || !file.length || !RELAIS || navigator.onLine === false) return;
@@ -382,6 +386,7 @@
       if (i >= file.length) {
         ls.ecrire('file', restants.concat((ls.lire('file') || []).slice(file.length)));
         enCours = false;
+        if (restants.length < file.length) surChangementEtat.forEach(function (f) { f(); });
         if (apres) apres();
         return;
       }
@@ -394,7 +399,7 @@
           if (etat.certificat) etat.certificat.numero = r.id;
           ls.ecrire('etat:' + slug, etat);
         } else if (r.definitif) {
-          etat.enAttente = false; etat.refus = r.erreur;
+          etat.enAttente = false; etat.refus = r.erreur; delete etat.certificat;
           ls.ecrire('etat:' + slug, etat);
         } else restants.push(item);
         suivant(i + 1);
@@ -410,6 +415,7 @@
     if (etat.enAttente) return { texte: 'En attente d’envoi', long: 'Attestée' + date + ', en attente d’envoi', classe: 'et-badge-attente', rang: 3 };
     if (etat.reussi) return { texte: 'À attester', long: 'Questions réussies : tu peux attester', classe: 'et-badge-cours', rang: 2, encours: true };
     if (etat.commence) return { texte: 'Commencée', long: 'Commencée', classe: 'et-badge-cours', rang: 1, encours: true };
+    if (etat.refus) return { texte: 'Refusée', long: 'Attestation refusée : avertis ton conseiller en santé et sécurité', classe: 'et-badge-refus', rang: 0 };
     return { texte: 'À lire', long: 'À lire', classe: '', rang: 0 };
   }
   function rafraichirEtats() {
@@ -428,7 +434,7 @@
     $$('[data-etat-badge][data-slug]').forEach(function (b) {
       var e = etatDe(b.getAttribute('data-slug'));
       b.textContent = b.hasAttribute('data-etat-long') ? e.long : e.texte;
-      b.classList.remove('et-badge-ok', 'et-badge-cours', 'et-badge-attente');
+      b.classList.remove('et-badge-ok', 'et-badge-cours', 'et-badge-attente', 'et-badge-refus');
       if (e.classe) b.classList.add(e.classe);
       if (b.classList.contains('et-badge-discret')) b.hidden = !e.fait;
     });
@@ -436,6 +442,10 @@
     WIKI.pages.forEach(function (p) { if (etatDe(p.s).fait) faits[p.k] = (faits[p.k] || 0) + 1; });
     var total = 0; Object.keys(faits).forEach(function (k) { total += faits[k]; });
     $$('[data-progression-compte]').forEach(function (c) { var k = c.getAttribute('data-progression-compte'); c.textContent = k ? (faits[k] || 0) : total; });
+    $$('[data-progression-phrase]').forEach(function (c) {
+      var k = c.getAttribute('data-progression-phrase'), n = k ? (faits[k] || 0) : total, max = c.getAttribute('data-total');
+      c.innerHTML = '<strong' + (k ? '' : ' id="progressionCompte"') + '>' + n + '</strong> lecture' + (n > 1 ? 's' : '') + ' attestée' + (n > 1 ? 's' : '') + ' sur ' + esc(max);
+    });
     $$('[data-progression-barre]').forEach(function (b) {
       var k = b.getAttribute('data-progression-barre');
       var n = k ? (faits[k] || 0) : total;
@@ -476,6 +486,7 @@
     var etat = ls.lire('etat:' + slug) || {};
     if (!etat.commence) { etat.commence = jour(); ls.ecrire('etat:' + slug, etat); }
     var sauverEtat = function () { ls.ecrire('etat:' + slug, etat); rafraichirEtats(); };
+    surChangementEtat.push(function () { etat = ls.lire('etat:' + slug) || etat; montrerBandeau(); });
 
     // -- chronomètre : temps ACTIF (page visible, lecteur actif depuis moins de 3 minutes) --
     var temps = ls.lire('temps:' + slug) || { lecture: 0, questions: 0 };
@@ -528,6 +539,13 @@
 
     var bandeau = $('#etatPage');
     function montrerBandeau() {
+      if (!etat.certificat && etat.refus) {
+        bandeau.hidden = false;
+        bandeau.className = 'et-etat-page et-refus';
+        bandeau.innerHTML = '';
+        bandeau.appendChild(el('p', { texte: 'Ton attestation a été refusée par le registre (' + etat.refus + '). Avertis ton conseiller en santé et sécurité ; tu peux aussi refaire les questions et attester de nouveau.' }));
+        return;
+      }
       if (!etat.certificat) { bandeau.hidden = true; return; }
       bandeau.hidden = false;
       bandeau.className = 'et-etat-page ' + (etat.atteste ? 'et-ok' : 'et-attente');
@@ -548,7 +566,7 @@
     var CONSIGNES = {
       choix: 'Choisis une seule réponse.', multi: 'Coche toutes les réponses vraies : il peut y en avoir une ou plusieurs.',
       vf: 'Cette affirmation est-elle vraie ou fausse ?', ordre: 'Avec les flèches, place les étapes dans le bon ordre, de la première à la dernière.',
-      court: 'Réponds en quelques phrases, avec tes mots (au moins 15 caractères). Ta réponse sera lue par un conseiller.',
+      court: 'Réponds en quelques phrases, avec tes mots (au moins 15 caractères). Ta réponse n’est pas comptée dans ton résultat : elle sera lue par ton conseiller en santé et sécurité.',
     };
 
     function construireQuestions() {
@@ -589,13 +607,15 @@
           var ordre = q.etapes.map(function (_, k) { return k; });
           var essai = 0;
           do { ordre = melanger(ordre); } while (++essai < 20 && ordre.every(function (v, k) { return v === k; }));
-          var ol = el('ol', { 'class': 'et-ordre', 'data-ordre': ordre.join(',') });
+          var ol = el('ol', { 'class': 'et-ordre', 'data-ordre': ordre.join(','), 'aria-label': 'Étapes à remettre en ordre' });
+          var annonceOrdre = el('span', { role: 'status', 'aria-live': 'polite', 'aria-atomic': 'true', style: 'position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0' });
           var dessiner = function (focusSur) {
             var actuel = ol.getAttribute('data-ordre').split(',').map(Number);
             ol.innerHTML = '';
+            if (focusSur) annonceOrdre.textContent = '« ' + q.etapes[focusSur.k] + ' » est maintenant à la position ' + (actuel.indexOf(focusSur.k) + 1) + ' sur ' + actuel.length + '.';
             actuel.forEach(function (k, pos) {
-              var haut = el('button', { type: 'button', 'class': 'et-fleche', 'aria-label': 'Monter : ' + q.etapes[k], texte: '↑', disabled: pos === 0 });
-              var bas = el('button', { type: 'button', 'class': 'et-fleche', 'aria-label': 'Descendre : ' + q.etapes[k], texte: '↓', disabled: pos === actuel.length - 1 });
+              var haut = el('button', { type: 'button', 'class': 'et-fleche', 'aria-label': 'Monter l’étape ' + (pos + 1) + ' sur ' + actuel.length + ' : ' + q.etapes[k], texte: '↑', disabled: pos === 0 });
+              var bas = el('button', { type: 'button', 'class': 'et-fleche', 'aria-label': 'Descendre l’étape ' + (pos + 1) + ' sur ' + actuel.length + ' : ' + q.etapes[k], texte: '↓', disabled: pos === actuel.length - 1 });
               var bouger = function (dec, quel) {
                 return function () {
                   if (ol.hasAttribute('data-fige')) return;
@@ -613,6 +633,7 @@
           };
           dessiner();
           fs.appendChild(ol);
+          fs.appendChild(annonceOrdre);
         } else if (q.type === 'court') {
           var ta = el('textarea', { name: nom, rows: 4, maxlength: 1500, 'aria-label': 'Ta réponse à la question ' + (i + 1) });
           ta.value = textesCourts[i] || '';
@@ -691,7 +712,7 @@
           nbCourts++;
           developpement.push('Q' + (i + 1) + ' : ' + q.question + '\nR : ' + r);
           fs.classList.add('et-q-notee');
-          retour.appendChild(el('p', { 'class': 'et-verdict', texte: '✎ Réponse notée : elle sera transmise avec ton attestation et lue par un conseiller.' }));
+          retour.appendChild(el('p', { 'class': 'et-verdict', texte: '✎ Réponse écrite enregistrée : elle sera transmise avec ton attestation et lue par ton conseiller en santé et sécurité.' }));
           retour.appendChild(el('p', { texte: 'Une bonne réponse contient :' }));
           retour.appendChild(el('ul', {}, q.attendu.map(function (a) { return el('li', { texte: a }); })));
         } else {
@@ -720,7 +741,12 @@
       } else {
         bilan.appendChild(el('p', { texte: 'Pas encore ' + seuil + ' %. Relis les explications et les passages de la page, puis recommence quand tu veux : rien n’est compté contre toi.' }));
         var encore = el('button', { type: 'button', 'class': 'et-bouton', texte: 'Recommencer les questions' });
-        encore.addEventListener('click', function () { construireQuestions(); zoneQuestions.scrollIntoView({ behavior: 'smooth' }); });
+        encore.addEventListener('click', function () {
+          construireQuestions();
+          var premiere = $('.et-q', zone);
+          if (premiere) { premiere.setAttribute('tabindex', '-1'); premiere.focus({ preventScroll: true }); }
+          zoneQuestions.scrollIntoView({ behavior: 'smooth' });
+        });
         bilan.appendChild(encore);
       }
       sauverEtat();
@@ -744,14 +770,14 @@
       [['Page', titre], ['Temps de lecture de la page', duree(res.temps.lecture)], ['Lecture estimée', '≈ ' + minutes + ' min'],
         questions.length ? ['Temps sur les questions', duree(res.temps.questions)] : null,
         res.score ? ['Résultat', res.score] : null, res.essais ? ['Essais', String(res.essais)] : null,
-        res.nbCourts ? ['Réponses écrites', res.nbCourts + ' (lues par un conseiller)'] : null]
+        res.nbCourts ? ['Réponses écrites', res.nbCourts + ' (lues par ton conseiller en santé et sécurité)'] : null]
         .filter(Boolean).forEach(function (l) { recap.appendChild(el('dt', { texte: l[0] })); recap.appendChild(el('dd', { texte: l[1] })); });
       zoneAtt.appendChild(recap);
 
       var form = el('form', { 'class': 'et-form-att', autocomplete: 'off', novalidate: true });
       var choisi = null;
       var champ = el('input', { type: 'text', id: 'etNom', 'class': 'et-champ', role: 'combobox', 'aria-autocomplete': 'list', 'aria-expanded': 'false', 'aria-controls': 'etNoms', maxlength: 80, autocomplete: 'off', spellcheck: 'false', placeholder: 'Tape les premières lettres de ton nom' });
-      var liste = el('ul', { id: 'etNoms', 'class': 'et-noms', role: 'listbox', hidden: true });
+      var liste = el('ul', { id: 'etNoms', 'class': 'et-noms', role: 'listbox', 'aria-label': 'Noms trouvés dans la liste des employés', hidden: true });
       var etatNom = el('p', { 'class': 'et-etat-nom', 'aria-live': 'polite' });
       var hors = el('input', { type: 'checkbox', id: 'etHorsListe' });
       var engage = el('input', { type: 'checkbox', id: 'etEngage' });
@@ -760,7 +786,7 @@
       form.appendChild(el('label', { 'for': 'etNom', 'class': 'et-libelle', texte: 'Ton nom, choisi dans la liste des employés' }));
       form.appendChild(el('div', { 'class': 'et-combo' }, [champ, liste]));
       form.appendChild(etatNom);
-      form.appendChild(el('label', { 'class': 'et-case', 'for': 'etHorsListe' }, [hors, el('span', { texte: 'Mon nom n’est pas dans la liste : je l’écris au complet (prénom et nom). Le service de santé et de sécurité le reliera à mon dossier.' })]));
+      form.appendChild(el('label', { 'class': 'et-case', 'for': 'etHorsListe' }, [hors, el('span', { texte: 'Mon nom n’est pas dans la liste : je l’écris au complet (prénom et nom). Mon conseiller en santé et sécurité le reliera à ma fiche du registre.' })]));
       form.appendChild(el('label', { 'class': 'et-case', 'for': 'etEngage' }, [engage, el('span', { texte: 'J’atteste avoir lu cette page et avoir répondu moi-même aux questions.' })]));
       form.appendChild(el('p', { 'class': 'et-note', texte: 'En envoyant, ton nom, la page lue, ton temps de lecture, ton résultat et tes réponses écrites sont enregistrés au registre de formation de ton employeur.' }));
       form.appendChild(bouton);
@@ -830,6 +856,9 @@
         valide();
       });
       engage.addEventListener('change', valide);
+      var quitte = function (e) { if (!e.relatedTarget || (e.relatedTarget !== champ && !liste.contains(e.relatedTarget))) fermer(); };
+      champ.addEventListener('focusout', quitte);
+      liste.addEventListener('focusout', quitte);
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         if (!valide()) { message.textContent = choisi || hors.checked ? 'Coche la case « J’atteste avoir lu cette page… ».' : 'Choisis ton nom dans la liste (ou coche « Mon nom n’est pas dans la liste »).'; return; }
@@ -884,11 +913,14 @@
         el('p', { 'class': 'et-cert-texte', html: 'Je, <strong></strong>, atteste avoir lu la page « <em></em> » et avoir répondu moi-même aux questions de compréhension.' }),
         table,
         c.numero ? null : el('p', { 'class': 'et-cert-attente', texte: 'Cette attestation n’est pas encore transmise au registre. Elle repartira toute seule à ta prochaine visite avec du réseau.' }),
-        c.horsListe ? el('p', { 'class': 'et-cert-note', texte: 'Nom écrit à la main : le service de santé et de sécurité le reliera à ton dossier.' }) : null,
+        c.horsListe ? el('p', { 'class': 'et-cert-note', texte: 'Nom tapé hors de la liste : ton conseiller en santé et sécurité le reliera à ta fiche du registre.' }) : null,
       ].filter(Boolean));
       $('strong', cert).textContent = c.nom;
       $('em', cert).textContent = c.titre;
+      cert.setAttribute('tabindex', '-1');
+      cert.appendChild(el('p', { role: 'status', 'class': 'et-cert-note', texte: c.numero ? 'Attestation transmise au registre, n° de confirmation ' + c.numero + '.' : 'Attestation enregistrée sur cet appareil, en attente d’envoi.' }));
       zoneAtt.appendChild(cert);
+      cert.focus({ preventScroll: true });
       var imprimer = el('button', { type: 'button', 'class': 'et-bouton', texte: 'Imprimer ou enregistrer en PDF' });
       imprimer.addEventListener('click', function () {
         corps.classList.add('et-imprime-certificat');

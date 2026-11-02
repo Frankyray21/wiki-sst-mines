@@ -36,6 +36,24 @@ surtout prévention ». Décisions :
 - **Airtable** : les étiquettes de section deviennent « Les bases », « Risques et réflexes », « Prendre soin de toi »,
   « Retour au travail » ; le relais les accepte (et garde les anciennes) ; les options se créent par `typecast`.
 
+### Revue contradictoire (le soir, après la refonte)
+
+Quatre relecteurs (fermeture, formulations, accessibilité et téléphone, code), puis un contradicteur par constat :
+31 constats, 17 retenus, tous corrigés. Les plus importants : deux adresses de pages qui disaient la situation du
+lecteur (`prevenir-une-nouvelle-blessure`, `sequelles-et-readaptation` → `postures-manutention-vibrations`,
+`readaptation-et-emploi-convenable`, avec un test sur les adresses) ; la description des pages (aperçus de lien,
+favoris) tirée du résumé, qui parlait d'arrêt, de blessure et d'indemnité (désormais le sous-titre neutre du wiki) ;
+le sélecteur du bouton « Lecture » qui attrapait `<html data-lecture>` et faisait basculer le mode à chaque clic ;
+le mode Lecture mémorisé qui cachait le menu des pages sans bouton de sortie et rendait le burger inopérant sur
+téléphone ; la file hors ligne qui laissait la page ouverte avec un état périmé (bandeau « pas encore transmise »
+après un envoi réussi) et gardait un certificat après un refus définitif ; le lien d'évitement invisible sous
+l'en-tête ; le focus perdu après l'attestation et après « Recommencer » ; la mise en ordre muette pour un lecteur
+d'écran ; la combobox du nom laissée ouverte ; l'index de recherche de repli définitif après une coupure ;
+« Sources » absent du sommaire ; l'id `contenu` en double avec un titre importé ; les questions imprimées avec
+l'article ; le vocabulaire (« ton conseiller en santé et sécurité », « réponse écrite », pluriels calculés).
+Écartés après vérification : « Réadaptation et emploi convenable » jugé jargon (terme de la loi, assumé), le message
+« tu as lu vite » (voulu par Frank), les variantes de marque, l'espace insécable (convention du wiki).
+
 ## Ce qui a été fait (première version du jour)
 
 - **`docs/travailleurs/`** : accueil et 29 lectures, généré par `tools/espace_travailleurs.mjs` (appelé par

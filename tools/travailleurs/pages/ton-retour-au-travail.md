@@ -40,7 +40,7 @@ Ton IRR prend fin quand tu redeviens capable d'exercer ton emploi (LATMP, art. 5
 
 ## Si tu ne peux pas reprendre ton emploi
 
-Si tu deviens capable d'exercer un emploi convenable, tu as le droit d'occuper le premier emploi convenable qui devient disponible dans un établissement de ton employeur, selon les règles d'ancienneté de ta convention collective (LATMP, art. 239). L'emploi convenable est expliqué dans [si ta blessure laisse des séquelles](sequelles-et-readaptation.html).
+Si tu deviens capable d'exercer un emploi convenable, tu as le droit d'occuper le premier emploi convenable qui devient disponible dans un établissement de ton employeur, selon les règles d'ancienneté de ta convention collective (LATMP, art. 239). L'emploi convenable est expliqué dans [si ta blessure laisse des séquelles](readaptation-et-emploi-convenable.html).
 
 ## Le retour progressif
 

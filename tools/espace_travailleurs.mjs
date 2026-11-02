@@ -315,7 +315,7 @@ ${sectionCourante.pages.map(p => li(`${p.slug}.html`, `${echapper(p.titre)} <spa
   <div class="nav-group"><div class="nav-title">Navigation</div><ul>
 ${li('index.html', '🏠 Accueil', courant === 'index.html')}
     <li id="reprendre" hidden><a href="#">▶ Reprendre</a></li>
-${li('parcours.html', '📖 Mes lectures', courant === 'parcours.html')}
+${li('parcours.html', '📚 Mes lectures', courant === 'parcours.html')}
 ${li('recherche.html', '🔎 Recherche', courant === 'recherche.html')}
 ${li('index-alphabetique.html', '🔤 Index alphabétique', courant === 'index-alphabetique.html')}
     <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
@@ -339,11 +339,11 @@ function pied(conf, version, donnees) {
 function page(conf, { titre, description, courant, corps, classeBody = '', attributs = '', sectionCourante = null }, sections, version, donnees) {
   return `${tete(titre, version, description)}
 <body class="espace-travailleurs ${classeBody}"${attributs}>
-<a class="et-sauter" href="#contenu">Aller au contenu</a>
+<a class="et-sauter" href="#principal">Aller au contenu</a>
 ${enteteSite(conf)}
 <div class="layout">
 ${barreLaterale(conf, sections, courant, sectionCourante)}
-<main class="content" id="contenu">
+<main class="content" id="principal">
 ${corps}
 </main>
 </div>
@@ -353,7 +353,7 @@ ${pied(conf, version, donnees)}`;
 function pageLecture(conf, p, sections, version, donnees) {
   const s = p.section;
   const n = p.questions.length;
-  const sommaire = [...sommaireDe(p.corps), { niveau: 2, id: 'questions', titre: n ? 'Questions sur ta lecture' : 'Ta lecture' }];
+  const sommaire = [...sommaireDe(p.corps), ...(p.sources.length ? [{ niveau: 2, id: 'sources', titre: 'Sources' }] : []), { niveau: 2, id: 'questions', titre: n ? 'Questions sur ta lecture' : 'Ta lecture' }];
   const toc = `<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">${pluriel(sommaire.length, 'section')}</span> <button type="button" class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul>${sommaire.map(e => `<li class="toc-l${e.niveau}"><a href="#${e.id}">${echapper(e.titre)}</a></li>`).join('')}</ul></nav>`;
   const infobox = `<aside class="infobox"><div class="infobox-title">${s.icone} ${echapper(p.titre)}</div><table>
 <tr><th>Ta lecture</th><td id="infoboxEtat" data-etat-badge data-etat-long data-slug="${p.slug}">À lire</td></tr>
@@ -393,7 +393,7 @@ ${liees}
 <div class="page-meta"><span>${p.revision ? `Révision déclarée : ${echapper(p.revision)} · ` : ''}Lecture estimée ≈ ${p.minutes} min · ${p.mots} mots</span><span class="accueil-marque">${echapper(marqueCourte(conf))} — ${echapper(conf.nom)}</span></div>
 <script type="application/json" id="donnees-questions">${JSON.stringify({ slug: p.slug, questions: p.questions }).replace(/</g, '\\u003c')}</script>`;
   return page(conf, {
-    titre: `${p.titre} — ${conf.nom}`, description: p.resume || texteDe(conf.sousTitre), courant: `${p.slug}.html`, corps, classeBody: 'et-lecture', sectionCourante: s,
+    titre: `${p.titre} — ${conf.nom}`, description: texteDe(conf.sousTitre), courant: `${p.slug}.html`, corps, classeBody: 'et-lecture', sectionCourante: s,
     attributs: ` data-slug="${p.slug}" data-titre="${echapper(p.titre)}" data-section="${echapper(s.etiquette)}" data-mots="${p.mots}" data-minutes="${p.minutes}" data-revision="${echapper(p.revision)}" data-relais="${echapper(conf.relais || '')}" data-seuil="${conf.seuil}"`,
   }, sections, version, donnees);
 }
@@ -410,7 +410,7 @@ function pageSection(conf, s, sections, version, donnees) {
 </header>
 <div class="page-body">
 <p>${echapper(s.chapeau)}</p>
-<p class="et-progression-texte" aria-live="polite"><strong data-progression-compte="${s.id}">0</strong> lecture(s) attestée(s) sur ${s.pages.length} dans ce thème.</p>
+<p class="et-progression-texte" aria-live="polite"><span data-progression-phrase="${s.id}" data-total="${s.pages.length}"><strong>0</strong> lecture attestée sur ${s.pages.length}</span> dans ce thème.</p>
 <h2 id="articles">Articles de ce thème</h2>
 ${listeNotions(s.pages)}
 </div>
@@ -441,8 +441,8 @@ function pageAccueil(conf, sections, pages, version, donnees, date) {
     html: `<nav class="accueil-themes-nav" aria-label="Aller à un thème">${themes.map(s => `<a href="#theme-${s.id}">${echapper(s.titre)}</a>`).join('')}</nav><div class="accueil-groupes accueil-themes">${volets}</div>`,
   });
   const lectures = boite({
-    id: 'mes-lectures', titre: 'Mes lectures', picto: 'mdiBookOpenVariant',
-    html: `<p aria-live="polite"><strong id="progressionCompte" data-progression-compte="">0</strong> lecture(s) attestée(s) sur ${total}.</p><p id="reprendreAccueil" hidden>Reprendre : <a href="#"></a></p><p><a href="parcours.html">Voir mes lectures et mes attestations →</a></p>`,
+    id: 'mes-lectures', titre: 'Mes lectures', picto: 'mdiFormatListChecks',
+    html: `<p aria-live="polite"><span data-progression-phrase="" data-total="${total}"><strong id="progressionCompte">0</strong> lecture attestée sur ${total}</span>.</p><p id="reprendreAccueil" hidden>Reprendre : <a href="#"></a></p><p><a href="parcours.html">Voir mes lectures et mes attestations →</a></p>`,
   });
   const aide = boite({
     id: 'besoin-de-parler', titre: 'Besoin de parler ?', picto: 'mdiPhone',
@@ -455,7 +455,7 @@ function pageAccueil(conf, sections, pages, version, donnees, date) {
 <li><strong>Réponds aux questions</strong> en bas de la page : choix de réponse, vrai ou faux, réponses à cocher, étapes à remettre en ordre, et une réponse courte à écrire. Il faut ${conf.seuil} % de bonnes réponses aux questions corrigées ; tu peux recommencer autant de fois que tu veux.</li>
 <li><strong>Atteste ta lecture</strong> : choisis ton nom dans la liste des employés et envoie. Tu obtiens une attestation à imprimer ou à enregistrer en PDF.</li>
 </ol>
-<p><strong>Ce qui est envoyé :</strong> ton nom, la page lue, ton temps de lecture, ton résultat et tes réponses écrites, au registre de formation de ton employeur, consulté par le service de santé et de sécurité. Rien ne part avant que tu cliques sur « Attester ma lecture ». Tes lectures en cours restent sur cet appareil.</p>`,
+<p><strong>Ce qui est envoyé :</strong> ton nom, la page lue, ton temps de lecture, ton résultat et ta réponse écrite, au registre de formation de ton employeur, consulté par ton conseiller en santé et sécurité. Rien ne part avant que tu cliques sur « Attester ma lecture ». Tes lectures en cours restent sur cet appareil.</p>`,
   });
   const corps = `${filAriane([['index.html', 'Accueil']])}
 <div class="accueil-banniere">
@@ -511,7 +511,7 @@ function pageParcours(conf, sections, pages, version, donnees) {
 <div class="page-sub">Ce que tu as lu et attesté, page par page. Ces repères sont gardés sur cet appareil seulement.</div>
 </header>
 <div class="page-body">
-<p class="et-progression-texte" aria-live="polite"><strong id="progressionCompte" data-progression-compte="">0</strong> lecture(s) attestée(s) sur ${pages.length}.</p>
+<p class="et-progression-texte" aria-live="polite"><span data-progression-phrase="" data-total="${pages.length}"><strong id="progressionCompte">0</strong> lecture attestée sur ${pages.length}</span>.</p>
 ${sections.map(s => `<h2 id="${s.id}">${s.icone} ${echapper(s.titre)}</h2>\n${listeNotions(s.pages)}`).join('\n')}
 <h2 id="attestations">Mes attestations</h2>
 <div id="listeAttestations"><p>Aucune attestation sur cet appareil pour l'instant.</p></div>

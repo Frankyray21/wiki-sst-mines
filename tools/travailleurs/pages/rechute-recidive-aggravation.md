@@ -58,7 +58,7 @@ En cas de retard, la CNESST prolonge le délai si tu démontres un motif raisonn
 
 Si ta rechute est acceptée, le revenu brut qui sert à calculer ton indemnité est le plus élevé des deux : celui de l'emploi que tu occupes au moment de la rechute, ou celui qui a servi au calcul de ton indemnité précédente. Si la rechute arrive plus d'un an après le début de ta première incapacité, cet ancien revenu est revalorisé (LATMP, art. 70).
 
-Si ta rechute te laisse une nouvelle atteinte permanente, tu as droit à une nouvelle indemnité pour préjudice corporel, selon le pourcentage de cette nouvelle atteinte (LATMP, art. 89). Voir [Séquelles et réadaptation](sequelles-et-readaptation.html).
+Si ta rechute te laisse une nouvelle atteinte permanente, tu as droit à une nouvelle indemnité pour préjudice corporel, selon le pourcentage de cette nouvelle atteinte (LATMP, art. 89). Voir [Séquelles et réadaptation](readaptation-et-emploi-convenable.html).
 
 ## Une blessure pendant tes soins
 

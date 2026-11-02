@@ -46,7 +46,7 @@ Les indemnités versées en vertu de la loi ne sont pas imposables (LATMP, art. 
 
 ## Jusqu'à quand ?
 
-Tant que ta lésion n'est pas consolidée, tu es présumé incapable d'exercer ton emploi (LATMP, art. 46). Après la consolidation, l'IRR continue tant que tu as besoin de réadaptation pour redevenir capable d'exercer ton emploi ou, sinon, un emploi convenable (LATMP, art. 47). Voir [Séquelles et réadaptation](sequelles-et-readaptation.html).
+Tant que ta lésion n'est pas consolidée, tu es présumé incapable d'exercer ton emploi (LATMP, art. 46). Après la consolidation, l'IRR continue tant que tu as besoin de réadaptation pour redevenir capable d'exercer ton emploi ou, sinon, un emploi convenable (LATMP, art. 47). Voir [Séquelles et réadaptation](readaptation-et-emploi-convenable.html).
 
 Le droit à l'IRR s'éteint au premier de ces événements (LATMP, art. 57) : quand tu redeviens capable d'exercer ton emploi, sous réserve d'une règle particulière (LATMP, art. 48) ; au décès ; à ton 68e anniversaire, ou quatre ans après le début de ton arrêt si tu avais au moins 64 ans au moment de ta blessure.
 
