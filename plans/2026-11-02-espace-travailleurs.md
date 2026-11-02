@@ -117,7 +117,64 @@ dans la copie remise aux travailleurs (`tools/travailleurs/corrections.json`, ch
 l'article ; une correction qui ne s'applique plus arrête la construction) ; **elles restent à corriger dans le
 vault**, sinon le wiki garde l'erreur.
 
-<!-- ERREURS -->
+### Pages recopiées dans l'espace : corrigées dans la copie (37 corrections), à reporter dans le vault
+
+| Page | Erreurs corrigées dans l'espace (fondement) |
+| --- | --- |
+| Droit de refus | « intégrité physique » sans « ou psychique » (LSST, art. 12) ; avis, convocation du représentant et inspecteur rattachés aux mauvais articles (15, 16, 18-19 et non 14, 15, 16) ; décision de l'inspecteur « liant les parties » alors qu'elle se révise et se conteste (art. 20) ; recours en cas de sanction : plainte à la CNESST dans les 30 jours (art. 227), puis Tribunal (art. 228), avec l'exception de l'exercice abusif (art. 30, al. 2) |
+| Démarrage rapide, travailleur (Droit du travail) | délai de la maladie professionnelle : à partir du moment où il est porté à la connaissance du travailleur qu'il en est atteint (LATMP, art. 272) |
+| Processus de réclamation CNESST | « IRR rétablies pendant la contestation » de l'assignation (faux : art. 179, al. 4 et 142) ; phrase abîmée « pendant la Droit à la réadaptation » ; « MQAC » au lieu du professionnel de la santé qui a charge (art. 179) ; remise de l'attestation à l'employeur : art. 267 |
+| IRR | « art. 44 (remplacé) » ×3 : l'article est en vigueur ; rechute : revenu brut le plus élevé des deux (art. 70) |
+| Droits et recours du travailleur | art. 30 LSST classé sous « Retrait préventif » ; « art. 44, indemnité décès (remplacé) » ; art. 25 et 27 classés sous « Présomption » ; « aucune sanction » sans l'exception de l'art. 30, al. 2 |
+| Démarrage rapide - Travailleur (Recueil) | droit à l'information et à la formation : art. 10 et 51, 9° (et non 49 et 40) ; retrait préventif de la travailleuse enceinte : LSST, art. 40 et 46 (et non LATMP, art. 40) ; « art. 51.11 » → art. 51, 11° ; obligation manquante « prendre connaissance du programme de prévention » (art. 49, 1°) ; recours au Tribunal sans l'étape de la révision dans les 30 jours (LATMP, art. 358 et 359) ; soins « chez ton médecin de famille » → professionnel de la santé de ton choix (art. 192) |
+| Où appeler quand ça ne va pas | urgence : « 9-1-1 ou 8-1-1 » alors que le tableau réserve le 8-1-1 aux cas sans danger immédiat (même page) |
+| PAE | le PAE présenté comme ligne de crise, contredit par « Pas un service d'urgence » (même page) |
+| Équipements de protection | **barbe : « ou APR autonome »**, dont le masque complet n'est pas étanche sur une barbe (prudence) ; **P100 contre la fumée diesel** sans dire qu'il n'arrête pas les gaz (prudence) ; quatre passages abîmés par des titres de liens ; une phrase coupée retirée |
+| Le risque électrique | **« vérifie par essai de démarrage »**, que la page Cadenassage dit insuffisant (prudence, RSST art. 201) ; « basse tension » → très basse tension |
+| Signaler un presqu'accident | « Le comit » complété (même page) |
+
+Restent dans ces pages, non corrigés : « validation MQAC » (tableau de Réclamation CNESST) ; « ajuster un Protection
+respiratoire (APR) (masque) » (Équipements de protection) ; la mention des zones d'approche « interdite » de la
+CSA Z462 (Risque électrique, norme absente du dépôt) ; le « Voir aussi » de Cadenassage, qui renvoie à des articles
+du RSST mal numérotés (188.x, 256), retiré de la copie mais présent dans le wiki ; le lien « art-309-RSST » de
+Presqu'accident (l'art. 309 porte sur le sauvetage en espace clos).
+
+### Pages techniques du wiki (hors de l'espace) : à corriger dans le vault
+
+- **Recours au TAT** et **TAT** : délai de « 45 jours » ; la loi dit 60 jours (LATMP, art. 359, 359.1). « Conciliation
+  (art. 358.3) » : l'article porte sur la révision sur dossier. « Emploi convenable (art. 204) » : l'art. 204 porte
+  sur l'examen médical exigé par la CNESST.
+- **Organismes du régime SST** : Tribunal limité aux questions « non médicales », alors que l'art. 360 permet de
+  le saisir directement après un avis du BEM.
+- **Évaluation médicale et BEM**, **BEM**, **Contestation au BEM** : le rapport du médecin ne lie que la CNESST
+  (art. 224) ; le BEM est saisi par la CNESST (212.1, 217), pas par l'employeur « via art. 216 » ; le rapport
+  complémentaire est une faculté du médecin du travailleur (205.1) ; le délai de 30 jours est celui de l'employeur
+  pour transmettre son rapport (212) ; après un avis du BEM, révision ou Tribunal au choix (360) ; contradiction
+  interne sur la révision.
+- **MQAC** : page tronquée, tableau vide. **Consolidation** : ébauche sans accents ; l'art. 2 ne dit pas qui la
+  détermine (c'est le rapport final, art. 203).
+- **Démarche en cas de lésion** : « art. 44, indemnité décès (remplacé) » ; l'employeur ne « saisit » pas le BEM ;
+  la liste des sujets médicaux oublie les soins et traitements. **Notions de la LATMP** : renversement de la
+  présomption rattaché à l'art. 29.
+- **Assignation temporaire** et **Programme de retour au travail et assignation** : « médecin qui a charge » au lieu
+  du professionnel de la santé ; « salaire complet » sans le cas des heures réduites (art. 180, al. 2 et 5) ;
+  « art. 53 » (il vise le travailleur de 60 ans et plus) ; « art. 234 à 247 » (244 à 246 abrogés) ; « PRIT »
+  (la loi dit plan individualisé de réadaptation, art. 146).
+- **Droit à la réadaptation** : délai de retour compté selon la « taille de l'entreprise » (la loi : travailleurs de
+  l'établissement, art. 240) ; « art. 148 » pour les accommodements ; « IRR rétablies pendant la contestation » ;
+  « barème des dommages corporels » (préjudice corporel, art. 83-84) ; art. 145 présenté comme un droit.
+- **Emploi convenable** : définition confondue avec celle de l'emploi équivalent (art. 2) ; « révision au TAT ».
+- **Comité SST et représentant en SST**, **Comité SST**, **Représentant à la prévention** : comité « obligatoire à 20
+  travailleurs et plus » (art. 68 : « peut être formé » au-delà de 20) ; « au moins la moitié » rattaché à l'art. 68
+  (c'est l'art. 71) ; « minimum 4 membres » introuvable ; représentants « élus » (art. 72) ; représentant
+  « obligatoire dès 10 travailleurs » (aucun seuil aux art. 87-88) ; renvois aux art. 78 et 98 erronés.
+- **Lignes d'aide et ressources de soutien** et **Où appeler** : numéros différents pour Tel-Aide et Hommes Québec.
+- **Travail répétitif** : « ISO 11128-3 » → ISO 11228-3. **Évaluation des risques de TMS** : seuils de l'OCRA
+  Checklist douteux. **Vibrations** : « VDV obligatoire si le facteur crête dépasse 9 », à vérifier.
+- **Noms de fichiers trompeurs** (texte exact) : `art-253-latmp-registre-accidents-employeur`,
+  `art-30-lsst-retrait-preventif`, `art-227-lsst-penalites-infractions`, `art-68-lsst-programme-sante-specifique`,
+  `art-358-latmp-audition-tat`, `art-352-latmp-competence-tat`, `art-40-latmp-indemnite-deces`.
+
 
 ## À faire valider par un conseiller
 

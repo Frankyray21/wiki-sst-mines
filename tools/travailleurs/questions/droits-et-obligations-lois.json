@@ -19,7 +19,11 @@
         "Collaborer avec le comité SST et le représentant à la prévention",
         "Choisir seul les mesures de prévention que tu suis"
       ],
-      "reponses": [0, 2, 3],
+      "reponses": [
+        0,
+        2,
+        3
+      ],
       "explication": "La page liste notamment : « Prendre les mesures nécessaires pour protéger sa santé et celle d'autrui. », « Se soumettre aux examens de santé applicables. » et « Collaborer avec le comité SST et le représentant à la prévention. » — Pour une blessure, c'est « Avise immédiatement ton superviseur. », et tu dois « Participer aux mesures de prévention. »"
     },
     {
@@ -31,13 +35,18 @@
         "Consulter ton médecin",
         "Remplir le formulaire de réclamation CNESST"
       ],
-      "explication": "La page donne cet ordre : « Avise immédiatement ton superviseur. », puis « Reçois les soins sur place puis chez ton médecin de famille. », puis « Remplis le formulaire CNESST dans les 6 mois ». — Le formulaire vient après, mais sans dépasser six mois."
+      "explication": "La page donne cet ordre : « Avise immédiatement ton superviseur. », puis « Reçois les soins sur place puis auprès du professionnel de la santé de ton choix. », puis « Remplis le formulaire CNESST dans les 6 mois ». — Le formulaire vient après, mais sans dépasser six mois."
     },
     {
       "id": "q4",
       "type": "choix",
       "question": "Après un accident, dans quel délai dois-tu remplir le formulaire de réclamation CNESST ?",
-      "options": ["14 jours", "30 jours", "6 mois", "2 ans"],
+      "options": [
+        "14 jours",
+        "30 jours",
+        "6 mois",
+        "2 ans"
+      ],
       "reponse": 2,
       "explication": "« Remplis le formulaire CNESST dans les 6 mois ». — Ne laisse pas passer ce délai."
     },
@@ -45,7 +54,12 @@
       "id": "q5",
       "type": "choix",
       "question": "Ton employeur te punit (par exemple une suspension) parce que tu as exercé un de tes droits en SST. Combien de temps as-tu pour porter plainte ?",
-      "options": ["10 jours", "30 jours", "6 mois", "1 an"],
+      "options": [
+        "10 jours",
+        "30 jours",
+        "6 mois",
+        "1 an"
+      ],
       "reponse": 1,
       "explication": "« Plainte pour mesure de représailles : art. 227 LSST, délai 30 jours. » — Trente jours, c'est court : agis vite."
     },

@@ -25,7 +25,11 @@
         "À partir du 15e jour complet, c'est la CNESST qui te verse l'IRR.",
         "Ton employeur continue de te payer tant que dure ton arrêt."
       ],
-      "reponses": [0, 1, 3],
+      "reponses": [
+        0,
+        1,
+        3
+      ],
       "explication": "« Le jour où débute l'incapacité et pendant les 14 jours complets suivants, c'est l'employeur qui paie ; la CNESST lui rembourse le salaire de ces 14 jours, puis verse elle-même l'indemnité de remplacement du revenu à compter du 15e jour complet. » — Pendant les 14 jours, l'employeur verse « 90 % du salaire net »."
     },
     {
@@ -65,7 +69,7 @@
         "Remettre l'attestation médicale à ton employeur",
         "Produire ta réclamation à la CNESST dans les délais"
       ],
-      "explication": "La page suit cet ordre : « Aviser le supérieur immédiat ou un représentant de l'employeur avant de quitter l'établissement », puis le médecin fait un « Rapport initial sans délai (art. 199), remis au travailleur », puis « Remettre à l'employeur l'attestation médicale (art. 199) et l'informer rapidement de son intention de réclamer », et enfin « Produire la réclamation dans les délais »."
+      "explication": "La page suit cet ordre : « Aviser le supérieur immédiat ou un représentant de l'employeur avant de quitter l'établissement », puis le médecin fait un « Rapport initial sans délai (art. 199), remis au travailleur », puis « Remettre à l'employeur l'attestation médicale prévue à l'art. 199 (art. 267) et l'informer rapidement de son intention de réclamer », et enfin « Produire la réclamation dans les délais »."
     },
     {
       "id": "q7",
