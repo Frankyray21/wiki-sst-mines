@@ -23,7 +23,7 @@ Les pages sont réparties en 6 wikis thématiques + 1 recueil législatif. Les [
 | 📚 [`/w/`](https://frankyray21.github.io/wiki-sst-mines/) | Tout le monde | Le fond documentaire, organisé par notion et par thème (une page par sujet, adresse `w/<wiki>/<notion>.html`) |
 | 🗂️ [`themes.html`](https://frankyray21.github.io/wiki-sst-mines/themes.html) | Tout le monde | Tous les thèmes, groupés par discipline |
 | 🎓 [`/g/`](https://frankyray21.github.io/wiki-sst-mines/g/) | Superviseurs, gestionnaires, direction | Portail en tableau de bord : entrée par rôle, par situation à gérer, ou par thème |
-| ⛑️ [`travailleurs/`](https://frankyray21.github.io/wiki-sst-mines/travailleurs/) | Travailleurs en arrêt de travail à la suite d'une blessure | Espace fermé de 29 lectures (droits et démarches, aide, retour au travail, sécurité), chacune avec ses questions et une attestation de lecture reliée à Airtable. Aucun lien vers le reste du wiki |
+| ⛑️ [`travailleurs/`](https://frankyray21.github.io/wiki-sst-mines/travailleurs/) | Travailleurs | **Wiki prévention** : un wiki fermé de 18 pages en 4 sections (les bases, les risques et les bons réflexes, prendre soin de toi, retour au travail), chacune avec ses questions et une attestation de lecture reliée à Airtable ; barre latérale, recherche et sommaire du wiki, mais aucun lien vers le reste du site |
 
 Le wiki séparé des travailleurs (`/t/`, abandonné le 9 septembre 2026, puis son index
 `travailleurs.html` dans le fond documentaire) est à son tour abandonné le **12 septembre 2026** :
@@ -114,7 +114,7 @@ adresses n'ont pas changé.
   nom long (`[[CNESST, rôles et pouvoirs]]` → `[[CNESST, rôles et pouvoirs|CNESST]]`) et retire les liens qu'un
   renommage a envoyés vers une note d'un autre wiki et d'un autre sens ; table à valider,
   `content-updates/2026-09-26-libelles-courts.json` ; essai par défaut, sauvegarde avant écriture
-- `tools/espace_travailleurs.mjs` — Espace travailleurs (`docs/travailleurs/`) : recopie les pages du wiki listées dans
+- `tools/espace_travailleurs.mjs` — Wiki prévention des travailleurs (`docs/travailleurs/`) : recopie les pages du wiki listées dans
   `tools/travailleurs/pages.json` en coupant tout lien vers le reste du wiki, rend les pages écrites pour l'espace
   (`tools/travailleurs/pages/*.md`), applique les corrections de `tools/travailleurs/corrections.json`, embarque les
   questions (`tools/travailleurs/questions/*.json`, format dans `tools/travailleurs/FORMAT.md`) ; appelé par le
@@ -445,6 +445,21 @@ node tools/serve.mjs
 - Après validation, la section « Arrêter ne suffit pas » du cadenassage utilise un tableau visible à deux colonnes, à la place de l’image et de son volet déroulant. La dernière note figure dans `content-updates/2026-09-06-cadenassage-tableau.json`, après `2026-09-06-cadenassage-compact.json`. L’ancre historique est conservée ; les images v1 et v2 restent dans le vault.
 - ~~En-tête pilote~~ : `tools/entete-article.mjs` regroupait titre, domaine, commandes de lecture et sommaire pour la seule fiche Cadenassage du wiki des travailleurs. Cette fiche a été archivée le 12 septembre 2026 avec le reste du wiki des travailleurs ; l'en-tête compact est retiré avec elle (sa jumelle du dossier « 27 - Articles gestionnaires » n'a ni le même contenu ni le même sommaire).
 - Fiches pour les travailleurs (9 septembre 2026, **abandonné le 12 septembre 2026**, voir l'entrée suivante) : le wiki des travailleurs `/t/` n'était plus généré, ses 84 pages étaient indexées par situation dans `travailleurs.html`. Historique conservé dans `content-updates/2026-09-09-integration-travailleurs.md`.
+- **Wiki prévention des travailleurs (2 novembre 2026, soir)** : l'espace devient un vrai wiki, fermé, présenté comme un
+  wiki de prévention. Frank retire les 11 pages de droits et de démarches (réclamation CNESST, IRR, BEM, contester une
+  décision, protections…) : elles restent dans le dépôt (`tools/travailleurs/pages/`, `questions/`, `corrections.json`),
+  listées dans `pages.json` sous `horsEspace`, prêtes à être remises dans une section. Restent 18 pages en 4 sections :
+  les bases (démarrages rapides, obligations, droit de refus, comité SST), les risques et les bons réflexes
+  (cadenassage, EPI, électricité, presqu'accident, postures et manutention), prendre soin de toi, retour au travail.
+  L'interface reprend les gabarits et la feuille de style du wiki : en-tête avec recherche interne (index
+  `assets/index-recherche.json`, suggestions et page `recherche.html`), barre latérale (navigation, une page au hasard,
+  les sections et leurs pages), fil d'Ariane, infobox (section, lecture estimée, questions, révision, état de ma
+  lecture), sommaire repliable, « Voir aussi », pages voisines, « Pages qui pointent ici », pages de section
+  (`section-<id>.html`), accueil en bannière et boîtes, page « Mes lectures » (`parcours.html`, états et attestations
+  gardés sur l'appareil), visionneuse d'image. Le script du wiki (`app.js`) n'est pas chargé : `travailleurs.js` refait
+  ces comportements sans sortir du dossier. Ni le nom, ni le chapeau, ni les sections, ni les titres de navigation ne
+  disent que le lecteur est blessé ou en arrêt (un test le vérifie) ; le contenu des pages, lui, reste écrit pour lui.
+  Les nouvelles sections s'écrivent dans Airtable par `typecast` (champ « Section »).
 - **Espace travailleurs (2 novembre 2026)** : `docs/travailleurs/`, à remettre aux travailleurs en arrêt de travail à la
   suite d'une blessure. 29 lectures en quatre sections (après ta blessure, prendre soin de toi, préparer ton retour,
   travailler en sécurité) : 17 pages du wiki qui s'adressent au travailleur, recopiées, et 12 pages écrites pour combler

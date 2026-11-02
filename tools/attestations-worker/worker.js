@@ -29,7 +29,10 @@
 //   LIMITE           liaison de débit des attestations (wrangler.toml), facultative
 //   LIMITE_RECHERCHE liaison de débit de la recherche de nom (wrangler.toml), facultative
 
-const SECTIONS = ['Après ta blessure', 'Prendre soin de toi', 'Préparer ton retour', 'Travailler en sécurité'];
+// sections du wiki (tools/travailleurs/pages.json, « etiquette ») = options du champ « Section » de la table ;
+// les trois dernières sont celles de l'espace du 2 novembre 2026, avant sa refonte en wiki de prévention
+const SECTIONS = ['Par où commencer', 'Risques et réflexes', 'Obligations et appuis', 'Prendre soin de toi', 'Retour au travail',
+  'Les bases', 'Après ta blessure', 'Préparer ton retour', 'Travailler en sécurité'];
 const LIMITES = { nom: 80, page: 200, lien: 500, score: 40, temps: 40, developpement: 6000, detail: 4000, revision: 40 };
 // adresses produites par le générateur de l'espace : travailleurs/<slug>.html
 const ADRESSE = /^travailleurs\/[a-z0-9][a-z0-9-]{0,80}\.html$/;

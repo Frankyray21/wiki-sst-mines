@@ -1,6 +1,8 @@
-// Espace travailleurs — lecture chronométrée, questions, attestation de lecture.
+// Wiki prévention des travailleurs — menu, sommaire, recherche interne, thème, visionneuse d'image,
+// états de lecture ; puis, sur une page de lecture : chronomètre, questions, attestation.
 // Aucun lien, aucun appel vers le reste du wiki : ce script ne parle qu'au relais des attestations
-// (adresse dans data-relais, écrite par tools/espace_travailleurs.mjs).
+// (adresse dans data-relais, écrite par tools/espace_travailleurs.mjs) et ne lit que les fichiers
+// du dossier travailleurs/.
 (function () {
   'use strict';
   var doc = document, corps = doc.body;
@@ -8,6 +10,11 @@
   var ls = {
     lire: function (k) { try { return JSON.parse(localStorage.getItem(CLE + k)); } catch (e) { return null; } },
     ecrire: function (k, v) { try { localStorage.setItem(CLE + k, JSON.stringify(v)); } catch (e) { /* navigation privée */ } },
+    cles: function (prefixe) {
+      var r = [];
+      try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf(CLE + prefixe) === 0) r.push(k.slice(CLE.length + prefixe.length)); } } catch (e) { /* rien */ }
+      return r;
+    },
   };
   var $ = function (s, r) { return (r || doc).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || doc).querySelectorAll(s)); };
@@ -21,6 +28,8 @@
     (enfants || []).forEach(function (e) { if (e) n.appendChild(typeof e === 'string' ? doc.createTextNode(e) : e); });
     return n;
   };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var plat = function (s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); };
   function duree(s) {
     s = Math.max(0, Math.round(s || 0));
     var m = Math.floor(s / 60), r = s % 60;
@@ -35,6 +44,12 @@
     for (var i = t.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var x = t[i]; t[i] = t[j]; t[j] = x; }
     return t;
   }
+  var WIKI = { pages: [], sections: [] };
+  try { WIKI = JSON.parse($('#donnees-wiki').textContent); } catch (e) { /* page sans données */ }
+  var sectionDe = {};
+  WIKI.pages.forEach(function (p) { sectionDe[p.s] = p.k; });
+  var titreDe = {};
+  WIKI.pages.forEach(function (p) { titreDe[p.s] = p.t; });
 
   // ---------- thème (même réglage que le wiki : sombre par défaut, clair, ou comme l'appareil) ----------
   (function () {
@@ -44,7 +59,7 @@
     var icones = { dark: '🌙', light: '☀️', auto: '🖥️' };
     var noms = { dark: 'sombre', light: 'clair', auto: 'comme l’appareil' };
     var actuel = function () { return doc.documentElement.getAttribute('data-theme') || 'dark'; };
-    var montrer = function () { var t = actuel(); b.textContent = icones[t]; b.setAttribute('aria-label', 'Thème ' + noms[t] + ' — changer'); };
+    var montrer = function () { var t = actuel(); b.textContent = icones[t]; b.setAttribute('aria-label', 'Thème ' + noms[t] + ' — changer'); b.title = 'Thème ' + noms[t]; };
     b.addEventListener('click', function () {
       var t = ordre[(ordre.indexOf(actuel()) + 1) % ordre.length];
       if (t === 'dark') doc.documentElement.removeAttribute('data-theme'); else doc.documentElement.setAttribute('data-theme', t);
@@ -52,6 +67,286 @@
       montrer();
     });
     montrer();
+  })();
+
+  // ---------- menu latéral sur téléphone (même conduite que le wiki) ----------
+  (function () {
+    var burger = $('#burger'), sidebar = $('#sidebar');
+    if (!burger || !sidebar) return;
+    var media = window.matchMedia('(max-width: 900px)');
+    function etat(ouvert, rendreFocus) {
+      var mobile = media.matches;
+      var focusDedans = sidebar.contains(doc.activeElement);
+      ouvert = mobile && ouvert;
+      sidebar.classList.toggle('open', ouvert);
+      sidebar.inert = mobile && !ouvert;
+      if (mobile && !ouvert) sidebar.setAttribute('aria-hidden', 'true'); else sidebar.removeAttribute('aria-hidden');
+      burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+      burger.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
+      if (rendreFocus || (mobile && !ouvert && focusDedans)) burger.focus();
+    }
+    etat(false, false);
+    burger.addEventListener('click', function () {
+      var ouvrir = !sidebar.classList.contains('open');
+      etat(ouvrir, false);
+      if (ouvrir && media.matches) { var premier = sidebar.querySelector('a[href]'); if (premier) premier.focus(); }
+    });
+    sidebar.addEventListener('click', function (ev) {
+      var lien = ev.target.closest ? ev.target.closest('a[href]') : null;
+      if (lien && media.matches && lien.id !== 'randomLink') etat(false, false);
+    });
+    doc.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && media.matches && sidebar.classList.contains('open')) { etat(false, true); ev.preventDefault(); } });
+    doc.addEventListener('click', function (ev) { if (media.matches && sidebar.classList.contains('open') && !sidebar.contains(ev.target) && !burger.contains(ev.target)) etat(false, false); });
+    var sync = function () { etat(sidebar.classList.contains('open'), false); };
+    if (media.addEventListener) media.addEventListener('change', sync); else window.addEventListener('resize', sync);
+  })();
+
+  // ---------- confort de lecture : taille du texte et mode lecture (mêmes réglages que le wiki) ----------
+  (function () {
+    var PALIERS = [0.85, 0.92, 1, 1.1, 1.2, 1.32, 1.45];
+    var moins = $$('[data-moins]'), plus = $$('[data-plus]'), lect = $$('[data-lecture]');
+    if (!moins.length && !lect.length) return;
+    function echelle() { try { var v = parseFloat(localStorage.getItem('echelle')); return PALIERS.indexOf(v) >= 0 ? v : 1; } catch (e) { return 1; } }
+    function poser(v) {
+      doc.documentElement.style.setProperty('--echelle', v);
+      try { if (v === 1) localStorage.removeItem('echelle'); else localStorage.setItem('echelle', String(v)); } catch (e) { /* rien */ }
+      etat();
+    }
+    function etat() {
+      var v = echelle();
+      moins.forEach(function (b) { b.disabled = PALIERS.indexOf(v) <= 0; });
+      plus.forEach(function (b) { b.disabled = PALIERS.indexOf(v) >= PALIERS.length - 1; });
+      var on = doc.documentElement.getAttribute('data-lecture') === '1';
+      lect.forEach(function (b) { b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.classList.toggle('actif', on); });
+    }
+    moins.forEach(function (b) { b.addEventListener('click', function () { poser(PALIERS[Math.max(0, PALIERS.indexOf(echelle()) - 1)]); }); });
+    plus.forEach(function (b) { b.addEventListener('click', function () { poser(PALIERS[Math.min(PALIERS.length - 1, PALIERS.indexOf(echelle()) + 1)]); }); });
+    lect.forEach(function (b) { b.addEventListener('click', function () {
+      var on = doc.documentElement.getAttribute('data-lecture') !== '1';
+      if (on) doc.documentElement.setAttribute('data-lecture', '1'); else doc.documentElement.removeAttribute('data-lecture');
+      try { if (on) localStorage.setItem('lecture', '1'); else localStorage.removeItem('lecture'); } catch (e) { /* rien */ }
+      etat();
+    }); });
+    etat();
+  })();
+
+  // ---------- sommaire repliable ----------
+  $$('.toc').forEach(function (toc) {
+    var btn = $('.toc-toggle', toc);
+    if (!btn) return;
+    var appliquer = function (replie) {
+      toc.classList.toggle('collapsed', replie);
+      btn.textContent = replie ? '[afficher]' : '[masquer]';
+      btn.setAttribute('aria-expanded', replie ? 'false' : 'true');
+    };
+    var pref = ls.lire('sommaire');
+    appliquer(pref !== null ? pref === 1 : (window.innerWidth <= 900 && $$('li', toc).length > 8));
+    btn.addEventListener('click', function () { var r = !toc.classList.contains('collapsed'); appliquer(r); ls.ecrire('sommaire', r ? 1 : 0); });
+  });
+
+  // ---------- une page au hasard (dans le wiki seulement) ----------
+  (function () {
+    var lien = $('#randomLink');
+    if (!lien || !WIKI.pages.length) return;
+    lien.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      var ici = corps.getAttribute('data-slug');
+      var choix = WIKI.pages.filter(function (p) { return p.s !== ici; });
+      if (!choix.length) choix = WIKI.pages;
+      location.href = choix[Math.floor(Math.random() * choix.length)].s + '.html';
+    });
+  })();
+
+  // ---------- recherche interne (index : assets/index-recherche.json) ----------
+  var index = null, indexPromesse = null;
+  function chargerIndex() {
+    if (index) return Promise.resolve(index);
+    if (!indexPromesse) {
+      indexPromesse = fetch('assets/index-recherche.json', { cache: 'no-cache', credentials: 'omit' }).then(function (r) { return r.json(); }).then(function (j) {
+        index = j.map(function (e) { e._t = plat(e.t); e._r = plat(e.r); e._x = plat(e.x); return e; });
+        return index;
+      }).catch(function () {
+        // sans réseau : les titres embarqués dans la page suffisent pour retrouver un article
+        indexPromesse = null;
+        index = WIKI.pages.map(function (p) { var k = WIKI.sections.filter(function (s) { return s.id === p.k; })[0]; return { s: p.s, t: p.t, r: '', k: k ? k.titre : '', m: '', x: '', _t: plat(p.t), _r: '', _x: '', titresSeulement: true }; });
+        return index;
+      });
+    }
+    return indexPromesse;
+  }
+  function motsDe(q) { return plat(q).split(/[^a-z0-9]+/).filter(function (m) { return m.length >= 2; }).slice(0, 8); }
+  function chercher(q) {
+    var mots = motsDe(q);
+    if (!mots.length || !index) return [];
+    return index.map(function (e) {
+      var score = 0, tous = true;
+      mots.forEach(function (m) {
+        var s = 0;
+        if (e._t.indexOf(m) >= 0) s += 8;
+        if (e._r.indexOf(m) >= 0) s += 3;
+        var n = e._x.split(m).length - 1;
+        if (n) s += Math.min(n, 5);
+        if (!s) tous = false;
+        score += s;
+      });
+      return { e: e, score: score, tous: tous };
+    }).filter(function (r) { return r.score > 0; }).sort(function (a, b) { return (b.tous - a.tous) || (b.score - a.score) || a.e.t.localeCompare(b.e.t, 'fr'); });
+  }
+  // motif qui retrouve un mot sans égard aux accents ni à la casse, dans un texte non normalisé
+  function motifDe(mots) {
+    var variantes = { a: 'aàâä', e: 'eéèêë', i: 'iîï', o: 'oôö', u: 'uùûü', c: 'cç', y: 'yÿ' };
+    return new RegExp('(' + mots.map(function (m) {
+      return m.split('').map(function (c) { return variantes[c] ? '[' + variantes[c] + variantes[c].toUpperCase() + ']' : c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('');
+    }).join('|') + ')', 'gi');
+  }
+  function surligner(texte, mots, balise) {
+    return esc(texte).replace(motifDe(mots), '<' + balise + '>$1</' + balise + '>');
+  }
+  function extrait(e, mots) {
+    var pos = -1;
+    for (var i = 0; i < mots.length; i++) { var p = e._x.indexOf(mots[i]); if (p >= 0 && (pos < 0 || p < pos)) pos = p; }
+    if (pos < 0) return e.r;
+    var debut = Math.max(0, pos - 70), fin = Math.min(e.x.length, pos + 110);
+    return (debut > 0 ? '…' : '') + e.x.slice(debut, fin).trim() + (fin < e.x.length ? '…' : '');
+  }
+  function brancherRecherche(idChamp, idBoite) {
+    var champ = $('#' + idChamp), boite = $('#' + idBoite);
+    if (!champ || !boite) return;
+    var sel = -1, derniere = 0;
+    champ.setAttribute('role', 'combobox');
+    champ.setAttribute('aria-autocomplete', 'list');
+    champ.setAttribute('aria-controls', idBoite);
+    champ.setAttribute('aria-expanded', 'false');
+    boite.setAttribute('role', 'listbox');
+    boite.setAttribute('aria-label', 'Suggestions de recherche');
+    var annonce = el('span', { role: 'status', 'aria-live': 'polite', 'aria-atomic': 'true', style: 'position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0' });
+    champ.parentNode.appendChild(annonce);
+    function fermer() { boite.hidden = true; boite.innerHTML = ''; sel = -1; champ.setAttribute('aria-expanded', 'false'); champ.removeAttribute('aria-activedescendant'); }
+    function montrer(resultats, q) {
+      var mots = motsDe(q);
+      if (!resultats.length) {
+        boite.innerHTML = '<div class="s-msg" role="presentation">Aucun résultat pour « ' + esc(q) + ' »</div>';
+        annonce.textContent = 'Aucun résultat';
+      } else {
+        boite.innerHTML = resultats.slice(0, 8).map(function (r) {
+          return '<a href="' + r.e.s + '.html"><span class="s-title">' + surligner(r.e.t, mots, 'b') + '</span><span class="s-meta">' + esc(r.e.k) + (r.e.m ? ' · ≈ ' + r.e.m + ' min' : '') + '</span></a>';
+        }).join('') + '<a class="s-all" href="recherche.html?q=' + encodeURIComponent(q) + '">Voir les ' + resultats.length + ' résultat' + (resultats.length > 1 ? 's' : '') + ' pour « ' + esc(q) + ' »</a>';
+        $$('a', boite).forEach(function (a, i) { a.id = idBoite + '-option-' + i; a.setAttribute('role', 'option'); a.setAttribute('tabindex', '-1'); a.setAttribute('aria-selected', 'false'); });
+        annonce.textContent = resultats.length + ' résultat' + (resultats.length > 1 ? 's' : '') + '. Flèches pour parcourir, Entrée pour ouvrir.';
+      }
+      boite.hidden = false; sel = -1;
+      champ.setAttribute('aria-expanded', 'true');
+    }
+    function selectionner(n) {
+      var options = $$('[role="option"]', boite);
+      if (!options.length) return;
+      sel = (n + options.length) % options.length;
+      options.forEach(function (o, i) { o.classList.toggle('sel', i === sel); o.setAttribute('aria-selected', i === sel ? 'true' : 'false'); });
+      champ.setAttribute('aria-activedescendant', options[sel].id);
+    }
+    champ.addEventListener('input', function () {
+      var q = champ.value.trim(), demande = ++derniere;
+      if (q.length < 2) { fermer(); return; }
+      chargerIndex().then(function () { if (demande !== derniere || champ.value.trim() !== q) return; montrer(chercher(q), q); });
+    });
+    champ.addEventListener('keydown', function (ev) {
+      if (ev.key === 'ArrowDown') { ev.preventDefault(); if (boite.hidden && champ.value.trim().length >= 2) champ.dispatchEvent(new Event('input')); else selectionner(sel + 1); }
+      else if (ev.key === 'ArrowUp') { ev.preventDefault(); selectionner(sel - 1); }
+      else if (ev.key === 'Escape') { fermer(); }
+      else if (ev.key === 'Enter') {
+        var options = $$('[role="option"]', boite);
+        if (sel >= 0 && options[sel]) { ev.preventDefault(); location.href = options[sel].getAttribute('href'); }
+        else if (champ.form) { /* le formulaire de la page Recherche s'envoie */ }
+        else if (champ.value.trim().length >= 2) { ev.preventDefault(); location.href = 'recherche.html?q=' + encodeURIComponent(champ.value.trim()); }
+      }
+    });
+    champ.addEventListener('blur', function () { setTimeout(function () { if (!boite.contains(doc.activeElement)) fermer(); }, 150); });
+    boite.addEventListener('mousedown', function (ev) { ev.preventDefault(); });
+  }
+  brancherRecherche('q', 'suggest');
+  brancherRecherche('q2', 'suggest2');
+  // page Recherche : résultats complets, avec extrait
+  (function () {
+    var zone = $('#resultats');
+    if (!zone) return;
+    var champ = $('#q2'), form = $('.et-recherche');
+    var q = '';
+    try { q = (new URLSearchParams(location.search).get('q') || '').trim(); } catch (e) { /* rien */ }
+    function rendre(q) {
+      zone.innerHTML = '';
+      if (q.length < 2) { zone.appendChild(el('p', { 'class': 'page-sub', texte: 'Tape au moins deux lettres, puis « Chercher ».' })); return; }
+      zone.appendChild(el('p', { 'class': 'page-sub', texte: 'Recherche en cours…' }));
+      chargerIndex().then(function () {
+        var resultats = chercher(q), mots = motsDe(q);
+        zone.innerHTML = '';
+        if (!index || !index.length) { zone.appendChild(el('p', { 'class': 'page-sub', texte: 'La recherche n’est pas disponible pour le moment. Les thèmes du menu restent accessibles.' })); return; }
+        if (!resultats.length) {
+          zone.appendChild(el('h2', { texte: 'Aucun résultat pour « ' + q + ' »' }));
+          zone.appendChild(el('p', { html: 'Essaie un autre mot, ou parcours les thèmes : ' + WIKI.sections.map(function (s) { return '<a href="section-' + s.id + '.html">' + esc(s.icone + ' ' + s.titre) + '</a>'; }).join(', ') + '.' }));
+          return;
+        }
+        zone.appendChild(el('h2', { texte: resultats.length + ' résultat' + (resultats.length > 1 ? 's' : '') + ' pour « ' + q + ' »' + (index[0].titresSeulement ? ' (titres seulement, sans réseau)' : '') }));
+        resultats.forEach(function (r) {
+          zone.appendChild(el('div', { 'class': 'sr-item' }, [
+            el('a', { 'class': 'sr-title', href: r.e.s + '.html', html: surligner(r.e.t, mots, 'b') }),
+            el('div', { 'class': 'sr-meta', texte: r.e.k + (r.e.m ? ' · ≈ ' + r.e.m + ' min' : '') }),
+            r.e.x ? el('div', { 'class': 'sr-x', html: surligner(extrait(r.e, mots), mots, 'b') }) : null,
+          ]));
+        });
+      });
+    }
+    if (champ) champ.value = q;
+    if (form) form.addEventListener('submit', function (ev) { ev.preventDefault(); var v = champ.value.trim(); try { history.replaceState(null, '', 'recherche.html?q=' + encodeURIComponent(v)); } catch (e) { /* rien */ } rendre(v); });
+    rendre(q);
+  })();
+
+  // ---------- visionneuse d'image (même conduite que le wiki) ----------
+  (function () {
+    var IMAGE = /\.(?:png|jpe?g|gif|svg|webp)(?:[?#]|$)/i;
+    var ouverte = null;
+    function surTouche(ev) {
+      if (!ouverte) return;
+      if (ev.key === 'Escape') { ev.preventDefault(); fermer(false); }
+      else if (ev.key === 'Tab') { ev.preventDefault(); ouverte.bouton.focus(); }
+    }
+    function fermer(parRetour) {
+      if (!ouverte) return;
+      var o = ouverte; ouverte = null;
+      o.v.remove();
+      doc.documentElement.classList.remove('visionneuse-ouverte');
+      doc.removeEventListener('keydown', surTouche, true);
+      if (o.lien && o.lien.focus) o.lien.focus();
+      if (!parRetour && o.historique && history.state && history.state.visionneuse) history.back();
+    }
+    function ouvrir(lien, source) {
+      var v = el('div', { 'class': 'visionneuse', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Image agrandie' + (source && source.alt ? ' : ' + source.alt : '') });
+      var bouton = el('button', { type: 'button', 'class': 'vis-fermer', 'aria-label': 'Fermer l’image agrandie', texte: '✕' });
+      var img = el('img', { src: lien.getAttribute('href'), alt: source ? source.alt : '' });
+      var filtre = source && window.getComputedStyle ? window.getComputedStyle(source).filter : '';
+      if (filtre && filtre !== 'none') img.style.filter = filtre;
+      v.appendChild(bouton); v.appendChild(img); v.appendChild(el('p', { 'class': 'vis-aide', texte: 'Toucher l’image : taille réelle ou ajustée à l’écran' }));
+      v.addEventListener('click', function (ev) {
+        if (ev.target !== img) { fermer(false); return; }
+        var reelle = !v.classList.contains('vis-reelle');
+        img.style.width = reelle ? Math.max(img.naturalWidth || 0, img.getBoundingClientRect().width * 2) + 'px' : '';
+        v.classList.toggle('vis-reelle', reelle);
+      });
+      doc.addEventListener('keydown', surTouche, true);
+      doc.documentElement.classList.add('visionneuse-ouverte');
+      corps.appendChild(v);
+      var historique = false;
+      try { history.pushState({ visionneuse: true }, ''); historique = true; } catch (e) { /* rien */ }
+      ouverte = { v: v, lien: lien, bouton: bouton, historique: historique };
+      bouton.focus();
+    }
+    window.addEventListener('popstate', function () { fermer(true); });
+    doc.addEventListener('click', function (ev) {
+      if (ouverte || ev.defaultPrevented || ev.button || ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+      var a = ev.target.closest ? ev.target.closest('.page-img a, a.img-lien') : null;
+      if (!a || !IMAGE.test(a.getAttribute('href') || '')) return;
+      ev.preventDefault();
+      ouvrir(a, a.querySelector('img'));
+    });
   })();
 
   // ---------- envoi au relais, file d'attente hors ligne ----------
@@ -107,24 +402,63 @@
     })(0);
   }
 
-  // ---------- accueil : état de chaque lecture ----------
-  function accueil() {
-    var cartes = $$('.et-carte'), faites = 0;
-    cartes.forEach(function (c) {
-      var etat = ls.lire('etat:' + c.getAttribute('data-slug')) || {};
-      var badge = $('[data-etat-badge]', c);
-      var texte = 'À lire', classe = '';
-      if (etat.atteste) { texte = 'Attestée ✓'; classe = 'et-badge-ok'; faites++; }
-      else if (etat.enAttente) { texte = 'Attestation en attente d’envoi'; classe = 'et-badge-attente'; }
-      else if (etat.reussi) { texte = 'Questions réussies — à attester'; classe = 'et-badge-cours'; }
-      else if (etat.commence) { texte = 'Commencée'; classe = 'et-badge-cours'; }
-      badge.textContent = texte;
-      badge.className = 'et-badge ' + classe;
+  // ---------- états de lecture : pastilles, infobox, barres de progression, mes attestations ----------
+  function etatDe(slug) {
+    var etat = ls.lire('etat:' + slug) || {};
+    var date = etat.certificat && etat.certificat.date ? ' le ' + etat.certificat.date : '';
+    if (etat.atteste) return { texte: 'Attestée ✓', long: 'Attestée' + date + ' ✓', classe: 'et-badge-ok', fait: true, rang: 4 };
+    if (etat.enAttente) return { texte: 'En attente d’envoi', long: 'Attestée' + date + ', en attente d’envoi', classe: 'et-badge-attente', rang: 3 };
+    if (etat.reussi) return { texte: 'À attester', long: 'Questions réussies : tu peux attester', classe: 'et-badge-cours', rang: 2, encours: true };
+    if (etat.commence) return { texte: 'Commencée', long: 'Commencée', classe: 'et-badge-cours', rang: 1, encours: true };
+    return { texte: 'À lire', long: 'À lire', classe: '', rang: 0 };
+  }
+  function rafraichirEtats() {
+    $$('[data-etat-coche][data-slug]').forEach(function (c) { c.textContent = etatDe(c.getAttribute('data-slug')).fait ? '✓' : ''; });
+    // reprendre : la page commencée et non attestée la plus avancée dans l'ordre de lecture
+    var reprise = null;
+    WIKI.pages.forEach(function (p) { if (etatDe(p.s).encours && p.s !== corps.getAttribute('data-slug')) reprise = p; });
+    [['#reprendre', 'a'], ['#reprendreAccueil', 'a']].forEach(function (x) {
+      var li = $(x[0]); if (!li) return;
+      var a = $(x[1], li);
+      if (!reprise) { li.hidden = true; return; }
+      a.href = reprise.s + '.html';
+      a.textContent = (x[0] === '#reprendre' ? '▶ Reprendre : ' : '') + reprise.t;
+      li.hidden = false;
     });
-    var compte = $('#progressionCompte'), barre = $('#progressionBarre'), role = $('.et-barre');
-    if (compte) compte.textContent = faites;
-    if (barre) barre.style.width = (cartes.length ? Math.round(faites / cartes.length * 100) : 0) + '%';
-    if (role) role.setAttribute('aria-valuenow', faites);
+    $$('[data-etat-badge][data-slug]').forEach(function (b) {
+      var e = etatDe(b.getAttribute('data-slug'));
+      b.textContent = b.hasAttribute('data-etat-long') ? e.long : e.texte;
+      b.classList.remove('et-badge-ok', 'et-badge-cours', 'et-badge-attente');
+      if (e.classe) b.classList.add(e.classe);
+      if (b.classList.contains('et-badge-discret')) b.hidden = !e.fait;
+    });
+    var faits = {};
+    WIKI.pages.forEach(function (p) { if (etatDe(p.s).fait) faits[p.k] = (faits[p.k] || 0) + 1; });
+    var total = 0; Object.keys(faits).forEach(function (k) { total += faits[k]; });
+    $$('[data-progression-compte]').forEach(function (c) { var k = c.getAttribute('data-progression-compte'); c.textContent = k ? (faits[k] || 0) : total; });
+    $$('[data-progression-barre]').forEach(function (b) {
+      var k = b.getAttribute('data-progression-barre');
+      var n = k ? (faits[k] || 0) : total;
+      var max = k ? WIKI.pages.filter(function (p) { return p.k === k; }).length : WIKI.pages.length;
+      b.style.width = (max ? Math.round(n / max * 100) : 0) + '%';
+      var role = b.parentNode; if (role && role.getAttribute('role') === 'progressbar') role.setAttribute('aria-valuenow', n);
+    });
+    var liste = $('#listeAttestations');
+    if (liste) {
+      var certs = ls.cles('etat:').map(function (slug) { var e = ls.lire('etat:' + slug) || {}; return e.certificat ? { slug: slug, c: e.certificat, atteste: e.atteste } : null; }).filter(Boolean)
+        .sort(function (a, b) { return (b.c.date || '').localeCompare(a.c.date || ''); });
+      if (certs.length) {
+        liste.innerHTML = '';
+        liste.appendChild(el('ul', { 'class': 'et-attestations' }, certs.map(function (x) {
+          return el('li', {}, [
+            el('span', { 'class': 'et-att-date', texte: x.c.date }),
+            el('a', { href: x.slug + '.html', texte: titreDe[x.slug] || x.c.titre }),
+            el('span', { 'class': 'et-badge ' + (x.atteste ? 'et-badge-ok' : 'et-badge-attente'), texte: x.atteste ? 'Transmise · n° ' + (x.c.numero || '') : 'En attente d’envoi' }),
+            el('span', { 'class': 'et-att-date', texte: 'lecture ' + x.c.lecture + (x.c.score ? ' · ' + x.c.score : '') }),
+          ]);
+        })));
+      }
+    }
   }
 
   // ---------- page de lecture ----------
@@ -141,7 +475,7 @@
     var questions = donnees.questions || [];
     var etat = ls.lire('etat:' + slug) || {};
     if (!etat.commence) { etat.commence = jour(); ls.ecrire('etat:' + slug, etat); }
-    var sauverEtat = function () { ls.ecrire('etat:' + slug, etat); };
+    var sauverEtat = function () { ls.ecrire('etat:' + slug, etat); rafraichirEtats(); };
 
     // -- chronomètre : temps ACTIF (page visible, lecteur actif depuis moins de 3 minutes) --
     var temps = ls.lire('temps:' + slug) || { lecture: 0, questions: 0 };
@@ -153,17 +487,19 @@
     var zoneQuestions = $('#questions');
     var puce = el('div', { 'class': 'et-chrono', 'aria-hidden': 'true', title: 'Temps de lecture de cette page' });
     corps.appendChild(puce);
+    var cellule = $('#chrono');
     var afficheurs = [];
     function rafraichir() {
       puce.textContent = '⏱ ' + duree(temps.lecture);
+      if (cellule) cellule.textContent = duree(temps.lecture);
       afficheurs.forEach(function (f) { f(); });
     }
     var tic = 0;
     setInterval(function () {
-      if (doc.visibilityState !== 'visible' || Date.now() - activite > 180000) return;
-      // en bas de page, sur les questions : c'est le temps des questions qui court
       var r = zoneQuestions.getBoundingClientRect();
       var surQuestions = r.top < window.innerHeight * 0.55 && r.bottom > 0;
+      puce.classList.toggle('et-cache', surQuestions);
+      if (doc.visibilityState !== 'visible' || Date.now() - activite > 180000) return;
       if (surQuestions && questions.length) temps.questions++; else temps.lecture++;
       if (++tic % 5 === 0) ls.ecrire('temps:' + slug, temps);
       rafraichir();
@@ -171,7 +507,6 @@
     window.addEventListener('pagehide', function () { ls.ecrire('temps:' + slug, temps); });
     rafraichir();
 
-    // bloc « temps de lecture » montré au moment de soumettre, et sur l'attestation
     function blocTemps(fige) {
       var b = el('div', { 'class': 'et-temps', role: 'group', 'aria-label': 'Temps de lecture' });
       var ligne1 = el('p', { 'class': 'et-temps-principal' });
@@ -184,14 +519,13 @@
         ligne2.textContent = 'Lecture estimée : ≈ ' + minutes + ' min' + (questions.length ? ' · Temps sur les questions : ' + duree(t.questions) : '');
         var court = t.lecture < minutes * 60 * 0.5;
         alerte.hidden = !court || Boolean(fige);
-        if (court) alerte.textContent = 'Ton temps de lecture est court par rapport au temps estimé. Prends le temps de lire la page au complet avant de soumettre : ce temps paraîtra sur ton attestation.';
+        if (court) alerte.textContent = 'Tu as lu vite par rapport au temps estimé (≈ ' + minutes + ' min). Si tu veux, relis la page avant de soumettre : ton temps de lecture paraîtra sur ton attestation.';
       };
       if (!fige) afficheurs.push(maj);
       maj();
       return b;
     }
 
-    // -- bandeau : lecture déjà attestée --
     var bandeau = $('#etatPage');
     function montrerBandeau() {
       if (!etat.certificat) { bandeau.hidden = true; return; }
@@ -207,14 +541,10 @@
     }
     montrerBandeau();
 
-    // -- questions --
     var zone = $('#questionsZone');
     var essais = etat.essais || 0;
     var textesCourts = {};
-    var LIBELLES = {
-      choix: 'Choix de réponse', multi: 'Choisis la ou les réponses vraies', vf: 'Vrai ou faux',
-      ordre: 'Mets en ordre', court: 'Court développement',
-    };
+    var LIBELLES = { choix: 'Choix de réponse', multi: 'Choisis la ou les réponses vraies', vf: 'Vrai ou faux', ordre: 'Mets en ordre', court: 'Court développement' };
     var CONSIGNES = {
       choix: 'Choisis une seule réponse.', multi: 'Coche toutes les réponses vraies : il peut y en avoir une ou plusieurs.',
       vf: 'Cette affirmation est-elle vraie ou fausse ?', ordre: 'Avec les flèches, place les étapes dans le bon ordre, de la première à la dernière.',
@@ -245,10 +575,7 @@
           var liste = el('div', { 'class': 'et-options' });
           melanger(q.options.map(function (_, k) { return k; })).forEach(function (k) {
             var id = nom + '-' + k;
-            liste.appendChild(el('label', { 'class': 'et-option', 'for': id }, [
-              el('input', { type: q.type === 'choix' ? 'radio' : 'checkbox', name: nom, id: id, value: k }),
-              el('span', { texte: q.options[k] }),
-            ]));
+            liste.appendChild(el('label', { 'class': 'et-option', 'for': id }, [el('input', { type: q.type === 'choix' ? 'radio' : 'checkbox', name: nom, id: id, value: k }), el('span', { texte: q.options[k] })]));
           });
           fs.appendChild(liste);
         } else if (q.type === 'vf') {
@@ -280,8 +607,7 @@
               };
               haut.addEventListener('click', bouger(-1, 'haut'));
               bas.addEventListener('click', bouger(1, 'bas'));
-              var li = el('li', { 'class': 'et-etape', 'data-k': k }, [el('span', { 'class': 'et-etape-texte', texte: q.etapes[k] }), el('span', { 'class': 'et-fleches' }, [haut, bas])]);
-              ol.appendChild(li);
+              ol.appendChild(el('li', { 'class': 'et-etape', 'data-k': k }, [el('span', { 'class': 'et-etape-texte', texte: q.etapes[k] }), el('span', { 'class': 'et-fleches' }, [haut, bas])]));
               if (focusSur && focusSur.k === k) setTimeout(function () { var b = focusSur.quel === 'haut' && !haut.disabled ? haut : (!bas.disabled ? bas : haut); b.focus(); }, 0);
             });
           };
@@ -385,14 +711,14 @@
       ls.ecrire('temps:' + slug, temps);
       bouton.hidden = true;
       message.textContent = '';
-      var bilan = el('div', { 'class': 'et-bilan ' + (reussi ? 'et-ok' : 'et-echec'), role: 'status', tabindex: '-1' });
+      var bilan = el('div', { 'class': 'et-bilan ' + (reussi ? 'et-ok' : 'et-reprise'), role: 'status', tabindex: '-1' });
       bilan.appendChild(el('p', { 'class': 'et-bilan-score', texte: pct === null ? 'Réponses notées.' : 'Résultat : ' + bons + ' sur ' + auto + ' (' + pct + ' %)' }));
       bilan.appendChild(blocTemps(fige));
       if (reussi) {
         etat.reussi = true;
         bilan.appendChild(el('p', { texte: 'Bravo ! Tu peux maintenant attester ta lecture, juste en dessous.' }));
       } else {
-        bilan.appendChild(el('p', { texte: 'Il faut au moins ' + seuil + ' % de bonnes réponses pour attester ta lecture. Relis les explications et les passages de la page, puis recommence.' }));
+        bilan.appendChild(el('p', { texte: 'Pas encore ' + seuil + ' %. Relis les explications et les passages de la page, puis recommence quand tu veux : rien n’est compté contre toi.' }));
         var encore = el('button', { type: 'button', 'class': 'et-bouton', texte: 'Recommencer les questions' });
         encore.addEventListener('click', function () { construireQuestions(); zoneQuestions.scrollIntoView({ behavior: 'smooth' }); });
         bilan.appendChild(encore);
@@ -409,7 +735,6 @@
       }
     }
 
-    // -- attestation --
     var zoneAtt = $('#attestation');
     function ouvrirAttestation(res) {
       zoneAtt.hidden = false;
@@ -456,14 +781,12 @@
         clearTimeout(minut);
         var v = champ.value.trim();
         if (hors.checked || v.length < 2) { fermer(); return; }
-        minut = setTimeout(function () { chercher(v); }, 250);
+        minut = setTimeout(function () { chercherNom(v); }, 250);
       });
       champ.addEventListener('keydown', function (e) {
         var items = $$('[role="option"]', liste);
-        var i = items.indexOf(doc.activeElement);
         if (e.key === 'ArrowDown' && items.length) { e.preventDefault(); items[0].focus(); }
         if (e.key === 'Escape') fermer();
-        if (i < 0) return;
       });
       liste.addEventListener('keydown', function (e) {
         var items = $$('[role="option"]', liste), i = items.indexOf(doc.activeElement);
@@ -471,7 +794,7 @@
         if (e.key === 'ArrowUp') { e.preventDefault(); (i > 0 ? items[i - 1] : champ).focus(); }
         if (e.key === 'Escape') { fermer(); champ.focus(); }
       });
-      function chercher(v) {
+      function chercherNom(v) {
         if (!RELAIS) { etatNom.textContent = 'La liste des noms n’est pas encore branchée. Coche « Mon nom n’est pas dans la liste » et écris ton nom au complet.'; return; }
         derniere = v;
         var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
@@ -556,8 +879,8 @@
         ['N° de confirmation', c.numero || 'en attente d’envoi']].filter(Boolean);
       var table = el('table', { 'class': 'et-cert-table' }, lignes.map(function (l) { return el('tr', {}, [el('th', { scope: 'row', texte: l[0] }), el('td', { texte: l[1] })]); }));
       var cert = el('div', { 'class': 'et-certificat', id: 'certificat' }, [
-        el('p', { 'class': 'et-cert-sur', texte: 'Espace travailleurs · WIKI SST — Mines' }),
-        el('h2', { 'class': 'et-cert-titre', texte: 'Attestation de lecture' }),
+        el('p', { 'class': 'et-cert-sur', texte: 'WIKI SST — Mines · Wiki prévention' }),
+        el('h2', { 'class': 'et-cert-titre', id: 'attestation-titre', texte: 'Attestation de lecture' }),
         el('p', { 'class': 'et-cert-texte', html: 'Je, <strong></strong>, atteste avoir lu la page « <em></em> » et avoir répondu moi-même aux questions de compréhension.' }),
         table,
         c.numero ? null : el('p', { 'class': 'et-cert-attente', texte: 'Cette attestation n’est pas encore transmise au registre. Elle repartira toute seule à ta prochaine visite avec du réseau.' }),
@@ -572,9 +895,9 @@
         window.print();
         setTimeout(function () { corps.classList.remove('et-imprime-certificat'); }, 500);
       });
-      var actions = el('div', { 'class': 'et-actions' }, [imprimer, el('a', { 'class': 'et-bouton et-bouton-second', href: 'index.html', texte: 'Retour aux lectures' })]);
-      var suiv = $('.et-suivante a');
-      if (suiv) actions.appendChild(el('a', { 'class': 'et-bouton et-bouton-second', href: suiv.getAttribute('href'), texte: 'Lecture suivante →' }));
+      var actions = el('div', { 'class': 'et-actions' }, [imprimer, el('a', { 'class': 'et-bouton et-bouton-second', href: 'parcours.html', texte: 'Mes lectures' })]);
+      var suiv = $('.voisin-suiv');
+      if (suiv) actions.appendChild(el('a', { 'class': 'et-bouton et-bouton-second', href: suiv.getAttribute('href'), texte: 'Page suivante →' }));
       zoneAtt.appendChild(actions);
       zoneAtt.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -583,7 +906,8 @@
     construireQuestions();
   }
 
-  if (corps.classList.contains('et-accueil')) { accueil(); viderFile(accueil); }
-  if (corps.classList.contains('et-lecture')) { lecture(); viderFile(); }
-  window.addEventListener('online', function () { viderFile(corps.classList.contains('et-accueil') ? accueil : null); });
+  rafraichirEtats();
+  if (corps.classList.contains('et-lecture')) lecture();
+  viderFile(rafraichirEtats);
+  window.addEventListener('online', function () { viderFile(rafraichirEtats); });
 })();

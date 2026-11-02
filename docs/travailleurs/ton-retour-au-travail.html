@@ -1,45 +1,78 @@
 <!DOCTYPE html>
-<html lang="fr" data-espace="travailleurs">
+<html lang="fr" data-wiki-entete data-espace="travailleurs">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ton retour au travail — Espace travailleurs</title>
+<title>Ton retour au travail — Wiki prévention</title>
 <meta name="description" content="Ton droit de reprendre ton emploi et ses délais, ce qui se passe si tu ne peux plus le faire, et comment préparer un retour qui tient.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
-<meta name="theme-color" content="#1f4f99">
+<meta name="theme-color" content="#2563eb">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛑️</text></svg>">
-<link rel="stylesheet" href="../assets/style.css?v=8b2e7f8076">
-<link rel="stylesheet" href="assets/travailleurs.css?v=8b2e7f8076">
-<script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="stylesheet" href="../assets/style.css?v=2dd99f2605">
+<link rel="stylesheet" href="assets/travailleurs.css?v=2dd99f2605">
+<script>window.ROOT='';try{var t=localStorage.getItem('theme');if(t==='light'||t==='auto')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}</script>
 </head>
-<body class="espace-travailleurs et-lecture" data-slug="ton-retour-au-travail" data-titre="Ton retour au travail" data-section="Préparer ton retour"
-  data-mots="866" data-minutes="5" data-revision="2026-11-02" data-relais="https://attestations-wiki-travailleurs.frankyray-21.workers.dev" data-seuil="80">
+<body class="espace-travailleurs et-lecture" data-slug="ton-retour-au-travail" data-titre="Ton retour au travail" data-section="Retour au travail" data-mots="866" data-minutes="5" data-revision="2026-11-02" data-relais="https://attestations-wiki-travailleurs.frankyray-21.workers.dev" data-seuil="80">
 <a class="et-sauter" href="#contenu">Aller au contenu</a>
-<header class="et-entete">
-  <a class="et-marque" href="index.html"><span class="et-marque-icone" aria-hidden="true">⛑️</span><span><strong>Espace travailleurs</strong><small>WIKI SST · Mines</small></span></a>
-  <button type="button" class="et-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
+<header class="site-header">
+  <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+  <a class="brand" href="index.html"><span class="brand-icon">⛑️</span><span class="brand-text"><strong>WIKI <span class="brand-sst">SST</span></strong><small>Prévention · Mines</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" aria-label="Rechercher dans le wiki" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+  <button type="button" class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 </header>
-<main class="content et-page" id="contenu">
-<nav class="et-fil" aria-label="Fil d'Ariane"><a href="index.html">← Toutes les lectures</a></nav>
-<header class="article-titre et-titre">
-<p class="et-section">🔁 Préparer ton retour</p>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Navigation du wiki">
+  <div class="nav-group"><div class="nav-title">Navigation</div><ul>
+<li><a href="index.html">🏠 Accueil</a></li>
+    <li id="reprendre" hidden><a href="#">▶ Reprendre</a></li>
+<li><a href="parcours.html">📖 Mes lectures</a></li>
+<li><a href="recherche.html">🔎 Recherche</a></li>
+<li><a href="index-alphabetique.html">🔤 Index alphabétique</a></li>
+    <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+<li><a href="ou-appeler.html">📞 Où appeler</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">⛑️ Wiki prévention</div><ul>
+<li><a href="section-commencer.html">🧭 Par où commencer</a></li>
+<li><a href="section-risques.html">⛑️ Les risques et les bons réflexes</a></li>
+<li><a href="section-appuis.html">🤝 Tes obligations et tes appuis</a></li>
+<li><a href="section-soin.html">💬 Prendre soin de toi</a></li>
+<li><a href="section-retour.html">🔁 Retour au travail</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Dans ce thème</div><ul>
+<li><a href="assignation-temporaire.html">L'assignation temporaire <span class="et-coche" data-etat-coche data-slug="assignation-temporaire" aria-hidden="true"></span></a></li>
+<li class="active"><a href="ton-retour-au-travail.html" aria-current="page">Ton retour au travail <span class="et-coche" data-etat-coche data-slug="ton-retour-au-travail" aria-hidden="true"></span></a></li>
+<li><a href="sequelles-et-readaptation.html">Réadaptation et emploi convenable <span class="et-coche" data-etat-coche data-slug="sequelles-et-readaptation" aria-hidden="true"></span></a></li>
+  </ul></div>
+
+</nav>
+<main class="content" id="contenu">
+<div class="breadcrumbs"><a href="index.html">Accueil</a> <span class="crumb-sep">›</span> <a href="section-retour.html">Retour au travail</a></div>
+<header class="article-titre">
 <h1 class="page-title">Ton retour au travail</h1>
-<p class="et-meta">Lecture estimée ≈ 5 min · 7 questions · révisée le 2026-11-02</p>
+<div class="page-sub">Un article du Wiki prévention · thème <a href="section-retour.html">🔁 Retour au travail</a> · lecture ≈ 5 min · <a href="#questions">7 questions, dont 1 à développement</a> en bas de page</div>
+<div class="lecture-outils" role="group" aria-label="Confort de lecture"><button type="button" data-moins title="Texte plus petit" aria-label="Texte plus petit">A−</button><button type="button" data-plus title="Texte plus grand" aria-label="Texte plus grand">A+</button><button type="button" data-lecture title="Mode lecture : masque les menus" aria-pressed="false">📖 Lecture</button></div>
 </header>
 <div class="et-etat-page" id="etatPage" hidden></div>
-<ol class="et-etapes" aria-label="Marche à suivre">
-<li><strong>Lis la page</strong> à ton rythme. Le temps de lecture est compté quand la page est à l'écran.</li>
-<li><strong>Réponds aux questions</strong> (7, dont 1 à développement), en bas de la page.</li>
-<li><strong>Atteste ta lecture</strong> : choisis ton nom dans la liste et envoie.</li>
-</ol>
-<p class="et-resume">Ton droit de reprendre ton emploi et ses délais, ce qui se passe si tu ne peux plus le faire, et comment préparer un retour qui tient.</p>
+<aside class="infobox"><div class="infobox-title">🔁 Ton retour au travail</div><table>
+<tr><th>Ta lecture</th><td id="infoboxEtat" data-etat-badge data-etat-long data-slug="ton-retour-au-travail">À lire</td></tr>
+<tr><th>Temps sur cette page</th><td><span id="chrono" aria-hidden="true">0 s</span> <small class="et-chrono-note">il paraîtra sur ton attestation</small></td></tr>
+<tr><th>Thème</th><td><a href="section-retour.html">Retour au travail</a></td></tr>
+<tr><th>Lecture estimée</th><td>≈ 5 min</td></tr>
+<tr><th>Questions</th><td><a href="#questions">7 questions, dont 1 à développement</a></td></tr>
+<tr><th>Révision</th><td>2026-11-02</td></tr>
+</table><div class="infobox-tags"><span class="tag">wiki</span><span class="tag">prévention</span><span class="tag">retour au travail</span></div></aside>
+<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">8 sections</span> <button type="button" class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul><li class="toc-l2"><a href="#ton-droit-de-retrouver-ton-emploi">Ton droit de retrouver ton emploi</a></li><li class="toc-l2"><a href="#combien-de-temps-dure-ce-droit">Combien de temps dure ce droit</a></li><li class="toc-l2"><a href="#si-tu-ne-peux-pas-reprendre-ton-emploi">Si tu ne peux pas reprendre ton emploi</a></li><li class="toc-l2"><a href="#le-retour-progressif">Le retour progressif</a></li><li class="toc-l2"><a href="#garder-le-contact-pendant-l-arret">Garder le contact pendant l'arrêt</a></li><li class="toc-l2"><a href="#parler-de-tes-limites">Parler de tes limites</a></li><li class="toc-l2"><a href="#les-signaux-qui-doivent-te-faire-consulter">Les signaux qui doivent te faire consulter</a></li><li class="toc-l2"><a href="#questions">Questions sur ta lecture</a></li></ul></nav>
 <div class="page-body">
+<div class="chapo"><span class="chapo-label">En bref</span><p>Ton droit de reprendre ton emploi et ses délais, ce qui se passe si tu ne peux plus le faire, et comment préparer un retour qui tient.</p></div>
 <p>Revenir au travail après une blessure, ça se prépare. La loi te donne le droit de reprendre ton emploi, pendant un temps limité. Voici ce droit, et comment préparer un retour qui tient.</p>
-<h2>Ton droit de retrouver ton emploi</h2>
+<h2 id="ton-droit-de-retrouver-ton-emploi">Ton droit de retrouver ton emploi</h2>
 <p>Quand tu redeviens capable d&#39;exercer ton emploi, tu as le droit de le reprendre en priorité dans l&#39;établissement où tu travaillais quand ta blessure est arrivée, ou de réintégrer un emploi équivalent chez ton employeur (LATMP, art. 236). Un emploi équivalent ressemble au tien pour les qualifications, le salaire, les avantages sociaux, la durée et les conditions de travail (LATMP, art. 2).</p>
-<p>À ton retour, tu as droit au salaire et aux avantages que tu aurais eus si tu avais continué à travailler (LATMP, art. 242). Pendant ton absence, tu continues d&#39;accumuler ton ancienneté et de participer aux régimes de retraite et d&#39;assurances, si tu paies ta part des cotisations (LATMP, art. 235). Ton employeur ne peut pas te punir parce que tu t&#39;es blessé (LATMP, art. 32) : voir <a href="tes-protections.html">tes protections</a>.</p>
-<h2>Combien de temps dure ce droit</h2>
+<p>À ton retour, tu as droit au salaire et aux avantages que tu aurais eus si tu avais continué à travailler (LATMP, art. 242). Pendant ton absence, tu continues d&#39;accumuler ton ancienneté et de participer aux régimes de retraite et d&#39;assurances, si tu paies ta part des cotisations (LATMP, art. 235). Ton employeur ne peut pas te punir parce que tu t&#39;es blessé (LATMP, art. 32) : voir <span class="et-hors">tes protections</span>.</p>
+<h2 id="combien-de-temps-dure-ce-droit">Combien de temps dure ce droit</h2>
 <p>Le délai part du début de ton absence continue à cause de ta blessure. Il dépend du nombre de travailleurs de ton établissement au début de cette absence (LATMP, art. 240) :</p>
 <table>
 <thead>
@@ -59,9 +92,9 @@
 </tbody></table>
 <p>Si ta convention collective prévoit un droit de retour plus long, c&#39;est ce délai qui compte (LATMP, art. 240). Si tu reprends le travail sur avis médical, mais que ta blessure t&#39;oblige à arrêter le jour même, ton absence continue n&#39;est pas interrompue (LATMP, art. 240).</p>
 <p>Ton IRR prend fin quand tu redeviens capable d&#39;exercer ton emploi (LATMP, art. 57). Mais si ça arrive après la fin du délai, tu gardes ton IRR jusqu&#39;à ce que tu réintègres ton emploi ou un emploi équivalent, ou que tu refuses sans raison valable de le faire, pendant au plus un an (LATMP, art. 48). Si ton employeur ne te reprend pas, la CNESST t&#39;aide à chercher un emploi (LATMP, art. 173).</p>
-<h2>Si tu ne peux pas reprendre ton emploi</h2>
+<h2 id="si-tu-ne-peux-pas-reprendre-ton-emploi">Si tu ne peux pas reprendre ton emploi</h2>
 <p>Si tu deviens capable d&#39;exercer un emploi convenable, tu as le droit d&#39;occuper le premier emploi convenable qui devient disponible dans un établissement de ton employeur, selon les règles d&#39;ancienneté de ta convention collective (LATMP, art. 239). L&#39;emploi convenable est expliqué dans <a href="sequelles-et-readaptation.html">si ta blessure laisse des séquelles</a>.</p>
-<h2>Le retour progressif</h2>
+<h2 id="le-retour-progressif">Le retour progressif</h2>
 <p>Reprendre d&#39;un coup à temps plein, c&#39;est risquer la surcharge. La CNESST peut prévoir ton retour progressif pour faciliter ta réintégration, si la durée de ton absence ou ta situation le justifie (LATMP, art. 167.2). Avant même la consolidation, elle peut aussi mettre en place chez ton employeur des mesures pour t&#39;aider à reprendre graduellement tes tâches (LATMP, art. 145).</p>
 <p>Un bon plan de retour progressif est écrit. Il précise les heures à chaque phase, les tâches incluses et exclues, les aménagements, les dates de bilan et quoi faire si la progression ne fonctionne pas. Il avance par étapes :</p>
 <ol>
@@ -71,13 +104,13 @@
 <li><strong>Bilans</strong> : aux dates prévues dans le plan, on vérifie que le retour tient.</li>
 </ol>
 <p>En mine, le plan peut prévoir un premier temps en surface avant de retourner sous terre, ou un retour de jour plutôt que de nuit. Pendant la progression, tu ne dois pas être placé sur un poste à risque élevé.</p>
-<h2>Garder le contact pendant l&#39;arrêt</h2>
+<h2 id="garder-le-contact-pendant-l-arret">Garder le contact pendant l&#39;arrêt</h2>
 <p>Des contacts réguliers et sans pression avec ton milieu de travail évitent que tu te sentes oublié. Ils n&#39;ont pas à porter sur ton diagnostic, par respect de la confidentialité.</p>
 <p>Deux avis sont obligatoires. Quand le professionnel de la santé qui a charge de toi t&#39;informe de la date de consolidation et de tes limitations fonctionnelles, ou du fait que tu n&#39;en gardes aucune, tu dois en informer ton employeur sans délai (LATMP, art. 274). Quand tu réintègres ton emploi ou un emploi équivalent, tu dois en informer la CNESST sans délai (LATMP, art. 276).</p>
-<h2>Parler de tes limites</h2>
+<h2 id="parler-de-tes-limites">Parler de tes limites</h2>
 <p>Ce que ton équipe sait de ta blessure, c&#39;est toi qui le décides : la communication t&#39;appartient, pas à ton superviseur. Tu peux dire que tu reviens, sans détails médicaux.</p>
 <p>Tes limites, elles, sont écrites dans ton plan, partagé avec toi, ton médecin et ton supérieur immédiat. Le plan doit être respecté. Si une tâche dépasse ce qui est prévu, dis-le tout de suite à ton superviseur.</p>
-<h2>Les signaux qui doivent te faire consulter</h2>
+<h2 id="les-signaux-qui-doivent-te-faire-consulter">Les signaux qui doivent te faire consulter</h2>
 <p>Après le retour, surveille ces signaux :</p>
 <ul>
 <li>la fatigue qui revient malgré les aménagements ;</li>
@@ -86,20 +119,27 @@
 <li>des erreurs ou des oublis qui réapparaissent.</li>
 </ul>
 <p>Ces signaux viennent d&#39;une page du wiki sur le retour après un trouble de santé mentale. Ils valent pour tout retour, mais ce ne sont pas des résultats d&#39;étude sur les blessures physiques.</p>
-<p>N&#39;attends pas que ça empire. Parle à ton superviseur pour ajuster le plan, consulte le professionnel de la santé qui te suit, et appelle le <a href="pae.html">PAE</a> au besoin. Si ta blessure revient ou s&#39;aggrave, lis <a href="rechute-recidive-aggravation.html">rechute, récidive, aggravation</a>.</p>
+<p>N&#39;attends pas que ça empire. Parle à ton superviseur pour ajuster le plan, consulte le professionnel de la santé qui te suit, et appelle le <a href="pae.html">PAE</a> au besoin. Si ta blessure revient ou s&#39;aggrave, lis <span class="et-hors">rechute, récidive, aggravation</span>.</p>
 
-</div>
+<h2 id="sources">Sources</h2>
+<ul class="et-sources"><li>LATMP, art. 2 (définition de l'emploi équivalent)</li><li>LATMP, art. 32 (protection contre les sanctions)</li><li>LATMP, art. 48 et 57 (IRR quand tu redeviens capable d'exercer ton emploi)</li><li>LATMP, art. 145 et 167.2 (reprise graduelle des tâches et retour progressif)</li><li>LATMP, art. 173 (soutien en recherche d'emploi)</li><li>LATMP, art. 235, 236, 239, 240 et 242 (droit au retour au travail)</li><li>LATMP, art. 274 et 276 (informer l'employeur et la CNESST)</li><li>Page du wiki : Programme de retour au travail et assignation temporaire</li><li>Page du wiki : Plan de retour progressif</li><li>Page du wiki : Étapes d'un retour au travail réussi</li><li>Page du wiki : Communication avec l'équipe lors du retour</li><li>Page du wiki : Prévenir les rechutes après retour</li></ul>
 <section class="et-questions" id="questions" aria-labelledby="questions-titre">
 <h2 id="questions-titre">Questions sur ta lecture</h2>
+<p class="et-intro">Ces questions t'aident à retenir l'essentiel. Tu peux relire la page et recommencer autant de fois que tu veux : rien n'est envoyé avant que tu attestes.</p>
 <noscript><p class="et-avis">Les questions et l'attestation demandent JavaScript. Ouvre la page dans le navigateur de ton téléphone ou de ton ordinateur.</p></noscript>
 <div id="questionsZone"></div>
 </section>
 <section class="et-attestation" id="attestation" aria-labelledby="attestation-titre" hidden></section>
-<nav class="et-suivante" aria-label="Lecture suivante"><a href="sequelles-et-readaptation.html"><small>Lecture suivante</small><span>Si ta blessure laisse des séquelles →</span></a></nav>
-</main>
-<footer class="et-pied"><p>Espace travailleurs · WIKI SST — Mines. Ces pages expliquent les règles ; elles ne remplacent ni ton médecin, ni la CNESST, ni un avis juridique.</p>
-<p>Détresse ou danger immédiat : compose le <a class="et-tel" href="tel:911">911</a>.</p></footer>
+</div>
+<nav class="voir-aussi" aria-label="Dans le même thème"><h2>Dans le même thème</h2><ul><li><a href="assignation-temporaire.html">L'assignation temporaire</a></li><li><a href="sequelles-et-readaptation.html">Réadaptation et emploi convenable</a></li></ul></nav>
+<nav class="voisins" aria-label="Pages voisines"><a class="voisin voisin-prec" href="assignation-temporaire.html"><small>← Précédent</small><span>L'assignation temporaire</span></a><a class="voisin voisin-suiv" href="sequelles-et-readaptation.html"><small>Suivant →</small><span>Réadaptation et emploi convenable</span></a></nav>
+<details class="backlinks"><summary>Pages qui pointent ici (4)</summary><ul><li><a href="prevenir-une-nouvelle-blessure.html">Postures, manutention, vibrations</a> <small class="bl-wiki">Les risques et les bons réflexes</small></li><li><a href="garder-le-moral.html">Garder le moral</a> <small class="bl-wiki">Prendre soin de toi</small></li><li><a href="assignation-temporaire.html">L'assignation temporaire</a> <small class="bl-wiki">Retour au travail</small></li><li><a href="sequelles-et-readaptation.html">Réadaptation et emploi convenable</a> <small class="bl-wiki">Retour au travail</small></li></ul></details>
+<div class="page-meta"><span>Révision déclarée : 2026-11-02 · Lecture estimée ≈ 5 min · 866 mots</span><span class="accueil-marque">WIKI SST — Wiki prévention</span></div>
 <script type="application/json" id="donnees-questions">{"slug":"ton-retour-au-travail","questions":[{"id":"q1","type":"choix","question":"Ton établissement comptait 150 travailleurs au début de ton absence, et ta convention collective ne prévoit pas de délai plus long. Combien de temps dure ton droit de retour au travail ?","options":["2 ans à partir du début de ton absence","1 an à partir du début de ton absence","6 mois à partir de ta consolidation","3 ans à partir de ta consolidation"],"reponse":0,"explication":"« Le délai part du début de ton absence continue à cause de ta blessure. » Le tableau de la page donne 2 ans pour « Plus de 20 travailleurs »."},{"id":"q2","type":"multi","question":"Selon la page, qu'est-ce qu'un bon plan de retour progressif écrit précise ?","options":["Les heures à chaque phase","Ton diagnostic, pour l'annoncer à l'équipe","Les tâches incluses et exclues","Un retour à temps plein dès le premier jour","Quoi faire si la progression ne fonctionne pas"],"reponses":[0,2,4],"explication":"« Il précise les heures à chaque phase, les tâches incluses et exclues, les aménagements, les dates de bilan et quoi faire si la progression ne fonctionne pas. » Ton diagnostic n'a pas à être annoncé (« Tu peux dire que tu reviens, sans détails médicaux ») et « Reprendre d'un coup à temps plein, c'est risquer la surcharge »."},{"id":"q3","type":"vf","question":"Si tu redeviens capable de faire ton emploi après la fin du délai de retour au travail, ton IRR s'arrête le jour même.","reponse":false,"explication":"« tu gardes ton IRR jusqu'à ce que tu réintègres ton emploi ou un emploi équivalent, ou que tu refuses sans raison valable de le faire, pendant au plus un an » — ton IRR continue, mais pas plus d'un an."},{"id":"q4","type":"ordre","question":"Remets dans l'ordre les étapes d'un retour progressif.","etapes":["Démarrage : heures réduites, tâches allégées, suivi rapproché","Progression : les heures et la charge augmentent graduellement","Stabilisation : retour à temps plein, avec des aménagements si nécessaire","Bilans : on vérifie que le retour tient"],"explication":"« Il avance par étapes » : on commence par des « heures réduites, tâches allégées, suivi rapproché », on augmente graduellement, on revient à temps plein, puis on fait des bilans « aux dates prévues dans le plan »."},{"id":"q5","type":"choix","question":"Ta blessure t'empêche de reprendre ton emploi de foreur, mais tu deviens capable d'exercer un emploi convenable. Quel est ton droit chez ton employeur ?","options":["Occuper le premier emploi convenable qui devient disponible","Choisir n'importe quel poste, même s'il est déjà occupé","Garder ton poste de foreur, mais avec un salaire réduit","Aucun : ton droit de retour prend fin à ce moment-là"],"reponse":0,"explication":"« tu as le droit d'occuper le premier emploi convenable qui devient disponible dans un établissement de ton employeur, selon les règles d'ancienneté de ta convention collective »."},{"id":"q6","type":"vf","question":"C'est toi qui décides ce que ton équipe sait de ta blessure.","reponse":true,"explication":"« Ce que ton équipe sait de ta blessure, c'est toi qui le décides » — la communication t'appartient, pas à ton superviseur."},{"id":"q7","type":"court","question":"En tes mots : quelques semaines après ton retour, la fatigue revient malgré les aménagements. Que fais-tu ?","attendu":["Je n'attends pas que ça empire","J'en parle à mon superviseur pour ajuster le plan","Je consulte le professionnel de la santé qui me suit","J'appelle le PAE au besoin"],"explication":"« N'attends pas que ça empire. Parle à ton superviseur pour ajuster le plan, consulte le professionnel de la santé qui te suit » — la fatigue qui revient malgré les aménagements fait partie des signaux à surveiller."}]}</script>
-<script src="assets/travailleurs.js?v=8b2e7f8076"></script>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Wiki prévention, pour les travailleurs des mines · Ces pages donnent des repères ; elles ne remplacent ni la procédure de ton site ni un avis médical.</footer>
+<script type="application/json" id="donnees-wiki">{"pages":[{"s":"securite-demarrage-rapide","t":"Sécurité : les bases","k":"commencer","o":0},{"s":"hygiene-demarrage-rapide","t":"Bruit, poussières, chaleur","k":"commencer","o":1},{"s":"toxicologie-demarrage-rapide","t":"Produits dangereux","k":"commencer","o":2},{"s":"ergonomie-demarrage-rapide","t":"Ton corps au travail","k":"commencer","o":3},{"s":"cadenassage","t":"Le cadenassage en mine","k":"risques","o":4},{"s":"equipements-de-protection","t":"Tes équipements de protection","k":"risques","o":5},{"s":"risque-electrique","t":"Le risque électrique","k":"risques","o":6},{"s":"presquaccident","t":"Signaler un presqu'accident","k":"risques","o":7},{"s":"prevenir-une-nouvelle-blessure","t":"Postures, manutention, vibrations","k":"risques","o":8},{"s":"obligations-du-travailleur","t":"Tes six obligations en santé et sécurité","k":"appuis","o":9},{"s":"droit-de-refus","t":"Refuser un travail dangereux","k":"appuis","o":10},{"s":"comite-sst-et-representant","t":"Le comité SST et le représentant à la prévention","k":"appuis","o":11},{"s":"garder-le-moral","t":"Garder le moral","k":"soin","o":12},{"s":"ou-appeler","t":"Où appeler quand ça ne va pas","k":"soin","o":13},{"s":"pae","t":"Le programme d'aide aux employés (PAE)","k":"soin","o":14},{"s":"assignation-temporaire","t":"L'assignation temporaire","k":"retour","o":15},{"s":"ton-retour-au-travail","t":"Ton retour au travail","k":"retour","o":16},{"s":"sequelles-et-readaptation","t":"Réadaptation et emploi convenable","k":"retour","o":17}],"sections":[{"id":"commencer","titre":"Par où commencer","icone":"🧭"},{"id":"risques","titre":"Les risques et les bons réflexes","icone":"⛑️"},{"id":"appuis","titre":"Tes obligations et tes appuis","icone":"🤝"},{"id":"soin","titre":"Prendre soin de toi","icone":"💬"},{"id":"retour","titre":"Retour au travail","icone":"🔁"}]}</script>
+<script src="assets/travailleurs.js?v=2dd99f2605"></script>
 </body>
 </html>

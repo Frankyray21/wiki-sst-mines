@@ -1,6 +1,6 @@
 # Relais des attestations — `attestations-wiki-travailleurs`
 
-L'Espace travailleurs (`docs/travailleurs/`) est publié par GitHub Pages : il n'a pas de serveur.
+Le Wiki prévention des travailleurs (`docs/travailleurs/`) est publié par GitHub Pages : il n'a pas de serveur.
 Un jeton Airtable posé dans une page publique serait lisible, et utilisable, par n'importe qui.
 Ce petit relais Cloudflare garde le jeton de son côté ; la page ne parle qu'à lui.
 
@@ -27,7 +27,7 @@ Base **Formations** (`appmq82YjvEUglYZU`), table **Attestations Wiki SST travail
 | --- | --- | --- |
 | Nom | `Jean Tremblay` | nom choisi dans la liste |
 | Employé | *(lien)* | relié par le relais : l'employé choisi, s'il porte bien ce nom ; sinon l'unique employé de ce nom exact |
-| Page, Adresse, Lien, Section | `Ta réclamation à la CNESST` … | la page lue |
+| Page, Adresse, Lien, Section | `Comprendre le cadenassage en mine`, section `Risques et réflexes` … | la page lue ; les sections viennent de `tools/travailleurs/pages.json` (« etiquette ») et une nouvelle option du champ « Section » se crée d'elle-même (`typecast`) |
 | Date | `2026-11-02` | jour au Québec, posé par le relais |
 | Score, Pourcentage, Essais | `5/6 — 83 %`, `83`, `2` | questions corrigées automatiquement (note de passage 80 %) |
 | Temps de lecture, Secondes lecture | `6 min 12 s`, `372` | temps actif sur la page, **montré au travailleur** quand il soumet ses réponses |
@@ -115,7 +115,7 @@ curl -H 'Origin: https://frankyray21.github.io' 'https://attestations-wiki-trava
 # 3. une attestation d'essai (à supprimer ensuite dans Airtable)
 curl -i -X POST https://attestations-wiki-travailleurs.frankyray-21.workers.dev \
   -H 'Content-Type: application/json' -H 'Origin: https://frankyray21.github.io' \
-  -d '{"nom":"Essai Branchement","adresse":"travailleurs/premieres-demarches.html","page":"Essai","section":"Après ta blessure","score":"5/5 — 100 %","pourcentage":100,"essais":1,"tempsLecture":"4 min 00 s","secondesLecture":240}'
+  -d '{"nom":"Essai Branchement","adresse":"travailleurs/cadenassage.html","page":"Essai","section":"Les bases","score":"5/5 — 100 %","pourcentage":100,"essais":1,"tempsLecture":"4 min 00 s","secondesLecture":240}'
 # → {"ok":true,"id":"rec…","relie":false,"mis_a_jour":false,"date":"…"} et une ligne « À relier »
 ```
 

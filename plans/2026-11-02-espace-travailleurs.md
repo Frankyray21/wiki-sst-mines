@@ -8,7 +8,35 @@ d'Airtable, avec le temps de lecture de la page indiqué clairement au moment de
 travailleurs ne doit pas mener aux autres pages (encadrement, SST, RH). Puis : dresser la liste complète des
 sujets pertinents pour le travailleur, vérifier s'ils existent, et créer les pages manquantes.
 
-## Ce qui a été fait
+## Refonte du soir : un wiki de prévention
+
+Deux demandes de Frank, le même jour : « retravaille l'interface pour qu'il ressemble à un vrai wiki ; il s'adresse
+à des travailleurs blessés et en arrêt, ne le dis pas explicitement », puis « ne parle pas démarches et droits,
+surtout prévention ». Décisions :
+
+- **Les 11 pages de droits et de démarches sortent du wiki** (choix de Frank, parmi trois options) : premières
+  démarches, démarrage rapide du droit du travail, réclamation CNESST, médecin et BEM, revenu pendant l'arrêt, IRR,
+  rechute, contester une décision, protections, droits et recours, droits et obligations selon les lois. Leurs
+  sources, questions et corrections restent dans le dépôt, listées dans `pages.json` sous `horsEspace` ; un lien
+  vers l'une d'elles devient du texte. Les remettre, c'est les replacer dans une section.
+- **18 pages en 4 sections**, prévention d'abord : Les bases (4 démarrages rapides, six obligations, droit de refus,
+  comité SST et représentant), Les risques et les bons réflexes (cadenassage, EPI, électricité, presqu'accident,
+  postures et manutention), Prendre soin de toi (garder le moral, où appeler, PAE), Retour au travail (assignation
+  temporaire, retour, séquelles et réadaptation). Titres de navigation reformulés sans « blessure », « arrêt » ni
+  « lésion » (« Garder le moral », « Séquelles et réadaptation », « Postures, manutention, vibrations : te
+  protéger ») ; le contenu des pages reste écrit pour le lecteur réel.
+- **Nom et vitrine** : « Wiki prévention » (marque WIKI SST · Prévention · Mines), chapeau sur les règles, les
+  risques, les réflexes et les ressources. Un test interdit « bless », « arrêt de travail », « lésion »,
+  « convalescen » dans le nom, le chapeau, les sections, les titres, le menu et l'accueil ; et « droit »,
+  « démarche », « réclamation » dans la vitrine.
+- **Interface du wiki** : mêmes gabarits et même feuille de style que `docs/w/` (en-tête, recherche, barre latérale,
+  fil d'Ariane, infobox, sommaire, « Voir aussi », voisins, pages liées, bannière et boîtes d'accueil, pages de
+  section façon pages de thème, visionneuse d'image), sans `app.js` : `travailleurs.js` refait ces comportements
+  dans le dossier. Recherche interne sur un index de l'espace (`assets/index-recherche.json`). Page « Mes lectures ».
+- **Airtable** : les étiquettes de section deviennent « Les bases », « Risques et réflexes », « Prendre soin de toi »,
+  « Retour au travail » ; le relais les accepte (et garde les anciennes) ; les options se créent par `typecast`.
+
+## Ce qui a été fait (première version du jour)
 
 - **`docs/travailleurs/`** : accueil et 29 lectures, généré par `tools/espace_travailleurs.mjs` (appelé par
   `build_site.mjs`, ou seul). Source : `tools/travailleurs/` (liste `pages.json`, pages écrites `pages/*.md`,

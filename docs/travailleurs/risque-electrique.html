@@ -1,39 +1,73 @@
 <!DOCTYPE html>
-<html lang="fr" data-espace="travailleurs">
+<html lang="fr" data-wiki-entete data-espace="travailleurs">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le risque électrique, ce que tu dois savoir — Espace travailleurs</title>
-<meta name="description" content="Lectures pendant ton arrêt de travail">
+<title>Le risque électrique — Wiki prévention</title>
+<meta name="description" content="Cette page t'explique ce que le courant fait au corps, où le risque électrique se cache en mine, et pourquoi on travaille hors tension chaque fois que c'est possible.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
-<meta name="theme-color" content="#1f4f99">
+<meta name="theme-color" content="#2563eb">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛑️</text></svg>">
-<link rel="stylesheet" href="../assets/style.css?v=8b2e7f8076">
-<link rel="stylesheet" href="assets/travailleurs.css?v=8b2e7f8076">
-<script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='auto')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="stylesheet" href="../assets/style.css?v=2dd99f2605">
+<link rel="stylesheet" href="assets/travailleurs.css?v=2dd99f2605">
+<script>window.ROOT='';try{var t=localStorage.getItem('theme');if(t==='light'||t==='auto')document.documentElement.setAttribute('data-theme',t);var ec=localStorage.getItem('echelle');if(ec)document.documentElement.style.setProperty('--echelle',ec);if(localStorage.getItem('lecture')==='1')document.documentElement.setAttribute('data-lecture','1');}catch(e){}</script>
 </head>
-<body class="espace-travailleurs et-lecture" data-slug="risque-electrique" data-titre="Le risque électrique, ce que tu dois savoir" data-section="Travailler en sécurité"
-  data-mots="717" data-minutes="4" data-revision="2026-09-03" data-relais="https://attestations-wiki-travailleurs.frankyray-21.workers.dev" data-seuil="80">
+<body class="espace-travailleurs et-lecture" data-slug="risque-electrique" data-titre="Le risque électrique" data-section="Risques et réflexes" data-mots="717" data-minutes="4" data-revision="2026-09-03" data-relais="https://attestations-wiki-travailleurs.frankyray-21.workers.dev" data-seuil="80">
 <a class="et-sauter" href="#contenu">Aller au contenu</a>
-<header class="et-entete">
-  <a class="et-marque" href="index.html"><span class="et-marque-icone" aria-hidden="true">⛑️</span><span><strong>Espace travailleurs</strong><small>WIKI SST · Mines</small></span></a>
-  <button type="button" class="et-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
+<header class="site-header">
+  <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+  <a class="brand" href="index.html"><span class="brand-icon">⛑️</span><span class="brand-text"><strong>WIKI <span class="brand-sst">SST</span></strong><small>Prévention · Mines</small></span></a>
+  <div class="searchbox">
+    <input type="search" id="q" aria-label="Rechercher dans le wiki" placeholder="Rechercher dans le wiki…" autocomplete="off">
+    <div id="suggest" class="suggest" hidden></div>
+  </div>
+  <button type="button" class="btn-theme" id="btnTheme" aria-label="Changer de thème" title="Changer de thème"></button>
 </header>
-<main class="content et-page" id="contenu">
-<nav class="et-fil" aria-label="Fil d'Ariane"><a href="index.html">← Toutes les lectures</a></nav>
-<header class="article-titre et-titre">
-<p class="et-section">⛑️ Travailler en sécurité</p>
-<h1 class="page-title">Le risque électrique, ce que tu dois savoir</h1>
-<p class="et-meta">Lecture estimée ≈ 4 min · 7 questions · révisée le 2026-09-03</p>
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Navigation du wiki">
+  <div class="nav-group"><div class="nav-title">Navigation</div><ul>
+<li><a href="index.html">🏠 Accueil</a></li>
+    <li id="reprendre" hidden><a href="#">▶ Reprendre</a></li>
+<li><a href="parcours.html">📖 Mes lectures</a></li>
+<li><a href="recherche.html">🔎 Recherche</a></li>
+<li><a href="index-alphabetique.html">🔤 Index alphabétique</a></li>
+    <li><a href="#" id="randomLink">🎲 Une page au hasard</a></li>
+<li><a href="ou-appeler.html">📞 Où appeler</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">⛑️ Wiki prévention</div><ul>
+<li><a href="section-commencer.html">🧭 Par où commencer</a></li>
+<li><a href="section-risques.html">⛑️ Les risques et les bons réflexes</a></li>
+<li><a href="section-appuis.html">🤝 Tes obligations et tes appuis</a></li>
+<li><a href="section-soin.html">💬 Prendre soin de toi</a></li>
+<li><a href="section-retour.html">🔁 Retour au travail</a></li>
+  </ul></div>
+  <div class="nav-group"><div class="nav-title">Dans ce thème</div><ul>
+<li><a href="cadenassage.html">Le cadenassage en mine <span class="et-coche" data-etat-coche data-slug="cadenassage" aria-hidden="true"></span></a></li>
+<li><a href="equipements-de-protection.html">Tes équipements de protection <span class="et-coche" data-etat-coche data-slug="equipements-de-protection" aria-hidden="true"></span></a></li>
+<li class="active"><a href="risque-electrique.html" aria-current="page">Le risque électrique <span class="et-coche" data-etat-coche data-slug="risque-electrique" aria-hidden="true"></span></a></li>
+<li><a href="presquaccident.html">Signaler un presqu'accident <span class="et-coche" data-etat-coche data-slug="presquaccident" aria-hidden="true"></span></a></li>
+<li><a href="prevenir-une-nouvelle-blessure.html">Postures, manutention, vibrations <span class="et-coche" data-etat-coche data-slug="prevenir-une-nouvelle-blessure" aria-hidden="true"></span></a></li>
+  </ul></div>
+
+</nav>
+<main class="content" id="contenu">
+<div class="breadcrumbs"><a href="index.html">Accueil</a> <span class="crumb-sep">›</span> <a href="section-risques.html">Les risques et les bons réflexes</a></div>
+<header class="article-titre">
+<h1 class="page-title">Le risque électrique</h1>
+<div class="page-sub">Un article du Wiki prévention · thème <a href="section-risques.html">⛑️ Les risques et les bons réflexes</a> · lecture ≈ 4 min · <a href="#questions">7 questions, dont 1 à développement</a> en bas de page</div>
+<div class="lecture-outils" role="group" aria-label="Confort de lecture"><button type="button" data-moins title="Texte plus petit" aria-label="Texte plus petit">A−</button><button type="button" data-plus title="Texte plus grand" aria-label="Texte plus grand">A+</button><button type="button" data-lecture title="Mode lecture : masque les menus" aria-pressed="false">📖 Lecture</button></div>
 </header>
 <div class="et-etat-page" id="etatPage" hidden></div>
-<ol class="et-etapes" aria-label="Marche à suivre">
-<li><strong>Lis la page</strong> à ton rythme. Le temps de lecture est compté quand la page est à l'écran.</li>
-<li><strong>Réponds aux questions</strong> (7, dont 1 à développement), en bas de la page.</li>
-<li><strong>Atteste ta lecture</strong> : choisis ton nom dans la liste et envoie.</li>
-</ol>
-
+<aside class="infobox"><div class="infobox-title">⛑️ Le risque électrique</div><table>
+<tr><th>Ta lecture</th><td id="infoboxEtat" data-etat-badge data-etat-long data-slug="risque-electrique">À lire</td></tr>
+<tr><th>Temps sur cette page</th><td><span id="chrono" aria-hidden="true">0 s</span> <small class="et-chrono-note">il paraîtra sur ton attestation</small></td></tr>
+<tr><th>Thème</th><td><a href="section-risques.html">Les risques et les bons réflexes</a></td></tr>
+<tr><th>Lecture estimée</th><td>≈ 4 min</td></tr>
+<tr><th>Questions</th><td><a href="#questions">7 questions, dont 1 à développement</a></td></tr>
+<tr><th>Révision</th><td>2026-09-03</td></tr>
+</table><div class="infobox-tags"><span class="tag">wiki</span><span class="tag">prévention</span><span class="tag">les risques et les bons réflexes</span></div></aside>
+<nav class="toc" aria-label="Sommaire de la page"><div class="toc-title">Sommaire <span class="toc-compte">7 sections</span> <button type="button" class="toc-toggle" aria-expanded="true">[masquer]</button></div><ul><li class="toc-l2"><a href="#a-quoi-sert-cette-page">À quoi sert cette page</a></li><li class="toc-l2"><a href="#contenu">Contenu</a></li><li class="toc-l2"><a href="#points-de-vigilance">Points de vigilance</a></li><li class="toc-l2"><a href="#application-terrain">Application terrain</a></li><li class="toc-l2"><a href="#a-eviter">À éviter</a></li><li class="toc-l2"><a href="#pour-aller-plus-loin">Pour aller plus loin</a></li><li class="toc-l2"><a href="#questions">Questions sur ta lecture</a></li></ul></nav>
 <div class="page-body">
 <p>Cette page t&#39;explique ce que le courant fait au corps, où le risque électrique se cache en mine, et pourquoi on travaille hors tension chaque fois que c&#39;est possible.</p>
 <h2 id="a-quoi-sert-cette-page">À quoi sert cette page</h2>
@@ -96,18 +130,24 @@
 <li>Articles de loi : <span class="et-hors">art. 477 RSSM</span>, <span class="et-hors">art. 479 RSSM</span>, <span class="et-hors">art. 331 RSST</span>, <a href="droit-de-refus.html">art. 12 LSST</a>.</li>
 </ul>
 
-</div>
+
 <section class="et-questions" id="questions" aria-labelledby="questions-titre">
 <h2 id="questions-titre">Questions sur ta lecture</h2>
+<p class="et-intro">Ces questions t'aident à retenir l'essentiel. Tu peux relire la page et recommencer autant de fois que tu veux : rien n'est envoyé avant que tu attestes.</p>
 <noscript><p class="et-avis">Les questions et l'attestation demandent JavaScript. Ouvre la page dans le navigateur de ton téléphone ou de ton ordinateur.</p></noscript>
 <div id="questionsZone"></div>
 </section>
 <section class="et-attestation" id="attestation" aria-labelledby="attestation-titre" hidden></section>
-<nav class="et-suivante" aria-label="Lecture suivante"><a href="hygiene-demarrage-rapide.html"><small>Lecture suivante</small><span>Bruit, poussières, chaleur : par où commencer →</span></a></nav>
-</main>
-<footer class="et-pied"><p>Espace travailleurs · WIKI SST — Mines. Ces pages expliquent les règles ; elles ne remplacent ni ton médecin, ni la CNESST, ni un avis juridique.</p>
-<p>Détresse ou danger immédiat : compose le <a class="et-tel" href="tel:911">911</a>.</p></footer>
+</div>
+<nav class="voir-aussi" aria-label="Dans le même thème"><h2>Dans le même thème</h2><ul><li><a href="cadenassage.html">Le cadenassage en mine</a></li><li><a href="equipements-de-protection.html">Tes équipements de protection</a></li><li><a href="presquaccident.html">Signaler un presqu'accident</a></li><li><a href="prevenir-une-nouvelle-blessure.html">Postures, manutention, vibrations</a></li></ul></nav>
+<nav class="voisins" aria-label="Pages voisines"><a class="voisin voisin-prec" href="equipements-de-protection.html"><small>← Précédent</small><span>Tes équipements de protection</span></a><a class="voisin voisin-suiv" href="presquaccident.html"><small>Suivant →</small><span>Signaler un presqu'accident</span></a></nav>
+
+<div class="page-meta"><span>Révision déclarée : 2026-09-03 · Lecture estimée ≈ 4 min · 717 mots</span><span class="accueil-marque">WIKI SST — Wiki prévention</span></div>
 <script type="application/json" id="donnees-questions">{"slug":"risque-electrique","questions":[{"id":"q1","type":"choix","question":"Quand peux-tu considérer qu'un équipement est hors tension ?","options":["Une fois la mise hors tension faite selon la procédure et vérifiée","Dès que tu as mis l'interrupteur en position arrêt","Dès que les voyants du panneau sont tous éteints","Dès qu'un collègue te dit qu'il a coupé le courant"],"reponse":0,"explication":"« Ne considère un équipement hors tension qu'une fois la mise hors tension faite selon la procédure et vérifiée. » Sans la procédure et la vérification, tu ne peux pas savoir si c'est vraiment hors tension."},{"id":"q2","type":"vf","question":"À environ 10 mA, tu peux encore lâcher une pièce sous tension par réflexe.","reponse":false,"explication":"« Ne compte pas sur ton réflexe pour lâcher une pièce sous tension : à environ 10 mA, tu ne peux déjà plus lâcher. » Ce sont des milliampères : « Le seuil où tu perds le contrôle de ta main est très bas. »"},{"id":"q3","type":"ordre","question":"Avant un travail sur un équipement, remets les étapes dans l'ordre.","etapes":["Arrêter l'équipement","Décharger les énergies résiduelles","Poser ton propre cadenas","Vérifier, selon la procédure, avant de commencer"],"explication":"« Avant un travail sur un équipement, arrête, décharge les énergies résiduelles, cadenasse et vérifie ». Le détail est dans la procédure : « Ton site devrait avoir une fiche de cadenassage par équipement »."},{"id":"q4","type":"multi","question":"Tu n'es pas électricien. Coche les bons réflexes, selon la page.","options":["Poser ton propre cadenas et garder ta clé sur toi","Prêter ta clé à un collègue qui finit le travail","Signaler un câble endommagé ou un couvercle manquant","Ouvrir une boîte de jonction pour trouver la panne","Laisser les travaux électriques aux personnes habilitées"],"reponses":[0,2,4],"explication":"« Pose ton propre cadenas, garde ta clé sur toi et ne la prête à personne. » Et « N'ouvre pas un coffret ou une boîte de jonction qui ne relève pas de ta tâche. »"},{"id":"q5","type":"vf","question":"Sur un appareillage électrique, n'importe quel électricien du site peut retirer le cadenas d'un collègue.","reponse":false,"explication":"« les cadenas sont posés et retirés uniquement par les personnes qui font les travaux : art. 477 RSSM. » Ton cadenas, c'est toi qui le poses et toi qui l'enlèves."},{"id":"q6","type":"choix","question":"Tu passes devant une chambre de transformateur affichée DANGER. La porte est ouverte. Ce n'est pas ta tâche. Que fais-tu ?","options":["Tu n'entres pas et tu signales la porte ouverte","Tu entres pour vérifier que tout va bien","Tu fermes la porte et tu n'en parles à personne","Tu entres, mais seulement avec tes gants"],"reponse":0,"explication":"« N'entre pas dans une chambre de transformateur ou un enclos affiché DANGER si ce n'est pas ta tâche. » Et « Signale les câbles endommagés, les couvercles manquants et les portes de chambre laissées ouvertes »."},{"id":"q7","type":"court","question":"Ton superviseur te demande de « dépanner vite » le panneau électrique d'une pompe, sans couper le courant, pour ne pas arrêter la production. Tu n'es pas électricien. Que fais-tu ?","attendu":["Ne pas travailler sous tension pour aller plus vite : le hors tension est la règle","Faire faire le travail par une personne habilitée, pas par dépannage","Demander à ton superviseur ou à ton représentant à la prévention qui est habilité sur le site et quelle est la procédure"],"explication":"« Fais faire les travaux sur l'appareillage électrique par les personnes habilitées, pas par dépannage. » La page le rappelle : « Travailler hors tension est toujours la solution privilégiée. »"}]}</script>
-<script src="assets/travailleurs.js?v=8b2e7f8076"></script>
+</main>
+</div>
+<footer class="site-footer">WIKI SST — Wiki prévention, pour les travailleurs des mines · Ces pages donnent des repères ; elles ne remplacent ni la procédure de ton site ni un avis médical.</footer>
+<script type="application/json" id="donnees-wiki">{"pages":[{"s":"securite-demarrage-rapide","t":"Sécurité : les bases","k":"commencer","o":0},{"s":"hygiene-demarrage-rapide","t":"Bruit, poussières, chaleur","k":"commencer","o":1},{"s":"toxicologie-demarrage-rapide","t":"Produits dangereux","k":"commencer","o":2},{"s":"ergonomie-demarrage-rapide","t":"Ton corps au travail","k":"commencer","o":3},{"s":"cadenassage","t":"Le cadenassage en mine","k":"risques","o":4},{"s":"equipements-de-protection","t":"Tes équipements de protection","k":"risques","o":5},{"s":"risque-electrique","t":"Le risque électrique","k":"risques","o":6},{"s":"presquaccident","t":"Signaler un presqu'accident","k":"risques","o":7},{"s":"prevenir-une-nouvelle-blessure","t":"Postures, manutention, vibrations","k":"risques","o":8},{"s":"obligations-du-travailleur","t":"Tes six obligations en santé et sécurité","k":"appuis","o":9},{"s":"droit-de-refus","t":"Refuser un travail dangereux","k":"appuis","o":10},{"s":"comite-sst-et-representant","t":"Le comité SST et le représentant à la prévention","k":"appuis","o":11},{"s":"garder-le-moral","t":"Garder le moral","k":"soin","o":12},{"s":"ou-appeler","t":"Où appeler quand ça ne va pas","k":"soin","o":13},{"s":"pae","t":"Le programme d'aide aux employés (PAE)","k":"soin","o":14},{"s":"assignation-temporaire","t":"L'assignation temporaire","k":"retour","o":15},{"s":"ton-retour-au-travail","t":"Ton retour au travail","k":"retour","o":16},{"s":"sequelles-et-readaptation","t":"Réadaptation et emploi convenable","k":"retour","o":17}],"sections":[{"id":"commencer","titre":"Par où commencer","icone":"🧭"},{"id":"risques","titre":"Les risques et les bons réflexes","icone":"⛑️"},{"id":"appuis","titre":"Tes obligations et tes appuis","icone":"🤝"},{"id":"soin","titre":"Prendre soin de toi","icone":"💬"},{"id":"retour","titre":"Retour au travail","icone":"🔁"}]}</script>
+<script src="assets/travailleurs.js?v=2dd99f2605"></script>
 </body>
 </html>

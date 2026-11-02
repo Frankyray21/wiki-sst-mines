@@ -1,66 +1,86 @@
-/* Espace travailleurs — s'ajoute à assets/style.css du wiki (couleurs, thèmes clair et sombre,
-   encadrés, tableaux), sans sa mise en page à colonne latérale. */
-html[data-espace="travailleurs"] { scroll-padding-top: 80px; scroll-padding-bottom: 56px; }
+/* Wiki prévention des travailleurs — s'ajoute à assets/style.css du wiki, qui donne l'en-tête, la
+   barre latérale, l'infobox, le sommaire, les encadrés, les boîtes d'accueil et les deux thèmes.
+   Ici : ce qui n'existe pas dans le wiki (questions, chronomètre, attestation, états de lecture). */
 .espace-travailleurs [hidden] { display: none !important; }
-body.espace-travailleurs { background: var(--bg); color: var(--text); margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
 .espace-travailleurs .et-sauter { position: absolute; left: -9999px; }
-.espace-travailleurs .et-sauter:focus { left: 12px; top: 8px; z-index: 50; background: var(--content-bg); padding: 8px 12px; border-radius: 6px; }
+.espace-travailleurs .et-sauter:focus { left: 12px; top: 8px; z-index: 50; background: var(--content-bg); padding: 8px 12px; border-radius: var(--rayon-petit); }
+/* lignes plus courtes sur grand écran : le wiki laisse filer jusqu'à 1440 px, trop long pour une lecture suivie */
+.espace-travailleurs .content { max-width: 1040px; }
+.et-coche { color: var(--tip-fg); font-weight: 700; }
+.et-intro { color: var(--text-soft); font-size: 14.5px; margin: -4px 0 14px; }
+.et-chrono-note { color: var(--text-soft); }
 
-.et-entete { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 10px 16px; background: var(--bg-entete, var(--content-bg)); border-bottom: 1px solid var(--border); }
-.et-marque { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; min-height: 44px; }
-.et-marque-icone { font-size: 26px; line-height: 1; }
-.et-marque strong { display: block; font-size: 17px; }
-.et-marque small { display: block; font-size: 12px; color: var(--text-soft); }
-.et-theme { min-width: 44px; min-height: 44px; border-radius: 10px; border: 1px solid var(--border); background: var(--content-bg); color: var(--text); font-size: 18px; cursor: pointer; }
-
-.content.et-page { flex: 1; width: 100%; max-width: 860px; margin: 0 auto; padding: 18px 16px 48px; box-sizing: border-box; background: transparent; border: 0; box-shadow: none; }
-.et-fil a { display: inline-block; padding: 8px 0; min-height: 24px; }
-.et-section { margin: 4px 0 2px; font-size: 14px; font-weight: 600; color: var(--text-soft); }
-.et-meta { margin: 6px 0 0; color: var(--text-soft); font-size: 14px; }
-.et-resume { font-size: 17px; line-height: 1.55; border-left: 4px solid var(--accent-ui, var(--accent)); padding: 4px 0 4px 12px; margin: 16px 0; }
-.et-etapes { margin: 16px 0; padding: 12px 16px 12px 36px; background: var(--bg-surface, var(--content-bg)); border: 1px solid var(--border-soft, var(--border)); border-radius: 10px; font-size: 15px; line-height: 1.5; }
-.et-etapes li + li { margin-top: 4px; }
+/* en-tête : sans favoris, aide ni hors-ligne, le bouton de thème vient tout de suite après le nom */
+@media (max-width: 600px) {
+  .espace-travailleurs .site-header { grid-template-columns: 44px minmax(0, 1fr) 44px; }
+  .espace-travailleurs .site-header > #btnTheme { grid-area: 1 / 3; }
+  .espace-travailleurs .site-header > .searchbox { grid-area: 2 / 1 / auto / -1; }
+}
 .et-hors { /* lien vers le reste du wiki, rendu en texte */ }
+.et-tel { font-weight: 700; white-space: nowrap; }
+.et-resume { font-size: 16.5px; line-height: 1.55; margin: 0 0 14px; color: var(--text); }
+.et-sources { font-size: 14px; color: var(--text-soft); }
+.et-sources li { margin: 3px 0; }
 
-.et-etat-page { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 12px 14px; border-radius: 10px; margin: 12px 0; border: 1px solid; }
+/* état de la lecture : bandeau sous le titre, pastille dans les listes, cellule de l'infobox */
+.et-etat-page { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 12px 14px; border-radius: var(--rayon); margin: 0 0 14px; border: 1px solid; }
 .et-etat-page p { margin: 0; flex: 1 1 260px; }
 .et-ok { border-color: var(--tip-bd); background: var(--tip-bg); color: var(--tip-fg); }
 .et-attente { border-color: var(--warn-bd); background: var(--warn-bg); color: var(--warn-fg); }
-.et-echec { border-color: var(--warn-bd); background: var(--warn-bg); }
+.et-reprise { border-color: var(--info-bd); background: var(--info-bg); }
+.et-badge { display: inline-block; font-size: 12.5px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: var(--tag-bg, var(--border-soft)); color: var(--text-soft); white-space: nowrap; }
+.et-badge-ok { background: var(--tip-bg); color: var(--tip-fg); }
+.et-badge-cours { background: var(--info-bg); color: var(--info-fg); }
+.et-badge-attente { background: var(--warn-bg); color: var(--warn-fg); }
+.et-badge-discret { font-size: 11.5px; padding: 1px 7px; }
+td.et-badge-ok, td.et-badge-cours, td.et-badge-attente { font-weight: 600; }
+
+/* listes de pages d'une section (rangées des pages de thème du wiki) et de l'accueil */
+.content .cat-pages.et-notions { columns: auto; margin: 8px 0 12px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 8px 10px; }
+.cat-pages.et-notions li a { gap: 10px; align-items: center; }
+.et-notion { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.et-notion-meta { font-size: 12.5px; color: var(--text-soft); font-weight: 400; }
+.cat-pages.et-notions .et-badge { flex: none; margin-right: 10px; }
+.accueil-corps .et-liste-accueil { margin: 4px 0 8px 20px; }
+.et-liste-accueil li { margin: 5px 0; }
+.et-liste-meta { color: var(--text-faint, var(--text-soft)); font-size: 12.5px; white-space: nowrap; }
+.accueil-theme-page { display: inline-block; margin-top: 4px; font-size: 14px; font-weight: 600; }
+
+/* progression : un chiffre, jamais une jauge */
+.et-progression-texte { font-size: 14.5px; }
 
 /* boutons */
-.et-bouton { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 20px; border-radius: 10px;
+.et-bouton { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 20px; border-radius: var(--rayon);
   border: 2px solid var(--accent-ui, var(--accent)); background: var(--accent-ui, var(--accent)); color: var(--accent-ui-text, #fff);
   font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; text-decoration: none; }
-.et-bouton:hover { background: var(--accent-ui-hover, var(--accent)); }
+.et-bouton:hover { background: var(--accent-ui-hover, var(--accent)); text-decoration: none; }
 .et-bouton[disabled] { opacity: .45; cursor: not-allowed; }
 .et-bouton-second { background: transparent; color: var(--text); border-color: var(--border); }
 .et-bouton-second:hover { background: var(--bg-surface-hover, var(--hover)); }
 .et-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
 
 /* questions */
-.et-questions, .et-attestation { margin-top: 36px; padding-top: 8px; border-top: 3px solid var(--accent-ui, var(--accent)); }
-.et-q { border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin: 0 0 16px; background: var(--content-bg); }
+.et-questions, .et-attestation { margin-top: 30px; padding-top: 6px; border-top: 3px solid var(--accent-ui, var(--accent)); }
+.et-q { border: 1px solid var(--border); border-radius: var(--rayon); padding: 14px 16px; margin: 0 0 16px; background: var(--bg-surface, var(--content-bg)); }
 .et-q legend { padding: 0; float: left; width: 100%; margin-bottom: 4px; }
 .et-q legend + * { clear: both; }
-.et-q-num { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--text-soft); }
+.et-q-num { display: block; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--text-soft); }
 .et-q-texte { display: block; font-size: 17px; font-weight: 600; line-height: 1.45; margin-top: 4px; }
 .et-q-consigne { clear: both; margin: 8px 0 10px; font-size: 14px; color: var(--text-soft); }
 .et-options { display: grid; gap: 8px; }
 .et-options-vf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.et-option { display: flex; align-items: flex-start; gap: 10px; padding: 12px; min-height: 48px; box-sizing: border-box; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; line-height: 1.4; }
+.et-option { display: flex; align-items: flex-start; gap: 10px; padding: 12px; min-height: 48px; box-sizing: border-box; border: 1px solid var(--border); border-radius: var(--rayon-petit); cursor: pointer; line-height: 1.4; background: var(--content-bg); }
 .et-option:hover { background: var(--bg-surface-hover, var(--hover)); }
 .et-option input { width: 24px; height: 24px; margin: 0; flex: none; accent-color: var(--accent-ui, var(--accent)); }
 .et-option:has(input:checked) { border-color: var(--accent-ui, var(--accent)); box-shadow: inset 0 0 0 1px var(--accent-ui, var(--accent)); }
 .et-ordre { list-style: none; counter-reset: etape; margin: 0; padding: 0; display: grid; gap: 8px; }
-.et-etape { counter-increment: etape; display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-surface, var(--content-bg)); }
+.et-etape { counter-increment: etape; display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 12px; border: 1px solid var(--border); border-radius: var(--rayon-petit); background: var(--content-bg); }
 .et-etape::before { content: counter(etape); flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; background: var(--tag-bg, var(--border-soft)); }
 .et-etape-texte { flex: 1; line-height: 1.4; }
 .et-fleches { display: flex; gap: 6px; flex: none; }
-.et-fleche { width: 44px; height: 44px; border-radius: 8px; border: 1px solid var(--border); background: var(--content-bg); color: var(--text); font-size: 20px; cursor: pointer; }
+.et-fleche { width: 44px; height: 44px; border-radius: var(--rayon-petit); border: 1px solid var(--border); background: var(--content-bg); color: var(--text); font-size: 20px; cursor: pointer; }
 .et-fleche[disabled] { opacity: .3; cursor: default; }
-.et-q textarea, .et-champ { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-surface-creux, var(--content-bg)); color: var(--text); }
+.et-q textarea, .et-champ { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 12px; border-radius: var(--rayon-petit); border: 1px solid var(--border); background: var(--bg-surface-creux, var(--content-bg)); color: var(--text); }
 .et-q textarea { min-height: 110px; resize: vertical; }
 .et-manque { border: 2px solid var(--warn-bd); }
 .et-q-juste { border-left: 6px solid var(--tip-bd); }
@@ -74,85 +94,69 @@ body.espace-travailleurs { background: var(--bg); color: var(--text); margin: 0;
 .et-explication { color: var(--text-soft); margin: 6px 0 0; }
 
 /* soumission et temps de lecture */
-.et-soumission { margin-top: 20px; padding: 16px; border-radius: 12px; background: var(--bg-surface, var(--content-bg)); border: 1px solid var(--border); }
+.et-soumission { margin-top: 20px; padding: 16px; border-radius: var(--rayon); background: var(--bg-surface, var(--content-bg)); border: 1px solid var(--border); }
 .et-soumission h3 { margin: 0 0 10px; }
-.et-temps { border: 2px solid var(--info-bd); background: var(--info-bg); color: var(--info-fg); border-radius: 10px; padding: 12px 14px; margin: 0 0 14px; }
+.et-temps { border: 2px solid var(--info-bd); background: var(--info-bg); color: var(--info-fg); border-radius: var(--rayon-petit); padding: 12px 14px; margin: 0 0 14px; }
 .et-temps p { margin: 0; }
 .et-temps-principal { font-size: 18px; }
 .et-temps-detail { font-size: 14px; margin-top: 4px !important; }
 .et-temps-alerte { margin-top: 8px !important; font-size: 14px; font-weight: 600; }
 .et-message { min-height: 1.4em; margin: 10px 0 0; font-weight: 600; }
-.et-bilan { margin-top: 18px; padding: 16px; border-radius: 12px; border: 1px solid; }
+.et-bilan { margin-top: 18px; padding: 16px; border-radius: var(--rayon); border: 1px solid; }
 .et-bilan-score { font-size: 20px; font-weight: 700; margin: 0 0 10px; }
 .et-chrono { position: fixed; right: 12px; bottom: 12px; z-index: 15; padding: 6px 12px; border-radius: 999px; font-size: 14px; font-variant-numeric: tabular-nums;
   background: var(--content-bg); color: var(--text); border: 1px solid var(--border); box-shadow: var(--ombre-legere, 0 2px 8px rgba(0,0,0,.2)); pointer-events: none; }
+.et-chrono.et-cache { display: none; }
+html[data-lecture] .et-chrono { display: none; }
 
 /* attestation */
-.et-recap { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 12px 0 18px; padding: 14px 16px; border-radius: 12px; background: var(--bg-surface, var(--content-bg)); border: 1px solid var(--border); }
+.et-recap { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 12px 0 18px; padding: 14px 16px; border-radius: var(--rayon); background: var(--bg-surface, var(--content-bg)); border: 1px solid var(--border); }
 .et-recap dt { font-weight: 600; color: var(--text-soft); }
 .et-recap dd { margin: 0; font-weight: 600; }
 .et-libelle { display: block; font-weight: 700; margin-bottom: 6px; }
 .et-combo { position: relative; }
-.et-noms { list-style: none; margin: 4px 0 0; padding: 4px; border: 1px solid var(--border); border-radius: 10px; background: var(--content-bg); max-height: 320px; overflow-y: auto; }
-.et-nom { padding: 12px; min-height: 44px; box-sizing: border-box; border-radius: 8px; cursor: pointer; }
+.et-noms { list-style: none; margin: 4px 0 0; padding: 4px; border: 1px solid var(--border); border-radius: var(--rayon-petit); background: var(--content-bg); max-height: 320px; overflow-y: auto; }
+.et-nom { padding: 12px; min-height: 44px; box-sizing: border-box; border-radius: var(--rayon-petit); cursor: pointer; }
 .et-nom:hover, .et-nom:focus { background: var(--bg-surface-hover, var(--hover)); outline: 2px solid var(--focus, var(--accent)); }
 .et-etat-nom { min-height: 1.3em; font-size: 14px; color: var(--text-soft); margin: 6px 0 12px; }
 .et-case { display: flex; gap: 10px; align-items: flex-start; margin: 10px 0; line-height: 1.45; cursor: pointer; }
 .et-case input { width: 24px; height: 24px; margin: 1px 0 0; flex: none; accent-color: var(--accent-ui, var(--accent)); }
 .et-note { font-size: 13px; color: var(--text-soft); margin: 12px 0; }
-.et-certificat { border: 3px double var(--border); border-radius: 12px; padding: 24px 20px; background: var(--content-bg); margin-top: 12px; }
+.et-certificat { border: 3px double var(--border); border-radius: var(--rayon); padding: 24px 20px; background: var(--content-bg); margin-top: 12px; }
 .et-cert-sur { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-soft); text-align: center; }
 .et-cert-titre { text-align: center; font-size: 26px; margin: 6px 0 16px; border: 0; }
 .et-cert-texte { font-size: 17px; line-height: 1.6; }
 .et-cert-table { width: 100%; border-collapse: collapse; margin: 14px 0; }
 .et-cert-table th, .et-cert-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border-soft, var(--border)); vertical-align: top; }
 .et-cert-table th { width: 46%; font-weight: 600; color: var(--text-soft); }
-.et-cert-attente { font-weight: 600; color: var(--warn-fg); background: var(--warn-bg); padding: 10px 12px; border-radius: 8px; }
+.et-cert-attente { font-weight: 600; color: var(--warn-fg); background: var(--warn-bg); padding: 10px 12px; border-radius: var(--rayon-petit); }
 .et-cert-note { font-size: 14px; color: var(--text-soft); }
 
-.et-suivante { margin-top: 36px; }
-.et-suivante a { display: block; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border); text-decoration: none; background: var(--content-bg); }
-.et-suivante small { display: block; color: var(--text-soft); }
-.et-suivante span { font-weight: 700; font-size: 17px; }
+/* recherche interne */
+.et-recherche { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin: 0 0 18px; }
+.et-recherche .et-libelle { flex: 1 0 100%; margin: 0; }
+.et-recherche-champ { position: relative; flex: 1 1 260px; min-width: 0; }
+.et-recherche-champ input { width: 100%; box-sizing: border-box; min-height: 48px; padding: 10px 14px; font: inherit; font-size: 16px; border: 1px solid var(--border); border-radius: var(--rayon-petit); background: var(--bg-surface-creux, var(--content-bg)); color: var(--text); }
+.et-recherche-champ input:focus { outline: 2px solid var(--focus); outline-offset: -1px; }
+/* pied de page : à gauche la révision, à droite la marque, comme un accueil du wiki */
+.espace-travailleurs .page-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px; }
 
-/* accueil */
-.et-accueil-titre .page-title { margin-bottom: 8px; }
-.et-chapeau { font-size: 18px; line-height: 1.55; margin: 0 0 16px; }
-.et-progression { margin: 18px 0; }
-.et-progression-texte { margin-bottom: 6px; }
-.et-barre { height: 12px; border-radius: 999px; background: var(--border-soft, var(--border)); overflow: hidden; }
-.et-barre span { display: block; height: 100%; width: 0; background: var(--accent-ui, var(--accent)); transition: width .4s; }
-.et-comment { margin: 16px 0 8px; border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; background: var(--content-bg); }
-.et-comment summary { cursor: pointer; font-weight: 700; min-height: 32px; display: flex; align-items: center; }
-.et-comment li + li { margin-top: 6px; }
-.et-section-bloc h2 { margin-top: 28px; }
-.et-cartes { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
-.et-carte a { display: flex; flex-direction: column; gap: 4px; height: 100%; box-sizing: border-box; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--content-bg); color: var(--text); text-decoration: none; }
-.et-carte a:hover { border-color: var(--hover-bd, var(--accent)); background: var(--bg-surface-hover, var(--hover)); }
-.et-carte-titre { font-weight: 700; font-size: 17px; color: var(--link); }
-.et-carte-resume { font-size: 14px; line-height: 1.45; color: var(--text-soft); }
-.et-carte-meta { font-size: 13px; color: var(--text-faint, var(--text-soft)); margin-top: auto; padding-top: 4px; }
-.et-badge { align-self: flex-start; margin-top: 6px; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--tag-bg, var(--border-soft)); color: var(--text-soft); }
-.et-badge-ok { background: var(--tip-bg); color: var(--tip-fg); }
-.et-badge-cours { background: var(--info-bg); color: var(--info-fg); }
-.et-badge-attente { background: var(--warn-bg); color: var(--warn-fg); }
-
-.et-pied { padding: 18px 16px 28px; text-align: center; font-size: 13px; color: var(--text-soft); border-top: 1px solid var(--border); }
-.et-pied p { margin: 4px auto; max-width: 720px; }
-.et-tel { font-weight: 700; white-space: nowrap; }
+/* mes lectures */
+.et-attestations { list-style: none; margin: 0; padding: 0; }
+.et-attestations li { padding: 10px 0; border-bottom: 1px solid var(--border-soft, var(--border)); display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; }
+.et-attestations .et-att-date { font-variant-numeric: tabular-nums; color: var(--text-soft); font-size: 14px; }
 
 @media (max-width: 520px) {
   .et-recap { grid-template-columns: 1fr; }
   .et-recap dd { margin-bottom: 6px; }
-  .et-options-vf { grid-template-columns: 1fr 1fr; }
   .et-chrono { bottom: 8px; right: 8px; }
 }
 
-/* impression : la page, sans les commandes ; ou l'attestation seule */
+/* impression : la page sans ses commandes (le wiki cache déjà en-tête, menu et pied), ou l'attestation seule */
 @media print {
-  .et-entete, .et-chrono, .et-pied, .et-fil, .et-suivante, .et-theme, .et-actions, .et-etapes, .et-etat-page, .et-form-att, .et-soumission .et-bouton { display: none !important; }
-  body.espace-travailleurs { background: #fff; color: #000; }
-  .et-imprime-certificat main > *:not(#attestation) { display: none !important; }
+  .et-chrono, .et-actions, .et-etat-page, .et-form-att, .et-soumission .et-bouton, .voisins, .voir-aussi, .et-questions noscript { display: none !important; }
+  .et-imprime-certificat .content > *:not(.page-body) { display: none !important; }
+  .et-imprime-certificat .page-body > *:not(#attestation) { display: none !important; }
   .et-imprime-certificat #attestation > *:not(.et-certificat) { display: none !important; }
   .et-imprime-certificat .et-attestation { border: 0; margin: 0; }
   .et-certificat { border-color: #000; }
