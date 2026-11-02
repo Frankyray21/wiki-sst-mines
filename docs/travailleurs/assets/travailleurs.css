@@ -3,7 +3,13 @@
    Ici : ce qui n'existe pas dans le wiki (questions, chronomètre, attestation, états de lecture). */
 .espace-travailleurs [hidden] { display: none !important; }
 .espace-travailleurs .et-sauter { position: absolute; left: -9999px; }
-.espace-travailleurs .et-sauter:focus { left: 12px; top: 8px; z-index: 50; background: var(--content-bg); padding: 8px 12px; border-radius: var(--rayon-petit); }
+.espace-travailleurs .et-sauter:focus { left: 12px; top: 8px; z-index: 60; background: var(--content-bg); padding: 8px 12px; border-radius: var(--rayon-petit); outline: 3px solid var(--focus); }
+/* mode Lecture : sur téléphone, le burger ouvre quand même le menu (le wiki masque la barre en display:none) */
+@media (max-width: 900px) { html[data-lecture] .sidebar.open { display: block !important; } }
+/* [masquer] du sommaire : une cible de 24 px aussi sur grand écran */
+.espace-travailleurs .toc-toggle { padding: 5px 6px; min-height: 24px; }
+.et-refus { border-color: var(--danger-bd); background: var(--danger-bg); color: var(--danger-fg); }
+.et-badge-refus { background: var(--danger-bg); color: var(--danger-fg); }
 /* lignes plus courtes sur grand écran : le wiki laisse filer jusqu'à 1440 px, trop long pour une lecture suivie */
 .espace-travailleurs .content { max-width: 1040px; }
 .et-coche { color: var(--tip-fg); font-weight: 700; }
@@ -154,7 +160,7 @@ html[data-lecture] .et-chrono { display: none; }
 
 /* impression : la page sans ses commandes (le wiki cache déjà en-tête, menu et pied), ou l'attestation seule */
 @media print {
-  .et-chrono, .et-actions, .et-etat-page, .et-form-att, .et-soumission .et-bouton, .voisins, .voir-aussi, .et-questions noscript { display: none !important; }
+  .et-chrono, .et-actions, .et-etat-page, .et-form-att, .voisins, .voir-aussi, .et-questions { display: none !important; }
   .et-imprime-certificat .content > *:not(.page-body) { display: none !important; }
   .et-imprime-certificat .page-body > *:not(#attestation) { display: none !important; }
   .et-imprime-certificat #attestation > *:not(.et-certificat) { display: none !important; }

@@ -33,7 +33,7 @@
         { "slug": "equipements-de-protection", "source": "w/securite/equipements-de-protection.html", "titre": "Tes équipements de protection" },
         { "slug": "risque-electrique", "source": "w/securite/le-risque-electrique-ce-que-tu-dois-savoir.html", "titre": "Le risque électrique" },
         { "slug": "presquaccident", "source": "w/securite/presquaccident.html", "titre": "Signaler un presqu'accident" },
-        { "slug": "prevenir-une-nouvelle-blessure", "fichier": "pages/prevenir-une-nouvelle-blessure.md", "titre": "Postures, manutention, vibrations" }
+        { "slug": "postures-manutention-vibrations", "fichier": "pages/postures-manutention-vibrations.md", "titre": "Postures, manutention, vibrations" }
       ]
     },
     {
@@ -72,7 +72,7 @@
       "pages": [
         { "slug": "assignation-temporaire", "fichier": "pages/assignation-temporaire.md", "titre": "L'assignation temporaire" },
         { "slug": "ton-retour-au-travail", "fichier": "pages/ton-retour-au-travail.md" },
-        { "slug": "sequelles-et-readaptation", "fichier": "pages/sequelles-et-readaptation.md", "titre": "Réadaptation et emploi convenable" }
+        { "slug": "readaptation-et-emploi-convenable", "fichier": "pages/readaptation-et-emploi-convenable.md", "titre": "Réadaptation et emploi convenable" }
       ]
     }
   ],
@@ -85,8 +85,8 @@
     "w/psychosocial/retour-au-travail.html": "ton-retour-au-travail",
     "w/legislation/40-concepts-juridiques-transverses/assignation-temporaire.html": "assignation-temporaire",
     "w/droit-travail/retour-au-travail-et-assignation.html": "assignation-temporaire",
-    "w/droit-travail/readaptation.html": "sequelles-et-readaptation",
-    "w/legislation/40-concepts-juridiques-transverses/emploi-convenable.html": "sequelles-et-readaptation",
+    "w/droit-travail/readaptation.html": "readaptation-et-emploi-convenable",
+    "w/legislation/40-concepts-juridiques-transverses/emploi-convenable.html": "readaptation-et-emploi-convenable",
     "w/hygiene/equipements-de-protection.html": "equipements-de-protection",
     "w/psychosocial/lignes-daide-et-pae.html": "ou-appeler",
     "w/legislation/40-concepts-juridiques-transverses/pae.html": "pae",

@@ -142,13 +142,18 @@ test('l’interface ne dit jamais que le lecteur est blessé ou en arrêt : nom,
   const { conf, pages, sections } = preparerEspace(DOCS, { outils: OUTILS });
   for (const t of [conf.nom, conf.nomLong, texteDe(conf.sousTitre), conf.chapeau, conf.marque.gros, conf.marque.petit]) assert.doesNotMatch(t, MOTS_INTERDITS, t);
   for (const s of sections) for (const t of [s.titre, s.chapeau, s.etiquette]) assert.doesNotMatch(t, MOTS_INTERDITS, t);
-  for (const p of pages) assert.doesNotMatch(p.titre, MOTS_INTERDITS, p.titre);
+  for (const p of pages) { assert.doesNotMatch(p.titre, MOTS_INTERDITS, p.titre); assert.doesNotMatch(p.slug, /bless|arret|lesion|sequelle|reclamation|indemnit|absence/, 'adresse de page : ' + p.slug); }
   const accueil = fs.readFileSync(path.join(ESPACE, 'index.html'), 'utf8');
   assert.doesNotMatch(texteDe(accueil), MOTS_INTERDITS, 'page d’accueil');
   // la barre latérale et l'en-tête de chaque page, pareil
   const article = fs.readFileSync(path.join(ESPACE, 'cadenassage.html'), 'utf8');
   const avantCorps = article.slice(0, article.indexOf('<div class="page-body">'));
   assert.doesNotMatch(texteDe(avantCorps), MOTS_INTERDITS, 'menu, fil d’Ariane, infobox, sommaire');
+  // la description (aperçus de lien, favoris) est le sous-titre neutre du wiki, jamais le résumé de la page
+  for (const f of ['garder-le-moral.html', 'readaptation-et-emploi-convenable.html', 'ton-retour-au-travail.html']) {
+    const h = fs.readFileSync(path.join(ESPACE, f), 'utf8');
+    assert.equal(h.match(/<meta name="description" content="([^"]*)">/)[1], texteDe(conf.sousTitre).replace(/&/g, '&amp;'), f);
+  }
   // et pas de droits ni de démarches en vitrine : le wiki parle de prévention
   assert.doesNotMatch(conf.nom + texteDe(conf.sousTitre) + conf.chapeau + sections.map(s => s.titre).join(' '), /droit|démarche|réclamation/i);
 });
@@ -218,6 +223,9 @@ test('une page de lecture a l’infobox, le sommaire, « Voir aussi », les vois
   assert.match(html, /<div class="lecture-outils" role="group"/, 'A−, A+, Lecture comme sur un article du wiki');
   assert.match(html, /<span id="chrono" aria-hidden="true">/, 'temps de lecture dans l’infobox');
   assert.match(html, /<div class="nav-title">Dans ce thème<\/div>/);
+  assert.match(html, /<main class="content" id="principal">/, 'identifiant du contenu sans collision avec un titre « Contenu »');
+  const md = fs.readFileSync(path.join(ESPACE, 'garder-le-moral.html'), 'utf8');
+  assert.match(md, /<li class="toc-l2"><a href="#sources">Sources<\/a><\/li><li class="toc-l2"><a href="#questions">/, 'les sources d’une page écrite sont au sommaire');
   assert.match(html, /<nav class="voisins"/);
   assert.match(html, /<details class="backlinks"><summary>Pages qui pointent ici \(\d+\)<\/summary>/);
   assert.match(html, /<li class="active"><a href="cadenassage\.html" aria-current="page">/, 'page courante marquée dans le menu');
