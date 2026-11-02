@@ -136,6 +136,9 @@ self.addEventListener('fetch', (e) => {
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
   // une seule clé par ressource : la query (?v=) ne fait pas partie de la clé
   const cle = sansQuery(req.url);
+  // Espace travailleurs : réseau seulement. Il ne doit jamais recevoir une page du wiki (pas même
+  // offline.html, qui mène au portail) ; hors réseau, le navigateur affiche sa propre erreur.
+  if (new URL(req.url).pathname.includes('/travailleurs/')) return;
   if (new URL(req.url).pathname.includes('/files/')) {
     // les captures et PDF ne changent pas : cache d'abord, réseau sinon
     e.respondWith(caches.match(cle).then((m) => m || fetch(req).then((rep) => {
@@ -414,6 +417,9 @@ export function genererListeHorsLigne(OUT, version) {
       // l'application Android se télécharge une fois, pour l'installer : elle n'a rien à faire dans
       // le cache de chaque lecteur, ni dans celui… de l'application elle-même
       if (chemin.startsWith('app/')) continue;
+      // l'Espace travailleurs est un espace à part, sans lien vers le wiki : il n'entre pas dans la
+      // synchronisation hors ligne du wiki, et son service worker ne le sert pas (voir plus haut)
+      if (chemin.startsWith('travailleurs/')) continue;
       const abs = path.join(d, e.name);
       if (e.isDirectory()) { walk(abs, chemin + '/'); continue; }
       const taille = fs.statSync(abs).size;

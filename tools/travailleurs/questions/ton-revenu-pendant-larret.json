@@ -1,0 +1,87 @@
+{
+  "page": "ton-revenu-pendant-larret",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choix",
+      "question": "Pendant les 14 jours complets qui suivent ta blessure, qui te paie et combien ?",
+      "options": [
+        "Ton employeur, 90 % de ton salaire net",
+        "La CNESST, 90 % de ton salaire net",
+        "Ton employeur, 100 % de ton salaire brut",
+        "Personne : ces jours ne sont pas payés"
+      ],
+      "reponse": 0,
+      "explication": "« Ton employeur te paie ces 14 jours à la date habituelle de ta paie si tu lui as remis ton attestation médicale » — Pendant ces 14 jours, ton employeur te verse 90 % de ton salaire net, puis la CNESST le rembourse."
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "question": "Coche ce que comprend l'assistance médicale payée par la CNESST.",
+      "options": [
+        "Les services des professionnels de la santé",
+        "Les médicaments et autres produits pharmaceutiques",
+        "Les prothèses et orthèses prescrites",
+        "Ton loyer pendant l'arrêt",
+        "Tes cotisations syndicales"
+      ],
+      "reponses": [
+        0,
+        1,
+        2
+      ],
+      "explication": "« La CNESST paie ces coûts, et personne ne peut te réclamer d'argent pour une assistance médicale à laquelle tu as droit » — L'assistance médicale couvre tes soins : professionnels de la santé, médicaments, prothèses et orthèses. Ton loyer et tes cotisations n'en font pas partie."
+    },
+    {
+      "id": "q3",
+      "type": "vf",
+      "question": "L'IRR versée par la CNESST est égale à 90 % de ton revenu net retenu annuel.",
+      "reponse": true,
+      "explication": "« Elle est égale à 90 % de ton revenu net retenu annuel » — C'est la règle de base. Le calcul détaillé est sur la page de l'IRR."
+    },
+    {
+      "id": "q4",
+      "type": "ordre",
+      "question": "Remets dans l'ordre ce qui se passe pour ton revenu pendant l'arrêt.",
+      "etapes": [
+        "Ton employeur paie ton salaire net pour le reste de la journée de ta blessure",
+        "Ton employeur paie 90 % de ton salaire net pendant 14 jours complets",
+        "La CNESST verse l'IRR à partir du 15e jour complet",
+        "Le droit à l'IRR s'éteint, par exemple quand tu redeviens capable d'exercer ton emploi"
+      ],
+      "explication": "« ton employeur, puis la CNESST, te versent une indemnité » — Ton employeur paie d'abord le jour de ta blessure et les 14 jours suivants, puis la CNESST prend le relais jusqu'à la fin du droit à l'IRR."
+    },
+    {
+      "id": "q5",
+      "type": "choix",
+      "question": "Tu dois faire de la route pour aller à tes traitements. Que dit la page sur tes frais de déplacement ?",
+      "options": [
+        "La CNESST les rembourse sur pièces justificatives",
+        "Tu les paies toi-même, comme pour un rendez-vous privé",
+        "Ton syndicat les rembourse à la fin de l'année",
+        "Ils sont retirés de ton IRR"
+      ],
+      "reponse": 0,
+      "explication": "« La CNESST te rembourse, sur pièces justificatives, tes frais de déplacement et de séjour pour recevoir des soins » — Garde tes reçus : ce sont tes pièces justificatives."
+    },
+    {
+      "id": "q6",
+      "type": "vf",
+      "question": "Tu peux attendre plusieurs mois avant de dire à ton employeur la date de consolidation que ton médecin t'a annoncée.",
+      "reponse": false,
+      "explication": "« Quand ton médecin t'annonce la date de consolidation, préviens ton employeur sans délai » — Sinon, si tu ne gardes aucune limitation, la CNESST doit te réclamer l'IRR reçue sans droit depuis la consolidation."
+    },
+    {
+      "id": "q7",
+      "type": "court",
+      "question": "En tes mots, nomme deux situations où l'IRR s'arrête.",
+      "attendu": [
+        "tu redeviens capable d'exercer ton emploi",
+        "tu as réintégré ton emploi ou un emploi équivalent",
+        "ton médecin fixe la consolidation sans limitation fonctionnelle et tu n'as pas besoin de réadaptation",
+        "à 68 ans, ou quatre ans après le début de l'arrêt si tu avais au moins 64 ans"
+      ],
+      "explication": "« Le droit à l'IRR s'éteint au premier de ces événements » — La page nomme aussi les cas où la CNESST cesse de verser l'IRR, par exemple quand tu as réintégré ton emploi."
+    }
+  ]
+}

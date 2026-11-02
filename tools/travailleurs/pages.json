@@ -1,0 +1,192 @@
+{
+  "titre": "Espace travailleurs",
+  "sousTitre": "Lectures pendant ton arrêt de travail",
+  "seuil": 80,
+  "relais": "https://attestations-travailleurs.frankyray-21.workers.dev",
+  "sections": [
+    {
+      "id": "blessure",
+      "titre": "Après ta blessure : tes démarches et tes droits",
+      "icone": "🩹",
+      "pages": [
+        {
+          "slug": "premieres-demarches",
+          "fichier": "pages/premieres-demarches.md"
+        },
+        {
+          "slug": "droit-demarrage-rapide",
+          "source": "w/droit-travail/demarrage-rapide-travailleur.html",
+          "titre": "Tes droits au travail : par où commencer"
+        },
+        {
+          "slug": "reclamation-cnesst",
+          "source": "w/droit-travail/reclamation-cnesst.html",
+          "titre": "Ta réclamation à la CNESST"
+        },
+        {
+          "slug": "ton-medecin-et-le-bem",
+          "fichier": "pages/ton-medecin-et-le-bem.md"
+        },
+        {
+          "slug": "ton-revenu-pendant-larret",
+          "fichier": "pages/ton-revenu-pendant-larret.md"
+        },
+        {
+          "slug": "irr-indemnites",
+          "source": "w/droit-travail/irr-indemnites.html",
+          "titre": "L'indemnité de remplacement du revenu (IRR)"
+        },
+        {
+          "slug": "rechute-recidive-aggravation",
+          "fichier": "pages/rechute-recidive-aggravation.md"
+        },
+        {
+          "slug": "contester-une-decision",
+          "fichier": "pages/contester-une-decision.md"
+        },
+        {
+          "slug": "tes-protections",
+          "fichier": "pages/tes-protections.md"
+        },
+        {
+          "slug": "droits-et-recours",
+          "source": "w/droit-travail/theme/droits-et-recours-du-travailleur.html",
+          "titre": "Tes droits et tes recours"
+        },
+        {
+          "slug": "droits-et-obligations-lois",
+          "source": "w/legislation/05-demarrage-rapide/demarrage-rapide-travailleur.html",
+          "titre": "Tes droits et obligations selon les lois"
+        }
+      ],
+      "etiquette": "Après ta blessure"
+    },
+    {
+      "id": "soins",
+      "titre": "Prendre soin de toi",
+      "icone": "💬",
+      "pages": [
+        {
+          "slug": "garder-le-moral",
+          "fichier": "pages/garder-le-moral.md"
+        },
+        {
+          "slug": "ou-appeler",
+          "source": "w/psychosocial/ou-appeler-quand-ca-ne-va-pas.html"
+        },
+        {
+          "slug": "pae",
+          "source": "w/psychosocial/programme-daide-aux-employes-pae.html",
+          "titre": "Le programme d'aide aux employés (PAE)"
+        }
+      ],
+      "etiquette": "Prendre soin de toi"
+    },
+    {
+      "id": "retour",
+      "titre": "Préparer ton retour au travail",
+      "icone": "🔁",
+      "pages": [
+        {
+          "slug": "assignation-temporaire",
+          "fichier": "pages/assignation-temporaire.md"
+        },
+        {
+          "slug": "ton-retour-au-travail",
+          "fichier": "pages/ton-retour-au-travail.md"
+        },
+        {
+          "slug": "sequelles-et-readaptation",
+          "fichier": "pages/sequelles-et-readaptation.md"
+        },
+        {
+          "slug": "prevenir-une-nouvelle-blessure",
+          "fichier": "pages/prevenir-une-nouvelle-blessure.md"
+        }
+      ],
+      "etiquette": "Préparer ton retour"
+    },
+    {
+      "id": "prevention",
+      "titre": "Travailler en sécurité au retour",
+      "icone": "⛑️",
+      "pages": [
+        {
+          "slug": "obligations-du-travailleur",
+          "source": "w/legislation/10-lois-principales/lsst/art-49-lsst-obligations-travailleur.html",
+          "titre": "Tes six obligations en santé et sécurité"
+        },
+        {
+          "slug": "droit-de-refus",
+          "source": "w/legislation/40-concepts-juridiques-transverses/droit-de-refus.html",
+          "titre": "Le droit de refus"
+        },
+        {
+          "slug": "comite-sst-et-representant",
+          "fichier": "pages/comite-sst-et-representant.md"
+        },
+        {
+          "slug": "securite-demarrage-rapide",
+          "source": "w/securite/demarrage-rapide-travailleur.html",
+          "titre": "Sécurité : par où commencer"
+        },
+        {
+          "slug": "cadenassage",
+          "source": "w/securite/cadenassage.html"
+        },
+        {
+          "slug": "equipements-de-protection",
+          "source": "w/securite/equipements-de-protection.html",
+          "titre": "Tes équipements de protection"
+        },
+        {
+          "slug": "presquaccident",
+          "source": "w/securite/presquaccident.html"
+        },
+        {
+          "slug": "risque-electrique",
+          "source": "w/securite/le-risque-electrique-ce-que-tu-dois-savoir.html"
+        },
+        {
+          "slug": "hygiene-demarrage-rapide",
+          "source": "w/hygiene/demarrage-rapide-travailleur.html",
+          "titre": "Bruit, poussières, chaleur : par où commencer"
+        },
+        {
+          "slug": "toxicologie-demarrage-rapide",
+          "source": "w/toxicologie/demarrage-rapide-travailleur.html",
+          "titre": "Produits dangereux : par où commencer"
+        },
+        {
+          "slug": "ergonomie-demarrage-rapide",
+          "source": "w/ergonomie/demarrage-rapide-travailleur.html",
+          "titre": "Ton corps au travail : par où commencer"
+        }
+      ],
+      "etiquette": "Travailler en sécurité"
+    }
+  ],
+  "renvois": {
+    "w/psychosocial/theme/retour-au-travail.html": "ton-retour-au-travail",
+    "w/psychosocial/retour-au-travail.html": "ton-retour-au-travail",
+    "w/legislation/40-concepts-juridiques-transverses/assignation-temporaire.html": "assignation-temporaire",
+    "w/droit-travail/retour-au-travail-et-assignation.html": "assignation-temporaire",
+    "w/droit-travail/bem-evaluation-medicale.html": "ton-medecin-et-le-bem",
+    "w/legislation/30-organismes-et-tribunaux/bem.html": "ton-medecin-et-le-bem",
+    "w/legislation/50-procedures/contestation-au-bem.html": "ton-medecin-et-le-bem",
+    "w/legislation/40-concepts-juridiques-transverses/mqac.html": "ton-medecin-et-le-bem",
+    "w/droit-travail/readaptation.html": "sequelles-et-readaptation",
+    "w/legislation/40-concepts-juridiques-transverses/emploi-convenable.html": "sequelles-et-readaptation",
+    "w/legislation/40-concepts-juridiques-transverses/represailles.html": "tes-protections",
+    "w/legislation/50-procedures/recours-au-tat.html": "contester-une-decision",
+    "w/legislation/30-organismes-et-tribunaux/tat.html": "contester-une-decision",
+    "w/hygiene/equipements-de-protection.html": "equipements-de-protection",
+    "w/psychosocial/lignes-daide-et-pae.html": "ou-appeler",
+    "w/legislation/40-concepts-juridiques-transverses/pae.html": "pae",
+    "w/legislation/10-lois-principales/lsst/art-12-lsst-droit-refus.html": "droit-de-refus",
+    "w/psychosocial/comite-sst-et-representant-en-sst.html": "comite-sst-et-representant",
+    "w/legislation/40-concepts-juridiques-transverses/representant-a-la-prevention.html": "comite-sst-et-representant",
+    "w/droit-travail/droits-du-travailleur.html": "droits-et-recours",
+    "w/droit-travail/theme/demarche-en-cas-de-lesion.html": "premieres-demarches"
+  }
+}

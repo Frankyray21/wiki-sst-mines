@@ -1,0 +1,66 @@
+{
+  "page": "droit-demarrage-rapide",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choix",
+      "question": "Après un accident au travail, combien de temps as-tu pour produire ta réclamation à la CNESST ?",
+      "options": ["30 jours", "6 mois", "1 an", "3 ans"],
+      "reponse": 1,
+      "explication": "« Tu as six mois après un accident pour produire une réclamation à la CNESST. » — La page ajoute : « Ne tarde pas. » Six mois, ça passe vite."
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "question": "Tu ne comprends pas une démarche ou une lettre. Selon la page, vers qui peux-tu te tourner ?",
+      "options": [
+        "Ton représentant à la prévention",
+        "Ton syndicat",
+        "La CNESST, par téléphone",
+        "Personne : mieux vaut attendre quelques semaines",
+        "Un avocat en droit du travail"
+      ],
+      "reponses": [0, 1, 2, 4],
+      "explication": "« Demande à ton représentant à la prévention, à ton syndicat, ou appelle la CNESST. Tu peux aussi consulter un avocat en droit du travail. » — Attendre n'est pas une bonne idée : « ne laisse pas une question sans réponse pendant des semaines »."
+    },
+    {
+      "id": "q3",
+      "type": "vf",
+      "question": "Le droit de refuser un travail dangereux fait partie de tes droits de base.",
+      "reponse": true,
+      "explication": "« Connaître tes droits de base : refus de travail dangereux, retrait préventif, participation à un comité SST, information sur les risques. » — Le refus d'un travail dangereux est le premier de la liste."
+    },
+    {
+      "id": "q4",
+      "type": "vf",
+      "question": "Après un accident ou une maladie liée au travail, il vaut mieux attendre un peu avant de le déclarer.",
+      "reponse": false,
+      "explication": "« Si tu subis un accident ou une maladie liée au travail, déclarer rapidement et faire ta réclamation à la CNESST. » — La page dit de déclarer vite, pas d'attendre."
+    },
+    {
+      "id": "q5",
+      "type": "choix",
+      "question": "La page dit que les délais comptent. Qu'est-ce que ça veut dire pour toi ?",
+      "options": [
+        "Ne laisse pas une question sans réponse pendant des semaines",
+        "Attends la fin de ton arrêt pour poser tes questions",
+        "Pose tes questions une seule fois, au tout début",
+        "Seul ton employeur doit respecter des délais"
+      ],
+      "reponse": 0,
+      "explication": "« Les délais comptent : ne laisse pas une question sans réponse pendant des semaines. » — Si tu attends trop, tu risques de manquer un délai."
+    },
+    {
+      "id": "q6",
+      "type": "court",
+      "question": "Tu reçois une décision de la CNESST que tu ne comprends pas, ou avec laquelle tu n'es pas d'accord. Explique en tes mots ce que tu fais.",
+      "attendu": [
+        "Ne pas attendre : les délais comptent",
+        "Demander de l'aide à ton représentant à la prévention ou à ton syndicat",
+        "Appeler la CNESST pour comprendre la décision",
+        "Au besoin, consulter un avocat en droit du travail (ou l'aide juridique)"
+      ],
+      "explication": "La page vise ce cas : « Tu reçois une décision CNESST que tu ne comprends pas ou avec laquelle tu n'es pas d'accord. » — En cas de doute : « Demande à ton représentant à la prévention, à ton syndicat, ou appelle la CNESST. » Et ne laisse pas traîner la question."
+    }
+  ]
+}

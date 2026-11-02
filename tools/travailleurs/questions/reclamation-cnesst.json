@@ -1,0 +1,83 @@
+{
+  "page": "reclamation-cnesst",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choix",
+      "question": "Tu te blesses à la mine. Quand dois-tu aviser ton supérieur ?",
+      "options": [
+        "Avant de quitter le site, ou dès que tu peux",
+        "Seulement après ta visite chez le médecin",
+        "Dans les six mois qui suivent l'accident",
+        "Le jour où tu reviens au travail"
+      ],
+      "reponse": 0,
+      "explication": "Tu dois « Aviser le supérieur immédiat ou un représentant de l'employeur avant de quitter l'établissement, ou dès que possible si incapable. » — Le délai de six mois, lui, sert pour la réclamation à la CNESST."
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "question": "Coche les phrases vraies sur qui te paie pendant ton arrêt.",
+      "options": [
+        "Le jour de l'accident, ton employeur te paie le reste de ta journée prévue.",
+        "Pendant les 14 jours complets suivants, ton employeur te verse 90 % de ton salaire net.",
+        "Pendant les 14 premiers jours, personne ne te verse d'argent.",
+        "À partir du 15e jour complet, c'est la CNESST qui te verse l'IRR.",
+        "Ton employeur continue de te payer tant que dure ton arrêt."
+      ],
+      "reponses": [0, 1, 3],
+      "explication": "« Le jour où débute l'incapacité et pendant les 14 jours complets suivants, c'est l'employeur qui paie ; la CNESST lui rembourse le salaire de ces 14 jours, puis verse elle-même l'indemnité de remplacement du revenu à compter du 15e jour complet. » — Pendant les 14 jours, l'employeur verse « 90 % du salaire net »."
+    },
+    {
+      "id": "q3",
+      "type": "vf",
+      "question": "Tu as une silicose. Ton délai de 6 mois pour réclamer commence au début de ton exposition à la poussière.",
+      "reponse": false,
+      "explication": "Le délai court « à compter de la date où il est porté à la connaissance du travailleur qu'il est atteint d'une maladie professionnelle », et « pas du début d'exposition ». — La page conseille aussi de « Documenter rigoureusement la chronologie »."
+    },
+    {
+      "id": "q4",
+      "type": "choix",
+      "question": "Tu es foreur pour une entreprise de forage sous-traitante, sur le site d'une mine. Qui est ton employeur dans ta réclamation ?",
+      "options": [
+        "L'entreprise sous-traitante qui t'emploie",
+        "La compagnie minière propriétaire du site",
+        "La CNESST, qui reçoit ta réclamation",
+        "Le syndicat des travailleurs de la mine"
+      ],
+      "reponse": 0,
+      "explication": "Pour un travailleur sous-traitant, « son employeur est le sous-traitant, pas le donneur d'ouvrage ». — La compagnie minière qui donne le contrat n'est pas ton employeur. La page demande une « Identification claire de l'employeur »."
+    },
+    {
+      "id": "q5",
+      "type": "vf",
+      "question": "Tu as dépassé le délai de 6 mois. Si tu as un motif raisonnable pour ton retard, la CNESST peut prolonger le délai.",
+      "reponse": true,
+      "explication": "« la CNESST prolonge un délai ou relève une personne des conséquences de son défaut lorsqu'elle démontre un motif raisonnable » (art. 352). — Tu dois donc expliquer la raison de ton retard."
+    },
+    {
+      "id": "q6",
+      "type": "ordre",
+      "question": "Tu viens de te blesser. Remets ces étapes dans l'ordre.",
+      "etapes": [
+        "Aviser ton supérieur avant de quitter l'établissement",
+        "Voir un médecin, qui te remet ton attestation médicale",
+        "Remettre l'attestation médicale à ton employeur",
+        "Produire ta réclamation à la CNESST dans les délais"
+      ],
+      "explication": "La page suit cet ordre : « Aviser le supérieur immédiat ou un représentant de l'employeur avant de quitter l'établissement », puis le médecin fait un « Rapport initial sans délai (art. 199), remis au travailleur », puis « Remettre à l'employeur l'attestation médicale (art. 199) et l'informer rapidement de son intention de réclamer », et enfin « Produire la réclamation dans les délais »."
+    },
+    {
+      "id": "q7",
+      "type": "court",
+      "question": "Tu te blesses en fin de quart, au camp, juste avant de rentrer chez toi en avion, et ton médecin de famille est loin. Explique en tes mots ce que tu dois faire.",
+      "attendu": [
+        "Aviser ton supérieur (ou un représentant de l'employeur) avant de partir du camp",
+        "Si ce n'est pas possible, l'aviser dès que possible (téléphone, courriel) et garder une trace",
+        "Obtenir ton attestation médicale en clinique sans rendez-vous ou au CISSS, et en garder une copie",
+        "Produire ta réclamation à la CNESST dans les 6 mois"
+      ],
+      "explication": "Pour le travail en camp : « Si l'accident survient en fin de quart en camp, donner l'avis avant le départ. À défaut, dès que possible (téléphone, courriel) en documentant. » — Pour le médecin : « L'attestation médicale peut être obtenue en clinique sans rendez-vous ou au CISSS local. Garder copie. »"
+    }
+  ]
+}

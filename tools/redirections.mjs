@@ -31,6 +31,14 @@ export function scriptRedirection(table) {
 export const SCRIPT_LIENS_404 = `(function () {
   var p = location.pathname;
   var base = /\\/(?:w|g|categorie|files|assets)\\//.test(p) ? p.replace(/\\/(?:w|g|categorie|files|assets)\\/.*$/, '/') : p.replace(/[^\\/]*$/, '');
+  var t = p.match(/^(.*?\\/)travailleurs\\//);
+  if (t) {
+    var a = document.getElementById('lien-accueil');
+    a.href = t[1] + 'travailleurs/index.html';
+    a.textContent = 'Retourner à l’Espace travailleurs';
+    document.getElementById('suite-recherche').remove();
+    return;
+  }
   document.getElementById('lien-accueil').href = base + 'index.html';
   document.getElementById('lien-recherche').href = base + 'recherche.html';
 })();`;
@@ -44,7 +52,7 @@ export function rendrePage404(table = {}) {
 <style>html{color-scheme:dark}body{font-family:-apple-system,'Segoe UI',sans-serif;background:#16181d;color:#e4e6e8;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;text-align:center;padding:20px}
 .b{max-width:420px}h1{font-size:44px;margin:0 0 8px}p{line-height:1.6;color:#a9b1ba}a{color:#7ab0ff}@media print{body{background:#fff;color:#000}p{color:#333}a{color:#00c}}</style></head>
 <body><div class="b"><h1>🔍</h1><h2>Page introuvable</h2>
-<p>Cette adresse ne correspond à aucune page du wiki. <a id="lien-accueil" href="./">Retourner au portail</a> ou <a id="lien-recherche" href="./recherche.html">lancer une recherche</a>.</p></div>
+<p>Cette adresse ne correspond à aucune page du wiki. <a id="lien-accueil" href="./">Retourner au portail</a><span id="suite-recherche"> ou <a id="lien-recherche" href="./recherche.html">lancer une recherche</a></span>.</p></div>
 <script>${SCRIPT_LIENS_404}</script></body></html>
 `;
 }

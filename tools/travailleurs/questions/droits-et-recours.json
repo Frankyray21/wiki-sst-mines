@@ -1,0 +1,68 @@
+{
+  "page": "droits-et-recours",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choix",
+      "question": "Selon la page, à quoi sert la présomption des articles 28 et 29 de la LATMP ?",
+      "options": [
+        "Elle facilite la preuve dans certains cas",
+        "Elle te donne droit à une prime spéciale",
+        "Elle remplace ta réclamation à la CNESST",
+        "Elle allonge ton délai de réclamation"
+      ],
+      "reponse": 0,
+      "explication": "« La présomption (art. 28 et 29) facilite la preuve dans certains cas. » — C'est une aide pour la preuve, pas une prime ni un délai de plus."
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "question": "La page sépare les droits de prévention (LSST) et les droits après une lésion (LATMP). Coche les droits qui viennent de la LATMP.",
+      "options": [
+        "Une indemnité de remplacement du revenu (IRR)",
+        "Le droit de refuser un travail dangereux",
+        "La réadaptation physique, sociale et professionnelle",
+        "La participation au comité SST",
+        "Un emploi convenable si tu ne peux pas reprendre ton poste"
+      ],
+      "reponses": [0, 2, 4],
+      "explication": "« Les droits LATMP sont curatifs et indemnitaires : reconnaissance de la lésion professionnelle, indemnité de remplacement du revenu (IRR), soins, Droit à la réadaptation physique sociale et professionnelle, retour au travail, droit à un emploi convenable si réintégration au poste impossible. » — Le refus et le comité SST sont des droits de prévention, dans la LSST."
+    },
+    {
+      "id": "q3",
+      "type": "vf",
+      "question": "Le retrait préventif concerne seulement les travailleuses enceintes.",
+      "reponse": false,
+      "explication": "Le retrait préventif s'applique « en cas de risque pour grossesse, allaitement ou exposition à un contaminant ». — Un travailleur exposé à un contaminant peut donc y avoir droit, lui aussi."
+    },
+    {
+      "id": "q4",
+      "type": "vf",
+      "question": "Si tu ne peux pas reprendre ton ancien poste après ta lésion, tu peux avoir droit à un emploi convenable.",
+      "reponse": true,
+      "explication": "Parmi les droits LATMP, la page nomme le « droit à un emploi convenable si réintégration au poste impossible ». — C'est un de tes droits après une lésion."
+    },
+    {
+      "id": "q5",
+      "type": "ordre",
+      "question": "Tu exerces ton droit de refus. Remets ces étapes dans l'ordre.",
+      "etapes": [
+        "Tu refuses d'exécuter le travail que tu juges dangereux",
+        "Tu informes ton superviseur",
+        "Le représentant à la prévention intervient",
+        "Au besoin, l'inspecteur de la CNESST intervient"
+      ],
+      "explication": "« Une procédure formelle encadre l'exercice du droit : information du superviseur, intervention du représentant à la prévention, et au besoin de l'inspecteur CNESST. » — L'inspecteur vient en dernier, seulement si c'est nécessaire."
+    },
+    {
+      "id": "q6",
+      "type": "court",
+      "question": "Tu reçois une décision de la CNESST sur ta réclamation et tu n'es pas d'accord. Explique en tes mots les étapes pour la contester.",
+      "attendu": [
+        "D'abord, demander une révision administrative",
+        "Ensuite, si tu n'es toujours pas d'accord, contester devant le Tribunal administratif du travail (TAT)"
+      ],
+      "explication": "« La contestation des décisions CNESST se fait d'abord en révision administrative, puis devant le Tribunal administratif du travail (TAT). » — L'ordre compte : la révision vient en premier."
+    }
+  ]
+}
