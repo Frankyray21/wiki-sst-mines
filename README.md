@@ -454,7 +454,7 @@ node tools/serve.mjs
   `tools/textes-loi/`. Chaque page a 5 à 7 questions de cinq types : choix de réponse, réponses vraies à cocher, vrai ou
   faux, étapes à remettre en ordre, court développement. Le temps de lecture actif est compté et affiché au moment de
   soumettre ; à 80 % de bonnes réponses, le travailleur choisit son nom dans la « Liste employé (registre formation) »
-  et atteste sa lecture : base **Formations**, table **Attestations lecture travailleurs (web)** (`tblh6H7GOXZUwgXor`),
+  et atteste sa lecture : base **Formations**, table **Attestations Wiki SST travailleurs (web)** (`tblh6H7GOXZUwgXor`),
   par le relais `attestations-travailleurs` (`tools/attestations-worker/`), puis attestation à imprimer ou en PDF.
   **Espace fermé, pas protégé** : aucune page de l'espace ne mène au portail, à l'encadrement `/g/`, aux démarrages
   rapides de la direction, des RH ou des conseillers, à la recherche ou au graphe ; il est hors du manifeste hors ligne

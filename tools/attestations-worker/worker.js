@@ -21,7 +21,7 @@
 //   AIRTABLE_TOKEN   secret — jeton d'accès personnel Airtable, portées data.records:read et
 //                    data.records:write, accès à la base Formations
 //   AIRTABLE_BASE    appmq82YjvEUglYZU          base « Formations »
-//   AIRTABLE_TABLE   tblh6H7GOXZUwgXor          « Attestations lecture travailleurs (web) »
+//   AIRTABLE_TABLE   tblh6H7GOXZUwgXor          « Attestations Wiki SST travailleurs (web) »
 //   EMP_TABLE        tbllKuNePDWZMr1cz          « Liste employé (registre formation) »
 //   EMP_NAME_FIELD   Name                       champ du nom complet dans la liste des employés
 //   ORIGINES         https://frankyray21.github.io  (virgules si plusieurs ; rien n'est admis d'office)

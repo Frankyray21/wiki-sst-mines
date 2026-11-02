@@ -26,7 +26,7 @@ sujets pertinents pour le travailleur, vérifier s'ils existent, et créer les p
   long (la ligne arrive « À relier »). Il coche « J'atteste avoir lu… » et envoie. L'attestation s'affiche
   (nom, date, temps de lecture, lecture estimée, temps sur les questions, résultat, essais, n° de
   confirmation) et s'imprime ou s'enregistre en PDF. Hors réseau, elle attend sur l'appareil et repart seule.
-- **Airtable** : table **Attestations lecture travailleurs (web)** (`tblh6H7GOXZUwgXor`) créée dans la base
+- **Airtable** : table **Attestations Wiki SST travailleurs (web)** (`tblh6H7GOXZUwgXor`) créée dans la base
   **Formations**, champ **Employé** relié à la Liste employé. Colonnes et statuts : `tools/attestations-worker/README.md`.
 - **Cloudflare** : relais `attestations-travailleurs` (`tools/attestations-worker/`) — recherche de nom (8 noms
   au plus) et écriture des attestations, rien d'autre ; employé vérifié par son nom ; une ligne par personne,

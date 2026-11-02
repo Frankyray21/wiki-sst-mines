@@ -13,14 +13,14 @@ Même mécanique que vos Workers `attestations-procedures`, `attestations-tms` e
 | --- | --- |
 | `GET /` | État du service : `{ "ok": true, "service": "attestations-travailleurs", "configure": true }` |
 | `GET /?q=<texte>` | Noms de la **Liste employé (registre formation)** qui contiennent le texte (2 lettres minimum, 8 noms au plus, accents et majuscules ignorés). Le travailleur choisit **son** nom dans cette liste. |
-| `POST /` | Enregistre une attestation de lecture dans **Attestations lecture travailleurs (web)** |
+| `POST /` | Enregistre une attestation de lecture dans **Attestations Wiki SST travailleurs (web)** |
 
 Aucune requête ne **lit** les attestations : personne ne peut, par ce relais, voir ce qu'un autre a
 lu ou répondu. Les conseillers consultent la table dans Airtable.
 
 ## Ce qu'il écrit
 
-Base **Formations** (`appmq82YjvEUglYZU`), table **Attestations lecture travailleurs (web)**
+Base **Formations** (`appmq82YjvEUglYZU`), table **Attestations Wiki SST travailleurs (web)**
 (`tblh6H7GOXZUwgXor`, créée le 2 novembre 2026). Une ligne par page lue :
 
 | Colonne | Exemple | D'où |

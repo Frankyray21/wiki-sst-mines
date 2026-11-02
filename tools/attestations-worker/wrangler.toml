@@ -6,7 +6,7 @@ compatibility_date = "2026-09-15"
 
 [vars]
 AIRTABLE_BASE = "appmq82YjvEUglYZU"      # base « Formations »
-AIRTABLE_TABLE = "tblh6H7GOXZUwgXor"     # table « Attestations lecture travailleurs (web) »
+AIRTABLE_TABLE = "tblh6H7GOXZUwgXor"     # table « Attestations Wiki SST travailleurs (web) »
 EMP_TABLE = "tbllKuNePDWZMr1cz"          # table « Liste employé (registre formation) »
 EMP_NAME_FIELD = "Name"                  # champ du nom complet dans la liste des employés
 ORIGINES = "https://frankyray21.github.io"
