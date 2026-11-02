@@ -1,0 +1,70 @@
+{
+  "page": "cadenassage",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vf",
+      "question": "La machine est arrêtée : tu peux donc intervenir dessus sans autre précaution.",
+      "reponse": false,
+      "explication": "« Arrêter une machine ne suffit pas à empêcher une remise en marche ou la libération d'une énergie emmagasinée. » Une machine arrêtée peut repartir ou libérer une énergie : il faut suivre la procédure de l'équipement."
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "question": "Coche les phrases vraies, selon la page.",
+      "options": [
+        "Une machine immobile peut encore contenir de l'énergie dangereuse.",
+        "Un essai de démarrage vérifie toutes les formes d'énergie.",
+        "La façon de vérifier dépend de l'équipement et des énergies en cause.",
+        "Une pièce encore chaude n'est plus dangereuse une fois la machine arrêtée.",
+        "Une charge en hauteur peut redescendre après l'arrêt."
+      ],
+      "reponses": [0, 2, 4],
+      "explication": "« Une machine immobile peut encore contenir de l’énergie dangereuse. » La page le dit aussi : « Un essai de démarrage n'est pas une vérification universelle de toutes les formes d'énergie. » Une pièce chaude et « Une charge en hauteur pouvant redescendre » font partie des énergies qui restent après l'arrêt."
+    },
+    {
+      "id": "q3",
+      "type": "choix",
+      "question": "Changement de quart : une machine est cadenassée et ton équipe continue le travail. Comment sais-tu dans quel ordre poser et retirer les cadenas ?",
+      "options": [
+        "Tu fais confirmer la relève prévue pour cet équipement",
+        "Tu fais comme d'habitude sur les autres machines",
+        "Tu fais ce que ton coéquipier fait d'habitude",
+        "Tu t'arranges sur place avec l'équipe qui part"
+      ],
+      "reponse": 0,
+      "explication": "« Ne déduis pas l'ordre de retrait et de pose des cadenas d'une règle générale : fais confirmer le dispositif de relève prévu pour l'équipement. » Pendant une relève, « le contrôle des énergies doit rester continu »."
+    },
+    {
+      "id": "q4",
+      "type": "vf",
+      "question": "Un collègue a oublié son cadenas sur la machine. Tu peux l'enlever toi-même pour ne pas retarder le travail.",
+      "reponse": false,
+      "explication": "« Le retrait du cadenas d'une autre personne relève d'une situation encadrée par la procédure applicable. Ne l'improvise pas. » Ce n'est pas à toi de décider seul d'enlever le cadenas d'un autre."
+    },
+    {
+      "id": "q5",
+      "type": "choix",
+      "question": "Tu remarques que la procédure ne correspond pas à la machine. Quand dois-tu le signaler ?",
+      "options": [
+        "Avant de commencer l'intervention",
+        "Pendant l'intervention, si ça bloque",
+        "Après l'intervention, dans ton rapport",
+        "À la fin de ton quart de travail"
+      ],
+      "reponse": 0,
+      "explication": "« Si la procédure manque, ne correspond pas à la machine ou ne couvre pas la relève, signale-le au responsable des travaux, à la maintenance et au département SST avant l'intervention. » On règle le problème de procédure avant de toucher à la machine."
+    },
+    {
+      "id": "q6",
+      "type": "court",
+      "question": "Ton superviseur te demande de débloquer une machine. Il te dit : « Elle est arrêtée, pas besoin de cadenasser, fais ça vite. » Que fais-tu ?",
+      "attendu": [
+        "Arrêter ne suffit pas : la machine peut se remettre en marche ou libérer une énergie emmagasinée",
+        "Appliquer la procédure écrite et validée de cet équipement, avec le matériel prévu",
+        "Si la procédure manque ou ne correspond pas à la machine, le signaler avant l'intervention (responsable des travaux, maintenance, département SST)"
+      ],
+      "explication": "« Utilise la procédure écrite et validée de l'équipement, avec la formation et le matériel prévus. » Une machine arrêtée n'est pas pour autant sécuritaire : « Arrêter ne suffit pas »."
+    }
+  ]
+}

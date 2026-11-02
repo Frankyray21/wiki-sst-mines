@@ -24,6 +24,7 @@ import { motsDePage, encoderListe } from './recherche_mots.mjs';
 import { texteLoiDeLaPage, insererTexteLoi, renommerLibelleCapture, texteBrut, numeroDeLaPage, LIBELLE_TEXTE } from './textes_loi.mjs';
 import { estAccueil, decouperAccueil, rendreAccueil, rendreThemesAccueil, titreAccueil, piedAccueil, epurerAccueil, liensDe, icone, iconeTheme, illustrationWiki } from './accueil_wiki.mjs';
 import { blocAvis, lireConfAvis, ecrireConfAvis } from './avis.mjs';
+import { genererEspaceTravailleurs } from './espace_travailleurs.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const VAULT = 'C:/Users/Frank/OneDrive/Documents/SST/\u{1F3E0} WIKI SST - Mines';
@@ -2066,6 +2067,10 @@ fs.writeFileSync(path.join(OUT, '.nojekyll'), ''); // GitHub Pages : ne pas pass
     for (const f of ['wiki-sst-mines.apk', 'wiki-sst-mines.json']) fs.copyFileSync(path.join(dist, f), path.join(OUT, 'app', f));
   }
 }
+// Espace travailleurs (docs/travailleurs/) : lectures remises aux travailleurs en arrêt de travail,
+// recopiées des pages qui viennent d'être écrites, avec questions et attestation. Hors du manifeste
+// hors ligne et du service worker du wiki : c'est un espace à part (tools/espace_travailleurs.mjs).
+genererEspaceTravailleurs(OUT);
 genererPwa(OUT, V);
 
 console.log(`  avis : relais ${relaisAvis.conf.url && !relaisAvis.avertissement ? relaisAvis.conf.url : 'non configuré — le bloc reste masqué'}`);

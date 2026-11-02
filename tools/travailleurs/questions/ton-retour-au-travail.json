@@ -1,0 +1,83 @@
+{
+  "page": "ton-retour-au-travail",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choix",
+      "question": "Ton établissement comptait 150 travailleurs au début de ton absence, et ta convention collective ne prévoit pas de délai plus long. Combien de temps dure ton droit de retour au travail ?",
+      "options": [
+        "2 ans à partir du début de ton absence",
+        "1 an à partir du début de ton absence",
+        "6 mois à partir de ta consolidation",
+        "3 ans à partir de ta consolidation"
+      ],
+      "reponse": 0,
+      "explication": "« Le délai part du début de ton absence continue à cause de ta blessure. » Le tableau de la page donne 2 ans pour « Plus de 20 travailleurs »."
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "question": "Selon la page, qu'est-ce qu'un bon plan de retour progressif écrit précise ?",
+      "options": [
+        "Les heures à chaque phase",
+        "Ton diagnostic, pour l'annoncer à l'équipe",
+        "Les tâches incluses et exclues",
+        "Un retour à temps plein dès le premier jour",
+        "Quoi faire si la progression ne fonctionne pas"
+      ],
+      "reponses": [0, 2, 4],
+      "explication": "« Il précise les heures à chaque phase, les tâches incluses et exclues, les aménagements, les dates de bilan et quoi faire si la progression ne fonctionne pas. » Ton diagnostic n'a pas à être annoncé (« Tu peux dire que tu reviens, sans détails médicaux ») et « Reprendre d'un coup à temps plein, c'est risquer la surcharge »."
+    },
+    {
+      "id": "q3",
+      "type": "vf",
+      "question": "Si tu redeviens capable de faire ton emploi après la fin du délai de retour au travail, ton IRR s'arrête le jour même.",
+      "reponse": false,
+      "explication": "« tu gardes ton IRR jusqu'à ce que tu réintègres ton emploi ou un emploi équivalent, ou que tu refuses sans raison valable de le faire, pendant au plus un an » — ton IRR continue, mais pas plus d'un an."
+    },
+    {
+      "id": "q4",
+      "type": "ordre",
+      "question": "Remets dans l'ordre les étapes d'un retour progressif.",
+      "etapes": [
+        "Démarrage : heures réduites, tâches allégées, suivi rapproché",
+        "Progression : les heures et la charge augmentent graduellement",
+        "Stabilisation : retour à temps plein, avec des aménagements si nécessaire",
+        "Bilans : on vérifie que le retour tient"
+      ],
+      "explication": "« Il avance par étapes » : on commence par des « heures réduites, tâches allégées, suivi rapproché », on augmente graduellement, on revient à temps plein, puis on fait des bilans « aux dates prévues dans le plan »."
+    },
+    {
+      "id": "q5",
+      "type": "choix",
+      "question": "Ta blessure t'empêche de reprendre ton emploi de foreur, mais tu deviens capable d'exercer un emploi convenable. Quel est ton droit chez ton employeur ?",
+      "options": [
+        "Occuper le premier emploi convenable qui devient disponible",
+        "Choisir n'importe quel poste, même s'il est déjà occupé",
+        "Garder ton poste de foreur, mais avec un salaire réduit",
+        "Aucun : ton droit de retour prend fin à ce moment-là"
+      ],
+      "reponse": 0,
+      "explication": "« tu as le droit d'occuper le premier emploi convenable qui devient disponible dans un établissement de ton employeur, selon les règles d'ancienneté de ta convention collective »."
+    },
+    {
+      "id": "q6",
+      "type": "vf",
+      "question": "C'est toi qui décides ce que ton équipe sait de ta blessure.",
+      "reponse": true,
+      "explication": "« Ce que ton équipe sait de ta blessure, c'est toi qui le décides » — la communication t'appartient, pas à ton superviseur."
+    },
+    {
+      "id": "q7",
+      "type": "court",
+      "question": "En tes mots : quelques semaines après ton retour, la fatigue revient malgré les aménagements. Que fais-tu ?",
+      "attendu": [
+        "Je n'attends pas que ça empire",
+        "J'en parle à mon superviseur pour ajuster le plan",
+        "Je consulte le professionnel de la santé qui me suit",
+        "J'appelle le PAE au besoin"
+      ],
+      "explication": "« N'attends pas que ça empire. Parle à ton superviseur pour ajuster le plan, consulte le professionnel de la santé qui te suit » — la fatigue qui revient malgré les aménagements fait partie des signaux à surveiller."
+    }
+  ]
+}

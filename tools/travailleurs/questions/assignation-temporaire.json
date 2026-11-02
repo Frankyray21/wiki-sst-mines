@@ -1,0 +1,83 @@
+{
+  "page": "assignation-temporaire",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choix",
+      "question": "Qui doit donner un avis favorable pour que ton employeur puisse t'assigner temporairement un travail ?",
+      "options": [
+        "Le professionnel de la santé qui a charge de toi",
+        "Ton superviseur et le service des ressources humaines",
+        "Le comité de santé et de sécurité de la mine",
+        "Un agent de la CNESST qui vient voir ton poste"
+      ],
+      "reponse": 0,
+      "explication": "« Sans l'avis favorable du professionnel de la santé écrit sur le formulaire, ton employeur ne peut pas t'assigner ce travail » — c'est la personne qui suit ta blessure qui doit être d'accord, pas ton employeur seul."
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "question": "Le professionnel de la santé donne un avis favorable seulement s'il croit que… Coche les conditions prévues par la loi.",
+      "options": [
+        "tu es raisonnablement en mesure de faire ce travail",
+        "ta blessure est déjà consolidée",
+        "ce travail est sans danger pour toi, vu ta blessure",
+        "ce travail a le même nombre d'heures que ton emploi",
+        "ce travail est favorable à ta réadaptation"
+      ],
+      "reponses": [0, 2, 4],
+      "explication": "« Le professionnel de la santé donne un avis favorable seulement s'il croit que » tu peux faire ce travail, qu'il est sans danger pour toi et qu'il aide ta réadaptation. L'assignation peut arriver « même si ta blessure n'est pas encore consolidée », et elle peut compter « moins d'heures que ton horaire habituel »."
+    },
+    {
+      "id": "q3",
+      "type": "choix",
+      "question": "Ton assignation compte moins d'heures que ton horaire habituel, et ton employeur choisit de payer seulement les heures assignées. Qu'est-ce que tu reçois ?",
+      "options": [
+        "Ton salaire pour ces heures, plus une IRR de la CNESST",
+        "Ton salaire pour ces heures, et aucun autre montant",
+        "Ton plein salaire, payé au complet par ton employeur",
+        "Ton salaire pour ces heures, plus une aide de ton syndicat"
+      ],
+      "reponse": 0,
+      "explication": "« l'IRR versée par la CNESST comble la différence entre ton salaire net pour ces heures et l'IRR que tu aurais reçue sans l'assignation » — avec cette option, la CNESST complète ce que ton employeur te paie."
+    },
+    {
+      "id": "q4",
+      "type": "vf",
+      "question": "Pendant que tu contestes l'avis favorable du professionnel de la santé, tu dois quand même faire le travail assigné.",
+      "reponse": false,
+      "explication": "« tu n'es pas tenu de faire le travail assigné tant que l'avis n'est pas confirmé par une décision finale » — tant que la procédure n'est pas terminée, tu n'as pas à faire ce travail."
+    },
+    {
+      "id": "q5",
+      "type": "ordre",
+      "question": "Tu n'es pas d'accord avec l'avis favorable donné pour ton assignation. Remets ces étapes dans l'ordre.",
+      "etapes": [
+        "Tu demandes au comité de santé et de sécurité d'examiner la question",
+        "Une décision est rendue sur ta demande",
+        "Tu demandes la révision de cette décision à la CNESST, dans les 10 jours",
+        "Tu contestes la décision rendue en révision devant le Tribunal administratif du travail"
+      ],
+      "explication": "D'abord « Tu demandes au comité de santé et de sécurité d'examiner la question et de décider ». Si tu te crois lésé, « tu peux en demander la révision à la CNESST dans les 10 jours de sa notification ». En dernier, tu peux contester « devant le Tribunal administratif du travail dans les 10 jours de sa notification »."
+    },
+    {
+      "id": "q6",
+      "type": "vf",
+      "question": "Si tu refuses sans raison valable un travail assigné que tu es tenu de faire, alors que ton employeur t'offre ton salaire, la CNESST peut réduire ou suspendre ton indemnité.",
+      "reponse": true,
+      "explication": "« la CNESST peut réduire ou suspendre ton indemnité » — c'est pourquoi la page te dit : « Si tu n'es pas d'accord, passe donc par la procédure ci-dessus »."
+    },
+    {
+      "id": "q7",
+      "type": "court",
+      "question": "En tes mots : tu crois ne pas être capable de faire le travail qu'on t'assigne. Que fais-tu ?",
+      "attendu": [
+        "Je ne refuse pas simplement : j'utilise la procédure prévue (comité de santé et de sécurité, sinon représentant et employeur, ou la CNESST)",
+        "J'agis vite : pour la révision et pour le Tribunal, j'ai seulement 10 jours",
+        "Pendant la procédure, je ne suis pas tenu de faire ce travail",
+        "Je me fais aider par mon représentant, mon syndicat ou la CNESST"
+      ],
+      "explication": "« Si tu n'es pas d'accord, passe donc par la procédure ci-dessus » et « Fais-toi aider tout de suite par ton » représentant, ton syndicat ou la CNESST, car « Pour la révision et pour le Tribunal, tu n'as que 10 jours »."
+    }
+  ]
+}

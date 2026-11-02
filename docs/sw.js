@@ -1,5 +1,5 @@
 // Service worker du WIKI SST — généré à la construction
-// Manifeste hors ligne réécrit sans reconstruction : 183e2e0dc5
+// Manifeste hors ligne réécrit sans reconstruction : 0dc77a35e1
 const VERSION = '20260923190431';
 const P = 'wiki-sst-pages';
 const M = 'wiki-sst-medias';
@@ -49,6 +49,9 @@ self.addEventListener('fetch', (e) => {
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
   // une seule clé par ressource : la query (?v=) ne fait pas partie de la clé
   const cle = sansQuery(req.url);
+  // Espace travailleurs : réseau seulement. Il ne doit jamais recevoir une page du wiki (pas même
+  // offline.html, qui mène au portail) ; hors réseau, le navigateur affiche sa propre erreur.
+  if (new URL(req.url).pathname.includes('/travailleurs/')) return;
   if (new URL(req.url).pathname.includes('/files/')) {
     // les captures et PDF ne changent pas : cache d'abord, réseau sinon
     e.respondWith(caches.match(cle).then((m) => m || fetch(req).then((rep) => {

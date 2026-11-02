@@ -1,0 +1,82 @@
+{
+  "page": "equipements-de-protection",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choix",
+      "question": "Tu as l'impression que seul ton EPI t'empêche de te blesser à ton poste. Que dit la page ?",
+      "options": [
+        "Il manque une étape en amont : ça vaut la peine d'en parler",
+        "C'est normal : l'EPI est la première barrière contre le danger",
+        "C'est normal : l'employeur n'a rien d'autre à prévoir",
+        "Tu dois acheter un EPI plus solide, à tes frais"
+      ],
+      "reponse": 0,
+      "explication": "« Ton équipement de protection individuelle (EPI) est la dernière barrière entre toi et un danger, pas la première. » Si tout repose sur ton EPI, « c'est qu'il manque une étape en amont »."
+    },
+    {
+      "id": "q2",
+      "type": "vf",
+      "question": "C'est l'employeur qui fournit ton EPI, et tu n'as pas à le payer.",
+      "reponse": true,
+      "explication": "« L'EPI est fourni gratuitement par l'employeur. Tu n'as pas à payer pour ta protection. » Pour remplacer une pièce, adresse-toi au « magasin / la santé-sécurité du site »."
+    },
+    {
+      "id": "q3",
+      "type": "ordre",
+      "question": "Tu mets ton demi-masque. Remets les étapes dans l'ordre.",
+      "etapes": [
+        "Inspecter les courroies, les soupapes et les filtres",
+        "Poser le masque et ajuster la mentonnière",
+        "Ajuster les courroies hautes et basses",
+        "Faire le test positif et le test négatif"
+      ],
+      "explication": "On inspecte d'abord, puis : « Pose le masque, ajuste la mentonnière en premier, puis les courroies hautes et basses. » Les tests viennent à la fin : « Si l'un des tests échoue, recommence l'ajustement. »"
+    },
+    {
+      "id": "q4",
+      "type": "vf",
+      "question": "Avec une barbe de 1 ou 2 jours, ton demi-masque reste bien étanche.",
+      "reponse": false,
+      "explication": "« Un masque hermétique (demi-masque, masque complet) ne fait pas étanchéité sur une barbe, même rasée de 1 ou 2 jours. » La page précise : « Ce n'est pas une question de préférence : c'est une question de fuite mesurable. »"
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Coche les bons réflexes pour que ton APR (masque) te protège vraiment.",
+      "options": [
+        "Le garder pendant toute l'exposition",
+        "Changer la cartouche selon l'horaire du programme",
+        "Garder une vieille cartouche tant qu'il en reste",
+        "Le baisser sur le menton pour respirer un coup",
+        "Refaire un essai d'ajustement après un changement physique"
+      ],
+      "reponses": [0, 1, 4],
+      "explication": "« Retirer 1 minute fait chuter beaucoup la protection moyenne » et « Une cartouche saturée laisse passer le contaminant ». Un masque baissé sur le menton « devient inutile et se contamine à l'intérieur »."
+    },
+    {
+      "id": "q6",
+      "type": "choix",
+      "question": "Pendant ton quart, ton détecteur multigaz se met à sonner. Que fais-tu ?",
+      "options": [
+        "Tu sors de la zone, sans l'éteindre",
+        "Tu l'éteins et tu finis ta tâche",
+        "Tu attends un peu pour voir si ça arrête",
+        "Tu le rapportes au magasin après le quart"
+      ],
+      "reponse": 0,
+      "explication": "Quand l'alarme sonne : « Sors de la zone, ne pas l'éteindre ». Et garde-le sur toi : « Un détecteur multigaz qui n'est pas sur toi ne protège personne. »"
+    },
+    {
+      "id": "q7",
+      "type": "court",
+      "question": "Tu reviens au travail après ton arrêt. Ton superviseur te place sur une autre tâche que d'habitude, et ton EPI est resté des semaines au vestiaire. Que fais-tu avant ton premier quart ?",
+      "attendu": [
+        "Inspecter chaque pièce avant le quart (casque sans fissure, détecteur allumé, calibré et alarme testée, filtre à jour…)",
+        "Vérifier que ton EPI, y compris ton APR, est encore le bon pour la nouvelle tâche",
+        "Signaler ce qui est abîmé et le faire remplacer par le magasin ou la santé-sécurité du site, sans frais"
+      ],
+      "explication": "« Prends 2 minutes pour inspecter avant chaque quart. » et « Si tu changes de tâche, vérifie que ton EPI est encore le bon. » Ce qui est abîmé se signale : « Ranger propre, signaler ce qui est abîmé »."
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "page": "obligations-du-travailleur",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "choix",
+      "question": "Selon l'article 49, de quel document dois-tu prendre connaissance ?",
+      "options": [
+        "Le programme de prévention qui s'applique à toi",
+        "La convention collective de ton syndicat",
+        "Le rapport annuel de la compagnie minière",
+        "Le contrat de travail de ton superviseur"
+      ],
+      "reponse": 0,
+      "explication": "La première obligation est de « prendre connaissance du programme de prévention qui lui est applicable ». — C'est la toute première de la liste."
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "question": "Selon l'article 49, coche les obligations du travailleur.",
+      "options": [
+        "Te soumettre aux examens de santé exigés par la loi",
+        "Rédiger toi-même le programme de prévention",
+        "Collaborer avec le comité de santé et de sécurité",
+        "Prendre les mesures nécessaires pour protéger ta santé et ta sécurité",
+        "Faire seul l'enquête après un accident"
+      ],
+      "reponses": [0, 2, 3],
+      "explication": "Le travailleur doit « se soumettre aux examens de santé exigés pour l'application de la présente loi et des règlements », « collaborer avec le comité de santé et de sécurité » et « prendre les mesures nécessaires pour protéger sa santé, sa sécurité ou son intégrité physique ou psychique ». — Le programme de prévention, tu dois le lire, pas l'écrire."
+    },
+    {
+      "id": "q3",
+      "type": "vf",
+      "question": "Ton obligation de ne pas mettre les autres en danger s'arrête aux gens de ton équipe.",
+      "reponse": false,
+      "explication": "Tu dois « veiller à ne pas mettre en danger la santé, la sécurité ou l'intégrité physique ou psychique des autres personnes qui se trouvent sur les lieux de travail ou à proximité des lieux de travail ». — Ça vise toutes les personnes sur le site et autour, pas seulement ton équipe."
+    },
+    {
+      "id": "q4",
+      "type": "vf",
+      "question": "La loi t'interdit de faire ton travail si ton état représente un risque, par exemple à cause de l'alcool ou de la drogue, incluant le cannabis.",
+      "reponse": true,
+      "explication": "Selon l'article 49.1 : « le travailleur ne doit pas exécuter son travail lorsque son état représente un risque pour sa santé, sa sécurité ou son intégrité physique ou psychique, notamment en raison de facultés affaiblies par l'alcool, la drogue, incluant le cannabis, ou une substance similaire »."
+    },
+    {
+      "id": "q5",
+      "type": "choix",
+      "question": "Selon l'article 49, quel est ton rôle face aux risques d'accidents dans la mine ?",
+      "options": [
+        "Participer à les repérer et à les éliminer",
+        "Laisser ce travail au comité SST",
+        "Attendre qu'un accident arrive pour en parler",
+        "Rien : c'est l'affaire de l'employeur"
+      ],
+      "reponse": 0,
+      "explication": "Tu dois « participer à l'identification et à l'élimination des risques d'accidents du travail et de maladies professionnelles sur le lieu de travail ». — Tu as un rôle à jouer, toi aussi."
+    },
+    {
+      "id": "q6",
+      "type": "court",
+      "question": "Tu prépares ton retour au travail après ta blessure. Explique en tes mots trois choses que l'article 49 te demande de faire une fois de retour.",
+      "attendu": [
+        "Prendre connaissance du programme de prévention qui s'applique à toi",
+        "Prendre les mesures pour protéger ta santé et ta sécurité",
+        "Ne pas mettre en danger les autres personnes sur les lieux de travail ou à proximité",
+        "Te soumettre aux examens de santé exigés et collaborer avec le comité de santé et de sécurité"
+      ],
+      "explication": "L'article 49 donne six obligations, de « prendre connaissance du programme de prévention qui lui est applicable » jusqu'à « collaborer avec le comité de santé et de sécurité ». — Elles s'appliquent à tout travailleur, donc à toi à ton retour."
+    }
+  ]
+}
